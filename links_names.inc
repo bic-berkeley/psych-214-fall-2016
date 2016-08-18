@@ -60,6 +60,7 @@
 .. _nose: http://readthedocs.org/docs/nose/en/latest
 .. _nose-ipdb: https://github.com/flavioamieiro/nose-ipdb
 .. _pip: http://pypi.python.org/pypi/pip
+.. _sphinx: http://www.sphinx-doc.org
 
 .. IPython
 .. _ipython: http://ipython.org/
