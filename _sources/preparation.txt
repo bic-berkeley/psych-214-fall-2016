@@ -1,0 +1,23 @@
+###########
+Preparation
+###########
+
+We are going to be using the following major software for the class:
+
+* Python 3;
+* numpy_ (the Python array package);
+* matplotlib_ (Python plotting package);
+* scipy_ (Python scientific library);
+* nibabel_ (read / write of neuroimaging file formats in Python);
+
+For the class and home work we will use:
+
+* the Aton_ text editor.
+* the git_ version control system.
+
+You will also need one of:
+
+* MATLAB installed on your laptop or;
+* an account on the `neuro cluster`_ (so you can run MATLAB / SPM_ remotely).
+
+.. include:: links_names.inc
