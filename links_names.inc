@@ -15,6 +15,9 @@
 .. Software
 .. _SPM: http://www.fil.ion.ucl.ac.uk/spm
 
+.. Python distributions
+.. _homebrew: http://brew.sh
+
 .. Version control
 .. _git: http://git-scm.com
 .. _git OSX installer: http://mackyle.github.io/git-osx-installer/
@@ -38,10 +41,13 @@
     http://www.rackspace.com/blog/text-editor-madness-bracket-vote-for-your-favorite
 .. _atom: https://atom.io
 .. _hydrogen: https://atom.io/packages/hydrogen
+.. _vim-mode: https://github.com/atom/vim-mode
+.. _ex-mode: https://atom.io/packages/ex-mode
+.. _emacs-mode: https://atom.io/packages/emacs-mode
 
 .. Python and common libraries
-.. _python: http://www.python.org
-.. _python standard library: http://docs.python.org/2/library
+.. _python: https://www.python.org
+.. _python standard library: http://docs.python.org/3/library
 .. _python.org releases: http://www.python.org/download/releases
 .. _setuptools: http://pypi.python.org/pypi/setuptools
 .. _distribute: http://pypi.python.org/pypi/distribute
@@ -55,12 +61,14 @@
 .. _pandas: http://pandas.pydata.org/
 .. _scikit-learn: http://scikit-learn.org/
 .. _scikit-image: http://scikit-image.org/
-.. _statsmodels: http://statsmodels.sourceforge.net/
+.. _statsmodels: http://www.statsmodels.org/
 .. _old and new python versions: https://launchpad.net/%7Efkrull/+archive/deadsnakes
 .. _nose: http://readthedocs.org/docs/nose/en/latest
 .. _nose-ipdb: https://github.com/flavioamieiro/nose-ipdb
 .. _pip: http://pypi.python.org/pypi/pip
 .. _sphinx: http://www.sphinx-doc.org
+.. _10 reasons Python rocks for research:
+   http://www.stat.washington.edu/~hoytak/blog/whypython.html
 
 .. IPython
 .. _ipython: http://ipython.org/
