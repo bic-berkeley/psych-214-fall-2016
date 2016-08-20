@@ -37,3 +37,6 @@ version control using git.
     :hidden:
 
     choosing_editor
+    installation_on_mac
+    installation_on_linux
+    glossary

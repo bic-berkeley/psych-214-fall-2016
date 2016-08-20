@@ -38,12 +38,13 @@
 .. _gedit: http://projects.gnome.org/gedit
 .. _emacs: http://www.gnu.org/software/emacs/
 .. _text editor competition:
-    http://www.rackspace.com/blog/text-editor-madness-bracket-vote-for-your-favorite
+   http://www.rackspace.com/blog/text-editor-madness-bracket-vote-for-your-favorite
 .. _atom: https://atom.io
 .. _hydrogen: https://atom.io/packages/hydrogen
 .. _vim-mode: https://github.com/atom/vim-mode
 .. _ex-mode: https://atom.io/packages/ex-mode
 .. _emacs-mode: https://atom.io/packages/emacs-mode
+.. _notepad++: https://notepad-plus-plus.org
 
 .. Python and common libraries
 .. _python: https://www.python.org
@@ -105,10 +106,6 @@
 .. _nipype: http://nipy.org/nipype
 .. _gitwash: http://github.com/matthew-brett/gitwash
 
-.. Places
-.. _brain imaging center: http://bic.berkeley.edu/
-.. _BIC: http://bic.berkeley.edu/
-
 .. FMRI datasets
 .. _openfmri: https://openfmri.org/
 .. _duncan et al data: https://openfmri.org/dataset/ds000107
@@ -132,7 +129,7 @@
 .. _Python(X,Y) UK mirror: http://www.mirrorservice.org/sites/pythonxy.com
 .. _blocked by Google code: http://nipyworld.blogspot.com/2011/07/why-you-shouldnt-use-google-code.html
 .. _Enthought Python Distribution: http://www.enthought.com/products/epd.php
-.. _Anaconda: https://store.continuum.io/cshop/anaconda
+.. _Anaconda: https://www.continuum.io/why-anaconda
 .. _EPD: http://www.enthought.com/products/epd.php
 .. _Enthought canopy: https://www.enthought.com/products/canopy/
 .. _checklist script: http://fperez.org/py4science/workshop_checklist.py
@@ -168,6 +165,9 @@
 .. _convolution: https://en.wikipedia.org/wiki/Convolution
 .. _impulse response: https://en.wikipedia.org/wiki/Impulse_response
 .. _boxcar function: https://en.wikipedia.org/wiki/Boxcar_function
+
+.. Unix
+.. _PATH: http://www.jarrodmillman.com/rcsds/standard/bash.html#commands
 
 .. Substitutions
 .. |emdash| unicode:: U+02014

@@ -4,7 +4,7 @@ Preparation
 
 We are going to be using the following major software for the class:
 
-* Python_ 3 (see :ref:`why python?`);
+* Python_ 3 (see :ref:`why-python-3`);
 * numpy_ (the Python array package);
 * matplotlib_ (Python plotting package);
 * scipy_ (Python scientific library);
@@ -12,7 +12,7 @@ We are going to be using the following major software for the class:
 
 For the class and homework we will use:
 
-* the Aton_ text editor (see :ref:`why Atom?`);
+* the Atom_ text editor (see :ref:`why-atom`);
 * the hydrogen_ Atom plugin for interactive code;
 * the git_ version control system.
 
@@ -25,6 +25,8 @@ You will also need one of:
 
 * MATLAB installed on your laptop or;
 * an account on the `neuro cluster`_ (so you can run MATLAB / SPM_ remotely).
+
+.. _why-python-3:
 
 *************
 Why Python 3?
@@ -51,6 +53,8 @@ writing was version 3.5.  Python versions 3.0 and greater (such as 3.5) differ
 in significant ways from earlier versions, such as version 2.7.  Many people
 still use Python 2.7, but because the versions are not fully compatible, we
 have standardized on Python 3.
+
+.. _why-atom:
 
 *********
 Why Atom?

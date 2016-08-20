@@ -52,8 +52,8 @@ Install homebrew
 ----------------
 
 Homebrew_ is "The missing package manager for OSX".  It is a system for
-installing many open-source software packages on OSX.  I recommend any serious
-Mac user install homebrew.
+installing many open-source software packages on OSX.  I recommend homebrew to
+any serious Mac user.
 
 To install homebrew, follow the instructions on the `homebrew home page
 <homebrew>`_.
@@ -65,8 +65,11 @@ In :ref:`terminal.app`, type::
 
     brew install python3
 
-Confirm that you have python 3 and the Python3 package installer ``pip3`` on
-the path with these commands and their expected outputs::
+Confirm that you have Python 3 and the Python 3 package installer ``pip3``
+commands correctly placed into one of the directories that your system
+searches for programs, with these commands and their expected outputs:
+
+.. code-block:: bash
 
     $ which python3
     /usr/local/bin/python3
@@ -86,7 +89,67 @@ refers to your home directory.
 
 Packages may have command line programs.  These will be installed to
 ``~/Library/Python/3.5/bin``.  You need to put this directory on your
-``PATH``.
+:term:`PATH`. To do this, start :ref:`Terminal.app` and type:
 
+.. code-block:: bash
+
+    atom ~/.bash_profile
+
+This will open the Atom editor and load the file ``.bash_profile`` from your
+home directory.  ``.bash_profile`` is a text file that contains commands that
+will run every time you open a new Terminal.app Window or tab.  At the end of
+this file, add these lines:
+
+.. code-block:: bash
+
+    export PATH="$PATH:$HOME/Library/Python/3.5/bin"
+
+Save and close Atom.  Quit and reopen Terminal.app in order to reload the
+``.bash_profile`` configuration.  Check the PATH is correct with:
+
+.. code-block:: bash
+
+    echo $PATH
+
+The value you see should end with the path to the ``Library/Python/3.5/bin``
+sub-directory in your home directory.
+
+Install the packages you need as user
+-------------------------------------
+
+Type this at the terminal prompt::
+
+    pip install --user numpy scipy matplotlib ipython nibabel jupyter
+
+Check that these have installed, and that your PATH is correctly set, with:
+
+.. code-block:: bash
+
+    $ ipython
+
+at your terminal (bash) prompt.  You should see something like this::
+
+    $ ipython
+    Python 3.5.2 (default, Jul 28 2016, 21:27:57)
+    Type "copyright", "credits" or "license" for more information.
+
+    IPython 5.1.0 -- An enhanced Interactive Python.
+    ?         -> Introduction and overview of IPython's features.
+    %quickref -> Quick reference.
+    help      -> Python's own help system.
+    object?   -> Details about 'object', use 'object??' for extra details.
+
+    In [1]:
+
+Type ``quit`` and press return to exit the IPython program.
+
+Other ways
+==========
+
+There are various other ways to install Python 3 and the Python packages.  If
+you already have a version of Python 3 that you are using, you are welcome to
+use that instead of homebrew Python.   For example, you might prefer to use
+the big installer package called Anaconda_ from Continuum Analytics to install
+your Python and other packages.
 
 .. include:: links_names.inc
