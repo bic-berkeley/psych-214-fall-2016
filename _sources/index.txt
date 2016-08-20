@@ -36,3 +36,4 @@ version control using git.
 .. toctree::
     :hidden:
 
+    choosing_editor

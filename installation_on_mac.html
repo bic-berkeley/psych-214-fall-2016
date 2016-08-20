@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation on Mac &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="installation-on-mac">
+<h1>Installation on Mac<a class="headerlink" href="#installation-on-mac" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="terminal-app">
+<span id="id1"></span><h2>Terminal.app<a class="headerlink" href="#terminal-app" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll be typing at the &#8220;terminal&#8221; prompt often during the class.  In OSX, the
+program giving the terminal prompt is <code class="docutils literal"><span class="pre">Terminal.app</span></code>.  It comes installed
+with OSX.</p>
+<p>Press the Command key and the spacebar at the same time to open the Spotlight
+search box.  Type &#8220;terminal&#8221; and press return to open Terminal.app.  You
+should get a terminal window.  Consider pinning Terminal.app to your dock by
+right-clicking on the Terminal icon in the dock, chose &#8220;Options&#8221; and &#8220;Keep in
+dock&#8221;.</p>
+</div>
+<div class="section" id="the-atom-text-editor">
+<h2>The Atom text editor<a class="headerlink" href="#the-atom-text-editor" title="Permalink to this headline">¶</a></h2>
+<p>Download the Atom installer for Mac from the <a class="reference external" href="https://atom.io">https://atom.io</a>.  Go to your
+Downloads folder and click on the Downloaded <code class="docutils literal"><span class="pre">atom-mac.zip</span></code> file.  This will
+unzip the files into your Download folder.  You should now see an Atom icon
+for the <code class="docutils literal"><span class="pre">Atom.app</span></code> application folder in your Downloads, maybe something
+like this:</p>
+<img alt="atom_downloaded.png" src="atom_downloaded.png" />
+<p>Open a new Finder window, navigate to the Applications folder, and drag the
+<code class="docutils literal"><span class="pre">Atom.app</span></code> folder to the Applications folder.</p>
+<p>Double-click on the Atom folder icon in the Applications folder to open Atom
+for the first time.  At the dialog &#8220;Atom.app is an application downloaded from
+the Internet. Are you sure you want to open it?&#8221;, select Open.  Atom should
+now be installed.</p>
+</div>
+<div class="section" id="python-and-packages">
+<h2>Python and packages<a class="headerlink" href="#python-and-packages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-standard-way">
+<h3>A standard way<a class="headerlink" href="#a-standard-way" title="Permalink to this headline">¶</a></h3>
+<p>This is the way that I (MB) installed on my Mac laptop, so it will be easiest
+for us to support you if you do the same thing.</p>
+<div class="section" id="install-homebrew">
+<h4>Install homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://brew.sh">Homebrew</a> is &#8220;The missing package manager for OSX&#8221;.  It is a system for
+installing many open-source software packages on OSX.  I recommend any serious
+Mac user install homebrew.</p>
+<p>To install homebrew, follow the instructions on the <a class="reference external" href="homebrew">homebrew home page</a>.</p>
+</div>
+<div class="section" id="install-python-3">
+<h4>Install Python 3<a class="headerlink" href="#install-python-3" title="Permalink to this headline">¶</a></h4>
+<p>In <a class="reference internal" href="#terminal-app"><span>Terminal.app</span></a>, type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>brew install python3
+</pre></div>
+</div>
+<p>Confirm that you have python 3 and the Python3 package installer <code class="docutils literal"><span class="pre">pip3</span></code> on
+the path with these commands and their expected outputs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ which python3
+/usr/local/bin/python3
+$ which pip3
+/usr/local/bin/pip3
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-user-installs">
+<h4>Set up user installs<a class="headerlink" href="#set-up-user-installs" title="Permalink to this headline">¶</a></h4>
+<p>The standard correct way to use <code class="docutils literal"><span class="pre">pip</span></code> (and, in our case) <code class="docutils literal"><span class="pre">pip3</span></code> is to
+install packages into your user&#8217;s environment, rather than into the main
+system that is shared across users.  This is called a pip &#8220;user&#8221; install.</p>
+<p>If you have Python 3.5, a user install on OSX will put the package files into
+a set of directories starting with <code class="docutils literal"><span class="pre">~/Library/Python/3.5</span></code>, where <code class="docutils literal"><span class="pre">~</span></code>
+refers to your home directory.</p>
+<p>Packages may have command line programs.  These will be installed to
+<code class="docutils literal"><span class="pre">~/Library/Python/3.5/bin</span></code>.  You need to put this directory on your
+<code class="docutils literal"><span class="pre">PATH</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation on Mac</a><ul>
+<li><a class="reference internal" href="#terminal-app">Terminal.app</a></li>
+<li><a class="reference internal" href="#the-atom-text-editor">The Atom text editor</a></li>
+<li><a class="reference internal" href="#python-and-packages">Python and packages</a><ul>
+<li><a class="reference internal" href="#a-standard-way">A standard way</a><ul>
+<li><a class="reference internal" href="#install-homebrew">Install homebrew</a></li>
+<li><a class="reference internal" href="#install-python-3">Install Python 3</a></li>
+<li><a class="reference internal" href="#set-up-user-installs">Set up user installs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation_on_mac.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/installation_on_mac.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

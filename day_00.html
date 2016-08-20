@@ -25,20 +25,16 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="author" title="About these documents" href="about.html" />
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="September 12:" href="day_01.html" />
+    <link rel="next" title="September 19: 2D / 3D arrays and plotting" href="day_01.html" />
     <link rel="prev" title="Classes" href="classes.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
-  
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
@@ -48,6 +44,29 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="august-29-introduction-python-images">
 <h1>August 29: introduction, Python, images<a class="headerlink" href="#august-29-introduction-python-images" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="course-introduction">
+<h2>Course introduction<a class="headerlink" href="#course-introduction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>What we are going to teach;</li>
+<li>why we are teaching this way;</li>
+<li>structure of classes and homework;</li>
+<li>what the final project will look like.</li>
+</ul>
+</div>
+<div class="section" id="instruction">
+<h2>Instruction<a class="headerlink" href="#instruction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Introduction to Python;</li>
+<li>brain and other images as arrays;</li>
+</ul>
+</div>
+<div class="section" id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Getting your computer set up;</li>
+<li>parsing an OpenFMRI text file.</li>
+</ul>
+</div>
 </div>
 
 
@@ -55,13 +74,23 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">August 29: introduction, Python, images</a><ul>
+<li><a class="reference internal" href="#course-introduction">Course introduction</a></li>
+<li><a class="reference internal" href="#instruction">Instruction</a></li>
+<li><a class="reference internal" href="#homework">Homework</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
       <li>Previous: <a href="classes.html" title="previous chapter">Classes</a></li>
-      <li>Next: <a href="day_01.html" title="next chapter">September 12:</a></li>
+      <li>Next: <a href="day_01.html" title="next chapter">September 19: 2D / 3D arrays and plotting</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -76,11 +105,14 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -91,8 +123,8 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
       |
       <a href="_sources/day_00.txt"
