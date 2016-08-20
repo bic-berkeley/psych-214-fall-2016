@@ -35,7 +35,7 @@ Installation check
 ******************
 
 Check your installation is correct by downloading this
-:download:`check_install.py`` script, and running it from the terminal with:
+:download:`check_install.py` script, and running it from the terminal with:
 
 .. code-block:: bash
 

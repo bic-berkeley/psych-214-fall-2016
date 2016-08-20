@@ -31,7 +31,7 @@ Install the ``wget`` command for downloading via the command line:
 
     sudo apt-get install -y wget
 
-Point your web browser at the `atom releases page`_ and download the latest
+Point your web browser at the `atom releases`_ page and download the latest
 ``.deb`` file for your distribution.  Here's me downloading a recent release
 from the command line:
 

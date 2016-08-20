@@ -2,23 +2,38 @@
 Logistics
 #########
 
-* Instructors:
+Fall 2016 Psych-214 is class number 33732.
 
-    * `Matthew Brett`_ (matthew dot brett on gmail);
-    * JB Poline (jbpoline on gmail).
+Class is 3 credits.
 
-* class number 33732;
-* 3 credits;
+.. _instructors:
+
+***********
+Instructors
+***********
+
+* `Matthew Brett`_ (matthew dot brett on gmail);
+* JB Poline (jbpoline on gmail).
+
+*******
+Grading
+*******
+
 * grade:
 
     * 20% participation;
     * 30% homework;
     * 50% final project.
 
-* Office hours:
+************
+Office hours
+************
 
-  * 210Q Barker Hall; if you can't get into the 210 area, then email one or
-    both of your instructors to let you in.
-  * Day / time TBA.
+Office hours are in 210Q Barker Hall
+
+If you can't get into the 210 area, then email one or both of your instructors
+to let you in.
+
+Day / time TBA.
 
 .. include:: links_names.inc
