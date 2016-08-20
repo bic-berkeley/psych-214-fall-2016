@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation on Linux &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Installation on Mac" href="installation_on_mac.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="installation-on-linux">
+<h1>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-python-3-git-and-atom">
+<h2>Installing Python 3, git and atom<a class="headerlink" href="#installing-python-3-git-and-atom" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="on-ubuntu-or-debian">
+<h3>On Ubuntu or Debian<a class="headerlink" href="#on-ubuntu-or-debian" title="Permalink to this headline">¶</a></h3>
+<p>Install git and Python 3:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install -y git python3-dev
+sudo apt-get install -y git
+</pre></div>
+</div>
+<p>Check your Python 3 version with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python3 --version
+</pre></div>
+</div>
+<p>This should give you a version &gt;= 3.4.  If not, ask your instructors for help.</p>
+<p>Install the <code class="docutils literal"><span class="pre">wget</span></code> command for downloading via the command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get install -y wget
+</pre></div>
+</div>
+<p>Point your web browser at the <a href="#id3"><span class="problematic" id="id4">`atom releases page`_</span></a> and download the latest
+<code class="docutils literal"><span class="pre">.deb</span></code> file for your distribution.  Here&#8217;s me downloading a recent release
+from the command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
+</pre></div>
+</div>
+<p>Install the Atom <code class="docutils literal"><span class="pre">.deb</span></code> package with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># This command will error with unmet dependencies</span>
+sudo dpkg --install atom-amd64.deb
+<span class="c1"># Fix the dependencies with this command</span>
+apt-get -f install -y
+</pre></div>
+</div>
+</div>
+<div class="section" id="on-fedora">
+<h3>On Fedora<a class="headerlink" href="#on-fedora" title="Permalink to this headline">¶</a></h3>
+<p>Install git and Python 3:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y python3-devel git
+</pre></div>
+</div>
+<p>If you get <code class="docutils literal"><span class="pre">bash:</span> <span class="pre">dnf:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code>, run <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">dnf</span></code> and
+try again.</p>
+<p>Check your Python 3 version with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python3 --version
+</pre></div>
+</div>
+<p>This should give you a version &gt;= 3.4.  If not, ask your instructors for help.</p>
+<p>Install the <code class="docutils literal"><span class="pre">wget</span></code> command for downloading via the command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y wget
+</pre></div>
+</div>
+<p>Point your web browser at the <a href="#id5"><span class="problematic" id="id6">`atom releases page`_</span></a> and download the latest
+<code class="docutils literal"><span class="pre">.rpm</span></code> file for your distribution.  Here&#8217;s me downloading a recent release
+from the command line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
+</pre></div>
+</div>
+<p>Install the Atom <code class="docutils literal"><span class="pre">.rpm</span></code> package with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y ./atom.x86_64.rpm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-python-3-packages">
+<h2>Installing Python 3 packages<a class="headerlink" href="#installing-python-3-packages" title="Permalink to this headline">¶</a></h2>
+<p>To get ready for Python user installs, put the user local install <code class="docutils literal"><span class="pre">bin</span></code>
+directory on your system <a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>.  First find the path the user <code class="docutils literal"><span class="pre">bin</span></code>
+directory with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python3 -c <span class="s1">&#39;import site; print(site.USER_BASE + &quot;/bin&quot;)&#39;</span>
+</pre></div>
+</div>
+<p>This will give you a result like <code class="docutils literal"><span class="pre">/home/your_username/.local/bin</span></code>.</p>
+<p>Open the <code class="docutils literal"><span class="pre">~/.bashrc</span></code> file in your home directory with Atom:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>atom ~/.bashrc
+</pre></div>
+</div>
+<p>Add these lines to end of the file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Put the path to the local bin directory into a variable</span>
+<span class="nv">py3_local_bin</span><span class="o">=</span><span class="k">$(</span>python3 -c <span class="s1">&#39;import site; print(site.USER_BASE + &quot;/bin&quot;)&#39;</span><span class="k">)</span>
+<span class="c1"># Put the directory at the front of the system PATH</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$py3_local_bin</span><span class="s2">:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Save the file, and restart your terminal to load the configuration from your
+<code class="docutils literal"><span class="pre">~/.bashrc</span></code> file.  Confirm that you have the <code class="docutils literal"><span class="pre">.local/bin</span></code> directory in
+your PATH now:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>Now install the Python package installer <code class="docutils literal"><span class="pre">pip</span></code> into your user directories
+(see: <a class="reference external" href="https://pip.pypa.io/en/stable/installing/#installing-with-get-pip-py">install pip with get-pip.py</a>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Download the get-pip.py installer</span>
+wget https://bootstrap.pypa.io/get-pip.py
+<span class="c1"># Execute the installer for Python 3 and a user install</span>
+python3 get-pip.py --user
+</pre></div>
+</div>
+<p>Check you now have the right version of the <code class="docutils literal"><span class="pre">pip3</span></code> command with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>which pip3
+</pre></div>
+</div>
+<p>This should give you something like <code class="docutils literal"><span class="pre">/home/your_username/.local/bin/pip3</span></code>.</p>
+<p>Finally, install the packages you need for the class:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation on Linux</a><ul>
+<li><a class="reference internal" href="#installing-python-3-git-and-atom">Installing Python 3, git and atom</a><ul>
+<li><a class="reference internal" href="#on-ubuntu-or-debian">On Ubuntu or Debian</a></li>
+<li><a class="reference internal" href="#on-fedora">On Fedora</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-python-3-packages">Installing Python 3 packages</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation_on_mac.html" title="previous chapter">Installation on Mac</a></li>
+      <li>Next: <a href="glossary.html" title="next chapter">Glossary</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation_on_linux.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/installation_on_linux.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

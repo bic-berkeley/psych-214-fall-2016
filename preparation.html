@@ -29,11 +29,14 @@
     <link rel="next" title="Classes" href="classes.html" />
     <link rel="prev" title="Logistics" href="logistics.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -45,7 +48,7 @@
 <h1>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h1>
 <p>We are going to be using the following major software for the class:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://www.python.org">Python</a> 3 (see <span class="xref std std-ref">why python?</span>);</li>
+<li><a class="reference external" href="https://www.python.org">Python</a> 3 (see <a class="reference internal" href="#why-python-3"><span class="std std-ref">Why Python 3?</span></a>);</li>
 <li><a class="reference external" href="http://www.numpy.org">numpy</a> (the Python array package);</li>
 <li><a class="reference external" href="http://matplotlib.org/">matplotlib</a> (Python plotting package);</li>
 <li><a class="reference external" href="http://www.scipy.org">scipy</a> (Python scientific library);</li>
@@ -53,22 +56,39 @@
 </ul>
 <p>For the class and homework we will use:</p>
 <ul class="simple">
-<li>the <a href="#id6"><span class="problematic" id="id7">Aton_</span></a> text editor (see <span class="xref std std-ref">why Atom?</span>);</li>
+<li>the <a class="reference external" href="https://atom.io">Atom</a> text editor (see <a class="reference internal" href="#why-atom"><span class="std std-ref">Why Atom?</span></a>);</li>
 <li>the <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> Atom plugin for interactive code;</li>
 <li>the <a class="reference external" href="http://git-scm.com">git</a> version control system.</li>
 </ul>
-<p>See:</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="installation_on_mac.html"><em>Installation on Mac</em></a>;</li>
-<li><code class="xref doc docutils literal"><span class="pre">installation_on_linux</span></code>;</li>
+<li><a class="reference internal" href="installation_on_mac.html"><span class="doc">Installation on Mac</span></a>;</li>
+<li><a class="reference internal" href="installation_on_linux.html"><span class="doc">Installation on Linux</span></a>;</li>
 </ul>
+<p>If you are on Windows, please come see us, and we will help you get set up.</p>
 <p>You will also need one of:</p>
 <ul class="simple">
 <li>MATLAB installed on your laptop or;</li>
 <li>an account on the <a class="reference external" href="https://www.neuro.berkeley.edu">neuro cluster</a> (so you can run MATLAB / <a class="reference external" href="http://www.fil.ion.ucl.ac.uk/spm">SPM</a> remotely).</li>
 </ul>
+</div>
+<div class="section" id="installation-check">
+<h2>Installation check<a class="headerlink" href="#installation-check" title="Permalink to this headline">¶</a></h2>
+<p>Check your installation is correct by downloading this
+<code class="xref download docutils literal"><span class="pre">check_install.py`</span></code> script, and running it from the terminal with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>python3 check_install.py
+</pre></div>
+</div>
+<p>You should see this printed to your terminal:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Congratulations</span><span class="p">,</span> <span class="nb">all</span> <span class="n">checks</span> <span class="n">passed</span>
+</pre></div>
+</div>
+<p>If you see anything else, copy and paste what you see into an email, and send
+it to one of your <span class="xref std std-ref">instructors</span>.</p>
+</div>
 <div class="section" id="why-python-3">
-<h2>Why Python 3?<a class="headerlink" href="#why-python-3" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Why Python 3?<a class="headerlink" href="#why-python-3" title="Permalink to this headline">¶</a></h2>
 <p>&#8220;Why Python 3?&#8221; is really two questions – &#8220;why Python?&#8221; and &#8220;why
 Python version 3&#8221;.</p>
 <p>Python has become the standard language for open-source scientific computing.
@@ -84,11 +104,12 @@ writing was version 3.5.  Python versions 3.0 and greater (such as 3.5) differ
 in significant ways from earlier versions, such as version 2.7.  Many people
 still use Python 2.7, but because the versions are not fully compatible, we
 have standardized on Python 3.</p>
+<p>For the class, you will need a version of Python &gt;= 3.4.</p>
 </div>
 <div class="section" id="why-atom">
-<h2>Why Atom?<a class="headerlink" href="#why-atom" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Why Atom?<a class="headerlink" href="#why-atom" title="Permalink to this headline">¶</a></h2>
 <p>We&#8217;re going to press you pretty hard to use the Atom text editor.</p>
-<p><a class="reference internal" href="choosing_editor.html"><em>Choosing an editor</em></a> is a personal decision, and one we recommend you invest
+<p><a class="reference internal" href="choosing_editor.html"><span class="doc">Choosing an editor</span></a> is a personal decision, and one we recommend you invest
 some time in.  For example, your instructors, outside the class, usually use
 <a class="reference external" href="http://www.vim.org">vim</a>.</p>
 <p>But, for the class, we will be using Atom, and we strongly suggest you do the
@@ -99,7 +120,8 @@ available for Windows, OSX and Linux;</li>
 <li>doesn&#8217;t need a lot of configuration to get started;</li>
 <li>can be configured to work in a very similar to way to other text editors you
 may be used to, such as vim (<a class="reference external" href="https://github.com/atom/vim-mode">vim-mode</a>; <a class="reference external" href="https://atom.io/packages/ex-mode">ex-mode</a>) and emacs (<a class="reference external" href="https://atom.io/packages/emacs-mode">emacs-mode</a>);</li>
-<li>can be used to run code interactively, with the <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin.</li>
+<li>can be used to run code interactively, with the <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin;</li>
+<li>has <a class="reference external" href="http://git-scm.com">git</a> integratin built-in.</li>
 </ul>
 </div>
 </div>
@@ -113,6 +135,8 @@ may be used to, such as vim (<a class="reference external" href="https://github.
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Preparation</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#installation-check">Installation check</a></li>
 <li><a class="reference internal" href="#why-python-3">Why Python 3?</a></li>
 <li><a class="reference internal" href="#why-atom">Why Atom?</a></li>
 </ul>
@@ -137,14 +161,11 @@ may be used to, such as vim (<a class="reference external" href="https://github.
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -155,8 +176,8 @@ may be used to, such as vim (<a class="reference external" href="https://github.
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/preparation.txt"

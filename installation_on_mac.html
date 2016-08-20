@@ -26,12 +26,17 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Installation on Linux" href="installation_on_linux.html" />
+    <link rel="prev" title="Choosing an editor" href="choosing_editor.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -59,13 +64,33 @@ Downloads folder and click on the Downloaded <code class="docutils literal"><spa
 unzip the files into your Download folder.  You should now see an Atom icon
 for the <code class="docutils literal"><span class="pre">Atom.app</span></code> application folder in your Downloads, maybe something
 like this:</p>
-<img alt="atom_downloaded.png" src="atom_downloaded.png" />
+<img alt="_images/atom_downloaded.png" src="_images/atom_downloaded.png" />
 <p>Open a new Finder window, navigate to the Applications folder, and drag the
 <code class="docutils literal"><span class="pre">Atom.app</span></code> folder to the Applications folder.</p>
 <p>Double-click on the Atom folder icon in the Applications folder to open Atom
 for the first time.  At the dialog &#8220;Atom.app is an application downloaded from
 the Internet. Are you sure you want to open it?&#8221;, select Open.  Atom should
 now be installed.</p>
+<p>See also <a class="reference external" href="http://flight-manual.atom.io/getting-started/sections/installing-atom">installing atom</a>.</p>
+</div>
+<div class="section" id="git">
+<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
+<p>On Mavericks (OSX 10.9) and above, <code class="docutils literal"><span class="pre">git</span></code> comes with the Apple OSX command
+line tools.</p>
+<p>To get these, type <code class="docutils literal"><span class="pre">git</span></code> at the terminal command line.  If git is not
+installed already you will get a dialog box like this:</p>
+<img alt="_images/git_developer_tools.png" src="_images/git_developer_tools.png" />
+<p>Click &#8216;install&#8217; to install the OSX developer command line tools, including
+git.</p>
+<p>If you have an earlier version of OSX, please install the most recent version
+of git from this <a class="reference external" href="http://mackyle.github.io/git-osx-installer/">git OSX installer</a> page.</p>
+</div>
+<div class="section" id="homebrew">
+<h2>Homebrew<a class="headerlink" href="#homebrew" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://brew.sh">Homebrew</a> is &#8220;The missing package manager for OSX&#8221;.  It is a system for
+installing many open-source software libraries packages on OSX.  I recommend
+Homebrew to any serious Mac user.</p>
+<p>To install Homebrew, follow the instructions on the <a class="reference external" href="homebrew">homebrew home page</a>.</p>
 </div>
 <div class="section" id="python-and-packages">
 <h2>Python and packages<a class="headerlink" href="#python-and-packages" title="Permalink to this headline">¶</a></h2>
@@ -73,22 +98,16 @@ now be installed.</p>
 <h3>A standard way<a class="headerlink" href="#a-standard-way" title="Permalink to this headline">¶</a></h3>
 <p>This is the way that I (MB) installed on my Mac laptop, so it will be easiest
 for us to support you if you do the same thing.</p>
-<div class="section" id="install-homebrew">
-<h4>Install homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">¶</a></h4>
-<p><a class="reference external" href="http://brew.sh">Homebrew</a> is &#8220;The missing package manager for OSX&#8221;.  It is a system for
-installing many open-source software packages on OSX.  I recommend any serious
-Mac user install homebrew.</p>
-<p>To install homebrew, follow the instructions on the <a class="reference external" href="homebrew">homebrew home page</a>.</p>
-</div>
-<div class="section" id="install-python-3">
-<h4>Install Python 3<a class="headerlink" href="#install-python-3" title="Permalink to this headline">¶</a></h4>
-<p>In <a class="reference internal" href="#terminal-app"><span>Terminal.app</span></a>, type:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>brew install python3
+<div class="section" id="install-python-3-with-homebrew">
+<h4>Install Python 3 with Homebrew<a class="headerlink" href="#install-python-3-with-homebrew" title="Permalink to this headline">¶</a></h4>
+<p>In <a class="reference internal" href="#terminal-app"><span class="std std-ref">Terminal.app</span></a>, type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
 </pre></div>
 </div>
-<p>Confirm that you have python 3 and the Python3 package installer <code class="docutils literal"><span class="pre">pip3</span></code> on
-the path with these commands and their expected outputs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ which python3
+<p>Confirm that you have Python 3 and the Python 3 package installer <code class="docutils literal"><span class="pre">pip3</span></code>
+commands correctly placed into one of the directories that your system
+searches for programs, with these commands and their expected outputs:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ which python3
 /usr/local/bin/python3
 $ which pip3
 /usr/local/bin/pip3
@@ -105,8 +124,59 @@ a set of directories starting with <code class="docutils literal"><span class="p
 refers to your home directory.</p>
 <p>Packages may have command line programs.  These will be installed to
 <code class="docutils literal"><span class="pre">~/Library/Python/3.5/bin</span></code>.  You need to put this directory on your
-<code class="docutils literal"><span class="pre">PATH</span></code>.</p>
+<a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>. To do this, start <a class="reference internal" href="#terminal-app"><span class="std std-ref">Terminal.app</span></a> and type:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>atom ~/.bash_profile
+</pre></div>
 </div>
+<p>This will open the Atom editor and load the file <code class="docutils literal"><span class="pre">.bash_profile</span></code> from your
+home directory.  <code class="docutils literal"><span class="pre">.bash_profile</span></code> is a text file that contains commands that
+will run every time you open a new Terminal.app Window or tab.  At the end of
+this file, add these lines:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/Library/Python/3.5/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Save and close Atom.  Quit and reopen Terminal.app in order to reload the
+<code class="docutils literal"><span class="pre">.bash_profile</span></code> configuration.  Check the PATH is correct with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>The value you see should start with the path to the <code class="docutils literal"><span class="pre">Library/Python/3.5/bin</span></code>
+sub-directory in your home directory.</p>
+</div>
+<div class="section" id="install-the-packages-you-need-as-user">
+<h4>Install the packages you need as user<a class="headerlink" href="#install-the-packages-you-need-as-user" title="Permalink to this headline">¶</a></h4>
+<p>Type this at the terminal prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">ipython</span> <span class="n">nibabel</span> <span class="n">jupyter</span>
+</pre></div>
+</div>
+<p>Check that these have installed, and that your PATH is correctly set, with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ipython
+</pre></div>
+</div>
+<p>at your terminal (bash) prompt.  You should see something like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ipython
+Python 3.5.2 <span class="o">(</span>default, Jul <span class="m">28</span> 2016, 21:27:57<span class="o">)</span>
+Type <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython<span class="s1">&#39;s features.</span>
+<span class="s1">%quickref -&gt; Quick reference.</span>
+<span class="s1">help      -&gt; Python&#39;</span>s own <span class="nb">help</span> system.
+object?   -&gt; Details about <span class="s1">&#39;object&#39;</span>, use <span class="s1">&#39;object??&#39;</span> <span class="k">for</span> extra details.
+
+In <span class="o">[</span>1<span class="o">]</span>:
+</pre></div>
+</div>
+<p>Type <code class="docutils literal"><span class="pre">quit</span></code> and press return to exit the IPython program.</p>
+</div>
+</div>
+<div class="section" id="other-ways">
+<h3>Other ways<a class="headerlink" href="#other-ways" title="Permalink to this headline">¶</a></h3>
+<p>There are various other ways to install Python 3 and the Python packages.  If
+you already have a version of Python 3 that you are using, you are welcome to
+use that instead of Homebrew Python.  For example, you might prefer to use the
+big installer package called <a class="reference external" href="https://www.continuum.io/why-anaconda">Anaconda</a> from Continuum Analytics to install
+your Python and other packages.</p>
 </div>
 </div>
 </div>
@@ -122,13 +192,16 @@ refers to your home directory.</p>
 <li><a class="reference internal" href="#">Installation on Mac</a><ul>
 <li><a class="reference internal" href="#terminal-app">Terminal.app</a></li>
 <li><a class="reference internal" href="#the-atom-text-editor">The Atom text editor</a></li>
+<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#homebrew">Homebrew</a></li>
 <li><a class="reference internal" href="#python-and-packages">Python and packages</a><ul>
 <li><a class="reference internal" href="#a-standard-way">A standard way</a><ul>
-<li><a class="reference internal" href="#install-homebrew">Install homebrew</a></li>
-<li><a class="reference internal" href="#install-python-3">Install Python 3</a></li>
+<li><a class="reference internal" href="#install-python-3-with-homebrew">Install Python 3 with Homebrew</a></li>
 <li><a class="reference internal" href="#set-up-user-installs">Set up user installs</a></li>
+<li><a class="reference internal" href="#install-the-packages-you-need-as-user">Install the packages you need as user</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#other-ways">Other ways</a></li>
 </ul>
 </li>
 </ul>
@@ -138,6 +211,8 @@ refers to your home directory.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="choosing_editor.html" title="previous chapter">Choosing an editor</a></li>
+      <li>Next: <a href="installation_on_linux.html" title="next chapter">Installation on Linux</a></li>
   </ul></li>
 </ul>
 </div>
@@ -151,14 +226,11 @@ refers to your home directory.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -169,8 +241,8 @@ refers to your home directory.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/installation_on_mac.txt"
