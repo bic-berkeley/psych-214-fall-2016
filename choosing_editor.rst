@@ -23,10 +23,11 @@ you consider choosing your editor.  No programmer would use Windows Notepad
 for writing code, and that is for a very good reason.
 
 The two most well-known and fully-featured cross-platform general text editors
-are emacs_ and vim_ / gvim_.  These run on any platform.
+are emacs_ and vim_ / gvim_.  These run on any platform.  Atom_ is another
+open-source cross-platform general text editor.
 
-No doubt you want to know what your instructors use?  No?  Well, in any case,
-the answer is that Matthew and JB use vim, and Stéfan uses emacs.
+No doubt you want to know what your instructors use for their daily work?  No?
+Well, in any case, the answer is that Matthew and JB use vim.
 
 ***
 vim
@@ -70,6 +71,19 @@ movement and editing.
 Emacs hard to configure, largely because it is so powerful.  We are very happy
 to help with this if you are interested.
 
+****
+Atom
+****
+
+Atom_ is another open-source text editor that describes itself as "A hackable
+text editor for the 21st Century".  It has installers for OSX, Linux and
+Windows.  It has many "packages" that can configure the editor in various
+ways, including setting it to use the same key combinations as vim_
+(vim-mode_, ex-mode_) and emacs (emacs-mode_).  It integrates with git_
+version control out of the box.  It has useful features for development, such
+as the ability to run code from the editor and return the results to the
+editor window (see the hydrogen_ package).
+
 *************************************
 Other editors that you might consider
 *************************************
@@ -78,8 +92,8 @@ We will support these editors too for anyone who wants to use them.  If you
 prefer another editor, we will help as best we can.
 
 This suggested set of editors comes from the top four editors from  `text
-editor competition`_ with the addition of TextMate (because we know at least
-one extremely efficient coder who uses it).
+editor competition`_ with the addition of TextMate and PyCharm (because we know at least
+one very efficient coder who use these).
 
 For any platform
 ================
@@ -87,6 +101,10 @@ For any platform
 Some people really like `Sublime text`_.  It is free to try, and the trial
 version does not expire, but if you continue to use it, the authors ask you to
 buy a license for 70 USD.
+
+We have heard good things about PyCharm.  This is a general text editor with
+features that allow it to be used as an integrated development environment for
+Python. See the `PyCharm web site <PyCharm>`_ for more detail.
 
 For OSX
 =======

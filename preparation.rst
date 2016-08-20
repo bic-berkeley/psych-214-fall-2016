@@ -16,15 +16,37 @@ For the class and homework we will use:
 * the hydrogen_ Atom plugin for interactive code;
 * the git_ version control system.
 
-See:
+************
+Installation
+************
 
 * :doc:`installation_on_mac`;
 * :doc:`installation_on_linux`;
+
+If you are on Windows, please come see us, and we will help you get set up.
 
 You will also need one of:
 
 * MATLAB installed on your laptop or;
 * an account on the `neuro cluster`_ (so you can run MATLAB / SPM_ remotely).
+
+******************
+Installation check
+******************
+
+Check your installation is correct by downloading this
+:download:`check_install.py`` script, and running it from the terminal with:
+
+.. code-block:: bash
+
+    python3 check_install.py
+
+You should see this printed to your terminal::
+
+    Congratulations, all checks passed
+
+If you see anything else, copy and paste what you see into an email, and send
+it to one of your :ref:`instructors`.
 
 .. _why-python-3:
 
@@ -54,6 +76,8 @@ in significant ways from earlier versions, such as version 2.7.  Many people
 still use Python 2.7, but because the versions are not fully compatible, we
 have standardized on Python 3.
 
+For the class, you will need a version of Python >= 3.4.
+
 .. _why-atom:
 
 *********
@@ -74,6 +98,7 @@ same.  This is for several reasons.  Atom:
 * doesn't need a lot of configuration to get started;
 * can be configured to work in a very similar to way to other text editors you
   may be used to, such as vim (vim-mode_; ex-mode_) and emacs (emacs-mode_);
-* can be used to run code interactively, with the `hydrogen`_ plugin.
+* can be used to run code interactively, with the `hydrogen`_ plugin;
+* has git_ integratin built-in.
 
 .. include:: links_names.inc

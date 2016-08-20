@@ -38,6 +38,37 @@ for the first time.  At the dialog "Atom.app is an application downloaded from
 the Internet. Are you sure you want to open it?", select Open.  Atom should
 now be installed.
 
+See also `installing atom`_.
+
+***
+Git
+***
+
+On Mavericks (OSX 10.9) and above, ``git`` comes with the Apple OSX command
+line tools.
+
+To get these, type ``git`` at the terminal command line.  If git is not
+installed already you will get a dialog box like this:
+
+.. image:: images/git_developer_tools.png
+
+Click 'install' to install the OSX developer command line tools, including
+git.
+
+If you have an earlier version of OSX, please install the most recent version
+of git from this `git OSX installer`_ page.
+
+********
+Homebrew
+********
+
+Homebrew_ is "The missing package manager for OSX".  It is a system for
+installing many open-source software libraries packages on OSX.  I recommend
+Homebrew to any serious Mac user.
+
+To install Homebrew, follow the instructions on the `homebrew home page
+<homebrew>`_.
+
 *******************
 Python and packages
 *******************
@@ -48,18 +79,8 @@ A standard way
 This is the way that I (MB) installed on my Mac laptop, so it will be easiest
 for us to support you if you do the same thing.
 
-Install homebrew
-----------------
-
-Homebrew_ is "The missing package manager for OSX".  It is a system for
-installing many open-source software packages on OSX.  I recommend homebrew to
-any serious Mac user.
-
-To install homebrew, follow the instructions on the `homebrew home page
-<homebrew>`_.
-
-Install Python 3
-----------------
+Install Python 3 with Homebrew
+------------------------------
 
 In :ref:`terminal.app`, type::
 
@@ -102,7 +123,7 @@ this file, add these lines:
 
 .. code-block:: bash
 
-    export PATH="$PATH:$HOME/Library/Python/3.5/bin"
+    export PATH="$HOME/Library/Python/3.5/bin:$PATH"
 
 Save and close Atom.  Quit and reopen Terminal.app in order to reload the
 ``.bash_profile`` configuration.  Check the PATH is correct with:
@@ -111,7 +132,7 @@ Save and close Atom.  Quit and reopen Terminal.app in order to reload the
 
     echo $PATH
 
-The value you see should end with the path to the ``Library/Python/3.5/bin``
+The value you see should start with the path to the ``Library/Python/3.5/bin``
 sub-directory in your home directory.
 
 Install the packages you need as user
@@ -119,7 +140,7 @@ Install the packages you need as user
 
 Type this at the terminal prompt::
 
-    pip install --user numpy scipy matplotlib ipython nibabel jupyter
+    pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
 
 Check that these have installed, and that your PATH is correctly set, with:
 
@@ -127,7 +148,9 @@ Check that these have installed, and that your PATH is correctly set, with:
 
     $ ipython
 
-at your terminal (bash) prompt.  You should see something like this::
+at your terminal (bash) prompt.  You should see something like this:
+
+.. code-block:: bash
 
     $ ipython
     Python 3.5.2 (default, Jul 28 2016, 21:27:57)
@@ -148,8 +171,8 @@ Other ways
 
 There are various other ways to install Python 3 and the Python packages.  If
 you already have a version of Python 3 that you are using, you are welcome to
-use that instead of homebrew Python.   For example, you might prefer to use
-the big installer package called Anaconda_ from Continuum Analytics to install
+use that instead of Homebrew Python.  For example, you might prefer to use the
+big installer package called Anaconda_ from Continuum Analytics to install
 your Python and other packages.
 
 .. include:: links_names.inc

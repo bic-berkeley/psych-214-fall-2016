@@ -12,9 +12,6 @@
 .. _practical neuroimaging course: http://practical-neuroimaging.github.io
 .. _neuro cluster: https://www.neuro.berkeley.edu
 
-.. Software
-.. _SPM: http://www.fil.ion.ucl.ac.uk/spm
-
 .. Python distributions
 .. _homebrew: http://brew.sh
 
@@ -41,10 +38,13 @@
    http://www.rackspace.com/blog/text-editor-madness-bracket-vote-for-your-favorite
 .. _atom: https://atom.io
 .. _hydrogen: https://atom.io/packages/hydrogen
+.. _installing atom: http://flight-manual.atom.io/getting-started/sections/installing-atom
+.. _atom_releases: https://github.com/atom/atom/releases
 .. _vim-mode: https://github.com/atom/vim-mode
 .. _ex-mode: https://atom.io/packages/ex-mode
 .. _emacs-mode: https://atom.io/packages/emacs-mode
 .. _notepad++: https://notepad-plus-plus.org
+.. _pycharm: http://www.jetbrains.com/pycharm
 
 .. Python and common libraries
 .. _python: https://www.python.org
@@ -70,6 +70,7 @@
 .. _sphinx: http://www.sphinx-doc.org
 .. _10 reasons Python rocks for research:
    http://www.stat.washington.edu/~hoytak/blog/whypython.html
+.. _install pip with get-pip.py: https://pip.pypa.io/en/stable/installing/#installing-with-get-pip-py
 
 .. IPython
 .. _ipython: http://ipython.org/
@@ -125,7 +126,7 @@
 .. _fmristat: http://www.math.mcgill.ca/keith/fmristat
 
 .. Installation
-.. _Python(X,Y): https://code.google.com/p/pythonxy/
+.. _Python(X,Y): https://python-xy.github.io
 .. _Python(X,Y) UK mirror: http://www.mirrorservice.org/sites/pythonxy.com
 .. _blocked by Google code: http://nipyworld.blogspot.com/2011/07/why-you-shouldnt-use-google-code.html
 .. _Enthought Python Distribution: http://www.enthought.com/products/epd.php
