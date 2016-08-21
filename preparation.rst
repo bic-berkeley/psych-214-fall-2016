@@ -59,19 +59,18 @@ Why Python 3?
 "Why Python 3?" is really two questions |--| "why Python?" and "why
 Python version 3".
 
-Python is an very good all-purpose language for scientific computing for `many
-reasons
+Python is well-suited to scientific computing for `many reasons
 <https://github.com/nipy/nipy/blob/master/doc/faq/why.rst#why-python>`_.
 
-Python code is famously easy to understand, and has become a common choice for
-teaching programming |--| see for example the `Berkeley CS61A course
-<http://cs61a.org>`_ and the `MIT introduction to computer science and
+Python code is famously easy to read, and Python has become a common choice
+for introductions to programming |--| see for example the `Berkeley CS61A
+course <http://cs61a.org>`_ and the `MIT introduction to computer science and
 programming
 <http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00sc-introduction-to-computer-science-and-programming-spring-2011/>`_.
 
 The CS61A course notes have a good introduction to the `benefits of Python
 <http://composingprograms.com/pages/11-getting-started.html#programming-in-python>`_.
-You may want to read `10 reasons Python rocks for research`_ for a comparsion
+You may want to read `10 reasons Python rocks for research`_ for a comparison
 between Python and MATLAB.
 
 Berkeley teaches its new data science courses using Python.
@@ -105,6 +104,6 @@ same.  This is for several reasons.  Atom:
 * can be configured to work in a very similar to way to other text editors you
   may be used to, such as vim (vim-mode_; ex-mode_) and emacs (emacs-mode_);
 * can be used to run code interactively, with the `hydrogen`_ plugin;
-* has git_ integratin built-in.
+* has git_ integration built-in.
 
 .. include:: links_names.inc

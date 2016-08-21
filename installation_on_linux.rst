@@ -100,7 +100,7 @@ Install the Atom hydrogen_ plugin with:
 .. code-block:: bash
 
     # Install dependencies for hydrogen plugin build
-    sudo dnf install -y gcc-c++ zeromq3-devel
+    sudo dnf install -y python2 gcc-c++ zeromq3-devel
     # Install hydrogen plugin
     PYTHON=python2.7 apm install hydrogen
 
