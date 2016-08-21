@@ -1,3 +1,5 @@
+# Preliminaries - not always in default docker container
+apt-get update
 apt-get install -y sudo
 
 sudo apt-get update
@@ -13,7 +15,7 @@ wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
 # This command will error with unmet dependencies
 sudo dpkg --install atom-amd64.deb
 # Fix the dependencies with this command
-apt-get -f install
+sudo apt-get -f install -y
 
 cat >> ~/.bashrc << EOF
 
@@ -35,5 +37,7 @@ python3 get-pip.py --user
 which pip3
 
 pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
+
+wget https://bic-berkeley.github.io/psych-214-fall-2016/_downloads/check_install.py
 
 python3 check_install.py

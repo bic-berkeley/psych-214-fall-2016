@@ -30,6 +30,8 @@ You will also need one of:
 * MATLAB installed on your laptop or;
 * an account on the `neuro cluster`_ (so you can run MATLAB / SPM_ remotely).
 
+.. _installation-check:
+
 ******************
 Installation check
 ******************

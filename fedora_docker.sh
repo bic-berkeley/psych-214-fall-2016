@@ -32,4 +32,6 @@ which pip3
 
 pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
 
+wget https://bic-berkeley.github.io/psych-214-fall-2016/_downloads/check_install.py
+
 python3 check_install.py

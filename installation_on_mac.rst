@@ -175,4 +175,11 @@ use that instead of Homebrew Python.  For example, you might prefer to use the
 big installer package called Anaconda_ from Continuum Analytics to install
 your Python and other packages.
 
+*******
+Finally
+*******
+
+However you installed Python 3 and the packages, don't forget to do the
+:ref:`installation-check`.
+
 .. include:: links_names.inc
