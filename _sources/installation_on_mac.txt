@@ -190,6 +190,11 @@ your Python and other packages.
 Finally
 *******
 
+.. atom commands:
+    cmd-shift-p  command palette
+    alt-shift-enter  run in place
+    alt-cmd-enter  run and move down
+
 However you installed Python 3 and the packages, don't forget to do the
 :ref:`installation-check`.
 

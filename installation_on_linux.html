@@ -72,9 +72,9 @@ wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
 </pre></div>
 </div>
 <p>Install the Atom <code class="docutils literal"><span class="pre">.deb</span></code> package with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># This command will error with unmet dependencies</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># This command may error with unmet dependencies</span>
 sudo dpkg --install atom-amd64.deb
-<span class="c1"># Fix the dependencies with this command</span>
+<span class="c1"># Fix any unmet dependencies with this command</span>
 sudo apt-get -f install -y
 </pre></div>
 </div>
@@ -125,8 +125,8 @@ sudo dnf install -y python2 gcc-c++ zeromq3-devel
 <div class="section" id="installing-python-3-packages">
 <h2>Installing Python 3 packages<a class="headerlink" href="#installing-python-3-packages" title="Permalink to this headline">¶</a></h2>
 <p>To get ready for Python user installs, put the user local install <code class="docutils literal"><span class="pre">bin</span></code>
-directory on your system <a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>.  First find the path the user <code class="docutils literal"><span class="pre">bin</span></code>
-directory with:</p>
+directory on your system <a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>.  First find the location of the user
+<code class="docutils literal"><span class="pre">bin</span></code> directory with:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>python3 -c <span class="s1">&#39;import site; print(site.USER_BASE + &quot;/bin&quot;)&#39;</span>
 </pre></div>
 </div>
