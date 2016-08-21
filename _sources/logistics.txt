@@ -19,11 +19,9 @@ Instructors
 Grading
 *******
 
-* grade:
-
-    * 20% participation;
-    * 30% homework;
-    * 50% final project.
+* 20% participation;
+* 30% homework;
+* 50% final project.
 
 ************
 Office hours
