@@ -42,9 +42,9 @@ Install the Atom ``.deb`` package with:
 
 .. code-block:: bash
 
-    # This command will error with unmet dependencies
+    # This command may error with unmet dependencies
     sudo dpkg --install atom-amd64.deb
-    # Fix the dependencies with this command
+    # Fix any unmet dependencies with this command
     sudo apt-get -f install -y
 
 Install the Atom hydrogen_ plugin with:
@@ -109,8 +109,8 @@ Installing Python 3 packages
 ****************************
 
 To get ready for Python user installs, put the user local install ``bin``
-directory on your system :term:`PATH`.  First find the path the user ``bin``
-directory with:
+directory on your system :term:`PATH`.  First find the location of the user
+``bin`` directory with:
 
 .. code-block:: bash
 
@@ -164,6 +164,11 @@ Finally, install the packages you need for the class:
 .. code-block:: bash
 
     pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
+
+.. atom commands:
+    ctrl-shift-p  command palette
+    alt-shift-enter  run in place
+    alt-ctrl-enter  run and move down
 
 Don't forget to do the :ref:`installation-check`.
 
