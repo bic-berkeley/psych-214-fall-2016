@@ -50,6 +50,7 @@
 <h2>Installing Python 3, git and atom<a class="headerlink" href="#installing-python-3-git-and-atom" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="on-ubuntu-or-debian">
 <h3>On Ubuntu or Debian<a class="headerlink" href="#on-ubuntu-or-debian" title="Permalink to this headline">¶</a></h3>
+<p>Tested on: Ubuntus 14.04, 15.04 through 16.10; Debians Jessie and Sid.</p>
 <p>Install git and Python 3:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get update
 sudo apt-get install -y git python3-dev
@@ -61,26 +62,26 @@ sudo apt-get install -y git
 </pre></div>
 </div>
 <p>This should give you a version &gt;= 3.4.  If not, ask your instructors for help.</p>
-<p>Install the <code class="docutils literal"><span class="pre">wget</span></code> command for downloading via the command line:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get install -y wget
-</pre></div>
-</div>
 <p>Point your web browser at the <a href="#id3"><span class="problematic" id="id4">`atom releases`_</span></a> page and download the latest
 <code class="docutils literal"><span class="pre">.deb</span></code> file for your distribution.  Here&#8217;s me downloading a recent release
 from the command line:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install the wget command for downloading from the command line</span>
+sudo apt-get install -y wget
+<span class="c1"># Download a recent version of Atom for Debian / Ubuntu</span>
+wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
 </pre></div>
 </div>
 <p>Install the Atom <code class="docutils literal"><span class="pre">.deb</span></code> package with:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># This command will error with unmet dependencies</span>
 sudo dpkg --install atom-amd64.deb
 <span class="c1"># Fix the dependencies with this command</span>
-apt-get -f install -y
+sudo apt-get -f install -y
 </pre></div>
 </div>
 </div>
 <div class="section" id="on-fedora">
 <h3>On Fedora<a class="headerlink" href="#on-fedora" title="Permalink to this headline">¶</a></h3>
+<p>Tested on Fedora 21 through 24.</p>
 <p>Install git and Python 3:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y python3-devel git
 </pre></div>
@@ -92,14 +93,13 @@ try again.</p>
 </pre></div>
 </div>
 <p>This should give you a version &gt;= 3.4.  If not, ask your instructors for help.</p>
-<p>Install the <code class="docutils literal"><span class="pre">wget</span></code> command for downloading via the command line:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y wget
-</pre></div>
-</div>
 <p>Point your web browser at the <a href="#id5"><span class="problematic" id="id6">`atom releases page`_</span></a> and download the latest
 <code class="docutils literal"><span class="pre">.rpm</span></code> file for your distribution.  Here&#8217;s me downloading a recent release
 from the command line:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install the wget command for downloading from the command line</span>
+sudo dnf install -y wget
+<span class="c1"># Download a recent version of Atom for Fedora</span>
+wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
 </pre></div>
 </div>
 <p>Install the Atom <code class="docutils literal"><span class="pre">.rpm</span></code> package with:</p>
@@ -151,6 +151,7 @@ python3 get-pip.py --user
 <div class="highlight-bash"><div class="highlight"><pre><span></span>pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
 </pre></div>
 </div>
+<p>Don&#8217;t forget to do the <a class="reference internal" href="preparation.html#installation-check"><span class="std std-ref">Installation check</span></a>.</p>
 </div>
 </div>
 

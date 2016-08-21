@@ -9,6 +9,8 @@ Installing Python 3, git and atom
 On Ubuntu or Debian
 ===================
 
+Tested on: Ubuntus 14.04, 15.04 through 16.10; Debians Jessie and Sid.
+
 Install git and Python 3:
 
 .. code-block:: bash
@@ -25,18 +27,15 @@ Check your Python 3 version with:
 
 This should give you a version >= 3.4.  If not, ask your instructors for help.
 
-Install the ``wget`` command for downloading via the command line:
-
-.. code-block:: bash
-
-    sudo apt-get install -y wget
-
 Point your web browser at the `atom releases`_ page and download the latest
 ``.deb`` file for your distribution.  Here's me downloading a recent release
 from the command line:
 
 .. code-block:: bash
 
+    # Install the wget command for downloading from the command line
+    sudo apt-get install -y wget
+    # Download a recent version of Atom for Debian / Ubuntu
     wget https://github.com/atom/atom/releases/download/v1.9.9/atom-amd64.deb
 
 Install the Atom ``.deb`` package with:
@@ -46,10 +45,12 @@ Install the Atom ``.deb`` package with:
     # This command will error with unmet dependencies
     sudo dpkg --install atom-amd64.deb
     # Fix the dependencies with this command
-    apt-get -f install -y
+    sudo apt-get -f install -y
 
 On Fedora
 =========
+
+Tested on Fedora 21 through 24.
 
 Install git and Python 3:
 
@@ -68,18 +69,15 @@ Check your Python 3 version with:
 
 This should give you a version >= 3.4.  If not, ask your instructors for help.
 
-Install the ``wget`` command for downloading via the command line:
-
-.. code-block:: bash
-
-    sudo dnf install -y wget
-
 Point your web browser at the `atom releases page`_ and download the latest
 ``.rpm`` file for your distribution.  Here's me downloading a recent release
 from the command line:
 
 .. code-block:: bash
 
+    # Install the wget command for downloading from the command line
+    sudo dnf install -y wget
+    # Download a recent version of Atom for Fedora
     wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
 
 Install the Atom ``.rpm`` package with:
@@ -148,5 +146,7 @@ Finally, install the packages you need for the class:
 .. code-block:: bash
 
     pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
+
+Don't forget to do the :ref:`installation-check`.
 
 .. include:: links_names.inc
