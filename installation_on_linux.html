@@ -78,6 +78,13 @@ sudo dpkg --install atom-amd64.deb
 sudo apt-get -f install -y
 </pre></div>
 </div>
+<p>Install the Atom <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies for hydrogen plugin build</span>
+sudo apt-get install -y build-essential libzmq3-dev
+<span class="c1"># Install hydrogen plugin</span>
+<span class="nv">PYTHON</span><span class="o">=</span>python2.7 apm install hydrogen
+</pre></div>
+</div>
 </div>
 <div class="section" id="on-fedora">
 <h3>On Fedora<a class="headerlink" href="#on-fedora" title="Permalink to this headline">¶</a></h3>
@@ -104,6 +111,13 @@ wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
 </div>
 <p>Install the Atom <code class="docutils literal"><span class="pre">.rpm</span></code> package with:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>sudo dnf install -y ./atom.x86_64.rpm
+</pre></div>
+</div>
+<p>Install the Atom <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies for hydrogen plugin build</span>
+sudo dnf install -y gcc-c++ zeromq3-devel
+<span class="c1"># Install hydrogen plugin</span>
+<span class="nv">PYTHON</span><span class="o">=</span>python2.7 apm install hydrogen
 </pre></div>
 </div>
 </div>

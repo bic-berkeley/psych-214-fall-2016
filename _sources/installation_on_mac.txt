@@ -18,6 +18,18 @@ should get a terminal window.  Consider pinning Terminal.app to your dock by
 right-clicking on the Terminal icon in the dock, chose "Options" and "Keep in
 dock".
 
+********
+Homebrew
+********
+
+Homebrew_ is "The missing package manager for OSX".  It is a system for
+installing many open-source software libraries packages on OSX.  I recommend
+Homebrew to any serious Mac user; you will need it for the instructions on
+this page.
+
+To install Homebrew, follow the instructions on the `homebrew home page
+<homebrew>`_.
+
 ********************
 The Atom text editor
 ********************
@@ -40,6 +52,16 @@ now be installed.
 
 See also `installing atom`_.
 
+You will also need the hydrogen_ plugin for Atom.  Install from
+:ref:`Terminal.app` with:
+
+.. code-block:: bash
+
+    # Install dependencies with homebrew
+    brew install pkg-config zeromq
+    # Install the plugin
+    PYTHON=python2.7 apm install hydrogen
+
 ***
 Git
 ***
@@ -57,17 +79,6 @@ git.
 
 If you have an earlier version of OSX, please install the most recent version
 of git from this `git OSX installer`_ page.
-
-********
-Homebrew
-********
-
-Homebrew_ is "The missing package manager for OSX".  It is a system for
-installing many open-source software libraries packages on OSX.  I recommend
-Homebrew to any serious Mac user.
-
-To install Homebrew, follow the instructions on the `homebrew home page
-<homebrew>`_.
 
 *******************
 Python and packages
