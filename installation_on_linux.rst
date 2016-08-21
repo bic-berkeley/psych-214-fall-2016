@@ -47,6 +47,15 @@ Install the Atom ``.deb`` package with:
     # Fix the dependencies with this command
     sudo apt-get -f install -y
 
+Install the Atom hydrogen_ plugin with:
+
+.. code-block:: bash
+
+    # Install dependencies for hydrogen plugin build
+    sudo apt-get install -y build-essential libzmq3-dev
+    # Install hydrogen plugin
+    PYTHON=python2.7 apm install hydrogen
+
 On Fedora
 =========
 
@@ -85,6 +94,15 @@ Install the Atom ``.rpm`` package with:
 .. code-block:: bash
 
     sudo dnf install -y ./atom.x86_64.rpm
+
+Install the Atom hydrogen_ plugin with:
+
+.. code-block:: bash
+
+    # Install dependencies for hydrogen plugin build
+    sudo dnf install -y gcc-c++ zeromq3-devel
+    # Install hydrogen plugin
+    PYTHON=python2.7 apm install hydrogen
 
 ****************************
 Installing Python 3 packages

@@ -11,6 +11,11 @@ wget https://github.com/atom/atom/releases/download/v1.9.9/atom.x86_64.rpm
 
 sudo dnf install -y ./atom.x86_64.rpm
 
+# Install dependencies for hydrogen plugin build
+sudo dnf install -y gcc-c++ zeromq3-devel
+# Install hydrogen plugin
+PYTHON=python2.7 apm install hydrogen
+
 cat >> ~/.bashrc << EOF
 
 # Put the path to the local bin directory into a variable

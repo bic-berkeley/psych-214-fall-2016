@@ -12,7 +12,9 @@ These programs should be installed:
 * apm
 * pip3 >= 8.1
 
-The following packages should be installed:
+The Hydrogen package should be installed via ``apm``.
+
+The following Python 3 packages should be installed:
 
 * numpy
 * scipy
@@ -28,17 +30,6 @@ from distutils.version import LooseVersion
 
 # Python running us is >= 3.4
 assert sys.version_info[:2] >= (3, 4)
-
-# git on the command line
-assert check_output(['git', '--version']).startswith(b'git version')
-
-# Atom from the command line.  Raises FileNotFoundError if missing
-atom_proc = Popen(['atom', '-h'], stdout=PIPE, stderr=PIPE)
-out, err = atom_proc.communicate()
-assert err == b''
-
-# apm should be on the command line
-assert check_output(['apm', '--version', '--color', 'false']).startswith(b'apm')
 
 # pip on Python sys path should be >= 8.1
 import pip
@@ -56,5 +47,19 @@ import matplotlib
 import nibabel
 import IPython
 import jupyter
+
+# git on the command line
+assert check_output(['git', '--version']).startswith(b'git version')
+
+# Atom from the command line.  Raises FileNotFoundError if missing
+atom_proc = Popen(['atom', '-h'], stdout=PIPE, stderr=PIPE)
+out, err = atom_proc.communicate()
+assert err == b''
+
+# apm should be on the command line
+assert check_output(['apm', '--version', '--color', 'false']).startswith(b'apm')
+
+# Hydrogen should be listed as installed
+assert b'Hydrogen' in check_output(['apm', 'list', '-ipb'])
 
 print("Congratulations, all checks passed")

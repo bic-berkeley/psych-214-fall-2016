@@ -17,6 +17,10 @@ sudo dpkg --install atom-amd64.deb
 # Fix the dependencies with this command
 sudo apt-get -f install -y
 
+# Install Hydrogen plugin
+sudo apt-get install -y build-essential libzmq3-dev
+PYTHON=python2.7 apm install hydrogen
+
 cat >> ~/.bashrc << EOF
 
 # Put the path to the local bin directory into a variable
