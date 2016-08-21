@@ -75,11 +75,10 @@ between Python and MATLAB.
 
 Berkeley teaches its new data science courses using Python.
 
-Python has several versions.  The current version of Python at the time of
-writing was version 3.5.  Python versions 3.0 and greater (such as 3.5) differ
-in significant ways from earlier versions, such as version 2.7.  Many people
-still use Python 2.7, but because the versions are not fully compatible, we
-have standardized on Python 3.
+The current version of Python at the time of writing was version 3.5.  Python
+versions 3.0 and greater (such as 3.5) differ in significant ways from earlier
+versions, such as version 2.7.  Many people still use Python 2.7, but because
+the versions are not fully compatible, we have standardized on Python 3.
 
 For the class, you will need a version of Python >= 3.4.
 
@@ -98,8 +97,8 @@ vim_.
 But, for the class, we will be using Atom, and we strongly suggest you do the
 same.  This is for several reasons.  Atom:
 
-* is a high-quality open-source text editor with good installers
-  available for Windows, OSX and Linux;
+* is a high-quality open-source text editor with installers for Windows, OSX
+  and Linux;
 * doesn't need a lot of configuration to get started;
 * can be configured to work in a very similar to way to other text editors you
   may be used to, such as vim (vim-mode_; ex-mode_) and emacs (emacs-mode_);
