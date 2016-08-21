@@ -69,7 +69,7 @@ Check your Python 3 version with:
 
 This should give you a version >= 3.4.  If not, ask your instructors for help.
 
-Point your web browser at the `atom releases page`_ and download the latest
+Point your web browser at the `atom releases`_ page and download the latest
 ``.rpm`` file for your distribution.  Here's me downloading a recent release
 from the command line:
 

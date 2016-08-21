@@ -39,7 +39,7 @@
 .. _atom: https://atom.io
 .. _hydrogen: https://atom.io/packages/hydrogen
 .. _installing atom: http://flight-manual.atom.io/getting-started/sections/installing-atom
-.. _atom_releases: https://github.com/atom/atom/releases
+.. _atom releases: https://github.com/atom/atom/releases
 .. _vim-mode: https://github.com/atom/vim-mode
 .. _ex-mode: https://atom.io/packages/ex-mode
 .. _emacs-mode: https://atom.io/packages/emacs-mode
