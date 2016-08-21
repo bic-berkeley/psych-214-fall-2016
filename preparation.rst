@@ -59,16 +59,20 @@ Why Python 3?
 "Why Python 3?" is really two questions |--| "why Python?" and "why
 Python version 3".
 
-Python has become the standard language for open-source scientific computing.
-It's an excellent language for teaching |--| see for example the `Berkeley
-CS61A course <http://cs61a.org>`_ and the `MIT introduction to computer
-science and programming
+Python is an very good all-purpose language for scientific computing for `many
+reasons
+<https://github.com/nipy/nipy/blob/master/doc/faq/why.rst#why-python>`_.
+
+Python code is famously easy to understand, and has become a common choice for
+teaching programming |--| see for example the `Berkeley CS61A course
+<http://cs61a.org>`_ and the `MIT introduction to computer science and
+programming
 <http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-00sc-introduction-to-computer-science-and-programming-spring-2011/>`_.
 
 The CS61A course notes have a good introduction to the `benefits of Python
 <http://composingprograms.com/pages/11-getting-started.html#programming-in-python>`_.
-You may want to read `10 reasons Python rocks for research`_ for a good
-description of the benefits of Python compared to MATLAB.
+You may want to read `10 reasons Python rocks for research`_ for a comparsion
+between Python and MATLAB.
 
 Berkeley teaches its new data science courses using Python.
 
