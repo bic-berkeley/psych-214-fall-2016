@@ -22,5 +22,4 @@ Instruction
 Homework
 ********
 
-* Getting your computer set up;
 * parsing an OpenFMRI text file.
