@@ -20,15 +20,25 @@ For the class and homework we will use:
 Installation
 ************
 
+.. note::
+
+    It's common to run into problems with installation - don't worry, we're
+    expecting that.  One of the things we are teaching in this class is how to
+    solve problems like installing and using scientific software.  So, if you
+    run into trouble - great - that will be a good opportunity for us to work
+    together on a not-trivial problem.
+
 * :doc:`installation_on_mac`;
 * :doc:`installation_on_linux`;
 
 If you are on Windows, please come see us, and we will help you get set up.
 
-You will also need one of:
+For later classes you will also need one of:
 
 * MATLAB installed on your laptop or;
 * an account on the `neuro cluster`_ (so you can run MATLAB / SPM_ remotely).
+
+Talk to your instructors if you need help with either of these options.
 
 .. _installation-check:
 
