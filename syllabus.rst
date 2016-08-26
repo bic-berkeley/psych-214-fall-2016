@@ -2,18 +2,18 @@
 Syllabus
 ########
 
-****
-Data
-****
+************
+Imaging data
+************
 
 * the structure of raw brain imaging data;
 * loading, manipulating, showing and saving brain images;
 * coordinate systems and transforms for brain images;
 * working with multiple time courses.
 
-********
-Concepts
-********
+*****************
+Analysis concepts
+*****************
 
 * writing and running diagnostics;
 * time-course interpolation to allow for slice-wise acquisition of brain
@@ -36,9 +36,9 @@ Concepts
 * inference on maps of statistics; correction for multiple comparisons;
   family-wise error; false discovery rate.
 
-****************
-Working practice
-****************
+**********************************************
+Collaboration, correctness and reproducibility
+**********************************************
 
 * collaborating with peers and mentors;
 * role of working practice in quality, reproducibility, collaboration;
