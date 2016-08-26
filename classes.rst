@@ -28,6 +28,6 @@ Monday September 5th is an academic holiday.
 
 Final project presentations during class hours, Monday 5 December (RRR week).
 
-Final project submissions by Saturday 17th December.
+Final project submissions by midnight Friday 17th December.
 
 .. include:: links_names.inc
