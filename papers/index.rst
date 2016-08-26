@@ -11,3 +11,8 @@ Papers
   `Reproducible research in computational harmonic analysis
   <http://stanford.edu/~vcs/papers/RRCiSE-STODDEN2009.pdf>`_.  Computing in
   Science & Engineering, 11(1), 8-18.
+
+* Wilson G, Aruliah DA, Brown CT, Chue Hong NP, Davis M, Guy RT, et al. (2014)
+  Best Practices for Scientific Computing. PLoS Biol 12(1): e1001745.
+  doi:10.1371/journal.pbio.1001745 URL:
+  http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745
