@@ -25,9 +25,11 @@ version control using git.
 .. toctree::
     :maxdepth: 1
 
-    logistics
+    syllabus
     preparation
+    logistics
     classes
+    projects
 
 .. include:: links_names.inc
 
@@ -40,3 +42,4 @@ version control using git.
     installation_on_mac
     installation_on_linux
     glossary
+    mentors
