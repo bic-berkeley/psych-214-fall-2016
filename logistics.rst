@@ -23,6 +23,9 @@ Grading
 * 25% homework;
 * 50% final project.
 
+Please read the `UCB academic polices on student conduct
+<http://guide.berkeley.edu/academic-policies/#studentconductappealstext>`_.
+
 ************
 Office hours
 ************

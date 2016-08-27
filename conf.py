@@ -30,9 +30,11 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 # ones.
 extensions = [
     'sphinx.ext.mathjax',
+    'sphinxcontrib.bibtex',
     'sphinx.ext.doctest',
     'nb2plots.nbplots',
     'texext.mathcode',
+    'sphinx.ext.autodoc',
     'texext.math_dollar',
 ]
 
