@@ -29,11 +29,14 @@
     <link rel="next" title="Installation on Linux" href="installation_on_linux.html" />
     <link rel="prev" title="Choosing an editor" href="choosing_editor.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -78,7 +81,7 @@ the Internet. Are you sure you want to open it?&#8221;, select Open.  Atom shoul
 now be installed.</p>
 <p>See also <a class="reference external" href="http://flight-manual.atom.io/getting-started/sections/installing-atom">installing atom</a>.</p>
 <p>You will also need the <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin for Atom.  Install from
-<a class="reference internal" href="#terminal-app"><span>Terminal.app</span></a> with:</p>
+<a class="reference internal" href="#terminal-app"><span class="std std-ref">Terminal.app</span></a> with:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies with homebrew</span>
 brew install pkg-config zeromq
 <span class="c1"># Install the plugin</span>
@@ -106,8 +109,8 @@ of git from this <a class="reference external" href="http://mackyle.github.io/gi
 for us to support you if you do the same thing.</p>
 <div class="section" id="install-python-3-with-homebrew">
 <h4>Install Python 3 with Homebrew<a class="headerlink" href="#install-python-3-with-homebrew" title="Permalink to this headline">¶</a></h4>
-<p>In <a class="reference internal" href="#terminal-app"><span>Terminal.app</span></a>, type:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>brew install python3
+<p>In <a class="reference internal" href="#terminal-app"><span class="std std-ref">Terminal.app</span></a>, type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
 </pre></div>
 </div>
 <p>Confirm that you have Python 3 and the Python 3 package installer <code class="docutils literal"><span class="pre">pip3</span></code>
@@ -130,7 +133,7 @@ a set of directories starting with <code class="docutils literal"><span class="p
 refers to your home directory.</p>
 <p>Packages may have command line programs.  These will be installed to
 <code class="docutils literal"><span class="pre">~/Library/Python/3.5/bin</span></code>.  You need to put this directory on your
-<a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>. To do this, start <a class="reference internal" href="#terminal-app"><span>Terminal.app</span></a> and type:</p>
+<a class="reference internal" href="glossary.html#term-path"><span class="xref std std-term">PATH</span></a>. To do this, start <a class="reference internal" href="#terminal-app"><span class="std std-ref">Terminal.app</span></a> and type:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>atom ~/.bash_profile
 </pre></div>
 </div>
@@ -152,7 +155,7 @@ sub-directory in your home directory.</p>
 <div class="section" id="install-the-packages-you-need-as-user">
 <h4>Install the packages you need as user<a class="headerlink" href="#install-the-packages-you-need-as-user" title="Permalink to this headline">¶</a></h4>
 <p>Type this at the terminal prompt:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip3 install --user numpy scipy matplotlib ipython nibabel jupyter
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">numpy</span> <span class="n">scipy</span> <span class="n">matplotlib</span> <span class="n">ipython</span> <span class="n">nibabel</span> <span class="n">jupyter</span>
 </pre></div>
 </div>
 <p>Check that these have installed, and that your PATH is correctly set, with:</p>
@@ -188,7 +191,7 @@ your Python and other packages.</p>
 <div class="section" id="finally">
 <h2>Finally<a class="headerlink" href="#finally" title="Permalink to this headline">¶</a></h2>
 <p>However you installed Python 3 and the packages, don&#8217;t forget to do the
-<a class="reference internal" href="preparation.html#installation-check"><span>Installation check</span></a>.</p>
+<a class="reference internal" href="preparation.html#installation-check"><span class="std std-ref">Installation check</span></a>.</p>
 </div>
 </div>
 
@@ -238,14 +241,11 @@ your Python and other packages.</p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -256,8 +256,8 @@ your Python and other packages.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/installation_on_mac.txt"

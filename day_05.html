@@ -28,13 +28,16 @@
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
     <link rel="next" title="October 17: regression and the general linear model" href="day_06.html" />
-    <link rel="prev" title="October 3: simple statistics on brain images" href="day_04.html" />
+    <link rel="prev" title="October 3: statistics on brain images" href="day_04.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +47,15 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="october-10-modeling-the-hemodynamic-response-function">
 <h1>October 10: modeling the hemodynamic response function<a class="headerlink" href="#october-10-modeling-the-hemodynamic-response-function" title="Permalink to this headline">¶</a></h1>
-<p>HRF modeling (single event modeling)</p>
+<ul class="simple">
+<li>the neural and hemodynamic model;</li>
+<li>the concept of a hemodynamic response function (HRF);</li>
+<li>designing an HRF;</li>
+<li>using convolution with the HRF to make a BOLD regressor;</li>
+<li>modeling FMRI signal with multiple regression and the BOLD regressors;</li>
+<li>allowing for different onsets with the temporal derivative;</li>
+<li>investigating assumptions behind the HRF and linear time invariance.</li>
+</ul>
 </div>
 
 
@@ -57,7 +68,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_04.html" title="previous chapter">October 3: simple statistics on brain images</a></li>
+      <li>Previous: <a href="day_04.html" title="previous chapter">October 3: statistics on brain images</a></li>
       <li>Next: <a href="day_06.html" title="next chapter">October 17: regression and the general linear model</a></li>
   </ul></li>
   </ul></li>
@@ -73,14 +84,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -91,8 +99,8 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/day_05.txt"

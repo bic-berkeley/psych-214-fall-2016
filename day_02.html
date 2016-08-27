@@ -28,13 +28,16 @@
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
     <link rel="next" title="September 26: diagnostics and testing" href="day_03.html" />
-    <link rel="prev" title="September 19: 2D / 3D arrays and plotting" href="day_01.html" />
+    <link rel="prev" title="September 19: arrays, images and plotting" href="day_01.html" />
    
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -44,7 +47,35 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="september-19-version-control-4d-arrays">
 <h1>September 19: version control, 4D arrays<a class="headerlink" href="#september-19-version-control-4d-arrays" title="Permalink to this headline">¶</a></h1>
-<p>Git / 4D arrays and masking / ROI</p>
+<div class="section" id="extreme-git-stress-test">
+<h2>Extreme git stress test<a class="headerlink" href="#extreme-git-stress-test" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>making a repository;</li>
+<li>pushing up to github;</li>
+<li>cloning;</li>
+<li>making a branch;</li>
+<li>pushing a branch;</li>
+<li>making a pull request;</li>
+<li>merging a pull request;</li>
+<li>getting out of trouble.</li>
+</ul>
+</div>
+<div class="section" id="d-arrays-and-time-series">
+<h2>4D arrays and time series<a class="headerlink" href="#d-arrays-and-time-series" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Loading images with <a class="reference external" href="http://nipy.org/nibabel">nibabel</a>;</li>
+<li>4D images as collections of 3D images;</li>
+<li>getting volumes from 4D images;</li>
+<li>getting time-series from 4D images by slicing;</li>
+</ul>
+</div>
+<div class="section" id="reading-and-homework">
+<h2>Reading and homework<a class="headerlink" href="#reading-and-homework" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>First half of chapter 8 of Huettel et al 2014 <a class="reference internal" href="bibliography.html#huettel2014functional" id="id1">[HSM14]</a>.</li>
+<li>Exercises on array and images.</li>
+</ul>
+</div>
 </div>
 
 
@@ -52,12 +83,22 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">September 19: version control, 4D arrays</a><ul>
+<li><a class="reference internal" href="#extreme-git-stress-test">Extreme git stress test</a></li>
+<li><a class="reference internal" href="#d-arrays-and-time-series">4D arrays and time series</a></li>
+<li><a class="reference internal" href="#reading-and-homework">Reading and homework</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_01.html" title="previous chapter">September 19: 2D / 3D arrays and plotting</a></li>
+      <li>Previous: <a href="day_01.html" title="previous chapter">September 19: arrays, images and plotting</a></li>
       <li>Next: <a href="day_03.html" title="next chapter">September 26: diagnostics and testing</a></li>
   </ul></li>
   </ul></li>
@@ -73,14 +114,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -91,8 +129,8 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
       <a href="_sources/day_02.txt"

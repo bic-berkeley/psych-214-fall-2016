@@ -39,7 +39,7 @@ A major part of collaboration is learning to learn from your more experienced
 peers.  We are expecting that they, in turn, will learn from you.
 
 Each project will have a graduate student or post-doc mentor.  See
-:doc:`mentor` for the instructions we give to the project mentors.
+:doc:`mentors` for the instructions we give to the project mentors.
 
 Of most use to you will be to find a mentor that you will work with later in
 your Berkeley career.  If you have an idea which lab you will be working with
