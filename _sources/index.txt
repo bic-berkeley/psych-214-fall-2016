@@ -30,6 +30,7 @@ version control using git.
     logistics
     classes
     projects
+    bibliography
 
 .. include:: links_names.inc
 
@@ -43,3 +44,4 @@ version control using git.
     installation_on_linux
     glossary
     mentors
+    papers/index

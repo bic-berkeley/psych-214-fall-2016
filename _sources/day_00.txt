@@ -6,20 +6,30 @@ August 29: introduction, Python, images
 Course introduction
 *******************
 
-* What we are going to teach;
-* why we are teaching this way;
+* what we are going to teach;
+* why we are teaching this way
+
+ * `What I cannot create, I do not understand
+   <http://blogs.scientificamerican.com/literally-psyched/files/2012/04/feynman_blackboard5.jpg>`_;
+ * `Simple Made Easy <https://www.infoq.com/presentations/Simple-Made-Easy>`_;
+
 * structure of classes and homework;
-* what the final project will look like.
+* grading (see :doc:`logistics`);
+* what the final project will look like (see :doc:`projects`).
 
 ***********
 Instruction
 ***********
 
-* Introduction to Python;
-* brain and other images as arrays;
+* introduction to Python;
+* what is an image?
 
-********
-Homework
-********
+*******
+Reading
+*******
 
-* parsing an OpenFMRI text file.
+Please read
+
+* :cite:`donoho2009reproducible`
+*
+
