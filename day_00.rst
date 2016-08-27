@@ -17,19 +17,20 @@ Course introduction
 * grading (see :doc:`logistics`);
 * what the final project will look like (see :doc:`projects`).
 
-***********
-Instruction
-***********
+**********************
+Teaching and exercises
+**********************
 
 * introduction to Python;
 * what is an image?
 
-*******
-Reading
-*******
+********************
+Reading and homework
+********************
 
-Please read
+Please read:
 
-* :cite:`donoho2009reproducible`
-*
+* Donoho et al 2009 :cite:`donoho2009reproducible`;
+* Wilson et al 2014 :cite:`wilson2014best`.
 
+.. include:: links_names.inc

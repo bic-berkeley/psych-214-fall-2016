@@ -145,6 +145,15 @@
 .. _numpy array object: http://scipy-lectures.github.io/intro/numpy/array_object.html
 .. _Array operations: http://scipy-lectures.github.io/intro/numpy/operations.html
 
+.. MB tutorials
+.. _curious git: https://matthew-brett.github.io/curious-git/index.html
+.. _introduction to Principal Components Analysis:
+.. _pca introduction: https://matthew-brett.github.io/teaching/pca_introduction.html
+.. _introduction to the General Linear Model:
+.. _GLM intro: https://matthew-brett.github.io/teaching/glm_intro.html
+.. _tutorial on convolution:
+   https://matthew-brett.github.io/teaching/on_convolution.html
+
 .. Ideas
 .. _principal component analysis:
    https://en.wikipedia.org/wiki/Principal_component_analysis
