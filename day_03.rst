@@ -19,6 +19,13 @@ Diagnostics on 4D images
 * time series differences;
 * displaying images.
 
+********
+Deadline
+********
+
+You should have chosen a project mentor by the end of this week - see
+:doc:`projects`.
+
 ********************
 Reading and homework
 ********************
