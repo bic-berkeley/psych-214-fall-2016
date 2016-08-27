@@ -153,6 +153,32 @@
 .. _GLM intro: https://matthew-brett.github.io/teaching/glm_intro.html
 .. _tutorial on convolution:
    https://matthew-brett.github.io/teaching/on_convolution.html
+.. _tutorial on correlated regressors:
+   https://matthew-brett.github.io/teaching/correlated_regressors.html
+.. _Bonferroni correction:
+   https://matthew-brett.github.io/teaching/bonferroni_correction.html
+.. _FDR:
+.. _False Discovery Rate:
+   https://matthew-brett.github.io/teaching/fdr.html
+.. _random fields:
+   https://matthew-brett.github.io/teaching/random_fields.html
+.. _slice timing correction:
+   https://matthew-brett.github.io/teaching/slice_timing.html
+.. _optimizing space:
+.. _optimizing spatial transformations:
+   https://matthew-brett.github.io/teaching/optimizing_space.html
+.. _Coordinate systems and affine transforms:
+   http://nipy.org/nibabel/coordinate_systems.html
+.. _floating point:
+   https://matthew-brett.github.io/teaching/floating_point.html
+.. _floating point error:
+   https://matthew-brett.github.io/teaching/floating_error.html
+.. _introduction to smoothing:
+   https://matthew-brett.github.io/teaching/smoothing_intro.html
+.. _smoothing as convolution:
+   https://matthew-brett.github.io/teaching/smoothing_as_convolution.html
+.. _rotation in 2D:
+   https://matthew-brett.github.io/teaching/rotation_2d.html
 
 .. Ideas
 .. _principal component analysis:

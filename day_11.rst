@@ -1,3 +1,23 @@
-############################################################
-November 21: coordinate systems; cross-modality registration
-############################################################
+############################################
+November 21: capstone; scripting an analysis
+############################################
+
+*************
+Presentations
+*************
+
+Problems from projects.
+
+********
+Teaching
+********
+
+* nipype for scripting;
+* designing a plugin for the analysis;
+* running a full analysis via SPM;
+
+********************
+Reading and homework
+********************
+
+Working on projects.
