@@ -27,5 +27,3 @@ Reading and homework
 * An `introduction to the General Linear Model`_.
 * The outlier competition - finding outliers in functional imaging runs, and
   generalizing across unseen runs (for October 10th).
-
-.. include:: links_names.inc

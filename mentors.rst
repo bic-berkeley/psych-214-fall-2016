@@ -36,5 +36,3 @@ your questions, and pitch in to discussions with students.
 
 We know this will be a significant amount of work for you, and as a thank you,
 we will buy you a textbook of your choice at the end of the course.
-
-.. include:: links_names.inc

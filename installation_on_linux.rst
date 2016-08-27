@@ -171,5 +171,3 @@ Finally, install the packages you need for the class:
     alt-ctrl-enter  run and move down
 
 Don't forget to do the :ref:`installation-check`.
-
-.. include:: links_names.inc

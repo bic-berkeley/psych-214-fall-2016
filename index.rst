@@ -32,8 +32,6 @@ version control using git.
     projects
     bibliography
 
-.. include:: links_names.inc
-
 .. The hidden toctree below is to suppress build warnings
 
 .. toctree::

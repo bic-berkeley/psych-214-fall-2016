@@ -197,5 +197,3 @@ Finally
 
 However you installed Python 3 and the packages, don't forget to do the
 :ref:`installation-check`.
-
-.. include:: links_names.inc

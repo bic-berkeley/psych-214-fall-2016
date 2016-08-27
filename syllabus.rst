@@ -49,5 +49,3 @@ Collaboration, correctness and reproducibility
 * pair coding and code review;
 * testing;
 * documentation.
-
-.. include:: links_names.inc

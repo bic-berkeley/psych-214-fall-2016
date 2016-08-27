@@ -224,6 +224,9 @@ _latex_macros = [
 
 rst_prolog = ':math:`{}`\n'.format(''.join(macro for macro in _latex_macros))
 
+# List of links and substitutions
+rst_epilog = '\n\n.. include:: /links_names.inc'
+
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
