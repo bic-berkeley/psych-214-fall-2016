@@ -21,5 +21,3 @@ Reading and homework
 * a `tutorial on convolution`_.
 
 Continue work on outlier detection project.
-
-.. include:: links_names.inc

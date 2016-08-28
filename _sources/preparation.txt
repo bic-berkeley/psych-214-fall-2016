@@ -114,5 +114,3 @@ same.  This is for several reasons.  Atom:
   may be used to, such as vim (vim-mode_; ex-mode_) and emacs (emacs-mode_);
 * can be used to run code interactively, with the `hydrogen`_ plugin;
 * has git_ integration built-in.
-
-.. include:: links_names.inc

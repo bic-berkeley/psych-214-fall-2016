@@ -74,5 +74,3 @@ Glossary
         including file permissions.  For example, the file permissions tell
         the file-system whether a particular user should be able to read the
         file, or write the file or execute the file as a program.
-
-.. include:: links_names.inc

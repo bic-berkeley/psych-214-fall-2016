@@ -36,5 +36,3 @@ If you can't get into the 210 area, then email one or both of your instructors
 to let you in.
 
 Day / time TBA.
-
-.. include:: links_names.inc

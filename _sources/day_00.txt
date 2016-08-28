@@ -32,5 +32,3 @@ Please read:
 
 * Donoho et al 2009 :cite:`donoho2009reproducible`;
 * Wilson et al 2014 :cite:`wilson2014best`.
-
-.. include:: links_names.inc

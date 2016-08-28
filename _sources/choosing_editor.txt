@@ -122,5 +122,3 @@ Suggestions?
 ************
 
 If you have any other suggestions or recommendations, please let us know.
-
-.. include:: links_names.inc

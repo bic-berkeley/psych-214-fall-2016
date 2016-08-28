@@ -59,5 +59,3 @@ We'll ask you to start thinking about your project in the first class.
 * October 10 : pitch project to the class;
 * December 5 : project presentation;
 * December 17 : final project submission.
-
-.. include:: links_names.inc

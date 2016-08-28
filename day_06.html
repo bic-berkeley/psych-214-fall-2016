@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>October 17: regression and the general linear model &mdash; Functional MRI methods</title>
+    <title>October 17: smoothing, contrasts and models &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="October 24: t and F contrasts, statistical inference" href="day_07.html" />
+    <link rel="next" title="October 24: inference on statistical maps" href="day_07.html" />
     <link rel="prev" title="October 10: modeling the hemodynamic response function" href="day_05.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -45,10 +45,29 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="october-17-regression-and-the-general-linear-model">
-<h1>October 17: regression and the general linear model<a class="headerlink" href="#october-17-regression-and-the-general-linear-model" title="Permalink to this headline">¶</a></h1>
-<p>Regression + GLM
-[hand in mid-term projects]</p>
+<div class="section" id="october-17-smoothing-contrasts-and-models">
+<h1>October 17: smoothing, contrasts and models<a class="headerlink" href="#october-17-smoothing-contrasts-and-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="teaching">
+<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>smoothing;</li>
+<li>t contrasts;</li>
+<li>using multiple regressors</li>
+<li>allowing for different onsets with the HRF temporal derivative;</li>
+<li>investigating power and bias for correlated regressors;</li>
+<li>modeling the baseline;</li>
+<li>selecting models;</li>
+</ul>
+</div>
+<div class="section" id="homework-and-reading">
+<h2>Homework and reading<a class="headerlink" href="#homework-and-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>the <cite>Bonferroni correction</cite>;</li>
+<li>thresholding with <a class="reference external" href="https://matthew-brett.github.io/teaching/random_fields.html">Random fields</a>;</li>
+<li>thresholding with the <a class="reference external" href="https://matthew-brett.github.io/teaching/fdr.html">False Discovery Rate</a>;</li>
+<li>Eklund et al 2016 <a class="reference internal" href="bibliography.html#eklund2016cluster" id="id1">[ENK16]</a>.</li>
+</ul>
+</div>
 </div>
 
 
@@ -56,13 +75,22 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">October 17: smoothing, contrasts and models</a><ul>
+<li><a class="reference internal" href="#teaching">Teaching</a></li>
+<li><a class="reference internal" href="#homework-and-reading">Homework and reading</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
       <li>Previous: <a href="day_05.html" title="previous chapter">October 10: modeling the hemodynamic response function</a></li>
-      <li>Next: <a href="day_07.html" title="next chapter">October 24: t and F contrasts, statistical inference</a></li>
+      <li>Next: <a href="day_07.html" title="next chapter">October 24: inference on statistical maps</a></li>
   </ul></li>
   </ul></li>
 </ul>

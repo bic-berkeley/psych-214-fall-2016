@@ -30,5 +30,3 @@ Reading and homework
 
 * First half of chapter 8 of Huettel et al 2014 :cite:`huettel2014functional`.
 * Exercises on array and images.
-
-.. include:: links_names.inc

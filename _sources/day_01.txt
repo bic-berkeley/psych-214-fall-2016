@@ -61,5 +61,3 @@ Reading and homework
         height="341" frameborder="0" webkitallowfullscreen mozallowfullscreen
         allowfullscreen></iframe> <p><a href="https://vimeo.com/121579601">The
         links between git commits, and git branches</a> (9 minutes).</p>
-
-.. include:: links_names.inc
