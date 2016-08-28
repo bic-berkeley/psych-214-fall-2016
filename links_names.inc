@@ -167,6 +167,8 @@
 .. _optimizing space:
 .. _optimizing spatial transformations:
    https://matthew-brett.github.io/teaching/optimizing_space.html
+.. _mutual information:
+   https://matthew-brett.github.io/teaching/mutual_information.html
 .. _Coordinate systems and affine transforms:
    http://nipy.org/nibabel/coordinate_systems.html
 .. _floating point:

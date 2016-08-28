@@ -25,5 +25,4 @@ Reading and homework
 
 * `Rotation in 2D`_
 * `Coordinate systems and affine transforms`_;
-* `Mutual information
-  <https://github.com/practical-neuroimaging/pna2015/blob/master/day10/mutual_information_example.ipynb>`_.
+* A tutorial on `mutual information`_.
