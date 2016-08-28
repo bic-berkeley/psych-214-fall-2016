@@ -21,8 +21,17 @@ Course introduction
 Teaching and exercises
 **********************
 
-* introduction to Python;
-* what is an image?
+::
+
+    git clone https://github.com/psych-214-fall-2016/classwork.git
+    cd classwork
+
+* :doc:`classwork/day_00/what_is_an_image`;
+* :doc:`classwork/day_00/introducing_python`.
+
+Then::
+
+    atom first_python.py
 
 ********************
 Reading and homework
@@ -31,4 +40,4 @@ Reading and homework
 Please read:
 
 * Donoho et al 2009 :cite:`donoho2009reproducible`;
-* Wilson et al 2014 :cite:`wilson2014best`.
+* Preeyanon et al 2014 :cite:`preeyanon2014reproducible`.

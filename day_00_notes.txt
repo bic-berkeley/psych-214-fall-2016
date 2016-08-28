@@ -1,0 +1,7 @@
+########################
+Python stuff not covered
+########################
+
+* Tuples
+* -1, -2 etc in indexing;
+* for element in collection: etc

@@ -1,0 +1,3 @@
+[submodule "classwork"]
+	path = classwork
+	url = https://github.com/psych-214-fall-2016/classwork.git
