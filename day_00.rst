@@ -50,5 +50,14 @@ Reading and homework
 
 Please read:
 
-* Donoho et al 2009 :cite:`donoho2009reproducible`;
-* Preeyanon et al 2014 :cite:`preeyanon2014reproducible`.
+* Donoho et al 2009 :cite:`donoho2009reproducible` (you can skip-read the
+  sections on Sparselab, Symmlab and Spherelab);
+* Preeyanon et al 2014 :cite:`preeyanon2014reproducible`;
+* Wilson et al 2014 :cite:`wilson2014best`.
+
+From these papers choose one recommendation for research practice and write:
+
+* one paragraph giving the strongest case you can make for *not* using that
+  practice;
+* one paragraph giving the strongest refutation you can for your first
+  paragraph.
