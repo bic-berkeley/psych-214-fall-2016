@@ -45,7 +45,11 @@
 <div class="section" id="what-is-an-image">
 <h1>What is an image?<a class="headerlink" href="#what-is-an-image" title="Permalink to this headline">¶</a></h1>
 <p>In this exercise we explore the nature of NIfTI images.</p>
-<p>First open a terminal, and change directory to</p>
+<p>The Python commands here are written with a <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> prefix.  The <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> is
+the prompt in the Python interactive console.  This is the prompt you get if
+you type <code class="docutils literal"><span class="pre">python3</span></code> at the shell prompt.  We suggest that you use the
+<a class="reference external" href="http://ipython.org/">IPython</a> console instead of the Python console to type your commands.  Get
+the IPython terminal by installing IPython with <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>, then typing <code class="docutils literal"><span class="pre">ipython</span></code>.</p>
 <p>First we will have a look at Python strings. Here is a variable called
 <code class="docutils literal"><span class="pre">my_string</span></code> with value &#8220;PNA is hard but fair&#8221;</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span> <span class="o">=</span> <span class="s2">&quot;neuroimaging is hard but fair&quot;</span>
@@ -68,8 +72,8 @@ the <code class="docutils literal"><span class="pre">type</span></code> function
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The last character of the string (don&#39;t forget indexing starts at 0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
-<span class="go">d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">28</span><span class="p">])</span>
+<span class="go">r</span>
 </pre></div>
 </div>
 <p>Now we introduce string <em>slicing</em>. This is where you take some sequential
@@ -134,9 +138,9 @@ called <code class="docutils literal"><span class="pre">contents</span></code>?<
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_bytes = ?</span>
 </pre></div>
 </div>
-<p>If 1 mebibyte (MiB) (<a class="reference external" href="http://en.wikipedia.org/wiki/Megabyte">http://en.wikipedia.org/wiki/Megabyte</a>) is size 1024
-* 1024, what is the file size in MiB? (Hint - the right answer is
-between 0 and 100).</p>
+<p>If 1 mebibyte (MiB) (<a class="reference external" href="http://en.wikipedia.org/wiki/Megabyte">http://en.wikipedia.org/wiki/Megabyte</a>) is size 1024 *
+1024, what is the file size in MiB? (Hint - the right answer is between 0 and
+100).</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_mib = ?</span>
 </pre></div>
 </div>

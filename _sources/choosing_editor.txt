@@ -4,6 +4,13 @@
 Choosing an editor
 ##################
 
+    *Use a Single Editor Well*
+
+    The editor should be an extension of your hand; make sure your editor is
+    configurable, extensible, and programmable.
+
+    -- From: "The pragmatic programmer" :cite:`hunt2000pragmatic`
+
 Being efficient means being able to use your tools well.  If you are fluent in
 using your editor, you will be able think better.  You will do better work
 more quickly and you will make fewer mistakes.
