@@ -200,3 +200,6 @@ github:
 	git push origin gh-pages:gh-pages --force
 	@echo
 	@echo "Published to Github"
+
+slides-%:
+	pandoc -t beamer -s $*_slides.md -o $*_slides.pdf
