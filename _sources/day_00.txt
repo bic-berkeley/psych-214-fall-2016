@@ -57,7 +57,7 @@ Please read:
 
 From these papers choose one recommendation for research practice and write:
 
-* one paragraph giving the strongest case you can make for *not* using that
-  practice;
-* one paragraph giving the strongest refutation you can for your first
+* one to two paragraphs giving the strongest case you can make for *not* using
+  that practice;
+* one to two paragraphs giving the strongest refutation you can for your first
   paragraph.
