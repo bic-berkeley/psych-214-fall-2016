@@ -26,6 +26,13 @@ Grading
 Please read the `UCB academic polices on student conduct
 <http://guide.berkeley.edu/academic-policies/#studentconductappealstext>`_.
 
+*********************
+Questions, discussion
+*********************
+
+Feel free to email your instructors, but prefer the `PSYCH 214 Piazza site
+<http://piazza.com/berkeley/fall2016/pysch214>`_.
+
 ************
 Office hours
 ************

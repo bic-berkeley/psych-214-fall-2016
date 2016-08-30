@@ -1,12 +1,6 @@
 #########################################
-September 19: arrays, images and plotting
+September 12: arrays, images and plotting
 #########################################
-
-*************
-Presentations
-*************
-
-Your defense of best practice for computing.
 
 ********
 Teaching
