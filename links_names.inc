@@ -142,6 +142,7 @@
 .. _The Python 3 tutorial: http://docs.python.org/3/tutorial/
 .. _Introduction to Python: http://www.introtopython.org
 .. _Scipy lecture notes: http://scipy-lectures.github.io
+.. _numpy introduction: http://scipy-lectures.github.io/intro/numpy/index.html
 .. _numpy array object: http://scipy-lectures.github.io/intro/numpy/array_object.html
 .. _Array operations: http://scipy-lectures.github.io/intro/numpy/operations.html
 

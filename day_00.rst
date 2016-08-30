@@ -35,14 +35,11 @@ Then::
     atom first_python.py
 
 If we have time, we will start the introduction to the numpy data library,
-from the `numpy introduction
-<https://scipy-lectures.github.io/intro/numpy/index.html>`_ of the `scipy
-lecture notes <https://scipy-lectures.github.io/index.html>`_:
+from the `numpy introduction`_ of the `scipy
+lecture notes`_.
 
-* The lecture on `the numpy array object
-  <https://scipy-lectures.github.io/intro/numpy/array_object.html>`_;
-* Some of the lecture on `numerical operations on arrays
-  <https://scipy-lectures.github.io/intro/numpy/operations.html>`_.
+* The lecture on the `numpy array object`_;
+* Some of the lecture on numerical `array operations`_.
 
 ********************
 Reading and homework
