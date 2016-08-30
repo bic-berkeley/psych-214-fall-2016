@@ -6,6 +6,19 @@ Fall 2016 Psych-214 is class number 33732.
 
 Class is 3 credits.
 
+**************
+Venue and time
+**************
+
+.. note::  Changed venue and time
+
+    Class meets at 10 Giannini Hall, at 1 until 4pm.
+
+    See these `directions to 10 Giannini Hall
+    <http://despolab.berkeley.edu/labcontact>`_.
+
+    The original venue and time were 3201 Tolman Hall, from 1.30 until 4.30.
+
 .. _instructors:
 
 ***********
