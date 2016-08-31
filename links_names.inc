@@ -205,6 +205,13 @@
 .. _impulse response: https://en.wikipedia.org/wiki/Impulse_response
 .. _boxcar function: https://en.wikipedia.org/wiki/Boxcar_function
 
+.. OpenFMRI projects
+.. _ds005: https://openfmri.org/dataset/ds000005
+.. _ds009: https://openfmri.org/dataset/ds000009
+.. _ds105: https://openfmri.org/dataset/ds000105
+.. _ds113: https://openfmri.org/dataset/ds000113
+.. _ds115: https://openfmri.org/dataset/ds000115
+
 .. Unix
 .. _PATH: http://www.jarrodmillman.com/rcsds/standard/bash.html#commands
 
