@@ -15,6 +15,23 @@ learning and for increasing the quality of your work.
 The best way to learn this, is with a substantial shared project.  So, a major
 part of this class is the final project.
 
+******************
+Choosing a project
+******************
+
+The project should be an open-ended exploration and analysis of functional MRI
+data on multiple subjects.
+
+A typical example would be to for you to explore a dataset, replicate a
+previous analysis, and extend the previous analysis. For example, you might:
+
+* take an OpenFMRI_ dataset;
+* investigate the data for outliers and sources of noise;
+* attempt to replicate the original analysis of the data;
+* explore the assumptions of the original analysis and whether these
+  assumptions and met;
+* explore other analyses of the data to test new hypotheses.
+
 .. _project-examples:
 
 ********
@@ -31,15 +48,61 @@ You'll notice that these analysis are fully reproducible |--| the students had
 to provide instructions that their graders could follow to reproduce their
 whole analysis, including their project figures.
 
+************
+Project data
+************
+
+Your project must be reproducible.  That means, that we, your graders, must be
+able to get the raw data for your project onto our own computers, and run your
+analysis on this data.
+
+We strongly prefer that the data that you use be available to anyone who
+agrees to license for the data.  For example, all the OpenFMRI_ datasets have
+a liberal license (`PDDL 1.0`_) allowing re-use and redistribution of the
+data.
+
+**********
+Submission
+**********
+
+As for the :ref:`project-examples`, you should submit the final version of
+your project as a github_ git_ repository.
+
+The project should have a `README` file that gives an introduction to the
+project, and lists the steps that your readers should follow in order to get
+the data, and run your analysis.
+
+Your repository should also contain the information necessary to build your
+final project report, including the figures.
+
+********************
+Recommended datasets
+********************
+
+You will get the most benefit if you are working on data that you and your
+mentor find interesting.  Here are some datasets selected from the OpenFMRI
+catalogue that you might consider exploring:
+
+* ds005_: The neural basis of loss aversion in decision making under risk;
+* ds009_: The generality of self-control;
+* ds105_: Distributed and overlapping representations of faces and objects in
+  ventral temporal cortex.  This is a very well-studied dataset from a famous
+  2001 paper by Haxby *et al*.  The advantage to you is there are several
+  tutorials for analyzing this dataset on the web.  The disadvantage is that
+  you will have to do more on this dataset to uncover new information;
+* ds113_: A high-resolution 7-Tesla fMRI dataset from complex natural
+  stimulation with an audio movie;
+* ds115_: Working memory in healthy and schizophrenic individuals.
+
 *******
 Mentors
 *******
 
 A major part of collaboration is learning to learn from your more experienced
-peers.  We are expecting that they, in turn, will learn from you.
+peers.  We are expecting that they, like us, will learn from you.
 
-Each project will have a graduate student or post-doc mentor.  See
-:doc:`mentors` for the instructions we give to the project mentors.
+Each project will have a mentor with experience of functional FMRI analysis.
+See :doc:`mentors` for the instructions we give to the project mentors.
 
 Of most use to you will be to find a mentor that you will work with later in
 your Berkeley career.  If you have an idea which lab you will be working with

@@ -1,0 +1,57 @@
+#######################
+Installation on Windows
+#######################
+
+********************
+The Atom text editor
+********************
+
+Download the Atom installer for Windows from the https://atom.io.  Go to your
+Downloads folder and click on the Downloaded ``atom-mac.zip`` file.  This will
+unzip the files into your Download folder.  You should now see an Atom icon
+for the ``Atom.app`` application folder in your Downloads, maybe something
+like this:
+
+.. image:: images/atom_downloaded.png
+
+Open a new Finder window, navigate to the Applications folder, and drag the
+``Atom.app`` folder to the Applications folder.
+
+Double-click on the Atom folder icon in the Applications folder to open Atom
+for the first time.  At the dialog "Atom.app is an application downloaded from
+the Internet. Are you sure you want to open it?", select Open.  Atom should
+now be installed.
+
+See also `installing atom`_.
+
+You will also need the hydrogen_ plugin for Atom.  Install from
+:ref:`Terminal.app` with:
+
+.. code-block:: bash
+
+    # Install dependencies with homebrew
+    brew install pkg-config zeromq
+    # Install the plugin
+    PYTHON=python2.7 apm install hydrogen
+
+***
+Git
+***
+
+On Mavericks (OSX 10.9) and above, ``git`` comes with the Apple OSX command
+line tools.
+
+To get these, type ``git`` at the terminal command line.  If git is not
+installed already you will get a dialog box like this:
+
+.. image:: images/git_developer_tools.png
+
+Click 'install' to install the OSX developer command line tools, including
+git.
+
+If you have an earlier version of OSX, please install the most recent version
+of git from this `git OSX installer`_ page.
+
+*******************
+Python and packages
+*******************
