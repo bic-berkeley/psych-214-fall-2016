@@ -30,8 +30,10 @@ Installation
 
 * :doc:`installation_on_mac`;
 * :doc:`installation_on_linux`;
+* :doc:`installation_on_windows`.
 
-If you are on Windows, please come see us, and we will help you get set up.
+If you are on Windows, please come see us, you will probably have a harder
+time getting your install working.
 
 For later classes you will also need one of:
 
