@@ -35,9 +35,10 @@ Installing this plugin is complicated, because you will need:
 
 * Atom to be running with Python version 2 as the default Python version.
   That is inconvenient, because later on we'll need Python 3 for the class;
-* an installation of a Microsoft Windows compiler program (a compiler is a
-  software that takes programs written in text format and "compiles" them into
-  instructions native to the computer).
+* an installation of a Microsoft Windows compiler program (a compiler is
+  some software that takes programs written in human-readable format and
+  "compiles" them into instructions that the computer central processing unit
+  (CPU) can understand).
 
 See https://atom.io/packages/hydrogen for more information.  What follows is a
 recipe:
