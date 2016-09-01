@@ -44,44 +44,89 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="installation-on-windows">
 <h1>Installation on Windows<a class="headerlink" href="#installation-on-windows" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="git-version-control">
+<h2>Git version control<a class="headerlink" href="#git-version-control" title="Permalink to this headline">¶</a></h2>
+<p>Go to <a class="reference external" href="http://git-scm.com/">http://git-scm.com/</a></p>
+<p>Click on the Downloads for Windows link at the bottom right.</p>
+<p>Download the file they propose, with a filename something like
+<code class="docutils literal"><span class="pre">Git-2.9.3.2-32-bit.exe</span></code>.</p>
+<p>Run the file to start the installation.</p>
+<p>We suggest you accept the defaults, except the sceen called &#8220;Adjusting your
+PATH environment&#8221;, where we suggest you choose the option &#8220;Use git from the
+Windows Command Prompt&#8221;.</p>
+</div>
 <div class="section" id="the-atom-text-editor">
 <h2>The Atom text editor<a class="headerlink" href="#the-atom-text-editor" title="Permalink to this headline">¶</a></h2>
-<p>Download the Atom installer for Windows from the <a class="reference external" href="https://atom.io">https://atom.io</a>.  Go to your
-Downloads folder and click on the Downloaded <code class="docutils literal"><span class="pre">atom-mac.zip</span></code> file.  This will
-unzip the files into your Download folder.  You should now see an Atom icon
-for the <code class="docutils literal"><span class="pre">Atom.app</span></code> application folder in your Downloads, maybe something
-like this:</p>
-<img alt="_images/atom_downloaded.png" src="_images/atom_downloaded.png" />
-<p>Open a new Finder window, navigate to the Applications folder, and drag the
-<code class="docutils literal"><span class="pre">Atom.app</span></code> folder to the Applications folder.</p>
-<p>Double-click on the Atom folder icon in the Applications folder to open Atom
-for the first time.  At the dialog &#8220;Atom.app is an application downloaded from
-the Internet. Are you sure you want to open it?&#8221;, select Open.  Atom should
-now be installed.</p>
-<p>See also <a class="reference external" href="http://flight-manual.atom.io/getting-started/sections/installing-atom">installing atom</a>.</p>
-<p>You will also need the <a class="reference external" href="https://atom.io/packages/hydrogen">hydrogen</a> plugin for Atom.  Install from
-<a class="reference internal" href="installation_on_mac.html#terminal-app"><span class="std std-ref">Terminal.app</span></a> with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies with homebrew</span>
-brew install pkg-config zeromq
-<span class="c1"># Install the plugin</span>
-<span class="nv">PYTHON</span><span class="o">=</span>python2.7 apm install hydrogen
-</pre></div>
+<p>Go to <a class="reference external" href="https://atom.io/">https://atom.io/</a></p>
+<p>Download the Windows installer, run.</p>
 </div>
-</div>
-<div class="section" id="git">
-<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
-<p>On Mavericks (OSX 10.9) and above, <code class="docutils literal"><span class="pre">git</span></code> comes with the Apple OSX command
-line tools.</p>
-<p>To get these, type <code class="docutils literal"><span class="pre">git</span></code> at the terminal command line.  If git is not
-installed already you will get a dialog box like this:</p>
-<img alt="_images/git_developer_tools.png" src="_images/git_developer_tools.png" />
-<p>Click &#8216;install&#8217; to install the OSX developer command line tools, including
-git.</p>
-<p>If you have an earlier version of OSX, please install the most recent version
-of git from this <a class="reference external" href="http://mackyle.github.io/git-osx-installer/">git OSX installer</a> page.</p>
+<div class="section" id="the-hydrogen-plugin-for-atom">
+<h2>The Hydrogen plugin for Atom<a class="headerlink" href="#the-hydrogen-plugin-for-atom" title="Permalink to this headline">¶</a></h2>
+<p>Installing this plugin is complicated, because you will need:</p>
+<ul class="simple">
+<li>Atom to be running with Python version 2 as the default Python version.
+That is inconvenient, because later on we&#8217;ll need Python 3 for the class;</li>
+<li>an installation of a Microsoft Windows compiler program (a compiler is a
+software that takes programs written in text format and &#8220;compiles&#8221; them into
+instructions native to the computer).</li>
+</ul>
+<p>See <a class="reference external" href="https://atom.io/packages/hydrogen">https://atom.io/packages/hydrogen</a> for more information.  What follows is a
+recipe:</p>
+<ol class="arabic simple">
+<li>Python 2.7: go to: <a class="reference external" href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a>.  Click on the
+Windows symbol for Windows downloads.  Select the 64-bit installer <em>for
+Python 2.7</em>, download, and install.  Choose to install for &#8220;Just me&#8221;, and
+leave the defaults as they are for the rest of the installation dialog
+boxes.  Now you have a version of Python 2.7;</li>
+<li>You are going to install Microsoft Visual Studio 2013 Express.  This is a
+free compiler from Microsoft.  You need the 2013 version, so be careful not
+to install a later version, such as the 2015 edition. Go to:
+<a class="reference external" href="https://www.microsoft.com/en-US/download/details.aspx?id=44914">https://www.microsoft.com/en-US/download/details.aspx?id=44914</a>. Choose
+<code class="docutils literal"><span class="pre">wdexpress.exe</span></code> to download.  Run this installer.  Accept all the
+defaults.  Reboot when the Visual Studio 2013 install has finished.  You
+now have the compiler you need;</li>
+<li>You can now install the Hydrogen plugin.  Start the Atom editor.  Go to the
+File menu, Settings, select +Install, type &#8220;hydrogen&#8221; in the search box,
+and click the Packages button to search.  When hydrogen comes up, click the
+Install button.  Wait a few minutes.  If there is an error, please come and
+find us for help.  Close Atom.</li>
+<li>Now install Python 3. Go back to: <a class="reference external" href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a>.
+Click on the Windows symbol for Windows downloads.  Select the 64-bit
+installer <em>for Python 3.5</em>, download, and install.  Choose to install for
+&#8220;Just me&#8221;, and leave the defaults as they are for the rest of the
+installation dialog boxes.  Now you have a version of Python 3.5;</li>
+</ol>
+<p>Test the Hydrogen plugin by starting Atom as you normally would. Make a new
+text file and save it somewhere as <code class="docutils literal"><span class="pre">test.py</span></code>.  Type <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">10</span></code> and press
+Alt-Shift-Enter to run this line in Hydrogen.  After a few seconds, you should
+see that Hydrogen started a new Python 3 kernel, and there will be a tick
+after the <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">10</span></code> line.  Or you may have got a small menu asking if you
+want a Python 2 or a Python 3 menu.  If so, all is probably well.  Otherwise,
+come and ask you instructors.</p>
 </div>
 <div class="section" id="python-and-packages">
 <h2>Python and packages<a class="headerlink" href="#python-and-packages" title="Permalink to this headline">¶</a></h2>
+<p>You install Python 3 and many of the packages you need in the last step, when
+you installed Anaconda3 (the version of Anaconda with Python 3.5).</p>
+<p>The last package you need is <a class="reference external" href="http://nipy.org/nibabel">nibabel</a>.</p>
+<p>Open git bash (this should have been installed with git).</p>
+<p>Type <code class="docutils literal"><span class="pre">which</span> <span class="pre">python</span></code> (and return) to see the version of Python that bash is
+finding.  It should be something like <code class="docutils literal"><span class="pre">/c/Users/your_user/Anaconda3/python</span></code>
+(note the <code class="docutils literal"><span class="pre">Anaconda3</span></code>).</p>
+<p>Now type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">nibabel</span>
+</pre></div>
+</div>
+<p>Check the installation worked with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ipython</span>
+</pre></div>
+</div>
+<p>then, from the IPython <code class="docutils literal"><span class="pre">In</span> <span class="pre">[1]</span></code> prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nibabel</span>
+</pre></div>
+</div>
+<p>That should return without an error.  Congratulations, you&#8217;re ready for the
+classes.</p>
 </div>
 </div>
 
@@ -94,8 +139,9 @@ of git from this <a class="reference external" href="http://mackyle.github.io/gi
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation on Windows</a><ul>
+<li><a class="reference internal" href="#git-version-control">Git version control</a></li>
 <li><a class="reference internal" href="#the-atom-text-editor">The Atom text editor</a></li>
-<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#the-hydrogen-plugin-for-atom">The Hydrogen plugin for Atom</a></li>
 <li><a class="reference internal" href="#python-and-packages">Python and packages</a></li>
 </ul>
 </li>
