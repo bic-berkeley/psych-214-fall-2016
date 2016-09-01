@@ -35,9 +35,10 @@ Installing this plugin is complicated, because you will need:
 
 * Atom to be running with Python version 2 as the default Python version.
   That is inconvenient, because later on we'll need Python 3 for the class;
-* an installation of a Microsoft Windows compiler program (a compiler is a
-  software that takes programs written in text format and "compiles" them into
-  instructions native to the computer).
+* an installation of a particular Microsoft Windows compiler program. A
+  compiler is software that takes programs written in human-readable format
+  and "compiles" them into instructions for the computer cental processing
+  unit (CPU).
 
 See https://atom.io/packages/hydrogen for more information.  What follows is a
 recipe:
@@ -71,7 +72,7 @@ Alt-Shift-Enter to run this line in Hydrogen.  After a few seconds, you should
 see that Hydrogen started a new Python 3 kernel, and there will be a tick
 after the ``a = 10`` line.  Or you may have got a small menu asking if you
 want a Python 2 or a Python 3 menu.  If so, all is probably well.  Otherwise,
-come and ask you instructors.
+come and ask your instructors.
 
 *******************
 Python and packages
