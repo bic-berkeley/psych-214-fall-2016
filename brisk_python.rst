@@ -909,18 +909,57 @@ A function can have more than one argument:
     >>> my_third_function(10, 42)
     52
 
+It is also possible to give a default value for a function argument:
+
+.. nbplot::
+
+    >>> def my_fourth_function(first_argument, extra_argument=101):
+    ...     return first_argument + extra_argument
+
+This function, like ``my_third_function``, has two arguments, and we can call
+it the same way that we call ``my_third_function``:
+
+.. nbplot::
+
+    >>> my_fourth_function(10, 42)
+    52
+
+But, we can also omit the second argument, in which case it will get its
+default value:
+
+.. nbplot::
+
+    >>> my_fourth_function(10)  # Pass one argument, get default for second
+    111
+
+So far we have passed in arguments by position, the first argument in our call
+becoming the first argument in the function, and so on.  We can also pass in
+arguments by name.  For example, we could pass in ``extra_argument`` by giving
+the parameter name and value, like this:
+
+.. nbplot::
+
+    >>> my_fourth_function(10, extra_argument=202)
+    212
+
+Passing arguments this way can make the code easier to read, because it the
+name of the argument often gives a good clue as to its purpose in the
+function.  It can also be very useful with functions having many parameters
+with default values; in that case using the argument name makes it easier to
+pass in only one of many not-default values.
+
 Remember that everything in Python is an object. The function is itself an
 object, where the name of the function is a variable, that refers to the
 function:
 
 .. nbplot::
 
-    >>> my_third_function
-    <function my_third_function at 0x...>
+    >>> my_fourth_function
+    <function my_fourth_function at 0x...>
 
 .. nbplot::
 
-    >>> type(my_third_function)
+    >>> type(my_fourth_function)
     <class 'function'>
 
 We call the function by adding the open parenthesis followed by the arguments
@@ -928,20 +967,20 @@ and the close parenthesis:
 
 .. nbplot::
 
-    >>> my_third_function(10, 42)
-    52
+    >>> my_fourth_function(10)
+    111
 
 We can make a new name to point to this same function as easily as we can
 could with any other Python variable:
 
 .. nbplot::
 
-    >>> another_reference_to_func3 = my_third_function
-    >>> type(another_reference_to_func3)
+    >>> another_reference_to_func4 = my_fourth_function
+    >>> type(another_reference_to_func4)
     <class 'function'>
     >>> # We call this function using the new name
-    >>> another_reference_to_func3(10, 42)
-    52
+    >>> another_reference_to_func4(10)
+    111
 
 *******
 Sorting
@@ -979,21 +1018,21 @@ For example, let's say we have first and last names stored as tuples:
 
 .. nbplot::
 
-    >>> people = [('stefan', 'van der walt'), ('matthew', 'brett')]
+    >>> people = [('JB', 'Poline'), ('Matthew', 'Brett'), ('Mark', 'DEsposito')]
 
 By default, Python compares tuples by comparing the first value first, then
-the second value, and so on. Because ``s`` is later in the alphabet than
-``m``, this means that we are sorting on the first name:
+the second value, and so on. This means for our case that we are sorting on
+the first name:
 
 .. nbplot::
 
-    >>> ('stefan', 'van der walt') > ('matthew', 'brett')
+    >>> ('Matthew', 'Brett') > ('Mark', 'DEsposito')
     True
 
 .. nbplot::
 
     >>> sorted(people)
-    [('matthew', 'brett'), ('stefan', 'van der walt')]
+    [('JB', 'Poline'), ('Mark', 'DEsposito'), ('Matthew', 'Brett')]
 
 That may not be what you want.  You might want to sort by the last name, which
 is the second value in the tuple.  In that case you can make a sort function,
@@ -1018,7 +1057,7 @@ We can pass this value to the ``sorted`` function as a sort function:
 .. nbplot::
 
     >>> sorted(people, key=get_last_name)
-    [('stefan', 'van der walt'), ('matthew', 'brett')]
+    [('Matthew', 'Brett'), ('Mark', 'DEsposito'), ('JB', 'Poline')]
 
 .. rubric:: Footnotes
 
