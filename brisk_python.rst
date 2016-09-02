@@ -198,15 +198,6 @@ Note that the first line of the conditional, that contains the conditional
 test, ends in a colon.  All subsequent lines indented relative to that line
 are executed only if the conditional is True.
 
-The first line that returns to the same level of indentation as the initial
-conditional statement, closes the block.  Call the first line: the
-*conditional test* and the subsequent lines of indented statements: the
-*conditional block*.
-
-Unless the conditional block contains some other type of block (e.g. a ``for``
-block or a ``while`` block), then all the lines in the block must have the
-same indentation.
-
 .. nbplot::
 
     >>> my_var = 11
@@ -215,6 +206,15 @@ same indentation.
     ...     print("my_var does equal 10")
     >>> print("Finished the conditional block")
     Finished the conditional block
+
+The first line that returns to the same level of indentation as the initial
+conditional statement, closes the block.  Call the first line: the
+*conditional test* and the subsequent lines of indented statements: the
+*conditional block*.
+
+Unless the conditional block contains some other type of block (e.g. a ``for``
+block or a ``while`` block), then all the lines in the block must have the
+same indentation.
 
 There may also be a further block where the conditional is ``else``, which is
 only run if the conditional test evaluates to False:
@@ -1052,7 +1052,8 @@ is also an object, with name ``get_last_name``:
     >>> get_last_name
     <function get_last_name at 0x...>
 
-We can pass this value to the ``sorted`` function as a sort function:
+We can pass this value to the ``sorted`` function as a sort function.  We will
+pass this in using the sort function parameter name, which is ``key``:
 
 .. nbplot::
 
