@@ -8,6 +8,9 @@ programming language, such as MATLAB, fairly well.
 A first point that you will see recur throughout is: everything in Python is
 an object.
 
+.. testsetup::
+
+    import os
 
 .. nbplot::
     :include-source: false
@@ -407,8 +410,21 @@ the two lists:
     >>> my_list + [False, 1, 2]
     [9, 101, 7, 0, 8, False, 1, 2]
 
+You can append elements with the ``append`` method.
 
-You can append elements with the ``append`` method:
+A method is a function attached to the object.  See :ref:`functions` for more
+on functions in Python.
+
+We can see that ``append`` is a method by displaying the value of
+``my_list.append``:
+
+.. nbplot::
+
+    >>> my_list.append
+    <built-in method append of list object at 0x...>
+
+To call the method, we add parentheses, surrounding any arguments we want to
+pass into the method.  In this case we want to pass in the element to append:
 
 .. nbplot::
 
@@ -424,6 +440,20 @@ the list in-place. Python returns ``None`` from the ``append`` method:
     >>> result = my_list.append(42)
     >>> result == None
     True
+
+This is also true for some other methods that modify the list in-place, such
+as the ``sort`` method:
+
+.. nbplot::
+
+    >>> new_list = [10, 1, 3]
+    >>> result = new_list.sort()
+    >>> # Return value is None
+    >>> result == None
+    True
+    >>> # But the original list now in ascending order from sort
+    >>> new_list
+    [1, 3, 10]
 
 You can remove elements from the list with the ``pop`` method:
 
@@ -849,6 +879,8 @@ Keys must be unique. A later key |--| value pair will overwrite an earlier key
     >>> software.items()  # doctest: +SKIP
     dict_items([('MATLAB', 45), ('Python', 100)])
 
+.. _functions:
+
 *********
 Functions
 *********
@@ -1060,6 +1092,88 @@ pass this in using the sort function parameter name, which is ``key``:
 
     >>> sorted(people, key=get_last_name)
     [('Matthew', 'Brett'), ('Mark', 'DEsposito'), ('JB', 'Poline')]
+
+*****
+Files
+*****
+
+You can open a file in several different *modes*.  The mode specifies whether
+you want to read or write the file, and whether the data in the file is, or
+will be, text string or binary data (bytes).  For example, here we open a file
+for writing (``w``) text (``t``):
+
+.. nbplot::
+
+    >>> my_file = open("a_text_file.txt", "wt")
+
+If we had wanted to write binary (byte) data, we would have used ``wb`` for
+the mode (Write Binary).
+
+As usual, you can explore this new file object in IPython by appending the
+object name with a period, and pressing TAB to get a list of attributes and
+methods.
+
+To write to a file use the ``write`` method.
+
+.. nbplot::
+
+    >>> # Write a line of text with a newline character at the end
+    >>> # The method returns the number of characters written
+    >>> my_file.write("MATLAB is good for matrices\n")
+    28
+    >>> # Another line
+    >>> my_file.write("Python is good for coding\n")
+    26
+
+You should close the file when you've finished with it:
+
+.. nbplot::
+
+    >>> my_file.close()
+
+To read a file, open the file in read mode:
+
+.. nbplot::
+
+    >>> # Open file in Read Text mode
+    >>> my_file2 = open("a_text_file.txt", "rt")
+
+You can read all the contents in one shot by calling the ``read`` method
+without arguments:
+
+.. nbplot::
+
+    >>> contents = my_file2.read()
+    >>> print(contents)
+    MATLAB is good for matrices
+    Python is good for coding
+    <BLANKLINE>
+
+Remember to close the file afterwards:
+
+.. nbplot::
+
+    >>> my_file2.close()
+
+An open text file object is also *iterable*, meaning, that you can ask the
+file object to return its contents line by line, in a ``for`` loop. Let's open
+the file again to show this in action:
+
+.. testcleanup::
+
+    os.unlink('a_text_file.txt')
+
+.. nbplot::
+
+    >>> my_file2 = open("a_text_file.txt", "rt")
+    >>> for line in my_file2:  # iterating over the file object
+    ...     print("Line is:", line)
+    ...
+    Line is: MATLAB is good for matrices
+    <BLANKLINE>
+    Line is: Python is good for coding
+    <BLANKLINE>
+    >>> my_file2.close()
 
 .. rubric:: Footnotes
 
