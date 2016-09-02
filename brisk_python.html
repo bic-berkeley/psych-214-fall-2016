@@ -196,13 +196,6 @@ from e.g. MATLAB, which uses <code class="docutils literal"><span class="pre">~=
 <p>Note that the first line of the conditional, that contains the conditional
 test, ends in a colon.  All subsequent lines indented relative to that line
 are executed only if the conditional is True.</p>
-<p>The first line that returns to the same level of indentation as the initial
-conditional statement, closes the block.  Call the first line: the
-<em>conditional test</em> and the subsequent lines of indented statements: the
-<em>conditional block</em>.</p>
-<p>Unless the conditional block contains some other type of block (e.g. a <code class="docutils literal"><span class="pre">for</span></code>
-block or a <code class="docutils literal"><span class="pre">while</span></code> block), then all the lines in the block must have the
-same indentation.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
@@ -211,6 +204,13 @@ same indentation.</p>
 <span class="go">Finished the conditional block</span>
 </pre></div>
 </div>
+<p>The first line that returns to the same level of indentation as the initial
+conditional statement, closes the block.  Call the first line: the
+<em>conditional test</em> and the subsequent lines of indented statements: the
+<em>conditional block</em>.</p>
+<p>Unless the conditional block contains some other type of block (e.g. a <code class="docutils literal"><span class="pre">for</span></code>
+block or a <code class="docutils literal"><span class="pre">while</span></code> block), then all the lines in the block must have the
+same indentation.</p>
 <p>There may also be a further block where the conditional is <code class="docutils literal"><span class="pre">else</span></code>, which is
 only run if the conditional test evaluates to False:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">11</span>
@@ -869,7 +869,8 @@ is also an object, with name <code class="docutils literal"><span class="pre">ge
 <span class="go">&lt;function get_last_name at 0x...&gt;</span>
 </pre></div>
 </div>
-<p>We can pass this value to the <code class="docutils literal"><span class="pre">sorted</span></code> function as a sort function:</p>
+<p>We can pass this value to the <code class="docutils literal"><span class="pre">sorted</span></code> function as a sort function.  We will
+pass this in using the sort function parameter name, which is <code class="docutils literal"><span class="pre">key</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_last_name</span><span class="p">)</span>
 <span class="go">[(&#39;Matthew&#39;, &#39;Brett&#39;), (&#39;Mark&#39;, &#39;DEsposito&#39;), (&#39;JB&#39;, &#39;Poline&#39;)]</span>
 </pre></div>
