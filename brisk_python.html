@@ -187,9 +187,12 @@ from e.g. MATLAB, which uses <code class="docutils literal"><span class="pre">~=
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;my_var does equal 10&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="go">The conditional is True!</span>
 <span class="go">my_var does equal 10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Finished the conditional block&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Finished the conditional block&quot;</span><span class="p">)</span>
 <span class="go">Finished the conditional block</span>
 </pre></div>
 </div>
@@ -200,7 +203,10 @@ are executed only if the conditional is True.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;my_var does equal 10&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Finished the conditional block&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Finished the conditional block&quot;</span><span class="p">)</span>
 <span class="go">Finished the conditional block</span>
 </pre></div>
 </div>
@@ -208,11 +214,12 @@ are executed only if the conditional is True.</p>
 conditional statement, closes the block.  Call the first line: the
 <em>conditional test</em> and the subsequent lines of indented statements: the
 <em>conditional block</em>.</p>
-<p>Unless the conditional block contains some other type of block (e.g. a <code class="docutils literal"><span class="pre">for</span></code>
-block or a <code class="docutils literal"><span class="pre">while</span></code> block), then all the lines in the block must have the
-same indentation.</p>
-<p>There may also be a further block where the conditional is <code class="docutils literal"><span class="pre">else</span></code>, which is
-only run if the conditional test evaluates to False:</p>
+<p>Unless the conditional block contains a further indented block (for example,
+another <code class="docutils literal"><span class="pre">if</span></code> block), then all the lines in the block must have the same
+indentation.</p>
+<p>The <code class="docutils literal"><span class="pre">if</span></code> block may be followed by another block where the conditional is
+<code class="docutils literal"><span class="pre">else:</span></code>. This block will only run if the initial conditional test evaluates
+to False.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
@@ -220,6 +227,7 @@ only run if the conditional test evaluates to False:</p>
 <span class="gp">... </span><span class="k">else</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is False!&quot;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;my_var does not equal 10&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="go">The conditional is False!</span>
 <span class="go">my_var does not equal 10</span>
 </pre></div>
@@ -240,6 +248,7 @@ contraction for <code class="docutils literal"><span class="pre">else</span> <sp
 <span class="gp">... </span><span class="k">else</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;All conditionals are False!&quot;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;my_var does not equal 10, 11 or 12&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="go">The third conditional is True!</span>
 <span class="go">my_var does equal 12</span>
 </pre></div>
