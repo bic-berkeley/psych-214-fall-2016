@@ -21,9 +21,6 @@ object of type ``float``.
     >>> a = 99
     >>> type(a)
     <class 'int'>
-
-.. nbplot::
-
     >>> b = 99.0
     >>> type(b)
     <class 'float'>
@@ -35,31 +32,19 @@ constructors:
 
     >>> float('1')
     1.0
-
-.. nbplot::
-
     >>> float(1)
     1.0
-
-.. nbplot::
-
     >>> int('1')
     1
-
-.. nbplot::
-
     >>> int(1)
     1
 
-``+ - * /`` on a mix of floats and ints, give floats
+``+``,  ``-``, ``*`` or ``/`` on a mix of floats and ints, give floats:
 
 .. nbplot::
 
     >>> a + b
     198.0
-
-.. nbplot::
-
     >>> a * b
     9801.0
 
@@ -400,14 +385,14 @@ When you do ``another_variable = a_variable``, you are telling the name
 .. nbplot::
 
     >>> another_list = my_list
-    >>> another_list 
+    >>> another_list
     [9, 99, 7, 0, 8]
 
 ``my_list`` points to a list object in memory. When you do
 ``another_list = my_list``, it tells Python that ``another_list`` points
 to *the same object*. So, if we modify the list, pointed to by
-``my_list``, we also modify the contents of ``another_list``, because
-``my_list`` and ``another_list`` point at the same list.
+``my_list``, we also modify the value of ``another_list``, because ``my_list``
+and ``another_list`` point at the same list.
 
 .. nbplot::
 
@@ -415,7 +400,7 @@ to *the same object*. So, if we modify the list, pointed to by
     >>> another_list
     [9, 101, 7, 0, 8]
 
-An interesting thing you can do to list is add:
+You can add lists:
 
 .. nbplot::
 
@@ -430,9 +415,8 @@ You can append elements with the ``append`` method:
     >>> my_list
     [9, 101, 7, 0, 8, 20]
 
-Note that the ``append`` method does *not* return the list, it just
-changes the list in-place. Python returns None from the ``append``
-method:
+Note that the ``append`` method does *not* return the list, it just changes
+the list in-place. Python returns ``None`` from the ``append`` method:
 
 .. nbplot::
 
@@ -440,7 +424,7 @@ method:
     >>> result == None
     True
 
-You can delete elements with ``del``:
+You can remove elements from the list with ``del``:
 
 .. nbplot::
 
@@ -448,20 +432,20 @@ You can delete elements with ``del``:
     >>> my_list
     [9, 101, 0, 8, 20, 42]
 
-You can return slices from any sequence, including lists, by putting a
-slice specifier in square brackets. For example, this returns the first
-3 elements of the list:
+You can return slices from any sequence, including lists, by putting a slice
+specifier in square brackets. For example, this returns the first 3 elements
+of the list:
 
 .. nbplot::
 
     >>> my_list[0:3]
     [9, 101, 0]
 
-The first number before the colon is the *start* index, in this case
-starting the first element (element at index 0). The second number,
-after the colon, is the *stop* index. This is the end index *plus one*.
-So we return elements at index 0, 1 and 2. That is, elements *up to, but
-not including* 3.
+The first number after the square bracket and before the colon is the *start*
+index. In this case we start at the first element (element at index 0). The
+second number, after the colon, is the *stop* index. This is the end index
+*plus one*.  So we return elements at index 0, 1 and 2. That is, elements *up
+to, but not including* 3.
 
 If you omit the first number (the start index) Python assumes 0:
 
@@ -477,15 +461,12 @@ the stop index.
 
     >>> my_list[2:]
     [0, 8, 20, 42]
-
-.. nbplot::
-
     >>> my_list[2:len(my_list)]
     [0, 8, 20, 42]
 
-You can omit both numbers, in which case you return all the elements of
-the list. This can be useful if you want to make another list that has
-the elements as the first:
+You can omit both numbers, in which case you return all the elements of the
+list. This can be useful if you want to make another list that contains the
+same elements as the first:
 
 .. nbplot::
 
@@ -493,8 +474,8 @@ the elements as the first:
     >>> another_list
     [9, 101, 0, 8, 20, 42]
 
-Because this is a new list object, you can change the original list
-without changing the new list:
+Because this is a new list object, you can change the original list without
+changing the new list:
 
 .. nbplot::
 
@@ -525,32 +506,23 @@ Negative numbers for the step have the obvious meaning:
     >>> my_list[4:1:-1]
     [20, 8, 0]
 
-If you have a negative step size, and you don't specify the start index,
-then the start index defaults to the last element in the list. If you
-don't specify the stop index, it defaults to one below 0:
+If you have a negative step size, and you don't specify the start index, then
+the start index defaults to the last element in the list. If you don't specify
+the stop index, it defaults to one below 0:
 
 .. nbplot::
 
     >>> my_list
     [9, 999, 0, 8, 20, 42]
-
-.. nbplot::
-
     >>> my_list[-1:1:-1]
     [42, 20, 8, 0]
-
-.. nbplot::
-
     >>> my_list[:1:-1]
     [42, 20, 8, 0]
-
-.. nbplot::
-
     >>> my_list[-2::-1]
     [20, 8, 0, 999, 9]
 
-One consequence that is worth remembering is that this idiom gives you a
-reversed copy of the list:
+One consequence that is worth remembering is that the following idiom gives
+you a reversed copy of the list:
 
 .. nbplot::
 
@@ -562,7 +534,7 @@ Tuples
 ******
 
 Tuples are almost the same as lists, except they are not mutable. That
-is, you cannot change the elements of a tuple, or add or remove
+is, you cannot change the elements of a tuple, or change the number of
 elements.
 
 .. nbplot::
@@ -575,9 +547,6 @@ elements.
 
     >>> isinstance(my_tuple, collections.Sequence)
     True
-
-.. nbplot::
-
     >>> isinstance(my_tuple, collections.MutableSequence)
     False
 
@@ -607,8 +576,7 @@ A tuple with two elements:
     >>> two_tuple
     (1, 5)
 
-There's a little complication in Python, when making a tuple with one
-element:
+There is a little complication when making a tuple with one element:
 
 .. nbplot::
 
@@ -625,8 +593,8 @@ rather than an expression with parentheses round it:
     >>> not_a_tuple
     9
 
-To tell Python that you mean this to be a length-one tuple, add a comma
-after the element, and before the closing parenthesis:
+To tell Python that you mean this to be a length-one tuple, add a comma after
+the element, and before the closing parenthesis:
 
 .. nbplot::
 
@@ -646,17 +614,14 @@ Make a string like this:
     >>> my_string
     'interesting text'
 
-You can use single quotes or double quotes for your string, the two
-strings are the same:
+You can use single quotes or double quotes for your string, the two strings
+are the same:
 
 .. nbplot::
 
     >>> another_string = "interesting text"
     >>> another_string
     'interesting text'
-
-.. nbplot::
-
     >>> my_string == another_string
     True
 
@@ -665,11 +630,13 @@ can slice).
 
 .. nbplot::
 
+    >>> # Length
     >>> len(my_string)
     16
 
 .. nbplot::
 
+    >>> # Iterable
     >>> for c in my_string:
     ...     print(c)
     i
@@ -691,16 +658,18 @@ can slice).
 
 .. nbplot::
 
+    >>> # Can index
     >>> my_string[1]
     'n'
 
 .. nbplot::
 
+    >>> # Can slice
     >>> my_string[1:5]
     'nter'
 
-Unlike lists, strings are immutable. You cannot change the characters
-within a string:
+Unlike lists, strings are immutable. You cannot change the characters within a
+string:
 
 .. nbplot::
 
@@ -708,10 +677,12 @@ within a string:
     >>> # my_string[1] = 'N'
 
 Strings have lots of interesting methods. Try tab-completing on a string
-variable name, followed by a period - e.g. ``my_string.``.
+variable name, followed by a period - e.g. ``my_string.``.  Also see the `list
+of string methods in the Python docs
+<http://docs.python.org/library/stdtypes.html#string-methods>`_.
 
-One interesting method is ``replace``. It returns a new string,
-replacing instances of one string with another:
+One interesting method is ``replace``. It returns a new string that is a copy
+of the input, but replacing instances of one string with another:
 
 .. nbplot::
 
@@ -737,14 +708,14 @@ You can add strings:
 Sets
 ****
 
-Sets are collections of unique elements, with no defined order (Python
+Sets are collections of unique elements, with no defined order.  Python
 reserves the right to order sets in any way it chooses:
 
 .. nbplot::
 
     >>> # Only unique elements collected in the set
     >>> my_set = set((5, 3, 1, 3))
-    >>> my_set
+    >>> my_set  # doctest: +SKIP
     {1, 3, 5}
 
 Because there is no defined order, you cannot index into a set:
@@ -754,12 +725,12 @@ Because there is no defined order, you cannot index into a set:
     >>> # Raises a TypeError
     >>> # my_set[1]
 
-You can iterate over a set, but order of the elements is arbitrary, and
+You can iterate over a set, but the order of the elements is arbitrary, and
 you cannot rely on the same order in any two runs of your program:
 
 .. nbplot::
 
-    >>> for element in my_set:
+    >>> for element in my_set:  # doctest: +SKIP
     ...     print(element)
     1
     3
@@ -772,9 +743,9 @@ Look at the methods of the set object for interesting operations such as
 Dictionaries
 ************
 
-A dictionary is an unordered collection of key, value pairs. The *key*
-is something that identifies the element, and the *value* is the value
-corresponding a particular key.
+A dictionary is an unordered collection of key, value pairs. The *key* is
+something that identifies the element, and the *value* is the value
+corresponding to the particular key.
 
 .. nbplot::
 
@@ -793,8 +764,8 @@ corresponding a particular key.
     >>> software.values()
     dict_values([])
 
-Here we make a new key value mapping. The key is a string - ``Python``,
-and the corresponding value is an integer 100:
+Here we insert a new key, value mapping into the dictionary. The key is a
+string |--| ``MATLAB``, and the corresponding value is an integer 50:
 
 .. nbplot::
 
@@ -802,7 +773,7 @@ and the corresponding value is an integer 100:
     >>> software.keys()
     dict_keys(['MATLAB'])
 
-Another key, value mapping:
+We can insert another key, value mapping:
 
 .. nbplot::
 
@@ -854,7 +825,6 @@ is the key and the second element is the value:
 
     >>> for key_value in software.items():  #doctest: +SKIP
     ...     print(key_value)
-
     ('MATLAB', 50)
     ('Python', 100)
 
@@ -867,8 +837,8 @@ key, value pairs, and colons separating the key and value:
     >>> software.items()  #doctest: +SKIP
     dict_items([('MATLAB', 50), ('Python', 100)])
 
-Keys must be unique. A later key, value pair will overwrite an earlier
-key, value pair that had the same key:
+Keys must be unique. A later key, value pair will overwrite an earlier key,
+value pair that had the same key:
 
 .. nbplot::
 
@@ -887,15 +857,14 @@ Here we define our first function in Python:
     >>> def my_function(an_argument):
     ...     return an_argument + 1
 
-The function definition begins with the ``def`` keyword followed by a
-space. There follows the name of the function ``my_function``. Next we
-have an open parenthesis, followed by a specification of the arguments
-that the function expects to be passed to it. In this case, the function
-expects a single argument. The value of this argument will be attached
-to the name ``an_argument`` when the function starts to execute. Last,
-we have an indented block, with code that will run when the function is
-called. We return a value from the function using the ``return``
-statement.
+The function definition begins with the ``def`` keyword followed by a space.
+There follows the name of the function ``my_function``. Next we have an open
+parenthesis, followed by a specification of the arguments that the function
+expects to be passed to it. In this case, the function expects a single
+argument. In our case, the value of the input argument will be attached to the
+name ``an_argument`` when the function starts to execute.  Last, we have an
+indented block, with code that will run when the function is called. We can
+return a value from the function using the ``return`` statement.
 
 .. nbplot::
 
@@ -903,9 +872,8 @@ statement.
     11
 
 We called ``my_function`` by appending the opening parenthesis, and the
-arguments, followed by the closing parenthesis. The function began to
-execute with the variable ``an_argument`` set to 10. It returned 10 + 1
-= 11.
+arguments, followed by the closing parenthesis. The function began to execute
+with the variable ``an_argument`` set to 10. It returned 10 + 1 = 11.
 
 A function need not accept any arguments:
 
@@ -917,6 +885,18 @@ A function need not accept any arguments:
     >>> my_second_function()
     42
 
+A function does not need to have a ``return`` statement.  If there is no
+return statement, the function returns ``None``:
+
+.. nbplot::
+
+    >>> def function_with_no_return():
+    ...     # Function with no return statement
+    ...     a = 1
+    ...
+    >>> function_with_no_return() == None
+    True
+
 A function can have more than one argument:
 
 .. nbplot::
@@ -927,9 +907,9 @@ A function can have more than one argument:
     >>> my_third_function(10, 42)
     52
 
-Remember that everything in Python is an object. The function is itself
-an object, where the name of the function is a variable, that refers to
-the function:
+Remember that everything in Python is an object. The function is itself an
+object, where the name of the function is a variable, that refers to the
+function:
 
 .. nbplot::
 
@@ -941,7 +921,7 @@ the function:
     >>> type(my_third_function)
     <class 'function'>
 
-We call the function by adding the open parenthesis, and the arguments
+We call the function by adding the open parenthesis followed by the arguments
 and the close parenthesis:
 
 .. nbplot::
@@ -949,18 +929,15 @@ and the close parenthesis:
     >>> my_third_function(10, 42)
     52
 
-We can make a new name to point to this same function as easily as we
-can do this with other Python variables, such as lists:
+We can make a new name to point to this same function as easily as we can
+could with any other Python variable:
 
 .. nbplot::
 
     >>> another_reference_to_func3 = my_third_function
     >>> type(another_reference_to_func3)
     <class 'function'>
-
-.. nbplot::
-
-    >>> # We can call this function using the new name
+    >>> # We call this function using the new name
     >>> another_reference_to_func3(10, 42)
     52
 
@@ -990,13 +967,10 @@ Python needed results like:
     >>> 3 < 5
     True
 
-Sometimes you have more complicated objects to sort, for which you
-cannot use ``<`` or ``>`` to compare the elements (maybe the greater
-than or less than methods don't exist for this object). Sometimes your
-objects do allow ``<`` or ``>`` but you want to order the objects in
-some other way. If so, then you can define a *sort function*, that, when
-given an element, returns a sort value for that element. Python does the
-sorting, not on the elements themselves, but on the returned sort value
+Sometimes you want to order the objects in some other way than simply
+comparing the elements. If so, then you can define a *sort function*, that,
+when given an element, returns a *sort value* for that element. Python does
+the sorting, not on the elements themselves, but on the returned sort value
 for each element.
 
 For example, let's say you have three tuples that you want to sort:
@@ -1005,9 +979,9 @@ For example, let's say you have three tuples that you want to sort:
 
     >>> tuples = (('c', 12), ('d', 13), ('b', 14))
 
-Python does know how to compare tuples, by comparing the first value
-first, then the second value, and so on. Because ``c`` is later in the
-alphabet than ``b``, this means that:
+By default, Python compares tuples by comparing the first value first, then
+the second value, and so on. Because ``c`` is later in the alphabet than
+``b``, this means that:
 
 .. nbplot::
 
@@ -1019,10 +993,10 @@ alphabet than ``b``, this means that:
     >>> sorted(tuples)
     [('b', 14), ('c', 12), ('d', 13)]
 
-That may not be what I want. I might want to sort by the second value in
-the tuples, the numbers, rather than the first values - the strings. In
-that case I can make a sort function, that accepts the element as an
-input (the tuple in this case), and returns a value:
+That may not be what you want.  You might want to sort by the second value in
+the tuples, the numbers, rather than the first values - the strings. In that
+case you can make a sort function, that accepts the element as an input (the
+tuple in this case), and returns a value:
 
 .. nbplot::
 
@@ -1033,8 +1007,8 @@ input (the tuple in this case), and returns a value:
     ...     print('Returning sort value {} for element {}'.format(value, element))
     ...     return value
 
-Remember everything in Python is an object. The function we have just
-defined is also an object, with name ``by_number``:
+Remember everything in Python is an object. The function we have just defined
+is also an object, with name ``by_number``:
 
 .. nbplot::
 
