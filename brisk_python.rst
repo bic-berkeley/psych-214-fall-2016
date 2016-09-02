@@ -189,8 +189,10 @@ A conditional block in Python looks like this:
     >>> if my_var == 10:
     ...     print("The conditional is True!")
     ...     print("my_var does equal 10")
+    ...
     The conditional is True!
     my_var does equal 10
+
     >>> print("Finished the conditional block")
     Finished the conditional block
 
@@ -204,6 +206,8 @@ are executed only if the conditional is True.
     >>> if my_var == 10:
     ...     print("The conditional is True!")
     ...     print("my_var does equal 10")
+    ...
+
     >>> print("Finished the conditional block")
     Finished the conditional block
 
@@ -212,12 +216,13 @@ conditional statement, closes the block.  Call the first line: the
 *conditional test* and the subsequent lines of indented statements: the
 *conditional block*.
 
-Unless the conditional block contains some other type of block (e.g. a ``for``
-block or a ``while`` block), then all the lines in the block must have the
-same indentation.
+Unless the conditional block contains a further indented block (for example,
+another ``if`` block), then all the lines in the block must have the same
+indentation.
 
-There may also be a further block where the conditional is ``else``, which is
-only run if the conditional test evaluates to False:
+The ``if`` block may be followed by another block where the conditional is
+``else:``. This block will only run if the initial conditional test evaluates
+to False.
 
 .. nbplot::
 
@@ -228,6 +233,7 @@ only run if the conditional test evaluates to False:
     ... else:
     ...     print("The conditional is False!")
     ...     print("my_var does not equal 10")
+    ...
     The conditional is False!
     my_var does not equal 10
 
@@ -236,6 +242,7 @@ These tests use the contraction ``elif conditional_test``, where ``elif`` is a
 contraction for ``else if``:
 
 .. nbplot::
+
     >>> my_var = 12
     >>> if my_var == 10:
     ...     print("The conditional is True!")
@@ -249,6 +256,7 @@ contraction for ``else if``:
     ... else:
     ...     print("All conditionals are False!")
     ...     print("my_var does not equal 10, 11 or 12")
+    ...
     The third conditional is True!
     my_var does equal 12
 
