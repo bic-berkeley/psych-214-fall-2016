@@ -1,2 +1,2 @@
-def get_last_name(person):
-    return person[1]  # The last name
+my_third_function(10, 42)
+# 52

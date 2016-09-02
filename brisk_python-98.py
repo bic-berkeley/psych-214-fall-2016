@@ -1,2 +1,2 @@
-sorted('adcea')
-# ['a', 'a', 'c', 'd', 'e']
+('stefan', 'van der walt') > ('matthew', 'brett')
+# True

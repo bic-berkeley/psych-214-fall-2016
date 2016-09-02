@@ -1,2 +1,2 @@
-def my_fourth_function(first_argument, extra_argument=101):
-    return first_argument + extra_argument
+my_third_function
+# <function my_third_function at 0x...>

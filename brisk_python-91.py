@@ -1,2 +1,2 @@
-my_fourth_function(10, 42)
-# 52
+type(my_third_function)
+# <class 'function'>

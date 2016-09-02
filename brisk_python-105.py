@@ -1,2 +1,3 @@
-get_last_name
-# <function get_last_name at 0x...>
+another_reference_to_func3 = my_third_function
+type(another_reference_to_func3)
+# <class 'function'>

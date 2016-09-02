@@ -1,2 +1,2 @@
-sorted(people)
-# [('JB', 'Poline'), ('Mark', 'DEsposito'), ('Matthew', 'Brett')]
+type(my_third_function)
+# <class 'function'>
