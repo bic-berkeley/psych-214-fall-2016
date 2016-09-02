@@ -1004,7 +1004,7 @@ tuple in this case), and returns a value:
     ...     # The value we will return for this element
     ...     value = element[1]
     ...     # Show the value we will return
-    ...     print('Returning sort value {} for element {}'.format(value, element))
+    ...     print('Returning sort value', value, 'for element', element)
     ...     return value
 
 Remember everything in Python is an object. The function we have just defined
