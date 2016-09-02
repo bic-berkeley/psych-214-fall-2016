@@ -177,11 +177,11 @@ from e.g. MATLAB, which uses ``~=``:
     >>> a != 1
     False
 
-*************************
-"If" blocks and indention
-*************************
+*************************************
+"If" statements, blocks and indention
+*************************************
 
-A conditional block in Python looks like this:
+A conditional statement in Python looks like this:
 
 .. nbplot::
 
@@ -193,34 +193,30 @@ A conditional block in Python looks like this:
     The conditional is True!
     my_var does equal 10
 
-    >>> print("Finished the conditional block")
-    Finished the conditional block
-
-Note that the first line of the conditional, that contains the conditional
-test, ends in a colon.  All subsequent lines indented relative to that line
-are executed only if the conditional is True.
+Note that the first line of the conditional statement, that contains the
+conditional test, ends in a colon.  Call this the *if test*.  There follow
+some lines *indented* relative to *if test*.  Call these indented lines the
+*if block*.  Python executes the statements in the *if block* only if the *if
+test* evaluates to True.
 
 .. nbplot::
 
     >>> my_var = 11
-    >>> if my_var == 10:
+    >>> # This time the conditional evaluates to False
+    >>> if my_var == 10:  # the "if test"
+    ...     # The indented lines are the "if block"
     ...     print("The conditional is True!")
     ...     print("my_var does equal 10")
     ...
 
-    >>> print("Finished the conditional block")
-    Finished the conditional block
 
-The first line that returns to the same level of indentation as the initial
-conditional statement, closes the block.  Call the first line: the
-*conditional test* and the subsequent lines of indented statements: the
-*conditional block*.
+The first line that returns to the same level of indentation as *if test*
+line, closes the *if block*.
 
-Unless the conditional block contains a further indented block (for example,
-another ``if`` block), then all the lines in the block must have the same
-indentation.
+Unless the *if block* has a further indented block (for example, another *if
+block*), then all the lines in the block must have the same indentation.
 
-The ``if`` block may be followed by another block where the conditional is
+The *if block* may be followed by another block where the conditional is
 ``else:``. This block will only run if the initial conditional test evaluates
 to False.
 
@@ -375,11 +371,6 @@ in the list, without creating a new list.
 
 .. nbplot::
 
-    >>> isinstance(my_list, collections.MutableSequence)
-    True
-
-.. nbplot::
-
     >>> my_list[1] = 99
     >>> my_list
     [9, 99, 7, 0, 8]
@@ -408,12 +399,14 @@ and ``another_list`` point at the same list.
     >>> another_list
     [9, 101, 7, 0, 8]
 
-You can add lists:
+Adding two lists with ``+`` returns a new list that is the concatenation of
+the two lists:
 
 .. nbplot::
 
     >>> my_list + [False, 1, 2]
     [9, 101, 7, 0, 8, False, 1, 2]
+
 
 You can append elements with the ``append`` method:
 
