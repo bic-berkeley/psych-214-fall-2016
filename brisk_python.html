@@ -92,14 +92,14 @@ constructors:</p>
 <span class="go">9801.0</span>
 </pre></div>
 </div>
-<p>Dividing an int by an int also a float - but this is only true by
-default for Python &gt;= 3</p>
+<p>Dividing an int by an int also gives a float – but this is only true by
+default for Python &gt;= 3:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="go">0.5</span>
 </pre></div>
 </div>
-<p>If your code may run on Python 2, and you want division to return a
-float, force one of the arguments to be a float:</p>
+<p>If your code may run on Python 2, and you want division to return a float,
+force one of the arguments to be a float:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">0.5</span>
 </pre></div>
@@ -209,11 +209,15 @@ from e.g. MATLAB, which uses <code class="docutils literal"><span class="pre">~=
 </pre></div>
 </div>
 <p>Note that the first line of the conditional, that contains the conditional
-test, end in a colon.  All lines indented relative to that line are run only
-if the conditional is True.  Unless the conditional block contains some other
-type of block (e.g. a <code class="docutils literal"><span class="pre">for</span></code> block or a <code class="docutils literal"><span class="pre">while</span></code> block), then all the lines
-in the block must have the same indentation.  The first line that returns to
-the same level of indentation as the conditional statement, closes the block.</p>
+test, ends in a colon.  All subsequent lines indented relative to that line
+are executed only if the conditional is True.</p>
+<p>The first line that returns to the same level of indentation as the initial
+conditional statement, closes the block.  Call the first line: the
+<em>conditional test</em> and the subsequent lines of indented statements: the
+<em>conditional block</em>.</p>
+<p>Unless the conditional block contains some other type of block (e.g. a <code class="docutils literal"><span class="pre">for</span></code>
+block or a <code class="docutils literal"><span class="pre">while</span></code> block), then all the lines in the block must have the
+same indentation.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
@@ -222,8 +226,8 @@ the same level of indentation as the conditional statement, closes the block.</p
 <span class="go">Finished the conditional block</span>
 </pre></div>
 </div>
-<p>There may also be a further block where the conditional is <code class="docutils literal"><span class="pre">else</span></code>, which
-is only run if the conditional evaluates to False:</p>
+<p>There may also be a further block where the conditional is <code class="docutils literal"><span class="pre">else</span></code>, which is
+only run if the conditional test evaluates to False:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
@@ -235,8 +239,9 @@ is only run if the conditional evaluates to False:</p>
 <span class="go">my_var does not equal 10</span>
 </pre></div>
 </div>
-<p>There may also be other conditional statements, with the contraction <code class="docutils literal"><span class="pre">elif</span>
-<span class="pre">conditional</span></code>, where <code class="docutils literal"><span class="pre">elif</span></code> is a contraction for <code class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></code>:</p>
+<p>There may be other conditional tests, with associated conditional blocks.
+These tests use the contraction <code class="docutils literal"><span class="pre">elif</span> <span class="pre">conditional_test</span></code>, where <code class="docutils literal"><span class="pre">elif</span></code> is a
+contraction for <code class="docutils literal"><span class="pre">else</span> <span class="pre">if</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">12</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;The conditional is True!&quot;</span><span class="p">)</span>
@@ -310,6 +315,8 @@ give a new sequence containing the first <code class="docutils literal"><span cl
 <span class="go">8</span>
 </pre></div>
 </div>
+<p>Notice that the <code class="docutils literal"><span class="pre">for</span></code> has the same form as the conditionals, with a first
+line ending in a colon, followed by an indented block.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can be indexed</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">4</span>

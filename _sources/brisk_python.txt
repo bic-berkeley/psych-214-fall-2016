@@ -63,16 +63,16 @@ constructors:
     >>> a * b
     9801.0
 
-Dividing an int by an int also a float - but this is only true by
-default for Python >= 3
+Dividing an int by an int also gives a float |--| but this is only true by
+default for Python >= 3:
 
 .. nbplot::
 
     >>> 1 / 2
     0.5
 
-If your code may run on Python 2, and you want division to return a
-float, force one of the arguments to be a float:
+If your code may run on Python 2, and you want division to return a float,
+force one of the arguments to be a float:
 
 .. nbplot::
 
@@ -211,11 +211,17 @@ A conditional block in Python looks like this:
     Finished the conditional block
 
 Note that the first line of the conditional, that contains the conditional
-test, end in a colon.  All lines indented relative to that line are run only
-if the conditional is True.  Unless the conditional block contains some other
-type of block (e.g. a ``for`` block or a ``while`` block), then all the lines
-in the block must have the same indentation.  The first line that returns to
-the same level of indentation as the conditional statement, closes the block.
+test, ends in a colon.  All subsequent lines indented relative to that line
+are executed only if the conditional is True.
+
+The first line that returns to the same level of indentation as the initial
+conditional statement, closes the block.  Call the first line: the
+*conditional test* and the subsequent lines of indented statements: the
+*conditional block*.
+
+Unless the conditional block contains some other type of block (e.g. a ``for``
+block or a ``while`` block), then all the lines in the block must have the
+same indentation.
 
 .. nbplot::
 
@@ -226,8 +232,8 @@ the same level of indentation as the conditional statement, closes the block.
     >>> print("Finished the conditional block")
     Finished the conditional block
 
-There may also be a further block where the conditional is ``else``, which
-is only run if the conditional evaluates to False:
+There may also be a further block where the conditional is ``else``, which is
+only run if the conditional test evaluates to False:
 
 .. nbplot::
 
@@ -241,8 +247,9 @@ is only run if the conditional evaluates to False:
     The conditional is False!
     my_var does not equal 10
 
-There may also be other conditional statements, with the contraction ``elif
-conditional``, where ``elif`` is a contraction for ``else if``:
+There may be other conditional tests, with associated conditional blocks.
+These tests use the contraction ``elif conditional_test``, where ``elif`` is a
+contraction for ``else if``:
 
 .. nbplot::
     >>> my_var = 12
@@ -326,6 +333,9 @@ indexed with integers, and sliced with slice definitions. So, if object
     7
     0
     8
+
+Notice that the ``for`` has the same form as the conditionals, with a first
+line ending in a colon, followed by an indented block.
 
 .. nbplot::
 
