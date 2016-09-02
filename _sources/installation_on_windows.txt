@@ -72,7 +72,7 @@ Alt-Shift-Enter to run this line in Hydrogen.  After a few seconds, you should
 see that Hydrogen started a new Python 3 kernel, and there will be a tick
 after the ``a = 10`` line.  Or you may have got a small menu asking if you
 want a Python 2 or a Python 3 menu.  If so, all is probably well.  Otherwise,
-come and ask you instructors.
+come and ask your instructors.
 
 *******************
 Python and packages

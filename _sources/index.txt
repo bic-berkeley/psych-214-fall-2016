@@ -29,6 +29,7 @@ version control using git.
     preparation
     logistics
     classes
+    labs
     projects
     bibliography
 
@@ -40,6 +41,8 @@ version control using git.
     choosing_editor
     installation_on_mac
     installation_on_linux
+    installation_on_windows
+    brisk_python
     glossary
     mentors
     papers/index
