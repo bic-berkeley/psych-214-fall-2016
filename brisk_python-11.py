@@ -1,2 +1,0 @@
-type(False)
-# <class 'bool'>

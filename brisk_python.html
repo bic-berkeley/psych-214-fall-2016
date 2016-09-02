@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Brisk introduction to Python &#8212; Functional MRI methods</title>
+    <title>Brisk introduction to Python &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -758,31 +758,61 @@ return statement, the function returns <code class="docutils literal"><span clas
 <span class="go">52</span>
 </pre></div>
 </div>
+<p>It is also possible to give a default value for a function argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_fourth_function</span><span class="p">(</span><span class="n">first_argument</span><span class="p">,</span> <span class="n">extra_argument</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">first_argument</span> <span class="o">+</span> <span class="n">extra_argument</span>
+</pre></div>
+</div>
+<p>This function, like <code class="docutils literal"><span class="pre">my_third_function</span></code>, has two arguments, and we can call
+it the same way that we call <code class="docutils literal"><span class="pre">my_third_function</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_fourth_function</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="go">52</span>
+</pre></div>
+</div>
+<p>But, we can also omit the second argument, in which case it will get its
+default value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_fourth_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Pass one argument, get default for second</span>
+<span class="go">111</span>
+</pre></div>
+</div>
+<p>So far we have passed in arguments by position, the first argument in our call
+becoming the first argument in the function, and so on.  We can also pass in
+arguments by name.  For example, we could pass in <code class="docutils literal"><span class="pre">extra_argument</span></code> by giving
+the parameter name and value, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_fourth_function</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">extra_argument</span><span class="o">=</span><span class="mi">202</span><span class="p">)</span>
+<span class="go">212</span>
+</pre></div>
+</div>
+<p>Passing arguments this way can make the code easier to read, because it the
+name of the argument often gives a good clue as to its purpose in the
+function.  It can also be very useful with functions having many parameters
+with default values; in that case using the argument name makes it easier to
+pass in only one of many not-default values.</p>
 <p>Remember that everything in Python is an object. The function is itself an
 object, where the name of the function is a variable, that refers to the
 function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_third_function</span>
-<span class="go">&lt;function my_third_function at 0x...&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_fourth_function</span>
+<span class="go">&lt;function my_fourth_function at 0x...&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_third_function</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_fourth_function</span><span class="p">)</span>
 <span class="go">&lt;class &#39;function&#39;&gt;</span>
 </pre></div>
 </div>
 <p>We call the function by adding the open parenthesis followed by the arguments
 and the close parenthesis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_third_function</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
-<span class="go">52</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_fourth_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">111</span>
 </pre></div>
 </div>
 <p>We can make a new name to point to this same function as easily as we can
 could with any other Python variable:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">another_reference_to_func3</span> <span class="o">=</span> <span class="n">my_third_function</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">another_reference_to_func3</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">another_reference_to_func4</span> <span class="o">=</span> <span class="n">my_fourth_function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">another_reference_to_func4</span><span class="p">)</span>
 <span class="go">&lt;class &#39;function&#39;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># We call this function using the new name</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">another_reference_to_func3</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
-<span class="go">52</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">another_reference_to_func4</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">111</span>
 </pre></div>
 </div>
 </div>
@@ -811,18 +841,18 @@ when given an element, returns a <em>sort value</em> for that element. Python do
 the sorting, not on the elements themselves, but on the returned sort value
 for each element.</p>
 <p>For example, let&#8217;s say we have first and last names stored as tuples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">people</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;stefan&#39;</span><span class="p">,</span> <span class="s1">&#39;van der walt&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;brett&#39;</span><span class="p">)]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">people</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;JB&#39;</span><span class="p">,</span> <span class="s1">&#39;Poline&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;Brett&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Mark&#39;</span><span class="p">,</span> <span class="s1">&#39;DEsposito&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>By default, Python compares tuples by comparing the first value first, then
-the second value, and so on. Because <code class="docutils literal"><span class="pre">s</span></code> is later in the alphabet than
-<code class="docutils literal"><span class="pre">m</span></code>, this means that we are sorting on the first name:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;stefan&#39;</span><span class="p">,</span> <span class="s1">&#39;van der walt&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="s1">&#39;matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;brett&#39;</span><span class="p">)</span>
+the second value, and so on. This means for our case that we are sorting on
+the first name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;Matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;Brett&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="s1">&#39;Mark&#39;</span><span class="p">,</span> <span class="s1">&#39;DEsposito&#39;</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
-<span class="go">[(&#39;matthew&#39;, &#39;brett&#39;), (&#39;stefan&#39;, &#39;van der walt&#39;)]</span>
+<span class="go">[(&#39;JB&#39;, &#39;Poline&#39;), (&#39;Mark&#39;, &#39;DEsposito&#39;), (&#39;Matthew&#39;, &#39;Brett&#39;)]</span>
 </pre></div>
 </div>
 <p>That may not be what you want.  You might want to sort by the last name, which
@@ -841,7 +871,7 @@ is also an object, with name <code class="docutils literal"><span class="pre">ge
 </div>
 <p>We can pass this value to the <code class="docutils literal"><span class="pre">sorted</span></code> function as a sort function:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_last_name</span><span class="p">)</span>
-<span class="go">[(&#39;stefan&#39;, &#39;van der walt&#39;), (&#39;matthew&#39;, &#39;brett&#39;)]</span>
+<span class="go">[(&#39;Matthew&#39;, &#39;Brett&#39;), (&#39;Mark&#39;, &#39;DEsposito&#39;), (&#39;JB&#39;, &#39;Poline&#39;)]</span>
 </pre></div>
 </div>
 <p class="rubric">Footnotes</p>
@@ -917,7 +947,7 @@ behavior when dividing integers.</td></tr>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
