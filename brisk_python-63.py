@@ -1,2 +1,3 @@
-isinstance(my_tuple, collections.Sequence)
-# True
+# Length
+len(my_string)
+# 16

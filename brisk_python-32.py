@@ -1,3 +1,2 @@
-# Has a length
-len(my_list)
-# 5
+my_list
+# [9, 4, 7, 0, 8]

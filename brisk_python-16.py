@@ -1,2 +1,5 @@
-type(False)
-# <class 'bool'>
+a = 1
+a
+# 1
+a == 1
+# True

@@ -1,2 +1,3 @@
-my_list[:1:-1]
-# [42, 20, 8, 0]
+not_a_tuple = (1 + 5 + 3)
+not_a_tuple
+# 9

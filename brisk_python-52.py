@@ -1,3 +1,2 @@
-another_list = my_list[:]
-another_list
-# [9, 101, 0, 8, 20, 42]
+my_list[::-1]
+# [20, 8, 0, 999, 9]

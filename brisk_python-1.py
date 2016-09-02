@@ -1,3 +1,1 @@
-a = 99
-type(a)
-# <class 'int'>
+from __future__ import print_function, division

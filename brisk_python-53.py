@@ -1,3 +1,3 @@
-my_list[1] = 999
-another_list
-# [9, 101, 0, 8, 20, 42]
+my_tuple = (9, 4, 7, 0, 8)
+my_tuple
+# (9, 4, 7, 0, 8)

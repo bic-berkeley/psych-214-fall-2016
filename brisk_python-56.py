@@ -1,2 +1,3 @@
-my_list[4:1:-1]
-# [20, 8, 0]
+empty_tuple = ()
+empty_tuple
+# ()

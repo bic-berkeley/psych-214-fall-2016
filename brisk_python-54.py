@@ -1,2 +1,2 @@
-my_list[0:4:2]
-# [9, 0]
+# This raises a TypeError
+# my_tuple[1] = 99

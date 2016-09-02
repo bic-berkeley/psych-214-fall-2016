@@ -1,3 +1,5 @@
-my_tuple = (9, 4, 7, 0, 8)
-my_tuple
-# (9, 4, 7, 0, 8)
+another_string = "interesting text"
+another_string
+# 'interesting text'
+my_string == another_string
+# True

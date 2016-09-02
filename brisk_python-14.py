@@ -1,2 +1,4 @@
-5.0 % 2.0
-# 1.0
+type(None)
+# <class 'NoneType'>
+None == None
+# True

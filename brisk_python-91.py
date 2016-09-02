@@ -1,2 +1,2 @@
-software.values()  #doctest: +SKIP
-# dict_values([50, 100])
+type(my_third_function)
+# <class 'function'>

@@ -1,2 +1,3 @@
-my_list
-# [9, 999, 0, 8, 20, 42]
+two_tuple = (1, 5)
+two_tuple
+# (1, 5)

@@ -1,2 +1,2 @@
-# This is an empty dictionary
-software = {}
+my_function(10)
+# 11

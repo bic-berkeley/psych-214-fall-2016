@@ -1,3 +1,2 @@
-# Can be indexed
-my_list[1]
-# 4
+my_list[-3]
+# 7

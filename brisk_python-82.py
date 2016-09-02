@@ -1,2 +1,4 @@
-my_string + ' with added insight'
-# 'interesting text with added insight'
+for key_value in software.items():  #doctest: +SKIP
+    print(key_value)
+# ('MATLAB', 50)
+# ('Python', 100)

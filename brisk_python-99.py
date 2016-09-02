@@ -1,2 +1,2 @@
-my_function(10)
-# 11
+sorted(people)
+# [('matthew', 'brett'), ('stefan', 'van der walt')]

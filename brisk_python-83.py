@@ -1,4 +1,3 @@
-# Only unique elements collected in the set
-my_set = set((5, 3, 1, 3))
-my_set
-# {1, 3, 5}
+software = {'MATLAB': 50, 'Python': 100}
+software.items()  #doctest: +SKIP
+# dict_items([('MATLAB', 50), ('Python', 100)])

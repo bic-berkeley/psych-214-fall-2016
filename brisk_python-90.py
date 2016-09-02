@@ -1,3 +1,2 @@
-software['Python'] = 100
-software.keys()  #doctest: +SKIP
-# dict_keys(['MATLAB', 'Python'])
+my_third_function
+# <function my_third_function at 0x...>

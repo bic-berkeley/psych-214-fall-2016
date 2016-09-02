@@ -1,2 +1,3 @@
-my_list[::-1]
-# [42, 20, 8, 0, 999, 9]
+my_string = 'interesting text'
+my_string
+# 'interesting text'

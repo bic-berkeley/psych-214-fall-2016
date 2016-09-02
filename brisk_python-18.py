@@ -1,12 +1,8 @@
-True and True
-# True
-True and False
-# False
-True or False
-# True
-False or False
-# False
-not True
-# False
-True and not False
-# True
+my_var = 10
+if my_var == 10:
+    print("The conditional is True!")
+    print("my_var does equal 10")
+# The conditional is True!
+# my_var does equal 10
+print("Finished the conditional block")
+# Finished the conditional block

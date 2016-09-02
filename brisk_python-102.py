@@ -1,2 +1,2 @@
-my_third_function
-# <function my_third_function at 0x...>
+sorted(people, key=get_last_name)
+# [('stefan', 'van der walt'), ('matthew', 'brett')]

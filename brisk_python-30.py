@@ -1,2 +1,3 @@
-type(mixed_list)
-# <class 'list'>
+# Can be sliced
+my_list[0:2]
+# [9, 4]

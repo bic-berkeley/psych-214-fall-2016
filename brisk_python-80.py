@@ -1,3 +1,4 @@
-another_string = my_string.replace('interesting', 'extraordinary')
-another_string
-# 'extraordinary text'
+for key in software.keys():  #doctest: +SKIP
+    print(key)
+# MATLAB
+# Python

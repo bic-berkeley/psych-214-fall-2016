@@ -1,3 +1,2 @@
-empty_tuple = ()
-empty_tuple
-# ()
+# Raises a TypeError
+# my_string[1] = 'N'

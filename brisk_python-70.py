@@ -1,3 +1,2 @@
-not_a_tuple = (1 + 5 + 3)
-not_a_tuple
-# 9
+my_string + ' with added insight'
+# 'interesting text with added insight'

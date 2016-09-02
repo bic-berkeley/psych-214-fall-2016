@@ -1,2 +1,6 @@
-round(5 / 2)
-# 2
+True == False
+# False
+True == True
+# True
+False == False
+# True

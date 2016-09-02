@@ -1,6 +1,2 @@
-True == False
+a != 1
 # False
-True == True
-# True
-False == False
-# True

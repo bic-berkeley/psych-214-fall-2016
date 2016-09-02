@@ -1,2 +1,3 @@
-# This raises a TypeError
-# my_tuple[1] = 99
+# Can index
+my_string[1]
+# 'n'

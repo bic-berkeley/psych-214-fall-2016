@@ -1,3 +1,3 @@
-my_list[1] = 99
-my_list
-# [9, 99, 7, 0, 8]
+result = my_list.append(42)
+result == None
+# True

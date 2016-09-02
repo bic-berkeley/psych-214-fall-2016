@@ -1,2 +1,5 @@
-len(my_string)
-# 16
+for element in my_set:  # doctest: +SKIP
+    print(element)
+# 1
+# 3
+# 5

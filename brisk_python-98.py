@@ -1,2 +1,2 @@
-def my_function(an_argument):
-    return an_argument + 1
+('stefan', 'van der walt') > ('matthew', 'brett')
+# True

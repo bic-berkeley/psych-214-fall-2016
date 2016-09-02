@@ -1,3 +1,3 @@
-two_tuple = (1, 5)
-two_tuple
-# (1, 5)
+another_string = my_string.replace('interesting', 'extraordinary')
+another_string
+# 'extraordinary text'

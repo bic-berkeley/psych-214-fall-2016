@@ -1,3 +1,2 @@
-my_string = 'interesting text'
-my_string
-# 'interesting text'
+# Raises a TypeError
+# my_set[1]

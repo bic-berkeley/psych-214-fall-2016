@@ -1,2 +1,3 @@
-my_string[1:5]
-# 'nter'
+software['Python'] = 100
+software  #doctest: +SKIP
+# {'Python': 100, 'MATLAB': 50}

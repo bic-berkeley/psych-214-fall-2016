@@ -1,5 +1,2 @@
-def my_second_function():
-    return 42
-# ...
-my_second_function()
-# 42
+def get_last_name(person):
+    return person[1]  # The last name

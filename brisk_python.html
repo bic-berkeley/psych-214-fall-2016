@@ -47,14 +47,14 @@
 <div class="section" id="brisk-introduction-to-python">
 <h1>Brisk introduction to Python<a class="headerlink" href="#brisk-introduction-to-python" title="Permalink to this headline">¶</a></h1>
 <p>This is an introduction designed for those of us who already know a dynamic
-programming language fairly well, such as MATLAB.</p>
+programming language, such as MATLAB, fairly well.</p>
 <p>A first point that you will see recur throughout is: everything in Python is
-an object</p>
+an object.</p>
 <div class="section" id="numbers">
 <h2>Numbers<a class="headerlink" href="#numbers" title="Permalink to this headline">¶</a></h2>
-<p>There are two types of number in Python, integers, and floating point.
-In Python, an integer is an <em>object</em> of type <code class="docutils literal"><span class="pre">int</span></code>, and a float is an
-object of type <code class="docutils literal"><span class="pre">float</span></code>.</p>
+<p>There are two types of numbers in Python: integer and floating point.  In
+Python, an integer is an <em>object</em> of type <code class="docutils literal"><span class="pre">int</span></code>, and a float is an object of
+type <code class="docutils literal"><span class="pre">float</span></code>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">99</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">&lt;class &#39;int&#39;&gt;</span>
@@ -83,14 +83,8 @@ constructors:</p>
 </pre></div>
 </div>
 <p>Dividing an int by an int also gives a float – but this is only true by
-default for Python &gt;= 3:</p>
+default for Python &gt;= 3 (see <a class="footnote-reference" href="#py2-division" id="id1">[1]</a>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="go">0.5</span>
-</pre></div>
-</div>
-<p>If your code may run on Python 2, and you want division to return a float,
-force one of the arguments to be a float:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="go">0.5</span>
 </pre></div>
 </div>
@@ -104,7 +98,8 @@ force one of the arguments to be a float:</p>
 <span class="go">2</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">%</span></code> operator on numbers gives you the remainder:</p>
+<p>The <code class="docutils literal"><span class="pre">%</span></code> operator on numbers gives you the remainder of integer division
+(also known as the modulus):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="o">%</span> <span class="mi">2</span>
 <span class="go">1</span>
 </pre></div>
@@ -185,8 +180,8 @@ from e.g. MATLAB, which uses <code class="docutils literal"><span class="pre">~=
 </pre></div>
 </div>
 </div>
-<div class="section" id="if-and-indention">
-<h2>If and indention<a class="headerlink" href="#if-and-indention" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="if-blocks-and-indention">
+<h2>&#8220;If&#8221; blocks and indention<a class="headerlink" href="#if-blocks-and-indention" title="Permalink to this headline">¶</a></h2>
 <p>A conditional block in Python looks like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">my_var</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
@@ -272,10 +267,10 @@ contraction for <code class="docutils literal"><span class="pre">else</span> <sp
 <span class="go">&lt;class &#39;list&#39;&gt;</span>
 </pre></div>
 </div>
-<p>Lists are <em>sequences</em>. A sequence is type of Python object that has a
-defined element order, that has a length, is iterable, and can be
-indexed with integers, and sliced with slice definitions. So, if object
-<code class="docutils literal"><span class="pre">s</span></code> is a sequence, then:</p>
+<p>Lists are <em>sequences</em>. A sequence is type of Python object that has a defined
+element order, that has a length, is iterable, and can be indexed with
+integers, and sliced – as we will soon see. So, if object <code class="docutils literal"><span class="pre">s</span></code> is a
+sequence, then:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">s</span></code> has a length that can be found with <code class="docutils literal"><span class="pre">len(s)</span></code>;</li>
 <li>we can iterate over the elements in <code class="docutils literal"><span class="pre">s</span></code> with
@@ -284,12 +279,6 @@ indexed with integers, and sliced with slice definitions. So, if object
 <li>we can get another sequence by <em>slicing</em> <code class="docutils literal"><span class="pre">s</span></code> - e.g. <code class="docutils literal"><span class="pre">s[0:n]</span></code> will
 give a new sequence containing the first <code class="docutils literal"><span class="pre">n</span></code> elements of <code class="docutils literal"><span class="pre">s</span></code>.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># We check that our list is an instance of the type Sequence.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">collections</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">my_list</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Sequence</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Has a length</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
 <span class="go">5</span>
@@ -386,10 +375,17 @@ the list in-place. Python returns <code class="docutils literal"><span class="pr
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>You can remove elements from the list with <code class="docutils literal"><span class="pre">del</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<p>You can remove elements from the list with the <code class="docutils literal"><span class="pre">pop</span></code> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Remove and return the last element of the list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="go">42</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span>
-<span class="go">[9, 101, 0, 8, 20, 42]</span>
+<span class="go">[9, 101, 7, 0, 8, 20]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Remove and return the third element of the list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span>
+<span class="go">[9, 101, 0, 8, 20]</span>
 </pre></div>
 </div>
 <p>You can return slices from any sequence, including lists, by putting a slice
@@ -412,9 +408,9 @@ to, but not including</em> 3.</p>
 <p>If you omit the second number, Python assumes the length of the list as
 the stop index.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-<span class="go">[0, 8, 20, 42]</span>
+<span class="go">[0, 8, 20]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)]</span>
-<span class="go">[0, 8, 20, 42]</span>
+<span class="go">[0, 8, 20]</span>
 </pre></div>
 </div>
 <p>You can omit both numbers, in which case you return all the elements of the
@@ -422,14 +418,14 @@ list. This can be useful if you want to make another list that contains the
 same elements as the first:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">another_list</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">another_list</span>
-<span class="go">[9, 101, 0, 8, 20, 42]</span>
+<span class="go">[9, 101, 0, 8, 20]</span>
 </pre></div>
 </div>
 <p>Because this is a new list object, you can change the original list without
 changing the new list:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">another_list</span>
-<span class="go">[9, 101, 0, 8, 20, 42]</span>
+<span class="go">[9, 101, 0, 8, 20]</span>
 </pre></div>
 </div>
 <p>You can also specify a second colon, and a third number. This third
@@ -440,8 +436,10 @@ the list:</p>
 </pre></div>
 </div>
 <p>You can use negative numbers for the start and stop indices:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">[0, 8]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span>
+<span class="go">[9, 999, 0, 8, 20]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[999, 0]</span>
 </pre></div>
 </div>
 <p>Negative numbers for the step have the obvious meaning:</p>
@@ -453,19 +451,19 @@ the list:</p>
 the start index defaults to the last element in the list. If you don&#8217;t specify
 the stop index, it defaults to one below 0:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span>
-<span class="go">[9, 999, 0, 8, 20, 42]</span>
+<span class="go">[9, 999, 0, 8, 20]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">[42, 20, 8, 0]</span>
+<span class="go">[20, 8, 0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">[42, 20, 8, 0]</span>
+<span class="go">[20, 8, 0]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">[20, 8, 0, 999, 9]</span>
+<span class="go">[8, 0, 999, 9]</span>
 </pre></div>
 </div>
 <p>One consequence that is worth remembering is that the following idiom gives
 you a reversed copy of the list:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">[42, 20, 8, 0, 999, 9]</span>
+<span class="go">[20, 8, 0, 999, 9]</span>
 </pre></div>
 </div>
 </div>
@@ -477,12 +475,6 @@ elements.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_tuple</span>
 <span class="go">(9, 4, 7, 0, 8)</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Sequence</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">)</span>
-<span class="go">False</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This raises a TypeError</span>
@@ -623,6 +615,19 @@ reserves the right to order sets in any way it chooses:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># my_set[1]</span>
 </pre></div>
 </div>
+<p>You can add elements to a set with the <code class="docutils literal"><span class="pre">add</span></code> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span>  
+<span class="go">{1, 3, 5, 10}</span>
+</pre></div>
+</div>
+<p>Because set elements must be unique, if you add an element already in the set,
+this does not change the set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_set</span>  
+<span class="go">{1, 3, 5, 10}</span>
+</pre></div>
+</div>
 <p>You can iterate over a set, but the order of the elements is arbitrary, and
 you cannot rely on the same order in any two runs of your program:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">my_set</span><span class="p">:</span>  
@@ -637,38 +642,24 @@ you cannot rely on the same order in any two runs of your program:</p>
 </div>
 <div class="section" id="dictionaries">
 <h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
-<p>A dictionary is an unordered collection of key, value pairs. The <em>key</em> is
+<p>A dictionary is an unordered collection of key – value pairs. The <em>key</em> is
 something that identifies the element, and the <em>value</em> is the value
 corresponding to the particular key.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is an empty dictionary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">software</span> <span class="o">=</span> <span class="p">{}</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the keys</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">dict_keys([])</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-<span class="go">dict_values([])</span>
-</pre></div>
-</div>
-<p>Here we insert a new key, value mapping into the dictionary. The key is a
+<p>Here we insert a new key – value mapping into the dictionary. The key is a
 string – <code class="docutils literal"><span class="pre">MATLAB</span></code>, and the corresponding value is an integer 50:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="p">[</span><span class="s1">&#39;MATLAB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">dict_keys([&#39;MATLAB&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span>
+<span class="go">{&#39;MATLAB&#39;: 50}</span>
 </pre></div>
 </div>
-<p>We can insert another key, value mapping:</p>
+<p>We can insert another key – value mapping:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>  
-<span class="go">dict_keys([&#39;MATLAB&#39;, &#39;Python&#39;])</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>  
-<span class="go">dict_values([50, 100])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span>  
+<span class="go">{&#39;Python&#39;: 100, &#39;MATLAB&#39;: 50}</span>
 </pre></div>
 </div>
 <p>We can get the value corresponding to a key by indexing the dictionary
@@ -695,24 +686,24 @@ order is arbitrary:</p>
 </div>
 <p>50
 100</p>
-<p>We can use the <code class="docutils literal"><span class="pre">items</span></code> method to iterate over the key, value pairs. In
-this case each element is a tuple of length two, where the first element
-is the key and the second element is the value:</p>
+<p>We can use the <code class="docutils literal"><span class="pre">items</span></code> method to iterate over the key – value pairs. In
+this case each element is a tuple of length two, where the first element is
+the key and the second element is the value:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key_value</span> <span class="ow">in</span> <span class="n">software</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>  
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">key_value</span><span class="p">)</span>
 <span class="go">(&#39;MATLAB&#39;, 50)</span>
 <span class="go">(&#39;Python&#39;, 100)</span>
 </pre></div>
 </div>
-<p>You can construct a dictionary with curly brackets, commas between the
-key, value pairs, and colons separating the key and value:</p>
+<p>You can construct a dictionary with curly brackets, commas between the key
+– value pairs, and colons separating the key and value:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MATLAB&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  
 <span class="go">dict_items([(&#39;MATLAB&#39;, 50), (&#39;Python&#39;, 100)])</span>
 </pre></div>
 </div>
-<p>Keys must be unique. A later key, value pair will overwrite an earlier key,
-value pair that had the same key:</p>
+<p>Keys must be unique. A later key – value pair will overwrite an earlier key
+– value pair that had the same key:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MATLAB&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;MATLAB&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  
 <span class="go">dict_items([(&#39;MATLAB&#39;, 45), (&#39;Python&#39;, 100)])</span>
@@ -819,47 +810,52 @@ comparing the elements. If so, then you can define a <em>sort function</em>, tha
 when given an element, returns a <em>sort value</em> for that element. Python does
 the sorting, not on the elements themselves, but on the returned sort value
 for each element.</p>
-<p>For example, let&#8217;s say you have three tuples that you want to sort:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tuples</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+<p>For example, let&#8217;s say we have first and last names stored as tuples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">people</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;stefan&#39;</span><span class="p">,</span> <span class="s1">&#39;van der walt&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;brett&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>By default, Python compares tuples by comparing the first value first, then
-the second value, and so on. Because <code class="docutils literal"><span class="pre">c</span></code> is later in the alphabet than
-<code class="docutils literal"><span class="pre">b</span></code>, this means that:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+the second value, and so on. Because <code class="docutils literal"><span class="pre">s</span></code> is later in the alphabet than
+<code class="docutils literal"><span class="pre">m</span></code>, this means that we are sorting on the first name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;stefan&#39;</span><span class="p">,</span> <span class="s1">&#39;van der walt&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="s1">&#39;matthew&#39;</span><span class="p">,</span> <span class="s1">&#39;brett&#39;</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span>
-<span class="go">[(&#39;b&#39;, 14), (&#39;c&#39;, 12), (&#39;d&#39;, 13)]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">)</span>
+<span class="go">[(&#39;matthew&#39;, &#39;brett&#39;), (&#39;stefan&#39;, &#39;van der walt&#39;)]</span>
 </pre></div>
 </div>
-<p>That may not be what you want.  You might want to sort by the second value in
-the tuples, the numbers, rather than the first values - the strings. In that
-case you can make a sort function, that accepts the element as an input (the
-tuple in this case), and returns a value:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">by_number</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="c1"># The value we will return for this element</span>
-<span class="gp">... </span>    <span class="n">value</span> <span class="o">=</span> <span class="n">element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="gp">... </span>    <span class="c1"># Show the value we will return</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Returning sort value&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="s1">&#39;for element&#39;</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">value</span>
+<p>That may not be what you want.  You might want to sort by the last name, which
+is the second value in the tuple.  In that case you can make a sort function,
+that accepts the element as an input (the tuple in this case), and returns a
+value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">get_last_name</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">person</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># The last name</span>
 </pre></div>
 </div>
 <p>Remember everything in Python is an object. The function we have just defined
-is also an object, with name <code class="docutils literal"><span class="pre">by_number</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">by_number</span>
-<span class="go">&lt;function by_number at 0x...&gt;</span>
+is also an object, with name <code class="docutils literal"><span class="pre">get_last_name</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_last_name</span>
+<span class="go">&lt;function get_last_name at 0x...&gt;</span>
 </pre></div>
 </div>
 <p>We can pass this value to the <code class="docutils literal"><span class="pre">sorted</span></code> function as a sort function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">by_number</span><span class="p">)</span>
-<span class="go">Returning sort value 12 for element (&#39;c&#39;, 12)</span>
-<span class="go">Returning sort value 13 for element (&#39;d&#39;, 13)</span>
-<span class="go">Returning sort value 14 for element (&#39;b&#39;, 14)</span>
-<span class="go">[(&#39;c&#39;, 12), (&#39;d&#39;, 13), (&#39;b&#39;, 14)]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">get_last_name</span><span class="p">)</span>
+<span class="go">[(&#39;stefan&#39;, &#39;van der walt&#39;), (&#39;matthew&#39;, &#39;brett&#39;)]</span>
 </pre></div>
 </div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="py2-division" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Python 3 returns a floating point value from dividing two
+integers, but the default for Python 2 is to return the integer part of the
+division.  Thus, in Python 2, <code class="docutils literal"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">//</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code>. If your code may
+run on Python 2, remember to add the statement <code class="docutils literal"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span>
+<span class="pre">division</span></code> at the top of your code files, to make sure you get the Python 3
+behavior when dividing integers.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -876,7 +872,7 @@ is also an object, with name <code class="docutils literal"><span class="pre">by
 <li><a class="reference internal" href="#true-and-false">True and False</a></li>
 <li><a class="reference internal" href="#none">None</a></li>
 <li><a class="reference internal" href="#equals">Equals</a></li>
-<li><a class="reference internal" href="#if-and-indention">If and indention</a></li>
+<li><a class="reference internal" href="#if-blocks-and-indention">&#8220;If&#8221; blocks and indention</a></li>
 <li><a class="reference internal" href="#lists">Lists</a></li>
 <li><a class="reference internal" href="#tuples">Tuples</a></li>
 <li><a class="reference internal" href="#strings">Strings</a></li>

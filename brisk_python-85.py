@@ -1,5 +1,2 @@
-for element in my_set:
-    print(element)
-# 1
-# 3
-# 5
+def my_function(an_argument):
+    return an_argument + 1

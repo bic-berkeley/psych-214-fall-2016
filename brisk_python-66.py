@@ -1,2 +1,3 @@
-# This raises an AttributeError, because tuples have no append method
-# my_tuple.append(20)
+# Can slice
+my_string[1:5]
+# 'nter'

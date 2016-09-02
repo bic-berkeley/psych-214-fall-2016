@@ -3,18 +3,24 @@ Brisk introduction to Python
 ############################
 
 This is an introduction designed for those of us who already know a dynamic
-programming language fairly well, such as MATLAB.
+programming language, such as MATLAB, fairly well.
 
 A first point that you will see recur throughout is: everything in Python is
-an object
+an object.
+
+
+.. nbplot::
+    :include-source: false
+
+    from __future__ import print_function, division
 
 *******
 Numbers
 *******
 
-There are two types of number in Python, integers, and floating point.
-In Python, an integer is an *object* of type ``int``, and a float is an
-object of type ``float``.
+There are two types of numbers in Python: integer and floating point.  In
+Python, an integer is an *object* of type ``int``, and a float is an object of
+type ``float``.
 
 .. nbplot::
 
@@ -49,19 +55,11 @@ constructors:
     9801.0
 
 Dividing an int by an int also gives a float |--| but this is only true by
-default for Python >= 3:
+default for Python >= 3 (see [#py2-division]_):
 
 .. nbplot::
 
     >>> 1 / 2
-    0.5
-
-If your code may run on Python 2, and you want division to return a float,
-force one of the arguments to be a float:
-
-.. nbplot::
-
-    >>> 1 / float(2)
     0.5
 
 If you only want the integer result of the division, use ``//``
@@ -78,7 +76,8 @@ Python has built-in function called ``round``:
     >>> round(5 / 2)
     2
 
-The ``%`` operator on numbers gives you the remainder:
+The ``%`` operator on numbers gives you the remainder of integer division
+(also known as the modulus):
 
 .. nbplot::
 
@@ -178,9 +177,9 @@ from e.g. MATLAB, which uses ``~=``:
     >>> a != 1
     False
 
-****************
-If and indention
-****************
+*************************
+"If" blocks and indention
+*************************
 
 A conditional block in Python looks like this:
 
@@ -283,10 +282,10 @@ A list element can be any type of object, including another list:
     >>> type(mixed_list)
     <class 'list'>
 
-Lists are *sequences*. A sequence is type of Python object that has a
-defined element order, that has a length, is iterable, and can be
-indexed with integers, and sliced with slice definitions. So, if object
-``s`` is a sequence, then:
+Lists are *sequences*. A sequence is type of Python object that has a defined
+element order, that has a length, is iterable, and can be indexed with
+integers, and sliced |--| as we will soon see. So, if object ``s`` is a
+sequence, then:
 
 -  ``s`` has a length that can be found with ``len(s)``;
 -  we can iterate over the elements in ``s`` with
@@ -296,6 +295,7 @@ indexed with integers, and sliced with slice definitions. So, if object
    give a new sequence containing the first ``n`` elements of ``s``.
 
 .. nbplot::
+    :include-source: false
 
     >>> # We check that our list is an instance of the type Sequence.
     >>> import collections
@@ -424,13 +424,20 @@ the list in-place. Python returns ``None`` from the ``append`` method:
     >>> result == None
     True
 
-You can remove elements from the list with ``del``:
+You can remove elements from the list with the ``pop`` method:
 
 .. nbplot::
 
-    >>> del my_list[2]
+    >>> # Remove and return the last element of the list
+    >>> my_list.pop()
+    42
     >>> my_list
-    [9, 101, 0, 8, 20, 42]
+    [9, 101, 7, 0, 8, 20]
+    >>> # Remove and return the third element of the list
+    >>> my_list.pop(2)
+    7
+    >>> my_list
+    [9, 101, 0, 8, 20]
 
 You can return slices from any sequence, including lists, by putting a slice
 specifier in square brackets. For example, this returns the first 3 elements
@@ -460,9 +467,9 @@ the stop index.
 .. nbplot::
 
     >>> my_list[2:]
-    [0, 8, 20, 42]
+    [0, 8, 20]
     >>> my_list[2:len(my_list)]
-    [0, 8, 20, 42]
+    [0, 8, 20]
 
 You can omit both numbers, in which case you return all the elements of the
 list. This can be useful if you want to make another list that contains the
@@ -472,7 +479,7 @@ same elements as the first:
 
     >>> another_list = my_list[:]
     >>> another_list
-    [9, 101, 0, 8, 20, 42]
+    [9, 101, 0, 8, 20]
 
 Because this is a new list object, you can change the original list without
 changing the new list:
@@ -481,7 +488,7 @@ changing the new list:
 
     >>> my_list[1] = 999
     >>> another_list
-    [9, 101, 0, 8, 20, 42]
+    [9, 101, 0, 8, 20]
 
 You can also specify a second colon, and a third number. This third
 number is the *step size*. For example, to get every second element of
@@ -496,8 +503,10 @@ You can use negative numbers for the start and stop indices:
 
 .. nbplot::
 
+    >>> my_list
+    [9, 999, 0, 8, 20]
     >>> my_list[-4:-2]
-    [0, 8]
+    [999, 0]
 
 Negative numbers for the step have the obvious meaning:
 
@@ -513,13 +522,13 @@ the stop index, it defaults to one below 0:
 .. nbplot::
 
     >>> my_list
-    [9, 999, 0, 8, 20, 42]
+    [9, 999, 0, 8, 20]
     >>> my_list[-1:1:-1]
-    [42, 20, 8, 0]
+    [20, 8, 0]
     >>> my_list[:1:-1]
-    [42, 20, 8, 0]
+    [20, 8, 0]
     >>> my_list[-2::-1]
-    [20, 8, 0, 999, 9]
+    [8, 0, 999, 9]
 
 One consequence that is worth remembering is that the following idiom gives
 you a reversed copy of the list:
@@ -527,7 +536,7 @@ you a reversed copy of the list:
 .. nbplot::
 
     >>> my_list[::-1]
-    [42, 20, 8, 0, 999, 9]
+    [20, 8, 0, 999, 9]
 
 ******
 Tuples
@@ -542,13 +551,6 @@ elements.
     >>> my_tuple = (9, 4, 7, 0, 8)
     >>> my_tuple
     (9, 4, 7, 0, 8)
-
-.. nbplot::
-
-    >>> isinstance(my_tuple, collections.Sequence)
-    True
-    >>> isinstance(my_tuple, collections.MutableSequence)
-    False
 
 .. nbplot::
 
@@ -725,6 +727,23 @@ Because there is no defined order, you cannot index into a set:
     >>> # Raises a TypeError
     >>> # my_set[1]
 
+You can add elements to a set with the ``add`` method:
+
+.. nbplot::
+
+    >>> my_set.add(10)
+    >>> my_set  # doctest: +SKIP
+    {1, 3, 5, 10}
+
+Because set elements must be unique, if you add an element already in the set,
+this does not change the set:
+
+.. nbplot::
+
+    >>> my_set.add(5)
+    >>> my_set  # doctest: +SKIP
+    {1, 3, 5, 10}
+
 You can iterate over a set, but the order of the elements is arbitrary, and
 you cannot rely on the same order in any two runs of your program:
 
@@ -743,7 +762,7 @@ Look at the methods of the set object for interesting operations such as
 Dictionaries
 ************
 
-A dictionary is an unordered collection of key, value pairs. The *key* is
+A dictionary is an unordered collection of key |--| value pairs. The *key* is
 something that identifies the element, and the *value* is the value
 corresponding to the particular key.
 
@@ -752,39 +771,22 @@ corresponding to the particular key.
     >>> # This is an empty dictionary
     >>> software = {}
 
-.. nbplot::
-
-    >>> # Show the keys
-    >>> software.keys()
-    dict_keys([])
-
-.. nbplot::
-
-    >>> # Show the values
-    >>> software.values()
-    dict_values([])
-
-Here we insert a new key, value mapping into the dictionary. The key is a
+Here we insert a new key |--| value mapping into the dictionary. The key is a
 string |--| ``MATLAB``, and the corresponding value is an integer 50:
 
 .. nbplot::
 
     >>> software['MATLAB'] = 50
-    >>> software.keys()
-    dict_keys(['MATLAB'])
+    >>> software
+    {'MATLAB': 50}
 
-We can insert another key, value mapping:
+We can insert another key |--| value mapping:
 
 .. nbplot::
 
     >>> software['Python'] = 100
-    >>> software.keys()  #doctest: +SKIP
-    dict_keys(['MATLAB', 'Python'])
-
-.. nbplot::
-
-    >>> software.values()  #doctest: +SKIP
-    dict_values([50, 100])
+    >>> software  #doctest: +SKIP
+    {'Python': 100, 'MATLAB': 50}
 
 We can get the value corresponding to a key by indexing the dictionary
 with the key:
@@ -817,9 +819,9 @@ order is arbitrary:
     50
     100
 
-We can use the ``items`` method to iterate over the key, value pairs. In
-this case each element is a tuple of length two, where the first element
-is the key and the second element is the value:
+We can use the ``items`` method to iterate over the key |--| value pairs. In
+this case each element is a tuple of length two, where the first element is
+the key and the second element is the value:
 
 .. nbplot::
 
@@ -828,8 +830,8 @@ is the key and the second element is the value:
     ('MATLAB', 50)
     ('Python', 100)
 
-You can construct a dictionary with curly brackets, commas between the
-key, value pairs, and colons separating the key and value:
+You can construct a dictionary with curly brackets, commas between the key
+|--| value pairs, and colons separating the key and value:
 
 .. nbplot::
 
@@ -837,8 +839,8 @@ key, value pairs, and colons separating the key and value:
     >>> software.items()  #doctest: +SKIP
     dict_items([('MATLAB', 50), ('Python', 100)])
 
-Keys must be unique. A later key, value pair will overwrite an earlier key,
-value pair that had the same key:
+Keys must be unique. A later key |--| value pair will overwrite an earlier key
+|--| value pair that had the same key:
 
 .. nbplot::
 
@@ -973,54 +975,56 @@ when given an element, returns a *sort value* for that element. Python does
 the sorting, not on the elements themselves, but on the returned sort value
 for each element.
 
-For example, let's say you have three tuples that you want to sort:
+For example, let's say we have first and last names stored as tuples:
 
 .. nbplot::
 
-    >>> tuples = (('c', 12), ('d', 13), ('b', 14))
+    >>> people = [('stefan', 'van der walt'), ('matthew', 'brett')]
 
 By default, Python compares tuples by comparing the first value first, then
-the second value, and so on. Because ``c`` is later in the alphabet than
-``b``, this means that:
+the second value, and so on. Because ``s`` is later in the alphabet than
+``m``, this means that we are sorting on the first name:
 
 .. nbplot::
 
-    >>> ('c', 12) > ('b', 14)
+    >>> ('stefan', 'van der walt') > ('matthew', 'brett')
     True
 
 .. nbplot::
 
-    >>> sorted(tuples)
-    [('b', 14), ('c', 12), ('d', 13)]
+    >>> sorted(people)
+    [('matthew', 'brett'), ('stefan', 'van der walt')]
 
-That may not be what you want.  You might want to sort by the second value in
-the tuples, the numbers, rather than the first values - the strings. In that
-case you can make a sort function, that accepts the element as an input (the
-tuple in this case), and returns a value:
+That may not be what you want.  You might want to sort by the last name, which
+is the second value in the tuple.  In that case you can make a sort function,
+that accepts the element as an input (the tuple in this case), and returns a
+value:
 
 .. nbplot::
 
-    >>> def by_number(element):
-    ...     # The value we will return for this element
-    ...     value = element[1]
-    ...     # Show the value we will return
-    ...     print('Returning sort value', value, 'for element', element)
-    ...     return value
+    >>> def get_last_name(person):
+    ...     return person[1]  # The last name
 
 Remember everything in Python is an object. The function we have just defined
-is also an object, with name ``by_number``:
+is also an object, with name ``get_last_name``:
 
 .. nbplot::
 
-    >>> by_number
-    <function by_number at 0x...>
+    >>> get_last_name
+    <function get_last_name at 0x...>
 
 We can pass this value to the ``sorted`` function as a sort function:
 
 .. nbplot::
 
-    >>> sorted(tuples, key=by_number)
-    Returning sort value 12 for element ('c', 12)
-    Returning sort value 13 for element ('d', 13)
-    Returning sort value 14 for element ('b', 14)
-    [('c', 12), ('d', 13), ('b', 14)]
+    >>> sorted(people, key=get_last_name)
+    [('stefan', 'van der walt'), ('matthew', 'brett')]
+
+.. rubric:: Footnotes
+
+.. [#py2-division] Python 3 returns a floating point value from dividing two
+   integers, but the default for Python 2 is to return the integer part of the
+   division.  Thus, in Python 2, ``1 / 2 == 1 // 2 == 0``. If your code may
+   run on Python 2, remember to add the statement ``from __future__ import
+   division`` at the top of your code files, to make sure you get the Python 3
+   behavior when dividing integers.

@@ -1,2 +1,2 @@
-1 // 2
-# 0
+type(False)
+# <class 'bool'>

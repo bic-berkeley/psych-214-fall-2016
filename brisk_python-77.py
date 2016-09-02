@@ -1,2 +1,3 @@
-my_string[1]
-# 'n'
+software['MATLAB'] = 50
+software
+# {'MATLAB': 50}
