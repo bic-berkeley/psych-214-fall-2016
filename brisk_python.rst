@@ -259,6 +259,31 @@ contraction for ``else if``:
     The third conditional is True!
     my_var does equal 12
 
+******************
+"While" statements
+******************
+
+``while`` statements are another example with an initial test followed by an
+indented block.   Here's an example where we find the largest factorial less
+than 100:
+
+.. nbplot::
+
+    >>> current = 1
+    >>> factorial = 1
+    >>> while factorial < 1000:
+    ...     last_factorial = factorial
+    ...     factorial = last_factorial * current
+    ...     current += 1
+    ...
+    >>> print("Largest factorial < 1000 is", last_factorial)
+    Largest factorial < 1000 is 720
+
+Notice the initial *while test*: ``while factorial < 1000:``, followed by the
+indented *while block*.  Unlike the "if" statement, Python will continue to
+run the statements in the *while block* until the conditional in the *while
+test* evaluates to False.
+
 *****
 Lists
 *****
@@ -334,9 +359,6 @@ line ending in a colon, followed by an indented block.
     >>> # Can be indexed
     >>> my_list[1]
     4
-
-.. nbplot::
-
     >>> # Can be sliced
     >>> my_list[0:2]
     [9, 4]
@@ -667,8 +689,6 @@ can slice).
     >>> len(my_string)
     16
 
-.. nbplot::
-
     >>> # Iterable
     >>> for c in my_string:
     ...     print(c)
@@ -689,13 +709,9 @@ can slice).
     x
     t
 
-.. nbplot::
-
     >>> # Can index
     >>> my_string[1]
     'n'
-
-.. nbplot::
 
     >>> # Can slice
     >>> my_string[1:5]
@@ -736,6 +752,70 @@ You can add strings:
 
     >>> my_string + ' with added insight'
     'interesting text with added insight'
+
+Convert other objects to strings using ``str``:
+
+.. nbplot::
+
+    >>> # Convert integer to string
+    >>> str(9)
+    '9'
+    >>> # Convert floating point value to string
+    >>> str(1.2)
+    '1.2'
+
+******
+Ranges
+******
+
+``range`` in Python 3 returns a *range object*.  It is a sequence, and so it
+is rather like a list [#py2-range]_:
+
+.. nbplot::
+
+    >>> my_range = range(5)
+    >>> my_range
+    range(0, 5)
+    >>> len(my_range)
+    5
+    >>> for e in my_range:
+    ...    print(e)
+    0
+    1
+    2
+    3
+    4
+    >>> my_range[1]
+    1
+    >>> my_range[0:2]
+    range(0, 2)
+
+You can make a range object into a list by using ``list``:
+
+.. nbplot::
+
+    >>> list(range(10))
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+You can set the start element for ``range`` by passing two arguments:
+
+.. nbplot::
+
+    >>> my_range = range(1, 7)
+    >>> my_range
+    range(1, 7)
+    >>> list(my_range)
+    [1, 2, 3, 4, 5, 6]
+
+You can set the step size with a third argument:
+
+.. nbplot::
+
+    >>> my_range = range(1, 7, 2)
+    >>> my_range
+    range(1, 7, 2)
+    >>> list(my_range)
+    [1, 3, 5]
 
 ****
 Sets
@@ -1183,3 +1263,9 @@ the file again to show this in action:
    run on Python 2, remember to add the statement ``from __future__ import
    division`` at the top of your code files, to make sure you get the Python 3
    behavior when dividing integers.
+
+.. [#py2-range] In Python 2, ``range`` returns a list.  You can often use a
+   Python 3 range object in the same way you could use a list, so this often
+   doesn't matter for the person using the code, but it is a difference you
+   might have to take into account when writing code that runs on Python 2 as
+   well as Python 3.
