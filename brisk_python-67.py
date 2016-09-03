@@ -1,2 +1,3 @@
-# Raises a TypeError
-# my_string[1] = 'N'
+another_string = my_string.replace('interesting', 'extraordinary')
+another_string
+# 'extraordinary text'

@@ -1,2 +1,2 @@
-type(my_third_function)
-# <class 'function'>
+my_fourth_function(10, extra_argument=202)
+# 212

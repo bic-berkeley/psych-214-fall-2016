@@ -1,4 +1,3 @@
-for key_value in software.items():  #doctest: +SKIP
-    print(key_value)
-# ('MATLAB', 50)
-# ('Python', 100)
+my_set.add(5)
+my_set  # doctest: +SKIP
+# {1, 3, 5, 10}

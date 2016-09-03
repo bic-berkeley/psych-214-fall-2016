@@ -1,2 +1,3 @@
-# Raises a TypeError
-# my_set[1]
+shepherd = "Mary"
+print("Shepherd {} is on duty.".format(shepherd))
+# Shepherd Mary is on duty.

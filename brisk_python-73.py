@@ -1,3 +1,4 @@
-my_set.add(10)
-my_set  # doctest: +SKIP
-# {1, 3, 5, 10}
+shepherd = "Mary"
+age = 32
+print("Shepherd {} is {} years old.".format(shepherd, age))
+# Shepherd Mary is 32 years old.

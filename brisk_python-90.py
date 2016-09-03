@@ -1,2 +1,4 @@
-my_third_function
-# <function my_third_function at 0x...>
+for key_value in software.items():  #doctest: +SKIP
+    print(key_value)
+# ('MATLAB', 50)
+# ('Python', 100)

@@ -1,3 +1,5 @@
-software['Python'] = 100
-software  #doctest: +SKIP
-# {'Python': 100, 'MATLAB': 50}
+my_range = range(1, 7, 2)
+my_range
+# range(1, 7, 2)
+list(my_range)
+# [1, 3, 5]

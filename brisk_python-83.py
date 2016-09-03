@@ -1,3 +1,5 @@
-software = {'MATLAB': 50, 'Python': 100}
-software.items()  #doctest: +SKIP
-# dict_items([('MATLAB', 50), ('Python', 100)])
+for element in my_set:  # doctest: +SKIP
+    print(element)
+# 1
+# 3
+# 5

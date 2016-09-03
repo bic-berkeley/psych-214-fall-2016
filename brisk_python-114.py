@@ -1,2 +1,2 @@
-by_number
-# <function by_number at 0x...>
+def get_last_name(person):
+    return person[1]  # The last name

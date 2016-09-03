@@ -1,2 +1,1 @@
-('c', 12) > ('b', 14)
-# True
+people = [('JB', 'Poline'), ('Matthew', 'Brett'), ('Mark', 'DEsposito')]

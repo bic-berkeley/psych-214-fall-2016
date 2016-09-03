@@ -1,2 +1,3 @@
-my_string + ' with added insight'
-# 'interesting text with added insight'
+another_example = 'one:two:three'
+another_example.split(":")
+# ['one', 'two', 'three']

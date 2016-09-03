@@ -1,3 +1,2 @@
-my_list[1] = 101
-another_list
-# [9, 101, 7, 0, 8]
+my_list.append
+# <built-in method append of list object at 0x...>

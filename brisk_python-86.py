@@ -1,2 +1,3 @@
-my_function(10)
-# 11
+software['Python'] = 100
+software  #doctest: +SKIP
+# {'Python': 100, 'MATLAB': 50}

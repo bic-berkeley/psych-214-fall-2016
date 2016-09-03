@@ -1,4 +1,2 @@
-for key in software.keys():  #doctest: +SKIP
-    print(key)
-# MATLAB
-# Python
+# Raises a TypeError
+# my_set[1]

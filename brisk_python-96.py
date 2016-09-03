@@ -1,2 +1,2 @@
-3 < 5
-# True
+my_function(10)
+# 11

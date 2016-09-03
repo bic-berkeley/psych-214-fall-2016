@@ -1,2 +1,3 @@
-type(my_list)
-# <class 'list'>
+my_list = [9, 4, 7, 0, 8]
+my_list
+# [9, 4, 7, 0, 8]

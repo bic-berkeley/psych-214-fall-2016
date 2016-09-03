@@ -1,3 +1,2 @@
-my_set.add(5)
-my_set  # doctest: +SKIP
-# {1, 3, 5, 10}
+print("Number {:03d} is here.".format(11))
+# Number 011 is here.

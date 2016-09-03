@@ -1,3 +1,2 @@
-# Can index
-my_string[1]
-# 'n'
+# Raises a TypeError
+# my_string[1] = 'N'

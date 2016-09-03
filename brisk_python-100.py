@@ -1,2 +1,2 @@
-def get_last_name(person):
-    return person[1]  # The last name
+def my_fourth_function(first_argument, extra_argument=101):
+    return first_argument + extra_argument

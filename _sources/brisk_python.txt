@@ -2,11 +2,11 @@
 Brisk introduction to Python
 ############################
 
-This is an introduction designed for those of us who already know a dynamic
-programming language, such as MATLAB, fairly well.
-
-A first point that you will see recur throughout is: everything in Python is
-an object.
+This is an introduction designed for those of us who already know a `dynamic
+programming language
+<https://en.wikipedia.org/wiki/Dynamic_programming_language>`_ fairly well.
+MATLAB and R are `examples of dynamic programming languages
+<https://en.wikipedia.org/wiki/Dynamic_programming_language#Examples_of_Dynamic_Programming_Languages>`_.
 
 .. testsetup::
 
@@ -172,7 +172,7 @@ As for MATLAB, ``=`` is for assignment, ``==`` is for testing equality.
     >>> a == 1
     True
 
-Python uses ``!=`` for testing that objects are not equal. This is different
+Python uses ``!=`` for testing that objects are *not* equal. This is different
 from e.g. MATLAB, which uses ``~=``:
 
 .. nbplot::
@@ -196,10 +196,10 @@ A conditional statement in Python looks like this:
     The conditional is True!
     my_var does equal 10
 
-Note that the first line of the conditional statement, that contains the
-conditional test, ends in a colon.  Call this the *if test*.  There follow
-some lines *indented* relative to *if test*.  Call these indented lines the
-*if block*.  Python executes the statements in the *if block* only if the *if
+The first line of the conditional statement, that contains the conditional
+test, ends in a colon.  Call this the *if test*.  There follow some lines
+*indented* relative to the *if test*.  Call these indented lines the *if
+block*.  Python executes the statements in the *if block* only if the *if
 test* evaluates to True.
 
 .. nbplot::
@@ -259,6 +259,31 @@ contraction for ``else if``:
     The third conditional is True!
     my_var does equal 12
 
+******************
+"While" statements
+******************
+
+``while`` statements are another example with an initial test followed by an
+indented block.   Here's an example where we find the largest `Fibonacci
+number <https://en.wikipedia.org/wiki/Fibonacci_number>`_ less than 1000:
+
+.. nbplot::
+
+    >>> last_but_1 = 0
+    >>> fibonacci = 1
+    >>> while fibonacci < 1000:
+    ...     last_but_2 = last_but_1
+    ...     last_but_1 = fibonacci
+    ...     fibonacci = last_but_2 + last_but_1
+    ...
+    >>> print("Largest Fibonacci < 1000 is", last_but_1)
+    Largest Fibonacci < 1000 is 987
+
+Notice the initial *while test*: ``while fibonacci < 1000:``, followed by the
+indented *while block*.  Unlike the "if" statement, Python will continue to
+run the statements in the *while block* until the conditional in the *while
+test* evaluates to False.
+
 *****
 Lists
 *****
@@ -289,17 +314,19 @@ A list element can be any type of object, including another list:
     >>> type(mixed_list)
     <class 'list'>
 
-Lists are *sequences*. A sequence is type of Python object that has a defined
-element order, that has a length, is iterable, and can be indexed with
-integers, and sliced |--| as we will soon see. So, if object ``s`` is a
-sequence, then:
+Lists are sequences
+===================
 
--  ``s`` has a length that can be found with ``len(s)``;
--  we can iterate over the elements in ``s`` with
-   ``for element in s: # do something with element``;
--  we can return the element at position ``n`` with ``s[n]``;
--  we can get another sequence by *slicing* ``s`` - e.g. ``s[0:n]`` will
-   give a new sequence containing the first ``n`` elements of ``s``.
+A sequence is type of Python object that has a defined element order, has a
+length, is iterable, can be indexed with integers, and *sliced* (see below).
+So, if object ``s`` is a sequence, then:
+
+* ``s`` has a length that can be found with ``len(s)``;
+* we can iterate over the elements in ``s`` with ``for element in s: # do
+  something with element``;
+* we can return the element at position ``n`` with ``s[n]``;
+* we can get another sequence by *slicing* ``s``.  For example, ``s[0:n]``
+  will give a new sequence containing the first ``n`` elements of ``s``.
 
 .. nbplot::
     :include-source: false
@@ -334,20 +361,25 @@ line ending in a colon, followed by an indented block.
     >>> # Can be indexed
     >>> my_list[1]
     4
-
-.. nbplot::
-
     >>> # Can be sliced
     >>> my_list[0:2]
     [9, 4]
 
-Notice that Python indices are 0-based. That means that the first
-element is at index 0, the second element is at index 1, and so on:
+Python indices are 0-based
+==========================
+
+Indices for Python sequences start at 0.  For Python, the first element is at
+index 0, the second element is at index 1, and so on:
 
 .. nbplot::
 
     >>> my_list[0]
     9
+    >>> my_list[1]
+    4
+
+Negative indices
+================
 
 Negative numbers as indices count back from the end of the list. For
 example, use index ``-1`` to return the last element in the list:
@@ -356,9 +388,6 @@ example, use index ``-1`` to return the last element in the list:
 
     >>> my_list
     [9, 4, 7, 0, 8]
-
-.. nbplot::
-
     >>> my_list[-1]
     8
 
@@ -369,7 +398,10 @@ This is the third from last element:
     >>> my_list[-3]
     7
 
-A list is also *mutable*. Mutable means, that we can change the elements
+Lists are mutable
+=================
+
+A list is a *mutable* object. Mutable means, that we can change the elements
 in the list, without creating a new list.
 
 .. nbplot::
@@ -402,6 +434,9 @@ and ``another_list`` point at the same list.
     >>> another_list
     [9, 101, 7, 0, 8]
 
+Adding lists
+============
+
 Adding two lists with ``+`` returns a new list that is the concatenation of
 the two lists:
 
@@ -409,6 +444,9 @@ the two lists:
 
     >>> my_list + [False, 1, 2]
     [9, 101, 7, 0, 8, False, 1, 2]
+
+Appending and removing elements
+===============================
 
 You can append elements with the ``append`` method.
 
@@ -469,6 +507,11 @@ You can remove elements from the list with the ``pop`` method:
     7
     >>> my_list
     [9, 101, 0, 8, 20]
+
+.. _slicing:
+
+Slicing
+=======
 
 You can return slices from any sequence, including lists, by putting a slice
 specifier in square brackets. For example, this returns the first 3 elements
@@ -658,6 +701,20 @@ are the same:
     >>> my_string == another_string
     True
 
+Convert other objects to strings using ``str``:
+
+.. nbplot::
+
+    >>> # Convert integer to string
+    >>> str(9)
+    '9'
+    >>> # Convert floating point value to string
+    >>> str(1.2)
+    '1.2'
+
+Strings are sequences
+=====================
+
 Like lists, strings are sequences (have length, can be iterated, can index,
 can slice).
 
@@ -666,8 +723,6 @@ can slice).
     >>> # Length
     >>> len(my_string)
     16
-
-.. nbplot::
 
     >>> # Iterable
     >>> for c in my_string:
@@ -689,17 +744,16 @@ can slice).
     x
     t
 
-.. nbplot::
-
     >>> # Can index
     >>> my_string[1]
     'n'
 
-.. nbplot::
-
     >>> # Can slice
     >>> my_string[1:5]
     'nter'
+
+Strings are immutable
+=====================
 
 Unlike lists, strings are immutable. You cannot change the characters within a
 string:
@@ -709,10 +763,21 @@ string:
     >>> # Raises a TypeError
     >>> # my_string[1] = 'N'
 
-Strings have lots of interesting methods. Try tab-completing on a string
-variable name, followed by a period - e.g. ``my_string.``.  Also see the `list
-of string methods in the Python docs
-<http://docs.python.org/library/stdtypes.html#string-methods>`_.
+Adding strings
+==============
+
+.. nbplot::
+
+    >>> my_string + ' with added insight'
+    'interesting text with added insight'
+
+String methods
+==============
+
+Strings have lots of interesting methods. In IPython, try tab-complete on a
+string variable name, followed by a period |--| e.g. type ``my_string.``,
+followed by the tab key.  See also the `list of string methods in the Python
+docs <http://docs.python.org/library/stdtypes.html#string-methods>`_.
 
 One interesting method is ``replace``. It returns a new string that is a copy
 of the input, but replacing instances of one string with another:
@@ -730,19 +795,120 @@ Notice that the original string has not changed (it's immutable):
     >>> my_string
     'interesting text'
 
-You can add strings:
+Use the ``split`` method to break a string into a list of strings.  By
+default, ``split`` will split the string at any white space (spaces tab
+characters or line breaks):
 
 .. nbplot::
 
-    >>> my_string + ' with added insight'
-    'interesting text with added insight'
+    >>> my_string.split()
+    ['interesting', 'text']
+
+Pass a character to ``split`` to split the string at that character:
+
+.. nbplot::
+
+    >>> another_example = 'one:two:three'
+    >>> another_example.split(":")
+    ['one', 'two', 'three']
+
+The ``strip`` method returns a new string with spaces, tabs and end of line
+characters removed from the beginning and end:
+
+.. nbplot::
+
+    >>> my_string = ' a string\n'
+    >>> my_string
+    ' a string\n'
+    >>> my_string.strip()
+    'a string'
+
+Inserting values into strings
+=============================
+
+Use the ``format`` method to create new strings with inserted values:
+
+.. nbplot::
+
+    >>> shepherd = "Mary"
+    >>> print("Shepherd {} is on duty.".format(shepherd))
+    Shepherd Mary is on duty.
+
+.. nbplot::
+
+    >>> shepherd = "Mary"
+    >>> age = 32
+    >>> print("Shepherd {} is {} years old.".format(shepherd, age))
+    Shepherd Mary is 32 years old.
+
+You can do more complex formatting of numbers and strings using formatting
+options within the curly brackets |--| see the `Python string format examples
+<https://docs.python.org/3.5/library/string.html#format-examples>`_.
+
+.. nbplot::
+
+    >>> print("Number {:03d} is here.".format(11))
+    Number 011 is here.
+
+******
+Ranges
+******
+
+``range`` in Python 3 returns a *range object*.  It is a sequence, and so it
+is rather like a list [#py2-range]_:
+
+.. nbplot::
+
+    >>> my_range = range(5)
+    >>> my_range
+    range(0, 5)
+    >>> len(my_range)
+    5
+    >>> for e in my_range:
+    ...    print(e)
+    0
+    1
+    2
+    3
+    4
+    >>> my_range[1]
+    1
+    >>> my_range[0:2]
+    range(0, 2)
+
+You can make a range object into a list by using ``list``:
+
+.. nbplot::
+
+    >>> list(range(10))
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Set the start element for ``range`` by passing two arguments:
+
+.. nbplot::
+
+    >>> my_range = range(1, 7)
+    >>> my_range
+    range(1, 7)
+    >>> list(my_range)
+    [1, 2, 3, 4, 5, 6]
+
+Set the step size with a third argument:
+
+.. nbplot::
+
+    >>> my_range = range(1, 7, 2)
+    >>> my_range
+    range(1, 7, 2)
+    >>> list(my_range)
+    [1, 3, 5]
 
 ****
 Sets
 ****
 
 Sets are collections of unique elements, with no defined order.  Python
-reserves the right to order sets in any way it chooses:
+reserves the right to order the elements in a set in any way it chooses:
 
 .. nbplot::
 
@@ -879,6 +1045,50 @@ Keys must be unique. A later key |--| value pair will overwrite an earlier key
     >>> software.items()  # doctest: +SKIP
     dict_items([('MATLAB', 45), ('Python', 100)])
 
+**************************************
+"for", "while", "continue" and "break"
+**************************************
+
+``for`` statements and ``while`` statement are *loops*, because Python 
+keeps executing the ``for`` or ``while`` block until the ``for`` runs out of
+elements or the ``while`` condition is False.  You can break out of a loop
+using the ``break`` statement:
+
+.. nbplot::
+
+    >>> for i in range(10):
+    ...     if i == 6:
+    ...         break
+    ...     print(i)
+    ...
+    0
+    1
+    2
+    3
+    4
+    5
+
+The ``continue`` statement short-circuits execution of the current iteration
+of the ``for`` or ``while`` block, to continue with the next:
+
+.. nbplot::
+
+    >>> for i in range(10):
+    ...     if i == 6:
+    ...         continue
+    ...     print(i)
+    0
+    1
+    2
+    3
+    4
+    5
+    7
+    8
+    9
+
+See :doc:`on_loops` for more on loops and ``break``.
+
 .. _functions:
 
 *********
@@ -977,9 +1187,9 @@ the parameter name and value, like this:
 
 Passing arguments this way can make the code easier to read, because it the
 name of the argument often gives a good clue as to its purpose in the
-function.  It can also be very useful with functions having many parameters
-with default values; in that case using the argument name makes it easier to
-pass in only one of many not-default values.
+function.  It can also be useful with functions having many parameters with
+default values; in that case using the argument name makes it easier to pass
+in one or few values that are different from the defaults.
 
 Remember that everything in Python is an object. The function is itself an
 object, where the name of the function is a variable, that refers to the
@@ -1110,8 +1320,8 @@ If we had wanted to write binary (byte) data, we would have used ``wb`` for
 the mode (Write Binary).
 
 As usual, you can explore this new file object in IPython by appending the
-object name with a period, and pressing TAB to get a list of attributes and
-methods.
+object name with a period, and pressing the tab key to get a list of
+attributes and methods.
 
 To write to a file use the ``write`` method.
 
@@ -1159,10 +1369,6 @@ An open text file object is also *iterable*, meaning, that you can ask the
 file object to return its contents line by line, in a ``for`` loop. Let's open
 the file again to show this in action:
 
-.. testcleanup::
-
-    os.unlink('a_text_file.txt')
-
 .. nbplot::
 
     >>> my_file2 = open("a_text_file.txt", "rt")
@@ -1175,6 +1381,10 @@ the file again to show this in action:
     <BLANKLINE>
     >>> my_file2.close()
 
+.. testcleanup::
+
+    os.unlink('a_text_file.txt')
+
 .. rubric:: Footnotes
 
 .. [#py2-division] Python 3 returns a floating point value from dividing two
@@ -1183,3 +1393,9 @@ the file again to show this in action:
    run on Python 2, remember to add the statement ``from __future__ import
    division`` at the top of your code files, to make sure you get the Python 3
    behavior when dividing integers.
+
+.. [#py2-range] In Python 2, ``range`` returns a list.  You can often use a
+   Python 3 range object in the same way you could use a list, so this often
+   doesn't matter for the person using the code, but it is a difference you
+   might have to take into account when writing code that runs on Python 2 as
+   well as Python 3.
