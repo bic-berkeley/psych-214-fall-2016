@@ -145,6 +145,8 @@
 .. _numpy introduction: http://scipy-lectures.github.io/intro/numpy/index.html
 .. _numpy array object: http://scipy-lectures.github.io/intro/numpy/array_object.html
 .. _Array operations: http://scipy-lectures.github.io/intro/numpy/operations.html
+.. _Google Python class: https://developers.google.com/edu/python
+.. _basic exercises: https://developers.google.com/edu/python/exercises/basic
 
 .. MB tutorials
 .. _curious git: https://matthew-brett.github.io/curious-git/index.html
