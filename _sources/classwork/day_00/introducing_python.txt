@@ -300,7 +300,7 @@ Adding strings:
     >>> example + " or two"
     'mary had a little lamb or two'
 
-Putting strings into other strings:
+Puting strings into other strings:
 
 .. nbplot::
 

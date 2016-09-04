@@ -198,9 +198,9 @@ A conditional statement in Python looks like this:
 
 The first line of the conditional statement, that contains the conditional
 test, ends in a colon.  Call this the *if test*.  There follow some lines
-*indented* relative to the *if test*.  Call these indented lines the *if
-block*.  Python executes the statements in the *if block* only if the *if
-test* evaluates to True.
+*indented* relative to the ``if`` test.  Call these indented lines the *if
+block*.  Python executes the statements in the ``if`` block only when the
+``if`` test evaluates to True.
 
 .. nbplot::
 
@@ -213,13 +213,13 @@ test* evaluates to True.
     ...
 
 
-The first line that returns to the same level of indentation as *if test*
-line, closes the *if block*.
+The first line that returns to the same level of indentation as the ``if``
+test line, closes the ``if`` block.
 
-Unless the *if block* has a further indented block (for example, another *if
-block*), then all the lines in the block must have the same indentation.
+Unless the ``if`` block has a further indented block (for example, another
+``if`` block), then all the lines in the block must have the same indentation.
 
-The *if block* may be followed by another block where the conditional is
+The ``if`` block may be followed by another block where the conditional is
 ``else:``. This block will only run if the initial conditional test evaluates
 to False.
 
@@ -280,9 +280,9 @@ number <https://en.wikipedia.org/wiki/Fibonacci_number>`_ less than 1000:
     Largest Fibonacci < 1000 is 987
 
 Notice the initial *while test*: ``while fibonacci < 1000:``, followed by the
-indented *while block*.  Unlike the "if" statement, Python will continue to
-run the statements in the *while block* until the conditional in the *while
-test* evaluates to False.
+indented *while block*.  Unlike the ``if`` statement, Python will continue to
+run the statements in the ``while`` block until the conditional in the
+``while`` test evaluates to False.
 
 *****
 Lists

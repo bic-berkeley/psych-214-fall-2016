@@ -21,22 +21,23 @@ Introduction talk slides:
 Teaching and exercises
 **********************
 
-::
+* :doc:`classwork/day_00/what_is_an_image`;
+* :doc:`brisk_python`;
+* (see also :doc:`classwork/day_00/introducing_python` for a slightly shorter
+  and less comprehensive version of :doc:`brisk_python`).
+
+To start the exercise, open your terminal and type::
 
     pip3 install --user ipython
     git clone https://github.com/psych-214-fall-2016/classwork.git
-    cd classwork
-
-* :doc:`classwork/day_00/what_is_an_image`;
-* :doc:`classwork/day_00/introducing_python`.
+    cd classwork/day_00
 
 Then::
 
     atom first_python.py
 
 If we have time, we will start the introduction to the numpy data library,
-from the `numpy introduction`_ of the `scipy
-lecture notes`_.
+from the `numpy introduction`_ of the `scipy lecture notes`_.
 
 * The lecture on the `numpy array object`_;
 * Some of the lecture on numerical `array operations`_.
