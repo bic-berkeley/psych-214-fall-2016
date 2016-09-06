@@ -1,1 +1,2 @@
-None
+a != 1
+# False

@@ -1,10 +1,9 @@
-my_var = 11
-if my_var == 10:
-    print("The conditional is True!")
-    print("my_var does equal 10")
-else:
-    print("The conditional is False!")
-    print("my_var does not equal 10")
+last_but_1 = 0
+fibonacci = 1
+while fibonacci < 1000:
+    last_but_2 = last_but_1
+    last_but_1 = fibonacci
+    fibonacci = last_but_2 + last_but_1
 # ...
-# The conditional is False!
-# my_var does not equal 10
+print("Largest Fibonacci < 1000 is", last_but_1)
+# Largest Fibonacci < 1000 is 987

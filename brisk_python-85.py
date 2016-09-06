@@ -1,3 +1,4 @@
-software['MATLAB'] = 50
-software
-# {'MATLAB': 50}
+5 in my_set
+# True
+11 in my_set
+# False

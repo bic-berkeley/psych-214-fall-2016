@@ -1,4 +1,2 @@
-shepherd = "Mary"
-age = 32
-print("Shepherd {} is {} years old.".format(shepherd, age))
-# Shepherd Mary is 32 years old.
+print("Number {:03d} is here.".format(11))
+# Number 011 is here.

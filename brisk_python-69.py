@@ -1,2 +1,3 @@
-my_string.split()
-# ['interesting', 'text']
+another_example = 'one:two:three'
+another_example.split(":")
+# ['one', 'two', 'three']

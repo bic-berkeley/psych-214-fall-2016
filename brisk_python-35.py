@@ -1,3 +1,3 @@
-another_list = my_list
+my_list[1] = 101
 another_list
-# [9, 99, 7, 0, 8]
+# [9, 101, 7, 0, 8]

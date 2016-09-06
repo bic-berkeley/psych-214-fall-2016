@@ -1,6 +1,11 @@
-def function_with_no_return():
-    # Function with no return statement
-    a = 1
+for i in range(10):
+    if i == 6:
+        break
+    print(i)
 # ...
-function_with_no_return() == None
-# True
+# 0
+# 1
+# 2
+# 3
+# 4
+# 5

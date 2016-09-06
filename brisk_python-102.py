@@ -1,2 +1,5 @@
-my_fourth_function(10)  # Pass one argument, get default for second
-# 111
+def my_second_function():
+    return 42
+# ...
+my_second_function()
+# 42

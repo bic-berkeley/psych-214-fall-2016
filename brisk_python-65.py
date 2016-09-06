@@ -1,2 +1,2 @@
-# Raises a TypeError
-# my_string[1] = 'N'
+my_string + ' with added insight'
+# 'interesting text with added insight'

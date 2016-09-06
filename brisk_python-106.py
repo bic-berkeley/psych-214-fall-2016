@@ -1,2 +1,2 @@
-my_fourth_function(10)
-# 111
+my_fourth_function(10, 42)
+# 52

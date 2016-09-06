@@ -1,8 +1,10 @@
-new_list = [10, 1, 3]
-result = new_list.sort()
-# Return value is None
-result == None
-# True
-# But the original list now in ascending order from sort
-new_list
-# [1, 3, 10]
+# Remove and return the last element of the list
+my_list.pop()
+# 42
+my_list
+# [9, 101, 7, 0, 8, 20]
+# Remove and return the third element of the list
+my_list.pop(2)
+# 7
+my_list
+# [9, 101, 0, 8, 20]

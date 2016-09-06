@@ -1,3 +1,4 @@
 shepherd = "Mary"
-print("Shepherd {} is on duty.".format(shepherd))
-# Shepherd Mary is on duty.
+age = 32
+print("Shepherd {} is {} years old.".format(shepherd, age))
+# Shepherd Mary is 32 years old.

@@ -1,3 +1,2 @@
-software['Python'] = 100
-software  #doctest: +SKIP
-# {'Python': 100, 'MATLAB': 50}
+11 not in my_set
+# True

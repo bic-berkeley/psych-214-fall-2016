@@ -1,9 +1,7 @@
-my_file2 = open("a_text_file.txt", "rt")
-for line in my_file2:  # iterating over the file object
-    print("Line is:", line)
-# ...
-# Line is: MATLAB is good for matrices
-# <BLANKLINE>
-# Line is: Python is good for coding
-# <BLANKLINE>
-my_file2.close()
+# Write a line of text with a newline character at the end
+# The method returns the number of characters written
+my_file.write("MATLAB is good for matrices\n")
+# 28
+# Another line
+my_file.write("Python is good for coding\n")
+# 26

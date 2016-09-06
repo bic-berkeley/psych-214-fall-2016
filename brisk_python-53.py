@@ -1,3 +1,2 @@
-my_tuple = (9, 4, 7, 0, 8)
-my_tuple
-# (9, 4, 7, 0, 8)
+# This raises a TypeError
+# my_tuple[1] = 99

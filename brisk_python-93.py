@@ -1,11 +1,5 @@
-for i in range(10):
-    if i == 6:
-        break
-    print(i)
-# ...
-# 0
-# 1
-# 2
-# 3
-# 4
-# 5
+for value in software.values():  #doctest: +SKIP
+    print(value)
+
+# 50
+# 100

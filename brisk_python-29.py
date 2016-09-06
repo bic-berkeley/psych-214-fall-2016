@@ -1,8 +1,6 @@
-# Is iterable
-for e in my_list:
-    print(e)
-# 9
+# Can be indexed
+my_list[1]
 # 4
-# 7
-# 0
-# 8
+# Can be sliced
+my_list[0:2]
+# [9, 4]

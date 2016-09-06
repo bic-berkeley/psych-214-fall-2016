@@ -1,5 +1,3 @@
-my_string = ' a string\n'
-my_string
-# ' a string\n'
-my_string.strip()
-# 'a string'
+shepherd = "Mary"
+print("Shepherd {} is on duty.".format(shepherd))
+# Shepherd Mary is on duty.

@@ -1,2 +1,2 @@
-# Open file in Read Text mode
-my_file2 = open("a_text_file.txt", "rt")
+get_last_name
+# <function get_last_name at 0x...>

@@ -1,2 +1,2 @@
-type(my_list)
+type(mixed_list)
 # <class 'list'>

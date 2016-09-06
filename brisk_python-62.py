@@ -1,5 +1,6 @@
-another_string = "interesting text"
-another_string
-# 'interesting text'
-my_string == another_string
-# True
+# Convert integer to string
+str(9)
+# '9'
+# Convert floating point value to string
+str(1.2)
+# '1.2'

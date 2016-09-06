@@ -1,2 +1,3 @@
-my_list.append
-# <built-in method append of list object at 0x...>
+my_list.append(20)
+my_list
+# [9, 101, 7, 0, 8, 20]

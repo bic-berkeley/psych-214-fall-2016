@@ -1,2 +1,3 @@
-my_string + ' with added insight'
-# 'interesting text with added insight'
+another_string = my_string.replace('interesting', 'extraordinary')
+another_string
+# 'extraordinary text'

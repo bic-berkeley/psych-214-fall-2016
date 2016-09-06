@@ -1,5 +1,13 @@
-def my_third_function(first_argument, second_argument):
-    return first_argument + second_argument
-# ...
-my_third_function(10, 42)
-# 52
+for i in range(10):
+    if i == 6:
+        continue
+    print(i)
+# 0
+# 1
+# 2
+# 3
+# 4
+# 5
+# 7
+# 8
+# 9

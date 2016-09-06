@@ -1,4 +1,4 @@
-my_list[0]
-# 9
-my_list[1]
-# 4
+my_list
+# [9, 4, 7, 0, 8]
+my_list[-1]
+# 8

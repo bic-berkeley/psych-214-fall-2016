@@ -1,3 +1,3 @@
-two_tuple = (1, 5)
-two_tuple
-# (1, 5)
+not_a_tuple = (1)
+not_a_tuple
+# 1

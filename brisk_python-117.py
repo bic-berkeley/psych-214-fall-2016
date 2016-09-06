@@ -1,1 +1,2 @@
-my_file = open("a_text_file.txt", "wt")
+('Matthew', 'Brett') > ('Mark', 'DEsposito')
+# True

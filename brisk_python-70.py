@@ -1,3 +1,6 @@
-another_example = 'one:two:three'
-another_example.split(":")
-# ['one', 'two', 'three']
+# A string with a newline character at the end
+my_string = ' a string\n'
+my_string
+# ' a string\n'
+my_string.strip()
+# 'a string'

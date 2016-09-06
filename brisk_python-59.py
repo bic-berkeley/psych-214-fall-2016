@@ -1,3 +1,3 @@
-not_a_tuple = (1 + 5 + 3)
-not_a_tuple
-# 9
+one_tuple = (1,)
+one_tuple
+# (1,)

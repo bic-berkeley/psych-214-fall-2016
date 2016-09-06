@@ -1,1 +1,1 @@
-my_file2.close()
+my_file = open("a_text_file.txt", "wt")

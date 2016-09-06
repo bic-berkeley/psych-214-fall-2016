@@ -1,2 +1,2 @@
-def get_last_name(person):
-    return person[1]  # The last name
+sorted((1, 5, 3, 2))
+# [1, 2, 3, 5]

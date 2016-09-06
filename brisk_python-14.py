@@ -1,4 +1,5 @@
-type(None)
-# <class 'NoneType'>
-None == None
+a = 1
+a
+# 1
+a == 1
 # True

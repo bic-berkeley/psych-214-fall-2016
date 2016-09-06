@@ -1,4 +1,8 @@
-# Only unique elements collected in the set
-my_set = set((5, 3, 1, 3))
-my_set  # doctest: +SKIP
-# {1, 3, 5}
+for i in range(5):
+   print(i)
+# ...
+# 0
+# 1
+# 2
+# 3
+# 4

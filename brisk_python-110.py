@@ -1,2 +1,2 @@
-3 < 5
-# True
+type(my_fourth_function)
+# <class 'function'>

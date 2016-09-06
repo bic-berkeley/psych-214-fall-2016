@@ -1,2 +1,3 @@
-my_function(10)
-# 11
+software = {'MATLAB': 50, 'Python': 100, 'MATLAB': 45}
+software  # doctest: +SKIP
+# {'Python': 100, 'MATLAB': 45}

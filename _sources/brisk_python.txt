@@ -5,7 +5,7 @@ Brisk introduction to Python
 This is an introduction designed for those of us who already know a `dynamic
 programming language
 <https://en.wikipedia.org/wiki/Dynamic_programming_language>`_ fairly well.
-MATLAB and R are `examples of dynamic programming languages
+MATLAB and the R language are `examples of dynamic programming languages
 <https://en.wikipedia.org/wiki/Dynamic_programming_language#Examples_of_Dynamic_Programming_Languages>`_.
 
 .. testsetup::
@@ -34,8 +34,7 @@ type ``float``.
     >>> type(b)
     <class 'float'>
 
-You can create ints and floats by using the ``int`` and ``float`` object
-constructors:
+You can create ints and floats by using ``int`` and ``float`` like this:
 
 .. nbplot::
 
@@ -65,18 +64,20 @@ default for Python >= 3 (see [#py2-division]_):
     >>> 1 / 2
     0.5
 
-If you only want the integer result of the division, use ``//``
+If you only want the integer part of the division, use ``//``
 
 .. nbplot::
 
     >>> 1 // 2
     0
+    >>> 1.0 // 2.0
+    0.0
 
 Python has built-in function called ``round``:
 
 .. nbplot::
 
-    >>> round(5 / 2)
+    >>> round(5.0 / 2.0)
     2
 
 The ``%`` operator on numbers gives you the remainder of integer division
@@ -103,14 +104,8 @@ True and False
 
     >>> type(True)
     <class 'bool'>
-
-.. nbplot::
-
     >>> type(False)
     <class 'bool'>
-
-.. nbplot::
-
     >>> True == False
     False
     >>> True == True
@@ -148,8 +143,6 @@ that we don't have a value for a parameter.
 
     >>> type(None)
     <class 'NoneType'>
-    >>> None == None
-    True
 
 Unlike most other values in Python, the default display output from None, is
 nothing:
@@ -162,7 +155,7 @@ nothing:
 Equals
 ******
 
-As for MATLAB, ``=`` is for assignment, ``==`` is for testing equality.
+As for MATLAB and R, ``=`` is for assignment, ``==`` is for testing equality.
 
 .. nbplot::
 
@@ -172,8 +165,8 @@ As for MATLAB, ``=`` is for assignment, ``==`` is for testing equality.
     >>> a == 1
     True
 
-Python uses ``!=`` for testing that objects are *not* equal. This is different
-from e.g. MATLAB, which uses ``~=``:
+Like R, Python uses ``!=`` for testing that objects are *not* equal. This is
+different from MATLAB, which uses ``~=``:
 
 .. nbplot::
 
@@ -200,7 +193,8 @@ The first line of the conditional statement, that contains the conditional
 test, ends in a colon.  Call this the *if test*.  There follow some lines
 *indented* relative to the ``if`` test.  Call these indented lines the *if
 block*.  Python executes the statements in the ``if`` block only when the
-``if`` test evaluates to True.
+``if`` test evaluates to True.  For example, in this case, the ``if`` test
+evaluates to False, and the block does not execute:
 
 .. nbplot::
 
@@ -218,6 +212,9 @@ test line, closes the ``if`` block.
 
 Unless the ``if`` block has a further indented block (for example, another
 ``if`` block), then all the lines in the block must have the same indentation.
+
+See note [#if-statement-equivalents]_ for equivalent ``if`` statements in R
+and MATLAB.
 
 The ``if`` block may be followed by another block where the conditional is
 ``else:``. This block will only run if the initial conditional test evaluates
@@ -314,12 +311,51 @@ A list element can be any type of object, including another list:
     >>> type(mixed_list)
     <class 'list'>
 
+A Python list is like a cell array in MATLAB, or a ``list`` in R.
+
+.. _for-loops:
+
+"for" loops and iteration
+=========================
+
+We can *iterate* over a list.  To iterate, means to fetch one element after
+another from some container, such as a list.  We can use a ``for`` loop to
+iterate over a list:
+
+.. nbplot::
+
+    >>> for e in my_list:
+    ...     print(e)
+    ...
+    9
+    4
+    7
+    0
+    8
+
+The ``for`` loop has the same form as ``if`` statements and ``while`` loops,
+with a first line ending in a colon, followed by an indented block.
+
+The first line in the ``for`` loop is of form: ``for loop_variable in
+container:``.  The *container* is the container from which we will fetch the
+elements.  At each iteration of the ``for`` loop, Python gets a new element
+from the container to put into the *loop variable*.  For each element in the
+container, Python executes the *for block*.
+
+Note [#for-loop-equivalents]_ shows equivalent ``for`` loops in Python, R and
+MATLAB.
+
+See :ref:`ranges` for a common way of writing a ``for`` loop that iterates
+over a sequence of integers.
+
 Lists are sequences
 ===================
 
-A sequence is type of Python object that has a defined element order, has a
-length, is iterable, can be indexed with integers, and *sliced* (see below).
-So, if object ``s`` is a sequence, then:
+A `sequence
+<https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range>`_
+is a category of Python objects that have a defined element order, have a
+length, are iterable, can be indexed with integers, and *sliced* (see below).
+If object ``s`` is a sequence, then:
 
 * ``s`` has a length that can be found with ``len(s)``;
 * we can iterate over the elements in ``s`` with ``for element in s: # do
@@ -352,9 +388,6 @@ So, if object ``s`` is a sequence, then:
     7
     0
     8
-
-Notice that the ``for`` has the same form as the conditionals, with a first
-line ending in a colon, followed by an indented block.
 
 .. nbplot::
 
@@ -442,7 +475,8 @@ the two lists:
 
 .. nbplot::
 
-    >>> my_list + [False, 1, 2]
+    >>> new_list = my_list + [False, 1, 2]
+    >>> new_list
     [9, 101, 7, 0, 8, False, 1, 2]
 
 Appending and removing elements
@@ -546,8 +580,8 @@ the stop index.
     [0, 8, 20]
 
 You can omit both numbers, in which case you return all the elements of the
-list. This can be useful if you want to make another list that contains the
-same elements as the first:
+list. This can be useful if you want to make a new list that contains the same
+elements as the first:
 
 .. nbplot::
 
@@ -570,10 +604,16 @@ the list:
 
 .. nbplot::
 
-    >>> my_list[0:4:2]
-    [9, 0]
+    >>> my_list[0:len(my_list):2]
+    [9, 0, 20]
 
-You can use negative numbers for the start and stop indices:
+    >>> # Length of list assumed as stop index if omitted
+    >>> my_list[0::2]
+    [9, 0, 20]
+
+You can use negative numbers for the ``start`` and ``stop`` indices. As for
+indexing, negative ``start`` and ``stop`` values count back from the end of
+the list:
 
 .. nbplot::
 
@@ -582,7 +622,8 @@ You can use negative numbers for the start and stop indices:
     >>> my_list[-4:-2]
     [999, 0]
 
-Negative numbers for the step have the obvious meaning:
+Negative numbers for the ``step`` count backwards from the ``start`` to the
+``stop`` index:
 
 .. nbplot::
 
@@ -591,7 +632,7 @@ Negative numbers for the step have the obvious meaning:
 
 If you have a negative step size, and you don't specify the start index, then
 the start index defaults to the last element in the list. If you don't specify
-the stop index, it defaults to one below 0:
+the stop index, it defaults to one prior to index 0:
 
 .. nbplot::
 
@@ -796,7 +837,7 @@ Notice that the original string has not changed (it's immutable):
     'interesting text'
 
 Use the ``split`` method to break a string into a list of strings.  By
-default, ``split`` will split the string at any white space (spaces tab
+default, ``split`` will split the string at any white space (spaces, tab
 characters or line breaks):
 
 .. nbplot::
@@ -813,10 +854,11 @@ Pass a character to ``split`` to split the string at that character:
     ['one', 'two', 'three']
 
 The ``strip`` method returns a new string with spaces, tabs and end of line
-characters removed from the beginning and end:
+characters removed from the beginning and end of the string:
 
 .. nbplot::
 
+    >>> # A string with a newline character at the end
     >>> my_string = ' a string\n'
     >>> my_string
     ' a string\n'
@@ -843,27 +885,45 @@ Use the ``format`` method to create new strings with inserted values:
 
 You can do more complex formatting of numbers and strings using formatting
 options within the curly brackets |--| see the `Python string format examples
-<https://docs.python.org/3.5/library/string.html#format-examples>`_.
+<https://docs.python.org/3/library/string.html#format-examples>`_.
 
 .. nbplot::
 
     >>> print("Number {:03d} is here.".format(11))
     Number 011 is here.
 
+.. _ranges:
+
 ******
 Ranges
 ******
 
 ``range`` in Python 3 returns a *range object*.  It is a sequence, and so it
-is rather like a list [#py2-range]_:
+is rather like a list [#py2-range]_.  When you use ``range`` with one
+argument, the argument value is the ``stop`` index.  For example, to make a
+``range`` object generating the numbers from 0 up to *but not including* 5:
 
 .. nbplot::
 
     >>> my_range = range(5)
     >>> my_range
     range(0, 5)
+
+You can make a range object into a list by using ``list``:
+
+.. nbplot::
+
+    >>> list(range(5))
+    [0, 1, 2, 3, 4]
+
+A ``range`` object is a sequence:
+
+.. nbplot::
+
+    >>> # Has a length
     >>> len(my_range)
     5
+    >>> # Is iterable
     >>> for e in my_range:
     ...    print(e)
     0
@@ -871,17 +931,12 @@ is rather like a list [#py2-range]_:
     2
     3
     4
+    >>> # Can be indexed
     >>> my_range[1]
     1
+    >>> # Can be sliced
     >>> my_range[0:2]
     range(0, 2)
-
-You can make a range object into a list by using ``list``:
-
-.. nbplot::
-
-    >>> list(range(10))
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 Set the start element for ``range`` by passing two arguments:
 
@@ -903,19 +958,33 @@ Set the step size with a third argument:
     >>> list(my_range)
     [1, 3, 5]
 
+One common use of ``range`` is to iterate over a sequence of numbers in a
+``for`` loop:
+
+.. nbplot::
+
+    >>> for i in range(5):
+    ...    print(i)
+    ...
+    0
+    1
+    2
+    3
+    4
+
 ****
 Sets
 ****
 
 Sets are collections of unique elements, with no defined order.  Python
-reserves the right to order the elements in a set in any way it chooses:
+reserves the right to order set elements in any way it chooses:
 
 .. nbplot::
 
     >>> # Only unique elements collected in the set
     >>> my_set = set((5, 3, 1, 3))
     >>> my_set  # doctest: +SKIP
-    {1, 3, 5}
+    {1, 5, 3}
 
 Because there is no defined order, you cannot index into a set:
 
@@ -941,25 +1010,64 @@ this does not change the set:
     >>> my_set  # doctest: +SKIP
     {1, 3, 5, 10}
 
-You can iterate over a set, but the order of the elements is arbitrary, and
-you cannot rely on the same order in any two runs of your program:
+You can iterate over a set, but the order of elements is arbitrary.  You
+cannot rely on the same order in any two runs of your program:
 
 .. nbplot::
 
+    >>> # The order of elements is arbitrary
     >>> for element in my_set:  # doctest: +SKIP
     ...     print(element)
     1
     3
     5
 
-Look at the methods of the set object for interesting operations such as
-``difference``, ``union``, ``intersection`` etc.
+Look at the `methods of the set object
+<https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset>`_
+for interesting operations such as ``difference``, ``union``, ``intersection``
+etc.
+
+*************************************
+Sets, lists and tuples are containers
+*************************************
+
+A *container* is a Python object for which you can test an element for
+membership.  So, if an object ``c`` is a container then we can test if an
+element is in the container with ``true_or_false = element in c``.
+
+Be careful |--| the word ``in`` has different meanings in ``for element in
+c:`` and ``true_or_false = element in c``.  With  ``for element in c:``,
+``in`` is a part of the ``for`` loop syntax.  With ``true_or_false = element
+in c``, ``in`` triggers a test of membership, returning True or False.
+
+.. nbplot::
+
+    >>> 5 in my_set
+    True
+    >>> 11 in my_set
+    False
+
+You can use ``not in`` to test if an element is not in a container:
+
+.. nbplot::
+
+    >>> 11 not in my_set
+    True
+
+Lists and tuples are also containers:
+
+.. nbplot::
+
+    >>> 9 in [9, 4, 7, 0, 8]
+    True
+    >>> 3 in (1, 3, 5)
+    True
 
 ************
 Dictionaries
 ************
 
-A dictionary is an unordered collection of key |--| value pairs. The *key* is
+A dictionary is an unordered collection of key / value pairs. The *key* is
 something that identifies the element, and the *value* is the value
 corresponding to the particular key.
 
@@ -968,8 +1076,8 @@ corresponding to the particular key.
     >>> # This is an empty dictionary
     >>> software = {}
 
-Here we insert a new key |--| value mapping into the dictionary. The key is a
-string |--| ``MATLAB``, and the corresponding value is an integer 50:
+Here we insert a new key / value mapping into the dictionary. The key is a
+string |--| ``MATLAB`` |--| and the corresponding value is an integer 50:
 
 .. nbplot::
 
@@ -977,7 +1085,7 @@ string |--| ``MATLAB``, and the corresponding value is an integer 50:
     >>> software
     {'MATLAB': 50}
 
-We can insert another key |--| value mapping:
+We can insert another key / value mapping:
 
 .. nbplot::
 
@@ -985,8 +1093,8 @@ We can insert another key |--| value mapping:
     >>> software  #doctest: +SKIP
     {'Python': 100, 'MATLAB': 50}
 
-We can get the value corresponding to a key by indexing the dictionary
-with the key:
+We can get the value corresponding to a key by indexing the dictionary with
+the key:
 
 .. nbplot::
 
@@ -1016,7 +1124,7 @@ order is arbitrary:
     50
     100
 
-We can use the ``items`` method to iterate over the key |--| value pairs. In
+We can use the ``items`` method to iterate over the key / value pairs. In
 this case each element is a tuple of length two, where the first element is
 the key and the second element is the value:
 
@@ -1027,8 +1135,8 @@ the key and the second element is the value:
     ('MATLAB', 50)
     ('Python', 100)
 
-You can construct a dictionary with curly brackets, commas between the key
-|--| value pairs, and colons separating the key and value:
+You can construct a dictionary with curly brackets, using colons to separate
+the key and value, and commas to separate the pairs:
 
 .. nbplot::
 
@@ -1036,21 +1144,35 @@ You can construct a dictionary with curly brackets, commas between the key
     >>> software.items()  #doctest: +SKIP
     dict_items([('MATLAB', 50), ('Python', 100)])
 
-Keys must be unique. A later key |--| value pair will overwrite an earlier key
-|--| value pair that had the same key:
+Keys must be unique. A later key / value pair will overwrite an earlier key /
+value pair that had the same key:
 
 .. nbplot::
 
     >>> software = {'MATLAB': 50, 'Python': 100, 'MATLAB': 45}
-    >>> software.items()  # doctest: +SKIP
-    dict_items([('MATLAB', 45), ('Python', 100)])
+    >>> software  # doctest: +SKIP
+    {'Python': 100, 'MATLAB': 45}
+
+Dictionaries are containers
+===========================
+
+Dictionaries are also containers.  Python takes the elements in the container
+to be the dictionary keys.  This is a convenient way to test if you already
+have a key in a dictionary:
+
+.. nbplot::
+
+    >>> 'MATLAB' in software
+    True
+    >>> 'happiness' in software
+    False
 
 **************************************
 "for", "while", "continue" and "break"
 **************************************
 
-``for`` statements and ``while`` statement are *loops*, because Python 
-keeps executing the ``for`` or ``while`` block until the ``for`` runs out of
+``for`` statements and ``while`` statement are *loops*, because Python keeps
+executing the ``for`` or ``while`` block until the ``for`` runs out of
 elements or the ``while`` condition is False.  You can break out of a loop
 using the ``break`` statement:
 
@@ -1069,7 +1191,7 @@ using the ``break`` statement:
     5
 
 The ``continue`` statement short-circuits execution of the current iteration
-of the ``for`` or ``while`` block, to continue with the next:
+of the ``for`` or ``while`` block, to continue with the next iteration:
 
 .. nbplot::
 
@@ -1152,7 +1274,10 @@ A function can have more than one argument:
     >>> my_third_function(10, 42)
     52
 
-It is also possible to give a default value for a function argument:
+Default values for function arguments
+=====================================
+
+The function definition can give a default value for a function argument:
 
 .. nbplot::
 
@@ -1167,8 +1292,8 @@ it the same way that we call ``my_third_function``:
     >>> my_fourth_function(10, 42)
     52
 
-But, we can also omit the second argument, in which case it will get its
-default value:
+But, we can also omit the second argument, because it has a default value.  In
+that case the argument will get its default value:
 
 .. nbplot::
 
@@ -1185,11 +1310,14 @@ the parameter name and value, like this:
     >>> my_fourth_function(10, extra_argument=202)
     212
 
-Passing arguments this way can make the code easier to read, because it the
-name of the argument often gives a good clue as to its purpose in the
-function.  It can also be useful with functions having many parameters with
-default values; in that case using the argument name makes it easier to pass
-in one or few values that are different from the defaults.
+Passing arguments this way can make the code easier to read, because the name
+of the argument often gives a good clue as to its purpose in the function.  It
+can also be useful with functions having many parameters with default values;
+in that case using the argument name makes it easier to pass in one or few
+values that are different from the defaults.
+
+Functions are objects too
+=========================
 
 Remember that everything in Python is an object. The function is itself an
 object, where the name of the function is a variable, that refers to the
@@ -1252,10 +1380,10 @@ Python needed results like:
     True
 
 Sometimes you want to order the objects in some other way than simply
-comparing the elements. If so, then you can define a *sort function*, that,
-when given an element, returns a *sort value* for that element. Python does
-the sorting, not on the elements themselves, but on the returned sort value
-for each element.
+comparing the elements. If so, then you can define a *sort function*.  A sort
+function is a function that accepts an element as its argument, and returns a
+*sort value* for that element. Python does the sorting, not on the elements
+themselves, but on the returned sort value for each element.
 
 For example, let's say we have first and last names stored as tuples:
 
@@ -1309,8 +1437,8 @@ Files
 
 You can open a file in several different *modes*.  The mode specifies whether
 you want to read or write the file, and whether the data in the file is, or
-will be, text string or binary data (bytes).  For example, here we open a file
-for writing (``w``) text (``t``):
+will be, text data (string) or binary data (bytes).  For example, here we open
+a file for Writing Text (``wt``):
 
 .. nbplot::
 
@@ -1321,9 +1449,9 @@ the mode (Write Binary).
 
 As usual, you can explore this new file object in IPython by appending the
 object name with a period, and pressing the tab key to get a list of
-attributes and methods.
+attributes and methods |--| e.g. ``myfile.`` followed by tab.
 
-To write to a file use the ``write`` method.
+To write to a file, use the ``write`` method.
 
 .. nbplot::
 
@@ -1394,8 +1522,90 @@ the file again to show this in action:
    division`` at the top of your code files, to make sure you get the Python 3
    behavior when dividing integers.
 
+.. [#if-statement-equivalents] Here is an ``if`` statement in Python:
+
+   .. code-block:: python
+
+       # Python
+       my_var = 10
+       if my_var == 10:
+           print("The conditional is True!")
+           print("my_var does equal 10")
+
+   The equivalent in R is:
+
+   .. code-block:: R
+
+       # R
+       my_var = 10
+       if (my_var == 10) {
+           print("The conditional is True!")
+           print("my_var does equal 10")
+       }
+
+   For MATLAB:
+
+   .. code-block:: MATLAB
+
+       % MATLAB
+       my_var = 10;
+       if my_var == 10
+           disp('The conditional is True!');
+           disp('my_var does equal 10');
+       end
+
+   For Python, the indentation defines the block.  For R and MATLAB,
+   indentation is an optional way of formatting the code to make it look
+   nicer:
+
+   .. code-block:: R
+
+       # R
+       my_var = 10
+       if (my_var == 10) {
+       # Indentation is optional
+       print("The conditional is True!")
+       print("my_var does equal 10")
+       }
+
+   .. code-block:: MATLAB
+
+       % MATLAB
+       my_var = 10;
+       if my_var == 10
+       % Indentation is optional
+       disp('The conditional is True!');
+       disp('my_var does equal 10');
+       end
+
+.. [#for-loop-equivalents] Here is a ``for`` loop in Python:
+
+   .. code-block:: python
+
+       # Python
+       for element in [9, 4, 7, 0, 8]:
+           print(element)
+
+   The equivalents in R and MATLAB are:
+
+   .. code-block:: R
+
+      # R
+      for (element in list(9, 4, 7, 0, 8)) {
+          print(element)
+      }
+
+   .. code-block:: MATLAB
+
+       % MATLAB
+       for element = {9, 4, 7, 0, 8}
+           disp(e);
+       end
+
 .. [#py2-range] In Python 2, ``range`` returns a list.  You can often use a
-   Python 3 range object in the same way you could use a list, so this often
-   doesn't matter for the person using the code, but it is a difference you
-   might have to take into account when writing code that runs on Python 2 as
-   well as Python 3.
+   Python 3 range object in the same way you could use a list, so this
+   difference between Python 2 and 3 may not matter for the person using the
+   code.  There are things that you can do with lists that you cannot do with
+   ranges, such as adding.  For example ``range(4) + range(5)`` will work in
+   Python 2 (adding lists), but fail in Python 3 (you cannot add range
+   objects).

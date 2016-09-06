@@ -1,3 +1,3 @@
-my_list[1] = 101
-another_list
-# [9, 101, 7, 0, 8]
+new_list = my_list + [False, 1, 2]
+new_list
+# [9, 101, 7, 0, 8, False, 1, 2]

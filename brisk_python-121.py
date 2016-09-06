@@ -1,5 +1,2 @@
-contents = my_file2.read()
-print(contents)
-# MATLAB is good for matrices
-# Python is good for coding
-# <BLANKLINE>
+sorted(people, key=get_last_name)
+# [('Matthew', 'Brett'), ('Mark', 'DEsposito'), ('JB', 'Poline')]

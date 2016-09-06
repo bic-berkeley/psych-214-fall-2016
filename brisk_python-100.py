@@ -1,2 +1,2 @@
-def my_fourth_function(first_argument, extra_argument=101):
-    return first_argument + extra_argument
+def my_function(an_argument):
+    return an_argument + 1

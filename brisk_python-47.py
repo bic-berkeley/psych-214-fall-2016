@@ -1,3 +1,6 @@
-my_list[1] = 999
-another_list
-# [9, 101, 0, 8, 20]
+my_list[0:len(my_list):2]
+# [9, 0, 20]
+
+# Length of list assumed as stop index if omitted
+my_list[0::2]
+# [9, 0, 20]

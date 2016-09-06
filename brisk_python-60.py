@@ -1,3 +1,3 @@
-one_tuple = (1,)
-one_tuple
-# (1,)
+my_string = 'interesting text'
+my_string
+# 'interesting text'

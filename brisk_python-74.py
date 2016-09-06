@@ -1,2 +1,3 @@
-print("Number {:03d} is here.".format(11))
-# Number 011 is here.
+my_range = range(5)
+my_range
+# range(0, 5)

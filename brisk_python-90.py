@@ -1,4 +1,3 @@
-for key_value in software.items():  #doctest: +SKIP
-    print(key_value)
-# ('MATLAB', 50)
-# ('Python', 100)
+software['Python'] = 100
+software  #doctest: +SKIP
+# {'Python': 100, 'MATLAB': 50}
