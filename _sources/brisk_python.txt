@@ -1077,7 +1077,7 @@ corresponding to the particular key.
     >>> software = {}
 
 Here we insert a new key / value mapping into the dictionary. The key is a
-string |--| ``MATLAB`` |--| and the corresponding value is an integer 50:
+string |--| ``'MATLAB'`` |--| and the corresponding value is an integer 50:
 
 .. nbplot::
 
@@ -1085,7 +1085,7 @@ string |--| ``MATLAB`` |--| and the corresponding value is an integer 50:
     >>> software
     {'MATLAB': 50}
 
-We can insert another key / value mapping:
+Now we insert another key / value mapping:
 
 .. nbplot::
 
@@ -1093,8 +1093,7 @@ We can insert another key / value mapping:
     >>> software  #doctest: +SKIP
     {'Python': 100, 'MATLAB': 50}
 
-We can get the value corresponding to a key by indexing the dictionary with
-the key:
+Get the value corresponding to a key by indexing the dictionary with the key:
 
 .. nbplot::
 
@@ -1120,7 +1119,7 @@ order is arbitrary:
 
     >>> for value in software.values():  #doctest: +SKIP
     ...     print(value)
-
+    ...
     50
     100
 
@@ -1135,14 +1134,14 @@ the key and the second element is the value:
     ('MATLAB', 50)
     ('Python', 100)
 
-You can construct a dictionary with curly brackets, using colons to separate
-the key and value, and commas to separate the pairs:
+One way to construct a dictionary is with curly brackets, using colons to
+separate the key and value, and commas to separate the pairs:
 
 .. nbplot::
 
     >>> software = {'MATLAB': 50, 'Python': 100}
-    >>> software.items()  #doctest: +SKIP
-    dict_items([('MATLAB', 50), ('Python', 100)])
+    >>> software  #doctest: +SKIP
+    {'Python': 100, 'MATLAB': 50}
 
 Keys must be unique. A later key / value pair will overwrite an earlier key /
 value pair that had the same key:

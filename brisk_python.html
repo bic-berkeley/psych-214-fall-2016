@@ -903,20 +903,19 @@ corresponding to the particular key.</p>
 </pre></div>
 </div>
 <p>Here we insert a new key / value mapping into the dictionary. The key is a
-string – <code class="docutils literal"><span class="pre">MATLAB</span></code> – and the corresponding value is an integer 50:</p>
+string – <code class="docutils literal"><span class="pre">'MATLAB'</span></code> – and the corresponding value is an integer 50:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="p">[</span><span class="s1">&#39;MATLAB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">software</span>
 <span class="go">{&#39;MATLAB&#39;: 50}</span>
 </pre></div>
 </div>
-<p>We can insert another key / value mapping:</p>
+<p>Now we insert another key / value mapping:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">software</span>  
 <span class="go">{&#39;Python&#39;: 100, &#39;MATLAB&#39;: 50}</span>
 </pre></div>
 </div>
-<p>We can get the value corresponding to a key by indexing the dictionary with
-the key:</p>
+<p>Get the value corresponding to a key by indexing the dictionary with the key:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">]</span>
 <span class="go">100</span>
 </pre></div>
@@ -935,10 +934,11 @@ program:</p>
 order is arbitrary:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">software</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>  
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">50</span>
+<span class="go">100</span>
 </pre></div>
 </div>
-<p>50
-100</p>
 <p>We can use the <code class="docutils literal"><span class="pre">items</span></code> method to iterate over the key / value pairs. In
 this case each element is a tuple of length two, where the first element is
 the key and the second element is the value:</p>
@@ -948,11 +948,11 @@ the key and the second element is the value:</p>
 <span class="go">(&#39;Python&#39;, 100)</span>
 </pre></div>
 </div>
-<p>You can construct a dictionary with curly brackets, using colons to separate
-the key and value, and commas to separate the pairs:</p>
+<p>One way to construct a dictionary is with curly brackets, using colons to
+separate the key and value, and commas to separate the pairs:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">software</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;MATLAB&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  
-<span class="go">dict_items([(&#39;MATLAB&#39;, 50), (&#39;Python&#39;, 100)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">software</span>  
+<span class="go">{&#39;Python&#39;: 100, &#39;MATLAB&#39;: 50}</span>
 </pre></div>
 </div>
 <p>Keys must be unique. A later key / value pair will overwrite an earlier key /
