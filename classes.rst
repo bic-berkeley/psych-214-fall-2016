@@ -31,16 +31,16 @@ Final project presentations during class hours, Monday 5 December (RRR week).
 Final project submissions by midnight Friday 17th December.
 
 .. number / date
-     0 August 30 - intro
-     1 September 12 - 2D / 3D arrays and images
-     2 September 19 - version control, 4D arrays
+     0 August 30 - intro - set hw1: reproducible
+     1 September 12 - 2D / 3D arrays and images (hw1 due 9th)
+     2 September 19 - version control, 4D arrays - set hw2: diagnostics
      3 September 26 - diagnostics and testing : deadline for choosing mentor
-     4 October 3 - statistics on brain images
+     4 October 3 - statistics on brain images - set hw3: analysis (hw2 30th)
      5 October 10 - modeling the HRF  : pitch project
-     6 October 17 - smoothing contrasts and models
-     7 October 24 - inference on statistical maps
+     6 October 17 - smoothing contrasts and models (hw3 14th)
+     7 October 24 - inference on statistical maps - set hw4: PNAS
      8 October 31 - slice timing and motion correction
-     9 November 7 - affine and cross-modality registration
+     9 November 7 - affine and cross-modality registration (hw4 4th)
     10 November 14 - cross-subject registration
     11 November 21 - capstone - scripting an analysis
     12 November 28 - TBD
