@@ -39,6 +39,30 @@ Grading
 Please read the `UCB academic polices on student conduct
 <http://guide.berkeley.edu/academic-policies/#studentconductappealstext>`_.
 
+********
+Homework
+********
+
+Each week, we will give you a selection of articles, chapters, tutorials and
+videos to study.  You will usually need to know the study material for the
+exercises in the following class.
+
+There will be four sets of graded homework.  The sets of homework do not
+contribute equally to the 25% homework portion of your final grade |--| see
+the table below.  The dates for setting / returning the homework are
+provisional, we may change them as the class develops.
+
+=========== ================ ===========    ===================
+Number      Set on           Due on         % of overall grade
+=========== ================ ===========    ===================
+1           August 29        September 9    3
+2           September 19     September 30   10
+3           October 3        October 14     5
+4           October 24       October 31     7
+=========== ================ ===========    ===================
+
+Please submit all homework by 17:00 on the due date.
+
 *********************
 Questions, discussion
 *********************
