@@ -6,11 +6,15 @@ September 12: arrays, images and plotting
 Teaching
 ********
 
-We will go through material from tutorial pages from the `scipy lecture
-notes`_:
+We will be using the background from the tutorial pages from the `scipy
+lecture notes`_:
 
 * The `numpy array object`_
 * `Array operations`_
+
+We'll cover:
+
+* :doc:`arrays_and_images`;
 
 We'll cover:
 

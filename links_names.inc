@@ -188,8 +188,10 @@
 .. Ideas
 .. _principal component analysis:
    https://en.wikipedia.org/wiki/Principal_component_analysis
-.. _linear_interpolation:
+.. _linear interpolation:
     http://en.wikipedia.org/wiki/Linear_interpolation
+.. _nearest neighbor interpolation:
+    https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 
 .. People
 .. _Matthew:
