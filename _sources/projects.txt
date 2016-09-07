@@ -43,6 +43,7 @@ https://github.com/berkeley-stat159, in particular:
 
 * https://github.com/berkeley-stat159/project-alpha
 * https://github.com/berkeley-stat159/project-beta
+* https://github.com/berkeley-stat159/project-epsilon
 
 You'll notice that these analysis are fully reproducible |--| the students had
 to provide instructions that their graders could follow to reproduce their
