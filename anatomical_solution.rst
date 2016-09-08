@@ -1,6 +1,6 @@
-###############################
-Anatomical image |--| solutions
-###############################
+###################
+Anatomical solution
+###################
 
 .. nbplot::
     :include-source: false
@@ -17,7 +17,7 @@ Anatomical image |--| solutions
 
 Now we will work with a 3D brain image.
 
-Like the camera image in :doc:`camera_solutions`, the pixel data for the 3D
+Like the camera image in :doc:`camera_solution`, the pixel data for the 3D
 image is in a text file called ``anatomical.txt``.  Download
 :download:`anatomical.txt` to your working directory.
 
@@ -43,6 +43,7 @@ Read all the lines of the file into a list of float values, as before.
 
 .. nbplot::
 
+    >>> #- Read file into list of float values
     >>> pixel_values = []
     >>> for line in open('anatomical.txt', 'r'):
     ...     pixel_values.append(float(line))
@@ -51,6 +52,7 @@ How many pixel values does this file contain?
 
 .. nbplot::
 
+    >>> #- How many pixel values?
     >>> len(pixel_values)
     848640
 
@@ -70,7 +72,7 @@ for ``I * J``?
 
 .. nbplot::
 
-    >>> # Find the size of a slice over the third dimension
+    >>> #- Find the size of a slice over the third dimension
     >>> # P = ?
     >>> P = len(pixel_values) / 32
     >>> P
@@ -89,6 +91,7 @@ Hint: the first value will be 120.
 
 .. nbplot::
 
+    >>> #- Find candidates for I
     >>> candidates = []
     >>> for i in range(120, 201):
     ...     if P % i == 0:
@@ -106,6 +109,7 @@ Use the integer division operator (``//``) to get a list of pairs of numbers
 
 .. nbplot::
 
+    >>> #- Find candidate pairs for I, J
     >>> pairs = []
     >>> for candidate in candidates:
     ...     pair = [candidate, P // candidate]
@@ -121,6 +125,7 @@ slice over the third dimension to see how it looks.
 
 .. nbplot::
 
+    >>> #- Try reshaping using some candidate pairs
     >>> pixel_array = np.array(pixel_values)
     >>> try1 = np.reshape(pixel_array, (130, 204, 32))
     >>> plt.imshow(try1[:, :, 15])  # A middle slice in the third dimension
@@ -128,18 +133,16 @@ slice over the third dimension to see how it looks.
 
 .. nbplot::
 
-    >>> #- another try
     >>> try2 = np.reshape(pixel_array, (195, 136, 32))
     >>> plt.imshow(try2[:, :, 15])  # Same slice
     <...>
 
 .. nbplot::
 
-    >>> #- and another
     >>> try3 = np.reshape(pixel_array, (170, 156, 32))
     >>> plt.imshow(try3[:, :, 15])
     <...>
 
-    >>> #- The last one looks good, so final shape is:
+    >>> # The last one looks good, so final shape is:
     >>> try3.shape
     (170, 156, 32)

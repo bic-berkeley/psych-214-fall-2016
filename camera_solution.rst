@@ -1,6 +1,6 @@
-#################################
-Cameraman exercise |--| solutions
-#################################
+##################
+Cameraman solution
+##################
 
 .. nbplot::
     :include-source: false
