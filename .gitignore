@@ -58,3 +58,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Exercises generated from solutions
+lab_01_exercises.rst
