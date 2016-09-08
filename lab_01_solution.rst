@@ -153,7 +153,7 @@ Simple visualizations
 >>> #- plot x against y
 >>> import matplotlib.pyplot as plt
 >>> plt.plot(x, y)
-[<...matplotlib.lines.Line2D object at ...>]
+[...]
 
 4. Make a 10 by 20 array of mean 0 variance 1 normal random numbers;
 

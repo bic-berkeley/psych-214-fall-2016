@@ -59,8 +59,6 @@ docs/_build/
 # PyBuilder
 target/
 
-# Exercises generated from solutions
-lab_01_exercise.rst
-camera_exercise.rst
-anatomical_exercise.rst
+# Exercises and code generated from solutions
+*_exercise.rst
 *_code.py

@@ -29,7 +29,8 @@ Exercises
 *********
 
 * :doc:`camera_exercise`;
-* :doc:`anatomical_exercise`.
+* :doc:`anatomical_exercise`;
+* :doc:`arteries_exercise`.
 
 .. To cover
     Numpy allows creation of arrays

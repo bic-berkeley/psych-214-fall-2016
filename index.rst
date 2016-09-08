@@ -46,3 +46,17 @@ version control using git.
     glossary
     mentors
     papers/index
+    anatomical_exercise.rst
+    anatomical_solution.rst
+    arrays_and_images.rst
+    arteries_exercise.rst
+    arteries_solution.rst
+    camera_exercise.rst
+    camera_solution.rst
+    classwork/README.rst
+    classwork/day_00/introducing_python.rst
+    classwork/day_00/what_is_an_image.rst
+    lab_00.rst
+    lab_01_exercise.rst
+    lab_01_solution.rst
+    on_loops.rst

@@ -209,3 +209,4 @@ rst-exercises:
 	$(PYTHON) tools/proc_rst.py lab_01_solution.rst
 	$(PYTHON) tools/proc_rst.py camera_solution.rst
 	$(PYTHON) tools/proc_rst.py anatomical_solution.rst
+	$(PYTHON) tools/proc_rst.py arteries_solution.rst

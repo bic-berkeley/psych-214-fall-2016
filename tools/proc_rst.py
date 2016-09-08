@@ -121,7 +121,7 @@ def process_doctest_blocks(doctest_blocks):
     return '\n'.join(process_doctest_block(dtb) for dtb in doctest_blocks)
 
 
-DOCTEST_RE = re.compile('^(\s*)(>>>|...) ')
+DOCTEST_RE = re.compile('^(\s*)(>>>|...) ?')
 
 
 def process_doctest_block(doctest_block):
