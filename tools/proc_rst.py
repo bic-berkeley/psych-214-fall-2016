@@ -2,6 +2,13 @@
 
 Process ReST doc with solutions to remove doctest code, replace title, and add
 sphinx ``:doc:`` link to solutions document.
+
+Doctests starting with ">>> #:" we leave in the source.
+
+Doctests starting with ">>> #-" we remove completely.
+
+Doctests starting ">>> " and followed by anything else, we replace with the
+doctest marker "::  >>> # Your code here"
 """
 
 from os.path import split as psplit, splitext
@@ -15,6 +22,8 @@ HEADER_FMT = """{underline}
 
 For solutions see :doc:`{solution_name}`
 """
+
+DOCTEST_MARKER = '::\n\n    >>> # Your code here\n\n'
 
 def is_section_line(line):
     if line == '':
@@ -31,15 +40,22 @@ def process_rst(contents):
     underline_char = None
     for line in contents.splitlines(True):
         sline = line.strip()
-        if state == 'doctest':
+        if state in ('doctest', 'doctest-loser', 'doctest-keeper'):
+            if state == 'doctest-keeper':
+                exercise_contents.append(line)
             if sline == '':
                 state = 'rest'
             continue
-        if state == 'rest':
-            if sline.startswith('>>> '):
-                state = 'doctest'
+        elif state == 'rest':
+            if sline.startswith('>>> #:'):  # Keep this doctest
+                state = 'doctest-keeper'
+            elif sline.startswith('>>> #-'):  # Drop this one completely
+                state = 'doctest-loser'
                 continue
-            if underline_char is None and is_section_line(line):
+            elif sline.startswith('>>> '):  # Replace this with Your code here
+                state = 'doctest'
+                line = DOCTEST_MARKER
+            elif underline_char is None and is_section_line(line):
                 state = 'title'
                 underline_char = line[0]
                 continue
@@ -49,7 +65,8 @@ def process_rst(contents):
         elif state == 'post-title':
             assert is_section_line(line)
             state = 'rest'
-    return ''.join(exercise_contents), underline_char
+    out = ''.join(exercise_contents)
+    return out, underline_char
 
 
 def get_parser():
