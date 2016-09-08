@@ -9,12 +9,8 @@ Teaching
 We will be using the background from the tutorial pages from the `scipy
 lecture notes`_:
 
-* The `numpy array object`_
-* `Array operations`_
-
-We'll cover:
-
-* :doc:`arrays_and_images`;
+* The `numpy array object`_;
+* `Array operations`_.
 
 We'll cover:
 
@@ -25,6 +21,15 @@ We'll cover:
 * 3D arrays and brain volumes;
 * reshaping and slicing arrays;
 * histograms;
+
+See: :doc:`arrays_and_images`.
+
+*********
+Exercises
+*********
+
+* :doc:`camera_exercise`;
+* :doc:`anatomical_exercise`.
 
 .. To cover
     Numpy allows creation of arrays

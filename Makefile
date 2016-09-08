@@ -208,3 +208,4 @@ slides-%:
 rst-exercises:
 	$(PYTHON) tools/proc_rst.py lab_01_solutions.rst "Lab 01 exercises" > lab_01_exercises.rst
 	$(PYTHON) tools/proc_rst.py camera_solutions.rst "Cameraman exercise" > camera_exercise.rst
+	$(PYTHON) tools/proc_rst.py anatomical_solutions.rst "Anatomical exercise" > anatomical_exercise.rst
