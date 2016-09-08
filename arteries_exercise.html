@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Find the arteries exercise &#8212; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Find the arteries solution" href="arteries_solution.html" />
+    <link rel="prev" title="Arrays as images, images as arrays" href="arrays_and_images.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="find-the-arteries-exercise">
+<h1>Find the arteries exercise<a class="headerlink" href="#find-the-arteries-exercise" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>For code template see: <a class="reference download internal" href="_downloads/arteries_code.py" download=""><code class="xref download docutils literal"><span class="pre">arteries_code.py</span></code></a>;</li>
+<li>For solutions see: <a class="reference internal" href="arteries_solution.html"><span class="doc">Find the arteries solution</span></a>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our usual imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># Python array library</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># Python plotting library</span>
+</pre></div>
+</div>
+<p>The major arteries in a T1 MRI image often have high signal (white when
+displaying in gray-scale).</p>
+<p>Our task is to see if we can pick out the courses of the <a class="reference external" href="http://en.wikipedia.org/wiki/Vertebral_artery#mediaviewer/File:Vertebral_artery_3D_AP.jpg">vertebral, basilar</a>
+and <a class="reference external" href="http://en.wikipedia.org/wiki/Internal_carotid_artery#mediaviewer/File:Magnetic_resonance_angiogram_of_segments_of_the_internal_carotid_artery.jpg">carotid</a>
+arteries on this image.</p>
+<p>The image is <code class="docutils literal"><span class="pre">ds107_sub001_highres.nii</span></code>. Download
+<a class="reference download internal" href="_downloads/ds107_sub001_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub001_highres.nii</span></code></a> to your working directory.</p>
+<p>This time we are going to load the image using the <code class="docutils literal"><span class="pre">nibabel</span></code> library.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import nibabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+<p>Try loading the image using nibabel, to make an image object. Use tab
+completion on <code class="docutils literal"><span class="pre">nib.</span></code> in IPython to see if you can fund the function you
+need.  Go back to have a look at <a class="reference internal" href="classwork/day_00/what_is_an_image.html"><span class="doc">What is an image?</span></a> if
+you are stuck.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- img = ?</span>
+</pre></div>
+</div>
+<p>Now get the image array data from the nibabel image object. Don&#8217;t forget to
+use tab completion on the image object if you can&#8217;t remember or don&#8217;t know the
+methods of the object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- data = ?</span>
+</pre></div>
+</div>
+<p>Try plotting a few slices over the third dimension to see whether you can see
+the arteries. For example, to plot the first slice over the third dimension,
+you might use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">data</span></code> is your image array data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plotting some slices over the third dimension</span>
+</pre></div>
+</div>
+<p>Now try looking for a good threshold so that you pick up only the very high
+signal in the brain. A good place to start is to use <code class="docutils literal"><span class="pre">plt.hist</span></code> to get an
+idea of the spread of values within the volume and within the slice.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Here you might try plt.hist or something else to find a threshold</span>
+</pre></div>
+</div>
+<p>Try making a binarized image with your threshold and displaying slices
+with that. What structures are you picking up?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Maybe display some slices from the data binarized with a threshold</span>
+</pre></div>
+</div>
+<p>Now try taking a 3D subvolume out of the middle of the image.  Take the approximate
+middle in all three axes.  Use this to pick out a good subvolume of the image
+that still contains the big arteries.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create a smaller 3D subvolume from the image data that still</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- contains the arteries</span>
+</pre></div>
+</div>
+<p>Try binarizing the subvolume with some thresholds to see whether you can pick
+out the arteries without much other stuff. Hint - you might consider using
+<code class="docutils literal"><span class="pre">np.percentile</span></code> or <code class="docutils literal"><span class="pre">plt.hist</span></code> to find a good threshold.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Try a few plots of binarized slices and other stuff to find a good</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- threshold</span>
+</pre></div>
+</div>
+<p>If you have a good threshold and a good binarized subset, see if you can see
+the arterial structure using the following fancy function to plot the
+binarized image with a 3D rendering.  To use this function, you will need to
+install the <a class="reference external" href="http://scikit-image.org/">scikit-image</a> toolbox.  First see if scikit-image is installed
+with the command <code class="docutils literal"><span class="pre">import</span> <span class="pre">skimage</span></code> from the Python / IPython console.  If
+this gives you an <code class="docutils literal"><span class="pre">ImportError</span></code>, then open a <em>new terminal window</em> and
+install scikit-image with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">scikit</span><span class="o">-</span><span class="n">image</span>
+</pre></div>
+</div>
+<p>Careful – do <em>not</em> run this <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span></code> command from Python / IPython,
+but from the terminal command window.</p>
+<p>Here is the fancy function to display your subvolume in 3D:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: This function uses matplotlib 3D plotting and sckit-image for rendering</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.art3d</span> <span class="kn">import</span> <span class="n">Poly3DCollection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">binarized_surface</span><span class="p">(</span><span class="n">binary_array</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Do a 3D plot of the surfaces in a binarized image</span>
+<span class="gp">...</span><span class="sd"></span>
+<span class="gp">... </span><span class="sd">    This uses scikit-image and some fancy commands that we don&#39;t</span>
+<span class="gp">... </span><span class="sd">    need to worry about at the moment, to do the plot.</span>
+<span class="gp">... </span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="gp">... </span>    <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">binary_array</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="c1"># Fancy indexing: `verts[faces]` to generate a collection of triangles</span>
+<span class="gp">... </span>    <span class="n">mesh</span> <span class="o">=</span> <span class="n">Poly3DCollection</span><span class="p">(</span><span class="n">verts</span><span class="p">[</span><span class="n">faces</span><span class="p">],</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">add_collection3d</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">binary_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">binary_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">binary_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For example, let&#8217;s say you have a binarized subvolume of the original
+data called <code class="docutils literal"><span class="pre">binarized_subvolume</span></code>. You could do a 3D rendering of this
+binary image with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">binarized_surface</span><span class="p">(</span><span class="n">binarized_subvolume</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="arrays_and_images.html" title="previous chapter">Arrays as images, images as arrays</a></li>
+      <li>Next: <a href="arteries_solution.html" title="next chapter">Find the arteries solution</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/arteries_exercise.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/arteries_exercise.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
