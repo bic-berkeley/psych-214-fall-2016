@@ -5,7 +5,7 @@ Cameraman exercise |--| solutions
 .. nbplot::
     :include-source: false
 
-    >>> #: Compatibility with Python 3
+    >>> #: Compatibility with Python 2
     >>> from __future__ import print_function  # print('me') instead of print 'me'
     >>> from __future__ import division  # 1/2 == 0.5, not 0
 
@@ -34,7 +34,7 @@ You probably want to start with something like this::
 
 .. nbplot::
 
-    >>> # Read lines from file and convert to list of floats
+    >>> #- Read lines from file and convert to list of floats
     >>> pixel_values = []
     >>> fobj = open('camera.txt', 'r')
     >>> for line in fobj:
@@ -52,7 +52,7 @@ number of pixel values, what would your guess be for ``M`` and ``N``?
 
 .. nbplot::
 
-    >>> # Guess M, N
+    >>> #- Guess M, N
     >>> P = len(pixel_values)
     >>> M = np.sqrt(P)
     >>> N = M
@@ -67,7 +67,7 @@ your guess for the shape ``(M, N)``.
 
 .. nbplot::
 
-    >>> # Convert list to array and reshape
+    >>> #- Convert list to array and reshape
     >>> pixel_array = np.array(pixel_values)
     >>> # The shape values shoule be integers
     >>> pixel_array = np.reshape(pixel_array, (int(M), int(N)))
@@ -78,7 +78,7 @@ Show this as an image using matplotlib's ``plt`` module:
 
 .. nbplot::
 
-    >>> # Show image using plt module
+    >>> #- Show image using plt module
     >>> plt.imshow(pixel_array)
     <...>
 
@@ -91,7 +91,7 @@ called ``jet``.
 
 .. nbplot::
 
-    >>> # A nicer version of the original plot
+    >>> #- A nicer version of the original plot
     >>> plt.imshow(pixel_array.T, cmap='gray')
     <...>
 
@@ -103,7 +103,7 @@ idea of the values on that line.
 
 .. nbplot::
 
-    >>> # A plot of the pixel position in x and the pixel value in y, for an image line.
+    >>> #- A plot of the pixel position in x and the pixel value in y, for an image line.
     >>> plt.plot(pixel_array.T[380])
     [...]
 
@@ -113,7 +113,7 @@ values less than the threshold are == 0 and greater than the threshold are ==
 
 .. nbplot::
 
-    >>> # Apply threshold to make new binary image, and show binary image
+    >>> #- Apply threshold to make new binary image, and show binary image
     >>> binary_array = pixel_array > 0.1
     >>> plt.imshow(binary_array.T, cmap='gray')
     <...>
@@ -126,7 +126,7 @@ good picture to show the pocket? Hint: you might want to explore the
 
 .. nbplot::
 
-    >>> # Extra points - a good image of the man's pocket.
+    >>> #- Extra points - a good image of the man's pocket.
     >>> clipped_array = np.clip(pixel_array, 0, 0.1)
     >>> plt.imshow(clipped_array.T, cmap='gray')
     <...>
