@@ -4,7 +4,7 @@
 INDEX_TEMPLATE = r"""
 <html>
 <body>
-<h2>Downloads for psych-214 class website</h2>
+<h2>${header}</h2>
 <p>
 % for name in names:
     <li><a href="${name}">${name}<a></li>
@@ -14,18 +14,24 @@ INDEX_TEMPLATE = r"""
 </html>
 """
 
-EXCLUDED = 'index.html'
+EXCLUDED = ['index.html']
 
 import os
-import sys
+import argparse
 
+# May need to do "pip install mako"
 from mako.template import Template
 
+
 def main():
-    directory = sys.argv[1]
-    fnames = [fname for fname in sorted(os.listdir(directory))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("directory")
+    parser.add_argument("--header")
+    args = parser.parse_args()
+    fnames = [fname for fname in sorted(os.listdir(args.directory))
               if fname not in EXCLUDED]
-    print(Template(INDEX_TEMPLATE).render(names=fnames))
+    header = (args.header if args.header else os.path.basename(args.directory))
+    print(Template(INDEX_TEMPLATE).render(names=fnames, header=header))
 
 
 if __name__ == '__main__':

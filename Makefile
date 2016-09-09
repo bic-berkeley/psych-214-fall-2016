@@ -211,4 +211,6 @@ rst-exercises:
 	$(PYTHON) tools/proc_rst.py arteries_solution.rst
 
 download-index:
-	$(PYTHON) tools/make_index.py $(BUILDDIR)/html/_downloads > $(BUILDDIR)/html/_downloads/index.html
+	$(PYTHON) tools/make_index.py --header="Downloads for PSYCH214 website" \
+		$(BUILDDIR)/html/_downloads \
+		> $(BUILDDIR)/html/_downloads/index.html
