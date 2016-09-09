@@ -195,8 +195,7 @@ pseudoxml:
 graphics:
 	python3 tools/vector_projection.py images/vector_projection
 
-github:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+github: html download-index
 	ghp-import -n $(BUILDDIR)/html/
 	git push origin gh-pages:gh-pages --force
 	@echo
@@ -210,3 +209,6 @@ rst-exercises:
 	$(PYTHON) tools/proc_rst.py camera_solution.rst
 	$(PYTHON) tools/proc_rst.py anatomical_solution.rst
 	$(PYTHON) tools/proc_rst.py arteries_solution.rst
+
+download-index:
+	$(PYTHON) tools/make_index.py $(BUILDDIR)/html/_downloads > $(BUILDDIR)/html/_downloads/index.html
