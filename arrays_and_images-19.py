@@ -1,0 +1,16 @@
+an_array > 50
+# array([[False, False, False, False, False, False, False, False],
+# [False, False, False, False,  True,  True,  True, False],
+# [False, False, False, False,  True,  True,  True, False],
+# [False, False, False, False, False, False, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False, False,  True,  True,  True, False, False],
+# [False, False,  True,  True,  True, False, False, False],
+# [False, False,  True,  True,  True, False, False, False],
+# [False, False,  True,  True,  True, False, False, False],
+# [False, False,  True,  True,  True, False, False, False],
+# [False, False, False, False, False, False, False, False]], dtype=bool)

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Index and reshape in NumPy and MATLAB &#8212; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="index-and-reshape-in-numpy-and-matlab">
+<h1>Index and reshape in NumPy and MATLAB<a class="headerlink" href="#index-and-reshape-in-numpy-and-matlab" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s make a 3D array by taking a 1D array from 0 through 23, and filling the
+3D array by depth (the last axis), and then by column (the second axis) and
+then by row (the first axis):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fill in a NumPy array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">py_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_index</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Python has 0-based indices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>  <span class="c1"># row index changes slowest</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>  <span class="c1"># then column index</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>  <span class="c1"># depth index changes fastest</span>
+<span class="gp">... </span>            <span class="n">py_arr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">n_index</span><span class="p">];</span>
+<span class="gp">... </span>            <span class="n">n_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">py_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">[[  0.   4.   8.]</span>
+<span class="go"> [ 12.  16.  20.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">py_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[  1.   5.   9.]</span>
+<span class="go"> [ 13.  17.  21.]]</span>
+</pre></div>
+</div>
+<p>We can do the same thing in MATLAB, or its open-source version, Octave:</p>
+<div class="highlight-octave"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c">% Fill in a MATLAB / Octave array</span>
+<span class="o">&gt;&gt;</span> <span class="n">numbers</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mi">23</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">m_arr</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">n_index</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span>  <span class="c">% row index changes slowest</span>
+       <span class="k">for</span> <span class="n">j</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span>  <span class="c">% then column index</span>
+           <span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span>  <span class="c">% depth index changes fastest</span>
+               <span class="n">m_arr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">n_index</span><span class="p">);</span>
+               <span class="n">n_index</span> <span class="p">=</span> <span class="n">n_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+           <span class="k">end</span>
+       <span class="k">end</span>
+   <span class="k">end</span>
+<span class="o">&gt;&gt;</span> <span class="n">m_arr</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">m_arr</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ans</span> <span class="p">=</span>
+
+        <span class="mi">0</span>        <span class="mi">4</span>        <span class="mi">8</span>
+       <span class="mi">12</span>       <span class="mi">16</span>       <span class="mi">20</span>
+
+<span class="n">ans</span> <span class="p">=</span>
+
+        <span class="mi">1</span>        <span class="mi">5</span>        <span class="mi">9</span>
+       <span class="mi">13</span>       <span class="mi">17</span>       <span class="mi">21</span>
+</pre></div>
+</div>
+<p>Remember that MATLAB and Octave have 1-based indices.  That is, the index to
+the first element on an axis is 1.  Python has 0-based indices.  Given that,
+these two arrays are the same.  By &#8220;the same&#8221; I mean that that <code class="docutils literal"><span class="pre">m_arr[i,</span> <span class="pre">j,</span>
+<span class="pre">k]</span> <span class="pre">==</span> <span class="pre">py_arr[i-1,</span> <span class="pre">j-1,</span> <span class="pre">k-1]</span></code> for any <code class="docutils literal"><span class="pre">i,</span> <span class="pre">j,</span> <span class="pre">k</span></code>.  You can see this from the
+printout above of the first two planes in each array in Python and MATLAB.</p>
+<p>So far, we see that NumPy / Python and MATLAB indexing are the same, apart
+from the 0-based / 1-based difference.  They differ in their default way of
+getting elements when doing a reshape.</p>
+<p>When NumPy or MATLAB reshapes one array into another array, it takes the
+elements from the first array in some order, and puts them into the new array
+using the same order.  The default order in NumPy is to take the elements off
+the last axis first, then the second to last, back to the first axis.  This is
+the same order as the loop above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is exactly the same as the original ``py_arr``</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">reshaped</span> <span class="o">==</span> <span class="n">py_arr</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>MATLAB does a reshape using the opposite order, taking the elements off the
+first axis first:</p>
+<div class="highlight-octave"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]);</span>
+<span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ans</span> <span class="p">=</span>
+
+        <span class="mi">0</span>        <span class="mi">2</span>        <span class="mi">4</span>
+        <span class="mi">1</span>        <span class="mi">3</span>        <span class="mi">5</span>
+
+<span class="n">ans</span> <span class="p">=</span>
+
+        <span class="mi">6</span>        <span class="mi">8</span>       <span class="mi">10</span>
+        <span class="mi">7</span>        <span class="mi">9</span>       <span class="mi">11</span>
+</pre></div>
+</div>
+<p>If you prefer this ordering, you can ask NumPy to do the same, by using the
+<code class="docutils literal"><span class="pre">order</span></code> parameter to <code class="docutils literal"><span class="pre">reshape</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># First axis first fetching, like MATLAB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_1_reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">first_1_reshaped</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">[[0 2 4]</span>
+<span class="go"> [1 3 5]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">first_1_reshaped</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">[[ 6  8 10]</span>
+<span class="go"> [ 7  9 11]]</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index_reshape.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/index_reshape.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
