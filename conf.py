@@ -33,6 +33,7 @@ extensions = [
     'sphinxcontrib.bibtex',
     'sphinx.ext.doctest',
     'nb2plots.nbplots',
+    'autorun',
     'texext.mathcode',
     'sphinx.ext.autodoc',
     'texext.math_dollar',
@@ -322,6 +323,11 @@ mathcode_plot_context = 'nb2plots.nbplots.plot_context'
 
 # Set highlight language to make copybutton >>> hiding work
 highlight_language = "python"
+
+# Configure octave for autorun extension
+autorun_languages = {}
+autorun_languages['octave'] = u'octave --silent --verbose --traditional'
+autorun_languages['octave_prefix_chars'] = 3
 
 # Add the 'copybutton' javascript, to hide/show the prompt in code
 # examples

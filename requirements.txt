@@ -1,3 +1,4 @@
+# Sadly, you'll also need Octave on the PATH
 sphinx
 ghp-import
 matplotlib>=1.4.3

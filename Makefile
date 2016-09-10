@@ -52,10 +52,12 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html: rst-exercises
+html-only:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+html: rst-exercises html-only
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
