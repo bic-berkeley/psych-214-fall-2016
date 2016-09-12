@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reshaping and three-dimensional arrays &#8212; Functional MRI methods</title>
+    <title>Reshaping and three-dimensional arrays &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -89,7 +89,7 @@ there is a short-cut command for that:</p>
 <p>You can reshape from one shape, to any other shape, as long as the number of
 elements stays the same.  Can you see the algorithm NumPy is using to decide
 which elements go in which position of the array?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_1d</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_2d</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">array([[0, 1],</span>
 <span class="go">       [2, 3],</span>
 <span class="go">       [4, 5]])</span>
@@ -139,10 +139,11 @@ dimension must be length 2, and the other way round:</p>
 </pre></div>
 </div>
 <p>To think about what array this is, imagine tipping the bottom of each 2D array
-backwards from the screen, so 0 sits nearly on top of 12, in the plane of the
-screen, and 1 sits nearly on top of 13.</p>
-<p>Here are the two planes of the array (slices over the third dimension):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+towards you from the plane of the screen, and look at these tipped planes from
+the left, so the 0 sits nearly on top of 12, in the plane of the screen, and 4
+sits nearly on top of 16, a little forward of the plane of the screen.</p>
+<p>Here are the four &#8220;planes&#8221; of the array (slices over the third dimension):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">arr_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span>
 <span class="gp">...</span>
 <span class="go">[[ 0  4  8]</span>
@@ -151,6 +152,8 @@ screen, and 1 sits nearly on top of 13.</p>
 <span class="go"> [13 17 21]]</span>
 <span class="go">[[ 2  6 10]</span>
 <span class="go"> [14 18 22]]</span>
+<span class="go">[[ 3  7 11]</span>
+<span class="go"> [15 19 23]]</span>
 </pre></div>
 </div>
 <p>We can reshape to one dimension in the same way as we did for the 2D arrays.</p>
@@ -221,7 +224,7 @@ then first dimensions:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

@@ -1,0 +1,2 @@
+np.sqrt
+# <ufunc 'sqrt'>

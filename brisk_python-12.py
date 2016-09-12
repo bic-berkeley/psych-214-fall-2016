@@ -1,0 +1,2 @@
+type(None)
+# <class 'NoneType'>
