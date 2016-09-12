@@ -24,6 +24,13 @@ We'll cover:
 
 See: :doc:`arrays_and_images`.
 
+*****
+Setup
+*****
+
+See: `associating text editors with git
+<https://help.github.com/articles/associating-text-editors-with-git>`_.
+
 *********
 Exercises
 *********
