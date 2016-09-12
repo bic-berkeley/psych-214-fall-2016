@@ -1,0 +1,13 @@
+Explain reshape
+
+Consider comparing reshape to MATLAB
+
+3D array explanation
+
+What are docstrings?
+
+Maybe revision on keyword arguments.
+
+Consider np.set_printoptions
+
+%matplotlib for IPython sessions.
