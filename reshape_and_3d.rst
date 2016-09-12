@@ -61,7 +61,7 @@ which elements go in which position of the array?
 
 .. nbplot::
 
-    >>> arr_1d.reshape((3, 2))
+    >>> arr_2d.reshape((3, 2))
     array([[0, 1],
            [2, 3],
            [4, 5]])
@@ -116,14 +116,15 @@ Here NumPy is showing us the two slices over the first dimension:
            [20, 21, 22, 23]])
 
 To think about what array this is, imagine tipping the bottom of each 2D array
-backwards from the screen, so 0 sits nearly on top of 12, in the plane of the
-screen, and 1 sits nearly on top of 13.
+towards you from the plane of the screen, and look at these tipped planes from
+the left, so the 0 sits nearly on top of 12, in the plane of the screen, and 4
+sits nearly on top of 16, a little forward of the plane of the screen.
 
-Here are the two planes of the array (slices over the third dimension):
+Here are the four "planes" of the array (slices over the third dimension):
 
 .. nbplot::
 
-    >>> for i in range(3):
+    >>> for i in range(4):
     ...     print(arr_3d[:, :, i])
     ...
     [[ 0  4  8]
@@ -132,6 +133,8 @@ Here are the two planes of the array (slices over the third dimension):
      [13 17 21]]
     [[ 2  6 10]
      [14 18 22]]
+    [[ 3  7 11]
+     [15 19 23]]
 
 We can reshape to one dimension in the same way as we did for the 2D arrays.
 
