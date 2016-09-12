@@ -22,7 +22,10 @@ We'll cover:
 * reshaping and slicing arrays;
 * histograms;
 
-See: :doc:`arrays_and_images`.
+See:
+
+* :doc:`arrays_and_images`;
+* :doc:`reshape_and_3d`.
 
 *****
 Setup

@@ -61,3 +61,4 @@ version control using git.
     lab_01_solution
     on_loops
     index_reshape
+    reshape_and_3d
