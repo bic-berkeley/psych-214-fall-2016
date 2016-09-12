@@ -67,7 +67,8 @@ arteries on this image.</p>
 completion on <code class="docutils literal"><span class="pre">nib.</span></code> in IPython to see if you can fund the function you
 need.  Go back to have a look at <a class="reference internal" href="classwork/day_00/what_is_an_image.html"><span class="doc">What is an image?</span></a> if
 you are stuck.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- img = ?</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use nibabel to load the image ds107_sub001_highres.nii</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- img = ?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub001_highres.nii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -79,12 +80,11 @@ methods of the object.</p>
 </pre></div>
 </div>
 <p>Try plotting a few slices over the third dimension to see whether you can see
-the arteries. For example, to plot the first slice over the third dimension,
-you might use:</p>
+the arteries. For example, if <code class="docutils literal"><span class="pre">data</span></code> is your image array data, then you
+might plot the first slice over the third dimension, you might use:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal"><span class="pre">data</span></code> is your image array data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plotting some slices over the third dimension</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -155,17 +155,24 @@ install scikit-image with:</p>
 </div>
 <p>Careful – do <em>not</em> run this <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span></code> command from Python / IPython,
 but from the terminal command window.</p>
-<p>Here is the fancy function to display your subvolume in 3D:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: This function uses matplotlib 3D plotting and sckit-image for rendering</span>
+<p>When you have done the scikit-image install, uncomment this code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Uncomment the next line after installing scikit-image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># from skimage import measure</span>
+</pre></div>
+</div>
+<p>With that import done, here is the fancy function to display your subvolume in
+3D:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: This function uses matplotlib 3D plotting and sckit-image for</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rendering</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.art3d</span> <span class="kn">import</span> <span class="n">Poly3DCollection</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">binarized_surface</span><span class="p">(</span><span class="n">binary_array</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Do a 3D plot of the surfaces in a binarized image</span>
 <span class="gp">...</span><span class="sd"></span>
-<span class="gp">... </span><span class="sd">    This uses scikit-image and some fancy commands that we don&#39;t</span>
-<span class="gp">... </span><span class="sd">    need to worry about at the moment, to do the plot.</span>
+<span class="gp">... </span><span class="sd">    The function does the plotting with scikit-image and some fancy</span>
+<span class="gp">... </span><span class="sd">    commands that we don&#39;t need to worry about at the moment.</span>
 <span class="gp">... </span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="gp">... </span>    <span class="c1"># Here we use the scikit-image &quot;measure&quot; function</span>
 <span class="gp">... </span>    <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">binary_array</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="gp">... </span>    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
@@ -187,9 +194,9 @@ binary image with:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binarized_surface</span><span class="p">(</span><span class="n">binarized_subvolume</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//arteries_solution-12.png">png</a>, <a class="reference external" href=".//arteries_solution-12.hires.png">hires.png</a>, <a class="reference external" href=".//arteries_solution-12.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//arteries_solution-14.png">png</a>, <a class="reference external" href=".//arteries_solution-14.hires.png">hires.png</a>, <a class="reference external" href=".//arteries_solution-14.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/arteries_solution-12.png" src="_images/arteries_solution-12.png" />
+<img alt="_images/arteries_solution-14.png" src="_images/arteries_solution-14.png" />
 </div>
 </div>
 

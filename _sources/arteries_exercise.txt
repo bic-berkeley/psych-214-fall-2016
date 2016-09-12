@@ -41,6 +41,7 @@ you are stuck.
 
 .. nbplot::
 
+    >>> #- Use nibabel to load the image ds107_sub001_highres.nii
     >>> #- img = ?
 
 Now get the image array data from the nibabel image object. Don't forget to
@@ -52,12 +53,10 @@ methods of the object.
     >>> #- data = ?
 
 Try plotting a few slices over the third dimension to see whether you can see
-the arteries. For example, to plot the first slice over the third dimension,
-you might use::
+the arteries. For example, if ``data`` is your image array data, then you
+might plot the first slice over the third dimension, you might use::
 
     plt.imshow(data[:, :, 0], cmap='gray')
-
-where ``data`` is your image array data.
 
 .. nbplot::
 
@@ -109,20 +108,33 @@ install scikit-image with::
 Careful |--| do *not* run this ``pip3 install`` command from Python / IPython,
 but from the terminal command window.
 
-Here is the fancy function to display your subvolume in 3D:
+When you have done the scikit-image install, uncomment this code:
 
 .. nbplot::
 
-    >>> #: This function uses matplotlib 3D plotting and sckit-image for rendering
+    >>> #: Uncomment the next line after installing scikit-image
+    >>> # from skimage import measure
+
+.. nbplot::
+    :include-source: false
+
+
+With that import done, here is the fancy function to display your subvolume in
+3D:
+
+.. nbplot::
+
+    >>> #: This function uses matplotlib 3D plotting and sckit-image for
+    >>> # rendering
     >>> from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-    >>> from skimage import measure
     >>>
     >>> def binarized_surface(binary_array):
     ...     """ Do a 3D plot of the surfaces in a binarized image
     ...
-    ...     This uses scikit-image and some fancy commands that we don't
-    ...     need to worry about at the moment, to do the plot.
+    ...     The function does the plotting with scikit-image and some fancy
+    ...     commands that we don't need to worry about at the moment.
     ...     """
+    ...     # Here we use the scikit-image "measure" function
     ...     verts, faces = measure.marching_cubes(binary_array, 0)
     ...     fig = plt.figure(figsize=(10, 12))
     ...     ax = fig.add_subplot(111, projection='3d')

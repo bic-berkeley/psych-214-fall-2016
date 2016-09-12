@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt  # Python plotting library
 #: Import nibabel
 import nibabel as nib
 
+#- Use nibabel to load the image ds107_sub001_highres.nii
 #- img = ?
 
 #- data = ?
@@ -24,16 +25,21 @@ import nibabel as nib
 #- Try a few plots of binarized slices and other stuff to find a good
 #- threshold
 
-#: This function uses matplotlib 3D plotting and sckit-image for rendering
+#: Uncomment the next line after installing scikit-image
+# from skimage import measure
+
+
+#: This function uses matplotlib 3D plotting and sckit-image for
+# rendering
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-from skimage import measure
 
 def binarized_surface(binary_array):
     """ Do a 3D plot of the surfaces in a binarized image
 
-    This uses scikit-image and some fancy commands that we don't
-    need to worry about at the moment, to do the plot.
+    The function does the plotting with scikit-image and some fancy
+    commands that we don't need to worry about at the moment.
     """
+    # Here we use the scikit-image "measure" function
     verts, faces = measure.marching_cubes(binary_array, 0)
     fig = plt.figure(figsize=(10, 12))
     ax = fig.add_subplot(111, projection='3d')
