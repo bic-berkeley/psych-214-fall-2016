@@ -16,7 +16,7 @@ Install git and Python 3:
 .. code-block:: bash
 
     sudo apt-get update
-    sudo apt-get install -y git python3-dev
+    sudo apt-get install -y git python3-dev python3-tk
     sudo apt-get install -y git
 
 Check your Python 3 version with:
@@ -65,7 +65,7 @@ Install git and Python 3:
 
 .. code-block:: bash
 
-    sudo dnf install -y python3-devel git
+    sudo dnf install -y git python3-devel python3-tkinter
 
 If you get ``bash: dnf: command not found``, run ``sudo yum install dnf`` and
 try again.
