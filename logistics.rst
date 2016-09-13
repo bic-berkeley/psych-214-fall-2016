@@ -74,9 +74,4 @@ Feel free to email your instructors, but prefer the `PSYCH 214 Piazza site
 Office hours
 ************
 
-Office hours are in 210Q Barker Hall.
-
-If you can't get into the 210 area, then email one or both of your instructors
-to let you in.
-
-Day / time TBA.
+Office hours are in 10 Giannini Hall on Fridays from 10 am to 11.30.
