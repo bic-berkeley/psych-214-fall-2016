@@ -19,7 +19,9 @@ the commit information by default.
     git config --global user.email "matthew.brett@gmail.com"
 
 git often needs to call up a text editor. We will use Atom as our text editor
-(see `associating text editors with git`_)::
+(see `associating text editors with git`_):
+
+.. workrun::
 
     git config --global core.editor "atom --wait"
 
@@ -45,14 +47,14 @@ Initializing the repository
 
 We first make a new empty directory that will be version controlled with git.
 
-.. desktoprun::
+.. workrun::
+    :hide:
 
     mkdir our_work
-    echo "here $PWD"
 
 Create the git repository:
 
-.. desktoprun::
+.. workrun::
 
     cd our_work
     git init
@@ -63,7 +65,7 @@ Show the new ``.git`` directory:
 
     ls .git
 
-There are only a couple of empty directories in the ``.git/objects``
+There are only a couple of empty sub-directories in the ``.git/objects``
 directory:
 
 .. prizerun::
@@ -97,9 +99,10 @@ Check we added the file to the staging area:
 
     git status
 
-Show yourself there is a new file in ``.git/objects``:
+Show yourself there is a new sub-directory and file in ``.git/objects``:
 
 .. prizerun::
+    :hide-out:
 
     ls .git/objects/*
 
@@ -146,8 +149,9 @@ use the ``decompress`` function in the Python ``zlib`` module:
     >>> zlib.decompress
     <built-in function decompress>
 
-Now |--| what is the SHA1 hash of the *decompressed* contents of the new
-``.git/objects`` file?  Do you recognize it?
+Now |--| what is the *decompressed* contents of the new ``.git/objects`` file?
+Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
+you recognize that?
 
 When you are done, have a look at the solution in: `reading git objects
 <https://matthew-brett.github.io/curious-git/reading_git_objects.html>`_.
@@ -185,7 +189,7 @@ Show what branch you are on, with the hash of the current commit:
 .. prizerun::
     :hide-out:
 
-    git branch -a
+    git branch -v
 
 Edit again, check and commit
 ============================
@@ -236,6 +240,7 @@ Make the commit:
 Look at the project history again:
 
 .. prizerun::
+    :hide:
 
     git log
 
@@ -312,9 +317,9 @@ cat-file -p`` followed by the first 7 digits of the hash value |--| e.g.
     git cat-file -p {{ our_paper_1_hash_7 }}
 
 See if you can find the hash of the object corresponding to the directory
-listing for our last commit, and display its contents.  Hint: consider
-starting by displaying the contents for the current commit message.  What is
-the hash for the current commit message?
+listing for our most recent commit, and display its contents.  Hint: Find the
+hash for the current commit message.  Try displaying the contents for the
+current commit message.
 
 Moving files
 ============

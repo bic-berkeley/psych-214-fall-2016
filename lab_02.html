@@ -54,7 +54,7 @@ $ git config --global user.email <span class="s2">&quot;matthew.brett@gmail.com&
 </div>
 <p>git often needs to call up a text editor. We will use Atom as our text editor
 (see <a class="reference external" href="https://help.github.com/articles/associating-text-editors-with-git">associating text editors with git</a>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">editor</span> <span class="s2">&quot;atom --wait&quot;</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global core.editor <span class="s2">&quot;atom --wait&quot;</span>
 </pre></div>
 </div>
 <p>We also turn on the use of color, which is very helpful in making the
@@ -105,14 +105,9 @@ to <span class="nb">read</span> about a specific subcommand or concept.
 <div class="section" id="initializing-the-repository">
 <h2>Initializing the repository<a class="headerlink" href="#initializing-the-repository" title="Permalink to this headline">¶</a></h2>
 <p>We first make a new empty directory that will be version controlled with git.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ mkdir our_work
-<span class="o">[</span>desktop<span class="o">]</span>$ <span class="nb">echo</span> <span class="s2">&quot;here </span><span class="nv">$PWD</span><span class="s2">&quot;</span>
-here /Users/mb312/dev_trees/psych-214-fall-2016/working
-</pre></div>
-</div>
 <p>Create the git repository:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ <span class="nb">cd</span> our_work
-<span class="o">[</span>desktop<span class="o">]</span>$ git init
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> our_work
+$ git init
 Initialized empty Git repository in /Users/mb312/dev_trees/psych-214-fall-2016/working/our_work/.git/
 </pre></div>
 </div>
@@ -128,7 +123,7 @@ objects
 refs
 </pre></div>
 </div>
-<p>There are only a couple of empty directories in the <code class="docutils literal"><span class="pre">.git/objects</span></code>
+<p>There are only a couple of empty sub-directories in the <code class="docutils literal"><span class="pre">.git/objects</span></code>
 directory:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ ls .git/objects/*
 .git/objects/info:
@@ -161,14 +156,8 @@ Changes to be committed:
 	new file:   our_paper.txt
 </pre></div>
 </div>
-<p>Show yourself there is a new file in <code class="docutils literal"><span class="pre">.git/objects</span></code>:</p>
+<p>Show yourself there is a new sub-directory and file in <code class="docutils literal"><span class="pre">.git/objects</span></code>:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ ls .git/objects/*
-.git/objects/d6:
-05b79accc16319ffe95fdc0a7992e830695c1c
-
-.git/objects/info:
-
-.git/objects/pack:
 </pre></div>
 </div>
 </div>
@@ -207,8 +196,9 @@ use the <code class="docutils literal"><span class="pre">decompress</span></code
 <span class="go">&lt;built-in function decompress&gt;</span>
 </pre></div>
 </div>
-<p>Now – what is the SHA1 hash of the <em>decompressed</em> contents of the new
-<code class="docutils literal"><span class="pre">.git/objects</span></code> file?  Do you recognize it?</p>
+<p>Now – what is the <em>decompressed</em> contents of the new <code class="docutils literal"><span class="pre">.git/objects</span></code> file?
+Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
+you recognize that?</p>
 <p>When you are done, have a look at the solution in: <a class="reference external" href="https://matthew-brett.github.io/curious-git/reading_git_objects.html">reading git objects</a>.</p>
 </div>
 <div class="section" id="make-a-first-commit">
@@ -234,7 +224,7 @@ Changes to be committed:
 </pre></div>
 </div>
 <p>Show what branch you are on, with the hash of the current commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git branch -a
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git branch -v
 </pre></div>
 </div>
 </div>
@@ -265,20 +255,6 @@ Crucially, this is the second sentence.
 </pre></div>
 </div>
 <p>Look at the project history again:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git log
-commit 12fb55aab675ca037509bdb436a5f1238b3b639b
-Author: Matthew Brett &lt;matthew.brett@gmail.com&gt;
-Date:   Thu Sep <span class="m">15</span> 14:35:13 <span class="m">2016</span> -0700
-
-    Second version of the paper
-
-commit ab566febeb63f2dbe6e02936f26e1f3e2a6913b5
-Author: Matthew Brett &lt;matthew.brett@gmail.com&gt;
-Date:   Thu Sep <span class="m">15</span> 14:30:13 <span class="m">2016</span> -0700
-
-    First version of the paper
-</pre></div>
-</div>
 <p>Check the parent hashes recorded in each commit.  How?:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Check the parents</span>
 </pre></div>
@@ -326,9 +302,9 @@ This is the first sentence of the new paper.
 </pre></div>
 </div>
 <p>See if you can find the hash of the object corresponding to the directory
-listing for our last commit, and display its contents.  Hint: consider
-starting by displaying the contents for the current commit message.  What is
-the hash for the current commit message?</p>
+listing for our most recent commit, and display its contents.  Hint: Find the
+hash for the current commit message.  Try displaying the contents for the
+current commit message.</p>
 </div>
 <div class="section" id="moving-files">
 <h2>Moving files<a class="headerlink" href="#moving-files" title="Permalink to this headline">¶</a></h2>
