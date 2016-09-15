@@ -51,6 +51,7 @@ help:
 
 clean:
 	rm -rf $(BUILDDIR)/*
+	-rm -rf working/* working/.gitconfig
 
 html-only:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html

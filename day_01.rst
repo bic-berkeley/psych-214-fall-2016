@@ -31,8 +31,7 @@ See:
 Setup
 *****
 
-See: `associating text editors with git
-<https://help.github.com/articles/associating-text-editors-with-git>`_.
+See: `associating text editors with git`_.
 
 *********
 Exercises

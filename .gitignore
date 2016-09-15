@@ -62,3 +62,6 @@ target/
 # Exercises and code generated from solutions
 *_exercise.rst
 *_code.py
+
+# Machinery for getting object names from shell etc
+object_names.inc
