@@ -110,12 +110,25 @@ Looking at real git objects
 ===========================
 
 Now we're going to read the new object in Python, and find the hash of its
-contents.  Here's how to read the binary contents of a whole file into memory:
+contents.  You don't need to do this kind of thing to use git.  This is to
+practice to some Python, and to show you how git stores its files.
+
+To read the new object, you'll need a few new bits of Python.
+
+Here's how to read the binary contents of a whole file into memory:
+
+.. nbplot::
+    :include-source: false
+
+    >>> with open('our_paper.txt', 'wt') as fobj:
+    ...     fobj.write('This is the first sentence of the new paper.\n')
+    ...
+    45
 
 .. nbplot::
 
-    >>> # Open the file in Read Binary mode
-    >>> fobj = open('ds107_sub001_highres.nii', 'rb')
+    >>> # Open a file in Read Binary mode to read bytes
+    >>> fobj = open('our_paper.txt', 'rb')
     >>> # Read contents as bytes
     >>> contents = fobj.read()  # Read the whole file
     >>> fobj.close()
@@ -130,14 +143,14 @@ Here's how to calculate the SHA1 hash value for the file contents:
     >>> import hashlib
     >>> # Generate the SHA1 hash string for these bytes
     >>> hashlib.sha1(contents).hexdigest()
-    'd8a8ab8fd509def03c410d080d3a420b98a42d23'
+    'cb083f8092a8bfbe55a215e1b45e9f33b9dec86f'
 
 This is the same value as the terminal command ``shasum`` calculates on a
 file:
 
-.. runblock::
+.. prizerun::
 
-    shasum ds107_sub001_highres.nii
+    shasum our_paper.txt
 
 The new file in ``.git/objects`` is *compressed* using a program called
 ``zlib``.  To un-compress some bytes that have been compressed with ``zlib``,
@@ -149,12 +162,34 @@ use the ``decompress`` function in the Python ``zlib`` module:
     >>> zlib.decompress
     <built-in function decompress>
 
+.. prizevar:: sha_fname
+
+    echo "function sha_fname { echo \${1:0:2}/\${1:2}; }; sha_fname "
+
+.. prizevar:: our_paper_1_fname
+
+    fname=$({{ sha_fname }} {{ our_paper_1_hash }})
+    echo ".git/objects/$fname"
+
 Now |--| what is the *decompressed* contents of the new ``.git/objects`` file?
 Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
-you recognize that?
+you recognize that?  Start with something like:
+
+.. prizeout::
+
+    echo ">>> fobj = open('{{ our_paper_1_fname }}', 'rb')"
+
+where |our_paper_1_fname| is the new file that appeared in your
+``.git/objects`` directory when you staged ``our_paper.txt``.
 
 When you are done, have a look at the solution in: `reading git objects
 <https://matthew-brett.github.io/curious-git/reading_git_objects.html>`_.
+
+.. nbplot::
+    :include-source: false
+
+    >>> import os
+    >>> os.remove('our_paper.txt')
 
 Make a first commit
 ===================
@@ -525,3 +560,5 @@ The end
 
 Congratulations!  You now know the basics of working with a single git
 repository.
+
+.. include:: working/object_names.inc
