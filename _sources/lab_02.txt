@@ -61,14 +61,14 @@ Create the git repository:
 
 Show the new ``.git`` directory:
 
-.. prizerun::
+.. reporun::
 
     ls .git
 
 There are only a couple of empty sub-directories in the ``.git/objects``
 directory:
 
-.. prizerun::
+.. reporun::
 
     ls .git/objects/*
 
@@ -79,29 +79,29 @@ git add - put stuff into the staging area
 
 Type this file in Atom and save:
 
-.. prizewrite:: our_paper.txt
+.. repowrite:: our_paper.txt
 
     This is the first sentence of the new paper.
 
 Add to the staging area:
 
-.. prizerun::
+.. reporun::
 
     git add our_paper.txt
 
-.. prizevar:: our_paper_1_hash
+.. repovar:: our_paper_1_hash
 
     git rev-parse :our_paper.txt
 
 Check we added the file to the staging area:
 
-.. prizerun::
+.. reporun::
 
     git status
 
 Show yourself there is a new sub-directory and file in ``.git/objects``:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     ls .git/objects/*
@@ -111,7 +111,7 @@ Looking at real git objects
 
 Now we're going to read the new object in Python, and find the hash of its
 contents.  You don't need to do this kind of thing to use git.  This is to
-practice to some Python, and to show you how git stores its files.
+practice some Python, and to show you how git stores its files.
 
 To read the new object, you'll need a few new bits of Python.
 
@@ -148,7 +148,7 @@ Here's how to calculate the SHA1 hash value for the file contents:
 This is the same value as the terminal command ``shasum`` calculates on a
 file:
 
-.. prizerun::
+.. reporun::
 
     shasum our_paper.txt
 
@@ -162,20 +162,22 @@ use the ``decompress`` function in the Python ``zlib`` module:
     >>> zlib.decompress
     <built-in function decompress>
 
-.. prizevar:: sha_fname
+.. repovar:: sha_fname
 
     echo "function sha_fname { echo \${1:0:2}/\${1:2}; }; sha_fname "
 
-.. prizevar:: our_paper_1_fname
+.. repovar:: our_paper_1_fname
 
     fname=$({{ sha_fname }} {{ our_paper_1_hash }})
     echo ".git/objects/$fname"
 
 Now |--| what is the *decompressed* contents of the new ``.git/objects`` file?
 Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
-you recognize that?  Start with something like:
+you recognize that?
 
-.. prizeout::
+You should start with something like:
+
+.. repoout::
 
     echo ">>> fobj = open('{{ our_paper_1_fname }}', 'rb')"
 
@@ -196,32 +198,32 @@ Make a first commit
 
 Remember what will go into this commit:
 
-.. prizerun::
+.. reporun::
 
     git status
 
 Make the commit:
 
-.. prizerun::
+.. reporun::
     :dont-run:
 
     git commit
 
-.. prizecommit:: commit_1_sha 2016-09-15 14:30:13
+.. repocommit:: commit_1_sha 2016-09-15 14:30:13
     :hide:
 
     git commit -m "First version of the paper"
 
 Review what you have so far in your history:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     git log
 
 Show what branch you are on, with the hash of the current commit:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     git branch -v
@@ -231,7 +233,7 @@ Edit again, check and commit
 
 Edit the paper file again to add some text:
 
-.. prizewrite:: our_paper.txt
+.. repowrite:: our_paper.txt
 
     This is the first sentence of the new paper.
 
@@ -239,7 +241,7 @@ Edit the paper file again to add some text:
 
 Check the difference between what you had before and what you have now:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     git diff
@@ -248,33 +250,33 @@ Add the changes to the staging area::
 
     # What goes here?
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git add our_paper.txt
 
 Our customary check:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     git status
 
 Make the commit:
 
-.. prizerun::
+.. reporun::
     :dont-run:
 
     git commit
 
-.. prizecommit:: commit_2_sha 2016-09-15 14:35:13
+.. repocommit:: commit_2_sha 2016-09-15 14:35:13
     :hide:
 
     git commit -m "Second version of the paper"
 
 Look at the project history again:
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git log
@@ -285,7 +287,7 @@ Check the parent hashes recorded in each commit.  How?::
 
 Check which hash the default branch is pointing to now:
 
-.. prizerun::
+.. reporun::
     :hide-out:
 
     git branch -v
@@ -295,7 +297,7 @@ A new file
 
 Make a new file like this:
 
-.. prizewrite:: our_analysis.py
+.. repowrite:: our_analysis.py
 
     # An analysis of our data
     # Details to be confirmed
@@ -308,12 +310,12 @@ Add the file to the staging area.
 
 Make a commit.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git add our_analysis.py
 
-.. prizecommit:: commit_3_sha 2016-09-15 14:40:13
+.. repocommit:: commit_3_sha 2016-09-15 14:40:13
     :hide:
 
     git commit -m "Add analysis"
@@ -325,7 +327,7 @@ A prettier log command
 
     git config --global alias.slog "log --oneline --graph"
 
-.. prizerun::
+.. reporun::
 
     git slog
 
@@ -339,15 +341,15 @@ What do these objects store?
 If you have the hash of an object, you can check the contents with ``git
 cat-file -p`` followed by the first 7 digits of the hash value |--| e.g.
 
-.. prizevar:: sha_7
+.. repovar:: sha_7
 
     echo "function sha_7 { echo \${1:0:7}; }; sha_7 "
 
-.. prizevar:: our_paper_1_hash_7
+.. repovar:: our_paper_1_hash_7
 
     {{ sha_7 }} {{ our_paper_1_hash }}
 
-.. prizerun::
+.. reporun::
 
     git cat-file -p {{ our_paper_1_hash_7 }}
 
@@ -361,7 +363,7 @@ Moving files
 
 Try moving a file (renaming) using ``git mv``:
 
-.. prizerun::
+.. reporun::
 
     git mv our_analysis.py our_first_analysis.py
 
@@ -372,7 +374,7 @@ Make a commit.
 Now you have made a commit, check the new directory listing for our latest
 commit.  What changed?
 
-.. prizecommit:: commit_4_sha 2016-09-15 14:45:13
+.. repocommit:: commit_4_sha 2016-09-15 14:45:13
     :hide:
 
     git commit -m "Move analysis file"
@@ -382,7 +384,7 @@ Making a new branch
 
 Make a new branch with:
 
-.. prizerun::
+.. reporun::
 
     git branch work-from-home
 
@@ -392,14 +394,14 @@ Have a look at the file ``.git/HEAD``.  What is it telling us?
 
 Tell git to start working on the new branch instead of our previous branch:
 
-.. prizerun::
+.. reporun::
 
     git checkout work-from-home
 
 Have a look at ``git branch -v`` again.  What changed?  How about the file
 ``.git/HEAD``?
 
-.. prizerun::
+.. reporun::
     :hide:
 
     echo "" >> our_paper.txt
@@ -407,7 +409,7 @@ Have a look at ``git branch -v`` again.  What changed?  How about the file
 
 Now see if you can replicate the following changes to ``our_paper.txt``:
 
-.. prizeout::
+.. repoout::
 
     git diff
 
@@ -416,12 +418,12 @@ above.
 
 When you've finished, add the changes to the staging area and then commit.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git add our_paper.txt
 
-.. prizecommit:: work_from_home_1_sha 2016-09-15 14:50:13
+.. repocommit:: work_from_home_1_sha 2016-09-15 14:50:13
     :hide:
 
     git commit -m "Move analysis file"
@@ -430,24 +432,24 @@ Check where you are with ``git slog``, and ``git branch -v``.
 
 Now go back to your previous branch, called ``master``:
 
-.. prizerun::
+.. reporun::
 
     git checkout master
 
 Create this data file, add it to the staging area and commit.
 
-.. prizewrite:: our_data.csv
+.. repowrite:: our_data.csv
 
     0,210,32
     1,212,30
     2,220,29
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git add our_data.csv
 
-.. prizecommit:: master_1_sha 2016-09-15 14:50:13
+.. repocommit:: master_1_sha 2016-09-15 14:50:13
     :hide:
 
     git commit -m "Add data file"
@@ -463,7 +465,7 @@ you need.
 
 Do the merge.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git merge work-from-home
@@ -486,7 +488,7 @@ changes you want to keep.
 
 Make and checkout a new branch ``asking-for-trouble``.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git branch asking-for-trouble
@@ -504,7 +506,7 @@ Checkout the ``master`` branch again.
 Edit ``our_paper.txt`` and add a sentence like "Fourth sentence is still
 warm-up."  Add to the staging area and commit.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     git checkout master
@@ -516,7 +518,7 @@ warm-up."  Add to the staging area and commit.
 Now try merging the ``asking-for-trouble`` branch into our current
 (``master``) branch. What do you see?
 
-.. prizerun::
+.. reporun::
     :allow-fail:
     :hide:
 
@@ -525,7 +527,7 @@ Now try merging the ``asking-for-trouble`` branch into our current
 When the merge failed, git wrote some text into the file where the changes
 clash.  ``our_paper.txt`` might look like this:
 
-.. prizeout::
+.. repoout::
 
     cat our_paper.txt
 
@@ -540,7 +542,7 @@ the file is ready, save it, then add it to the staging area and do a commit.
 
 Check all is well with ``git slog``.
 
-.. prizerun::
+.. reporun::
     :hide:
 
     cat << EOF > our_paper.txt

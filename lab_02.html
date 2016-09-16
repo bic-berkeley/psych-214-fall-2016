@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="“for” and “while”, “break” and “else:”" href="on_loops.html" />
+    <link rel="prev" title="Lab 01 solution" href="lab_01_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -112,7 +114,7 @@ Initialized empty Git repository in /Users/mb312/dev_trees/psych-214-fall-2016/w
 </pre></div>
 </div>
 <p>Show the new <code class="docutils literal"><span class="pre">.git</span></code> directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ ls .git
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git
 HEAD
 branches
 config
@@ -125,7 +127,7 @@ refs
 </div>
 <p>There are only a couple of empty sub-directories in the <code class="docutils literal"><span class="pre">.git/objects</span></code>
 directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ ls .git/objects/*
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git/objects/*
 .git/objects/info:
 
 .git/objects/pack:
@@ -141,11 +143,11 @@ directory:</p>
 </div>
 </div>
 <p>Add to the staging area:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git add our_paper.txt
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git add our_paper.txt
 </pre></div>
 </div>
 <p>Check we added the file to the staging area:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git status
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
 On branch master
 
 Initial commit
@@ -157,7 +159,7 @@ Changes to be committed:
 </pre></div>
 </div>
 <p>Show yourself there is a new sub-directory and file in <code class="docutils literal"><span class="pre">.git/objects</span></code>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ ls .git/objects/*
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git/objects/*
 </pre></div>
 </div>
 </div>
@@ -165,7 +167,7 @@ Changes to be committed:
 <h2>Looking at real git objects<a class="headerlink" href="#looking-at-real-git-objects" title="Permalink to this headline">¶</a></h2>
 <p>Now we&#8217;re going to read the new object in Python, and find the hash of its
 contents.  You don&#8217;t need to do this kind of thing to use git.  This is to
-practice to some Python, and to show you how git stores its files.</p>
+practice some Python, and to show you how git stores its files.</p>
 <p>To read the new object, you&#8217;ll need a few new bits of Python.</p>
 <p>Here&#8217;s how to read the binary contents of a whole file into memory:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Open a file in Read Binary mode to read bytes</span>
@@ -187,7 +189,7 @@ practice to some Python, and to show you how git stores its files.</p>
 </div>
 <p>This is the same value as the terminal command <code class="docutils literal"><span class="pre">shasum</span></code> calculates on a
 file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ shasum our_paper.txt
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ shasum our_paper.txt
 cb083f8092a8bfbe55a215e1b45e9f33b9dec86f  our_paper.txt
 </pre></div>
 </div>
@@ -201,7 +203,8 @@ use the <code class="docutils literal"><span class="pre">decompress</span></code
 </div>
 <p>Now – what is the <em>decompressed</em> contents of the new <code class="docutils literal"><span class="pre">.git/objects</span></code> file?
 Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
-you recognize that?  Start with something like:</p>
+you recognize that?</p>
+<p>You should start with something like:</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>&gt;&gt;&gt; fobj = open(&#39;.git/objects/d6/05b79accc16319ffe95fdc0a7992e830695c1c&#39;, &#39;rb&#39;)
 </pre></div>
 </div>
@@ -212,7 +215,7 @@ you recognize that?  Start with something like:</p>
 <div class="section" id="make-a-first-commit">
 <h2>Make a first commit<a class="headerlink" href="#make-a-first-commit" title="Permalink to this headline">¶</a></h2>
 <p>Remember what will go into this commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git status
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
 On branch master
 
 Initial commit
@@ -224,15 +227,15 @@ Changes to be committed:
 </pre></div>
 </div>
 <p>Make the commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git commit
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git commit
 </pre></div>
 </div>
 <p>Review what you have so far in your history:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git log
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git log
 </pre></div>
 </div>
 <p>Show what branch you are on, with the hash of the current commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git branch -v
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch -v
 </pre></div>
 </div>
 </div>
@@ -247,7 +250,7 @@ Crucially, this is the second sentence.
 </div>
 </div>
 <p>Check the difference between what you had before and what you have now:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git diff
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git diff
 </pre></div>
 </div>
 <p>Add the changes to the staging area:</p>
@@ -255,11 +258,11 @@ Crucially, this is the second sentence.
 </pre></div>
 </div>
 <p>Our customary check:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git status
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
 </pre></div>
 </div>
 <p>Make the commit:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git commit
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git commit
 </pre></div>
 </div>
 <p>Look at the project history again:</p>
@@ -268,7 +271,7 @@ Crucially, this is the second sentence.
 </pre></div>
 </div>
 <p>Check which hash the default branch is pointing to now:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git branch -v
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch -v
 </pre></div>
 </div>
 </div>
@@ -292,7 +295,7 @@ print(&quot;Tada!&quot;)
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global alias.slog <span class="s2">&quot;log --oneline --graph&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git slog
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git slog
 * 30f2717 Add analysis
 * 12fb55a Second version of the paper
 * ab566fe First version of the paper
@@ -305,7 +308,7 @@ print(&quot;Tada!&quot;)
 <p>What do these objects store?</p>
 <p>If you have the hash of an object, you can check the contents with <code class="docutils literal"><span class="pre">git</span>
 <span class="pre">cat-file</span> <span class="pre">-p</span></code> followed by the first 7 digits of the hash value – e.g.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git cat-file -p d605b79
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git cat-file -p d605b79
 This is the first sentence of the new paper.
 </pre></div>
 </div>
@@ -317,7 +320,7 @@ current commit message.</p>
 <div class="section" id="moving-files">
 <h2>Moving files<a class="headerlink" href="#moving-files" title="Permalink to this headline">¶</a></h2>
 <p>Try moving a file (renaming) using <code class="docutils literal"><span class="pre">git</span> <span class="pre">mv</span></code>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git mv our_analysis.py our_first_analysis.py
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git mv our_analysis.py our_first_analysis.py
 </pre></div>
 </div>
 <p>Check the status.  Do you need to add anything to the staging area?</p>
@@ -328,13 +331,13 @@ commit.  What changed?</p>
 <div class="section" id="making-a-new-branch">
 <h2>Making a new branch<a class="headerlink" href="#making-a-new-branch" title="Permalink to this headline">¶</a></h2>
 <p>Make a new branch with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git branch work-from-home
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch work-from-home
 </pre></div>
 </div>
 <p>Use <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code> to check the hash that this new branch points to.</p>
 <p>Have a look at the file <code class="docutils literal"><span class="pre">.git/HEAD</span></code>.  What is it telling us?</p>
 <p>Tell git to start working on the new branch instead of our previous branch:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git checkout work-from-home
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout work-from-home
 Switched to branch <span class="s1">&#39;work-from-home&#39;</span>
 </pre></div>
 </div>
@@ -358,7 +361,7 @@ above.</p>
 <p>When you&#8217;ve finished, add the changes to the staging area and then commit.</p>
 <p>Check where you are with <code class="docutils literal"><span class="pre">git</span> <span class="pre">slog</span></code>, and <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code>.</p>
 <p>Now go back to your previous branch, called <code class="docutils literal"><span class="pre">master</span></code>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ git checkout master
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout master
 Switched to branch <span class="s1">&#39;master&#39;</span>
 </pre></div>
 </div>
@@ -460,6 +463,8 @@ repository.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="lab_01_solution.html" title="previous chapter">Lab 01 solution</a></li>
+      <li>Next: <a href="on_loops.html" title="next chapter">&#8220;for&#8221; and &#8220;while&#8221;, &#8220;break&#8221; and &#8220;else:&#8221;</a></li>
   </ul></li>
 </ul>
 </div>
