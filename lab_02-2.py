@@ -1,5 +1,7 @@
-# Import the Python module that calculates hash values
-import hashlib
-# Generate the SHA1 hash string for these bytes
-hashlib.sha1(contents).hexdigest()
-# 'd8a8ab8fd509def03c410d080d3a420b98a42d23'
+# Open a file in Read Binary mode to read bytes
+fobj = open('our_paper.txt', 'rb')
+# Read contents as bytes
+contents = fobj.read()  # Read the whole file
+fobj.close()
+type(contents)
+# <class 'bytes'>

@@ -164,9 +164,12 @@ Changes to be committed:
 <div class="section" id="looking-at-real-git-objects">
 <h2>Looking at real git objects<a class="headerlink" href="#looking-at-real-git-objects" title="Permalink to this headline">¶</a></h2>
 <p>Now we&#8217;re going to read the new object in Python, and find the hash of its
-contents.  Here&#8217;s how to read the binary contents of a whole file into memory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Open the file in Read Binary mode</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ds107_sub001_highres.nii&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+contents.  You don&#8217;t need to do this kind of thing to use git.  This is to
+practice to some Python, and to show you how git stores its files.</p>
+<p>To read the new object, you&#8217;ll need a few new bits of Python.</p>
+<p>Here&#8217;s how to read the binary contents of a whole file into memory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Open a file in Read Binary mode to read bytes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;our_paper.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read contents as bytes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">fobj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Read the whole file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -179,13 +182,13 @@ contents.  Here&#8217;s how to read the binary contents of a whole file into mem
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the SHA1 hash string for these bytes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-<span class="go">&#39;d8a8ab8fd509def03c410d080d3a420b98a42d23&#39;</span>
+<span class="go">&#39;cb083f8092a8bfbe55a215e1b45e9f33b9dec86f&#39;</span>
 </pre></div>
 </div>
 <p>This is the same value as the terminal command <code class="docutils literal"><span class="pre">shasum</span></code> calculates on a
 file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ shasum ds107_sub001_highres.nii
-d8a8ab8fd509def03c410d080d3a420b98a42d23  ds107_sub001_highres.nii
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>desktop<span class="o">]</span>$ shasum our_paper.txt
+cb083f8092a8bfbe55a215e1b45e9f33b9dec86f  our_paper.txt
 </pre></div>
 </div>
 <p>The new file in <code class="docutils literal"><span class="pre">.git/objects</span></code> is <em>compressed</em> using a program called
@@ -198,7 +201,12 @@ use the <code class="docutils literal"><span class="pre">decompress</span></code
 </div>
 <p>Now – what is the <em>decompressed</em> contents of the new <code class="docutils literal"><span class="pre">.git/objects</span></code> file?
 Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
-you recognize that?</p>
+you recognize that?  Start with something like:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>&gt;&gt;&gt; fobj = open(&#39;.git/objects/d6/05b79accc16319ffe95fdc0a7992e830695c1c&#39;, &#39;rb&#39;)
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">.git/objects/d6/05b79accc16319ffe95fdc0a7992e830695c1c</span></code> is the new file that appeared in your
+<code class="docutils literal"><span class="pre">.git/objects</span></code> directory when you staged <code class="docutils literal"><span class="pre">our_paper.txt</span></code>.</p>
 <p>When you are done, have a look at the solution in: <a class="reference external" href="https://matthew-brett.github.io/curious-git/reading_git_objects.html">reading git objects</a>.</p>
 </div>
 <div class="section" id="make-a-first-commit">
