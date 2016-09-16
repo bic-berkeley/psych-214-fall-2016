@@ -36,7 +36,7 @@ extensions = [
     'autorun',
     'writefile',
     'workrun',
-    'prizefiles',
+    'repofiles',
     'texext.mathcode',
     'sphinx.ext.autodoc',
     'texext.math_dollar',

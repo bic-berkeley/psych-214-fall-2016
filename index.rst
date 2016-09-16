@@ -59,6 +59,7 @@ version control using git.
     lab_00
     lab_01_exercise
     lab_01_solution
+    lab_02
     on_loops
     index_reshape
     reshape_and_3d
