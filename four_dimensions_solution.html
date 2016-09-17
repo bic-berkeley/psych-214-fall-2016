@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Four dimennsions solution &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="prev" title="Four dimennsions exercise" href="four_dimensions_exercise.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="four-dimennsions-solution">
+<h1>Four dimennsions solution<a class="headerlink" href="#four-dimennsions-solution" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our usual imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
+</pre></div>
+</div>
+<p>We are going to load a four-dimensional (X, Y, Z, t) BOLD image called
+<a class="reference download internal" href="_downloads/ds107_sub012_t1r2.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code></a>. Download the file using the link.  Import
+the <code class="docutils literal"><span class="pre">nibabel</span></code> module, and load the image with nibabel to create an image
+object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load image object using nibabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Turn off nibabel memory mapping.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">mmap</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the usual way get the array data from this image and show the image shape.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get image array data from image object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Select the 10th volume (time index 9) from 4D image data array, by slicing
+over the last dimension. What shape is it?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the 10th volume and show shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tenth_vol</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tenth_vol</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 35)</span>
+</pre></div>
+</div>
+<p>Get the standard deviation across all voxels in this 3D volume:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Standard deviation across all voxels for 10th volume</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tenth_vol</span><span class="p">)</span>
+<span class="go">387.19281139947577</span>
+</pre></div>
+</div>
+<p>Loop over all volumes in the 4D image and store the standard deviation for
+each volume in a list. Plot these to see if there are any volumes with
+particularly unusual standard deviation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get standard deviation for each volume; then plot the values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">vol</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">stds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">vol</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//four_dimensions_solution-7.png">png</a>, <a class="reference external" href=".//four_dimensions_solution-7.hires.png">hires.png</a>, <a class="reference external" href=".//four_dimensions_solution-7.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/four_dimensions_solution-7.png" src="_images/four_dimensions_solution-7.png" />
+</div>
+<p>SPM uses a measure called &#8220;global signal&#8221; to give a very rough estimate of the
+average signal value within the brain. The idea is that you need a threshold
+to select voxels with signal high enough to be inside the brain, and not in
+the air around the brain, which has very low (near 0) signal.</p>
+<p>The algorithm goes like this.</p>
+<ul class="simple">
+<li>Get a single 3D volume V;</li>
+<li>Calculate the mean signal of the voxels in V; call that M;</li>
+<li>Make a threshold T where T = M / 8.</li>
+<li>Select all voxel values in V that are greater than T; call these values W;</li>
+<li>Return the mean of all values in W.</li>
+</ul>
+<p>See <a class="reference external" href="http://imaging.mrc-cbu.cam.ac.uk/imaging/PrinciplesStatistics#Global_image_signal">SPM global image signal</a>.</p>
+<p>In the SPM code, the algorithm is implemented in a MATLAB function called
+<code class="docutils literal"><span class="pre">spm_global</span></code>.</p>
+<p>I used the MATLAB script <a class="reference download internal" href="_downloads/get_global_signals.m" download=""><code class="xref download docutils literal"><span class="pre">get_global_signals.m</span></code></a> to run the
+<code class="docutils literal"><span class="pre">spm_global</span></code> MATLAB function on the volumes of <code class="docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code>.
+The script saved the SPM global values to a text file
+<a class="reference download internal" href="_downloads/global_signals.txt" download=""><code class="xref download docutils literal"><span class="pre">global_signals.txt</span></code></a>. The first four lines of the
+<code class="docutils literal"><span class="pre">global_signals.txt</span></code> file look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">376.53</span>
+<span class="mf">375.75</span>
+<span class="mf">375.26</span>
+<span class="mf">376.01</span>
+</pre></div>
+</div>
+<p>Read these global values calculated by SPM into a list, and plot the values.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read global signal values calculated by SPM, and plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">global_signals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;global_signals.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">global_signals</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//four_dimensions_solution-8.png">png</a>, <a class="reference external" href=".//four_dimensions_solution-8.hires.png">hires.png</a>, <a class="reference external" href=".//four_dimensions_solution-8.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/four_dimensions_solution-8.png" src="_images/four_dimensions_solution-8.png" />
+</div>
+<p>Now implement the algorithm above to recalculate the SPM global signal for the
+first volume (volume index zero). Hint: you will likely need to index using a
+boolean (mask) array. Remember, the steps are:</p>
+<ul class="simple">
+<li>Get a single 3D volume V;</li>
+<li>Calculate the mean signal of the voxels in V; call that M;</li>
+<li>Make a threshold T where T = M / 8.</li>
+<li>Select all voxel values in V that are greater than T; call these values W;</li>
+<li>Get the mean of all values in W.</li>
+</ul>
+<p>You should get the same value as SPM - the first value you read from
+<code class="docutils literal"><span class="pre">global_signals.txt</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Apply algorithm for SPM global calculation to first volume</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vol</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vol</span><span class="p">)</span><span class="o">/</span> <span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msk</span> <span class="o">=</span> <span class="n">vol</span> <span class="o">&gt;</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">W</span> <span class="o">=</span> <span class="n">vol</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="go">376.53382753...</span>
+</pre></div>
+</div>
+<p>Make a function called <code class="docutils literal"><span class="pre">spm_global</span></code> that accepts a 3D array as input, and
+returns the global signal using the SPM algorithm. Call that function on the
+first volume to show that it is working (as in <code class="docutils literal"><span class="pre">print(spm_global(data[:,</span> <span class="pre">:,</span>
+<span class="pre">:,</span> <span class="pre">0]))</span></code>).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a `spm_global` function that accepts a 3D array as input,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- and returns the global mean for the volume according to the SPM</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- algorithm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">spm_global</span><span class="p">(</span><span class="n">vol</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vol</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vol</span><span class="p">[</span><span class="n">vol</span> <span class="o">&gt;</span> <span class="n">T</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">spm_global</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="go">376.533827532</span>
+</pre></div>
+</div>
+<p>Make a function called <code class="docutils literal"><span class="pre">get_spm_globals</span></code> that accepts an image filename as
+an argument. The function will load the image, get the array data for the
+image, use your new <code class="docutils literal"><span class="pre">spm_global</span></code> function calculate the global value for
+each volume, and return these values as a list.  Finally, show this is working
+by plotting the values for the <code class="docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code> image with something
+like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">all_globals</span> <span class="o">=</span> <span class="n">get_spm_globals</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_globals</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Write a function `get_spm_globals` that returns the global values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for each volume</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">get_spm_globals</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">spm_vals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="gp">... </span>        <span class="n">vol</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="n">spm_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spm_global</span><span class="p">(</span><span class="n">vol</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">spm_vals</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">all_globals</span> <span class="o">=</span> <span class="n">get_spm_globals</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_globals</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//four_dimensions_solution-11.png">png</a>, <a class="reference external" href=".//four_dimensions_solution-11.hires.png">hires.png</a>, <a class="reference external" href=".//four_dimensions_solution-11.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/four_dimensions_solution-11.png" src="_images/four_dimensions_solution-11.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="four_dimensions_exercise.html" title="previous chapter">Four dimennsions exercise</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/four_dimensions_solution.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/four_dimensions_solution.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

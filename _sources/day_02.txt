@@ -24,6 +24,12 @@ Extreme git stress test
 * getting volumes from 4D images;
 * getting time-series from 4D images by slicing;
 
+*********
+Exercises
+*********
+
+:doc:`four_dimensions_exercise`;
+
 ********************
 Reading and homework
 ********************
