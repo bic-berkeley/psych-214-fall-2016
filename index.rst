@@ -63,3 +63,5 @@ version control using git.
     on_loops
     index_reshape
     reshape_and_3d
+    four_dimensions_exercise
+    four_dimensions_solution

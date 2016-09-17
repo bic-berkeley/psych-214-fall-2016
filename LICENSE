@@ -5,3 +5,25 @@ LICENSE for psych 214 fall 2016 course website
 Unless we state otherwise, the files in this website are copyright Matthew
 Brett, JB Poline, 2016, licensed under the Creative Commons attribution 2.0
 generic license (CC-by 2.0): see http://creativecommons.org/licenses/by/2.0/
+
+The data in ``camera.txt`` comes from reading the file ``camera.png`` in the
+scikit-image ``data`` directory, and writing the read values out to a text
+file.  I could not find a copyright statement or license for it, but many
+image-processing packages use it, and it appears to be in the public domain.
+
+The data from the anatomical image stored in ``anatomical.txt`` is from the
+OpenFMRI project, dataset ``ds114``: https://openfmri.org/dataset/ds000114 . It
+is a version of ``sub009/anatomy/highres001.nii.gz`` from which I (MB) have
+loaded the data and written the data to a text file.
+
+The data for the anatomical image `ds107_sub001_highres.nii` is an
+uncompressed copy of ``sub001/anatomy/highres001.nii.gz`` from OpenFMRI
+dataset ``ds107`` https://openfmri.org/dataset/ds000107.
+
+The BOLD data ``ds107_sub012_t1r2.nii`` comes from the OpenFMRI project
+dataset ``ds107``: https://openfmri.org/dataset/ds000107 . It is a
+decompressed and renamed copy of ``sub012/BOLD/task001_run002/bold.nii.gz``.
+
+The files from the ``ds107`` and ``ds114`` datasets are covered by a Public
+Domain Dedication and License version 1.0 :
+http://opendatacommons.org/licenses/pddl/1.0/

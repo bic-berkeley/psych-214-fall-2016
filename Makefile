@@ -212,6 +212,7 @@ rst-exercises:
 	$(PYTHON) tools/proc_rst.py camera_solution.rst
 	$(PYTHON) tools/proc_rst.py anatomical_solution.rst
 	$(PYTHON) tools/proc_rst.py arteries_solution.rst
+	$(PYTHON) tools/proc_rst.py four_dimensions_solution.rst
 
 download-index:
 	$(PYTHON) tools/make_index.py --header="Downloads for PSYCH214 website" \
