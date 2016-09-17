@@ -1,6 +1,6 @@
-#########################
-Four dimennsions solution
-#########################
+########################
+Four dimensions solution
+########################
 
 .. nbplot::
     :include-source: false
