@@ -28,7 +28,7 @@ Extreme git stress test
 Exercises
 *********
 
-:doc:`four_dimensions_exercise`;
+* :doc:`four_dimensions_exercise`;
 
 ********************
 Reading and homework
