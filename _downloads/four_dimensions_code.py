@@ -1,4 +1,4 @@
-""" Four dimennsions exercise
+""" Four dimensions exercise
 """
 
 #: Our usual imports
