@@ -18,7 +18,16 @@ September 19: version control, 4D arrays, diagnostics
 Modules and functions
 *********************
 
-* :doc:`on_modules`.
+* intro + exercise: :doc:`on_modules`.
+* exercise::
+
+    git clone https://github.com/psych-214-fall-2016/classwork
+    cd classwork/day_02
+    ipython
+
+  then (in IPython)::
+
+    run spm_funcs.py
 
 ****************************************
 Introduction to the diagnostics exercise
