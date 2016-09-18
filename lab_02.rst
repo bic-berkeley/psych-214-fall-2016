@@ -106,6 +106,8 @@ Show yourself there is a new sub-directory and file in ``.git/objects``:
 
     ls .git/objects/*
 
+.. _reading-git-objects:
+
 Looking at real git objects
 ===========================
 

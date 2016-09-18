@@ -1,0 +1,13 @@
+Reading bytes from a file.
+
+Calculating a hash from a bytes.
+
+if __name__ == '__main__'
+
+sys.argv
+
+strip, and split
+
+os.path.join
+
+Raising errors.
