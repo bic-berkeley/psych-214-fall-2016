@@ -11,7 +11,7 @@ September 19: version control, 4D arrays, diagnostics
 * getting volumes from 4D images;
 * getting time-series from 4D images by slicing;
 
-* intro page: :doc:`intro_4d`;
+* intro page: :doc:`intro_to_4d`;
 * exercise: :doc:`four_dimensions_exercise`.
 
 ****************************************
