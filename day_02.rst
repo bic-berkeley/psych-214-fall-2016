@@ -14,6 +14,12 @@ September 19: version control, 4D arrays, diagnostics
 * intro page: :doc:`intro_to_4d`;
 * exercise: :doc:`four_dimensions_exercise`.
 
+*********************
+Modules and functions
+*********************
+
+* :doc:`on_modules`.
+
 ****************************************
 Introduction to the diagnostics exercise
 ****************************************

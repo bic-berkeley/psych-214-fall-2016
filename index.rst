@@ -66,3 +66,4 @@ version control using git.
     four_dimensions_exercise
     four_dimensions_solution
     intro_to_4d
+    on_modules
