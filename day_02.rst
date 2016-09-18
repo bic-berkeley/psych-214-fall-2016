@@ -18,6 +18,9 @@ September 19: version control, 4D arrays, diagnostics
 Modules and functions
 *********************
 
+.. note to self
+    Should put something on ``__main__`` in on_modules.rst page.
+
 * intro + exercise: :doc:`on_modules`.
 * exercise::
 
