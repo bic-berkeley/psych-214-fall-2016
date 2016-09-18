@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>September 19: version control, 4D arrays &mdash; Functional MRI methods</title>
+    <title>September 19: version control, 4D arrays, diagnostics &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -45,21 +45,8 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="september-19-version-control-4d-arrays">
-<h1>September 19: version control, 4D arrays<a class="headerlink" href="#september-19-version-control-4d-arrays" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="extreme-git-stress-test">
-<h2>Extreme git stress test<a class="headerlink" href="#extreme-git-stress-test" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>making a repository;</li>
-<li>pushing up to github;</li>
-<li>cloning;</li>
-<li>making a branch;</li>
-<li>pushing a branch;</li>
-<li>making a pull request;</li>
-<li>merging a pull request;</li>
-<li>getting out of trouble.</li>
-</ul>
-</div>
+<div class="section" id="september-19-version-control-4d-arrays-diagnostics">
+<h1>September 19: version control, 4D arrays, diagnostics<a class="headerlink" href="#september-19-version-control-4d-arrays-diagnostics" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="d-arrays-and-time-series">
 <h2>4D arrays and time series<a class="headerlink" href="#d-arrays-and-time-series" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -67,16 +54,66 @@
 <li>4D images as collections of 3D images;</li>
 <li>getting volumes from 4D images;</li>
 <li>getting time-series from 4D images by slicing;</li>
+<li>intro page: <a class="reference internal" href="intro_to_4d.html"><span class="doc">Working with four dimensional images, masks and functions</span></a>;</li>
+<li>exercise: <a class="reference internal" href="four_dimensions_exercise.html"><span class="doc">Four dimensions exercise</span></a>.</li>
 </ul>
 </div>
-<div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="modules-and-functions">
+<h2>Modules and functions<a class="headerlink" href="#modules-and-functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="four_dimensions_exercise.html"><span class="doc">Four dimensions exercise</span></a>;</li>
+<li><a class="reference internal" href="on_modules.html"><span class="doc">Modules and scripts</span></a>.</li>
 </ul>
 </div>
-<div class="section" id="reading-and-homework">
-<h2>Reading and homework<a class="headerlink" href="#reading-and-homework" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction-to-the-diagnostics-exercise">
+<h2>Introduction to the diagnostics exercise<a class="headerlink" href="#introduction-to-the-diagnostics-exercise" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>reading bytes from a file;</li>
+<li>calculating a hash from the bytes.</li>
+</ul>
+<p>See <a class="reference internal" href="lab_02.html#reading-git-objects"><span class="std std-ref">Looking at real git objects</span></a>.</p>
+<ul class="simple">
+<li>stripping and splitting strings:</li>
+<li>raising Errors;</li>
+<li>manipulating paths;</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/__main__.html">if __name__ == &#8216;__main__&#8217;</a>;</li>
+</ul>
+<p>Split into groups, then:</p>
+<ul>
+<li><p class="first">Get the data for your group from the USB key(s);</p>
+</li>
+<li><p class="first">Tell me about your groups;</p>
+</li>
+<li><p class="first">&#8220;Fork&#8221; the repository for your group, to your github user:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Group 00 forks : <a class="reference external" href="https://github.com/psych-214-fall-2016/diagnostics-00">https://github.com/psych-214-fall-2016/diagnostics-00</a></li>
+<li>Group 01 forks : <a class="reference external" href="https://github.com/psych-214-fall-2016/diagnostics-01">https://github.com/psych-214-fall-2016/diagnostics-01</a></li>
+<li>Group 02 forks : <a class="reference external" href="https://github.com/psych-214-fall-2016/diagnostics-02">https://github.com/psych-214-fall-2016/diagnostics-02</a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Clone your forked repository.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">matthew</span><span class="o">-</span><span class="n">brett</span><span class="o">/</span><span class="n">diagnostics</span><span class="o">-</span><span class="mo">00</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">matthew</span><span class="o">-</span><span class="n">brett</span><span class="o">/</span><span class="n">diagnostics</span><span class="o">-</span><span class="mo">00</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">matthew-brett</span></code> is your github user name, and <code class="docutils literal"><span class="pre">00</span></code> is your group.</p>
+</li>
+<li><p class="first">Change directory into this new directory, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">diagnostics</span><span class="o">-</span><span class="mo">00</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the data from the USB key into your new <code class="docutils literal"><span class="pre">data</span></code> directory;</p>
+</li>
+<li><p class="first">Run <code class="docutils literal"><span class="pre">python3</span> <span class="pre">scripts/validata_data.py</span> <span class="pre">data</span></code></p>
+</li>
+<li><p class="first">Edit <code class="docutils literal"><span class="pre">scripts/validate_data.py</span></code> in Atom to fix.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="reading-and-homework-for-next-week">
+<h2>Reading and homework for next week<a class="headerlink" href="#reading-and-homework-for-next-week" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>First half of chapter 8 of Huettel et al 2014 <a class="reference internal" href="bibliography.html#huettel2014functional" id="id1">[HSM14]</a>.</li>
 <li>Exercises on array and images.</li>
@@ -92,11 +129,11 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">September 19: version control, 4D arrays</a><ul>
-<li><a class="reference internal" href="#extreme-git-stress-test">Extreme git stress test</a></li>
+<li><a class="reference internal" href="#">September 19: version control, 4D arrays, diagnostics</a><ul>
 <li><a class="reference internal" href="#d-arrays-and-time-series">4D arrays and time series</a></li>
-<li><a class="reference internal" href="#exercises">Exercises</a></li>
-<li><a class="reference internal" href="#reading-and-homework">Reading and homework</a></li>
+<li><a class="reference internal" href="#modules-and-functions">Modules and functions</a></li>
+<li><a class="reference internal" href="#introduction-to-the-diagnostics-exercise">Introduction to the diagnostics exercise</a></li>
+<li><a class="reference internal" href="#reading-and-homework-for-next-week">Reading and homework for next week</a></li>
 </ul>
 </li>
 </ul>

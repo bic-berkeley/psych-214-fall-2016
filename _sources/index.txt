@@ -65,3 +65,5 @@ version control using git.
     reshape_and_3d
     four_dimensions_exercise
     four_dimensions_solution
+    intro_to_4d
+    on_modules

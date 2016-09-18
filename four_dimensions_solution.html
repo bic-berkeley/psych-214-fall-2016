@@ -158,7 +158,7 @@ boolean (mask) array. Remember, the steps are:</p>
 returns the global signal using the SPM algorithm. Call that function on the
 first volume to show that it is working (as in <code class="docutils literal"><span class="pre">print(spm_global(data[:,</span> <span class="pre">:,</span>
 <span class="pre">:,</span> <span class="pre">0]))</span></code>).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a `spm_global` function that accepts a 3D array as input,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make an `spm_global` function that accepts a 3D array as input,</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- and returns the global mean for the volume according to the SPM</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- algorithm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">spm_global</span><span class="p">(</span><span class="n">vol</span><span class="p">):</span>
