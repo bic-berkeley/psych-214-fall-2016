@@ -72,7 +72,11 @@ Split into groups, then:
 Reading and homework for next week
 **********************************
 
-Reading is chapter 8 of Huettel et al 2014 :cite:`huettel2014functional`.
+Reading is
+
+* chapter 8 of Huettel et al 2014 :cite:`huettel2014functional`;
+* `curious remotes`_ |--| the Curious Git section on using git to work with
+  other repositories and other people.
 
 Homework is to continue the diagnostics exercise.
 
