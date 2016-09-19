@@ -152,6 +152,8 @@
 
 .. MB tutorials
 .. _curious git: https://matthew-brett.github.io/curious-git/index.html
+.. _curious remotes:
+    https://matthew-brett.github.io/curious-git/curious_remotes.html
 .. _introduction to Principal Components Analysis:
 .. _pca introduction: https://matthew-brett.github.io/teaching/pca_introduction.html
 .. _introduction to the General Linear Model:
