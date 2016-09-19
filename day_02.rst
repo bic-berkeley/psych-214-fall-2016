@@ -18,10 +18,7 @@ September 19: version control, 4D arrays, diagnostics
 Modules and functions
 *********************
 
-.. note to self
-    Should put something on ``__main__`` in on_modules.rst page.
-
-* intro + exercise: :doc:`on_modules`.
+* intro :doc:`on_modules`.
 * exercise::
 
     git clone https://github.com/psych-214-fall-2016/classwork
@@ -41,11 +38,10 @@ Introduction to the diagnostics exercise
 
 See :ref:`reading-git-objects`.
 
-* stripping and splitting strings:
-* raising Errors;
-* manipulating paths;
-* `if __name__ == '__main__'
-  <https://docs.python.org/3/library/__main__.html>`_;
+* stripping and splitting strings with ``my_string.strip()`` and
+  ``my_string.split()``;
+* raising Errors with ``raise``;
+* manipulating paths with ``os.path``.
 
 Split into groups, then:
 
@@ -76,5 +72,33 @@ Split into groups, then:
 Reading and homework for next week
 **********************************
 
-* First half of chapter 8 of Huettel et al 2014 :cite:`huettel2014functional`.
-* Exercises on array and images.
+Reading is chapter 8 of Huettel et al 2014 :cite:`huettel2014functional`.
+
+Homework is to continue the diagnostics exercise.
+
+You have two weeks to do this exercise.
+
+Your goal is to:
+
+#. Fill out the script and any needed library code to run
+   ``scripts/find_outliers.py data`` on your data, and return a list of
+   outlier volumes for each scan (where there is an outlier);
+#. You should add a text file giving a brief summary for each outlier scan,
+   why you think the detected scans should be rejected as an outlier, and your
+   educated guess as to the cause of the difference between this scan and the
+   rest of the scans in the run;
+#. You should do this by collaborating in your teams using git and github;
+
+Grading will be on:
+
+* the quality of your outlier detection as assessed by the improvement in the
+  statistical testing for the experimental model after removing the outliers;
+* the generality of your outlier detection as assessed by the improvement in
+  the statistical testing for the experimental model after removing the
+  outliers, for another similar dataset;
+* the quality of your code;
+* the quality and transparency of your process, from your interactions on
+  github;
+* the quality of your arguments about the scans rejected as outliers.
+
+We will cover more of the workflow in the Thursday lab.
