@@ -83,6 +83,9 @@ library:
 
     >>> import nibabel as nib
 
+I am going to load the image with filename :download:`ds114_sub009_t2r1.nii`.
+Download the file from the link to type along.
+
 First I ``load`` the image, to give me an "image" object:
 
 .. nbplot::
