@@ -61,7 +61,7 @@
 <div class="section" id="modules-and-functions">
 <h2>Modules and functions<a class="headerlink" href="#modules-and-functions" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">intro + exercise: <a class="reference internal" href="on_modules.html"><span class="doc">Modules and scripts</span></a>.</p>
+<li><p class="first">intro <a class="reference internal" href="on_modules.html"><span class="doc">Modules and scripts</span></a>.</p>
 </li>
 <li><p class="first">exercise:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">classwork</span>
@@ -84,10 +84,10 @@
 </ul>
 <p>See <a class="reference internal" href="lab_02.html#reading-git-objects"><span class="std std-ref">Looking at real git objects</span></a>.</p>
 <ul class="simple">
-<li>stripping and splitting strings:</li>
-<li>raising Errors;</li>
-<li>manipulating paths;</li>
-<li><a class="reference external" href="https://docs.python.org/3/library/__main__.html">if __name__ == &#8216;__main__&#8217;</a>;</li>
+<li>stripping and splitting strings with <code class="docutils literal"><span class="pre">my_string.strip()</span></code> and
+<code class="docutils literal"><span class="pre">my_string.split()</span></code>;</li>
+<li>raising Errors with <code class="docutils literal"><span class="pre">raise</span></code>;</li>
+<li>manipulating paths with <code class="docutils literal"><span class="pre">os.path</span></code>.</li>
 </ul>
 <p>Split into groups, then:</p>
 <ul>
@@ -126,10 +126,33 @@
 </div>
 <div class="section" id="reading-and-homework-for-next-week">
 <h2>Reading and homework for next week<a class="headerlink" href="#reading-and-homework-for-next-week" title="Permalink to this headline">¶</a></h2>
+<p>Reading is chapter 8 of Huettel et al 2014 <a class="reference internal" href="bibliography.html#huettel2014functional" id="id1">[HSM14]</a>.</p>
+<p>Homework is to continue the diagnostics exercise.</p>
+<p>You have two weeks to do this exercise.</p>
+<p>Your goal is to:</p>
+<ol class="arabic simple">
+<li>Fill out the script and any needed library code to run
+<code class="docutils literal"><span class="pre">scripts/find_outliers.py</span> <span class="pre">data</span></code> on your data, and return a list of
+outlier volumes for each scan (where there is an outlier);</li>
+<li>You should add a text file giving a brief summary for each outlier scan,
+why you think the detected scans should be rejected as an outlier, and your
+educated guess as to the cause of the difference between this scan and the
+rest of the scans in the run;</li>
+<li>You should do this by collaborating in your teams using git and github;</li>
+</ol>
+<p>Grading will be on:</p>
 <ul class="simple">
-<li>First half of chapter 8 of Huettel et al 2014 <a class="reference internal" href="bibliography.html#huettel2014functional" id="id1">[HSM14]</a>.</li>
-<li>Exercises on array and images.</li>
+<li>the quality of your outlier detection as assessed by the improvement in the
+statistical testing for the experimental model after removing the outliers;</li>
+<li>the generality of your outlier detection as assessed by the improvement in
+the statistical testing for the experimental model after removing the
+outliers, for another similar dataset;</li>
+<li>the quality of your code;</li>
+<li>the quality and transparency of your process, from your interactions on
+github;</li>
+<li>the quality of your arguments about the scans rejected as outliers.</li>
 </ul>
+<p>We will cover more of the workflow in the Thursday lab.</p>
 </div>
 </div>
 

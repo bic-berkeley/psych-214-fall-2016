@@ -3,6 +3,20 @@
 It uses mymodule
 """
 
+import sys
+
 import mymodule
-means = mymodule.vol_means('ds107_sub012_t1r2.nii')
-print(means)
+
+
+def main():
+    # This function executed when we are being run as a script
+    print(sys.argv)
+    filename = sys.argv[1]
+    means = mymodule.vol_means(filename)
+    for mean in means:
+        print(mean)
+
+
+if __name__ == '__main__':
+    # We are being run as a script
+    main()
