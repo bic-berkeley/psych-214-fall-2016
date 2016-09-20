@@ -14,6 +14,7 @@
 
 import sys
 import os
+from collections import OrderedDict
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -171,6 +172,23 @@ html_static_path = ['_static']
 
 # Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ],
+}
+html_theme_options = {
+    'sidebar_includehidden': False,
+    'extra_nav_links':  OrderedDict((
+        ('Website downloads', '_downloads'),
+        ('Dataset downloads', 'https://nipy.bic.berkeley.edu/psych-214'),
+        ('Github organization', 'https://github.com/psych-214-fall-2016')
+    ))
+}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
