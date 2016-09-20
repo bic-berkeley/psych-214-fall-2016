@@ -58,7 +58,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'psych-214-fall-2016'
+project = u'PSYCH 214 Fall 2016'
 copyright = u'2016, Matthew Brett, JB Poline'
 author = u'Matthew Brett, JB Poline'
 
@@ -127,7 +127,6 @@ html_theme = 'alabaster'
 # documentation.
 #html_theme_options = {}
 html_theme_options = {
-    'description': 'Psych 214 Fall 2016',
     'github_button': False,
     'extra_nav_links': {"Home page":
                         'http://bic-berkeley.github.io/psych-214-fall-2016'},
