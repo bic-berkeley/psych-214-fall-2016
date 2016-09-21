@@ -29,6 +29,8 @@ Modules and functions
 
     run spm_funcs.py
 
+.. _diagnostics-preparation:
+
 ****************************************
 Introduction to the diagnostics exercise
 ****************************************
@@ -56,7 +58,6 @@ Split into groups, then:
 * Clone your forked repository.  For example::
 
     git clone https://github.com/matthew-brett/diagnostics-00
-    git clone https://github.com/matthew-brett/diagnostics-00
 
   where ``matthew-brett`` is your github user name, and ``00`` is your group.
 
@@ -64,8 +65,48 @@ Split into groups, then:
 
     cd diagnostics-00
 
-* Copy the data from the USB key into your new ``data`` directory;
-* Run ``python3 scripts/validata_data.py data``
+* Unpack and copy the data from the USB key into your new ``data`` directory.
+  The following instructions assume you are running from the terminal in OSX
+  and Linux, or the git bash shell in Windows.
+
+  * If you have already unpacked your ``group0x.tar.gz`` archive (where x can
+    be 0, 1 or 2), then copy the ``*.nii`` files to your data directory with
+    something like::
+
+        cd data
+        cp ~/Downloads/group00/* .
+
+    where ``~/Downloads/group00`` is the directory you unpacked to;
+  * If you haven't unpacked the archive yet, you can unpack the archive into
+    your data directory with::
+
+        cd data
+        tar zxvf ~/Downloads/group00.tar.gz
+
+  Your ``data`` directory should now contain 20 files with filenames starting
+  with ``group0`` and ending with ``.nii``; another file called
+  ``hash_list.txt``, and a file called ``data_hashes.txt`` that came with the
+  repository when you cloned it;
+* Now do ``git status``.  You will see that none of the files that you have
+  just copied show up in git's listing of untracked files.  This is because I
+  put a clever ``.gitignore`` file in the ``data`` directory, to tell git to
+  ignore all files except the ``data_hashes.txt`` file.  You can see the file
+  by opening it in Atom with ``atom .gitignore``;
+* If your terimal is currently running in the ``data`` subdirectory, change
+  directory back to the ``diagnostics-00`` (etc) directory with ``cd ..``;
+* Have a look at ``hash_list.txt`` file, by opening it in Atom::
+
+    atom data/hash_list.txt
+
+  For each of the ``.nii`` files, ``hash_list.txt`` has a line with the SHA1
+  hash for that file, and the filename, separated by a space;
+* You want to be able to confirm that your data has not beed overwritten or
+  corrupted.  To do this, you need to calculate the current hash for each
+  ``.nii`` file and compare it to the hash value in ``hash_list.txt``;
+* See :ref:`reading-git-objects` for a reminder of how to read file contents
+  and calculate the SHA1 hash for the contents;
+* Now run ``python3 scripts/validata_data.py data``.  When you first run this
+  file, it will fail;
 * Edit ``scripts/validate_data.py`` in Atom to fix.
 
 **********************************
