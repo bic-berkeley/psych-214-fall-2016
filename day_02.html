@@ -77,7 +77,7 @@
 </ul>
 </div>
 <div class="section" id="introduction-to-the-diagnostics-exercise">
-<h2>Introduction to the diagnostics exercise<a class="headerlink" href="#introduction-to-the-diagnostics-exercise" title="Permalink to this headline">¶</a></h2>
+<span id="diagnostics-preparation"></span><h2>Introduction to the diagnostics exercise<a class="headerlink" href="#introduction-to-the-diagnostics-exercise" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>reading bytes from a file;</li>
 <li>calculating a hash from the bytes.</li>
@@ -106,7 +106,6 @@
 </li>
 <li><p class="first">Clone your forked repository.  For example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">matthew</span><span class="o">-</span><span class="n">brett</span><span class="o">/</span><span class="n">diagnostics</span><span class="o">-</span><span class="mo">00</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">matthew</span><span class="o">-</span><span class="n">brett</span><span class="o">/</span><span class="n">diagnostics</span><span class="o">-</span><span class="mo">00</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal"><span class="pre">matthew-brett</span></code> is your github user name, and <code class="docutils literal"><span class="pre">00</span></code> is your group.</p>
@@ -116,9 +115,57 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Copy the data from the USB key into your new <code class="docutils literal"><span class="pre">data</span></code> directory;</p>
+<li><p class="first">Unpack and copy the data from the USB key into your new <code class="docutils literal"><span class="pre">data</span></code> directory.
+The following instructions assume you are running from the terminal in OSX
+and Linux, or the git bash shell in Windows.</p>
+<ul>
+<li><p class="first">If you have already unpacked your <code class="docutils literal"><span class="pre">group0x.tar.gz</span></code> archive (where x can
+be 0, 1 or 2), then copy the <code class="docutils literal"><span class="pre">*.nii</span></code> files to your data directory with
+something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">data</span>
+<span class="n">cp</span> <span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">group00</span><span class="o">/*</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">~/Downloads/group00</span></code> is the directory you unpacked to;</p>
 </li>
-<li><p class="first">Run <code class="docutils literal"><span class="pre">python3</span> <span class="pre">scripts/validata_data.py</span> <span class="pre">data</span></code></p>
+<li><p class="first">If you haven&#8217;t unpacked the archive yet, you can unpack the archive into
+your data directory with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">data</span>
+<span class="n">tar</span> <span class="n">zxvf</span> <span class="o">~/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">group00</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Your <code class="docutils literal"><span class="pre">data</span></code> directory should now contain 20 files with filenames starting
+with <code class="docutils literal"><span class="pre">group0</span></code> and ending with <code class="docutils literal"><span class="pre">.nii</span></code>; another file called
+<code class="docutils literal"><span class="pre">hash_list.txt</span></code>, and a file called <code class="docutils literal"><span class="pre">data_hashes.txt</span></code> that came with the
+repository when you cloned it;</p>
+</li>
+<li><p class="first">Now do <code class="docutils literal"><span class="pre">git</span> <span class="pre">status</span></code>.  You will see that none of the files that you have
+just copied show up in git&#8217;s listing of untracked files.  This is because I
+put a clever <code class="docutils literal"><span class="pre">.gitignore</span></code> file in the <code class="docutils literal"><span class="pre">data</span></code> directory, to tell git to
+ignore all files except the <code class="docutils literal"><span class="pre">data_hashes.txt</span></code> file.  You can see the file
+by opening it in Atom with <code class="docutils literal"><span class="pre">atom</span> <span class="pre">.gitignore</span></code>;</p>
+</li>
+<li><p class="first">If your terimal is currently running in the <code class="docutils literal"><span class="pre">data</span></code> subdirectory, change
+directory back to the <code class="docutils literal"><span class="pre">diagnostics-00</span></code> (etc) directory with <code class="docutils literal"><span class="pre">cd</span> <span class="pre">..</span></code>;</p>
+</li>
+<li><p class="first">Have a look at <code class="docutils literal"><span class="pre">hash_list.txt</span></code> file, by opening it in Atom:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">atom</span> <span class="n">data</span><span class="o">/</span><span class="n">hash_list</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>For each of the <code class="docutils literal"><span class="pre">.nii</span></code> files, <code class="docutils literal"><span class="pre">hash_list.txt</span></code> has a line with the SHA1
+hash for that file, and the filename, separated by a space;</p>
+</li>
+<li><p class="first">You want to be able to confirm that your data has not beed overwritten or
+corrupted.  To do this, you need to calculate the current hash for each
+<code class="docutils literal"><span class="pre">.nii</span></code> file and compare it to the hash value in <code class="docutils literal"><span class="pre">hash_list.txt</span></code>;</p>
+</li>
+<li><p class="first">See <a class="reference internal" href="lab_02.html#reading-git-objects"><span class="std std-ref">Looking at real git objects</span></a> for a reminder of how to read file contents
+and calculate the SHA1 hash for the contents;</p>
+</li>
+<li><p class="first">Now run <code class="docutils literal"><span class="pre">python3</span> <span class="pre">scripts/validata_data.py</span> <span class="pre">data</span></code>.  When you first run this
+file, it will fail;</p>
 </li>
 <li><p class="first">Edit <code class="docutils literal"><span class="pre">scripts/validate_data.py</span></code> in Atom to fix.</p>
 </li>
