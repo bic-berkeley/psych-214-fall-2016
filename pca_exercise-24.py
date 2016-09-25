@@ -1,2 +1,2 @@
-#- Show middle slice (over third dimension) from volume of coefficients
-#- for second component
+#- Show middle slice (over third dimension) from scalar projections
+#- for first component

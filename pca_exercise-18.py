@@ -1,2 +1,1 @@
-#- Show the total sum of squares in X
-#- Is this (nearly) the same as the sum of the values in S?
+#- Confirm tranpose of U is inverse of U

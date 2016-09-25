@@ -1,7 +1,2 @@
-a = np.arange(5)
-b = np.arange(10, 15)
-np.dot(a, b)
-# 130
-# The same thing as
-np.sum(a * b)  # Elementwise multiplication
-# 130
+np.arange(10) * 0.5 + 4
+# array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])

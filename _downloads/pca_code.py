@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt  # the Python plotting package
 # Display array values to 6 digits of precision
 np.set_printoptions(precision=4, suppress=True)
 
-#- import numpy.linalg with a shorter name
+#: import numpy.linalg with a shorter name
+import numpy.linalg as npl
 
 #- Load the image 'ds114_sub009_t2r1.nii' with nibabel
 #- Get the data array from the image
@@ -42,6 +43,8 @@ np.set_printoptions(precision=4, suppress=True)
 
 #- Confirm orthogonality of columns in U
 
+#- Confirm tranpose of U is inverse of U
+
 #- Show the total sum of squares in X
 #- Is this (nearly) the same as the sum of the values in S?
 
@@ -49,7 +52,8 @@ np.set_printoptions(precision=4, suppress=True)
 #- Plot line corresponding to a scaled version of the first principal component
 #- (Scaling may need to be negative)
 
-#- Calculate the projection coefficients for projecting X onto the vectors in U
+#- Calculate the scalar projections for projecting X onto the
+#- vectors in U.
 #- Put the result into a new array C.
 
 #- Transpose C
@@ -58,10 +62,10 @@ np.set_printoptions(precision=4, suppress=True)
 
 #- Break 4D array into two 3D volumes
 
-#- Show middle slice (over third dimension) from volume of coefficients
+#- Show middle slice (over third dimension) from scalar projections
 #- for first component
 
-#- Show middle slice (over third dimension) from volume of coefficients
+#- Show middle slice (over third dimension) from scalar projections
 #- for second component
 
 #- Reshape first dimension of whole image data array to N, and take
@@ -75,11 +79,11 @@ np.set_printoptions(precision=4, suppress=True)
 #- Calculate unscaled covariance matrix of X
 
 
-#- Use subplots to make axes to plot first 10 principle component
+#- Use subplots to make axes to plot first 10 principal component
 #- vectors
 #- Plot one component vector per sub-plot.
 
-#- Calculate scalar projection coefficients for projecting X onto U
+#- Calculate scalar projections for projecting X onto U
 #- Put results into array C.
 
 #- Transpose C
@@ -90,10 +94,10 @@ np.set_printoptions(precision=4, suppress=True)
 #- component volume
 
 #- Make the mean volume (mean over the last axis)
-#- Show the middle slice (slicing over the third axis)
+#- Show the middle plane (slicing over the third axis)
 
-#- Show middle slice (over third dimension) of second principal
+#- Show middle plane (slice over third dimension) of second principal
 #- component volume
 
-#- Show middle slice (over third dimension) of third principal
+#- Show middle plane (slice over third dimension) of third principal
 #- component volume

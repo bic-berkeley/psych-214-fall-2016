@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="PCA exercise" href="pca_exercise.html" />
+    <link rel="prev" title="Modules and scripts" href="on_modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -148,6 +150,30 @@ the elements, it multiplies them:</p>
 </div>
 <p>This is a useful operation when we want to apply some processing on all
 voxels, without regard to their relative spatial position.</p>
+</div>
+<div class="section" id="allclose">
+<h2>allclose<a class="headerlink" href="#allclose" title="Permalink to this headline">¶</a></h2>
+<p>When the computer calculates a floating point value, there will often be some
+degree of error in the calculation, because the computer floating point format
+cannot represent every floating point number exactly. See:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/floating_point.html">floating point</a>;</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/floating_error.html">floating point error</a>.</li>
+</ul>
+<p>When we check the results of a floating point calculation, we often want to
+avoid checking if the returned value is exactly equal to a desired value.
+Rather, we want to check whether the returned value is close enough, given the
+usual floating point error.  A common idiom in NumPy is to use the
+<code class="docutils literal"><span class="pre">np.allclose</span></code> function, which checks whether two values or two arrays equal,
+within a small amount of error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">==</span> <span class="mf">3.1415926</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">3.1415926</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.1415926</span><span class="p">,</span> <span class="mf">6.2831852</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="np-arange">
 <h2>np.arange<a class="headerlink" href="#np-arange" title="Permalink to this headline">¶</a></h2>
@@ -352,9 +378,9 @@ argument and the matching Y coordinates as the second argument:</p>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-29.png">png</a>, <a class="reference external" href=".//dot_and_outer-29.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-29.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-30.png">png</a>, <a class="reference external" href=".//dot_and_outer-30.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-30.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-29.png" src="_images/dot_and_outer-29.png" />
+<img alt="_images/dot_and_outer-30.png" src="_images/dot_and_outer-30.png" />
 </div>
 </div>
 <div class="section" id="subplots-and-axes">
@@ -377,9 +403,9 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-30.png">png</a>, <a class="reference external" href=".//dot_and_outer-30.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-30.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-31.png">png</a>, <a class="reference external" href=".//dot_and_outer-31.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-31.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-30.png" src="_images/dot_and_outer-30.png" />
+<img alt="_images/dot_and_outer-31.png" src="_images/dot_and_outer-31.png" />
 </div>
 </div>
 </div>
@@ -425,6 +451,8 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="on_modules.html" title="previous chapter">Modules and scripts</a></li>
+      <li>Next: <a href="pca_exercise.html" title="next chapter">PCA exercise</a></li>
   </ul></li>
 </ul>
 </div>

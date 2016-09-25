@@ -1,4 +1,4 @@
-#- Show middle slice (over third dimension) of third principal
+#- Show middle plane (slice over third dimension) of second principal
 #- component volume
-plt.imshow(C_vols[:, :, 14, 2], cmap='gray')
+plt.imshow(C_vols[:, :, 14, 1], cmap='gray')
 # <...>

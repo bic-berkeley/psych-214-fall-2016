@@ -1,3 +1,3 @@
-#- Transpose C
-#- Reshape the first dimension of C to have the 3D shape of the
-#- original data volumes.
+#- Calculate the scalar projections for projecting X onto the
+#- vectors in U.
+#- Put the result into a new array C.

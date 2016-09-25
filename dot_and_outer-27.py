@@ -1,6 +1,7 @@
-means_expanded = np.outer(row_means, np.ones(3))
-means_expanded
-# array([[ 2.666667,  2.666667,  2.666667],
-# [ 5.      ,  5.      ,  5.      ],
-# [ 4.333333,  4.333333,  4.333333],
-# [ 5.333333,  5.333333,  5.333333]])
+# Use a loop to subtract the mean from each row
+de_meaned = arr.copy()
+for i in range(arr.shape[0]):  # iterate over rows
+    de_meaned[i] = de_meaned[i] - row_means[i]
+# The rows now have very near 0 mean
+de_meaned.mean(axis=1)
+# array([ 0.,  0.,  0.,  0.])

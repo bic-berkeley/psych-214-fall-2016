@@ -1,2 +1,2 @@
-#- Reshape first dimension of whole image data array to N, and take
-#- transpose
+#- Show middle slice (over third dimension) from scalar projections
+#- for second component

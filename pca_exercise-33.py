@@ -1,2 +1,2 @@
-#- Make the mean volume (mean over the last axis)
-#- Show the middle slice (slicing over the third axis)
+#- Show middle slice (over third dimension) of first principal
+#- component volume

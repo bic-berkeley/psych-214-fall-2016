@@ -1,5 +1,4 @@
-#- Reshape first dimension of whole image data array to N, and take
-#- transpose
-arr = data.reshape(N, n_vols).T
-arr.shape
-# (173, 122880)
+#- Show middle slice (over third dimension) from scalar projections
+#- for second component
+plt.imshow(vol1[:, :, 14], cmap='gray')
+# <...>

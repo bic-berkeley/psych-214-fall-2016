@@ -1,4 +1,3 @@
-#- Show middle slice (over third dimension) from volume of coefficients
-#- for first component
-plt.imshow(vol0[:, :, 14], cmap='gray')
-# <...>
+#- Break 4D array into two 3D volumes
+vol0 = C_vols[..., 0]
+vol1 = C_vols[..., 1]

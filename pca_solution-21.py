@@ -1,6 +1,6 @@
-#- Transpose C
-#- Reshape the first dimension of C to have the 3D shape of the
-#- original data volumes.
-C_vols = C.T.reshape(vol_shape + (2,))
-C_vols.shape
-# (64, 64, 30, 2)
+#- Calculate the scalar projections for projecting X onto the
+#- vectors in U.
+#- Put the result into a new array C.
+C = U.T.dot(first_two)
+C.shape
+# (2, 122880)

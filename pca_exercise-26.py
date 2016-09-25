@@ -1,4 +1,2 @@
-#- Calculate mean across columns
-#- Expand to (173, N) shape using np.outer
-#- Subtract from data array to remove mean over columns (row means)
-#- Put result into array X
+#- Reshape first dimension of whole image data array to N, and take
+#- transpose

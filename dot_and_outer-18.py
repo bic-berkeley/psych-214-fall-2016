@@ -1,5 +1,3 @@
-col_vector = np.array([[2], [0], [1]])
-col_vector
-# array([[2],
-# [0],
-# [1]])
+row_vector = np.array([[1, 3, 2]])
+row_vector
+# array([[1, 3, 2]])

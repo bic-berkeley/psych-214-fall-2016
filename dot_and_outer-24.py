@@ -1,4 +1,6 @@
-# Mean across the second (column) axis
-row_means = np.mean(arr, axis=1)
-row_means
-# array([ 2.666667,  5.      ,  4.333333,  5.333333])
+arr = np.array([[3., 1, 4], [1, 5, 9], [2, 6, 5], [3, 5, 8]])
+arr
+# array([[ 3.,  1.,  4.],
+# [ 1.,  5.,  9.],
+# [ 2.,  6.,  5.],
+# [ 3.,  5.,  8.]])

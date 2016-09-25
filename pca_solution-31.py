@@ -1,4 +1,3 @@
-#- Transpose C
-#- Reshape the first dimension of C to have the 3D shape of the
-#- original data volumes.
-C_vols = C.T.reshape(img.shape)
+#- Calculate scalar projections for projecting X onto U
+#- Put results into array C.
+C = U.T.dot(X)

@@ -1,4 +1,4 @@
-#- Show middle slice (over third dimension) of first principal
-#- component volume
-plt.imshow(C_vols[:, :, 14, 0], cmap='gray')
-# <...>
+#- Transpose C
+#- Reshape the first dimension of C to have the 3D shape of the
+#- original data volumes.
+C_vols = C.T.reshape(img.shape)

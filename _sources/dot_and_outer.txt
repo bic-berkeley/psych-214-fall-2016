@@ -137,6 +137,33 @@ Then we can reshape the array to 2D, with voxels on the first axis, and time
 This is a useful operation when we want to apply some processing on all
 voxels, without regard to their relative spatial position.
 
+********
+allclose
+********
+
+When the computer calculates a floating point value, there will often be some
+degree of error in the calculation, because the computer floating point format
+cannot represent every floating point number exactly. See:
+
+* `floating point`_;
+* `floating point error`_.
+
+When we check the results of a floating point calculation, we often want to
+avoid checking if the returned value is exactly equal to a desired value.
+Rather, we want to check whether the returned value is close enough, given the
+usual floating point error.  A common idiom in NumPy is to use the
+``np.allclose`` function, which checks whether two values or two arrays equal,
+within a small amount of error:
+
+.. nbplot::
+
+    >>> np.pi == 3.1415926
+    False
+    >>> np.allclose(np.pi, 3.1415926)
+    True
+    >>> np.allclose([np.pi, 2 * np.pi], [3.1415926, 6.2831852])
+    True
+
 *********
 np.arange
 *********

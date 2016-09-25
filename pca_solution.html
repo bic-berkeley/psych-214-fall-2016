@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="prev" title="PCA exercise" href="pca_exercise.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -51,12 +52,12 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- import numpy.linalg with a shorter name</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import numpy.linalg with a shorter name</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
 </pre></div>
 </div>
 <p>Download the image <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a> if you don&#8217;t already have
-it. Load it with nibabel. Get the data:</p>
+it. Load it with nibabel. Get the data.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the image &#39;ds114_sub009_t2r1.nii&#39; with nibabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the data array from the image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
@@ -78,7 +79,7 @@ a variable <code class="docutils literal"><span class="pre">n_vols</span></code>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_vols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>We are going to start by looking at only the first two &#8220;variables&#8221; (time
+<p>We are going to start by looking at only the first two &#8220;features&#8221; (time
 points).</p>
 <p>Slice the data array to make a new array that contains only the first two
 volumes:</p>
@@ -89,14 +90,14 @@ volumes:</p>
 <span class="go">(64, 64, 30, 2)</span>
 </pre></div>
 </div>
-<p>How many voxels are there in one volume? Call this number variable <code class="docutils literal"><span class="pre">N</span></code>:</p>
+<p>How many voxels are there in one volume? Put this number in a variable <code class="docutils literal"><span class="pre">N</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Set N to be the number of voxels in a volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">vol_shape</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Reshape the new two-volume data array to have a first dimension length <code class="docutils literal"><span class="pre">N</span></code>
-and second dimension length 2. So, each column corresponds to the voxels for
-one volume.</p>
+and second dimension length 2.  Each of the two columns corresponds to the
+voxels for a whole volume.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape to 2D array with first dimension length N</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">first_two</span> <span class="o">=</span> <span class="n">first_two</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">first_two</span><span class="o">.</span><span class="n">shape</span>
@@ -110,7 +111,8 @@ one volume.</p>
 <span class="go">(2, 122880)</span>
 </pre></div>
 </div>
-<p>Calculate the mean across columns (row means):</p>
+<p>Calculate the mean across columns (row means).  Put these means into a
+variable <code class="docutils literal"><span class="pre">row_means</span></code>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the mean across columns</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">first_two</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span>
@@ -137,7 +139,7 @@ to check they are now very close to 0:</p>
 </div>
 <p>Plot the two rows against each other to get a feel for the variation.
 Remember that each row in <code class="docutils literal"><span class="pre">X</span></code> is a volume, so you are plotting the signal
-from the first volume against the signal for the second volume.</p>
+from the first volume against the corresponding signal for the second volume.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -163,8 +165,8 @@ covariance:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">unscaled_covariance</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Confirm that the column vectors in <code class="docutils literal"><span class="pre">U</span></code> are both unit vectors. A unit
-vector has vector length (vector <em>norm</em> of 1):</p>
+<p>Confirm that the column vectors in <code class="docutils literal"><span class="pre">U</span></code> are both unit vectors. A unit vector
+has vector length (vector <em>norm</em>) 1:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show that the columns in U each have vector length 1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">memmap([ 1.,  1.])</span>
@@ -173,6 +175,12 @@ vector has vector length (vector <em>norm</em> of 1):</p>
 <p>Confirm that the first column in <code class="docutils literal"><span class="pre">U</span></code> is orthogonal to the second:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm orthogonality of columns in U</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">U</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Confirm that the transpose of <code class="docutils literal"><span class="pre">U</span></code> is also the matrix inverse of <code class="docutils literal"><span class="pre">U</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm tranpose of U is inverse of U</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -205,34 +213,34 @@ scale by a negative number for it to look nice on the plot:</p>
 <span class="go">3157.9395737007...</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//pca_solution-19.png">png</a>, <a class="reference external" href=".//pca_solution-19.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-19.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//pca_solution-20.png">png</a>, <a class="reference external" href=".//pca_solution-20.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-20.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/pca_solution-19.png" src="_images/pca_solution-19.png" />
+<img alt="_images/pca_solution-20.png" src="_images/pca_solution-20.png" />
 </div>
 <p>Remember the projection formula <span class="math">\(c = \hat{u} \cdot \vec{v}\)</span>.</p>
-<p>We now need to calculate the projection coefficients <span class="math">\(c\)</span> for each
-component <span class="math">\(\hat{u}\)</span> and each voxel (each <span class="math">\(\vec{v}\)</span>).</p>
+<p>We now need to calculate the scalar projections <span class="math">\(c\)</span> for each component
+<span class="math">\(\hat{u}\)</span> and each voxel (each <span class="math">\(\vec{v}\)</span>).</p>
 <p>This will give us a new output matrix of scalar projections <span class="math">\(C\)</span> of shape
 <code class="docutils literal"><span class="pre">(2,</span> <span class="pre">N)</span></code>, where the rows give the scalar projections for one component, and
 the columns give the coefficients for one voxel.</p>
 <p>For example, <code class="docutils literal"><span class="pre">C[0,</span> <span class="pre">0]</span></code> will be the result of <code class="docutils literal"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">0])</span></code>, <code class="docutils literal"><span class="pre">C[0,</span>
 <span class="pre">1]</span></code> will be the result of <code class="docutils literal"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">1])</span></code>, and <code class="docutils literal"><span class="pre">C[1,</span> <span class="pre">0]</span></code> will be the
 result of <code class="docutils literal"><span class="pre">U[:,</span> <span class="pre">1].dot(X[:,</span> <span class="pre">0])</span></code>.</p>
-<p>With that background, see if you can use matrix multiplication to calculate
-the projection coefficients <code class="docutils literal"><span class="pre">C</span></code> for projecting the data <code class="docutils literal"><span class="pre">X</span></code> onto the
-vectors in <code class="docutils literal"><span class="pre">U</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the projection coefficients for projecting X onto the vectors in U</span>
+<p>With that background, use matrix multiplication to calculate the scalar
+projections <code class="docutils literal"><span class="pre">C</span></code> for projecting the data <code class="docutils literal"><span class="pre">X</span></code> onto the vectors in <code class="docutils literal"><span class="pre">U</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the scalar projections for projecting X onto the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- vectors in U.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put the result into a new array C.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">first_two</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 122880)</span>
 </pre></div>
 </div>
-<p>Remember that <code class="docutils literal"><span class="pre">C</span></code> - the scalar projection coefficients – has one column
-per voxel. We can think of each row as corresponding to a volume where the
-volumes are contained in: <code class="docutils literal"><span class="pre">C[0]</span></code> (first row of <code class="docutils literal"><span class="pre">C</span></code>) - projection
-coefficients for first principal component; <code class="docutils literal"><span class="pre">C[1]</span></code> (second row of C) -
-projection coefficients for second principal component.</p>
+<p>Remember that <code class="docutils literal"><span class="pre">C</span></code> - the matrix of scalar projections – has one column per
+voxel. We can think of each row as corresponding to a volume where the volumes
+are contained in: <code class="docutils literal"><span class="pre">C[0]</span></code> (first row of <code class="docutils literal"><span class="pre">C</span></code>) – scalar projections for
+first principal component; <code class="docutils literal"><span class="pre">C[1]</span></code> (second row of C) – scalar projections
+for second principal component.</p>
 <p>Take the transpose of <code class="docutils literal"><span class="pre">C</span></code> and reshape the resulting first dimension (length
 <code class="docutils literal"><span class="pre">N</span></code>) back to <code class="docutils literal"><span class="pre">vol_shape</span></code> - the original shape of the 3D volumes in the
 data:</p>
@@ -251,29 +259,29 @@ for second component) using slicing:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol1</span> <span class="o">=</span> <span class="n">C_vols</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Show the plane (slice over the third dimension) from the volume of
-coefficients for the first component:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from volume of coefficients</span>
+<p>Show the middle plane (slice over the third dimension) from the volume of
+scalar projections for the first component:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for first component</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="go">&lt;...&gt;</span>
-</pre></div>
-</div>
-<p>(<a class="reference external" href=".//pca_solution-23.png">png</a>, <a class="reference external" href=".//pca_solution-23.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-23.pdf">pdf</a>)</p>
-<div class="figure">
-<img alt="_images/pca_solution-23.png" src="_images/pca_solution-23.png" />
-</div>
-<p>Show the middle plane (slice over the third dimension) from the volume of
-coefficients for the second component:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from volume of coefficients</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for second component</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
 <p>(<a class="reference external" href=".//pca_solution-24.png">png</a>, <a class="reference external" href=".//pca_solution-24.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-24.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/pca_solution-24.png" src="_images/pca_solution-24.png" />
+</div>
+<p>Show the middle plane (slice over the third dimension) from the volume of
+scalar projections for the second component:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for second component</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//pca_solution-25.png">png</a>, <a class="reference external" href=".//pca_solution-25.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-25.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/pca_solution-25.png" src="_images/pca_solution-25.png" />
 </div>
 <p>Now we are ready to do the same thing for all the time points, instead of just
 the first two.</p>
@@ -315,7 +323,7 @@ the mean across columns (mean per volume). Call this mean-corrected variable
 <p>Use <code class="docutils literal"><span class="pre">plt.subplots</span></code> to make a column of 10 axes. Iterate over these axes,
 plotting one principal component vector per axis. You should then have a plot
 of each of the first 10 principal component vectors:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use subplots to make axes to plot first 10 principle component</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use subplots to make axes to plot first 10 principal component</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- vectors</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot one component vector per sub-plot.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -324,20 +332,20 @@ of each of the first 10 principal component vectors:</p>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//pca_solution-29.png">png</a>, <a class="reference external" href=".//pca_solution-29.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-29.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//pca_solution-30.png">png</a>, <a class="reference external" href=".//pca_solution-30.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-30.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/pca_solution-29.png" src="_images/pca_solution-29.png" />
+<img alt="_images/pca_solution-30.png" src="_images/pca_solution-30.png" />
 </div>
 <p>Use <code class="docutils literal"><span class="pre">U</span></code> and matrix multiplication to calculate the scalar projection
 coefficients for projecting the data <code class="docutils literal"><span class="pre">X</span></code> onto the principal components
 <code class="docutils literal"><span class="pre">U</span></code>. Put the result into <code class="docutils literal"><span class="pre">C</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate scalar projection coefficients for projecting X onto U</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate scalar projections for projecting X onto U</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put results into array C.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Remember, each row of <code class="docutils literal"><span class="pre">C</span></code> is a full volume of projection coefficients, one
-row per principal component.</p>
+<p>Remember, each row of <code class="docutils literal"><span class="pre">C</span></code> is a full volume of scalar projections, one row
+per principal component.</p>
 <p>Reconstruct these rows as volumes by taking the transpose of <code class="docutils literal"><span class="pre">C</span></code> and
 reshaping the first dimension length <code class="docutils literal"><span class="pre">N</span></code> to the original three dimensions of
 the original data volumes.</p>
@@ -348,16 +356,16 @@ the original data volumes.</p>
 </pre></div>
 </div>
 <p>Take the first volume (corresponding to the first principal component) and
-display the middle slice (slicing over the third dimension):</p>
+display the middle plane (slicing over the third dimension):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) of first principal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C_vols</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//pca_solution-32.png">png</a>, <a class="reference external" href=".//pca_solution-32.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-32.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//pca_solution-33.png">png</a>, <a class="reference external" href=".//pca_solution-33.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-33.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/pca_solution-32.png" src="_images/pca_solution-32.png" />
+<img alt="_images/pca_solution-33.png" src="_images/pca_solution-33.png" />
 </div>
 <p>What does this first component show us?</p>
 <p>Remember that the projections coefficients tell us how much of the component
@@ -368,26 +376,12 @@ the component time course.</p>
 <p>Have a look again at the first component time course. How would a large
 positive or negative amplitude of the time course come about?</p>
 <p>As a hint while you are thinking, get the mean over time from the image data
-(mean over the last axis), and show the middle slice (slicing over the third
+(mean over the last axis), and show the middle plane (slicing over the third
 axis):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make the mean volume (mean over the last axis)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the middle slice (slicing over the third axis)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the middle plane (slicing over the third axis)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mean_vol</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mean_vol</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="go">&lt;...&gt;</span>
-</pre></div>
-</div>
-<p>(<a class="reference external" href=".//pca_solution-33.png">png</a>, <a class="reference external" href=".//pca_solution-33.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-33.pdf">pdf</a>)</p>
-<div class="figure">
-<img alt="_images/pca_solution-33.png" src="_images/pca_solution-33.png" />
-</div>
-<p>Display the middle slice (slicing over the third dimension) for the second
-principal component volume.</p>
-<p>Looking at the principal component plot - what kind of changes over time does
-this principal component represent?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) of second principal</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C_vols</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
@@ -395,16 +389,30 @@ this principal component represent?</p>
 <div class="figure">
 <img alt="_images/pca_solution-34.png" src="_images/pca_solution-34.png" />
 </div>
-<p>Do the same for the third principal component volume:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) of third principal</span>
+<p>Display the middle plane (slicing over the third dimension) for the second
+principal component volume.</p>
+<p>Looking at the principal component plot - what kind of changes over time does
+this principal component represent?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of second principal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C_vols</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C_vols</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
 <p>(<a class="reference external" href=".//pca_solution-35.png">png</a>, <a class="reference external" href=".//pca_solution-35.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-35.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/pca_solution-35.png" src="_images/pca_solution-35.png" />
+</div>
+<p>Do the same for the third principal component volume:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of third principal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C_vols</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//pca_solution-36.png">png</a>, <a class="reference external" href=".//pca_solution-36.hires.png">hires.png</a>, <a class="reference external" href=".//pca_solution-36.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/pca_solution-36.png" src="_images/pca_solution-36.png" />
 </div>
 </div>
 
@@ -449,6 +457,7 @@ this principal component represent?</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="pca_exercise.html" title="previous chapter">PCA exercise</a></li>
   </ul></li>
 </ul>
 </div>

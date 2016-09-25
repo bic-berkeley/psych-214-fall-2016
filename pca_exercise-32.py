@@ -1,2 +1,3 @@
-#- Show middle slice (over third dimension) of first principal
-#- component volume
+#- Transpose C
+#- Reshape the first dimension of C to have the 3D shape of the
+#- original data volumes.

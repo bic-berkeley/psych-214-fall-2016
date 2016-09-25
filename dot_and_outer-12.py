@@ -1,5 +1,6 @@
-np.arange(4, 11, 2)
-# array([ 4,  6,  8, 10])
-np.arange(4, 11, 0.5)
-# array([  4. ,   4.5,   5. ,   5.5,   6. ,   6.5,   7. ,   7.5,   8. ,
-# 8.5,   9. ,   9.5,  10. ,  10.5])
+np.pi == 3.1415926
+# False
+np.allclose(np.pi, 3.1415926)
+# True
+np.allclose([np.pi, 2 * np.pi], [3.1415926, 6.2831852])
+# True

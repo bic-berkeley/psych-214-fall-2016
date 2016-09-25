@@ -1,2 +1,5 @@
-row_vector.dot(col_vector)
-# array([[4]])
+col_vector = np.array([[2], [0], [1]])
+col_vector
+# array([[2],
+# [0],
+# [1]])

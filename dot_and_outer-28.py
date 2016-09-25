@@ -1,4 +1,6 @@
-re_de_meaned = arr - means_expanded
-# The row means are now very close to zero
-re_de_meaned.mean(axis=1)
-# array([ 0.,  0.,  0.,  0.])
+means_expanded = np.outer(row_means, np.ones(3))
+means_expanded
+# array([[ 2.666667,  2.666667,  2.666667],
+# [ 5.      ,  5.      ,  5.      ],
+# [ 4.333333,  4.333333,  4.333333],
+# [ 5.333333,  5.333333,  5.333333]])

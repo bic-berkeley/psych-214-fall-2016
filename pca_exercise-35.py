@@ -1,2 +1,2 @@
-#- Show middle slice (over third dimension) of third principal
+#- Show middle plane (slice over third dimension) of second principal
 #- component volume
