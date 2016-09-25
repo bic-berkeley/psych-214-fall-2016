@@ -1,23 +1,27 @@
-#####################################
-September 26: diagnostics and testing
-#####################################
+#########################################
+September 26: vectors, projection and PCA
+#########################################
 
-*******
-Testing
-*******
+*****************
+Vector projection
+*****************
 
-* assert statements;
-* doctests;
-* unit tests.
+* :doc:`some_sums`;
+* :doc:`on_vectors`;
+* :doc:`vector_projection`.
 
-************************
-Diagnostics on 4D images
-************************
+*******************
+numpy dot and outer
+*******************
 
-* the global mean;
-* summary images;
-* time series differences;
-* displaying images.
+* :doc:`dot_and_outer`.
+
+****************************
+Principal component analysis
+****************************
+
+* :doc:`pca_introduction`;
+* exercise: :doc:`pca_exercise`.
 
 ********
 Deadline
@@ -26,11 +30,10 @@ Deadline
 You should have chosen a project mentor by the end of this week - see
 :doc:`projects`.
 
-********************
-Reading and homework
-********************
+**********************************
+Reading and homework for next week
+**********************************
 
-* An `introduction to Principal Components Analysis`_;
-* An `introduction to the General Linear Model`_.
-* The outlier competition - finding outliers in functional imaging runs, and
-  generalizing across unseen runs (for October 10th).
+* Huettel chapter 7 - :cite:`huettel2014functional`;
+* an `introduction to the General Linear Model`_.
+* continue the outlier competition - for October 10th).
