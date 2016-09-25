@@ -19,11 +19,11 @@ PCA exercise
 
 .. nbplot::
 
-    >>> #- import numpy.linalg with a shorter name
+    >>> #: import numpy.linalg with a shorter name
     >>> import numpy.linalg as npl
 
 Download the image :download:`ds114_sub009_t2r1.nii` if you don't already have
-it. Load it with nibabel. Get the data:
+it. Load it with nibabel. Get the data.
 
 .. nbplot::
 
@@ -50,7 +50,7 @@ a variable ``n_vols``:
     >>> vol_shape = data.shape[:-1]
     >>> n_vols = data.shape[-1]
 
-We are going to start by looking at only the first two "variables" (time
+We are going to start by looking at only the first two "features" (time
 points).
 
 Slice the data array to make a new array that contains only the first two
@@ -64,7 +64,7 @@ volumes:
     >>> first_two.shape
     (64, 64, 30, 2)
 
-How many voxels are there in one volume? Call this number variable ``N``:
+How many voxels are there in one volume? Put this number in a variable ``N``:
 
 .. nbplot::
 
@@ -72,8 +72,8 @@ How many voxels are there in one volume? Call this number variable ``N``:
     >>> N = np.prod(vol_shape)
 
 Reshape the new two-volume data array to have a first dimension length ``N``
-and second dimension length 2. So, each column corresponds to the voxels for
-one volume.
+and second dimension length 2.  Each of the two columns corresponds to the
+voxels for a whole volume.
 
 .. nbplot::
 
@@ -91,7 +91,8 @@ Take the transpose of this array to get a 2 by ``N`` array, ready for the PCA:
     >>> first_two.shape
     (2, 122880)
 
-Calculate the mean across columns (row means):
+Calculate the mean across columns (row means).  Put these means into a
+variable ``row_means``.
 
 .. nbplot::
 
@@ -124,7 +125,7 @@ to check they are now very close to 0:
 
 Plot the two rows against each other to get a feel for the variation.
 Remember that each row in ``X`` is a volume, so you are plotting the signal
-from the first volume against the signal for the second volume.
+from the first volume against the corresponding signal for the second volume.
 
 .. nbplot::
 
@@ -153,8 +154,8 @@ covariance:
     >>> #- Use SVD to return U, S, VT matrices from unscaled covariance
     >>> U, S, VT = npl.svd(unscaled_covariance)
 
-Confirm that the column vectors in ``U`` are both unit vectors. A unit
-vector has vector length (vector *norm* of 1):
+Confirm that the column vectors in ``U`` are both unit vectors. A unit vector
+has vector length (vector *norm*) 1:
 
 .. nbplot::
 
@@ -168,6 +169,14 @@ Confirm that the first column in ``U`` is orthogonal to the second:
 
     >>> #- Confirm orthogonality of columns in U
     >>> np.allclose(U[:, 0].dot(U[:, 1]), 0)
+    True
+
+Confirm that the transpose of ``U`` is also the matrix inverse of ``U``:
+
+.. nbplot::
+
+    >>> #- Confirm tranpose of U is inverse of U
+    >>> np.allclose(np.eye(2), U.T.dot(U))
     True
 
 Show the total sum of squares in ``X``. Confirm that the total sum of squares
@@ -205,8 +214,8 @@ scale by a negative number for it to look nice on the plot:
 
 Remember the projection formula :math:`c = \hat{u} \cdot \vec{v}`.
 
-We now need to calculate the projection coefficients :math:`c` for each
-component :math:`\hat{u}` and each voxel (each :math:`\vec{v}`).
+We now need to calculate the scalar projections :math:`c` for each component
+:math:`\hat{u}` and each voxel (each :math:`\vec{v}`).
 
 This will give us a new output matrix of scalar projections :math:`C` of shape
 ``(2, N)``, where the rows give the scalar projections for one component, and
@@ -216,23 +225,23 @@ For example, ``C[0, 0]`` will be the result of ``U[0, :].dot(X[:, 0])``, ``C[0,
 1]`` will be the result of ``U[0, :].dot(X[:, 1])``, and ``C[1, 0]`` will be the
 result of ``U[:, 1].dot(X[:, 0])``.
 
-With that background, see if you can use matrix multiplication to calculate
-the projection coefficients ``C`` for projecting the data ``X`` onto the
-vectors in ``U``:
+With that background, use matrix multiplication to calculate the scalar
+projections ``C`` for projecting the data ``X`` onto the vectors in ``U``:
 
 .. nbplot::
 
-    >>> #- Calculate the projection coefficients for projecting X onto the vectors in U
+    >>> #- Calculate the scalar projections for projecting X onto the
+    >>> #- vectors in U.
     >>> #- Put the result into a new array C.
     >>> C = U.T.dot(first_two)
     >>> C.shape
     (2, 122880)
 
-Remember that ``C`` - the scalar projection coefficients |--| has one column
-per voxel. We can think of each row as corresponding to a volume where the
-volumes are contained in: ``C[0]`` (first row of ``C``) - projection
-coefficients for first principal component; ``C[1]`` (second row of C) -
-projection coefficients for second principal component.
+Remember that ``C`` - the matrix of scalar projections |--| has one column per
+voxel. We can think of each row as corresponding to a volume where the volumes
+are contained in: ``C[0]`` (first row of ``C``) |--| scalar projections for
+first principal component; ``C[1]`` (second row of C) |--| scalar projections
+for second principal component.
 
 Take the transpose of ``C`` and reshape the resulting first dimension (length
 ``N``) back to ``vol_shape`` - the original shape of the 3D volumes in the
@@ -256,22 +265,22 @@ for second component) using slicing:
     >>> vol0 = C_vols[..., 0]
     >>> vol1 = C_vols[..., 1]
 
-Show the plane (slice over the third dimension) from the volume of
-coefficients for the first component:
+Show the middle plane (slice over the third dimension) from the volume of
+scalar projections for the first component:
 
 .. nbplot::
 
-    >>> #- Show middle slice (over third dimension) from volume of coefficients
+    >>> #- Show middle slice (over third dimension) from scalar projections
     >>> #- for first component
     >>> plt.imshow(vol0[:, :, 14], cmap='gray')
     <...>
 
 Show the middle plane (slice over the third dimension) from the volume of
-coefficients for the second component:
+scalar projections for the second component:
 
 .. nbplot::
 
-    >>> #- Show middle slice (over third dimension) from volume of coefficients
+    >>> #- Show middle slice (over third dimension) from scalar projections
     >>> #- for second component
     >>> plt.imshow(vol1[:, :, 14], cmap='gray')
     <...>
@@ -328,7 +337,7 @@ of each of the first 10 principal component vectors:
 
 .. nbplot::
 
-    >>> #- Use subplots to make axes to plot first 10 principle component
+    >>> #- Use subplots to make axes to plot first 10 principal component
     >>> #- vectors
     >>> #- Plot one component vector per sub-plot.
     >>> fig, axes = plt.subplots(10, 1)
@@ -342,12 +351,12 @@ coefficients for projecting the data ``X`` onto the principal components
 
 .. nbplot::
 
-    >>> #- Calculate scalar projection coefficients for projecting X onto U
+    >>> #- Calculate scalar projections for projecting X onto U
     >>> #- Put results into array C.
     >>> C = U.T.dot(X)
 
-Remember, each row of ``C`` is a full volume of projection coefficients, one
-row per principal component.
+Remember, each row of ``C`` is a full volume of scalar projections, one row
+per principal component.
 
 Reconstruct these rows as volumes by taking the transpose of ``C`` and
 reshaping the first dimension length ``N`` to the original three dimensions of
@@ -361,7 +370,7 @@ the original data volumes.
     >>> C_vols = C.T.reshape(img.shape)
 
 Take the first volume (corresponding to the first principal component) and
-display the middle slice (slicing over the third dimension):
+display the middle plane (slicing over the third dimension):
 
 .. nbplot::
 
@@ -382,18 +391,18 @@ Have a look again at the first component time course. How would a large
 positive or negative amplitude of the time course come about?
 
 As a hint while you are thinking, get the mean over time from the image data
-(mean over the last axis), and show the middle slice (slicing over the third
+(mean over the last axis), and show the middle plane (slicing over the third
 axis):
 
 .. nbplot::
 
     >>> #- Make the mean volume (mean over the last axis)
-    >>> #- Show the middle slice (slicing over the third axis)
+    >>> #- Show the middle plane (slicing over the third axis)
     >>> mean_vol = data.mean(axis=-1)
     >>> plt.imshow(mean_vol[:, :, 14], cmap='gray')
     <...>
 
-Display the middle slice (slicing over the third dimension) for the second
+Display the middle plane (slicing over the third dimension) for the second
 principal component volume.
 
 Looking at the principal component plot - what kind of changes over time does
@@ -401,7 +410,7 @@ this principal component represent?
 
 .. nbplot::
 
-    >>> #- Show middle slice (over third dimension) of second principal
+    >>> #- Show middle plane (slice over third dimension) of second principal
     >>> #- component volume
     >>> plt.imshow(C_vols[:, :, 14, 1], cmap='gray')
     <...>
@@ -410,7 +419,7 @@ Do the same for the third principal component volume:
 
 .. nbplot::
 
-    >>> #- Show middle slice (over third dimension) of third principal
+    >>> #- Show middle plane (slice over third dimension) of third principal
     >>> #- component volume
     >>> plt.imshow(C_vols[:, :, 14, 2], cmap='gray')
     <...>
