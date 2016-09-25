@@ -154,7 +154,7 @@
 .. _curious git: https://matthew-brett.github.io/curious-git/index.html
 .. _curious remotes:
     https://matthew-brett.github.io/curious-git/curious_remotes.html
-.. _introduction to Principal Components Analysis:
+.. _introduction to Principal Component Analysis:
 .. _pca introduction: https://matthew-brett.github.io/teaching/pca_introduction.html
 .. _introduction to the General Linear Model:
 .. _GLM intro: https://matthew-brett.github.io/teaching/glm_intro.html
@@ -188,6 +188,12 @@
    https://matthew-brett.github.io/teaching/smoothing_as_convolution.html
 .. _rotation in 2D:
    https://matthew-brett.github.io/teaching/rotation_2d.html
+.. _algebra of sums:
+   http://matthew-brett.github.io/teaching/some_sums.html
+.. _vectors and dot products:
+   http://matthew-brett.github.io/teaching/on_vectors.html
+.. _vector projection:
+   http://matthew-brett.github.io/teaching/vector_projection.html
 
 .. Ideas
 .. _principal component analysis:
