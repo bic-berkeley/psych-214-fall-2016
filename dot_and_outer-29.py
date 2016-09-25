@@ -1,5 +1,6 @@
-x = np.arange(0, np.pi * 2, 0.1)
-fig, axes = plt.subplots(2, 1)
-axes[0].plot(x, np.sin(x))
-axes[1].plot(x, np.cos(x))
+# A line from (1, 2) to (7, 11)
+plt.plot([1, 7], [2, 11])
+# [...]
+# Another line from (2, 6) to (8, 1)
+plt.plot([2, 8], [6, 1])
 # [...]

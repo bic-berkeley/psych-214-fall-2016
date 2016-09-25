@@ -22,7 +22,8 @@ PCA exercise
     >>> #- import numpy.linalg with a shorter name
     >>> import numpy.linalg as npl
 
-Load the image ``ds114_sub009_t2r1.nii`` with nibabel. Get the data:
+Download the image :download:`ds114_sub009_t2r1.nii` if you don't already have
+it. Load it with nibabel. Get the data:
 
 .. nbplot::
 

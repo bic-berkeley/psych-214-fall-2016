@@ -1,3 +1,17 @@
-voxel_by_time = data.reshape(n_voxels, data.shape[-1])
-voxel_by_time.shape
-# (122880, 173)
+X = np.array([[0, 1, 2], [3, 4, 5]])
+X
+# array([[0, 1, 2],
+# [3, 4, 5]])
+Y = np.array([[7, 8], [9, 10], [11, 12]])
+Y
+# array([[ 7,  8],
+# [ 9, 10],
+# [11, 12]])
+X.dot(Y)
+# array([[ 31,  34],
+# [112, 124]])
+
+X[0, :].dot(Y[:, 0])
+# 31
+X[1, :].dot(Y[:, 0])
+# 112

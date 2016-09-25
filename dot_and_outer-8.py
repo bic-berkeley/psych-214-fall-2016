@@ -1,2 +1,5 @@
-arr.ravel()
-# array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
+import nibabel as nib
+img = nib.load('ds114_sub009_t2r1.nii')
+data = img.get_data()
+data.shape
+# (64, 64, 30, 173)

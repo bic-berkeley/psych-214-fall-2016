@@ -6,9 +6,9 @@ September 26: vectors, projection and PCA
 Vector projection
 *****************
 
-* :doc:`some_sums`;
-* :doc:`on_vectors`;
-* :doc:`vector_projection`.
+* `algebra of sums`_;
+* `vectors and dot products`_;
+* `vector projection`_.
 
 *******************
 numpy dot and outer
@@ -20,7 +20,7 @@ numpy dot and outer
 Principal component analysis
 ****************************
 
-* :doc:`pca_introduction`;
+* background: `introduction to Principal Component Analysis`_;
 * exercise: :doc:`pca_exercise`.
 
 ********
@@ -35,5 +35,5 @@ Reading and homework for next week
 **********************************
 
 * Huettel chapter 7 - :cite:`huettel2014functional`;
-* an `introduction to the General Linear Model`_.
-* continue the outlier competition - for October 10th).
+* Read the `introduction to the General Linear Model`_.
+* continue the outlier competition - for October 10th.

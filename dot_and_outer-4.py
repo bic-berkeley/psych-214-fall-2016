@@ -1,2 +1,2 @@
-arr.sum()
-# 4
+type(arr)
+# <class 'numpy.ndarray'>

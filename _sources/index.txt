@@ -61,6 +61,7 @@ version control using git.
     lab_01_solution
     lab_02
     lab_03
+    lab_04
     on_loops
     index_reshape
     reshape_and_3d
@@ -68,3 +69,6 @@ version control using git.
     four_dimensions_solution
     intro_to_4d
     on_modules
+    dot_and_outer
+    pca_exercise
+    pca_solution
