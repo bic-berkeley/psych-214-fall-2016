@@ -201,12 +201,12 @@ equally spaced vectors (<code class="docutils literal"><span class="pre">np.lins
 </div>
 <div class="section" id="vector-dot-products">
 <h2>Vector dot products<a class="headerlink" href="#vector-dot-products" title="Permalink to this headline">¶</a></h2>
-<p>If I have two vectors <span class="math">\(\mathbf{a}\)</span> with elements <span class="math">\(a_0, a_1, ...
-a_{n-1}\)</span>, and <span class="math">\(\mathbf{b}\)</span> with elements <span class="math">\(b_0, b_1, ... b_{n-1}\)</span>
+<p>If I have two vectors <span class="math">\(\vec{a}\)</span> with elements <span class="math">\(a_0, a_1, ...
+a_{n-1}\)</span>, and <span class="math">\(\vec{b}\)</span> with elements <span class="math">\(b_0, b_1, ... b_{n-1}\)</span>
 then the <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product">dot product</a> is
 defined as:</p>
 <div class="math">
-\[\mathbf{a}\cdot \mathbf{b} = \sum_{i=0}^{n-1} a_ib_i = a_0b_0 + a_1b_1 + \cdots + a_{n-1}b_{n-1}\]</div>
+\[\vec{a} \cdot \vec{b} = \sum_{i=0}^{n-1} a_ib_i = a_0b_0 + a_1b_1 + \cdots + a_{n-1}b_{n-1}\]</div>
 <p>In code:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -228,11 +228,11 @@ be neater and easier to read:</p>
 <h2>Matrix dot products<a class="headerlink" href="#matrix-dot-products" title="Permalink to this headline">¶</a></h2>
 <p>Matrix multiplication operates by taking dot products of the rows of the first
 array (matrix) with the columns of the second.</p>
-<p>Let&#8217;s say I have a matrix <span class="math">\(\mathbf{X}\)</span>, and <span class="math">\(X_{i,:}\)</span> is row
+<p>Let&#8217;s say I have a matrix <span class="math">\(\mathbf{X}\)</span>, and <span class="math">\(\vec{X_{i,:}}\)</span> is row
 <span class="math">\(i\)</span> in <span class="math">\(\mathbf{X}\)</span>. I have a matrix <span class="math">\(\mathbf{Y}\)</span>, and
-<span class="math">\(Y_{:,j}\)</span> is column <span class="math">\(j\)</span> in <span class="math">\(\mathbf{Y}\)</span>. The output matrix
-<span class="math">\(\mathbf{Z} = \mathbf{X} \mathbf{Y}\)</span> has entry <span class="math">\(Z_{i,j} = X_{i,:}
-\cdot Y_{:, j}\)</span>. We will see this often over the next few weeks.</p>
+<span class="math">\(\vec{Y_{:,j}}\)</span> is column <span class="math">\(j\)</span> in <span class="math">\(\mathbf{Y}\)</span>. The output
+matrix <span class="math">\(\mathbf{Z} = \mathbf{X} \mathbf{Y}\)</span> has entry <span class="math">\(Z_{i,j} =
+\vec{X_{i,:}} \cdot \vec{Y_{:, j}}\)</span>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
 <span class="go">array([[0, 1, 2],</span>
@@ -307,6 +307,83 @@ vectors, by using the numpy <code class="docutils literal"><span class="pre">np.
 </pre></div>
 </div>
 </div>
+<div class="section" id="dot-vectors-and-matrices">
+<h2>Dot, vectors and matrices<a class="headerlink" href="#dot-vectors-and-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Unlike MATLAB, Python has one-dimensional vectors. For example, if I slice a
+column out of a 2D array of shape (M, N), I do not get a column vector, shape
+(M, 1), I get a 1D vector, shape (M,):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2,)</span>
+</pre></div>
+</div>
+<p>Because the 1D vector has lost the idea of being a column rather than a row in
+a matrix, it is no longer unambiguous what <span class="math">\(v \cdot \mathbf{X}\)</span> means.  It
+could be mean a dot product of a row vector shape (1, M) with a matrix shape
+(M, N), which is valid – or a dot product of a row vector (M, 1) with a
+matrix shape (M, N), which is not valid.</p>
+<p>If you pass a 1D vector into the <code class="docutils literal"><span class="pre">dot</span></code> function or method, NumPy assumes you
+mean it to be a row vector on the left, and a column vector on the right,
+which is nearly always what you intended:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 1D vector is row vector on the left hand side of dot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([ 9, 12, 15])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 1D vector is column vector on the right hand side of dot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="go">array([2, 2])</span>
+</pre></div>
+</div>
+<p>Notice that, in both cases, <code class="docutils literal"><span class="pre">dot</span></code> returns a 1D result.</p>
+<p>It sometimes helps to make a 1D vector into a 2D row or column vector, to make
+your intention explicit, and preserve the 2D shape of the output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Turn 1D vector into explicit row vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Dot new returns a row vector rather than a 1D vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 9, 12, 15]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-length-1-dimensions-with-newaxis">
+<h2>Adding length 1 dimensions with newaxis<a class="headerlink" href="#adding-length-1-dimensions-with-newaxis" title="Permalink to this headline">¶</a></h2>
+<p>NumPy has a nice shortcut for adding a length 1 dimesion to an array.  It is a
+little brain-bending, because it operates via array slicing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Insert a new length 1 dimension at the beginning</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span>
+<span class="go">array([[0, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Insert a new length 1 dimension at the end</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span>
+<span class="go">array([[0],</span>
+<span class="go">       [3]])</span>
+</pre></div>
+</div>
+<p>Read this last slicing operation as &#8220;do slicing as normal, except, before
+slicing, insert a length 1 dimension at the position of <code class="docutils literal"><span class="pre">np.newaxis</span></code>&#8221;.</p>
+<p>In fact the name <code class="docutils literal"><span class="pre">np.newaxis</span></code> points to the familiar Python <code class="docutils literal"><span class="pre">None</span></code> object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>So, you also use the <code class="docutils literal"><span class="pre">np.newaxis</span></code> trick like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 2)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="subtracting-the-mean">
 <h2>Subtracting the mean<a class="headerlink" href="#subtracting-the-mean" title="Permalink to this headline">¶</a></h2>
 <p>We often want to do operations like subtract the mean from the columns or rows
@@ -378,9 +455,9 @@ argument and the matching Y coordinates as the second argument:</p>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-30.png">png</a>, <a class="reference external" href=".//dot_and_outer-30.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-30.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-36.png">png</a>, <a class="reference external" href=".//dot_and_outer-36.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-36.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-30.png" src="_images/dot_and_outer-30.png" />
+<img alt="_images/dot_and_outer-36.png" src="_images/dot_and_outer-36.png" />
 </div>
 </div>
 <div class="section" id="subplots-and-axes">
@@ -403,9 +480,9 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-31.png">png</a>, <a class="reference external" href=".//dot_and_outer-31.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-31.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-37.png">png</a>, <a class="reference external" href=".//dot_and_outer-37.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-37.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-31.png" src="_images/dot_and_outer-31.png" />
+<img alt="_images/dot_and_outer-37.png" src="_images/dot_and_outer-37.png" />
 </div>
 </div>
 </div>

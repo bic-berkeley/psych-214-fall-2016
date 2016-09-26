@@ -1,4 +1,8 @@
-# Mean across the second (column) axis
-row_means = np.mean(arr, axis=1)
-row_means
-# array([ 2.666667,  5.      ,  4.333333,  5.333333])
+# 1D vector is row vector on the left hand side of dot
+v.dot(X)
+# array([ 9, 12, 15])
+
+# 1D vector is column vector on the right hand side of dot
+w = np.array([-1, 0, 1])
+X.dot(w)
+# array([2, 2])

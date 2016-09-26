@@ -54,7 +54,7 @@ Exercises
   first past of the exercises listed there.  If you're rushing ahead, try the
   other problems.
 * When done, use Git to commit your changes;
-* Send this new branch up to your user repository on github.  Give 
+* Send this new branch up to your user repository on github.  Type::
 
     git push origin for-exercise-1:for-exercise-1 --set-upstream
 
