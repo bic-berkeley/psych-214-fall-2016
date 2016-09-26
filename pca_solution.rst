@@ -50,8 +50,9 @@ a variable ``n_vols``:
     >>> vol_shape = data.shape[:-1]
     >>> n_vols = data.shape[-1]
 
-We are going to start by looking at only the first two "features" (time
-points).
+We are going to take the time axis as containing the "features".  We will take
+the voxels as being the "samples".  We start by taking the first two features
+(time points).
 
 Slice the data array to make a new array that contains only the first two
 volumes:
@@ -135,8 +136,8 @@ from the first volume against the corresponding signal for the second volume.
 
 Time for the PCA.
 
-We are going to use the *unscaled* covariance. This is given by the matrix
-multiplication of ``X`` with its transpose. Calculate this:
+We are going to use the *unscaled* covariance across time. This is given by
+the matrix multiplication of ``X`` with its transpose. Calculate this:
 
 .. nbplot::
 
@@ -193,11 +194,11 @@ from the SVD:
     129672885307.0
 
 Plot the first row in ``X`` against the second row in ``X`` again. This
-time add a line corresponding to the first principal component. You'll
-have to scale this line (a unit vector) to make it long enough to see on
-the axes of the plot. If the first principal component is flipped
-(:math:`\vec{r}` defines same line as :math:`-\vec{r}`) you may need to
-scale by a negative number for it to look nice on the plot:
+time add a line to the plot that corresponds to the first principal component.
+You'll have to scale this line (a unit vector) to make it long enough to see
+on the axes of the plot. If the first principal component is flipped
+(:math:`\vec{r}` defines same line as :math:`-\vec{r}`) you may need to scale
+by a negative number for it to look nice on the plot:
 
 .. nbplot::
 
