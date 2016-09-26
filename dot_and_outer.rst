@@ -196,14 +196,14 @@ equally spaced vectors (``np.linspace`` is another):
 Vector dot products
 *******************
 
-If I have two vectors :math:`\mathbf{a}` with elements :math:`a_0, a_1, ...
-a_{n-1}`, and :math:`\mathbf{b}` with elements :math:`b_0, b_1, ... b_{n-1}`
+If I have two vectors :math:`\vec{a}` with elements :math:`a_0, a_1, ...
+a_{n-1}`, and :math:`\vec{b}` with elements :math:`b_0, b_1, ... b_{n-1}`
 then the `dot product <https://en.wikipedia.org/wiki/Dot_product>`__ is
 defined as:
 
 .. math::
 
-   \mathbf{a}\cdot \mathbf{b} = \sum_{i=0}^{n-1} a_ib_i = a_0b_0 + a_1b_1 + \cdots + a_{n-1}b_{n-1}
+   \vec{a} \cdot \vec{b} = \sum_{i=0}^{n-1} a_ib_i = a_0b_0 + a_1b_1 + \cdots + a_{n-1}b_{n-1}
 
 In code:
 
@@ -232,11 +232,11 @@ Matrix dot products
 Matrix multiplication operates by taking dot products of the rows of the first
 array (matrix) with the columns of the second.
 
-Let's say I have a matrix :math:`\mathbf{X}`, and :math:`X_{i,:}` is row
+Let's say I have a matrix :math:`\mathbf{X}`, and :math:`\vec{X_{i,:}}` is row
 :math:`i` in :math:`\mathbf{X}`. I have a matrix :math:`\mathbf{Y}`, and
-:math:`Y_{:,j}` is column :math:`j` in :math:`\mathbf{Y}`. The output matrix
-:math:`\mathbf{Z} = \mathbf{X} \mathbf{Y}` has entry :math:`Z_{i,j} = X_{i,:}
-\cdot Y_{:, j}`. We will see this often over the next few weeks.
+:math:`\vec{Y_{:,j}}` is column :math:`j` in :math:`\mathbf{Y}`. The output
+matrix :math:`\mathbf{Z} = \mathbf{X} \mathbf{Y}` has entry :math:`Z_{i,j} =
+\vec{X_{i,:}} \cdot \vec{Y_{:, j}}`.
 
 .. nbplot::
 
@@ -324,6 +324,99 @@ vectors, by using the numpy ``np.outer`` function:
     array([[2, 6, 4],
            [0, 0, 0],
            [1, 3, 2]])
+
+*************************
+Dot, vectors and matrices
+*************************
+
+Unlike MATLAB, Python has one-dimensional vectors. For example, if I slice a
+column out of a 2D array of shape (M, N), I do not get a column vector, shape
+(M, 1), I get a 1D vector, shape (M,):
+
+.. nbplot::
+
+    >>> X = np.array([[0, 1, 2],
+    ...               [3, 4, 5]])
+    >>> v = X[:, 0]
+    >>> v.shape
+    (2,)
+
+Because the 1D vector has lost the idea of being a column rather than a row in
+a matrix, it is no longer unambiguous what $v \cdot \mathbf{X}$ means.  It
+could be mean a dot product of a row vector shape (1, M) with a matrix shape
+(M, N), which is valid |--| or a dot product of a row vector (M, 1) with a
+matrix shape (M, N), which is not valid.
+
+If you pass a 1D vector into the ``dot`` function or method, NumPy assumes you
+mean it to be a row vector on the left, and a column vector on the right,
+which is nearly always what you intended:
+
+.. nbplot::
+
+    >>> # 1D vector is row vector on the left hand side of dot
+    >>> v.dot(X)
+    array([ 9, 12, 15])
+
+    >>> # 1D vector is column vector on the right hand side of dot
+    >>> w = np.array([-1, 0, 1])
+    >>> X.dot(w)
+    array([2, 2])
+
+Notice that, in both cases, ``dot`` returns a 1D result.
+
+It sometimes helps to make a 1D vector into a 2D row or column vector, to make
+your intention explicit, and preserve the 2D shape of the output:
+
+.. nbplot::
+
+    >>> # Turn 1D vector into explicit row vector
+    >>> row_v = v.reshape((1, 2))
+    >>> # Dot new returns a row vector rather than a 1D vector
+    >>> row_v.dot(X)
+    array([[ 9, 12, 15]])
+
+***************************************
+Adding length 1 dimensions with newaxis
+***************************************
+
+NumPy has a nice shortcut for adding a length 1 dimesion to an array.  It is a
+little brain-bending, because it operates via array slicing:
+
+.. nbplot::
+
+    >>> v.shape
+    (2,)
+    >>> # Insert a new length 1 dimension at the beginning
+    >>> row_v = v[np.newaxis, :]
+    >>> row_v.shape
+    (1, 2)
+    >>> row_v
+    array([[0, 3]])
+    >>> # Insert a new length 1 dimension at the end
+    >>> col_v = v[:, np.newaxis]
+    >>> col_v.shape
+    (2, 1)
+    >>> col_v
+    array([[0],
+           [3]])
+
+Read this last slicing operation as "do slicing as normal, except, before
+slicing, insert a length 1 dimension at the position of ``np.newaxis``".
+
+In fact the name ``np.newaxis`` points to the familiar Python ``None`` object:
+
+.. nbplot::
+
+    >>> np.newaxis is None
+    True
+
+So, you also use the ``np.newaxis`` trick like this:
+
+.. nbplot::
+
+    >>> row_v = v[None, :]
+    >>> row_v.shape
+    (1, 2)
 
 ********************
 Subtracting the mean
