@@ -77,8 +77,9 @@ a variable <code class="docutils literal"><span class="pre">n_vols</span></code>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- &#39;n_vols&#39; for number of volumes</span>
 </pre></div>
 </div>
-<p>We are going to start by looking at only the first two &#8220;features&#8221; (time
-points).</p>
+<p>We are going to take the time axis as containing the &#8220;features&#8221;.  We will take
+the voxels as being the &#8220;samples&#8221;.  We start by taking the first two features
+(time points).</p>
 <p>Slice the data array to make a new array that contains only the first two
 volumes:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice the image data array to give array with only first two</span>
@@ -123,8 +124,8 @@ from the first volume against the corresponding signal for the second volume.</p
 </pre></div>
 </div>
 <p>Time for the PCA.</p>
-<p>We are going to use the <em>unscaled</em> covariance. This is given by the matrix
-multiplication of <code class="docutils literal"><span class="pre">X</span></code> with its transpose. Calculate this:</p>
+<p>We are going to use the <em>unscaled</em> covariance across time. This is given by
+the matrix multiplication of <code class="docutils literal"><span class="pre">X</span></code> with its transpose. Calculate this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate unscaled covariance matrix for X</span>
 </pre></div>
 </div>
@@ -154,11 +155,11 @@ from the SVD:</p>
 </pre></div>
 </div>
 <p>Plot the first row in <code class="docutils literal"><span class="pre">X</span></code> against the second row in <code class="docutils literal"><span class="pre">X</span></code> again. This
-time add a line corresponding to the first principal component. You&#8217;ll
-have to scale this line (a unit vector) to make it long enough to see on
-the axes of the plot. If the first principal component is flipped
-(<span class="math">\(\vec{r}\)</span> defines same line as <span class="math">\(-\vec{r}\)</span>) you may need to
-scale by a negative number for it to look nice on the plot:</p>
+time add a line to the plot that corresponds to the first principal component.
+You&#8217;ll have to scale this line (a unit vector) to make it long enough to see
+on the axes of the plot. If the first principal component is flipped
+(<span class="math">\(\vec{r}\)</span> defines same line as <span class="math">\(-\vec{r}\)</span>) you may need to scale
+by a negative number for it to look nice on the plot:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot line corresponding to a scaled version of the first principal component</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- (Scaling may need to be negative)</span>

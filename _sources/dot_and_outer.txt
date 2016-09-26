@@ -270,6 +270,8 @@ A row vector is a 2D vector where the first dimension is length 1.
 .. nbplot::
 
     >>> row_vector = np.array([[1, 3, 2]])
+    >>> row_vector.shape
+    (1, 3)
     >>> row_vector
     array([[1, 3, 2]])
 
@@ -278,6 +280,8 @@ A column vector is a 2D vector where the second dimension is length 1.
 .. nbplot::
 
     >>> col_vector = np.array([[2], [0], [1]])
+    >>> col_vector.shape
+    (3, 1)
     >>> col_vector
     array([[2],
            [0],
