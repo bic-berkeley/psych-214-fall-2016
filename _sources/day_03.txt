@@ -35,5 +35,4 @@ Reading and homework for next week
 **********************************
 
 * Huettel chapter 7 - :cite:`huettel2014functional`;
-* Read the `introduction to the General Linear Model`_.
 * continue the outlier competition - for October 10th.
