@@ -56,8 +56,8 @@ provisional, we may change them as the class develops.
 Number      Set on           Due on         % of overall grade
 =========== ================ =============  ===================
 1           August 29        September 9    3
-2           September 19     September 30   10
-3           October 3        October 14     5
+2           September 19     October 10     10
+3           October 10       October 24     5
 4           October 24       November 4     7
 =========== ================ =============  ===================
 
