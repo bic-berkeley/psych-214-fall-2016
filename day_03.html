@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>September 26: vectors, projection and PCA &mdash; Functional MRI methods</title>
+    <title>September 26: vectors, projection and PCA &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -76,9 +76,116 @@
 <div class="section" id="reading-and-homework-for-next-week">
 <h2>Reading and homework for next week<a class="headerlink" href="#reading-and-homework-for-next-week" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>finish PCA exercise, with some github practice (see below);</li>
 <li>Huettel chapter 7 - <a class="reference internal" href="bibliography.html#huettel2014functional" id="id1">[HSM14]</a>;</li>
 <li>continue the outlier competition - for October 10th.</li>
 </ul>
+</div>
+<div class="section" id="finish-pca-exercise-with-some-github-practice">
+<h2>Finish PCA exercise, with some github practice<a class="headerlink" href="#finish-pca-exercise-with-some-github-practice" title="Permalink to this headline">¶</a></h2>
+<p>This exercise is for you to:</p>
+<ul class="simple">
+<li>finish the PCA exercise;</li>
+<li>practice Github collaborative workflow;</li>
+<li>see pull requests in action.</li>
+</ul>
+<p>You&#8217;re going to fork a repository, finish the PCA exercise, and then make a
+pull request to the repository.  I&#8217;ll review your pull request and merge it
+when it is ready.</p>
+<p>I&#8217;ve made private repositories for each of you for the exercise.  This will be
+the &#8220;upstream&#8221; repository that you will fork, and make a pull request to.</p>
+<ul>
+<li><p class="first">Make sure you have logged into your Github account;</p>
+</li>
+<li><p class="first">Go to the <a class="reference external" href="https://github.com/psych-214-fall-2016">course github organization</a> page.  You should see a private
+repository with a name like <cite>yourname-pca-exercise</cite> where <code class="docutils literal"><span class="pre">yourname</span></code> is
+your first name.</p>
+</li>
+<li><p class="first">Click on this repository;</p>
+</li>
+<li><p class="first">Fork the repository to your own account by clicking the &#8220;Fork&#8221; button
+towards the top left hand corner.  Your browswer should then open a page
+pointing to your fork of the repository;</p>
+</li>
+<li><p class="first">Click the green &#8220;Clone or download button and copy the URL to clone the
+forked repository;</p>
+</li>
+<li><p class="first">From the terminal, run <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span>
+<span class="pre">https://github.com/your-gh-user/yourname-pca-exercise.git</span></code> where the URL is
+the URL of your cloned repository;</p>
+</li>
+<li><p class="first">Change directory into your new cloned repository:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">yourname</span><span class="o">-</span><span class="n">pca</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make a new branch to work on, and checkout this new branch:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="n">pca</span><span class="o">-</span><span class="n">exercise</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">pca</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finish the PCA exercise by filling in <code class="docutils literal"><span class="pre">pca_code.py</span></code>.  I suggest you keep
+the exercise web-page open in your browser, and work in IPython as in:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ ipython
+Python 3.5.2 (default, Jul 28 2016, 21:28:00)
+Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython&#39;s features.
+%quickref -&gt; Quick reference.
+help      -&gt; Python&#39;s own help system.
+object?   -&gt; Details about &#39;object&#39;, use &#39;object??&#39; for extra details.
+
+In [1]: %matplotlib
+Using matplotlib backend: MacOSX
+
+In [2]: run pca_code.py
+
+In [3]: plt.show()
+</pre></div>
+</div>
+</li>
+<li><p class="first">When you&#8217;ve finished:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="n">pca_code</span><span class="o">.</span><span class="n">py</span>
+<span class="n">git</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>and fill in a message describing the commit;</p>
+</li>
+<li><p class="first">Push these changes to your own repository, giving the branch name that you
+have been working on:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">pca</span><span class="o">-</span><span class="n">exercise</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Go back to the web page for your forked repository - the URL will be
+something like: <a class="reference external" href="https://github.com/your-gh-user/yourname-pca-exercise">https://github.com/your-gh-user/yourname-pca-exercise</a>.
+Reload the page to make sure Github knows about your new branch;</p>
+</li>
+<li><p class="first">From the Branch list-box near the top-left of the page, select your new
+<cite>pca-exercise</cite> branch. Click on the <code class="docutils literal"><span class="pre">pca_code.py</span></code> file to check it is what
+you were expecting;</p>
+</li>
+<li><p class="first">Click on the &#8220;New pull request&#8221; button next to the branch name list-box.
+Type in a message to me, and click the green &#8220;Create pull request&#8221; button at
+the bottom.   When you do, I&#8217;ll get an email that you&#8217;ve made a pull
+request;</p>
+</li>
+<li><p class="first">Now the fun begins.  I&#8217;ll use the Github Pull request interface to comment
+on your code, to give you feedback, and make suggestions for changes.  This
+is a &#8220;code review&#8221;;</p>
+</li>
+<li><p class="first">To make changes, go back to your repository, edit the code, and make a new
+commit with the changes.  When you finished making changes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+<p>to push back up to your Github fork, and <code class="docutils literal"><span class="pre">pca-exercise</span></code> branch.  The
+changes show up automatically in the Github Pull-request interface.</p>
+</li>
+</ul>
+<p>Happy hunting.</p>
 </div>
 </div>
 
@@ -148,7 +255,7 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

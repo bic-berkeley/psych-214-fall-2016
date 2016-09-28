@@ -1,2 +1,0 @@
-type(np)
-# <class 'module'>
