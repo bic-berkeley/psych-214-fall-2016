@@ -3,6 +3,7 @@
 .. Course
 .. _mailing list: https://calmail.berkeley.edu/manage/list/listinfo/practical_fmri@lists.berkeley.edu
 .. _course web directory: http://nipy.bic.berkeley.edu/practical_neuroimaging/
+.. _course github organization: https://github.com/psych-214-fall-2016
 
 .. BIC
 .. _BIC:
