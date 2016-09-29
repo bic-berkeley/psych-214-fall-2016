@@ -61,9 +61,9 @@ the "upstream" repository that you will fork, and make a pull request to.
   your first name.
 * Click on this repository;
 * Fork the repository to your own account by clicking the "Fork" button
-  towards the top left hand corner.  Your browswer should then open a page
+  towards the top left hand corner.  Your browser should then open a page
   pointing to your fork of the repository;
-* Click the green "Clone or download button and copy the URL to clone the
+* Click the green "Clone or download" button and copy the URL to clone the
   forked repository;
 * From the terminal, run ``git clone
   https://github.com/your-gh-user/yourname-pca-exercise.git`` where the URL is

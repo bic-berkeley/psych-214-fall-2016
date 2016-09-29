@@ -1,0 +1,1 @@
+type(range(10))

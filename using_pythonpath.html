@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing and using Python modules &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="writing-and-using-python-modules">
+<h1>Writing and using Python modules<a class="headerlink" href="#writing-and-using-python-modules" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s say we have written our own module called <code class="docutils literal"><span class="pre">ourmodule.py</span></code>, in a
+directory called <code class="docutils literal"><span class="pre">code</span></code>.</p>
+<p>We also have a script called <code class="docutils literal"><span class="pre">ourscript.py</span></code> in a directory called
+<code class="docutils literal"><span class="pre">scripts</span></code>.</p>
+<p>We want to be able to <code class="docutils literal"><span class="pre">import</span></code> the code in <code class="docutils literal"><span class="pre">ourmodule.py</span></code> to use in
+<code class="docutils literal"><span class="pre">ourscript.py</span></code>.  So, we want to be able to put his line in
+<code class="docutils literal"><span class="pre">ourscript.py</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ourmodule</span>
+</pre></div>
+</div>
+<div class="section" id="putting-stuff-on-the-python-path">
+<h2>Putting stuff on the Python path<a class="headerlink" href="#putting-stuff-on-the-python-path" title="Permalink to this headline">¶</a></h2>
+<p>The Python PATH is the list of directories that Python will search to find
+code.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We are going to be using the modules in <code class="docutils literal"><span class="pre">pna_code</span></code> again this week.</p>
+<p>It is getting a little tiring to keep doing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/mb312/pna_code&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Is there any easier way?</p>
+<p>Why yes - there is. In fact there are several.</p>
+<p>The one we are going to use is the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable
+(see <a class="reference external" href="https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH">https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH</a>).</p>
+<div class="section" id="if-you-are-on-a-mac">
+<h3>If you are on a Mac<a class="headerlink" href="#if-you-are-on-a-mac" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Open <code class="docutils literal"><span class="pre">Terminal.app</span></code>;</p>
+</li>
+<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bash_profile</span></code> in your text editor;</p>
+</li>
+<li><p class="first">Add the following line to the end:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>export PYTHONPATH=$HOME/pna_code
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Save the file. * Close <code class="docutils literal"><span class="pre">Terminal.app</span></code>; * Start <code class="docutils literal"><span class="pre">Terminal.app</span></code>
+again, and type this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>```
+echo $PYTHONPATH
+```
+</pre></div>
+</div>
+<p>It should show something like <code class="docutils literal"><span class="pre">/Users/your_username/pna_code</span></code>. If not,
+come get one of us.</p>
+</div>
+<div class="section" id="if-you-are-on-linux">
+<h3>If you are on Linux<a class="headerlink" href="#if-you-are-on-linux" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Open your favorite terminal program;</p>
+</li>
+<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bashrc</span></code> in your text editor;</p>
+</li>
+<li><p class="first">Add the following line to the end:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>export PYTHONPATH=$HOME/pna_code
+</pre></div>
+</div>
+<p>Save the file.</p>
+</li>
+<li><p class="first">Close your terminal application;</p>
+</li>
+<li><p class="first">Start your terminal application again, and type this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>echo $PYTHONPATH
+</pre></div>
+</div>
+</li>
+</ul>
+<p>It should show something like <code class="docutils literal"><span class="pre">/home/your_username/pna_code</span></code>. If not,
+come get one of us.</p>
+</div>
+<div class="section" id="if-you-are-on-windows">
+<h3>If you are on Windows<a class="headerlink" href="#if-you-are-on-windows" title="Permalink to this headline">¶</a></h3>
+<p>Got to the Windows menu, right-click on &#8220;Computer&#8221; and select
+&#8220;Properties&#8221;:</p>
+<p>From the computer properties dialog, select &#8220;Advanced system settings&#8221;
+on the left:</p>
+<p>From the advanced system settings dialog, choose the &#8220;Environment
+variables&#8221; button:</p>
+<p>In the Environment variables dialog, click the &#8220;New&#8221; button in the top
+half of the dialog, to make a new <em>user</em> variable:</p>
+<p>Give the variable name as <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> and the value is the path to
+the <code class="docutils literal"><span class="pre">pna_code</span></code> directory. Choose OK and OK again to save this
+variable.</p>
+<p>Now open a <code class="docutils literal"><span class="pre">cmd</span></code> Window (Windows key, then type <code class="docutils literal"><span class="pre">cmd</span></code> and press
+Return). Type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">%</span><span class="n">PYTHONPATH</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>to confirm the environment variable is correctly set:</p>
+<p>If you want the IPython notebook to see this new <code class="docutils literal"><span class="pre">PYTHONPATH</span></code>
+variable, you may need to close your terminal, open it again, and
+restart <code class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></code>, so that it picks up <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> from
+the environment settings.</p>
+<p>You can check the current setting of environment variables, using the
+<code class="docutils literal"><span class="pre">os.environ</span></code> dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHONPATH&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/using_pythonpath.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

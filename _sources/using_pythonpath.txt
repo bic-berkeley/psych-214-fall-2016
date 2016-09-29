@@ -1,0 +1,135 @@
+################################
+Writing and using Python modules
+################################
+
+.. nbplot::
+    :include-source: false
+
+    >>> # - compatibility with Python 2
+    >>> from __future__ import print_function, division
+
+Let's say we have written our own module called ``ourmodule.py``, in a
+directory called ``code``.
+
+We also have a script called ``ourscript.py`` in a directory called
+``scripts``.
+
+We want to be able to ``import`` the code in ``ourmodule.py`` to use in
+``ourscript.py``.  So, we want to be able to put his line in
+``ourscript.py``::
+
+    import ourmodule
+
+********************************
+Putting stuff on the Python path
+********************************
+
+The Python PATH is the list of directories that Python will search to find
+code.
+
+.. nbplot::
+
+    >>> import sys
+    >>> print('\n'.join(sys.path))
+
+We are going to be using the modules in ``pna_code`` again this week.
+
+It is getting a little tiring to keep doing:
+
+::
+
+    import sys
+    sys.path.append('/Users/mb312/pna_code')
+
+Is there any easier way?
+
+Why yes - there is. In fact there are several.
+
+The one we are going to use is the ``PYTHONPATH`` environment variable
+(see https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH).
+
+If you are on a Mac
+===================
+
+-  Open ``Terminal.app``;
+-  Open the file ``~/.bash_profile`` in your text editor;
+-  Add the following line to the end:
+
+   ::
+
+       export PYTHONPATH=$HOME/pna_code
+
+Save the file. \* Close ``Terminal.app``; \* Start ``Terminal.app``
+again, and type this:
+
+::
+
+    ```
+    echo $PYTHONPATH
+    ```
+
+It should show something like ``/Users/your_username/pna_code``. If not,
+come get one of us.
+
+If you are on Linux
+===================
+
+-  Open your favorite terminal program;
+-  Open the file ``~/.bashrc`` in your text editor;
+-  Add the following line to the end:
+
+   ::
+
+       export PYTHONPATH=$HOME/pna_code
+
+   Save the file.
+-  Close your terminal application;
+-  Start your terminal application again, and type this:
+
+   ::
+
+       echo $PYTHONPATH
+
+It should show something like ``/home/your_username/pna_code``. If not,
+come get one of us.
+
+If you are on Windows
+=====================
+
+Got to the Windows menu, right-click on "Computer" and select
+"Properties":
+
+From the computer properties dialog, select "Advanced system settings"
+on the left:
+
+From the advanced system settings dialog, choose the "Environment
+variables" button:
+
+In the Environment variables dialog, click the "New" button in the top
+half of the dialog, to make a new *user* variable:
+
+Give the variable name as ``PYTHONPATH`` and the value is the path to
+the ``pna_code`` directory. Choose OK and OK again to save this
+variable.
+
+Now open a ``cmd`` Window (Windows key, then type ``cmd`` and press
+Return). Type:
+
+::
+
+    echo %PYTHONPATH%
+
+to confirm the environment variable is correctly set:
+
+If you want the IPython notebook to see this new ``PYTHONPATH``
+variable, you may need to close your terminal, open it again, and
+restart ``ipython notebook``, so that it picks up ``PYTHONPATH`` from
+the environment settings.
+
+You can check the current setting of environment variables, using the
+``os.environ`` dictionary:
+
+.. nbplot::
+
+    >>> import os
+    >>> os.environ['PYTHONPATH']
