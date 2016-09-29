@@ -58,7 +58,7 @@ html-only:
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
-html: rst-exercises html-only
+html: tex-exercises rst-exercises html-only
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
@@ -214,6 +214,9 @@ rst-exercises:
 	$(PYTHON) tools/proc_rst.py arteries_solution.rst
 	$(PYTHON) tools/proc_rst.py four_dimensions_solution.rst
 	$(PYTHON) tools/proc_rst.py pca_solution.rst
+
+tex-exercises:
+	pdflatex git_short.tex
 
 download-index:
 	$(PYTHON) tools/make_index.py --header="Downloads for PSYCH214 website" \
