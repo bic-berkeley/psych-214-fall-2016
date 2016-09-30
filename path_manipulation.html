@@ -79,13 +79,13 @@ for Unix paths on Unix machines, and Windows paths on Windows machines:</p>
 <p>Windows, backslash and strings</p>
 <p class="last">On Windows, we have the extra problem that Python uses the backslash character
 in strings to indicate a special character follows.  For example the string
-<code class="docutils literal"><span class="pre">Tab</span> <span class="pre">is</span> <span class="pre">\t,</span> <span class="pre">newline</span> <span class="pre">is</span> <span class="pre">\n</span></code> contains a tab character and a newline character,
+<code class="docutils literal"><span class="pre">&quot;Tab</span> <span class="pre">\t,</span> <span class="pre">newline</span> <span class="pre">\n&quot;</span></code> contains a tab character and a newline character,
 indicated by <code class="docutils literal"><span class="pre">'\t'</span></code> and <code class="docutils literal"><span class="pre">\n</span></code>.  So we need to prepend a backslash to each
 backslash we want in the output string:</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c1"># On Windows</span>
-<span class="o">&gt;&gt;</span> <span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">a</span><span class="se">\\</span><span class="s1">full</span><span class="se">\\</span><span class="s1">path</span><span class="se">\\</span><span class="s1">then_filename.txt&#39;</span><span class="p">)</span>
-<span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">a</span><span class="se">\\</span><span class="s1">full</span><span class="se">\\</span><span class="s1">path&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">a</span><span class="se">\\</span><span class="s1">full</span><span class="se">\\</span><span class="s1">path</span><span class="se">\\</span><span class="s1">then_filename.txt&#39;</span><span class="p">)</span> 
+<span class="go">&#39;c:\\a\\full\\path&#39;</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">dirname</span></code> also works for relative paths,  A relative path where the starting
@@ -116,9 +116,9 @@ does:</p>
 </pre></div>
 </div>
 <p>This also works on Windows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c1"># On Windows</span>
-<span class="o">&gt;&gt;</span> <span class="n">join</span><span class="p">(</span><span class="s1">&#39;relative&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;then_filename.txt&#39;</span><span class="p">)</span>
-<span class="s1">&#39;relative</span><span class="se">\\</span><span class="s1">path</span><span class="se">\\</span><span class="s1">then_filename.txt&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;relative&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;then_filename.txt&#39;</span><span class="p">)</span>  
+<span class="go">&#39;relative\\path\\then_filename.txt&#39;</span>
 </pre></div>
 </div>
 <p>To convert a relative to an absolute path, use <code class="docutils literal"><span class="pre">abspath</span></code>:</p>
