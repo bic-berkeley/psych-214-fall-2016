@@ -11,9 +11,13 @@ See: https://docs.python.org/3.5/library/os.path.html
 
     >>> import os.path
 
-Tab complete on ``os.path`` to list the functions and attributes there.
+In IPython, you can tab complete on ``os.path`` to list the functions and
+attributes there.
 
-We can import stuff from modules like this:
+The first function we will use from ``os.path`` is ``dirname``.  To avoid
+typing ``os.path.dirname`` all the time, import the ``dirname`` function
+directly into the current name-space, by using the ``from module import ...``
+version of the ``import`` command:
 
 .. nbplot::
 
@@ -27,8 +31,9 @@ We can import stuff from modules like this:
     >>> dirname is os.path.dirname
     True
 
-``dirname`` gives the directory name from a full file path. It works correctly
-for Unix paths on Unix machines, and Windows paths on Windows machines:
+The ``dirname`` function gives the directory name from a full file path. It
+works correctly for Unix paths on Unix machines, and Windows paths on Windows
+machines:
 
 .. nbplot::
 
