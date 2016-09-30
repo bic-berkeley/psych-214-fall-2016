@@ -13,10 +13,7 @@ What branch should I use?
 Path manipulation
 *****************
 
-See: https://docs.python.org/3.5/library/os.path.html
-
-* ``os.path``
-* ``dirname, basename, join, splitext, abspath``
+See: :doc:`path_manipulation`.
 
 *******************************
 Adding stuff to the Python PATH

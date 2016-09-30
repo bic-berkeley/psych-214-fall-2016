@@ -72,3 +72,4 @@ version control using git.
     dot_and_outer
     pca_exercise
     pca_solution
+    path_manipulation
