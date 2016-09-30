@@ -80,8 +80,8 @@ for Unix paths on Unix machines, and Windows paths on Windows machines:</p>
 <p class="last">On Windows, we have the extra problem that Python uses the backslash character
 in strings to indicate a special character follows.  For example the string
 <code class="docutils literal"><span class="pre">&quot;Tab</span> <span class="pre">\t,</span> <span class="pre">newline</span> <span class="pre">\n&quot;</span></code> contains a tab character and a newline character,
-indicated by <code class="docutils literal"><span class="pre">'\t'</span></code> and <code class="docutils literal"><span class="pre">\n</span></code>.  So we need to prepend a backslash to each
-backslash we want in the output string:</p>
+indicated by <code class="docutils literal"><span class="pre">&quot;\t&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;\n&quot;</span></code>.  So we need to prepend a backslash to
+each backslash we want in the output string:</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">a</span><span class="se">\\</span><span class="s1">full</span><span class="se">\\</span><span class="s1">path</span><span class="se">\\</span><span class="s1">then_filename.txt&#39;</span><span class="p">)</span> 
