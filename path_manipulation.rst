@@ -40,14 +40,14 @@ for Unix paths on Unix machines, and Windows paths on Windows machines:
 
     On Windows, we have the extra problem that Python uses the backslash character
     in strings to indicate a special character follows.  For example the string
-    ``Tab is \t, newline is \n`` contains a tab character and a newline character,
+    ``"Tab \t, newline \n"`` contains a tab character and a newline character,
     indicated by ``'\t'`` and ``\n``.  So we need to prepend a backslash to each
     backslash we want in the output string:
 
 ::
 
-    >> # On Windows
-    >> dirname('c:\\a\\full\\path\\then_filename.txt')
+    >>> # On Windows
+    >>> dirname('c:\\a\\full\\path\\then_filename.txt') # doctest: +SKIP
     'c:\\a\\full\\path'
 
 ``dirname`` also works for relative paths,  A relative path where the starting
@@ -85,8 +85,8 @@ does:
 
 This also works on Windows::
 
-    >> # On Windows
-    >> join('relative', 'path', 'then_filename.txt')
+    >>> # On Windows
+    >>> join('relative', 'path', 'then_filename.txt')  # doctest: +SKIP
     'relative\\path\\then_filename.txt'
 
 To convert a relative to an absolute path, use ``abspath``:
