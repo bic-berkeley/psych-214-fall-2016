@@ -31,7 +31,7 @@ The module and script might look like this:
 .. workrun::
     :hide:
 
-    rm -rf code scripts
+    rm -rf code scripts another_dir
     mkdir code scripts
 
 .. writefile:: code/a_module.py
@@ -68,6 +68,8 @@ IPython:
 
     >>> import a_module
 
+.. _sys-path:
+
 **************************************
 Python looks for modules in "sys.path"
 **************************************
@@ -102,108 +104,64 @@ There are various ways of making sure a directory is always on the Python
 ``sys.path`` list when you run Python, including:
 
 * put the directory into the contents of the ``PYTHONPATH`` environment
-  variable |--| :doc:`using_pythonpath` (see: :doc:`path_manipulation`) (see:
-  :doc:`path_manipulation`):
+  variable |--| :doc:`using_pythonpath`
 * make the module part of an installable package, and install it |--| see:
   `making a Python package`_.
 
-You can also put your ``code`` directory on the Python ``sys.path`` at the top
-of the files that need it.  For example (see: :doc:`path_manipulation``):
+As a crude hack, you can also put your ``code`` directory on the Python
+``sys.path`` at the top of the files that need it:
 
-::
+.. writefile:: scripts/a_script_with_hack.py
+    :cwd: /working
 
     import sys
-    sys.path.append('/Users/mb312/pna_code')
+    sys.path.append('code')
 
-Is there any easier way?
+    import a_module
 
-Why yes - there is. In fact there are several.
+    a_module.func()
 
-The one we are going to use is the ``PYTHONPATH`` environment variable
-(see https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH).
+Then:
 
-If you are on a Mac
-===================
+.. workrun::
 
--  Open ``Terminal.app``;
--  Open the file ``~/.bash_profile`` in your text editor;
--  Add the following line to the end:
+    python3 scripts/a_script_with_hack.py
 
-   ::
+The simple ``append`` above will only work when running the script from a
+directory containing the ``code`` subdirectory.  For example:
 
-       export PYTHONPATH=$HOME/pna_code
+.. workrun::
+    :allow-fail:
 
-Save the file. \* Close ``Terminal.app``; \* Start ``Terminal.app``
-again, and type this:
+    mkdir another_dir
+    cd another_dir
+    python3 ../scripts/a_script_with_hack.py
 
-::
+This is because the directory ``code`` that we specified is a relative path,
+and therefore Python looks for the ``code`` directory in the current working
+directory.
 
-    ```
-    echo $PYTHONPATH
-    ```
+To make the hack work when running the code from any directory, you could use
+some :doc:`path manipulation <path_manipulation>` on the :ref:`file-variable`:
 
-It should show something like ``/Users/your_username/pna_code``. If not,
-come get one of us.
+.. writefile:: scripts/a_script_with_better_hack.py
+    :cwd: /working
 
-If you are on Linux
-===================
+    from os.path import dirname, abspath, join
+    import sys
 
--  Open your favorite terminal program;
--  Open the file ``~/.bashrc`` in your text editor;
--  Add the following line to the end:
+    # Find code directory relative to our directory
+    THIS_DIR = dirname(__file__)
+    CODE_DIR = abspath(join(THIS_DIR, '..', 'code'))
+    sys.path.append(CODE_DIR)
 
-   ::
+    import a_module
 
-       export PYTHONPATH=$HOME/pna_code
+    a_module.func()
 
-   Save the file.
--  Close your terminal application;
--  Start your terminal application again, and type this:
+Now the module import does work from ``another_dir``:
 
-   ::
+.. workrun::
+    :cwd: /working/another_dir
 
-       echo $PYTHONPATH
-
-It should show something like ``/home/your_username/pna_code``. If not,
-come get one of us.
-
-If you are on Windows
-=====================
-
-Got to the Windows menu, right-click on "Computer" and select
-"Properties":
-
-From the computer properties dialog, select "Advanced system settings"
-on the left:
-
-From the advanced system settings dialog, choose the "Environment
-variables" button:
-
-In the Environment variables dialog, click the "New" button in the top
-half of the dialog, to make a new *user* variable:
-
-Give the variable name as ``PYTHONPATH`` and the value is the path to
-the ``pna_code`` directory. Choose OK and OK again to save this
-variable.
-
-Now open a ``cmd`` Window (Windows key, then type ``cmd`` and press
-Return). Type:
-
-::
-
-    echo %PYTHONPATH%
-
-to confirm the environment variable is correctly set:
-
-If you want the IPython notebook to see this new ``PYTHONPATH``
-variable, you may need to close your terminal, open it again, and
-restart ``ipython notebook``, so that it picks up ``PYTHONPATH`` from
-the environment settings.
-
-You can check the current setting of environment variables, using the
-``os.environ`` dictionary:
-
-.. nbplot::
-
-    >>> import os
-    >>> # os.environ['PYTHONPATH']  # doctest: +SKIP
+    python3 ../scripts/a_script_with_better_hack.py

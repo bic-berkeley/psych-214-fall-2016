@@ -15,6 +15,8 @@ When you see a *dunder* variable or function or method, it is almost
 invariably a variable or function or method that Python has defined, or that
 Python is using in a special way.
 
+.. _file-variable:
+
 ***********************
 The "__file__" variable
 ***********************
@@ -47,6 +49,7 @@ If you ``import`` the module, ``__file__`` is also set:
     # Run Python code with "-c" flag
     python3 -c "import example_module"
 
+.. _name-variable:
 
 ***********************
 The "__name__" variable
