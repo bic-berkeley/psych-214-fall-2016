@@ -204,6 +204,8 @@
     http://en.wikipedia.org/wiki/Linear_interpolation
 .. _nearest neighbor interpolation:
     https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
+.. _Pearson product-moment correlation coefficient:
+   https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
 
 .. People
 .. _Matthew:

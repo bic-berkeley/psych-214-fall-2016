@@ -2,27 +2,30 @@
 October 3: statistics on brain images
 #####################################
 
-*************
-Yay! A review
-*************
-
-Review is at :download:`git_short.pdf`.
-
-Review should take about 10 minutes.
-
-After you've worked through the review on your own, get into your groups, and
-cross check your answers.  Decide who's got the answer right.
-
-Then we'll go through the answers.
-
 ********
 Teaching
 ********
 
-* Review of the math;
 * block subtraction;
+
+**************************
+Correlation and projection
+**************************
+
+* :doc:`vector_angles`;
+* :doc:`correlation_and_projection`.
+
+***********************
+Correlation in practice
+***********************
+
 * correlation, one voxel;
 * correlation, all voxels;
+
+******************************
+Simple and multiple regression
+******************************
+
 * simple regression;
 * multiple regression with confounds.
 
@@ -30,4 +33,5 @@ Teaching
 Reading and homework for next week
 **********************************
 
-Continue work on outlier detection project for next week.
+* Do exercises from last week's lab: :ref:`git_workflow-exercises`;
+* Continue work on outlier detection project for next week.
