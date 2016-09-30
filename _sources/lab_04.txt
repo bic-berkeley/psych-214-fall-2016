@@ -21,7 +21,7 @@ Adding stuff to the Python PATH
 
 The mystery of where ``mymodule`` comes from, when you do ``import mymodule``.
 
-See: https://docs.python.org/3.5/library/sys.html#sys.path
+See: :doc:`sys_path`.
 
 *******
 Testing
@@ -39,7 +39,13 @@ Some numpy stuff
 Some live coding
 ****************
 
-With guest editor Stéfan van der Walt.
+With guest editor Stéfan van der Walt:
+
+* making issues;
+* feature branches;
+* pull requests;
+* responding to comments on pull requests;
+* merging pull requests with the "Merge" button on Github.
 
 ************
 Git workflow

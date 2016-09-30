@@ -1,2 +1,2 @@
-# - compatibility with Python 2
-from __future__ import print_function, division
+import os
+os.environ['PYTHONPATH'] = "/home/my_user/code"

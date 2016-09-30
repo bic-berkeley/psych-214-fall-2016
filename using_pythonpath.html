@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing and using Python modules &mdash; Functional MRI methods</title>
+    <title>Using PYTHONPATH &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -42,110 +42,143 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="writing-and-using-python-modules">
-<h1>Writing and using Python modules<a class="headerlink" href="#writing-and-using-python-modules" title="Permalink to this headline">¶</a></h1>
-<p>Let&#8217;s say we have written our own module called <code class="docutils literal"><span class="pre">ourmodule.py</span></code>, in a
-directory called <code class="docutils literal"><span class="pre">code</span></code>.</p>
-<p>We also have a script called <code class="docutils literal"><span class="pre">ourscript.py</span></code> in a directory called
-<code class="docutils literal"><span class="pre">scripts</span></code>.</p>
-<p>We want to be able to <code class="docutils literal"><span class="pre">import</span></code> the code in <code class="docutils literal"><span class="pre">ourmodule.py</span></code> to use in
-<code class="docutils literal"><span class="pre">ourscript.py</span></code>.  So, we want to be able to put his line in
-<code class="docutils literal"><span class="pre">ourscript.py</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ourmodule</span>
+<div class="section" id="using-pythonpath">
+<h1>Using PYTHONPATH<a class="headerlink" href="#using-pythonpath" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal"><span class="pre">PYTHONPATH</span></code> is an <a class="reference internal" href="glossary.html#term-environment-variable"><span class="xref std std-term">environment variable</span></a>.</p>
+<p>See the <a class="reference external" href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">Python 3 docs for PYTHONPATH</a>.</p>
+<p>The PYTHONPATH variable has a value that is a string with a list of
+directories that Python should add to the <a class="reference internal" href="sys_path.html#sys-path"><span class="std std-ref">sys.path</span></a> directory
+list.</p>
+<p>The main use of PYTHONPATH is when we are developing some code that we want to
+be able to import from Python, but that we have not yet made into an
+installable Python package (see: <cite>making a Python package</cite>).</p>
+<p>Returning to the example module and script in <a class="reference internal" href="sys_path.html"><span class="doc">Where does Python look for modules?</span></a>:</p>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">code/a_module.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>def func():
+    print(&quot;Running useful function&quot;)
 </pre></div>
 </div>
-<div class="section" id="putting-stuff-on-the-python-path">
-<h2>Putting stuff on the Python path<a class="headerlink" href="#putting-stuff-on-the-python-path" title="Permalink to this headline">¶</a></h2>
-<p>The Python PATH is the list of directories that Python will search to find
-code.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+</div>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">scripts/a_script.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>import a_module
+
+a_module.func()
 </pre></div>
 </div>
-<p>We are going to be using the modules in <code class="docutils literal"><span class="pre">pna_code</span></code> again this week.</p>
-<p>It is getting a little tiring to keep doing:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/mb312/pna_code&#39;</span><span class="p">)</span>
+</div>
+<p>At the moment, on my machine, PYTHONPATH is empty:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
-<p>Is there any easier way?</p>
-<p>Why yes - there is. In fact there are several.</p>
-<p>The one we are going to use is the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable
-(see <a class="reference external" href="https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH">https://docs.python.org/2/using/cmdline.html#envvar-PYTHONPATH</a>).</p>
+<p>Before we set PYTHONPATH correctly, <code class="docutils literal"><span class="pre">a_script.py</span></code> will fail with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 scripts/a_script.py
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;scripts/a_script.py&quot;</span>, line 1, in &lt;module&gt;
+    import a_module
+ImportError: No module named <span class="s1">&#39;a_module&#39;</span>
+</pre></div>
+</div>
+<p>Now I set the PYTHONPATH environment variable value to be the path to the
+<code class="docutils literal"><span class="pre">code</span></code> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="c1"># Set PYTHONPATH to path to the working directory + /code</span>
+$ <span class="c1"># This is for the &quot;bash&quot; shell on Unix / git bash on Windows</span>
+$ <span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/code&quot;</span>
+$ <span class="c1"># Now the script can find &quot;a_module&quot;</span>
+$ python3 scripts/a_script.py
+Running useful <span class="k">function</span>
+</pre></div>
+</div>
+<div class="section" id="setting-pythonpath-more-permanently">
+<h2>Setting PYTHONPATH more permanently<a class="headerlink" href="#setting-pythonpath-more-permanently" title="Permalink to this headline">¶</a></h2>
+<p>You probably don&#8217;t want to have to set PYTHONPATH every time you start up a
+terminal and run a Python script.</p>
+<p>Luckily, we can make the PYTHONPATH value be set for any terminal session, by
+setting the environment variable default.</p>
+<p>For example, let&#8217;s say I wanted add the directory <code class="docutils literal"><span class="pre">/Users/my_user/code</span></code> to
+the PYTHONPATH:</p>
 <div class="section" id="if-you-are-on-a-mac">
 <h3>If you are on a Mac<a class="headerlink" href="#if-you-are-on-a-mac" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Open <code class="docutils literal"><span class="pre">Terminal.app</span></code>;</p>
 </li>
-<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bash_profile</span></code> in your text editor;</p>
+<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bash_profile</span></code> in your text editor – e.g. <code class="docutils literal"><span class="pre">atom</span>
+<span class="pre">~/.bash_profile</span></code>;</p>
 </li>
 <li><p class="first">Add the following line to the end:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>export PYTHONPATH=$HOME/pna_code
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/Users/my_user/code&quot;</span>
 </pre></div>
 </div>
 </li>
-</ul>
-<p>Save the file. * Close <code class="docutils literal"><span class="pre">Terminal.app</span></code>; * Start <code class="docutils literal"><span class="pre">Terminal.app</span></code>
-again, and type this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>```
-echo $PYTHONPATH
-```
+<li><p class="first">Save the file.</p>
+</li>
+<li><p class="first">Close <code class="docutils literal"><span class="pre">Terminal.app</span></code>;</p>
+</li>
+<li><p class="first">Start <code class="docutils literal"><span class="pre">Terminal.app</span></code> again, to read in the new settings, and type this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
-<p>It should show something like <code class="docutils literal"><span class="pre">/Users/your_username/pna_code</span></code>. If not,
-come get one of us.</p>
+<p>It should show something like <code class="docutils literal"><span class="pre">/Users/my_user/code</span></code>.</p>
+</li>
+</ul>
 </div>
 <div class="section" id="if-you-are-on-linux">
 <h3>If you are on Linux<a class="headerlink" href="#if-you-are-on-linux" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Open your favorite terminal program;</p>
 </li>
-<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bashrc</span></code> in your text editor;</p>
+<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bashrc</span></code> in your text editor – e.g. <code class="docutils literal"><span class="pre">atom</span>
+<span class="pre">~/.bashrc</span></code>;</p>
 </li>
 <li><p class="first">Add the following line to the end:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>export PYTHONPATH=$HOME/pna_code
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">my_user</span><span class="o">/</span><span class="n">code</span>
 </pre></div>
 </div>
+</div></blockquote>
 <p>Save the file.</p>
 </li>
 <li><p class="first">Close your terminal application;</p>
 </li>
-<li><p class="first">Start your terminal application again, and type this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>echo $PYTHONPATH
+<li><p class="first">Start your terminal application again, to read in the new settings, and
+type this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
+<p>It should show something like <code class="docutils literal"><span class="pre">/home/my_user/code</span></code>.</p>
 </li>
 </ul>
-<p>It should show something like <code class="docutils literal"><span class="pre">/home/your_username/pna_code</span></code>. If not,
-come get one of us.</p>
 </div>
 <div class="section" id="if-you-are-on-windows">
 <h3>If you are on Windows<a class="headerlink" href="#if-you-are-on-windows" title="Permalink to this headline">¶</a></h3>
-<p>Got to the Windows menu, right-click on &#8220;Computer&#8221; and select
-&#8220;Properties&#8221;:</p>
-<p>From the computer properties dialog, select &#8220;Advanced system settings&#8221;
-on the left:</p>
-<p>From the advanced system settings dialog, choose the &#8220;Environment
-variables&#8221; button:</p>
-<p>In the Environment variables dialog, click the &#8220;New&#8221; button in the top
-half of the dialog, to make a new <em>user</em> variable:</p>
+<p>Got to the Windows menu, right-click on &#8220;Computer&#8221; and select &#8220;Properties&#8221;:</p>
+<p>From the computer properties dialog, select &#8220;Advanced system settings&#8221; on the
+left:</p>
+<p>From the advanced system settings dialog, choose the &#8220;Environment variables&#8221;
+button:</p>
+<p>In the Environment variables dialog, click the &#8220;New&#8221; button in the top half of
+the dialog, to make a new <em>user</em> variable:</p>
 <p>Give the variable name as <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> and the value is the path to
-the <code class="docutils literal"><span class="pre">pna_code</span></code> directory. Choose OK and OK again to save this
+the <code class="docutils literal"><span class="pre">code</span></code> directory. Choose OK and OK again to save this
 variable.</p>
 <p>Now open a <code class="docutils literal"><span class="pre">cmd</span></code> Window (Windows key, then type <code class="docutils literal"><span class="pre">cmd</span></code> and press
 Return). Type:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">%</span><span class="n">PYTHONPATH</span><span class="o">%</span>
 </pre></div>
 </div>
-<p>to confirm the environment variable is correctly set:</p>
-<p>If you want the IPython notebook to see this new <code class="docutils literal"><span class="pre">PYTHONPATH</span></code>
-variable, you may need to close your terminal, open it again, and
-restart <code class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></code>, so that it picks up <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> from
-the environment settings.</p>
+<p>to confirm the environment variable is correctly set.</p>
+<p>If you want your IPython sessions to see this new <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> variable,
+you&#8217;ll have to restart your terminal and restart IPython so that it picks up
+<code class="docutils literal"><span class="pre">PYTHONPATH</span></code> from the environment settings.</p>
+</div>
+<div class="section" id="checking-system-environment-variables-in-python">
+<h3>Checking system environment variables in Python<a class="headerlink" href="#checking-system-environment-variables-in-python" title="Permalink to this headline">¶</a></h3>
 <p>You can check the current setting of environment variables, using the
-<code class="docutils literal"><span class="pre">os.environ</span></code> dictionary:</p>
+<code class="docutils literal"><span class="pre">os.environ</span></code> dictionary.   It contains all the defined environment variables
+of the shell that started Python. For example, you can check the value of the
+PYTHONPATH environment variable, if it is defined:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHONPATH&#39;</span><span class="p">]</span>
+<span class="go">&#39;/home/my_user/code&#39;</span>
 </pre></div>
 </div>
 </div>

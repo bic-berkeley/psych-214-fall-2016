@@ -1,2 +1,3 @@
-import sys
-print('\n'.join(sys.path))
+import os
+os.environ['PYTHONPATH']
+# '/home/my_user/code'
