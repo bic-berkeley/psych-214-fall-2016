@@ -2,11 +2,12 @@
 
 See autorun.py for license
 """
+from __future__ import print_function
 
 import sys
 from code import InteractiveInterpreter
 
-    
+
 def main():
     """
     Print lines of input along with output.
@@ -16,21 +17,20 @@ def main():
     source = ''
     try:
         while True:
-            source = source_lines.next()
-            print '>>>', source
+            source = next(source_lines)
+            print('>>>', source)
             more = console.runsource(source)
             while more:
-                next_line = source_lines.next()
-                print '...', next_line
-                source += '\n' + next_line 
+                next_line = next(source_lines)
+                print('...', next_line)
+                source += '\n' + next_line
                 more = console.runsource(source)
     except StopIteration:
         if more:
-            print '... '
+            print('... ')
             more = console.runsource(source + '\n')
 
-    
-    
+
 if __name__ == '__main__':
     main()
 

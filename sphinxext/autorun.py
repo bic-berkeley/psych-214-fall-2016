@@ -42,6 +42,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import os
+import sys
 from subprocess import Popen, PIPE
 import re
 
@@ -60,7 +61,7 @@ class AutoRun(object):
     here = os.path.abspath(__file__)
     pycon = os.path.join(os.path.dirname(here), 'pycon.py')
     config = dict(
-        pycon = 'python ' + pycon,
+        pycon = '{} {}'.format(sys.executable, pycon),
         pycon_prefix_chars = 4,
         pycon_show_source = False,
         console = 'bash',
