@@ -74,6 +74,7 @@
 .. _10 reasons Python rocks for research:
    http://www.stat.washington.edu/~hoytak/blog/whypython.html
 .. _install pip with get-pip.py: https://pip.pypa.io/en/stable/installing/#installing-with-get-pip-py
+.. _making a Python package: https://packaging.python.org/distributing
 
 .. IPython
 .. _ipython: http://ipython.org/
