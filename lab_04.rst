@@ -39,7 +39,13 @@ Some numpy stuff
 Some live coding
 ****************
 
-With guest editor Stéfan van der Walt.
+With guest editor Stéfan van der Walt:
+
+* making issues;
+* feature branches;
+* pull requests;
+* responding to comments on pull requests;
+* merging pull requests with the "Merge" button on Github.
 
 ************
 Git workflow

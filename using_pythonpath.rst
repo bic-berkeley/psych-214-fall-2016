@@ -76,25 +76,22 @@ the PYTHONPATH:
 If you are on a Mac
 ===================
 
--  Open ``Terminal.app``;
--  Open the file ``~/.bash_profile`` in your text editor |--| e.g. ``atom
+* Open ``Terminal.app``;
+* Open the file ``~/.bash_profile`` in your text editor |--| e.g. ``atom
   ~/.bash_profile``;
--  Add the following line to the end:
+* Add the following line to the end::
 
-   ::
+    export PYTHONPATH="/Users/my_user/code"
 
-       export PYTHONPATH="/Users/my_user/code"
-
-Save the file.
-
+* Save the file.
 * Close ``Terminal.app``;
 * Start ``Terminal.app`` again, to read in the new settings, and type this:
 
-    ::
+  .. code-block:: bash
 
-        echo $PYTHONPATH
+      echo $PYTHONPATH
 
-It should show something like ``/Users/my_user/code``.
+  It should show something like ``/Users/my_user/code``.
 
 If you are on Linux
 ===================
@@ -113,11 +110,11 @@ If you are on Linux
 * Start your terminal application again, to read in the new settings, and
   type this:
 
-   ::
+  .. code-block:: bash
 
        echo $PYTHONPATH
 
-It should show something like ``/home/my_user/code``.
+  It should show something like ``/home/my_user/code``.
 
 If you are on Windows
 =====================

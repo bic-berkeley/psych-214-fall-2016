@@ -78,7 +78,9 @@ the "upstream" repository that you will fork, and make a pull request to.
     git checkout pca-exercise
 
 * Finish the PCA exercise by filling in ``pca_code.py``.  I suggest you keep
-  the exercise web-page open in your browser, and work in IPython as in::
+  the exercise web-page open in your browser, and work in IPython as in:
+
+  .. code-block:: bash
 
     $ ipython
     Python 3.5.2 (default, Jul 28 2016, 21:28:00)
