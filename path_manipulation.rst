@@ -41,8 +41,8 @@ for Unix paths on Unix machines, and Windows paths on Windows machines:
     On Windows, we have the extra problem that Python uses the backslash character
     in strings to indicate a special character follows.  For example the string
     ``"Tab \t, newline \n"`` contains a tab character and a newline character,
-    indicated by ``'\t'`` and ``\n``.  So we need to prepend a backslash to each
-    backslash we want in the output string:
+    indicated by ``"\t"`` and ``"\n"``.  So we need to prepend a backslash to
+    each backslash we want in the output string:
 
 ::
 
