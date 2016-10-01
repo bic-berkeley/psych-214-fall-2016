@@ -196,6 +196,10 @@
    http://matthew-brett.github.io/teaching/on_vectors.html
 .. _vector projection:
    http://matthew-brett.github.io/teaching/vector_projection.html
+.. _correlation and projection:
+   http://matthew-brett.github.io/teaching/correlation_projection.html
+.. _vector angles:
+   http://matthew-brett.github.io/teaching/vector_angles.html
 
 .. Ideas
 .. _principal component analysis:
