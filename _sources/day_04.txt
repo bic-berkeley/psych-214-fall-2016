@@ -2,27 +2,47 @@
 October 3: statistics on brain images
 #####################################
 
-*************
-Yay! A review
-*************
+******************
+Project discussion
+******************
 
-Review is at :download:`git_short.pdf`.
+* mentors;
+* teams.
 
-Review should take about 10 minutes.
+**********
+Activation
+**********
 
-After you've worked through the review on your own, get into your groups, and
-cross check your answers.  Decide who's got the answer right.
+* :doc:`slicing_with_booleans`;
+* :doc:`first_activation_exercise`.
 
-Then we'll go through the answers.
+**************************
+Correlation and projection
+**************************
 
-********
-Teaching
-********
+* `vector angles`_;
+* `correlation and projection`_.
 
-* Review of the math;
-* block subtraction;
-* correlation, one voxel;
-* correlation, all voxels;
+***********************
+Correlation in practice
+***********************
+
+* :doc:`voxel_time_courses`;
+* :download:`stimuli.py` file;
+* :download:`test_stimuli.py` file;
+* ::
+
+    pip install pytest
+    py.test test_stimuli.py
+
+* :doc:`voxel_correlation_exercise`.
+* :doc:`pearson_functions` exercise.
+
+******************************
+Simple and multiple regression
+******************************
+
+* `introduction to the General Linear Model`_;
 * simple regression;
 * multiple regression with confounds.
 
@@ -30,4 +50,5 @@ Teaching
 Reading and homework for next week
 **********************************
 
-Continue work on outlier detection project for next week.
+* Do exercises from last week's lab: :ref:`git-workflow-exercises`;
+* Continue work on outlier detection project for Monday next week.

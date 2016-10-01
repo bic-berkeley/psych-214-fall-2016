@@ -27,13 +27,45 @@ See: :doc:`sys_path`.
 Testing
 *******
 
-* assert statements;
+Using assert statements:
+
+>>> # No error
+>>> assert True
+>>> # Tests whether expression evaluates to True
+>>> assert 10 == 10
+
+>>> # Error
+>>> assert False
+Traceback (most recent call last):
+   ...
+AssertionError
+
+>>> # Tests whether statement evaluates to True
+>>> assert 10 == 11
+Traceback (most recent call last):
+   ...
+AssertionError
 
 ****************
 Some numpy stuff
 ****************
 
-* ``np.logical_and``, ``np.logical_or``;
+``np.logical_and``, ``np.logical_or``:
+
+.. nbplot::
+
+    >>> import numpy as np
+
+    >>> bool1 = np.array([True, True, False, False])
+    >>> bool2 = np.array([False, True, False, True])
+
+    >>> # logical_and True where both of bool1 and bool2 are True
+    >>> np.logical_and(bool1, bool2)
+    array([False,  True, False, False], dtype=bool)
+
+    >>> # logical_or True where either of bool1 and bool2 are True
+    >>> np.logical_or(bool1, bool2)
+    array([ True,  True, False,  True], dtype=bool)
 
 ****************
 Some live coding
@@ -46,6 +78,8 @@ With guest editor Stéfan van der Walt:
 * pull requests;
 * responding to comments on pull requests;
 * merging pull requests with the "Merge" button on Github.
+
+.. _git-workflow-exercises:
 
 ************
 Git workflow

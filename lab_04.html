@@ -64,15 +64,48 @@
 </div>
 <div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>assert statements;</li>
-</ul>
+<p>Using assert statements:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># No error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Tests whether expression evaluates to True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="bp">False</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">AssertionError</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Tests whether statement evaluates to True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">11</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">AssertionError</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="some-numpy-stuff">
 <h2>Some numpy stuff<a class="headerlink" href="#some-numpy-stuff" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">np.logical_and</span></code>, <code class="docutils literal"><span class="pre">np.logical_or</span></code>;</li>
-</ul>
+<p><code class="docutils literal"><span class="pre">np.logical_and</span></code>, <code class="docutils literal"><span class="pre">np.logical_or</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bool2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># logical_and True where both of bool1 and bool2 are True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">bool1</span><span class="p">,</span> <span class="n">bool2</span><span class="p">)</span>
+<span class="go">array([False,  True, False, False], dtype=bool)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># logical_or True where either of bool1 and bool2 are True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">bool1</span><span class="p">,</span> <span class="n">bool2</span><span class="p">)</span>
+<span class="go">array([ True,  True, False,  True], dtype=bool)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="some-live-coding">
 <h2>Some live coding<a class="headerlink" href="#some-live-coding" title="Permalink to this headline">¶</a></h2>
@@ -86,7 +119,7 @@
 </ul>
 </div>
 <div class="section" id="git-workflow">
-<h2>Git workflow<a class="headerlink" href="#git-workflow" title="Permalink to this headline">¶</a></h2>
+<span id="git-workflow-exercises"></span><h2>Git workflow<a class="headerlink" href="#git-workflow" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="spm-funcs-exercise">
 <h3>spm_funcs exercise<a class="headerlink" href="#spm-funcs-exercise" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
