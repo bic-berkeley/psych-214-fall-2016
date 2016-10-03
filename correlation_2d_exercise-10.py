@@ -1,1 +1,1 @@
-#- Loop over voxels filling in correlation at this voxel
+#- Make a 1D array of size (n_voxels,) to hold the correlation values

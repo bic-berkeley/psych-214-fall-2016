@@ -1,1 +1,1 @@
-#- Reshape 4D array to 2D array n_voxels by n_volumes
+#- Calculate the number of voxels (number of elements in one volume)

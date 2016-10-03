@@ -1,1 +1,1 @@
-#- Calculate the number of voxels (number of elements in one volume)
+#- Drop the first 4 volumes, and the first 4 on-off values

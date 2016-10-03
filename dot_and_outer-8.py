@@ -1,5 +1,2 @@
-import nibabel as nib
-img = nib.load('ds114_sub009_t2r1.nii')
-data = img.get_data()
-data.shape
-# (64, 64, 30, 173)
+np.arange(10) * 0.5 + 4
+# array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])

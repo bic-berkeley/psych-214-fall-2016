@@ -1,1 +1,1 @@
-#- Make a 1D array of size (n_voxels,) to hold the correlation values
+#- Reshape 4D array to 2D array n_voxels by n_volumes

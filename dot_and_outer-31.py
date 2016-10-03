@@ -1,4 +1,6 @@
-# Mean across the second (column) axis
-row_means = np.mean(arr, axis=1)
-row_means
-# array([ 2.666667,  5.      ,  4.333333,  5.333333])
+x = np.arange(0, np.pi * 2, 0.1)
+fig, axes = plt.subplots(2, 1)
+axes[0].plot(x, np.sin(x))
+# [...]
+axes[1].plot(x, np.cos(x))
+# [...]

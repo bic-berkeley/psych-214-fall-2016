@@ -7,13 +7,6 @@ calculate a correlation between the task-on / task-off vector and the voxel
 time course.  We then make a new 3D volume that contains correlation values
 for each voxel.
 
-You've done this before in the exercise :doc:`voxel_correlation_exercise`, but
-this time we'll do it by reshaping the 4D data to 2D, and looping over the
-long voxels axis instead of over each of the three spatial axes.
-
-We've given you the stuff you will have done already for the previous exercise
-|--| you can copy-paste into IPython.
-
 .. nbplot::
     :include-source: false
 
@@ -27,35 +20,45 @@ We've given you the stuff you will have done already for the previous exercise
     >>> import matplotlib.pyplot as plt
     >>> import nibabel as nib
 
+Import the ``events2neural`` function from the :download:`stimuli.py` module:
+
 .. nbplot::
 
-    >>> #: import events2neural from stimuli module
+    >>> #- import events2neural from stimuli module
     >>> from stimuli import events2neural
 
-    >>> #: Load the ds114_sub009_t2r1.nii image
+If you don't have it already, download the :download:`ds114_sub009_t2r1.nii`
+image.  Load it with nibabel.
+
+.. nbplot::
+
+    >>> #- Load the ds114_sub009_t2r1.nii image
     >>> img = nib.load('ds114_sub009_t2r1.nii')
 
-    >>> #: Get the number of volumes in ds114_sub009_t2r1.nii
+    >>> #- Get the number of volumes in ds114_sub009_t2r1.nii
     >>> n_trs = img.shape[-1]
 
 The TR (time between scans) is 2.5 seconds.
 
 .. nbplot::
 
+    >>> #: TR
     >>> TR = 2.5
 
-Call the ``events2neural`` function to give you a time course that is 1
-for the volumes during the task (thinking of verbs) and 0 for the
-volumes during rest.
+Call the ``events2neural`` function to give you a time course that is 1 for
+the volumes during the task (thinking of verbs) and 0 for the volumes during
+rest.
 
 .. nbplot::
 
-    >>> #: Call events2neural to give on-off values for each volume
+    >>> #- Call events2neural to give on-off values for each volume
     >>> time_course = events2neural('ds114_sub009_t2r1_cond.txt', 2.5, n_trs)
 
+Using slicing, drop the first 4 volumes, and the corresponding on-off values:
+
 .. nbplot::
 
-    >>> #: Drop the first 4 volumes, and the first 4 on-off values
+    >>> #- Drop the first 4 volumes, and the first 4 on-off values
     >>> data = img.get_data()
     >>> data = data[..., 4:]
     >>> time_course = time_course[4:]
@@ -78,7 +81,9 @@ of volumes).
     >>> #- Make a 1D array of size (n_voxels,) to hold the correlation values
     >>> correlations_1d = np.zeros((n_voxels,))
 
-Loop over all voxels, calculate the correlation coefficient with
+If you finished the :doc:`pearson_function` exercise, you can use your
+``pearson_2d`` routine for calculating Pearson correlations across a 2D array.
+Otherwise, loop over all voxels, calculate the correlation coefficient with
 ``time_course`` at this voxel, and fill in the corresponding entry in your 1D
 array.
 
@@ -96,8 +101,22 @@ shape.
     >>> #- Reshape the correlations array back to 3D
     >>> correlations = np.reshape(correlations_1d, data.shape[:-1])
 
-If all went well, you should have generated the same 3D volume of correlations
-as you did for the original exercise:
+Test that your brain-at-a-time correlation image gives the same answer when
+you run the correlation on a single voxel time course.  Select an example
+voxel |--| say ``data[42, 32, 19]`` |--| and check that this gives the same
+answer as you found for the matching voxel in your correlations 3D array:
+
+.. nbplot::
+
+    >>> #- Check you get the same answer when selecting a voxel time course
+    >>> #- and running the correlation on that time course.  One example voxel
+    >>> #- could be the voxel at array coordinate [42, 32, 19]
+    >>> voxel_time_course = data[42, 32, 19]
+    >>> single_cc = np.corrcoef(voxel_time_course, time_course)[0, 1]
+    >>> assert np.allclose(correlations[42, 32, 19], single_cc)
+
+Plot the middle slice (plane) of the third axis from the correlations array.
+Look for any voxels with a high task correlation in the frontal lobe:
 
 .. nbplot::
 

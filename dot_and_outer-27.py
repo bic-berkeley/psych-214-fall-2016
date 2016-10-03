@@ -1,15 +1,7 @@
-v.shape
-# (2,)
-# Insert a new length 1 dimension at the beginning
-row_v = v[np.newaxis, :]
-row_v.shape
-# (1, 2)
-row_v
-# array([[0, 3]])
-# Insert a new length 1 dimension at the end
-col_v = v[:, np.newaxis]
-col_v.shape
-# (2, 1)
-col_v
-# array([[0],
-# [3]])
+# Use a loop to subtract the mean from each row
+de_meaned = arr.copy()
+for i in range(arr.shape[0]):  # iterate over rows
+    de_meaned[i] = de_meaned[i] - row_means[i]
+# The rows now have very near 0 mean
+de_meaned.mean(axis=1)
+# array([ 0.,  0.,  0.,  0.])

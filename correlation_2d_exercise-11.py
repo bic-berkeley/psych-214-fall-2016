@@ -1,1 +1,1 @@
-#- Reshape the correlations array back to 3D
+#- Loop over voxels filling in correlation at this voxel

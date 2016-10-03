@@ -1,2 +1,2 @@
-np.arange(10) * 0.5 + 4
-# array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])
+row_vector.dot(col_vector)
+# array([[4]])

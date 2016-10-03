@@ -6,23 +6,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import nibabel as nib
 
-#: import events2neural from stimuli module
-from stimuli import events2neural
+#- import events2neural from stimuli module
 
-#: Load the ds114_sub009_t2r1.nii image
-img = nib.load('ds114_sub009_t2r1.nii')
+#- Load the ds114_sub009_t2r1.nii image
 
-#: Get the number of volumes in ds114_sub009_t2r1.nii
-n_trs = img.shape[-1]
+#- Get the number of volumes in ds114_sub009_t2r1.nii
 
+#: TR
+TR = 2.5
 
-#: Call events2neural to give on-off values for each volume
-time_course = events2neural('ds114_sub009_t2r1_cond.txt', 2.5, n_trs)
+#- Call events2neural to give on-off values for each volume
 
-#: Drop the first 4 volumes, and the first 4 on-off values
-data = img.get_data()
-data = data[..., 4:]
-time_course = time_course[4:]
+#- Drop the first 4 volumes, and the first 4 on-off values
 
 #- Calculate the number of voxels (number of elements in one volume)
 
@@ -33,5 +28,9 @@ time_course = time_course[4:]
 #- Loop over voxels filling in correlation at this voxel
 
 #- Reshape the correlations array back to 3D
+
+#- Check you get the same answer when selecting a voxel time course
+#- and running the correlation on that time course.  One example voxel
+#- could be the voxel at array coordinate [42, 32, 19]
 
 #- Plot the middle slice of the third axis from the correlations array
