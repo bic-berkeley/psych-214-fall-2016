@@ -22,30 +22,7 @@ Our standard imports to start:
 Methods vs functions in numpy
 *****************************
 
-Many things are implemented in numpy as both *functions* and *methods*.  For
-example, there is a ``np.sum`` function, that adds up all the elements:
-
-.. nbplot::
-
-    >>> arr = np.array([1, 2, 0, 1])
-    >>> np.sum(arr)
-    4
-
-There is also a ``sum`` method of the numpy ``array`` object:
-
-.. nbplot::
-
-    >>> type(arr)
-    <class 'numpy.ndarray'>
-
-.. nbplot::
-
-    >>> arr.sum()
-    4
-
-Nearly all the method versions do the same thing as the function versions.
-Examples are ``mean``, ``min``, ``max``, ``sum``, ``reshape``.  Choosing the
-method or the function will usually depend on which one is easier to read.
+See :doc:`methods_vs_functions`.
 
 ***************
 More on reshape
@@ -57,56 +34,13 @@ See :doc:`reshape_and_4d`.
 allclose
 ********
 
-When the computer calculates a floating point value, there will often be some
-degree of error in the calculation, because the computer floating point format
-cannot represent every floating point number exactly. See:
-
-* `floating point`_;
-* `floating point error`_.
-
-When we check the results of a floating point calculation, we often want to
-avoid checking if the returned value is exactly equal to a desired value.
-Rather, we want to check whether the returned value is close enough, given the
-usual floating point error.  A common idiom in NumPy is to use the
-``np.allclose`` function, which checks whether two values or two arrays equal,
-within a small amount of error:
-
-.. nbplot::
-
-    >>> np.pi == 3.1415926
-    False
-    >>> np.allclose(np.pi, 3.1415926)
-    True
-    >>> np.allclose([np.pi, 2 * np.pi], [3.1415926, 6.2831852])
-    True
+See: :doc:`allclose`.
 
 *********
 np.arange
 *********
 
-``arange`` in NumPy is very like the Python ``range`` callable with two
-important differences:
-
-* ``arange`` returns an array rather than a ``range`` object (Python 3) or a
-  list (Python 2);
-* ``arange`` arguments can be floating point values.
-
-.. nbplot::
-
-    >>> np.arange(4, 11, 2)
-    array([ 4,  6,  8, 10])
-    >>> np.arange(4, 11, 0.5)
-    array([  4. ,   4.5,   5. ,   5.5,   6. ,   6.5,   7. ,   7.5,   8. ,
-             8.5,   9. ,   9.5,  10. ,  10.5])
-
-Because ``arange`` returns arrays, you can use NumPy element-wise operations
-to multiply by the step size and add a start value.  This is one way to create
-equally spaced vectors (``np.linspace`` is another):
-
-.. nbplot::
-
-    >>> np.arange(10) * 0.5 + 4
-    array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])
+See: :doc:`arange`.
 
 *******************
 Vector dot products
@@ -299,44 +233,7 @@ your intention explicit, and preserve the 2D shape of the output:
 Adding length 1 dimensions with newaxis
 ***************************************
 
-NumPy has a nice shortcut for adding a length 1 dimension to an array.  It is
-a little brain-bending, because it operates via array slicing:
-
-.. nbplot::
-
-    >>> v.shape
-    (2,)
-    >>> # Insert a new length 1 dimension at the beginning
-    >>> row_v = v[np.newaxis, :]
-    >>> row_v.shape
-    (1, 2)
-    >>> row_v
-    array([[0, 3]])
-    >>> # Insert a new length 1 dimension at the end
-    >>> col_v = v[:, np.newaxis]
-    >>> col_v.shape
-    (2, 1)
-    >>> col_v
-    array([[0],
-           [3]])
-
-Read this last slicing operation as "do slicing as normal, except, before
-slicing, insert a length 1 dimension at the position of ``np.newaxis``".
-
-In fact the name ``np.newaxis`` points to the familiar Python ``None`` object:
-
-.. nbplot::
-
-    >>> np.newaxis is None
-    True
-
-So, you also use the ``np.newaxis`` trick like this:
-
-.. nbplot::
-
-    >>> row_v = v[None, :]
-    >>> row_v.shape
-    (1, 2)
+See: :doc:`newaxis`.
 
 ********************
 Subtracting the mean

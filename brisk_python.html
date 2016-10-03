@@ -312,7 +312,7 @@ from the container to put into the <em>loop variable</em>.  For each element in 
 container, Python executes the <em>for block</em>.</p>
 <p>Note <a class="footnote-reference" href="#for-loop-equivalents" id="id3">[3]</a> shows equivalent <code class="docutils literal"><span class="pre">for</span></code> loops in Python, R and
 MATLAB.</p>
-<p>See <a class="reference internal" href="#ranges"><span class="std std-ref">Ranges</span></a> for a common way of writing a <code class="docutils literal"><span class="pre">for</span></code> loop that iterates
+<p>See <a class="reference internal" href="#ranges"><span class="std std-ref">Range</span></a> for a common way of writing a <code class="docutils literal"><span class="pre">for</span></code> loop that iterates
 over a sequence of integers.</p>
 </div>
 <div class="section" id="lists-are-sequences">
@@ -758,10 +758,10 @@ options within the curly brackets – see the <a class="reference external" href
 </div>
 </div>
 </div>
-<div class="section" id="ranges">
-<span id="id5"></span><h2>Ranges<a class="headerlink" href="#ranges" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="range">
+<span id="ranges"></span><h2>Range<a class="headerlink" href="#range" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal"><span class="pre">range</span></code> in Python 3 returns a <em>range object</em>.  It is a sequence, and so it
-is rather like a list <a class="footnote-reference" href="#py2-range" id="id6">[4]</a>.  When you use <code class="docutils literal"><span class="pre">range</span></code> with one
+is rather like a list <a class="footnote-reference" href="#py2-range" id="id5">[4]</a>.  When you use <code class="docutils literal"><span class="pre">range</span></code> with one
 argument, the argument value is the <code class="docutils literal"><span class="pre">stop</span></code> index.  For example, to make a
 <code class="docutils literal"><span class="pre">range</span></code> object generating the numbers from 0 up to <em>but not including</em> 5:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -1014,7 +1014,7 @@ of the <code class="docutils literal"><span class="pre">for</span></code> or <co
 <p>See <a class="reference internal" href="on_loops.html"><span class="doc">&#8220;for&#8221; and &#8220;while&#8221;, &#8220;break&#8221; and &#8220;else:&#8221;</span></a> for more on loops and <code class="docutils literal"><span class="pre">break</span></code>.</p>
 </div>
 <div class="section" id="functions">
-<span id="id7"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<span id="id6"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <p>Here we define our first function in Python:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">an_argument</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">an_argument</span> <span class="o">+</span> <span class="mi">1</span>
@@ -1337,7 +1337,7 @@ my_var <span class="o">=</span> <span class="m">10</span>
 <table class="docutils footnote" frame="void" id="py2-range" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td>In Python 2, <code class="docutils literal"><span class="pre">range</span></code> returns a list.  You can often use a
+<tr><td class="label"><a class="fn-backref" href="#id5">[4]</a></td><td>In Python 2, <code class="docutils literal"><span class="pre">range</span></code> returns a list.  You can often use a
 Python 3 range object in the same way you could use a list, so this
 difference between Python 2 and 3 may not matter for the person using the
 code.  There are things that you can do with lists that you cannot do with

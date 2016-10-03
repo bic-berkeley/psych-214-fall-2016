@@ -1,5 +1,4 @@
-# Turn 1D vector into explicit row vector
-row_v = v.reshape((1, 2))
-# Dot new returns a row vector rather than a 1D vector
-row_v.dot(X)
-# array([[ 9, 12, 15]])
+re_de_meaned = arr - means_expanded
+# The row means are now very close to zero
+re_de_meaned.mean(axis=1)
+# array([ 0.,  0.,  0.,  0.])

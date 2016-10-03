@@ -1,8 +1,6 @@
-# 1D vector is row vector on the left hand side of dot
-v.dot(X)
-# array([ 9, 12, 15])
-
-# 1D vector is column vector on the right hand side of dot
-w = np.array([-1, 0, 1])
-X.dot(w)
-# array([2, 2])
+means_expanded = np.outer(row_means, np.ones(3))
+means_expanded
+# array([[ 2.666667,  2.666667,  2.666667],
+# [ 5.      ,  5.      ,  5.      ],
+# [ 4.333333,  4.333333,  4.333333],
+# [ 5.333333,  5.333333,  5.333333]])

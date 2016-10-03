@@ -894,9 +894,9 @@ options within the curly brackets |--| see the `Python string format examples
 
 .. _ranges:
 
-******
-Ranges
-******
+*****
+Range
+*****
 
 ``range`` in Python 3 returns a *range object*.  It is a sequence, and so it
 is rather like a list [#py2-range]_.  When you use ``range`` with one

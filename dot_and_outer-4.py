@@ -1,2 +1,2 @@
-type(arr)
-# <class 'numpy.ndarray'>
+a.dot(b)
+# 130

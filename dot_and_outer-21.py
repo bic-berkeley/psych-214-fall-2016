@@ -1,15 +1,6 @@
-v.shape
-# (2,)
-# Insert a new length 1 dimension at the beginning
-row_v = v[np.newaxis, :]
-row_v.shape
-# (1, 2)
-row_v
-# array([[0, 3]])
-# Insert a new length 1 dimension at the end
-col_v = v[:, np.newaxis]
-col_v.shape
-# (2, 1)
-col_v
-# array([[0],
-# [3]])
+# A line from (1, 2) to (7, 11)
+plt.plot([1, 7], [2, 11])
+# [...]
+# Another line from (2, 6) to (8, 1)
+plt.plot([2, 8], [6, 1])
+# [...]

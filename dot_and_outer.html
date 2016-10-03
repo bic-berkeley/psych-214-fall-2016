@@ -55,25 +55,7 @@
 </div>
 <div class="section" id="methods-vs-functions-in-numpy">
 <h2>Methods vs functions in numpy<a class="headerlink" href="#methods-vs-functions-in-numpy" title="Permalink to this headline">¶</a></h2>
-<p>Many things are implemented in numpy as both <em>functions</em> and <em>methods</em>.  For
-example, there is a <code class="docutils literal"><span class="pre">np.sum</span></code> function, that adds up all the elements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="go">4</span>
-</pre></div>
-</div>
-<p>There is also a <code class="docutils literal"><span class="pre">sum</span></code> method of the numpy <code class="docutils literal"><span class="pre">array</span></code> object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="go">&lt;class &#39;numpy.ndarray&#39;&gt;</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">4</span>
-</pre></div>
-</div>
-<p>Nearly all the method versions do the same thing as the function versions.
-Examples are <code class="docutils literal"><span class="pre">mean</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, <code class="docutils literal"><span class="pre">sum</span></code>, <code class="docutils literal"><span class="pre">reshape</span></code>.  Choosing the
-method or the function will usually depend on which one is easier to read.</p>
+<p>See <a class="reference internal" href="methods_vs_functions.html"><span class="doc">Methods vs functions in numpy</span></a>.</p>
 </div>
 <div class="section" id="more-on-reshape">
 <h2>More on reshape<a class="headerlink" href="#more-on-reshape" title="Permalink to this headline">¶</a></h2>
@@ -81,51 +63,11 @@ method or the function will usually depend on which one is easier to read.</p>
 </div>
 <div class="section" id="allclose">
 <h2>allclose<a class="headerlink" href="#allclose" title="Permalink to this headline">¶</a></h2>
-<p>When the computer calculates a floating point value, there will often be some
-degree of error in the calculation, because the computer floating point format
-cannot represent every floating point number exactly. See:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/floating_point.html">floating point</a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/floating_error.html">floating point error</a>.</li>
-</ul>
-<p>When we check the results of a floating point calculation, we often want to
-avoid checking if the returned value is exactly equal to a desired value.
-Rather, we want to check whether the returned value is close enough, given the
-usual floating point error.  A common idiom in NumPy is to use the
-<code class="docutils literal"><span class="pre">np.allclose</span></code> function, which checks whether two values or two arrays equal,
-within a small amount of error:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">==</span> <span class="mf">3.1415926</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">3.1415926</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.1415926</span><span class="p">,</span> <span class="mf">6.2831852</span><span class="p">])</span>
-<span class="go">True</span>
-</pre></div>
-</div>
+<p>See: <a class="reference internal" href="allclose.html"><span class="doc">allclose</span></a>.</p>
 </div>
 <div class="section" id="np-arange">
 <h2>np.arange<a class="headerlink" href="#np-arange" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal"><span class="pre">arange</span></code> in NumPy is very like the Python <code class="docutils literal"><span class="pre">range</span></code> callable with two
-important differences:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">arange</span></code> returns an array rather than a <code class="docutils literal"><span class="pre">range</span></code> object (Python 3) or a
-list (Python 2);</li>
-<li><code class="docutils literal"><span class="pre">arange</span></code> arguments can be floating point values.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">array([ 4,  6,  8, 10])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="go">array([  4. ,   4.5,   5. ,   5.5,   6. ,   6.5,   7. ,   7.5,   8. ,</span>
-<span class="go">         8.5,   9. ,   9.5,  10. ,  10.5])</span>
-</pre></div>
-</div>
-<p>Because <code class="docutils literal"><span class="pre">arange</span></code> returns arrays, you can use NumPy element-wise operations
-to multiply by the step size and add a start value.  This is one way to create
-equally spaced vectors (<code class="docutils literal"><span class="pre">np.linspace</span></code> is another):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">4</span>
-<span class="go">array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])</span>
-</pre></div>
-</div>
+<p>See: <a class="reference internal" href="arange.html"><span class="doc">Numpy arange</span></a>.</p>
 </div>
 <div class="section" id="vector-dot-products">
 <h2>Vector dot products<a class="headerlink" href="#vector-dot-products" title="Permalink to this headline">¶</a></h2>
@@ -283,38 +225,7 @@ your intention explicit, and preserve the 2D shape of the output:</p>
 </div>
 <div class="section" id="adding-length-1-dimensions-with-newaxis">
 <h2>Adding length 1 dimensions with newaxis<a class="headerlink" href="#adding-length-1-dimensions-with-newaxis" title="Permalink to this headline">¶</a></h2>
-<p>NumPy has a nice shortcut for adding a length 1 dimension to an array.  It is
-a little brain-bending, because it operates via array slicing:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(2,)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Insert a new length 1 dimension at the beginning</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(1, 2)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span>
-<span class="go">array([[0, 3]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Insert a new length 1 dimension at the end</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(2, 1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">col_v</span>
-<span class="go">array([[0],</span>
-<span class="go">       [3]])</span>
-</pre></div>
-</div>
-<p>Read this last slicing operation as &#8220;do slicing as normal, except, before
-slicing, insert a length 1 dimension at the position of <code class="docutils literal"><span class="pre">np.newaxis</span></code>&#8221;.</p>
-<p>In fact the name <code class="docutils literal"><span class="pre">np.newaxis</span></code> points to the familiar Python <code class="docutils literal"><span class="pre">None</span></code> object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span> <span class="ow">is</span> <span class="bp">None</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<p>So, you also use the <code class="docutils literal"><span class="pre">np.newaxis</span></code> trick like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(1, 2)</span>
-</pre></div>
-</div>
+<p>See: <a class="reference internal" href="newaxis.html"><span class="doc">Adding length 1 dimensions with newaxis</span></a>.</p>
 </div>
 <div class="section" id="subtracting-the-mean">
 <h2>Subtracting the mean<a class="headerlink" href="#subtracting-the-mean" title="Permalink to this headline">¶</a></h2>
@@ -387,9 +298,9 @@ argument and the matching Y coordinates as the second argument:</p>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-30.png">png</a>, <a class="reference external" href=".//dot_and_outer-30.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-30.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-21.png">png</a>, <a class="reference external" href=".//dot_and_outer-21.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-21.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-30.png" src="_images/dot_and_outer-30.png" />
+<img alt="_images/dot_and_outer-21.png" src="_images/dot_and_outer-21.png" />
 </div>
 </div>
 <div class="section" id="subplots-and-axes">
@@ -412,9 +323,9 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
 <span class="go">[...]</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//dot_and_outer-31.png">png</a>, <a class="reference external" href=".//dot_and_outer-31.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-31.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//dot_and_outer-22.png">png</a>, <a class="reference external" href=".//dot_and_outer-22.hires.png">hires.png</a>, <a class="reference external" href=".//dot_and_outer-22.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/dot_and_outer-31.png" src="_images/dot_and_outer-31.png" />
+<img alt="_images/dot_and_outer-22.png" src="_images/dot_and_outer-22.png" />
 </div>
 </div>
 </div>

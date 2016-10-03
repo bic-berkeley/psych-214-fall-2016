@@ -1,6 +1,4 @@
-print(col_vector[0] * row_vector)
-# [[2 6 4]]
-print(col_vector[1] * row_vector)
-# [[0 0 0]]
-print(col_vector[2] * row_vector)
-# [[1 3 2]]
+# Mean across the second (column) axis
+row_means = np.mean(arr, axis=1)
+row_means
+# array([ 2.666667,  5.      ,  4.333333,  5.333333])
