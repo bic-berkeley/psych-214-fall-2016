@@ -74,4 +74,6 @@ Feel free to email your instructors, but prefer the `PSYCH 214 Piazza site
 Office hours
 ************
 
-Office hours are in 10 Giannini Hall on Wednesdays from 11 am to 12.30.
+Office hours are in 10 Giannini Hall on Fridays from 10 am to 11.30.
+
+If you can't make it then, please arrange another time with your instructors.

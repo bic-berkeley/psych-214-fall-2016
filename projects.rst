@@ -15,6 +15,14 @@ learning and for increasing the quality of your work.
 The best way to learn this, is with a substantial shared project.  So, a major
 part of this class is the final project.
 
+***************
+A group project
+***************
+
+Because we want you to learn how to share work, the projects should be in
+groups of 2 or 3.  Please agree your projects and mentors in discussion with
+the others in the class.
+
 ******************
 Choosing a project
 ******************
@@ -120,6 +128,6 @@ Timing
 We'll ask you to start thinking about your project in the first class.
 
 * September 30 : deadline for choosing a mentor;
-* October 10 : pitch project to the class;
+* October 17 : pitch project to the class;
 * December 5 : project presentation;
 * December 17 : final project submission.
