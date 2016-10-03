@@ -13,6 +13,7 @@ Project discussion
 Activation
 **********
 
+* :doc:`voxels_by_time`;
 * :doc:`slicing_with_booleans`;
 * :doc:`first_activation_exercise`.
 
@@ -21,7 +22,8 @@ Correlation and projection
 **************************
 
 * `vector angles`_;
-* `correlation and projection`_.
+* `correlation and projection`_;
+* :doc:`pearson_functions` exercise.
 
 ***********************
 Correlation in practice
@@ -35,8 +37,10 @@ Correlation in practice
     pip install pytest
     py.test test_stimuli.py
 
-* :doc:`voxel_correlation_exercise`.
-* :doc:`pearson_functions` exercise.
+Then one of:
+
+* :doc:`voxel_correlation_exercise`;
+* :doc:`correlation_2d_exercise`.
 
 ******************************
 Simple and multiple regression

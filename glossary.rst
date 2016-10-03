@@ -74,3 +74,8 @@ Glossary
         including file permissions.  For example, the file permissions tell
         the file-system whether a particular user should be able to read the
         file, or write the file or execute the file as a program.
+
+   voxel
+      Voxels are volumetric pixels - that is, they are values in a regular
+      grid in three dimensional space - see the `Wikipedia voxel
+      <https://en.Wikipedia.org/wiki/Voxel>`_ entry.
