@@ -22,8 +22,8 @@ Import the ``events2neural`` function from the :download:`stimuli.py` module:
     >>> #- import events2neural from stimuli module
     >>> from stimuli import events2neural
 
-If you don't have it already, download :download:`ds114_sub009_t2r1.nii`
-image:
+If you don't have it already, download the :download:`ds114_sub009_t2r1.nii`
+image.  Load it with nibabel.
 
 .. nbplot::
 
