@@ -1,6 +1,6 @@
-#####################################
-Index and reshape in NumPy and MATLAB
-#####################################
+##############################################
+Index ordering and reshape in NumPy and MATLAB
+##############################################
 
 Let's make a 3D array by taking a 1D array from 0 through 23, and filling the
 3D array by depth (the last axis), and then by column (the second axis) and

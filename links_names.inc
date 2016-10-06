@@ -149,6 +149,8 @@
 .. _numpy introduction: http://scipy-lectures.github.io/intro/numpy/index.html
 .. _numpy array object: http://scipy-lectures.github.io/intro/numpy/array_object.html
 .. _Array operations: http://scipy-lectures.github.io/intro/numpy/operations.html
+.. _numpy broadcasting:
+.. _broadcasting: http://www.scipy-lectures.org/intro/numpy/operations.html#broadcasting
 .. _Google Python class: https://developers.google.com/edu/python
 .. _basic exercises: https://developers.google.com/edu/python/exercises/basic
 

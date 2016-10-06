@@ -108,5 +108,3 @@ We can then calculate $\yhat$ (also called the *fitted data*):
     [...]
     >>> plt.plot(y_hat)
     [...]
-
-.. include:: ../links_names.inc
