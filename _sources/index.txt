@@ -31,6 +31,7 @@ version control using git.
     classes
     labs
     projects
+    topics
     bibliography
 
 .. The hidden toctree below is to suppress build warnings
@@ -62,6 +63,8 @@ version control using git.
     lab_02
     lab_03
     lab_04
+    lab_05
+    lab_06
     on_loops
     index_reshape
     reshape_and_3d
@@ -73,3 +76,25 @@ version control using git.
     pca_exercise
     pca_solution
     path_manipulation
+    allclose
+    arange
+    boolean_indexing
+    correlation_2d_exercise
+    correlation_2d_solution
+    first_activation_exercise
+    first_activation_solution
+    list_comprehensions
+    methods_vs_functions
+    model_one_voxel
+    newaxis
+    packages_namespaces
+    pearson_functions
+    reshape_and_4d
+    slicing_with_booleans
+    sys_path
+    two_dunders
+    using_pythonpath
+    voxel_correlation_exercise
+    voxel_correlation_solution
+    voxel_time_courses
+    voxels_by_time

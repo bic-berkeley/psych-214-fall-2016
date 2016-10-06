@@ -1,10 +1,10 @@
-###########################
-Git, collaboration, testing
-###########################
+##################################
+Some git, some multiple regression
+##################################
 
-*************
-Yay! A review
-*************
+*****************
+Yay! A git review
+*****************
 
 Review is at :download:`git_short.pdf`.
 
@@ -15,10 +15,8 @@ cross check your answers.  Decide who's got the answer right.
 
 Then we'll go through the answers.
 
-*******
-Testing
-*******
+************************
+The general linear model
+************************
 
-* doctests;
-* unit tests.
-* pytest
+* `introduction to the general linear model`_.

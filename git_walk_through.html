@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Git walk-through &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="git-walk-through">
+<h1>Git walk-through<a class="headerlink" href="#git-walk-through" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-configuration">
+<h2>Basic configuration<a class="headerlink" href="#basic-configuration" title="Permalink to this headline">¶</a></h2>
+<p>We need to tell git about us before we start. This stuff will go into
+the commit information by default.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global user.name <span class="s2">&quot;Matthew Brett&quot;</span>
+$ git config --global user.email <span class="s2">&quot;matthew.brett@gmail.com&quot;</span>
+</pre></div>
+</div>
+<p>git often needs to call up a text editor. We will use Atom as our text editor
+(see <a class="reference external" href="https://help.github.com/articles/associating-text-editors-with-git">associating text editors with git</a>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global core.editor <span class="s2">&quot;atom --wait&quot;</span>
+</pre></div>
+</div>
+<p>We also turn on the use of color, which is very helpful in making the
+output of git easier to read:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global color.ui <span class="s2">&quot;auto&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git
+usage: git <span class="o">[</span>--version<span class="o">]</span> <span class="o">[</span>--help<span class="o">]</span> <span class="o">[</span>-C &lt;path&gt;<span class="o">]</span> <span class="o">[</span>-c <span class="nv">name</span><span class="o">=</span>value<span class="o">]</span>
+           <span class="o">[</span>--exec-path<span class="o">[=</span>&lt;path&gt;<span class="o">]]</span> <span class="o">[</span>--html-path<span class="o">]</span> <span class="o">[</span>--man-path<span class="o">]</span> <span class="o">[</span>--info-path<span class="o">]</span>
+           <span class="o">[</span>-p<span class="p">|</span>--paginate<span class="p">|</span>--no-pager<span class="o">]</span> <span class="o">[</span>--no-replace-objects<span class="o">]</span> <span class="o">[</span>--bare<span class="o">]</span>
+           <span class="o">[</span>--git-dir<span class="o">=</span>&lt;path&gt;<span class="o">]</span> <span class="o">[</span>--work-tree<span class="o">=</span>&lt;path&gt;<span class="o">]</span> <span class="o">[</span>--namespace<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
+           &lt;command&gt; <span class="o">[</span>&lt;args&gt;<span class="o">]</span>
+
+The most commonly used git commands are:
+   add        Add file contents to the index
+   bisect     Find by binary search the change that introduced a bug
+   branch     List, create, or delete branches
+   checkout   Checkout a branch or paths to the working tree
+   clone      Clone a repository into a new directory
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   fetch      Download objects and refs from another repository
+   grep       Print lines matching a pattern
+   init       Create an empty Git repository or reinitialize an existing one
+   log        Show commit logs
+   merge      Join two or more development histories together
+   mv         Move or rename a file, a directory, or a symlink
+   pull       Fetch from and integrate with another repository or a <span class="nb">local</span> branch
+   push       Update remote refs along with associated objects
+   rebase     Forward-port <span class="nb">local</span> commits to the updated upstream head
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+   show       Show various types of objects
+   status     Show the working tree status
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+<span class="s1">&#39;git help -a&#39;</span> and <span class="s1">&#39;git help -g&#39;</span> lists available subcommands and some
+concept guides. See <span class="s1">&#39;git help &lt;command&gt;&#39;</span> or <span class="s1">&#39;git help &lt;concept&gt;&#39;</span>
+to <span class="nb">read</span> about a specific subcommand or concept.
+</pre></div>
+</div>
+<p>Try <code class="docutils literal"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">add</span></code> for an example.</p>
+</div>
+<div class="section" id="initializing-the-repository">
+<h2>Initializing the repository<a class="headerlink" href="#initializing-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>We first make a new empty directory that will be version controlled with git.</p>
+<p>Create the git repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> our_work
+$ git init
+Initialized empty Git repository in /Users/mb312/dev_trees/psych-214-fall-2016/working/our_work/.git/
+</pre></div>
+</div>
+<p>Show the new <code class="docutils literal"><span class="pre">.git</span></code> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git
+HEAD
+branches
+config
+description
+hooks
+info
+objects
+refs
+</pre></div>
+</div>
+<p>There are only a couple of empty sub-directories in the <code class="docutils literal"><span class="pre">.git/objects</span></code>
+directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git/objects/*
+.git/objects/info:
+
+.git/objects/pack:
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-add-put-stuff-into-the-staging-area">
+<span id="git-add"></span><h2>git add - put stuff into the staging area<a class="headerlink" href="#git-add-put-stuff-into-the-staging-area" title="Permalink to this headline">¶</a></h2>
+<p>Type this file in Atom and save:</p>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">our_paper.txt</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>This is the first sentence of the new paper.
+</pre></div>
+</div>
+</div>
+<p>Add to the staging area:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git add our_paper.txt
+</pre></div>
+</div>
+<p>Check we added the file to the staging area:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
+
+	new file:   our_paper.txt
+</pre></div>
+</div>
+<p>Show yourself there is a new sub-directory and file in <code class="docutils literal"><span class="pre">.git/objects</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ ls .git/objects/*
+</pre></div>
+</div>
+</div>
+<div class="section" id="looking-at-real-git-objects">
+<span id="reading-git-objects"></span><h2>Looking at real git objects<a class="headerlink" href="#looking-at-real-git-objects" title="Permalink to this headline">¶</a></h2>
+<p>Now we&#8217;re going to read the new object in Python, and find the hash of its
+contents.  You don&#8217;t need to do this kind of thing to use git.  This is to
+practice some Python, and to show you how git stores its files.</p>
+<p>To read the new object, you&#8217;ll need a few new bits of Python.</p>
+<p>Here&#8217;s how to read the binary contents of a whole file into memory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Open a file in Read Binary mode to read bytes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;our_paper.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read contents as bytes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">fobj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Read the whole file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">&lt;class &#39;bytes&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Here&#8217;s how to calculate the SHA1 hash value for the file contents:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import the Python module that calculates hash values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the SHA1 hash string for these bytes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<span class="go">&#39;cb083f8092a8bfbe55a215e1b45e9f33b9dec86f&#39;</span>
+</pre></div>
+</div>
+<p>This is the same value as the terminal command <code class="docutils literal"><span class="pre">shasum</span></code> calculates on a
+file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ shasum our_paper.txt
+cb083f8092a8bfbe55a215e1b45e9f33b9dec86f  our_paper.txt
+</pre></div>
+</div>
+<p>The new file in <code class="docutils literal"><span class="pre">.git/objects</span></code> is <em>compressed</em> using a program called
+<code class="docutils literal"><span class="pre">zlib</span></code>.  To un-compress some bytes that have been compressed with <code class="docutils literal"><span class="pre">zlib</span></code>,
+use the <code class="docutils literal"><span class="pre">decompress</span></code> function in the Python <code class="docutils literal"><span class="pre">zlib</span></code> module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zlib</span><span class="o">.</span><span class="n">decompress</span>
+<span class="go">&lt;built-in function decompress&gt;</span>
+</pre></div>
+</div>
+<p>Now – what is the <em>decompressed</em> contents of the new <code class="docutils literal"><span class="pre">.git/objects</span></code> file?
+Do you recognize it?  What is the SHA1 hash of the decompressed contents?  Do
+you recognize that?</p>
+<p>You should start with something like:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>&gt;&gt;&gt; fobj = open(&#39;.git/objects/d6/05b79accc16319ffe95fdc0a7992e830695c1c&#39;, &#39;rb&#39;)
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">.git/objects/d6/05b79accc16319ffe95fdc0a7992e830695c1c</span></code> is the new file that appeared in your
+<code class="docutils literal"><span class="pre">.git/objects</span></code> directory when you staged <code class="docutils literal"><span class="pre">our_paper.txt</span></code>.</p>
+<p>When you are done, have a look at the solution in: <a class="reference external" href="https://matthew-brett.github.io/curious-git/reading_git_objects.html">reading git objects</a>.</p>
+</div>
+<div class="section" id="make-a-first-commit">
+<h2>Make a first commit<a class="headerlink" href="#make-a-first-commit" title="Permalink to this headline">¶</a></h2>
+<p>Remember what will go into this commit:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage<span class="o">)</span>
+
+	new file:   our_paper.txt
+</pre></div>
+</div>
+<p>Make the commit:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git commit
+</pre></div>
+</div>
+<p>Review what you have so far in your history:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git log
+</pre></div>
+</div>
+<p>Show what branch you are on, with the hash of the current commit:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch -v
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-again-check-and-commit">
+<h2>Edit again, check and commit<a class="headerlink" href="#edit-again-check-and-commit" title="Permalink to this headline">¶</a></h2>
+<p>Edit the paper file again to add some text:</p>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">our_paper.txt</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>This is the first sentence of the new paper.
+
+Crucially, this is the second sentence.
+</pre></div>
+</div>
+</div>
+<p>Check the difference between what you had before and what you have now:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git diff
+</pre></div>
+</div>
+<p>Add the changes to the staging area:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># What goes here?</span>
+</pre></div>
+</div>
+<p>Our customary check:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git status
+</pre></div>
+</div>
+<p>Make the commit:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git commit
+</pre></div>
+</div>
+<p>Look at the project history again:</p>
+<p>Check the parent hashes recorded in each commit.  How?:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Check the parents</span>
+</pre></div>
+</div>
+<p>Check which hash the default branch is pointing to now:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch -v
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-new-file">
+<h2>A new file<a class="headerlink" href="#a-new-file" title="Permalink to this headline">¶</a></h2>
+<p>Make a new file like this:</p>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">our_analysis.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span># An analysis of our data
+# Details to be confirmed
+
+print(&quot;Tada!&quot;)
+</pre></div>
+</div>
+</div>
+<p>Check the status of the file.</p>
+<p>Add the file to the staging area.</p>
+<p>Make a commit.</p>
+</div>
+<div class="section" id="a-prettier-log-command">
+<h2>A prettier log command<a class="headerlink" href="#a-prettier-log-command" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git config --global alias.slog <span class="s2">&quot;log --oneline --graph&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git slog
+* 30f2717 Add analysis
+* 12fb55a Second version of the paper
+* ab566fe First version of the paper
+</pre></div>
+</div>
+</div>
+<div class="section" id="thinking-about-objects-again">
+<h2>Thinking about objects again<a class="headerlink" href="#thinking-about-objects-again" title="Permalink to this headline">¶</a></h2>
+<p>See if you can guess how many files there are now in <code class="docutils literal"><span class="pre">.git/objects</span></code>.</p>
+<p>What do these objects store?</p>
+<p>If you have the hash of an object, you can check the contents with <code class="docutils literal"><span class="pre">git</span>
+<span class="pre">cat-file</span> <span class="pre">-p</span></code> followed by the first 7 digits of the hash value – e.g.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git cat-file -p d605b79
+This is the first sentence of the new paper.
+</pre></div>
+</div>
+<p>See if you can find the hash of the object corresponding to the directory
+listing for our most recent commit, and display its contents.  Hint: Find the
+hash for the current commit message.  Try displaying the contents for the
+current commit message.</p>
+</div>
+<div class="section" id="moving-files">
+<h2>Moving files<a class="headerlink" href="#moving-files" title="Permalink to this headline">¶</a></h2>
+<p>Try moving a file (renaming) using <code class="docutils literal"><span class="pre">git</span> <span class="pre">mv</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git mv our_analysis.py our_first_analysis.py
+</pre></div>
+</div>
+<p>Check the status.  Do you need to add anything to the staging area?</p>
+<p>Make a commit.</p>
+<p>Now you have made a commit, check the new directory listing for our latest
+commit.  What changed?</p>
+</div>
+<div class="section" id="making-a-new-branch">
+<h2>Making a new branch<a class="headerlink" href="#making-a-new-branch" title="Permalink to this headline">¶</a></h2>
+<p>Make a new branch with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git branch work-from-home
+</pre></div>
+</div>
+<p>Use <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code> to check the hash that this new branch points to.</p>
+<p>Have a look at the file <code class="docutils literal"><span class="pre">.git/HEAD</span></code>.  What is it telling us?</p>
+<p>Tell git to start working on the new branch instead of our previous branch:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout work-from-home
+Switched to branch <span class="s1">&#39;work-from-home&#39;</span>
+</pre></div>
+</div>
+<p>Have a look at <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code> again.  What changed?  How about the file
+<code class="docutils literal"><span class="pre">.git/HEAD</span></code>?</p>
+<p>Now see if you can replicate the following changes to <code class="docutils literal"><span class="pre">our_paper.txt</span></code>:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>diff --git a/our_paper.txt b/our_paper.txt
+index d18df62..75fe792 100644
+--- a/our_paper.txt
++++ b/our_paper.txt
+@@ -1,3 +1,5 @@
+ This is the first sentence of the new paper.
+ 
+ Crucially, this is the second sentence.
++
++The third sentence starts the crescendo.
+</pre></div>
+</div>
+<p>Your job is to make the output from <code class="docutils literal"><span class="pre">git</span> <span class="pre">diff</span></code> look the same as the output
+above.</p>
+<p>When you&#8217;ve finished, add the changes to the staging area and then commit.</p>
+<p>Check where you are with <code class="docutils literal"><span class="pre">git</span> <span class="pre">slog</span></code>, and <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code>.</p>
+<p>Now go back to your previous branch, called <code class="docutils literal"><span class="pre">master</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ git checkout master
+Switched to branch <span class="s1">&#39;master&#39;</span>
+</pre></div>
+</div>
+<p>Create this data file, add it to the staging area and commit.</p>
+<div class="admonition">
+<em class="first">Contents of </em><code class="docutils literal"><span class="pre">our_data.csv</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>0,210,32
+1,212,30
+2,220,29
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="merging">
+<h2>Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h2>
+<p>Now we want to merge the work from the <code class="docutils literal"><span class="pre">work-from-home</span></code> branch.  Put another
+way, we want to merge the <code class="docutils literal"><span class="pre">work-from-home</span></code> branch into our current branch,
+<code class="docutils literal"><span class="pre">master</span></code>. What git command would do this action?  Scan the output of <code class="docutils literal"><span class="pre">git</span>
+<span class="pre">help</span></code> for clues, then <code class="docutils literal"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">&lt;command&gt;</span></code> when you&#8217;ve found the command
+you need.</p>
+<p>Do the merge.</p>
+<p>Check the output of <code class="docutils literal"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-v</span></code> again.</p>
+<p>Have a look at the output of <code class="docutils literal"><span class="pre">git</span> <span class="pre">slog</span></code>.</p>
+<p>What do you see with <code class="docutils literal"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--parents</span></code>?</p>
+</div>
+<div class="section" id="conflicts">
+<h2>Conflicts<a class="headerlink" href="#conflicts" title="Permalink to this headline">¶</a></h2>
+<p>The merge that you just did should have been simple, with no conflicts.</p>
+<p>Conflicts can occur when you have made changes to the same file on two
+different branches, and you try and merge them.  If the changes are on or near
+the same lines in the file, git will complain and ask you to work out which
+changes you want to keep.</p>
+<p>Make and checkout a new branch <code class="docutils literal"><span class="pre">asking-for-trouble</span></code>.</p>
+<p>Edit <code class="docutils literal"><span class="pre">our_paper.txt</span></code> and add a sentence like &#8220;Fourth sentence gets to the
+point.&#8221;   Add to the staging area and then commit.</p>
+<p>Checkout the <code class="docutils literal"><span class="pre">master</span></code> branch again.</p>
+<p>Edit <code class="docutils literal"><span class="pre">our_paper.txt</span></code> and add a sentence like &#8220;Fourth sentence is still
+warm-up.&#8221;  Add to the staging area and commit.</p>
+<p>Now try merging the <code class="docutils literal"><span class="pre">asking-for-trouble</span></code> branch into our current
+(<code class="docutils literal"><span class="pre">master</span></code>) branch. What do you see?</p>
+<p>When the merge failed, git wrote some text into the file where the changes
+clash.  <code class="docutils literal"><span class="pre">our_paper.txt</span></code> might look like this:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>This is the first sentence of the new paper.
+
+Crucially, this is the second sentence.
+
+The third sentence starts the crescendo.
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Fourth sentence is still warm-up.
+=======
+Fourth sentence gets to the point.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; asking-for-trouble
+</pre></div>
+</div>
+<p>The lines between <code class="docutils literal"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="pre">HEAD</span></code> and <code class="docutils literal"><span class="pre">=======</span></code> are the changed lines from
+the branch we are merging <em>into</em> (<code class="docutils literal"><span class="pre">master</span></code> in our case).  The lines between
+<code class="docutils literal"><span class="pre">=======</span></code> and <code class="docutils literal"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="pre">asking-for-trouble</span></code> are the changes from the branch
+we are merging (<code class="docutils literal"><span class="pre">asking-for-trouble</span></code> in our case).</p>
+<p>Open the <code class="docutils literal"><span class="pre">our_paper.txt</span></code> file and remove the new marker lines in the text.
+Choose how you&#8217;d like to combine your two different changes to the file.  When
+the file is ready, save it, then add it to the staging area and do a commit.</p>
+<p>Check all is well with <code class="docutils literal"><span class="pre">git</span> <span class="pre">slog</span></code>.</p>
+</div>
+<div class="section" id="the-end">
+<h2>The end<a class="headerlink" href="#the-end" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations!  You now know the basics of working with a single git
+repository.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/git_walk_through.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

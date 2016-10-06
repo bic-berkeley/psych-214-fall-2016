@@ -81,7 +81,7 @@ of volumes).
     >>> #- Make a 1D array of size (n_voxels,) to hold the correlation values
     >>> correlations_1d = np.zeros((n_voxels,))
 
-If you finished the :doc:`pearson_function` exercise, you can use your
+If you finished the :doc:`pearson_functions` exercise, you can use your
 ``pearson_2d`` routine for calculating Pearson correlations across a 2D array.
 Otherwise, loop over all voxels, calculate the correlation coefficient with
 ``time_course`` at this voxel, and fill in the corresponding entry in your 1D

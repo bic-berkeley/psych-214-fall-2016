@@ -1,0 +1,34 @@
+########################
+Python, NumPy and images
+########################
+
+******
+Python
+******
+
+* :doc:`brisk_python`;
+* :doc:`on_loops`;
+* :doc:`on_modules`;
+* :doc:`packages_namespaces`;
+* :doc:`list_comprehensions`;
+* :doc:`sys_path`;
+* :doc:`two_dunders`;
+* :doc:`using_pythonpath`;
+
+*****
+Numpy
+*****
+
+* :doc:`allclose`;
+* :doc:`arange`;
+* :doc:`newaxis`
+* :doc:`path_manipulation`;
+* :doc:`methods_vs_functions`;
+* :doc:`arrays_and_images`;
+* :doc:`dot_and_outer`;
+* :doc:`index_reshape`;
+* :doc:`reshape_and_3d`;
+* :doc:`intro_to_4d`;
+* :doc:`reshape_and_4d`;
+* :doc:`boolean_indexing`;
+* :doc:`slicing_with_booleans`;

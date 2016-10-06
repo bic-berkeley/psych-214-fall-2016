@@ -1,0 +1,2 @@
+type(np)
+# <class 'module'>

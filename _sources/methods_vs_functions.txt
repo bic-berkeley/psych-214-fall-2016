@@ -1,8 +1,8 @@
 #############################
-Methods vs functions in numpy
+Methods vs functions in NumPy
 #############################
 
-Many things are implemented in numpy as both *functions* and *methods*.  For
+Many things are implemented in NumPy as both *functions* and *methods*.  For
 example, there is a ``np.sum`` function, that adds up all the elements:
 
 .. nbplot::

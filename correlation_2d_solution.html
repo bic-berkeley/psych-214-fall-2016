@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="A first go at finding brain activation" href="first_activation_exercise.html" />
+    <link rel="prev" title="Correlation per voxel, in 2D" href="correlation_2d_exercise.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -102,7 +104,7 @@ of volumes).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">correlations_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_voxels</span><span class="p">,))</span>
 </pre></div>
 </div>
-<p>If you finished the <span class="xref doc">pearson_function</span> exercise, you can use your
+<p>If you finished the <a class="reference internal" href="pearson_functions.html"><span class="doc">Pearson 1D and 2D function exercise</span></a> exercise, you can use your
 <code class="docutils literal"><span class="pre">pearson_2d</span></code> routine for calculating Pearson correlations across a 2D array.
 Otherwise, loop over all voxels, calculate the correlation coefficient with
 <code class="docutils literal"><span class="pre">time_course</span></code> at this voxel, and fill in the corresponding entry in your 1D
@@ -166,6 +168,7 @@ Look for any voxels with a high task correlation in the frontal lobe:</p>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
@@ -184,6 +187,8 @@ Look for any voxels with a high task correlation in the frontal lobe:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="correlation_2d_exercise.html" title="previous chapter">Correlation per voxel, in 2D</a></li>
+      <li>Next: <a href="first_activation_exercise.html" title="next chapter">A first go at finding brain activation</a></li>
   </ul></li>
 </ul>
 </div>

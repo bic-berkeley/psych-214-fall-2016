@@ -1,0 +1,6 @@
+###########################
+Statistics and brain images
+###########################
+
+* :doc:`model_one_voxel`;
+* :doc:`voxel_time_courses`.
