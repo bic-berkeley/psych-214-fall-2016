@@ -98,6 +98,51 @@ Please answer the following questions.
     \texttt{git remote -v}
   \end{answer}
 \end{question}
+\end{block}
+
+\begin{block}[questions=1]
+
+You are working on a team project.  You have forked the main project
+repository, and cloned your fork.  This automatically gave you a remote called
+\texttt{origin} that points to your forked repository.  You added a remote
+called \texttt{upstream} that points to the main project repository.
+
+Overnight, your eager team members have merged some work to the main
+repository, therefore updating the \texttt{master} branch of the main
+repository.  Today you want to do some work on a new branch that starts off at
+the new position of \texttt{master} on the main repository.
+
+\begin{question}
+
+    What command(s) would you type to start working in a new branch named
+    \texttt{more-work} that starts at the new position of \texttt{master} in
+    the main repository?
+
+    \vspace{80mm}
+    \begin{answer}
+        \texttt{
+            git fetch upstream \\
+            git branch more-work --no-track upstream/master \\
+            git checkout master
+        }
+    \end{answer}
+
+\end{question}
+
+\begin{question}
+
+    You have done some commits on your new branch \texttt{more-work}.  What
+    command(s) would you type to replicate this your new branch to your own
+    fork on Github?
+
+    \vspace{80mm}
+    \begin{answer}
+        \texttt{
+            git push origin more-work --set-upstream
+        }
+    \end{answer}
+
+\end{question}
 
 \end{block}
 
