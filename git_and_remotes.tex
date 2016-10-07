@@ -1,4 +1,3 @@
-% See git_and_remotes.tex for updated version
 \documentclass[10pt]{examdesign}
 \usepackage{amsmath}
 \usepackage{pifont}
@@ -14,7 +13,6 @@
 % Disable the alarming examish stuff at the top
 \def\namedata{}
 
-
 \class{{\Large Git review}}
 \examname{Quiz}
 
@@ -24,10 +22,12 @@
   Match the following concepts with their definitions.
   \pair{working tree}{directory containing the files you are currently working on}
   \pair{commit}{a full snapshot of a working tree}
-  \pair{repository}{a DAG of commits with additional information (e.g., branches, tags, remotes)}
-  \pair{remote}{another repository whose branches your repository tracks}
-  \pair{branch}{a pointer to a particular commit, which moves forward as you commit}
-  \pair{tag}{a pointer to a particular commit}
+  \pair{repository}{the collection of data necessary to reconstruct the full
+    history of the project}
+  \pair{remote}{a link to another repository}
+  \pair{branch}{a pointer to a particular commit that moves forward when you
+    make a commit}
+  \pair{tag}{a pointer to a particular commit that does not move when you make a commit}
   \pair{merge}{joins two or more development histories together}
   \pair{staging area}{where snapshots of changes are placed before they are committed}
   \pair{push and pull}{used to synchronize repositories}
@@ -43,7 +43,7 @@ Please explain what each of the following terms means.
   \texttt{HEAD}
   \vspace{5mm}
   \begin{answer}
-    \texttt{HEAD} is a pointer to the current commit you are on.
+    \texttt{HEAD} is a pointer to the current branch or commit that you are on.
   \end{answer}
 \end{question}
 
@@ -51,10 +51,9 @@ Please explain what each of the following terms means.
   \texttt{master}
   \vspace{5mm}
   \begin{answer}
-    When Git creates a repository, \texttt{master} is the name given
-    to the default branch.  It is often used as the main ``trunk'' from
-    which branches diverge (possibly to be merged back into the
-    trunk later).
+    When Git creates a repository, \texttt{master} is the name git gives to the
+      default branch.  It is often used as the main ``trunk'' from which
+      branches diverge (possibly to be merged back into the trunk later).
   \end{answer}
 \end{question}
 
@@ -64,7 +63,7 @@ Please explain what each of the following terms means.
   \begin{answer}
     The default name for your main remote.  For instance, if you created
     your repository by cloning it, Git will automatically set \texttt{origin}
-    to point to this remote.
+    to point to the repository that you cloned.
   \end{answer}
 \end{question}
 \end{block}
@@ -110,8 +109,9 @@ called \texttt{upstream} that points to the main project repository.
 
 Overnight, your eager team members have merged some work to the main
 repository, therefore updating the \texttt{master} branch of the main
-repository.  Today you want to do some work on a new branch that starts off at
-the new position of \texttt{master} on the main repository.
+repository.  Today you want to do some work on a new branch.  You want to start
+your new branch at the commit that is the new position of \texttt{master} on
+the main repository.
 
 \begin{question}
 
