@@ -9,13 +9,13 @@ teaching day.
 Python
 ******
 
-* :doc:`brisk_python`;
+* :doc:`brisk_python`. See :doc:`day_00`;
 * :doc:`on_loops`;
 * :doc:`on_modules`;
 * :doc:`packages_namespaces`;
 * :doc:`list_comprehensions`;
-* :doc:`path_manipulation`;
-* :doc:`sys_path`;
+* :doc:`path_manipulation`.  See: :doc:`lab_04`;
+* :doc:`sys_path`.  See: :doc:`lab_04`;
 * :doc:`two_dunders`;
 * :doc:`using_pythonpath`.
 
@@ -23,40 +23,18 @@ Python
 Numpy, arrays and images
 ************************
 
-* :doc:`classwork/day_00/what_is_an_image`;
+* :doc:`classwork/day_00/what_is_an_image`. See :doc:`day_00`;
 * `NumPy introduction`_ (from `scipy lecture notes`_ (SLN);
 * `numpy array object`_ (SLN);
-* `array operations`_ (SLN);
-
-    Exercises:
-
-    * :doc:`lab_01_exercise`;
-
-* :doc:`arrays_and_images`;
-
-    Exercises:
-
-    * :doc:`camera_exercise`;
-    * :doc:`anatomical_exercise`;
-    * :doc:`arteries_exercise`.
-
-* :doc:`reshape_and_3d`;
+* `array operations`_ (SLN).  See: :doc:`lab_01_exercise`;
+* :doc:`arrays_and_images`. See: :doc:`day_01`;
+* :doc:`reshape_and_3d`. See: :doc:`day_01`;
 * :doc:`index_reshape`;
-* :doc:`intro_to_4d`;
-
-    Exercise:
-
-    * :doc:`four_dimensions_exercise`;
-
+* :doc:`intro_to_4d`. See: :doc:`day_02`;
 * :doc:`reshape_and_4d`;
 * :doc:`numpy_logical`;
 * :doc:`voxels_by_time`;
-* :doc:`slicing_with_booleans`;
-
-    Exercise:
-
-    * :doc:`first_activation_exercise`.
-
+* :doc:`slicing_with_booleans`. See: :doc:`day_04`;
 * :doc:`boolean_indexing`.
 * :doc:`dot_outer`;
 * :doc:`allclose`;
@@ -80,7 +58,7 @@ Git
 * :doc:`git_videos`;
 * :doc:`git_walk_through`;
 * :ref:`reading-git-objects`;
-* `curious_remotes`.
+* `curious remotes`_.
 
 Exercises:
 
@@ -93,22 +71,10 @@ Statistics and brain images
 
 * `algebra of sums`_;
 * `vectors and dot products`_;
-* `vector projection`_.
-* `introduction to Principal Component Analysis`_;
-
-    Exercise:
-
-    * :doc:`pca_exercise` (see also :doc:`github_pca_exercise`).
-
+* `vector projection`_;
+* `introduction to Principal Component Analysis`_.  See: :doc:`day_03`;
 * `vector angles`_;
 * `correlation and projection`_;
-* :doc:`voxel_time_courses`;
-
-    Exercises:
-
-    * :doc:`pearson_functions` exercise;
-    * :doc:`voxel_correlation_exercise`;
-    * :doc:`correlation_2d_exercise`.
-
+* :doc:`voxel_time_courses`.  See :doc:`day_04`;
 * `introduction to the General Linear Model`_;
 * :doc:`model_one_voxel`;
