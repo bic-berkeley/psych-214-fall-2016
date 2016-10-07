@@ -98,3 +98,12 @@ version control using git.
     voxel_correlation_solution
     voxel_time_courses
     voxels_by_time
+    dot_outer
+    git_videos
+    git_walk_through
+    git_workflow_exercises
+    github_pca_exercise
+    numpy_logical
+    plot_lines
+    subplots
+    subtract_means

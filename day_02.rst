@@ -43,7 +43,7 @@ See :ref:`reading-git-objects`.
 * stripping and splitting strings with ``my_string.strip()`` and
   ``my_string.split()``;
 * raising Errors with ``raise``;
-* manipulating paths with ``os.path``.
+* manipulating paths with ``os.path`` (see: :doc:`path_manipulation`);
 
 Split into groups, then:
 
