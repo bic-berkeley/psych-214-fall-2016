@@ -50,22 +50,7 @@ AssertionError
 Some numpy stuff
 ****************
 
-``np.logical_and``, ``np.logical_or``:
-
-.. nbplot::
-
-    >>> import numpy as np
-
-    >>> bool1 = np.array([True, True, False, False])
-    >>> bool2 = np.array([False, True, False, True])
-
-    >>> # logical_and True where both of bool1 and bool2 are True
-    >>> np.logical_and(bool1, bool2)
-    array([False,  True, False, False], dtype=bool)
-
-    >>> # logical_or True where either of bool1 and bool2 are True
-    >>> np.logical_or(bool1, bool2)
-    array([ True,  True, False,  True], dtype=bool)
+See: :doc:`numpy_logical`.
 
 ****************
 Some live coding
@@ -79,28 +64,8 @@ With guest editor Stéfan van der Walt:
 * responding to comments on pull requests;
 * merging pull requests with the "Merge" button on Github.
 
-.. _git-workflow-exercises:
-
 ************
 Git workflow
 ************
 
-spm_funcs exercise
-==================
-
-* Fork the repository at https://github.com/psych-214-fall-2016/outlier-utils;
-* Clone your fork;
-* Make a *new branch to work on*;
-* Solve the ``code/spm_funcs.py`` exercise;
-* Commit;
-* Push;
-* Make a pull request back to https://github.com/psych-214-fall-2016/outlier-utils.
-
-detector exercise
-=================
-
-* Make a *new branch to work on*;
-* Solve the ``code/detectors.py`` exercise;
-* Commit;
-* Push;
-* Make a pull request back to https://github.com/psych-214-fall-2016/outlier-utils.
+See: :doc:`git_workflow_exercises`.
