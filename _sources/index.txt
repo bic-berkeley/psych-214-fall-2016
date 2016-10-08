@@ -108,3 +108,4 @@ version control using git.
     subplots
     subtract_means
     array_reductions
+    diagnostics_project
