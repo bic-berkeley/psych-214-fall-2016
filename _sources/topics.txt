@@ -27,6 +27,7 @@ Numpy, arrays and images
 * `NumPy introduction`_ (from `scipy lecture notes`_ (SLN);
 * `numpy array object`_ (SLN);
 * `array operations`_ (SLN).  See: :doc:`lab_01_exercise`;
+* :doc:`array_reductions`;
 * :doc:`arrays_and_images`. See: :doc:`day_01`;
 * :doc:`reshape_and_3d`. See: :doc:`day_01`;
 * :doc:`index_reshape`;
