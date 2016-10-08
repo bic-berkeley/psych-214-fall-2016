@@ -107,3 +107,4 @@ version control using git.
     plot_lines
     subplots
     subtract_means
+    array_reductions
