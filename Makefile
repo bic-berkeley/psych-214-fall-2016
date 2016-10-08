@@ -207,13 +207,13 @@ github: html download-index
 slides-%:
 	pandoc -t beamer -s $*_slides.md -o $*_slides.pdf
 
-SOLUTIONS = anatomical_solution camera_solution \
-			four_dimensions_solution pca_solution arteries_solution \
-			first_activation_solution lab_01_solution \
-			voxel_correlation_solution correlation_2d_solution
+SOLUTIONS = anatomical camera \
+			four_dimensions pca arteries \
+			first_activation lab_01 \
+			voxel_correlation correlation_2d
 
 rst-exercises:
-	$(foreach soln,$(SOLUTIONS), $(PYTHON) tools/proc_rst.py $(soln).rst;)
+	$(foreach soln,$(SOLUTIONS), $(PYTHON) tools/proc_rst.py $(soln).tpl;)
 
 tex-exercises:
 	pdflatex git_short.tex

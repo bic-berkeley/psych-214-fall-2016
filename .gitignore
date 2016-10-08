@@ -59,8 +59,9 @@ docs/_build/
 # PyBuilder
 target/
 
-# Exercises and code generated from solutions
+# Exercises, solutions and code generated from templates
 *_exercise.rst
+*_solution.rst
 *_code.py
 
 # Machinery for getting object names from shell etc

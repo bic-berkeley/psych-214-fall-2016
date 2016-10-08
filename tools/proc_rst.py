@@ -79,7 +79,9 @@ def process_rst(contents):
     state = 'rest'
     underline_char = None
     title = None
+    solution_page = []
     for line in contents.splitlines(True):
+        solution_page.append(line)
         sline = line.strip()
         if state in ('doctest', 'doctest-keeper'):
             if sline == '':
@@ -101,8 +103,21 @@ def process_rst(contents):
             elif underline_char is None and is_section_line(line):
                 state = 'title'
                 underline_char = line[0]
+            elif sline.startswith('.. solution-start'):
+                state = 'in-solution'
             else:
                 exercise_page.append(line)
+        elif state == 'in-solution':
+            if sline.startswith('.. solution-replace'):
+                state = 'replace-solution'
+            elif sline.startswith('.. solution-end'):
+                state = 'rest'
+        elif state == 'replace-solution':
+            if sline.startswith('.. solution-end'):
+                state = 'rest'
+            else:
+                exercise_page.append(line)
+                solution_page.pop()
         elif state == 'title':  # Knock off header
             state = 'post-title'
             title = sline
@@ -114,7 +129,9 @@ def process_rst(contents):
         doctest_blocks.append(doctest_block)
         exercise_page += doctest_block
     code_template = process_doctest_blocks(doctest_blocks)
-    return ''.join(exercise_page), code_template, title, underline_char
+    return (''.join(solution_page),
+            ''.join(exercise_page),
+            code_template, title, underline_char)
 
 
 def process_doctest_blocks(doctest_blocks):
@@ -132,8 +149,9 @@ def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("solution_fname")
     parser.add_argument("--new-title")
-    parser.add_argument("--out-page")
-    parser.add_argument("--out-code")
+    parser.add_argument("--exercise-page")
+    parser.add_argument("--solution-page")
+    parser.add_argument("--exercise-code")
     return parser
 
 
@@ -147,30 +165,34 @@ def write_or_print(out, content):
         fobj.write(content)
 
 
-SOLUTION_RE = re.compile("(solutions?)")
-
-
 def main():
     args = get_parser().parse_args()
     in_fname = args.solution_fname
+    froot, ext = splitext(in_fname)
     with open(in_fname, 'rt') as fobj:
         contents = fobj.read()
-    processed, code_template, title, u_char = process_rst(contents)
+    soln_rst, ex_rst, code_template, title, u_char = process_rst(contents)
     if title is None:
         raise RuntimeError("Could not find title for page")
     new_title = (args.new_title if args.new_title
                  else title.replace('solution', 'exercise'))
-    out_page = (args.out_page if args.out_page
-                else SOLUTION_RE.sub('exercise', in_fname))
-    out_code = (args.out_code if args.out_code
-                else splitext(SOLUTION_RE.sub('code', in_fname))[0] + '.py')
+    solution_page = (froot + '_solution.rst' if args.solution_page is None
+                     else args.solution_page)
+    exercise_page = (froot + '_exercise.rst' if args.exercise_page is None
+                     else args.exercise_page)
+    exercise_code = (froot + '_code.py' if args.exercise_code is None
+                     else args.exercise_code)
     code_template = '""" {}\n"""\n'.format(new_title) + code_template
     header = HEADER_FMT.format(underline=u_char * len(new_title),
                                title=new_title,
                                solution_name=splitext(basename(in_fname))[0],
-                               template_name=basename(out_code))
-    write_or_print(out_page, header + processed)
-    write_or_print(out_code, code_template)
+                               template_name=basename(exercise_code))
+    if solution_page not in ('', 'none'):  # Empty string disables
+        write_or_print(solution_page, soln_rst)
+    if exercise_page not in ('', 'none'):  # Empty string disables
+        write_or_print(exercise_page, header + ex_rst)
+    if exercise_code not in ('', 'none'):  # Empty string disables
+        write_or_print(exercise_code, code_template)
 
 
 if __name__ == '__main__':
