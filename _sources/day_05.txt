@@ -13,12 +13,6 @@ Teaching
 * modeling FMRI signal with multiple regression and the BOLD regressors;
 * investigating assumptions behind the HRF and linear time invariance.
 
-********
-Feedback
-********
-
-Presentation of project proposals - see :doc:`projects`.
-
 ********************
 Homework and reading
 ********************

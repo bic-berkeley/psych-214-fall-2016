@@ -2,6 +2,12 @@
 October 17: smoothing, contrasts and models
 ###########################################
 
+***************
+Project pitches
+***************
+
+Pitches for your project proposals - see :doc:`projects`.
+
 ********
 Teaching
 ********

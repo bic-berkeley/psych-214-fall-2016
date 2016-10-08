@@ -128,6 +128,12 @@ Timing
 We'll ask you to start thinking about your project in the first class.
 
 * September 30 : deadline for choosing a mentor;
-* October 17 : pitch project to the class;
+* October 17 : project pitches to the class.  Each group makes a 10 minute
+  presentation describing:
+
+  * the dataset;
+  * any exploration you have already done;
+  * your initial plan of investigation.
+
 * December 5 : project presentation;
 * December 17 : final project submission.
