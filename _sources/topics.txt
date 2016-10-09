@@ -64,7 +64,7 @@ Git
 Exercises:
 
 * :doc:`git_workflow_exercises`;
-* :doc:`github_pca_exercise`;
+* :doc:`github_pca_homework`.
 
 ***************************
 Statistics and brain images

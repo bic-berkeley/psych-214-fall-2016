@@ -102,7 +102,7 @@ version control using git.
     git_videos
     git_walk_through
     git_workflow_exercises
-    github_pca_exercise
+    github_pca_homework
     numpy_logical
     plot_lines
     subplots
