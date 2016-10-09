@@ -431,14 +431,3 @@ is mean centered.
     the mean-centered model, by adjusting the value of $c$ to include the $\b
     \bar{x}$ term.
 
-.. solution-replace:
-
-    ?
-
-.. solution-code-replace:
-
-    """ Explain the relationship between the fitted values for the original
-    model and those for the new model, where the clammy regressor is mean
-    centered.
-
-    """
