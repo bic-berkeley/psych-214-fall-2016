@@ -511,7 +511,7 @@ is mean centered.
     the mean-centered model, by adjusting the value of $c$ to include the $\b
     \bar{x}$ term.
 
-.. solution-replace:
+.. solution-replace
 
     ?
 
@@ -522,3 +522,5 @@ is mean centered.
     centered.
 
     """
+
+.. solution-end
