@@ -210,7 +210,8 @@ slides-%:
 SOLUTIONS = anatomical camera \
 			four_dimensions pca arteries \
 			first_activation lab_01 \
-			voxel_correlation correlation_2d
+			voxel_correlation correlation_2d \
+			on_estimation
 
 rst-exercises:
 	$(foreach soln,$(SOLUTIONS), $(PYTHON) tools/proc_rst.py $(soln).tpl;)

@@ -22,8 +22,6 @@ HEADER_FMT = """{underline}
 {title}
 {underline}
 
-* For code template see: :download:`{template_name}`;
-* For solutions see: :doc:`{solution_name}`.
 """
 
 def is_section_line(line):
@@ -105,19 +103,22 @@ def process_rst(contents):
                 underline_char = line[0]
             elif sline.startswith('.. solution-start'):
                 state = 'in-solution'
+                solution_page.pop()
             else:
                 exercise_page.append(line)
         elif state == 'in-solution':
             if sline.startswith('.. solution-replace'):
                 state = 'replace-solution'
+                solution_page.pop()
             elif sline.startswith('.. solution-end'):
                 state = 'rest'
+                solution_page.pop()
         elif state == 'replace-solution':
+            solution_page.pop()
             if sline.startswith('.. solution-end'):
                 state = 'rest'
             else:
                 exercise_page.append(line)
-                solution_page.pop()
         elif state == 'title':  # Knock off header
             state = 'post-title'
             title = sline
@@ -184,15 +185,21 @@ def main():
                      else args.exercise_code)
     code_template = '""" {}\n"""\n'.format(new_title) + code_template
     header = HEADER_FMT.format(underline=u_char * len(new_title),
-                               title=new_title,
-                               solution_name=splitext(basename(in_fname))[0],
-                               template_name=basename(exercise_code))
+                               title=new_title)
+    header_extras = []
+    if exercise_code not in ('', 'none'):  # Empty string disables
+        header_extras.append(
+            '* For code template see: :download:`{}`'.format(
+                basename(exercise_code)))
+        write_or_print(exercise_code, code_template)
     if solution_page not in ('', 'none'):  # Empty string disables
+        header_extras.append(
+            '* For solution see: :doc:`{}`'.format(
+                basename(splitext(solution_page)[0])))
         write_or_print(solution_page, soln_rst)
     if exercise_page not in ('', 'none'):  # Empty string disables
-        write_or_print(exercise_page, header + ex_rst)
-    if exercise_code not in ('', 'none'):  # Empty string disables
-        write_or_print(exercise_code, code_template)
+        extras = ';\n'.join(header_extras) + '.\n\n'
+        write_or_print(exercise_page, header + extras + ex_rst)
 
 
 if __name__ == '__main__':
