@@ -268,3 +268,16 @@ version ``y_c``?  Hint: remember $(\vec{a} + \vec{b}) \cdot \vec{c} = $\vec{a}
 
     ?
 
+
+Calculate the fitted values for the ``X_o`` model, and compare them to the
+fitted values for the original model:
+
+.. nbplot::
+
+
+For even more extra points, explain the relationship between the fitted values
+for the original model and those for the new model, where the clammy regressor
+is mean centered.
+
+.. admonition:: Answer
+

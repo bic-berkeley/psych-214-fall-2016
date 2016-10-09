@@ -331,6 +331,30 @@ cdot vec{c} + vec{b} cdot vec{c}$.</p>
 same in both cases, both <span class="math">\(\vec{y_c}\)</span> and <span class="math">\(\yvec\)</span> must give the same output
 <span class="math">\(\beta_2\)</span>.</p>
 </div>
+<p>Calculate the fitted values for the <code class="docutils literal"><span class="pre">X_o</span></code> model, and compare them to the
+fitted values for the original model:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fitted_X_o</span> <span class="o">=</span> <span class="n">X_o</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B_o</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">fitted_X_o</span><span class="p">,</span> <span class="n">fitted</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>For even more extra points, explain the relationship between the fitted values
+for the original model and those for the new model, where the clammy regressor
+is mean centered.</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p>We can write the second column of the original model in terms of the
+mean-centered vector $vec{x_c}:</p>
+<div class="math">
+\[\Xmat_{:,1] = \vec{x_c} + \bar{x} \vec{1})\]</div>
+<p>The fit for particular values of <span class="math">\(c\)</span> and <span class="math">\(b\)</span> will be:</p>
+<div class="math">
+\[\begin{split}c + b(\vec{x_c} + \bar{x} \vec{1})) \\
+= c + \bar{b \vec{x_c} + b \bar{x}\end{split}\]</div>
+<p class="last">Therefore any fit possible with the original model can be achieved with
+the mean-centered model, by adjusting the value of <span class="math">\(c\)</span> to include the <span class="math">\(\b
+\bar{x}\)</span> term.</p>
+</div>
 </div>
 </div>
 
