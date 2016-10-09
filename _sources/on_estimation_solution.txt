@@ -80,21 +80,6 @@ $\vec{x}, \vec{y}$ with their respective means subtracted:
 
     \vec{y^c} = [y_1 - \bar{y}, y_2 - \bar{y}, ... , y_n - \bar{y}]
 
-Define the *standard deviation* of $\vec{x}$ as:
-
-.. math::
-
-    s_x = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}
-
-From the the vector algebra in `vectors and dot products`_, $s^x$ is also
-given by:
-
-.. math::
-
-    s_x = \sqrt{\frac{1}{n}} \; \; \VL{x^c}
-
-See: `correlation and projection`_ for details.
-
 We found in `introduction to the general linear model`_ that, for the case of
 a full-rank matrix $\Xmat$, the least squares estimate for $\bvec$ is given
 by:
@@ -290,12 +275,14 @@ Calculate the correlation coefficient between ``y_c`` and the second column of
     0.42245241...
 
 What is the relationship between this correlation coefficient and ``B_o[1]``?
+Hint: what is the relationship of the correlation coefficient to vector dot
+products?  See: `correlation and projection`_ for a reminder.
 
 .. admonition:: Answer
 
 
-    `Remember that <correlation and projection_>`_ correlation coefficient can
-    be written as:
+    `Remember that <correlation and projection_>`_ the correlation coefficient
+    can be written as:
 
     .. math::
 

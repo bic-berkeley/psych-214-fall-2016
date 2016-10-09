@@ -94,14 +94,6 @@ and the second being <span class="math">\(\xvec\)</span>. <span class="math">\(\
 <span class="math">\(\vec{x}, \vec{y}\)</span> with their respective means subtracted:</p>
 <div class="math">
 \[ \begin{align}\begin{aligned}\vec{x^c} = [x_1 - \bar{x}, x_2 - \bar{x}, ... , x_n - \bar{x}]\\\vec{y^c} = [y_1 - \bar{y}, y_2 - \bar{y}, ... , y_n - \bar{y}]\end{aligned}\end{align} \]</div>
-<p>Define the <em>standard deviation</em> of <span class="math">\(\vec{x}\)</span> as:</p>
-<div class="math">
-\[s_x = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}\]</div>
-<p>From the the vector algebra in <a class="reference external" href="http://matthew-brett.github.io/teaching/on_vectors.html">vectors and dot products</a>, <span class="math">\(s^x\)</span> is also
-given by:</p>
-<div class="math">
-\[s_x = \sqrt{\frac{1}{n}} \; \; \VL{x^c}\]</div>
-<p>See: <a class="reference external" href="http://matthew-brett.github.io/teaching/correlation_projection.html">correlation and projection</a> for details.</p>
 <p>We found in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> that, for the case of
 a full-rank matrix <span class="math">\(\Xmat\)</span>, the least squares estimate for <span class="math">\(\bvec\)</span> is given
 by:</p>
@@ -252,11 +244,13 @@ multiple of the first value in <span class="math">\(\vec{p}\)</span>, and is the
 <span class="go">0.42245241...</span>
 </pre></div>
 </div>
-<p>What is the relationship between this correlation coefficient and <code class="docutils literal"><span class="pre">B_o[1]</span></code>?</p>
+<p>What is the relationship between this correlation coefficient and <code class="docutils literal"><span class="pre">B_o[1]</span></code>?
+Hint: what is the relationship of the correlation coefficient to vector dot
+products?  See: <a class="reference external" href="http://matthew-brett.github.io/teaching/correlation_projection.html">correlation and projection</a> for a reminder.</p>
 <div class="admonition-answer admonition">
 <p class="first admonition-title">Answer</p>
-<p><a class="reference external" href="http://matthew-brett.github.io/teaching/correlation_projection.html">Remember that</a> correlation coefficient can
-be written as:</p>
+<p><a class="reference external" href="http://matthew-brett.github.io/teaching/correlation_projection.html">Remember that</a> the correlation coefficient
+can be written as:</p>
 <div class="math">
 \[r_{xy} = \frac{\vec{x^c} \cdot \vec{y^c}} {\VL{x^c} \VL{y^c}}\]</div>
 <p>Set:</p>
