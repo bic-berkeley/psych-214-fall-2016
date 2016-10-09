@@ -3,7 +3,8 @@ PCA exercise
 ############
 
 * For code template see: :download:`pca_code.py`;
-* For solutions see: :doc:`pca_solution`.
+* For solution see: :doc:`pca_solution`.
+
 
 .. nbplot::
     :include-source: false

@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Understanding least-squares regression &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="understanding-least-squares-regression">
+<h1>Understanding least-squares regression<a class="headerlink" href="#understanding-least-squares-regression" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>For code template see: <a class="reference download internal" href="_downloads/on_estimation_code.py" download=""><code class="xref download docutils literal"><span class="pre">on_estimation_code.py</span></code></a>;</li>
+<li>For solution see: <a class="reference internal" href="on_estimation_solution.html"><span class="doc">Understanding least-squares regression</span></a>.</li>
+</ul>
+<div class="section" id="introduction-and-definitions">
+<h2>Introduction and definitions<a class="headerlink" href="#introduction-and-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import numerical and plotting libraries</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print to four digits of precision</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>These exercises are to practice thinking about how the regression estimation
+works, and the relationship of correlation and regression.</p>
+<p>To give us some concrete data to play with, here are some more samples of the
+&#8220;psychopathy&#8221; and &#8220;clamminess&#8221; scores that we saw in the <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the
+general linear model</a>:</p>
+<p><span class="math">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
+<p>Our simple linear model can be expressed by:</p>
+<div class="math">
+\[y_i = c + bx_i + e_i`\]</div>
+<p>or, in vector notation:</p>
+<div class="math">
+\[\yvec = c + b \xvec + \evec\]</div>
+<p>where <span class="math">\(\yvec\)</span> is the vector of values <span class="math">\([y_1, y_2, ... y_n]\)</span> we want to explain
+(psychopathy), <span class="math">\(\xvec\)</span> is the vector of values <span class="math">\([x_1, x_2, ... x_n]\)</span>
+containing our explanatory variable (clammy), and <span class="math">\(\evec\)</span> is the vector of
+remaining data unexplained by <span class="math">\(c + b \xvec\)</span>.</p>
+<p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span></p>
+<p>The same model can also be expressed using a design <em>matrix</em> <span class="math">\(\Xmat\)</span>:</p>
+<div class="math">
+\[\yvec = \Xmat \bvec + \evec\]</div>
+<p>where <span class="math">\(\Xmat\)</span> has two columns, the first being a length <span class="math">\(n\)</span> vector of ones,
+and the second being <span class="math">\(\xvec\)</span>. <span class="math">\(\bvec\)</span> is column vector containing two values,
+<span class="math">\([c, b]\)</span> that are the intercept and slope of the fitted line.</p>
+<p>Now define the <em>mean</em> of <span class="math">\(\vec{x}\)</span> as:</p>
+<div class="math">
+\[\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\]</div>
+<p>Define two new vectors, <span class="math">\(\vec{x^c}, \vec{y^c}\)</span> that contain the values in
+<span class="math">\(\vec{x}, \vec{y}\)</span> with their respective means subtracted:</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}\vec{x^c} = [x_1 - \bar{x}, x_2 - \bar{x}, ... , x_n - \bar{x}]\\\vec{y^c} = [y_1 - \bar{y}, y_2 - \bar{y}, ... , y_n - \bar{y}]\end{aligned}\end{align} \]</div>
+<p>Define the <em>standard deviation</em> of <span class="math">\(\vec{x}\)</span> as:</p>
+<div class="math">
+\[s_x = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2}\]</div>
+<p>From the the vector algebra in <a class="reference external" href="http://matthew-brett.github.io/teaching/on_vectors.html">vectors and dot products</a>, <span class="math">\(s^x\)</span> is also
+given by:</p>
+<div class="math">
+\[s_x = \sqrt{\frac{1}{n}} \; \; \VL{x^c}\]</div>
+<p>See: <a class="reference external" href="http://matthew-brett.github.io/teaching/correlation_projection.html">correlation and projection</a> for details.</p>
+<p>We found in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> that, for the case of
+a full-rank matrix <span class="math">\(\Xmat\)</span>, the least squares estimate for <span class="math">\(\bvec\)</span> is given
+by:</p>
+<div class="math">
+\[\newcommand{\bhat}{\hat{\bvec}} \newcommand{\yhat}{\hat{\yvec}}
+\bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\]</div>
+</div>
+<div class="section" id="correlation-coefficient-and-regression">
+<h2>Correlation coefficient and regression<a class="headerlink" href="#correlation-coefficient-and-regression" title="Permalink to this headline">¶</a></h2>
+<p>Create the <span class="math">\(\Xmat\)</span> matrix from a vector of ones and the vector of <code class="docutils literal"><span class="pre">clammy</span></code>
+scores:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create X design matrix fron column of ones and clammy vector</span>
+</pre></div>
+</div>
+<p>Are the columns of <code class="docutils literal"><span class="pre">X</span></code> orthogononal to each other?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether the columns of X are orthogonal</span>
+</pre></div>
+</div>
+<p>Is <span class="math">\(\Xmat^T \Xmat\)</span> invertible?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether X.T X is invertible</span>
+</pre></div>
+</div>
+<p>Calculate <span class="math">\((\Xmat^T \Xmat)^{-1} \Xmat^T\)</span>.  What shape is it?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate (X.T X)^-1 X.T (the pseudoinverse)</span>
+</pre></div>
+</div>
+<p>Calculate the least squares fit value for <span class="math">\(\bvec\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate least squares fit for beta vector</span>
+</pre></div>
+</div>
+<p>Calculate the fitted values <span class="math">\(c + b \xvec\)</span>, and the residuals <span class="math">\(\evec\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the fitted values</span>
+</pre></div>
+</div>
+<p>Confirm that the mean of the residuals is close to zero:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- mean of residuals near zero</span>
+</pre></div>
+</div>
+<p>Confirm that residuals are orthogonal to both columns of the design matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Residuals orthogonal to design</span>
+</pre></div>
+</div>
+<p>We will not modify the design to see what happens to the parameters and the
+fitted values.</p>
+<p>To keep our calculations for the original and new designs, start by copying
+<code class="docutils literal"><span class="pre">X</span></code> to make a new array <code class="docutils literal"><span class="pre">X_o</span></code>.  Hint: tab complete on the array object in
+IPython.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Copy X to new array X_o</span>
+</pre></div>
+</div>
+<p>We found that above that the columns of <code class="docutils literal"><span class="pre">X</span></code> are not orthogonal.  How can we
+modify the second column of <code class="docutils literal"><span class="pre">X</span></code> to make it orthogonal to the first?  Hint:
+write out the dot product of the first column with the second as a sum, and
+simplify. Use that result to work out what to subtract from the second column
+so the dot product is 0.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make second column orthononal to first. Confirm orthogonality</span>
+</pre></div>
+</div>
+<p>Look at the diagonal values of the matrix <code class="docutils literal"><span class="pre">X_o.T.dot(X_o)</span></code>.  What is the
+relationship of these values to the lengths of the vectors in the first and
+second columns of <code class="docutils literal"><span class="pre">X_o</span></code>?</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+<p>Use <code class="docutils literal"><span class="pre">numpy.linalg.inv</span></code> to find <span class="math">\((\Xmat^T \Xmat)^{-1}\)</span> – the inverse of
+<code class="docutils literal"><span class="pre">X_o.T.dot(X_o)</span></code>. Now what is the relationship of the values in the diagonal
+of the inverse matrix to the lengths of the vectors in the first and second
+columns of <code class="docutils literal"><span class="pre">X_o</span></code>?  Hint: <span class="math">\(A^-1 \cdot A = I\)</span>; if <span class="math">\(A\)</span> has all zeros off the
+diagonal, what must <span class="math">\(A^-1\)</span> be for this to be true?</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+<p>Make a new data vector <code class="docutils literal"><span class="pre">y_c</span></code> by subtracting the mean from the psychopathy
+vector:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make mean-centered version of psychopathy vector</span>
+</pre></div>
+</div>
+<p>Calculate a new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector for the least-squares fit of <code class="docutils literal"><span class="pre">X_o</span></code>
+to <code class="docutils literal"><span class="pre">y_c</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate fit of X_o to y_o</span>
+</pre></div>
+</div>
+<p>The first parameter has changed compared to your previous estimate.  Can you
+explain its new value?</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+<p>Calculate the correlation coefficient between <code class="docutils literal"><span class="pre">y_c</span></code> and the second column of
+<code class="docutils literal"><span class="pre">X_o</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Correlation coefficient of y_c and the second column of X_o</span>
+</pre></div>
+</div>
+<p>What is the relationship between this correlation coefficient and <code class="docutils literal"><span class="pre">B_o[1]</span></code>?</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+<p>Now try calculating <span class="math">\(\bvec\)</span> fitting the <code class="docutils literal"><span class="pre">X_o</span></code> design to the original
+psychopathy data (not the mean-cetnered version).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fit X_o to psychopathy data</span>
+</pre></div>
+</div>
+<p>Compare the first value in the new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector with the mean of
+the <code class="docutils literal"><span class="pre">psychpathy</span></code> vector.</p>
+<p>Can you explain the relationship?</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+<p>For extra points, can you explain why the second value in <code class="docutils literal"><span class="pre">B_o</span></code> did not
+change when we estimated for <code class="docutils literal"><span class="pre">psychopathy</span></code> rather than the mean-centered
+version <code class="docutils literal"><span class="pre">y_c</span></code>?  Hint: remember <span class="math">\((\vec{a} + \vec{b}) \cdot \vec{c} = \)</span>vec{a}
+cdot vec{c} + vec{b} cdot vec{c}$.</p>
+<div class="admonition-answer admonition">
+<p class="first admonition-title">Answer</p>
+<p class="last">?</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/on_estimation_exercise.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

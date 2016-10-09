@@ -3,7 +3,8 @@ Voxel correlation exercise
 ##########################
 
 * For code template see: :download:`voxel_correlation_code.py`;
-* For solutions see: :doc:`voxel_correlation_solution`.
+* For solution see: :doc:`voxel_correlation_solution`.
+
 
 .. nbplot::
     :include-source: false

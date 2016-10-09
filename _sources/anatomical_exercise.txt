@@ -3,7 +3,8 @@ Anatomical exercise
 ###################
 
 * For code template see: :download:`anatomical_code.py`;
-* For solutions see: :doc:`anatomical_solution`.
+* For solution see: :doc:`anatomical_solution`.
+
 
 .. nbplot::
     :include-source: false

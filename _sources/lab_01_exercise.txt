@@ -3,7 +3,8 @@ Lab 01 exercise
 ###############
 
 * For code template see: :download:`lab_01_code.py`;
-* For solutions see: :doc:`lab_01_solution`.
+* For solution see: :doc:`lab_01_solution`.
+
 
 .. testsetup::
 

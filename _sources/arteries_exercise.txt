@@ -3,7 +3,8 @@ Find the arteries exercise
 ##########################
 
 * For code template see: :download:`arteries_code.py`;
-* For solutions see: :doc:`arteries_solution`.
+* For solution see: :doc:`arteries_solution`.
+
 
 .. nbplot::
     :include-source: false
