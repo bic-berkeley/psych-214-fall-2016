@@ -37,4 +37,4 @@ Reading and homework for next week
 * finish PCA exercise, with some github practice (see below);
 * Huettel chapter 7 - :cite:`huettel2014functional`;
 * continue the outlier competition - for October 10th;
-* do the :doc:`github_pca_exercise`.
+* do the :doc:`github_pca_homework`.
