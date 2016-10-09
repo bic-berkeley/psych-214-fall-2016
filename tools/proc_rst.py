@@ -14,6 +14,7 @@ remove up until the first empty line.
 import sys
 from os.path import basename, splitext
 import re
+from textwrap import dedent
 import argparse
 
 SECTION_CHARS=r"!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
@@ -103,22 +104,44 @@ def process_rst(contents):
                 underline_char = line[0]
             elif sline.startswith('.. solution-start'):
                 state = 'in-solution'
+                extra_code = []
                 solution_page.pop()
             else:
                 exercise_page.append(line)
         elif state == 'in-solution':
-            if sline.startswith('.. solution-replace'):
-                state = 'replace-solution'
+            if sline == '.. solution-replace':
+                state = 'replace-in-exercise'
                 solution_page.pop()
-            elif sline.startswith('.. solution-end'):
+            elif sline == '.. solution-replace-code':
+                state = 'replace-in-code'
+                doctest_block = []
+                solution_page.pop()
+            elif sline == '.. solution-end':
                 state = 'rest'
                 solution_page.pop()
-        elif state == 'replace-solution':
+        elif state == 'replace-in-exercise':
             solution_page.pop()
-            if sline.startswith('.. solution-end'):
+            if sline == '.. solution-end':
+                if extra_code:
+                    doctest_blocks.append(
+                        dedent(''.join(extra_code)))
                 state = 'rest'
+            elif sline == '.. solution-replace-code':
+                state = 'replace-in-code'
+                doctest_block = []
             else:
                 exercise_page.append(line)
+        elif state == 'replace-in-code':
+            solution_page.pop()
+            if sline == '.. solution-end':
+                if extra_code:
+                    doctest_blocks.append(
+                        dedent(''.join(extra_code)))
+                state = 'rest'
+            elif sline == '.. solution-replace':
+                state = 'replace-in-exercise'
+            else:
+                extra_code.append(line)
         elif state == 'title':  # Knock off header
             state = 'post-title'
             title = sline
@@ -139,7 +162,7 @@ def process_doctest_blocks(doctest_blocks):
     return '\n'.join(process_doctest_block(dtb) for dtb in doctest_blocks)
 
 
-DOCTEST_RE = re.compile('^(\s*)(>>>|...) ?')
+DOCTEST_RE = re.compile('^(\s*)(>>>|\.\.\.) ?')
 
 
 def process_doctest_block(doctest_block):

@@ -231,6 +231,14 @@ second columns of ``X_o``?
 
     ?
 
+.. solution-replace-code
+
+    """ What is the relationship between the values on the diagonal of
+    X_o.T.dot(X_o) and the lengths of the vectors in the first and second
+    columns of X_o?
+
+    """
+
 .. solution-end
 
 Use ``numpy.linalg.inv`` to find $(\Xmat^T \Xmat)^{-1}$ |--| the inverse of
@@ -249,6 +257,14 @@ diagonal, what must $A^-1$ be for this to be true?
 .. solution-replace
 
     ?
+
+.. solution-replace-code
+
+    """ What is the relationship between the values on the diagonal of the
+    *inverse* of X_o.T.dot(X_o) and the lengths of the vectors in the first
+    and second columns of X_o?
+
+    """
 
 .. solution-end
 
@@ -294,6 +310,13 @@ explain its new value?
 .. solution-replace
 
     ?
+
+.. solution-replace-code
+
+    """ Explain the new value of the first element of the parameter estimate
+    vector.
+
+    """
 
 .. solution-end
 
@@ -350,6 +373,13 @@ What is the relationship between this correlation coefficient and ``B_o[1]``?
 
     ?
 
+.. solution-replace-code
+
+    """ What is the relationship between the correlation coefficient "r_xy"
+    and the second element in the parameter vector "B_o[1]"?
+
+    """
+
 .. solution-end
 
 Now try calculating $\bvec$ fitting the ``X_o`` design to the original
@@ -404,6 +434,13 @@ Can you explain the relationship?
 
     ?
 
+.. solution-replace-code
+
+    """ Explain the relationship between the mean of the psychopathy values
+    and the first element of the parameter estimate vector.
+
+    """
+
 .. solution-end
 
 For extra points, can you explain why the second value in ``B_o`` did not
@@ -444,4 +481,57 @@ version ``y_c``?  Hint: remember $(\vec{a} + \vec{b}) \cdot \vec{c} = $\vec{a}
 
     ?
 
+.. solution-replace-code
+
+    """ Why is the second value in B_o the same when estimating against "y_c"
+    and "psychopathy"?
+    """
+
 .. solution-end
+
+Calculate the fitted values for the ``X_o`` model, and compare them to the
+fitted values for the original model:
+
+.. nbplot::
+
+    >>> fitted_X_o = X_o.dot(B_o)
+    >>> np.allclose(fitted_X_o, fitted)
+    True
+
+For even more extra points, explain the relationship between the fitted values
+for the original model and those for the new model, where the clammy regressor
+is mean centered.
+
+.. admonition:: Answer
+
+.. solution-start
+
+    We can write the second column of the original model in terms of the
+    mean-centered vector $\vec{x_c}:
+
+    .. math::
+
+        \Xmat_{:,1] = \vec{x_c} + \bar{x} \vec{1})
+
+    The fit for particular values of $c$ and $b$ will be:
+
+    .. math::
+
+        c + b(\vec{x_c} + \bar{x} \vec{1})) \\
+        = c + \bar{b \vec{x_c} + b \bar{x}
+
+    Therefore any fit possible with the original model can be achieved with
+    the mean-centered model, by adjusting the value of $c$ to include the $\b
+    \bar{x}$ term.
+
+.. solution-replace:
+
+    ?
+
+.. solution-code-replace:
+
+    """ Explain the relationship between the fitted values for the original
+    model and those for the new model, where the clammy regressor is mean
+    centered.
+
+    """
