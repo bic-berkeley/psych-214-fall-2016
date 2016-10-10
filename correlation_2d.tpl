@@ -1,3 +1,5 @@
+.. vim: ft=rst
+
 ############################
 Correlation per voxel, in 2D
 ############################
@@ -92,6 +94,12 @@ array.
     >>> #- Loop over voxels filling in correlation at this voxel
     >>> for i in range(n_voxels):
     ...     correlations_1d[i] = np.corrcoef(time_course, data_2d[i, :])[0, 1]
+
+.. nbplot::
+
+    >>> #- Or (much faster) use pearson_2d function
+    >>> from pearson import pearson_2d
+    >>> correlations_1d = pearson_2d(time_course, data_2d.T)
 
 Reshape the correlations 1D array back to a 3D array, using the original 3D
 shape.

@@ -212,6 +212,8 @@
     https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _Pearson product-moment correlation coefficient:
    https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+.. _standard error:
+    https://en.wikipedia.org/wiki/Standard_error
 
 .. People
 .. _Matthew:

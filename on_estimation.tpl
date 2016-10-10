@@ -116,7 +116,7 @@ scores:
            [ 1.   ,  5.167],
            [ 1.   ,  7.257]])
 
-Are the columns of ``X`` orthogononal to each other?
+Are the columns of ``X`` orthogonal to each other?
 
 .. nbplot::
 
@@ -370,7 +370,7 @@ products?  See: `correlation and projection`_ for a reminder.
 .. solution-end
 
 Now try calculating $\bvec$ fitting the ``X_o`` design to the original
-psychopathy data (not the mean-cetnered version).
+psychopathy data (not the mean-centered version).
 
 .. nbplot::
 
@@ -493,23 +493,45 @@ is mean centered.
 
 .. solution-start
 
-    We can write the second column of the original model in terms of the
-    mean-centered vector $\vec{x_c}:
+    Call the second column of the original design $\vec{x}$.  These are the
+    values of ``clammy`` in our case.  $\vec{x_c} = \vec{x} - \bar{x}$.  So
+    $\vec{x}$, which is the second column of our original design, can also be
+    written as the sum of two vectors:
 
     .. math::
 
-        \Xmat_{:,1] = \vec{x_c} + \bar{x} \vec{1})
+        \Xmat_{:,1} = \vec{x} = \vec{x_c} + \bar{x} \vec{1}
 
-    The fit for particular values of $c$ and $b$ will be:
+    A fit to the original design, for particular values of $c$ and $b$ will
+    be:
 
     .. math::
 
-        c + b(\vec{x_c} + \bar{x} \vec{1})) \\
-        = c + \bar{b \vec{x_c} + b \bar{x}
+        c + b \vec{x} \\
+        = c + b \vec{x_c} + \bar{x} \vec{1} \\
+        = c + b \vec{x_c} + b \bar{x}
 
     Therefore any fit possible with the original model can be achieved with
-    the mean-centered model, by adjusting the value of $c$ to include the $\b
-    \bar{x}$ term.
+    the mean-centered model, by adjusting the value of $c$ to include the $b
+    \bar{x}$ term.  Specifically:
+
+    .. nbplot::
+
+        >>> # Fit again to original model
+        >>> B = npl.inv(X.T.dot(X)).dot(X.T).dot(psychopathy)
+        >>> B
+        array([ 9.8016,  0.8074])
+
+        >>> # Fit again to mean-centered model
+        >>> B_o = npl.inv(X_o.T.dot(X_o)).dot(X_o.T).dot(psychopathy)
+        >>> B_o
+        array([ 12.5746,   0.8074])
+
+        >>> # The difference in B_o[0] (c) is b * X[:, 1].mean()
+        >>> B[1] * X[:, 1].mean()
+        2.7729...
+        >>> B[0] + B[1] * X[:, 1].mean()
+        12.57458...
 
 .. solution-replace
 

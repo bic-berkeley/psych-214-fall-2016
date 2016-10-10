@@ -75,7 +75,8 @@ Statistics and brain images
 * `vector projection`_;
 * `introduction to Principal Component Analysis`_.  See: :doc:`day_03`;
 * `vector angles`_;
-* `correlation and projection`_;
+* `correlation and projection`_.  See :doc:`day_04`;
 * :doc:`voxel_time_courses`.  See :doc:`day_04`;
-* `introduction to the General Linear Model`_;
+* `introduction to the General Linear Model`_.  See :doc:`day_05`;
+* :doc:`mean_test_example`;
 * :doc:`model_one_voxel`;

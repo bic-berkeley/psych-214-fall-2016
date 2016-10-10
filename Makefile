@@ -207,17 +207,27 @@ github: html download-index
 slides-%:
 	pandoc -t beamer -s $*_slides.md -o $*_slides.pdf
 
-SOLUTIONS = anatomical camera \
+TEMPLATES = anatomical camera \
 			four_dimensions pca arteries \
 			first_activation lab_01 \
 			voxel_correlation correlation_2d \
 			on_estimation
 
-rst-exercises:
-	$(foreach soln,$(SOLUTIONS), $(PYTHON) tools/proc_rst.py $(soln).tpl;)
+TPL_FILES = $(TEMPLATES:=.tpl)
+SOLUTION_FILES = $(TPL_FILES:.tpl=_solution.rst)
 
-tex-exercises:
-	pdflatex git_short.tex
+%_solution.rst : %.tpl
+	$(PYTHON) tools/proc_rst.py $<
+
+rst-exercises: $(SOLUTION_FILES)
+
+%.pdf : %.tex
+	pdflatex $<
+
+TEX_FILES = git_short.tex git_and_remotes.tex
+PDF_FILES = $(TEX_FILES:.tex=.pdf)
+
+tex-exercises: $(PDF_FILES)
 
 download-index:
 	$(PYTHON) tools/make_index.py --header="Downloads for PSYCH214 website" \
