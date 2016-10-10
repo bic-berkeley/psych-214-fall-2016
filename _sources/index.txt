@@ -109,3 +109,7 @@ version control using git.
     subtract_means
     array_reductions
     diagnostics_project
+    on_estimation_exercise
+    on_estimation_solution
+    matrix_rank
+    mean_test_example

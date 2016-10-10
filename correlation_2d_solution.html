@@ -114,6 +114,11 @@ array.</p>
 <span class="gp">... </span>    <span class="n">correlations_1d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">time_course</span><span class="p">,</span> <span class="n">data_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Or (much faster) use pearson_2d function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pearson</span> <span class="kn">import</span> <span class="n">pearson_2d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">correlations_1d</span> <span class="o">=</span> <span class="n">pearson_2d</span><span class="p">(</span><span class="n">time_course</span><span class="p">,</span> <span class="n">data_2d</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Reshape the correlations 1D array back to a 3D array, using the original 3D
 shape.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape the correlations array back to 3D</span>
@@ -139,9 +144,9 @@ Look for any voxels with a high task correlation in the frontal lobe:</p>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//correlation_2d_solution-14.png">png</a>, <a class="reference external" href=".//correlation_2d_solution-14.hires.png">hires.png</a>, <a class="reference external" href=".//correlation_2d_solution-14.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//correlation_2d_solution-15.png">png</a>, <a class="reference external" href=".//correlation_2d_solution-15.hires.png">hires.png</a>, <a class="reference external" href=".//correlation_2d_solution-15.pdf">pdf</a>)</p>
 <div class="figure">
-<img alt="_images/correlation_2d_solution-14.png" src="_images/correlation_2d_solution-14.png" />
+<img alt="_images/correlation_2d_solution-15.png" src="_images/correlation_2d_solution-15.png" />
 </div>
 </div>
 

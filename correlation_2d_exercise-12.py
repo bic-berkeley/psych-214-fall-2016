@@ -1,1 +1,1 @@
-#- Reshape the correlations array back to 3D
+#- Or (much faster) use pearson_2d function

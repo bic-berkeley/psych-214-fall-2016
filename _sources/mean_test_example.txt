@@ -4,9 +4,9 @@ A worked example of the general linear model
 
 See: `introduction to the general linear model`_.
 
-Here we go through the matrix formulation of the GLM with the simplest
-possible example |--| a t test for the difference of the sample mean from
-zero.
+Here we go through the matrix formulation of the general linear model with the
+simplest possible example |--| a t-test for the difference of the sample mean
+from zero.
 
 Let us say we have the hypothesis that men are more psychopathic than women.
 
@@ -30,20 +30,26 @@ We have 10 difference scores:
     ...                          1.0286,  0.8466,  1.6669, -0.8241,  0.4469])
 
 Our hypothesis is that the females in the couple have a lower psychopathy
-score, and therefore that, in the whole population of male-female couples,
-this measure will, on average, be positive (men have higher scores than
-women).
+score. We therefore predict that, in the whole population of male-female
+couples, the difference measure will, on average, be positive (men have higher
+scores than women).
 
 We teat this hypothesis by testing whether the sample mean is far enough from
-0 that to make it unlikely that the population mean is actually 0.
+zero to make it unlikely that the population mean is actually zero.
 
 ******************************
 The standard error of the mean
 ******************************
 
-One way to test this, it to compare the mean value, to the `standard error of
+One way to test this, is to compare the mean value, to the `standard error of
 the mean
 <https://en.wikipedia.org/wiki/Standard_error#Standard_error_of_the_mean_2>`_.
+
+The `standard error`_ of a statistic (such as a mean) is the standard
+deviation of the sampling distribution of the statistic.  The standard
+deviation of the sampling distribution is the estimate of the standard
+deviation of the statistic, when taking a very large number of samples of the
+statistic.
 
 As usual, define the *mean* of a vector of values $\vec{x}$ as:
 
@@ -71,8 +77,8 @@ The standard error of the mean is:
 
 where $n$ is the number of samples, 10 in our case.
 
-We can make a t statistic by dividing the mean by the standard error of the
-mean:
+A t statistic is given by a value divided by the *standard error* of that
+value.  The t statistic for $\bar{x}$ is:
 
 .. math::
 
@@ -108,7 +114,7 @@ show how the machinery works in the simplest case.
 :math:`\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}`
 :math:`\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}`
 
-The matrix experssion of the general linear model is:
+The matrix expression of the general linear model is:
 
 .. math::
 
@@ -160,12 +166,12 @@ The student's t statistic from the general linear model is:
    t = \frac{c^T \hat\beta}{\sqrt{\hat{\sigma}^2 c^T (\Xmat^T \Xmat)^+ c}}
 
 where $\hat{\sigma}^2$ is our estimate of variance in the residuals, $c$ is a
-contrast vector to select some combination of the desingn columns, and
+contrast vector to select some combination of the design columns, and
 $(\Xmat^T \Xmat)^+$ is the *pseudoinverse* of $\Xmat^T \Xmat$.
 
 In our case we have only one design column, so $c = [1]$ and we can omit it.
 $\hat{\sigma}^2 = s_x^2$ for $s_x$ defined above.  $\Xmat^T \Xmat$ is
-invrtible, and we know the inverse already: $\frac{1}{n}$.  Therefore:
+invertible, and we know the inverse already: $\frac{1}{n}$.  Therefore:
 
 .. math::
 

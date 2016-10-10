@@ -45,9 +45,9 @@
 <div class="section" id="a-worked-example-of-the-general-linear-model">
 <h1>A worked example of the general linear model<a class="headerlink" href="#a-worked-example-of-the-general-linear-model" title="Permalink to this headline">¶</a></h1>
 <p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a>.</p>
-<p>Here we go through the matrix formulation of the GLM with the simplest
-possible example – a t test for the difference of the sample mean from
-zero.</p>
+<p>Here we go through the matrix formulation of the general linear model with the
+simplest possible example – a t-test for the difference of the sample mean
+from zero.</p>
 <p>Let us say we have the hypothesis that men are more psychopathic than women.</p>
 <p>We find 10 male-female couples, and we give them each a psychopathy
 questionnaire.  We score the questionnaires, and then, for each couple, we
@@ -65,15 +65,20 @@ subtract the woman&#8217;s score from the man&#8217;s score, to get a difference
 </pre></div>
 </div>
 <p>Our hypothesis is that the females in the couple have a lower psychopathy
-score, and therefore that, in the whole population of male-female couples,
-this measure will, on average, be positive (men have higher scores than
-women).</p>
+score. We therefore predict that, in the whole population of male-female
+couples, the difference measure will, on average, be positive (men have higher
+scores than women).</p>
 <p>We teat this hypothesis by testing whether the sample mean is far enough from
-0 that to make it unlikely that the population mean is actually 0.</p>
+zero to make it unlikely that the population mean is actually zero.</p>
 <div class="section" id="the-standard-error-of-the-mean">
 <h2>The standard error of the mean<a class="headerlink" href="#the-standard-error-of-the-mean" title="Permalink to this headline">¶</a></h2>
-<p>One way to test this, it to compare the mean value, to the <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_error#Standard_error_of_the_mean_2">standard error of
+<p>One way to test this, is to compare the mean value, to the <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_error#Standard_error_of_the_mean_2">standard error of
 the mean</a>.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_error">standard error</a> of a statistic (such as a mean) is the standard
+deviation of the sampling distribution of the statistic.  The standard
+deviation of the sampling distribution is the estimate of the standard
+deviation of the statistic, when taking a very large number of samples of the
+statistic.</p>
 <p>As usual, define the <em>mean</em> of a vector of values <span class="math">\(\vec{x}\)</span> as:</p>
 <div class="math">
 \[\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\]</div>
@@ -89,8 +94,8 @@ deviation.</p>
 <div class="math">
 \[SE_{\bar{x}} = \frac{s_x}{\sqrt{n}}\]</div>
 <p>where <span class="math">\(n\)</span> is the number of samples, 10 in our case.</p>
-<p>We can make a t statistic by dividing the mean by the standard error of the
-mean:</p>
+<p>A t statistic is given by a value divided by the <em>standard error</em> of that
+value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
 <div class="math">
 \[t = \frac{\bar{x}}{SE_{\bar{x}}}\]</div>
 <p>In our case:</p>
@@ -118,7 +123,7 @@ mean:</p>
 show how the machinery works in the simplest case.</p>
 <p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span>
 <span class="math">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
-<p>The matrix experssion of the general linear model is:</p>
+<p>The matrix expression of the general linear model is:</p>
 <div class="math">
 \[\yvec = \Xmat \bvec + \evec\]</div>
 <p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span></p>
@@ -152,11 +157,11 @@ show how the machinery works in the simplest case.</p>
 <div class="math">
 \[t = \frac{c^T \hat\beta}{\sqrt{\hat{\sigma}^2 c^T (\Xmat^T \Xmat)^+ c}}\]</div>
 <p>where <span class="math">\(\hat{\sigma}^2\)</span> is our estimate of variance in the residuals, <span class="math">\(c\)</span> is a
-contrast vector to select some combination of the desingn columns, and
+contrast vector to select some combination of the design columns, and
 <span class="math">\((\Xmat^T \Xmat)^+\)</span> is the <em>pseudoinverse</em> of <span class="math">\(\Xmat^T \Xmat\)</span>.</p>
 <p>In our case we have only one design column, so <span class="math">\(c = [1]\)</span> and we can omit it.
 <span class="math">\(\hat{\sigma}^2 = s_x^2\)</span> for <span class="math">\(s_x\)</span> defined above.  <span class="math">\(\Xmat^T \Xmat\)</span> is
-invrtible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)</span>.  Therefore:</p>
+invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)</span>.  Therefore:</p>
 <div class="math">
 \[\begin{split}t = \frac{\bar{y}}{s_x \sqrt{\frac{1}{n}}} \\
 = \frac{\bar{x}}{SE_{\bar{x}}}\end{split}\]</div>

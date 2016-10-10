@@ -5,6 +5,8 @@ Correlation per voxel, in 2D
 * For code template see: :download:`correlation_2d_code.py`;
 * For solution see: :doc:`correlation_2d_solution`.
 
+.. vim: ft=rst
+
 
 In this exercise, we will take each voxel time course in the brain, and
 calculate a correlation between the task-on / task-off vector and the voxel
@@ -82,6 +84,10 @@ array.
 .. nbplot::
 
     >>> #- Loop over voxels filling in correlation at this voxel
+
+.. nbplot::
+
+    >>> #- Or (much faster) use pearson_2d function
 
 Reshape the correlations 1D array back to a 3D array, using the original 3D
 shape.

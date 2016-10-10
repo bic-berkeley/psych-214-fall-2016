@@ -124,7 +124,7 @@ scores:</p>
 <span class="go">       [ 1.   ,  7.257]])</span>
 </pre></div>
 </div>
-<p>Are the columns of <code class="docutils literal"><span class="pre">X</span></code> orthogononal to each other?</p>
+<p>Are the columns of <code class="docutils literal"><span class="pre">X</span></code> orthogonal to each other?</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether the columns of X are orthogonal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="go">array([[  12.    ,   41.212 ],</span>
@@ -275,7 +275,7 @@ can be written as:</p>
 </div>
 </div>
 <p>Now try calculating <span class="math">\(\bvec\)</span> fitting the <code class="docutils literal"><span class="pre">X_o</span></code> design to the original
-psychopathy data (not the mean-cetnered version).</p>
+psychopathy data (not the mean-centered version).</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fit X_o to psychopathy data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">iXtX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
@@ -337,17 +337,40 @@ for the original model and those for the new model, where the clammy regressor
 is mean centered.</p>
 <div class="admonition-answer admonition">
 <p class="first admonition-title">Answer</p>
-<p>We can write the second column of the original model in terms of the
-mean-centered vector $vec{x_c}:</p>
+<p>Call the second column of the original design <span class="math">\(\vec{x}\)</span>.  These are the
+values of <code class="docutils literal"><span class="pre">clammy</span></code> in our case.  <span class="math">\(\vec{x_c} = \vec{x} - \bar{x}\)</span>.  So
+<span class="math">\(\vec{x}\)</span>, which is the second column of our original design, can also be
+written as the sum of two vectors:</p>
 <div class="math">
-\[\Xmat_{:,1] = \vec{x_c} + \bar{x} \vec{1})\]</div>
-<p>The fit for particular values of <span class="math">\(c\)</span> and <span class="math">\(b\)</span> will be:</p>
+\[\Xmat_{:,1} = \vec{x} = \vec{x_c} + \bar{x} \vec{1}\]</div>
+<p>A fit to the original design, for particular values of <span class="math">\(c\)</span> and <span class="math">\(b\)</span> will
+be:</p>
 <div class="math">
-\[\begin{split}c + b(\vec{x_c} + \bar{x} \vec{1})) \\
-= c + \bar{b \vec{x_c} + b \bar{x}\end{split}\]</div>
-<p class="last">Therefore any fit possible with the original model can be achieved with
-the mean-centered model, by adjusting the value of <span class="math">\(c\)</span> to include the <span class="math">\(\b
-\bar{x}\)</span> term.</p>
+\[\begin{split}c + b \vec{x} \\
+= c + b \vec{x_c} + \bar{x} \vec{1} \\
+= c + b \vec{x_c} + b \bar{x}\end{split}\]</div>
+<p>Therefore any fit possible with the original model can be achieved with
+the mean-centered model, by adjusting the value of <span class="math">\(c\)</span> to include the <span class="math">\(b
+\bar{x}\)</span> term.  Specifically:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fit again to original model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span>
+<span class="go">array([ 9.8016,  0.8074])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fit again to mean-centered model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
+<span class="go">array([ 12.5746,   0.8074])</span>
+</pre></div>
+</div>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The difference in B_o[0] (c) is b * X[:, 1].mean()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">2.7729...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">12.57458...</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
