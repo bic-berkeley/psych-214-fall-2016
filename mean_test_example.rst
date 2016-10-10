@@ -176,4 +176,5 @@ invertible, and we know the inverse already: $\frac{1}{n}$.  Therefore:
 .. math::
 
    t = \frac{\bar{y}}{s_x \sqrt{\frac{1}{n}}} \\
-   = \frac{\bar{x}}{SE_{\bar{x}}}
+   = \bar{y} \Big/ \frac{s_x}{\sqrt{n}} \\
+   = \frac{\bar{y}}{SE_{\bar{y}}}
