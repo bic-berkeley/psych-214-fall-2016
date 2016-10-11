@@ -365,7 +365,7 @@ Can you explain the relationship?
 
 For extra points, can you explain why the second value in ``B_o`` did not
 change when we estimated for ``psychopathy`` rather than the mean-centered
-version ``y_c``?  Hint: remember $(\vec{a} + \vec{b}) \cdot \vec{c} = $\vec{a}
+version ``y_c``?  Hint: remember $(\vec{a} + \vec{b}) \cdot \vec{c} = \vec{a}
 \cdot \vec{c} + \vec{b} \cdot \vec{c}$.
 
 .. admonition:: Answer
