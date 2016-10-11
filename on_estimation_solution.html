@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Matrix rank" href="matrix_rank.html" />
+    <link rel="prev" title="Understanding least-squares regression" href="on_estimation_exercise.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -132,7 +134,7 @@ scores:</p>
 </pre></div>
 </div>
 <p>Is <span class="math">\(\Xmat^T \Xmat\)</span> invertible?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether X.T X is invertible</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether X.T.dot(X) is invertible</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iXtX</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>  <span class="c1"># No error in inversion</span>
 </pre></div>
 </div>
@@ -417,6 +419,8 @@ the mean-centered model, by adjusting the value of <span class="math">\(c\)</spa
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="on_estimation_exercise.html" title="previous chapter">Understanding least-squares regression</a></li>
+      <li>Next: <a href="matrix_rank.html" title="next chapter">Matrix rank</a></li>
   </ul></li>
 </ul>
 </div>

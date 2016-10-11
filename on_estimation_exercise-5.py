@@ -1,1 +1,1 @@
-#- Check whether X.T X is invertible
+#- Check whether X.T.dot(X) is invertible

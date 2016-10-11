@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 #- Check whether the columns of X are orthogonal
 
-#- Check whether X.T X is invertible
+#- Check whether X.T.dot(X) is invertible
 
 #- Calculate (X.T X)^-1 X.T (the pseudoinverse)
 

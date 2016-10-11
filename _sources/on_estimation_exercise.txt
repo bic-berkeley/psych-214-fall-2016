@@ -108,7 +108,7 @@ Is $\Xmat^T \Xmat$ invertible?
 
 .. nbplot::
 
-    >>> #- Check whether X.T X is invertible
+    >>> #- Check whether X.T.dot(X) is invertible
 
 Calculate $(\Xmat^T \Xmat)^{-1} \Xmat^T$.  What shape is it?
 
