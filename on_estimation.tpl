@@ -129,7 +129,7 @@ Is $\Xmat^T \Xmat$ invertible?
 
 .. nbplot::
 
-    >>> #- Check whether X.T X is invertible
+    >>> #- Check whether X.T.dot(X) is invertible
     >>> iXtX = npl.inv(X.T.dot(X))  # No error in inversion
 
 Calculate $(\Xmat^T \Xmat)^{-1} \Xmat^T$.  What shape is it?
