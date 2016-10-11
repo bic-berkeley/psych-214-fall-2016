@@ -508,7 +508,7 @@ is mean centered.
     .. math::
 
         c + b \vec{x} \\
-        = c + b \vec{x_c} + \bar{x} \vec{1} \\
+        = c + b (\vec{x_c} + \bar{x} \vec{1}) \\
         = c + b \vec{x_c} + b \bar{x}
 
     Therefore any fit possible with the original model can be achieved with
@@ -518,12 +518,13 @@ is mean centered.
     .. nbplot::
 
         >>> # Fit again to original model
-        >>> B = npl.inv(X.T.dot(X)).dot(X.T).dot(psychopathy)
+        >>> y = psychopathy
+        >>> B = npl.inv(X.T.dot(X)).dot(X.T).dot(y)
         >>> B
         array([ 9.8016,  0.8074])
 
         >>> # Fit again to mean-centered model
-        >>> B_o = npl.inv(X_o.T.dot(X_o)).dot(X_o.T).dot(psychopathy)
+        >>> B_o = npl.inv(X_o.T.dot(X_o)).dot(X_o.T).dot(y)
         >>> B_o
         array([ 12.5746,   0.8074])
 
