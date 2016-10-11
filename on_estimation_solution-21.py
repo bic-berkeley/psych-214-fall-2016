@@ -1,10 +1,11 @@
 # Fit again to original model
-B = npl.inv(X.T.dot(X)).dot(X.T).dot(psychopathy)
+y = psychopathy
+B = npl.inv(X.T.dot(X)).dot(X.T).dot(y)
 B
 # array([ 9.8016,  0.8074])
 
 # Fit again to mean-centered model
-B_o = npl.inv(X_o.T.dot(X_o)).dot(X_o.T).dot(psychopathy)
+B_o = npl.inv(X_o.T.dot(X_o)).dot(X_o.T).dot(y)
 B_o
 # array([ 12.5746,   0.8074])
 

@@ -349,19 +349,20 @@ written as the sum of two vectors:</p>
 be:</p>
 <div class="math">
 \[\begin{split}c + b \vec{x} \\
-= c + b \vec{x_c} + \bar{x} \vec{1} \\
+= c + b (\vec{x_c} + \bar{x} \vec{1}) \\
 = c + b \vec{x_c} + b \bar{x}\end{split}\]</div>
 <p>Therefore any fit possible with the original model can be achieved with
 the mean-centered model, by adjusting the value of <span class="math">\(c\)</span> to include the <span class="math">\(b
 \bar{x}\)</span> term.  Specifically:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fit again to original model</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">psychopathy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span>
 <span class="go">array([ 9.8016,  0.8074])</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fit again to mean-centered model</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
 <span class="go">array([ 12.5746,   0.8074])</span>
 </pre></div>
