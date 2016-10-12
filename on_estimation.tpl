@@ -229,8 +229,8 @@ second columns of ``X_o``?
 Use ``numpy.linalg.inv`` to find $(\Xmat^T \Xmat)^{-1}$ |--| the inverse of
 ``X_o.T.dot(X_o)``. Now what is the relationship of the values in the diagonal
 of the inverse matrix to the lengths of the vectors in the first and second
-columns of ``X_o``?  Hint: $A^-1 \cdot A = I$; if $A$ has all zeros off the
-diagonal, what must $A^-1$ be for this to be true?
+columns of ``X_o``?  Hint: $A^{-1} \cdot A = I$; if $A$ has all zeros off the
+diagonal, what must $A^{-1}$ be for this to be true?
 
 .. admonition:: Answer
 
