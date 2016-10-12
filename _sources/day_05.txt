@@ -60,6 +60,6 @@ Correlation again
 Reading and homework for next week
 **********************************
 
-* Finish the :doc:`on_estimation_exercise`.  I will make you a repository to
-  submit to;
+* Finish the :doc:`on_estimation_exercise` |--| see
+  :doc:`github_glm_homework`;
 * Do preliminary work on projects to prepare for project pitch next week.

@@ -103,6 +103,7 @@ version control using git.
     git_walk_through
     git_workflow_exercises
     github_pca_homework
+    github_glm_homework
     numpy_logical
     plot_lines
     subplots
