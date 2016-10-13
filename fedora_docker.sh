@@ -1,7 +1,7 @@
 # Preliminaries - not in default docker container
 dnf install -y sudo which
 
-sudo dnf install -y python3-devel git
+sudo dnf install -y python3-devel python3-tkinter git
 
 python3 --version
 

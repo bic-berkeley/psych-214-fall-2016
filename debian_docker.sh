@@ -3,7 +3,7 @@ apt-get update
 apt-get install -y sudo
 
 sudo apt-get update
-sudo apt-get install -y git python3-dev
+sudo apt-get install -y git python3-dev python3-tk
 sudo apt-get install -y git
 
 python3 --version
