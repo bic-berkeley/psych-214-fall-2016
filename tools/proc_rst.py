@@ -3,12 +3,44 @@
 Process ReST doc with solutions to remove doctest code, replace title, and add
 sphinx ``:doc:`` link to solutions document.
 
-Doctests starting with ">>> #:" we leave in the source.
+The code operates on a "template" page.  From the template page, the code can
+(and will by default) generate a
 
-Doctest lines starting ">>> #-" we leave in place.
+* code template file, with a code skeleton to fill out the exercise;
+* ReST exercise file, to read, alongside the code template, with more
+  detailed instructions;
+* ReST solution file, with solutions to the exercises - gemerally a superset of
+  the exercise page;
 
-Doctests lines starting ">>> " and followed by any other doctest stuff, we
-remove up until the first empty line.
+******************
+Doctest processing
+******************
+
+A doctest starts with a `>>> ` prompt, and ends at the first blank line.
+
+* Doctests starting with ">>> #:" we leave in the source unmodified;
+* Doctest lines starting ">>> #-" we leave in place, but we remove the other
+  lines in the doctest;
+* Doctests lines starting ">>> " and followed by any other doctest stuff, we
+  remove up until the first empty line.
+
+************
+Other markup
+************
+
+A line ``.. solution-start`` starts off a block of markup that defines which
+text goes into the solution, the exercise and the code skeleton.
+
+From ``.. solution-start`` up to any other ``.. solution-`` line, goes into the
+solution unmodified, but not into the exercise or code skeleton.
+
+If there is a ``.. solution-replace`` line, from that line, until ``..
+solution-replace-code`` or ``.. solution-end``, goes into the exercise, but not
+the code template.
+
+If there is a ``.. solution-replace-code`` line, from that line, until ``..
+solution-replace`` or ``.. solution-end``, goes into the code template, but not
+the exercise.
 """
 
 import sys
