@@ -52,11 +52,17 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 	-rm -rf working/* working/.gitconfig
+	-rm -rf $(SOLUTION_FILES) $(CODE_FILES) $(EXERCISE_FILES)
 
-html-only:
+html-only: html-submodules
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+SUBMODULES = on-dummies
+
+html-submodules:
+	$(foreach subm,$(SUBMODULES), cd $(subm) && make html;)
 
 html: tex-exercises rst-exercises html-only
 
@@ -175,7 +181,7 @@ linkcheck:
 	@echo "Link check complete; look for any errors in the above output " \
 	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
-doctest:
+doctest: $(SOLUTION_FILES)
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
@@ -215,6 +221,8 @@ TEMPLATES = anatomical camera \
 
 TPL_FILES = $(TEMPLATES:=.tpl)
 SOLUTION_FILES = $(TPL_FILES:.tpl=_solution.rst)
+EXERCISE_FILES = $(TPL_FILES:.tpl=_exercise.rst)
+CODE_SKELETON_FILES = $(TPL_FILES:.tpl=_code.rst)
 
 %_solution.rst : %.tpl
 	$(PYTHON) tools/proc_rst.py $<

@@ -86,7 +86,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', 'on-dummies']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -353,3 +353,7 @@ autorun_languages['octave_prefix_chars'] = 3
 # examples
 def setup(app):
     app.add_javascript('copybutton.js')
+
+# Use local mathjax when environment variable IN_CUBA is set
+if os.environ.get('IN_CUBA'):
+    mathjax_path="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"

@@ -202,6 +202,8 @@
    http://matthew-brett.github.io/teaching/correlation_projection.html
 .. _vector angles:
    http://matthew-brett.github.io/teaching/vector_angles.html
+.. _matrix rank:
+   http://matthew-brett.github.io/teaching/matrix_rank.html
 
 .. Ideas
 .. _principal component analysis:

@@ -44,7 +44,7 @@ Simple and multiple regression
     res = lm(psychopathy ~ clammy)
     print(summary(res))
 
-* on :doc:`matrix_rank`;
+* on `matrix rank`_;
 * :doc:`mean_test_example`;
 * :doc:`on_estimation_exercise`.
 

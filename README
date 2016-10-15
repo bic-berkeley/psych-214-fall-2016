@@ -9,7 +9,11 @@ We built the website with Sphinx: http://www.sphinx-doc.org.
 To build and uplaod the website::
 
     pip install -r requirements.txt
+    git submodule update --init --recursive
+    # Check that octave is installed (needed by build)
+    which octave
+    # Build the site
     make github
 
-See the ``LICENSE`` file in this directory for copyright and your rights to copy
-these pages.
+See the ``LICENSE`` file in this directory for copyright and your rights to
+copy these pages.

@@ -1,6 +1,6 @@
-###########################################
-October 17: smoothing, contrasts and models
-###########################################
+#############################################
+October 17: project pitch, ANOVA with the GLM
+#############################################
 
 ***************
 Project pitches
@@ -8,32 +8,21 @@ Project pitches
 
 Pitches for your project proposals - see :doc:`projects`.
 
-********
-Teaching
-********
+***********************************************
+t tests and ANOVA with the general linear model
+***********************************************
 
+* `introduction to the general linear model`_;
+* on `matrix rank`_;
+* :doc:`mean_test_example`;
+* :doc:`on_dummies_exercise`.
+
+********************************
+The neural and hemodynamic model
+********************************
+
+* `tutorial on convolution`_;
 * the neural and hemodynamic model;
 * the concept of a hemodynamic response function (HRF);
-* designing an HRF;
 * using convolution with the HRF to make a BOLD regressor;
-* modeling FMRI signal with multiple regression and the BOLD regressors;
-* investigating assumptions behind the HRF and linear time invariance.
-* smoothing;
-* t contrasts;
-* using multiple regressors
-* allowing for different onsets with the HRF temporal derivative;
-* investigating power and bias for correlated regressors;
-* modeling the baseline;
-* selecting models;
-
-********************
-Homework and reading
-********************
-
-* `Tutorial on correlated regressors`_;
-* `Introduction to smoothing`_;
-* `Smoothing as convolution`_.
-* the `Bonferroni correction`;
-* thresholding with `Random fields`_;
-* thresholding with the `False Discovery Rate`_;
-* Eklund et al 2016 :cite:`eklund2016cluster`.
+* :doc:`convolution_background`;

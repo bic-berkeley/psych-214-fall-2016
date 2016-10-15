@@ -79,4 +79,7 @@ Statistics and brain images
 * :doc:`voxel_time_courses`.  See :doc:`day_04`;
 * `introduction to the General Linear Model`_.  See :doc:`day_05`;
 * :doc:`mean_test_example`;
+* `matrix rank`_
 * :doc:`model_one_voxel`;
+* `tutorial on convolution`_;
+* :doc:`convolution_background`;

@@ -112,5 +112,7 @@ version control using git.
     diagnostics_project
     on_estimation_exercise
     on_estimation_solution
-    matrix_rank
     mean_test_example
+    on_dummies_exercise
+    convolution_background
+    floating_in_text

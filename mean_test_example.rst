@@ -105,6 +105,98 @@ In our case:
     >>> t
     1.88884...
 
+**********************************
+The standard error as an estimator
+**********************************
+
+Imagine that we repeat the following procedure many times, collecting each
+value into a vector $\vec{m}$:
+
+* take $n$ samples from some distribution;
+* take the mean of these $n$ samples.
+
+The standard error of the mean is an estimate of the standard deviation of the
+values in $\vec{m}$.
+
+We can simulate this process when we know the exact distribution of the values
+in the population.  For example, let us imagine that we know that the
+population distribution is a normal distribution with population mean 10 ($\mu
+= 10$) and population standard deviation 1.5 ($\sigma = 1.5$).
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.random.seed(42)
+
+.. nbplot::
+
+    >>> # 10 samples from normal distribution with mean 5 and sd 1.5
+    >>> sample = np.random.normal(5, 1.5, size=10)
+    >>> sample
+    array([ 5.7451,  4.7926,  5.9715,  7.2845,  4.6488,  4.6488,  7.3688,
+            6.1512,  4.2958,  5.8138])
+
+We know the exact mean ($\mu$) and standard deviation ($\sigma$).  If we draw
+a near-infinite number of samples like this, then the standard deviation of
+the mean of these samples will be $\frac{\sigma}{\sqrt{n}}$:
+
+.. nbplot::
+
+    >>> 1.5 / np.sqrt(n)
+    0.474341...
+
+We can compare this number to an estimate of the same thing from a very large
+number of means from samples size 10:
+
+.. nbplot::
+
+    >>> n_samples = 100000
+    >>> pop_mean = 5
+    >>> pop_sd = 1.5
+    >>> means_of_samples = np.zeros(n_samples)
+    >>> for i in range(n_samples):
+    ...     sample = np.random.normal(pop_mean, pop_sd, size=n)
+    ...     means_of_samples[i] = sample.mean()
+    >>> sq_deviations = (means_of_samples - pop_mean) ** 2
+    >>> # With lots of samples, this value is close to the exact number
+    >>> means_std_dev = np.sqrt(1. / n_samples * np.sum(sq_deviations))
+    >>> means_std_dev
+    0.474735...
+
+Normally we do not know the exact standard deviation of the population.  The
+standard error of the mean is for that situation.  First we use the sample
+that we have to get an *unbiased estimate* of the population standard
+deviation:
+
+.. nbplot::
+
+    >>> n = 10
+    >>> y = sample
+    >>> y_bar = y.mean()
+    >>> unbiased_var_estimate = 1. / (n - 1) * np.sum((y - y_bar) ** 2)
+    >>> unbiased_sd_est = np.sqrt(unbiased_var_estimate)
+
+Of course, this estimate will not be exactly the same as the population
+standard deviation ($\sigma = 1.5$):
+
+.. nbplot::
+
+    >>> unbiased_sd_est
+    1.433659...
+
+We use the unbiased standard deviation estimate to give an unbiased estimate
+for the standard error of the mean. This estimate will be close to the
+standard deviation of means from many samples of size $n$:
+
+.. nbplot::
+
+    >>> # Standard deviation of means from population
+    >>> 1.5 / np.sqrt(n)
+    0.474341...
+    >>> # Our estimate for the standard error of mean
+    >>> unbiased_sd_est / np.sqrt(n)
+    0.453362...
+
 **************************************
 Testing using the general linear model
 **************************************
