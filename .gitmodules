@@ -5,5 +5,5 @@
 	path = tools
 	url = https://github.com/matthew-brett/course-site-tools.git
 [submodule "on-dummies"]
-	path = on-dummies
+	path = on_dummies
 	url = https://github.com/psych-214-fall-2016/on-dummies.git
