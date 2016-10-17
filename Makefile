@@ -59,7 +59,7 @@ html-only: html-submodules
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
-SUBMODULES = on_dummies
+SUBMODULES = on-dummies
 
 html-submodules:
 	$(foreach subm,$(SUBMODULES), cd $(subm) && make html;)
