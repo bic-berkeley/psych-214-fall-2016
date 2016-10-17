@@ -113,7 +113,7 @@ version control using git.
     on_estimation_exercise
     on_estimation_solution
     mean_test_example
-    on_dummies/on_dummies_exercise
+    on_dummies_exercise
     convolution_background
     floating_in_text
     diag_inverse
