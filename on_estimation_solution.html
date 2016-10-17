@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="next" title="Matrix rank" href="matrix_rank.html" />
+    <link rel="next" title="A worked example of the general linear model" href="mean_test_example.html" />
     <link rel="prev" title="Understanding least-squares regression" href="on_estimation_exercise.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -61,12 +61,14 @@ works, and the relationship of correlation and regression.</p>
 <p>To give us some concrete data to play with, here are some more samples of the
 &#8220;psychopathy&#8221; and &#8220;clamminess&#8221; scores that we saw in the <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the
 general linear model</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">11.914</span><span class="p">,</span>   <span class="mf">4.289</span><span class="p">,</span>  <span class="mf">10.825</span><span class="p">,</span>  <span class="mf">14.987</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: The data, that we are trying to model.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">11.914</span><span class="p">,</span>   <span class="mf">4.289</span><span class="p">,</span>  <span class="mf">10.825</span><span class="p">,</span>  <span class="mf">14.987</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">7.572</span><span class="p">,</span>   <span class="mf">5.447</span><span class="p">,</span>   <span class="mf">17.332</span><span class="p">,</span>  <span class="mf">12.105</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">13.297</span><span class="p">,</span>  <span class="mf">10.635</span><span class="p">,</span>  <span class="mf">21.777</span><span class="p">,</span>  <span class="mf">20.715</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.422</span><span class="p">,</span>  <span class="mf">0.406</span><span class="p">,</span>  <span class="mf">0.061</span><span class="p">,</span>  <span class="mf">0.962</span><span class="p">,</span>  <span class="mf">4.715</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: The regressor that we will use to model the data.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.422</span><span class="p">,</span>  <span class="mf">0.406</span><span class="p">,</span>  <span class="mf">0.061</span><span class="p">,</span>  <span class="mf">0.962</span><span class="p">,</span>  <span class="mf">4.715</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="mf">1.398</span><span class="p">,</span>  <span class="mf">1.952</span><span class="p">,</span>  <span class="mf">5.095</span><span class="p">,</span> <span class="mf">8.092</span><span class="p">,</span>  <span class="mf">5.685</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="mf">5.167</span><span class="p">,</span>  <span class="mf">7.257</span><span class="p">])</span>
 </pre></div>
@@ -184,7 +186,7 @@ modify the second column of <code class="docutils literal"><span class="pre">X</
 write out the dot product of the first column with the second as a sum, and
 simplify. Use that result to work out what to subtract from the second column
 so the dot product is 0.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make second column orthononal to first. Confirm orthogonality</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make second column orthogonal to first. Confirm orthogonality</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">)</span>
 <span class="go">array([[ 12.    ,   0.    ],</span>
@@ -421,7 +423,7 @@ the mean-centered model, by adjusting the value of <span class="math">\(c\)</spa
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="on_estimation_exercise.html" title="previous chapter">Understanding least-squares regression</a></li>
-      <li>Next: <a href="matrix_rank.html" title="next chapter">Matrix rank</a></li>
+      <li>Next: <a href="mean_test_example.html" title="next chapter">A worked example of the general linear model</a></li>
   </ul></li>
 </ul>
 </div>

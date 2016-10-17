@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>October 24: inference on statistical maps &mdash; Functional MRI methods</title>
+    <title>October 24: the HRF, inference on statistical maps &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -28,7 +28,7 @@
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
     <link rel="next" title="October 31: slice timing and motion correction" href="day_08.html" />
-    <link rel="prev" title="October 17: smoothing, contrasts and models" href="day_06.html" />
+    <link rel="prev" title="October 17: project pitch, ANOVA with the GLM" href="day_06.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,15 +45,43 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="october-24-inference-on-statistical-maps">
-<h1>October 24: inference on statistical maps<a class="headerlink" href="#october-24-inference-on-statistical-maps" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="october-24-the-hrf-inference-on-statistical-maps">
+<h1>October 24: the HRF, inference on statistical maps<a class="headerlink" href="#october-24-the-hrf-inference-on-statistical-maps" title="Permalink to this headline">¶</a></h1>
+<p>This page is currently the combination of stuff we have not yet covered.  We
+will move much of this stuff into the following days.</p>
+<div class="section" id="teaching">
+<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>modeling FMRI signal with multiple regression and the BOLD regressors;</li>
+<li>investigating assumptions behind the HRF and linear time invariance.</li>
+<li>smoothing;</li>
+<li>t contrasts;</li>
+<li>using multiple regressors</li>
+<li>allowing for different onsets with the HRF temporal derivative;</li>
+<li>investigating power and bias for correlated regressors;</li>
+<li>modeling the baseline;</li>
+<li>selecting models;</li>
+</ul>
+</div>
+<div class="section" id="homework-and-reading">
+<h2>Homework and reading<a class="headerlink" href="#homework-and-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/correlated_regressors.html">Tutorial on correlated regressors</a>;</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/smoothing_intro.html">Introduction to smoothing</a>;</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/smoothing_as_convolution.html">Smoothing as convolution</a>.</li>
+<li>the <cite>Bonferroni correction</cite>;</li>
+<li>thresholding with <a class="reference external" href="https://matthew-brett.github.io/teaching/random_fields.html">Random fields</a>;</li>
+<li>thresholding with the <a class="reference external" href="https://matthew-brett.github.io/teaching/fdr.html">False Discovery Rate</a>;</li>
+<li>Eklund et al 2016 <a class="reference internal" href="bibliography.html#eklund2016cluster" id="id1">[ENK16]</a>.</li>
+</ul>
+</div>
 <div class="section" id="presentations">
 <h2>Presentations<a class="headerlink" href="#presentations" title="Permalink to this headline">¶</a></h2>
 <p>How did the cluster correction problem happen?</p>
 <p>Who&#8217;s right about the cluster corrections?</p>
 </div>
-<div class="section" id="teaching">
-<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>Teaching<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>family-wise error and FDR;</li>
 <li>cluster and voxel-wise correction;</li>
@@ -114,7 +142,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_06.html" title="previous chapter">October 17: smoothing, contrasts and models</a></li>
+      <li>Previous: <a href="day_06.html" title="previous chapter">October 17: project pitch, ANOVA with the GLM</a></li>
       <li>Next: <a href="day_08.html" title="next chapter">October 31: slice timing and motion correction</a></li>
   </ul></li>
   </ul></li>

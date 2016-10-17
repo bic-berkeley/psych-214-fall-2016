@@ -26,7 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="prev" title="Matrix rank" href="matrix_rank.html" />
+    <link rel="next" title="Convolving with the hemodyamic response function" href="convolution_background.html" />
+    <link rel="prev" title="Understanding least-squares regression" href="on_estimation_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -116,6 +117,79 @@ value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">x_bar</span> <span class="o">/</span> <span class="n">SEM</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">1.88884...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-standard-error-as-an-estimator">
+<h2>The standard error as an estimator<a class="headerlink" href="#the-standard-error-as-an-estimator" title="Permalink to this headline">¶</a></h2>
+<p>Imagine that we repeat the following procedure many times, collecting each
+value into a vector <span class="math">\(\vec{m}\)</span>:</p>
+<ul class="simple">
+<li>take <span class="math">\(n\)</span> samples from some distribution;</li>
+<li>take the mean of these <span class="math">\(n\)</span> samples.</li>
+</ul>
+<p>The standard error of the mean is an estimate of the standard deviation of the
+values in <span class="math">\(\vec{m}\)</span>.</p>
+<p>We can simulate this process when we know the exact distribution of the values
+in the population.  For example, let us imagine that we know that the
+population distribution is a normal distribution with population mean 10 (<span class="math">\(\mu
+= 10\)</span>) and population standard deviation 1.5 (<span class="math">\(\sigma = 1.5\)</span>).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 10 samples from normal distribution with mean 5 and sd 1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span>
+<span class="go">array([ 5.7451,  4.7926,  5.9715,  7.2845,  4.6488,  4.6488,  7.3688,</span>
+<span class="go">        6.1512,  4.2958,  5.8138])</span>
+</pre></div>
+</div>
+<p>We know the exact mean (<span class="math">\(\mu\)</span>) and standard deviation (<span class="math">\(\sigma\)</span>).  If we draw
+a near-infinite number of samples like this, then the standard deviation of
+the mean of these samples will be <span class="math">\(\frac{\sigma}{\sqrt{n}}\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">0.474341...</span>
+</pre></div>
+</div>
+<p>We can compare this number to an estimate of the same thing from a very large
+number of means from samples size 10:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pop_mean</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pop_sd</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">means_of_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">pop_mean</span><span class="p">,</span> <span class="n">pop_sd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">means_of_samples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq_deviations</span> <span class="o">=</span> <span class="p">(</span><span class="n">means_of_samples</span> <span class="o">-</span> <span class="n">pop_mean</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># With lots of samples, this value is close to the exact number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">means_std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_samples</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sq_deviations</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">means_std_dev</span>
+<span class="go">0.474735...</span>
+</pre></div>
+</div>
+<p>Normally we do not know the exact standard deviation of the population.  The
+standard error of the mean is for that situation.  First we use the sample
+that we have to get an <em>unbiased estimate</em> of the population standard
+deviation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">sample</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_bar</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_var_estimate</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_bar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">unbiased_var_estimate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Of course, this estimate will not be exactly the same as the population
+standard deviation (<span class="math">\(\sigma = 1.5\)</span>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span>
+<span class="go">1.433659...</span>
+</pre></div>
+</div>
+<p>We use the unbiased standard deviation estimate to give an unbiased estimate
+for the standard error of the mean. This estimate will be close to the
+standard deviation of means from many samples of size <span class="math">\(n\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Standard deviation of means from population</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">0.474341...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Our estimate for the standard error of mean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">0.453362...</span>
 </pre></div>
 </div>
 </div>
@@ -213,7 +287,8 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="matrix_rank.html" title="previous chapter">Matrix rank</a></li>
+      <li>Previous: <a href="on_estimation_solution.html" title="previous chapter">Understanding least-squares regression</a></li>
+      <li>Next: <a href="convolution_background.html" title="next chapter">Convolving with the hemodyamic response function</a></li>
   </ul></li>
 </ul>
 </div>

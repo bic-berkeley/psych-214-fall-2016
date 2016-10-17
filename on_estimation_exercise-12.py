@@ -1,1 +1,1 @@
-#- Make second column orthononal to first. Confirm orthogonality
+#- Make second column orthogonal to first. Confirm orthogonality
