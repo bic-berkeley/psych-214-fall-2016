@@ -116,3 +116,5 @@ version control using git.
     on_dummies/on_dummies_exercise
     convolution_background
     floating_in_text
+    diag_inverse
+    subtract_mean_math

@@ -217,6 +217,10 @@
 .. _standard error:
     https://en.wikipedia.org/wiki/Standard_error
 
+.. Psych-214
+.. _worked example of GLM:
+   https://github.com/bic-berkeley/psych-214-fall-2014/mean_test_example.html
+
 .. People
 .. _Matthew:
 .. _Matthew Brett : http://matthew.dynevor.org
