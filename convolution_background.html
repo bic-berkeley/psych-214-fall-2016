@@ -27,7 +27,7 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="next" title="Formats for floating point values in text files" href="floating_in_text.html" />
-    <link rel="prev" title="A worked example of the general linear model" href="mean_test_example.html" />
+    <link rel="prev" title="Modeling groups with dummy variables" href="on_dummies_exercise.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -204,13 +204,13 @@ drop the last <code class="docutils literal"><span class="pre">len(hrf_at_trs)</
 </div>
 <p>For our future use, let us save our convolved time course to a numpy text
 file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">,</span> <span class="n">convolved</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Save the convolved time course to 6 decimal point precision</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">,</span> <span class="n">convolved</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%2.6f</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">convolved</span><span class="p">,</span> <span class="n">back</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="floating_in_text.html"><span class="doc">Formats for floating point values in text files</span></a> for the format of the numbers in this text file.</p>
 </div>
 </div>
 
@@ -256,7 +256,7 @@ file:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="mean_test_example.html" title="previous chapter">A worked example of the general linear model</a></li>
+      <li>Previous: <a href="on_dummies_exercise.html" title="previous chapter">Modeling groups with dummy variables</a></li>
       <li>Next: <a href="floating_in_text.html" title="next chapter">Formats for floating point values in text files</a></li>
   </ul></li>
 </ul>
