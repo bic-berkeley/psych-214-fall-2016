@@ -206,8 +206,12 @@ pseudo-inverse.</p>
 – the number of observations in each group?</p>
 </div>
 <p>Now, what is our t-value ?</p>
-<p>Is this significant ? use the stats model from scipy to create a t-distribution with
-df_error degrees of freedom</p>
+<p>Is this significant ? Use the <code class="docutils literal"><span class="pre">stats</span></code> module from <code class="docutils literal"><span class="pre">scipy</span></code> to create a
+t-distribution with <code class="docutils literal"><span class="pre">df_error</span></code> degrees of freedom.  See the <code class="docutils literal"><span class="pre">t_stat</span></code>
+function in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> for inspiration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use scipy.stats to test if your t-test value is significant.</span>
+</pre></div>
+</div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
 <p class="last">Now imagine your UCB and MIT are groups are not equal.  <span class="math">\(n\)</span> is constant,
@@ -223,29 +227,80 @@ t statistic?</p>
 </div>
 <div class="section" id="hypothesis-testing-f-tests">
 <h2>Hypothesis testing: F-tests<a class="headerlink" href="#hypothesis-testing-f-tests" title="Permalink to this headline">¶</a></h2>
-<p>T-test tests a linear combinaison of the <span class="math">\(\beta\)</span>, they would test if the mean of the first group is greater than the mean of the second group (<span class="math">\(\beta_1 - \beta_2\)</span>) or the opposite, but in any case these tests are <em>signed</em>.</p>
-<p>In many instance, we do not know the direction of the test. Or we have to test the influence of several regressors on the data. In this cases, an F-test is more appropriate.</p>
-<p>The simplest and generally most useful way of thinking of F test is to think as the test between two models: one which contains the regressor or factor that we want to test for (refered as the full model with design matrix <span class="math">\(X\)</span>), and one which doesnt (the reduced model <span class="math">\(X_0\)</span>). In the example above, what is our reduced model <span class="math">\(X_0\)</span> ?</p>
-<p>The <em>reduced</em> model is the model here is simply a model where there is no difference between the group means: only the mean of the data is modelled, so, one column of <span class="math">\(n\)</span> values.</p>
-<p>To test whether the model containing two columns is better, we compute the difference between the estimation of the noise variance between the models (variance estimated with X versus variance estimated with X0), normalized by the estimation of the noise (residual) variance under the full model <span class="math">\(X\)</span>. This is :</p>
-<blockquote>
-<div><div class="math">
+<p>Imagine we have also measured the clammy score for the Berkeley and MIT
+students.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Clamminess of handshake for UCB and MIT students</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.6386</span><span class="p">,</span> <span class="mf">9.6094</span><span class="p">,</span> <span class="mf">8.3379</span><span class="p">,</span> <span class="mf">6.2871</span><span class="p">,</span> <span class="mf">7.2775</span><span class="p">,</span> <span class="mf">2.4787</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="mf">8.6037</span><span class="p">,</span> <span class="mf">12.8713</span><span class="p">,</span> <span class="mf">10.4906</span><span class="p">,</span> <span class="mf">5.6766</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We want to test whether the clammy score is useful in explaining
+the psychopathy data, over and above the students&#8217; college affiliation.  We
+could do a t-test on the clammy score, but the t test only tests one direction
+of the effect.  Because the t-test only tests one direction, we can only test
+whether the clammy score is associated with an <em>increase</em> of the psychopathy
+score, or a <em>decrease</em>, but we can&#8217;t simultaneously test for either an
+increase or decrease.  We can use an F test to do that.</p>
+<p>The simplest and generally most useful way of thinking of F test is to think
+as the test between two models: a <em>full model</em> and a <em>reduced model</em>.  The
+full model contains the regressor or factor that we want to test for.  We will
+use <span class="math">\(\Xmat_f\)</span> for the full model.  The reduced model is a model that does not
+contain the effect we want to test for, but does contain all other effects in
+the full model.  We will use <span class="math">\(\Xmat_r\)</span> for the reduced model.</p>
+<p>In our case, <span class="math">\(\Xmat_f\)</span> is the model containing the <code class="docutils literal"><span class="pre">clammy</span></code> regressor, as
+well as the two dummy columns for the UCB and MIT group means.</p>
+<p><span class="math">\(\Xmat_r\)</span> is our original model, that only contains the dummy columns for the
+UCB and MIT group means.</p>
+<p>If the full model is a better fit to the data than the reduced model, then
+adding the new regressor(s) will cause a convincing drop in the size of
+residuals.</p>
+<p>The F test is a measure that reflects the drop in the magnitude of squared
+residuals as a result of adding the new regressors.</p>
+<p>To help our notation, a reminder that, when we use vectors in matrix
+multiplication, we assume a vector <span class="math">\(\vec{x}\)</span> should be treated as a column
+vector.  Thus <span class="math">\(\vec{x}^T\)</span> is a row vector.  We can therefore write the dot
+product of a vector with itself in either of these two ways:</p>
+<div class="math">
+\[\vec{x} \cdot \vec{x} \equiv \vec{x}^T \vec{x}\]</div>
+<p>Read <span class="math">\(\equiv\)</span> as &#8220;equivalent to&#8221;.  This gives us several ways of writing the
+sum of squares of a residual vector:</p>
+<div class="math">
+\[\sum_{i=1}^n e_i^2 \equiv \evec \cdot \evec \equiv \evec^T \evec\]</div>
+<p>Now define we define the <span class="math">\(SSR(\Xmat_r)\)</span> and <span class="math">\(SSR(\Xmat_f)\)</span>.  These are the
+sums of squares of the residuals of the reduced and full model respectively.</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}\begin{split}\bhat_r = \Xmat_r^+ \yvec \\
+\hat\evec_r = \yvec - \Xmat_r \bhat_r \\
+SSR(\Xmat_r) = \hat\evec_r^T \hat\evec_r \\\end{split}\\\begin{split}\bhat_f = \Xmat_f^+ \yvec \\
+\hat\evec_f = \yvec - \Xmat_f \bhat_f \\
+SSR(\Xmat_f) = \hat\evec_f^T \hat\evec_f\end{split}\end{aligned}\end{align} \]</div>
+<p><span class="math">\(ESS = SSR(\Xmat_r) - SSR(\Xmat_f)\)</span> is the Extra Sum of Squared residuals
+explained by the full compared to the reduced model.  The top half of the
+ratio that forms the F statistic is <span class="math">\(ESS / \nu_1\)</span>, where <span class="math">\(\nu_1\)</span> is the number
+of extra independent regressors (columns) in <span class="math">\(\Xmat_f\)</span> compared to <span class="math">\(\Xmat_r\)</span>.
+Specifically:</p>
+<div class="math">
+\[\nu_1 = \textrm{rank}(\Xmat_f) - \textrm{rank}(\Xmat_r)\]</div>
+<p>where <span class="math">\(\textrm{rank}(\boldsymbol A)\)</span> is the <a class="reference external" href="http://matthew-brett.github.io/teaching/matrix_rank.html">matrix rank</a> of matrix
+<span class="math">\(\boldsymbol A\)</span>.  The bottom half of the F statistic is the estimated variance
+<span class="math">\(\hat{\sigma^2}\)</span> from the full model.  This can also be written as
+<span class="math">\(SSR(\Xmat_f) / \nu_2\)</span> where <span class="math">\(\nu_2\)</span> is the <em>degrees of freedom of the error</em>:</p>
+<div class="math">
 \[\begin{split}\begin{eqnarray}
-F_{\nu_1, \nu_2} &amp; = &amp; \frac{(\hat\epsilon_0^t \hat\epsilon_0 - \hat\epsilon^T\hat\epsilon)/ \nu_{1} }{\hat\epsilon^T\hat\epsilon/\nu_{2}} \\
-&amp; = &amp; \frac{(\textrm{SSR}(X_0) - \textrm{SSR}(X))/\nu_1}{\textrm{SSR}(X)/\nu_2}
+F_{\nu_1, \nu_2} &amp; = &amp;
+\frac{
+(\hat\evec_r^T \hat\evec_r - \hat\evec_f^T \hat\evec_f)
+/ \nu_{1} }
+{\hat\evec_f^T \hat\evec_f / \nu_{2}} \\
+&amp; = &amp;
+\frac{
+(\textrm{SSR}(\Xmat_r) - \textrm{SSR}(\Xmat_f)) / \nu_1}
+{\textrm{SSR}(\Xmat_f) / \nu_2}
 \end{eqnarray}\end{split}\]</div>
-</div></blockquote>
-<p>SSR here stands for &#8220;Sum of square of the residuals&#8221;.</p>
-<p>What are <span class="math">\({\nu_1, \nu_2}\)</span>?</p>
-<p><span class="math">\({\nu_2}\)</span> we have already encountered. This is the degrees of freedom of the <em>error</em>, that we have seen is <span class="math">\(n - 2\)</span>.</p>
-<p>What is  <span class="math">\({\nu_1}\)</span> ? It&#8217;s something related. You remember that the degree of freedom of the residuals (the one we used to estimate the variance of the error) is <span class="math">\(n-m\)</span> with <span class="math">\(n\)</span> the number of observations, and <span class="math">\(m\)</span> the number of linearly independent columns in the design (the number of things to estimate). Here, we are looking at the difference between two designs, and this degrees of freedom will simply be this number <span class="math">\(m\)</span> minus the number of linearly independent columns in <span class="math">\(X_0\)</span>.</p>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
-<p class="last">Make the alternative model <span class="math">\(X_0\)</span>. Compute the degrees of freedom <span class="math">\({\nu_1}\)</span>.
-Compute the extra sum of squares and the F statistics. How is it related to
-the t-statistics that you had above ? To investigate, create a little glm
-function that takes as input X (design)  and Y (data) and returns Beta,
-sum of square of the residuals, and degrees of freedom of the residuals.</p>
+<p class="last">Make the alternative full model <span class="math">\(\Xmat_f\)</span>. Compute the extra degrees of
+freedom <span class="math">\({\nu_1}\)</span>.  Compute the extra sum of squares and the F statistic.</p>
 </div>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="col-vec" rules="none">
