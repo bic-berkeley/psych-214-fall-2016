@@ -74,3 +74,4 @@ a_text_file.txt
 # Generated stuff from tests
 *.aux
 git_*.pdf
+.ropeproject/
