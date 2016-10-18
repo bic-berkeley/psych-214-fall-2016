@@ -216,6 +216,11 @@
    https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
 .. _standard error:
     https://en.wikipedia.org/wiki/Standard_error
+.. _pseudoinverse:
+.. _Moore-Penrose pseudoinverse:
+    https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_pseudoinverse
+.. _Bessel's correction:
+    https://en.wikipedia.org/wiki/Bessel%27s_correction
 
 .. Psych-214
 .. _worked example of GLM:
