@@ -225,6 +225,12 @@
 .. Psych-214
 .. _worked example of GLM:
    https://github.com/bic-berkeley/psych-214-fall-2014/mean_test_example.html
+.. _Hypothesis tests:
+    https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html
+.. _F tests:
+    https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html#f-tests
+.. _unbiased variance estimate:
+    https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html#unbiased-variance
 
 .. People
 .. _Matthew:
