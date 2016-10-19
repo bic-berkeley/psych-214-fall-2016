@@ -118,3 +118,5 @@ version control using git.
     floating_in_text
     diag_inverse
     subtract_mean_math
+    hypothesis_tests
+    github_dummies_homework
