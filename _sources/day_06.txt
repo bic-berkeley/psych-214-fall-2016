@@ -15,7 +15,7 @@ t tests and ANOVA with the general linear model
 * :doc:`diag_inverse`;
 * on `matrix rank`_;
 * :doc:`mean_test_example`;
-* :doc:`hypothesis_testing`;
+* :doc:`hypothesis_tests`;
 * :doc:`on_dummies_exercise`.
 
 ********************************
