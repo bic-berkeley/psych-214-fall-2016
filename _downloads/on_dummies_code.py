@@ -71,6 +71,7 @@ and ``mit_psycho``.
 
 
 
+#- Use scipy.stats to test if your t-test value is significant.
 
 
 """ Using your answer above, derive a formula for the result of
@@ -81,8 +82,13 @@ of ``b`` should you chose to give the largest value for your t statistic?
 """
 
 
+#: Clamminess of handshake for UCB and MIT students
+clammy = np.array([2.6386, 9.6094, 8.3379, 6.2871, 7.2775, 2.4787,
+                   8.6037, 12.8713, 10.4906, 5.6766])
 
-""" 
-Some solution code here
+
+"""
+Make the alternative full model X_f. Compute the extra degrees of
+freedom nu_1.  Compute the extra sum of squares and the F statistic.
 """
 

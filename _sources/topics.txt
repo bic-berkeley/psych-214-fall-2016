@@ -82,6 +82,7 @@ Statistics and brain images
 * :doc:`diag_inverse`;
 * :doc:`subtract_mean_math`;
 * `matrix rank`_
+* :doc:`hypothesis_tests`;
 * :doc:`model_one_voxel`;
 * `tutorial on convolution`_;
 * :doc:`convolution_background`;

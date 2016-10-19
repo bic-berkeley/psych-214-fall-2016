@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modeling groups with dummy variables &#8212; Functional MRI methods</title>
+    <title>Modeling groups with dummy variables &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,7 +47,7 @@
 <div class="section" id="modeling-groups-with-dummy-variables">
 <h1>Modeling groups with dummy variables<a class="headerlink" href="#modeling-groups-with-dummy-variables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>For code template see: <a class="reference download internal" href="_downloads/on_dummies_code1.py" download=""><code class="xref download docutils literal"><span class="pre">on_dummies_code.py</span></code></a>.</li>
+<li>For code template see: <a class="reference download internal" href="_downloads/on_dummies_code.py" download=""><code class="xref download docutils literal"><span class="pre">on_dummies_code.py</span></code></a>.</li>
 </ul>
 <div class="section" id="introduction-and-definitions">
 <h2>Introduction and definitions<a class="headerlink" href="#introduction-and-definitions" title="Permalink to this headline">¶</a></h2>
@@ -207,8 +207,9 @@ pseudo-inverse.</p>
 </div>
 <p>Now, what is our t-value ?</p>
 <p>Is this significant ? Use the <code class="docutils literal"><span class="pre">stats</span></code> module from <code class="docutils literal"><span class="pre">scipy</span></code> to create a
-t-distribution with <code class="docutils literal"><span class="pre">df_error</span></code> degrees of freedom.  See the <code class="docutils literal"><span class="pre">t_stat</span></code>
-function in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> for inspiration:</p>
+t-distribution with <code class="docutils literal"><span class="pre">df_error</span></code> (degrees of freedom of the error).  See the
+<code class="docutils literal"><span class="pre">t_stat</span></code> function in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> for
+inspiration:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use scipy.stats to test if your t-test value is significant.</span>
 </pre></div>
 </div>
@@ -220,7 +221,7 @@ the number of students. Call <span class="math">\(b\)</span> the number of Berke
 <span class="math">\(n - b\)</span>.  Using your answer above, derive a formula for the result of
 <span class="math">\(\cvec^T (\Xmat^T \Xmat)^{-1} \cvec\)</span> in terms of <span class="math">\(b\)</span> and <span class="math">\(n\)</span>. <span class="math">\(\cvec\)</span> is
 the contrast you chose above.  If all other things remain equal, such as
-<span class="math">\(n = 10\)</span>, the <span class="math">\(\hat{\sigma^2}\)</span> and <span class="math">\(\cvec^T \bvec\)</span>, then which of the
+<span class="math">\(n = 10\)</span>, the <span class="math">\(\hat{\sigma^2}\)</span> and <span class="math">\(\cvec^T \bhat\)</span>, then which of the
 possible values of <span class="math">\(b\)</span> should you chose to give the largest value for your
 t statistic?</p>
 </div>
@@ -235,72 +236,29 @@ students.</p>
 </pre></div>
 </div>
 <p>We want to test whether the clammy score is useful in explaining
-the psychopathy data, over and above the students&#8217; college affiliation.  We
-could do a t-test on the clammy score, but the t test only tests one direction
-of the effect.  Because the t-test only tests one direction, we can only test
-whether the clammy score is associated with an <em>increase</em> of the psychopathy
-score, or a <em>decrease</em>, but we can&#8217;t simultaneously test for either an
-increase or decrease.  We can use an F test to do that.</p>
-<p>The simplest and generally most useful way of thinking of F test is to think
-as the test between two models: a <em>full model</em> and a <em>reduced model</em>.  The
-full model contains the regressor or factor that we want to test for.  We will
-use <span class="math">\(\Xmat_f\)</span> for the full model.  The reduced model is a model that does not
-contain the effect we want to test for, but does contain all other effects in
-the full model.  We will use <span class="math">\(\Xmat_r\)</span> for the reduced model.</p>
+the psychopathy data, over and above the students&#8217; college affiliation.</p>
+<p>To do this, we will use an <a class="reference internal" href="hypothesis_tests.html#f-tests"><span class="std std-ref">F test</span></a>.</p>
+<p>An F-test compares a <em>full model</em> <span class="math">\(\Xmat_f\)</span> with a <em>reduced model</em> <span class="math">\(\Xmat_r\)</span>.</p>
 <p>In our case, <span class="math">\(\Xmat_f\)</span> is the model containing the <code class="docutils literal"><span class="pre">clammy</span></code> regressor, as
 well as the two dummy columns for the UCB and MIT group means.</p>
 <p><span class="math">\(\Xmat_r\)</span> is our original model, that only contains the dummy columns for the
 UCB and MIT group means.</p>
-<p>If the full model is a better fit to the data than the reduced model, then
-adding the new regressor(s) will cause a convincing drop in the size of
-residuals.</p>
-<p>The F test is a measure that reflects the drop in the magnitude of squared
-residuals as a result of adding the new regressors.</p>
-<p>To help our notation, a reminder that, when we use vectors in matrix
-multiplication, we assume a vector <span class="math">\(\vec{x}\)</span> should be treated as a column
-vector.  Thus <span class="math">\(\vec{x}^T\)</span> is a row vector.  We can therefore write the dot
-product of a vector with itself in either of these two ways:</p>
-<div class="math">
-\[\vec{x} \cdot \vec{x} \equiv \vec{x}^T \vec{x}\]</div>
-<p>Read <span class="math">\(\equiv\)</span> as &#8220;equivalent to&#8221;.  This gives us several ways of writing the
-sum of squares of a residual vector:</p>
-<div class="math">
-\[\sum_{i=1}^n e_i^2 \equiv \evec \cdot \evec \equiv \evec^T \evec\]</div>
-<p>Now define we define the <span class="math">\(SSR(\Xmat_r)\)</span> and <span class="math">\(SSR(\Xmat_f)\)</span>.  These are the
-sums of squares of the residuals of the reduced and full model respectively.</p>
+<p>We define <span class="math">\(SSR(\Xmat_r)\)</span> and <span class="math">\(SSR(\Xmat_f)\)</span> as in <a class="reference internal" href="hypothesis_tests.html"><span class="doc">Hypothesis tesing with the general linear model</span></a>.
+These are the Sums of Squares of the Residuals of the reduced and full model
+respectively.</p>
 <div class="math">
 \[ \begin{align}\begin{aligned}\begin{split}\bhat_r = \Xmat_r^+ \yvec \\
 \hat\evec_r = \yvec - \Xmat_r \bhat_r \\
 SSR(\Xmat_r) = \hat\evec_r^T \hat\evec_r \\\end{split}\\\begin{split}\bhat_f = \Xmat_f^+ \yvec \\
 \hat\evec_f = \yvec - \Xmat_f \bhat_f \\
 SSR(\Xmat_f) = \hat\evec_f^T \hat\evec_f\end{split}\end{aligned}\end{align} \]</div>
-<p><span class="math">\(ESS = SSR(\Xmat_r) - SSR(\Xmat_f)\)</span> is the Extra Sum of Squared residuals
-explained by the full compared to the reduced model.  The top half of the
-ratio that forms the F statistic is <span class="math">\(ESS / \nu_1\)</span>, where <span class="math">\(\nu_1\)</span> is the number
-of extra independent regressors (columns) in <span class="math">\(\Xmat_f\)</span> compared to <span class="math">\(\Xmat_r\)</span>.
-Specifically:</p>
-<div class="math">
-\[\nu_1 = \textrm{rank}(\Xmat_f) - \textrm{rank}(\Xmat_r)\]</div>
-<p>where <span class="math">\(\textrm{rank}(\boldsymbol A)\)</span> is the <a class="reference external" href="http://matthew-brett.github.io/teaching/matrix_rank.html">matrix rank</a> of matrix
-<span class="math">\(\boldsymbol A\)</span>.  The bottom half of the F statistic is the estimated variance
-<span class="math">\(\hat{\sigma^2}\)</span> from the full model.  This can also be written as
-<span class="math">\(SSR(\Xmat_f) / \nu_2\)</span> where <span class="math">\(\nu_2\)</span> is the <em>degrees of freedom of the error</em>:</p>
-<div class="math">
-\[\begin{split}\begin{eqnarray}
-F_{\nu_1, \nu_2} &amp; = &amp;
-\frac{
-(\hat\evec_r^T \hat\evec_r - \hat\evec_f^T \hat\evec_f)
-/ \nu_{1} }
-{\hat\evec_f^T \hat\evec_f / \nu_{2}} \\
-&amp; = &amp;
-\frac{
-(\textrm{SSR}(\Xmat_r) - \textrm{SSR}(\Xmat_f)) / \nu_1}
-{\textrm{SSR}(\Xmat_f) / \nu_2}
-\end{eqnarray}\end{split}\]</div>
+<p>You can calculate the F statistic for adding the <code class="docutils literal"><span class="pre">clammy</span></code> regressor, by
+using these calculations and the formula for the F-test at <a class="reference internal" href="hypothesis_tests.html#f-tests"><span class="std std-ref">F tests</span></a>.</p>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
 <p class="last">Make the alternative full model <span class="math">\(\Xmat_f\)</span>. Compute the extra degrees of
-freedom <span class="math">\({\nu_1}\)</span>.  Compute the extra sum of squares and the F statistic.</p>
+freedom consumed by the design – <span class="math">\({\nu_1}\)</span>.  Compute the extra sum of
+squares and the F statistic.</p>
 </div>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="col-vec" rules="none">
@@ -378,7 +336,7 @@ column vector, and therefore that <span class="math">\(\vec{v}^T\)</span> is a r
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

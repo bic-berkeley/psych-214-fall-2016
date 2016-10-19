@@ -228,8 +228,9 @@ Now, what is our t-value ?
 
 
 Is this significant ? Use the ``stats`` module from ``scipy`` to create a
-t-distribution with ``df_error`` degrees of freedom.  See the ``t_stat``
-function in `introduction to the general linear model`_ for inspiration:
+t-distribution with ``df_error`` (degrees of freedom of the error).  See the
+``t_stat`` function in `introduction to the general linear model`_ for
+inspiration:
 
 .. nbplot::
 
@@ -243,7 +244,7 @@ function in `introduction to the general linear model`_ for inspiration:
     $n - b$.  Using your answer above, derive a formula for the result of
     $\cvec^T (\Xmat^T \Xmat)^{-1} \cvec$ in terms of $b$ and $n$. $\cvec$ is
     the contrast you chose above.  If all other things remain equal, such as
-    $n = 10$, the $\hat{\sigma^2}$ and $\cvec^T \bvec$, then which of the
+    $n = 10$, the $\hat{\sigma^2}$ and $\cvec^T \bhat$, then which of the
     possible values of $b$ should you chose to give the largest value for your
     t statistic?
 
@@ -262,19 +263,11 @@ students.
     ...                    8.6037, 12.8713, 10.4906, 5.6766])
 
 We want to test whether the clammy score is useful in explaining
-the psychopathy data, over and above the students' college affiliation.  We
-could do a t-test on the clammy score, but the t test only tests one direction
-of the effect.  Because the t-test only tests one direction, we can only test
-whether the clammy score is associated with an *increase* of the psychopathy
-score, or a *decrease*, but we can't simultaneously test for either an
-increase or decrease.  We can use an F test to do that.
+the psychopathy data, over and above the students' college affiliation.
 
-The simplest and generally most useful way of thinking of F test is to think
-as the test between two models: a *full model* and a *reduced model*.  The
-full model contains the regressor or factor that we want to test for.  We will
-use $\Xmat_f$ for the full model.  The reduced model is a model that does not
-contain the effect we want to test for, but does contain all other effects in
-the full model.  We will use $\Xmat_r$ for the reduced model.
+To do this, we will use an :ref:`F test <f-tests>`.
+
+An F-test compares a *full model* $\Xmat_f$ with a *reduced model* $\Xmat_r$.
 
 In our case, $\Xmat_f$ is the model containing the ``clammy`` regressor, as
 well as the two dummy columns for the UCB and MIT group means.
@@ -282,31 +275,9 @@ well as the two dummy columns for the UCB and MIT group means.
 $\Xmat_r$ is our original model, that only contains the dummy columns for the
 UCB and MIT group means.
 
-If the full model is a better fit to the data than the reduced model, then
-adding the new regressor(s) will cause a convincing drop in the size of
-residuals.
-
-The F test is a measure that reflects the drop in the magnitude of squared
-residuals as a result of adding the new regressors.
-
-To help our notation, a reminder that, when we use vectors in matrix
-multiplication, we assume a vector $\vec{x}$ should be treated as a column
-vector.  Thus $\vec{x}^T$ is a row vector.  We can therefore write the dot
-product of a vector with itself in either of these two ways:
-
-.. math::
-
-    \vec{x} \cdot \vec{x} \equiv \vec{x}^T \vec{x}
-
-Read $\equiv$ as "equivalent to".  This gives us several ways of writing the
-sum of squares of a residual vector:
-
-.. math::
-
-    \sum_{i=1}^n e_i^2 \equiv \evec \cdot \evec \equiv \evec^T \evec
-
-Now define we define the $SSR(\Xmat_r)$ and $SSR(\Xmat_f)$.  These are the
-sums of squares of the residuals of the reduced and full model respectively.
+We define $SSR(\Xmat_r)$ and $SSR(\Xmat_f)$ as in :doc:`hypothesis_tests`.
+These are the Sums of Squares of the Residuals of the reduced and full model
+respectively.
 
 .. math::
 
@@ -318,39 +289,14 @@ sums of squares of the residuals of the reduced and full model respectively.
     \hat\evec_f = \yvec - \Xmat_f \bhat_f \\
     SSR(\Xmat_f) = \hat\evec_f^T \hat\evec_f
 
-$ESS = SSR(\Xmat_r) - SSR(\Xmat_f)$ is the Extra Sum of Squared residuals
-explained by the full compared to the reduced model.  The top half of the
-ratio that forms the F statistic is $ESS / \nu_1$, where $\nu_1$ is the number
-of extra independent regressors (columns) in $\Xmat_f$ compared to $\Xmat_r$.
-Specifically:
-
-.. math::
-
-    \nu_1 = \textrm{rank}(\Xmat_f) - \textrm{rank}(\Xmat_r)
-
-where $\textrm{rank}(\boldsymbol A)$ is the `matrix rank`_ of matrix
-$\boldsymbol A$.  The bottom half of the F statistic is the estimated variance
-$\hat{\sigma^2}$ from the full model.  This can also be written as
-$SSR(\Xmat_f) / \nu_2$ where $\nu_2$ is the *degrees of freedom of the error*:
-
-.. math::
-
-    \begin{eqnarray}
-    F_{\nu_1, \nu_2} & = &
-    \frac{
-    (\hat\evec_r^T \hat\evec_r - \hat\evec_f^T \hat\evec_f)
-    / \nu_{1} }
-    {\hat\evec_f^T \hat\evec_f / \nu_{2}} \\
-    & = &
-    \frac{
-    (\textrm{SSR}(\Xmat_r) - \textrm{SSR}(\Xmat_f)) / \nu_1}
-    {\textrm{SSR}(\Xmat_f) / \nu_2}
-    \end{eqnarray}
+You can calculate the F statistic for adding the ``clammy`` regressor, by
+using these calculations and the formula for the F-test at :ref:`f-tests`.
 
 .. admonition:: Question
 
     Make the alternative full model $\Xmat_f$. Compute the extra degrees of
-    freedom ${\nu_1}$.  Compute the extra sum of squares and the F statistic.
+    freedom consumed by the design |--| ${\nu_1}$.  Compute the extra sum of
+    squares and the F statistic.
 
 
 .. rubric:: Footnotes
