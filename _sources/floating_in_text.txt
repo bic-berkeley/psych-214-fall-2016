@@ -2,6 +2,12 @@
 Formats for floating point values in text files
 ***********************************************
 
+.. testsetup::
+
+    import numpy as np
+    # Set print options for doctests below
+    np.set_printoptions(precision=6)
+
 Let's say we have a floating point numbers like this:
 
 >>> a_number = 314.15926
@@ -29,7 +35,7 @@ represent floating point numbers when writing to text files.  For example:
 >>> import numpy as np
 >>> an_array = np.array([a_number, 1.0, 2.0])
 >>> an_array
-array([ 314.1593,    1.    ,    2.    ])
+array([ 314.15926,    1.     ,    2.     ])
 >>> np.savetxt('some_numbers.txt', an_array)
 >>> with open('some_numbers.txt', 'rt') as fobj:
 ...     contents = fobj.read()

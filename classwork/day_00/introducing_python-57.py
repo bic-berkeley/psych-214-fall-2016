@@ -1,2 +1,0 @@
-print(fobj.readline())
-# <BLANKLINE>

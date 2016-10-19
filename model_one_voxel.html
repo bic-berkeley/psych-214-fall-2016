@@ -126,14 +126,14 @@ invertible, the pseudoinverse is given by:</p>
 <p>We calculate <span class="math">\(\bhat\)</span>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span> <span class="o">=</span> <span class="n">Xp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span>
-<span class="go">array([   31.185514,  2029.367685])</span>
+<span class="go">array([   31.185514,  2029.367689])</span>
 </pre></div>
 </div>
 <p>We can then calculate <span class="math">\(\yhat\)</span> (also called the <em>fitted data</em>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta_hat</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e_vec</span> <span class="o">=</span> <span class="n">voxel_time_course</span> <span class="o">-</span> <span class="n">y_hat</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e_vec</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
-<span class="go">41405.572776...</span>
+<span class="go">41405.57...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="go">[...]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_hat</span><span class="p">)</span>

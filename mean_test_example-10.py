@@ -1,6 +1,0 @@
-# Standard deviation of means from population
-1.5 / np.sqrt(n)
-# 0.474341...
-# Our estimate for the standard error of mean
-unbiased_sd_est / np.sqrt(n)
-# 0.453362...

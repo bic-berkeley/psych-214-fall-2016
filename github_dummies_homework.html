@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Subtracting the mean from a vector &mdash; Functional MRI methods</title>
+    <title>Dummy coding GLM exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="next" title="Hypothesis tesing with the general linear model" href="hypothesis_tests.html" />
-    <link rel="prev" title="Inverse of a diagonal matrix" href="diag_inverse.html" />
+    <link rel="prev" title="Hypothesis tesing with the general linear model" href="hypothesis_tests.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,33 +43,45 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="subtracting-the-mean-from-a-vector">
-<h1>Subtracting the mean from a vector<a class="headerlink" href="#subtracting-the-mean-from-a-vector" title="Permalink to this headline">¶</a></h1>
-<p>We have a vector <span class="math">\(\vec{x}\)</span> with <span class="math">\(n\)</span> elements: <span class="math">\([x_1, x_2, ..., x_n]\)</span>.</p>
-<p>The mean is:</p>
-<div class="math">
-\[\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\]</div>
-<p>From here I will abbreviate <span class="math">\(\sum_{i=1}^n x_i\)</span> as <span class="math">\(\sum{x_i}\)</span>.</p>
-<p>When we subtract the mean from the vector, the sum of the vector elements is
-zero:</p>
-<div class="math">
-\[\begin{split}\vec{x'} = [x_1 - \bar{x}, x_2 - \bar{x}, ..., x_n - \bar{x}] \\\end{split}\]</div>
-<p>Remembering that <span class="math">\(\sum c = n c\)</span> where <span class="math">\(c\)</span> is a constant (see: <a class="reference external" href="http://matthew-brett.github.io/teaching/some_sums.html">algebra
-of sums</a>):</p>
-<div class="math">
-\[\begin{split}\sum x'_i =
-\sum \left[ x_i + \bar{x} \right] \\
-= \sum x_i + \sum \bar{x} \\
-= \sum x_i + n \bar{x} \\
-= \sum x_i + n \frac{1}{n} \sum x_i \\
-= 0.\end{split}\]</div>
-<p>Looking at the problem from the other way round, we could have worked out what
-scalar value <span class="math">\(c\)</span> we need to subtract from a vector <span class="math">\(\vec{x}\)</span> such that
-<span class="math">\(\sum \left( x_i - c \right) = 0\)</span>. Now we have:</p>
-<div class="math">
-\[\begin{split}\sum \left( x_i - c \right) = 0 \implies \\
-\sum x_i - n c  = 0 \implies \\
-c = \frac{1}{n} \sum x_i\end{split}\]</div>
+<div class="section" id="dummy-coding-glm-exercise">
+<h1>Dummy coding GLM exercise<a class="headerlink" href="#dummy-coding-glm-exercise" title="Permalink to this headline">¶</a></h1>
+<p>This exercise follows the same form as <a class="reference internal" href="github_pca_homework.html"><span class="doc">PCA exercise, with some github practice</span></a> and
+<a class="reference internal" href="github_glm_homework.html"><span class="doc">GLM exercise, with some github practice</span></a>, with the minor difference that this time - you
+don&#8217;t have the solutions on the main web page.</p>
+<p>As before:</p>
+<ul>
+<li><p class="first">Make sure you have logged into your Github account;</p>
+</li>
+<li><p class="first">Go to the <a class="reference external" href="https://github.com/psych-214-fall-2016">course github organization</a> page.  You should see a private
+repository with a name like <cite>yourname-dummies-exercise</cite> where <code class="docutils literal"><span class="pre">yourname</span></code>
+is your first name.</p>
+</li>
+<li><p class="first">Fork this repository to your own account;</p>
+</li>
+<li><p class="first">Clone your forked repository;</p>
+</li>
+<li><p class="first">Change directory into your new cloned repository:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">yourname</span><span class="o">-</span><span class="n">dummies</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make a new branch to work on, and checkout this new branch:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="n">dummies</span><span class="o">-</span><span class="n">exercise</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">dummies</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finish the dummy coding exercise by filling in <code class="docutils literal"><span class="pre">on_dummies_code.py</span></code>,
+including writing the text answers into the strings in the code file;</p>
+</li>
+<li><p class="first">When you&#8217;ve finished, commit <code class="docutils literal"><span class="pre">on_dummies_code.py</span></code>, and push these changes
+to your github fork;</p>
+</li>
+<li><p class="first">Make a pull request to the upstream repository.</p>
+</li>
+</ul>
+<p>Any problems, please feel free to contact JB or I.</p>
+<p>Happy dummy GLMing.</p>
 </div>
 
 
@@ -115,8 +126,7 @@ c = \frac{1}{n} \sum x_i\end{split}\]</div>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="diag_inverse.html" title="previous chapter">Inverse of a diagonal matrix</a></li>
-      <li>Next: <a href="hypothesis_tests.html" title="next chapter">Hypothesis tesing with the general linear model</a></li>
+      <li>Previous: <a href="hypothesis_tests.html" title="previous chapter">Hypothesis tesing with the general linear model</a></li>
   </ul></li>
 </ul>
 </div>
@@ -142,7 +152,7 @@ c = \frac{1}{n} \sum x_i\end{split}\]</div>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/subtract_mean_math.txt"
+      <a href="_sources/github_dummies_homework.txt"
           rel="nofollow">Page source</a>
     </div>
 
