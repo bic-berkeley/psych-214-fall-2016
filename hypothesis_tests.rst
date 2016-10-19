@@ -55,8 +55,8 @@ x_2, ... , x_n]$.  Our straight line model is:
 
     y_i = c + b x_i + e_i
 
-Where $c$ is the intercept, $b$ is the slope, and $e_i$ is the remainder of
-$y_i$ after removing $c + b x_i$.
+where $c$ is the intercept, $b$ is the slope, and $e_i$ is the remainder of
+$y_i$ after subtracting $c + b x_i$.
 
 We then defined a new vector $\evec = [e_1, e_2, ... e_n]$ for remaining
 error, and rewrote the same formula in vector notation:
@@ -95,14 +95,14 @@ where $\bvec$ is:
     column vector, and therefore that $\vec{v}^T$ is a row vector.
 
 Using the matrix formulation of the general linear model, we found the least
-square *estimate* for $\bvec$ is:
+squares *estimate* for $\bvec$ is:
 
 .. math::
 
    \bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec
 
 The formula above applies when $\Xmat^T \Xmat$ is invertible.  Generalizing to
-the case where $\Xmat^T \Xmat$ is not invertible, the least square estimate
+the case where $\Xmat^T \Xmat$ is not invertible, the least squares estimate
 is:
 
 .. math::
@@ -146,10 +146,10 @@ as the dot product of $\ehat$ with itself:
 
     \sum e_i^2 \equiv \ehat \cdot \ehat
 
-Read $\equiv$ as "equivalent to".  Because we assume that :ref:`vectors are
-column vectors in matrix operations <vector-as-column>`, we can also write
-$\sum e_i^2$ as the matrix multiplication of $\ehat$ as a row vector with
-$\ehat$ as a column vector:
+Read $\equiv$ as "equivalent to".  We can also express $\sum e_i^2$ as the
+matrix multiplication of $\ehat$ as a row vector with $\ehat$ as a column
+vector.  Because we assume that :ref:`vectors are column vectors in matrix
+operations <vector-as-column>`, we can write that formulation as:
 
 .. math::
 
@@ -241,7 +241,7 @@ Here is the t statistic calculation in Python:
     >>> # The two columns are not colinear, so rank is 2
     >>> rank_x
     2
-    >>> # Unbiased estimate of popualation variance
+    >>> # Unbiased estimate of population variance
     >>> df_error = n - rank_x
     >>> s2_hat = e.dot(e) / df_error
     >>> t = c.T.dot(B) / np.sqrt(s2_hat * c.T.dot(iXtX).dot(c))
@@ -254,15 +254,15 @@ F tests
 =======
 
 F tests are another way to test hypotheses about the linear models.  They are
-particularly useful whether there is a significant improvement in model fit
-when adding one or more regressors.
+particularly useful for testing whether there is a significant reduction in
+the residual error when adding one or more regressors.
 
 The simplest and generally most useful way of thinking of F test is as a test
 comparing two models: a *full model* and a *reduced model*.  The full model
-contains the regressor or factor that we want to test for.  We will use
-$\Xmat_f$ for the full model.  The reduced model is a model that does not
-contain the effect we want to test for, but does contain all other effects in
-the full model.  We will use $\Xmat_r$ for the reduced model.
+contains the regressors that we want to test.  We will use $\Xmat_f$ for the
+full model.  The reduced model is a model that does not contain the regressors
+we want to test, but does contain all other regressors in the full model
+[#effects-in-design]_.  We will use $\Xmat_r$ for the reduced model.
 
 In our case, $\Xmat_f$ is the model containing the ``clammy`` regressor, as
 well as the column of ones that models the intercept.
@@ -347,3 +347,45 @@ column is the square of the t statistic testing the same column:
 
     >>> t ** 2
     array([[ 3.664886]])
+
+.. rubric:: Footnotes
+
+.. [#effects-in-design] Actually, the full model need not contain exactly the
+   same regressors as the reduced model, but it must be able to model all the
+   data vectors that the reduced design can, once matrix multiplied by a
+   suitable parameter vector $\bvec$.  For example, consider the following two
+   designs:
+
+   .. math::
+
+        \boldsymbol X_1 =
+        \begin{bmatrix}
+        1 & 0 \\
+        0 & 1 \\
+        0 & 0 \\
+        \end{bmatrix}
+        \\
+        \boldsymbol X_2 =
+        \begin{bmatrix}
+        2 & 1 \\
+        1 & 2 \\
+        0 & 0 \\
+        \end{bmatrix}
+
+   These designs do not contain the same regressors, but, with suitable
+   $\bvec$ vectors, they can both give an exact fit to any data vector of
+   form:
+
+   .. math::
+
+        y =
+        \begin{bmatrix}
+        p \\
+        q \\
+        0 \\
+        \end{bmatrix}
+
+   In fact, these are the only vectors they can fit.  So, although the two
+   designs $\boldsymbol X_1$ and $\boldsymbol X_2$ do not have the same
+   regressors, they do model the same *effects* |--| meaning, they can fit the
+   same range of data vectors.
