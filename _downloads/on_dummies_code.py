@@ -44,9 +44,9 @@ vector to the values of ``ucb_psycho`` and ``mit_psycho``?
 #- Compare beta vector to means of each group
 
 
-r""" Using your knowledge of the parts of (X.T X)^{-1} X y, explain the
-relationship of the values in $\bhat$ to the means of of ``ucb_psycho``
-and ``mit_psycho``.
+r""" Using your knowledge of the parts of inv(X.T X) X y, explain the
+relationship of the values in the estimated beta vector to the means of of
+``ucb_psycho`` and ``mit_psycho``.
 
 """
 
