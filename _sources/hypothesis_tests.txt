@@ -155,6 +155,8 @@ operations <vector-as-column>`, we can write that formulation as:
 
     \sum e_i^2 \equiv \ehat^T \ehat
 
+.. _unbiased-variance:
+
 ****************************************
 Unbiased estimate of population variance
 ****************************************
