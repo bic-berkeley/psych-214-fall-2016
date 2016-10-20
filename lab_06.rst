@@ -1,13 +1,7 @@
-#######
-Testing
-#######
+###############
+Github workflow
+###############
 
-*******
-Testing
-*******
-
-* doctests;
-* unit tests.
-* pytest
-
-.. maybe write tests for function to subtract means or similar
+* reviewing code;
+* raising issues;
+* responding to issues with pull requests.
