@@ -12,4 +12,6 @@ Labs are Fridays from 2pm |--| 3pm at 10 Giannini Hall.
 * Thursday September 15 |--| :doc:`lab_02`;
 * Thursday September 22 |--| :doc:`lab_03`;
 * Thursday September 29 |--| :doc:`lab_04`;
-* Thursday October 6 |--| :doc:`lab_05`.
+* Thursday October 6 |--| :doc:`lab_05`;
+* Thursday October 13 |--| :doc:`lab_06`;
+* Thursday October 20 |--| :doc:`lab_07`.
