@@ -12,8 +12,11 @@ Making a predicted neural time course
 
 .. nbplot::
 
+    >>> #: Standard imports
     >>> import numpy as np
     >>> import matplotlib.pyplot as plt
+    >>> # Print arrays to 4 decimal places
+    >>> np.set_printoptions(precision=4, suppress=True)
 
 We are going to be analyzing the data for the 4D image
 :download:`ds114_sub009_t2r1.nii` again.
@@ -82,6 +85,7 @@ data shape above.
     >>> tr = 2.5
     >>> neural_prediction = events2neural('ds114_sub009_t2r1_cond.txt', tr, data.shape[-1])
     >>> plt.plot(neural_prediction)
+    [...]
     >>> plt.ylim(0, 1.2)
     (0, 1.2)
 
@@ -146,12 +150,34 @@ Correlate the predicted neural time series with the voxel time course:
     >>> #- Correlation of predicted neural time course with voxel signal time
     >>> #- course
     >>> np.corrcoef(neural_prediction_no_0, voxel_values)
-    array([[ 1.        ,  0.31166306],
-           [ 0.31166306,  1.        ]])
+    array([[ 1.    ,  0.3117],
+           [ 0.3117,  1.    ]])
 
 Now we will do a predicted hemodynamic time course using convolution.
 
 Next we need to get the HRF vector to convolve with.
+
+Here is my not-that-good HRF definition.  Feel free to replace this one with
+your better HRF definition from :doc:`make_an_hrf_exercise`:
+
+.. nbplot::
+
+    >>> #: import the gamma probability density function
+    >>> from scipy.stats import gamma
+    >>>
+    >>> def mt_hrf(times):
+    ...     """ Return values for HRF at given times
+    ...
+    ...     This is the "not_great_hrf" from the "make_an_hrf" exercise.
+    ...     """
+    ...     # Gamma pdf for the peak
+    ...     peak_values = gamma.pdf(times, 6)
+    ...     # Gamma pdf for the undershoot
+    ...     undershoot_values = gamma.pdf(times, 12)
+    ...     # Combine them
+    ...     values = peak_values - 0.35 * undershoot_values
+    ...     # Scale max to 0.6
+    ...     return values / np.max(values) * 0.6
 
 Remember we have defined the HRF as a function of time, not TRs.
 
@@ -219,8 +245,8 @@ course?
 
     >>> #- Correlation of the convolved time course with voxel time course
     >>> np.corrcoef(hemodynamic_prediction, voxel_values)
-    array([[ 1.        ,  0.33029022],
-           [ 0.33029022,  1.        ]])
+    array([[ 1.    ,  0.3586],
+           [ 0.3586,  1.    ]])
 
 Plot the hemodynamic prediction against the actual signal (voxel values).
 Remember to use a marker such as '+' to give you a scatter plot. How does it
@@ -230,6 +256,8 @@ look?
 
     >>> #- Scatterplot the hemodynamic prediction against the signal
     >>> plt.plot(hemodynamic_prediction, voxel_values, '+')
+    [...]
     >>> plt.xlabel('hemodynamic prediction')
+    <...>
     >>> plt.ylabel('voxel values')
     <...>
