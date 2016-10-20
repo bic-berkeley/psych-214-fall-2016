@@ -39,8 +39,8 @@ time-series.
 
 The stimulus file is :download:`ds114_sub009_t2r1_cond.txt`.
 
-Here's a version of the same thing we did in an earlier exercise, as a
-function:
+Here's a version of the same thing we did in :doc:`first_activation_exercise`,
+wrapped up as a function:
 
 .. nbplot::
 
@@ -68,6 +68,7 @@ function:
     ...     task[:, :2] = task[:, :2] / tr
     ...     time_course = np.zeros(n_trs)
     ...     for onset, duration, amplitude in task:
+    ...         onset, duration = int(onset),  int(duration)
     ...         time_course[onset:onset + duration] = amplitude
     ...     return time_course
 
@@ -79,10 +80,14 @@ data shape above.
 
 .. nbplot::
 
+    >>> #: TR for this run
+    >>> tr = 2.5
+
+.. nbplot::
+
     >>> #- Read the stimulus data file and return a predicted neural time
     >>> #- course.
     >>> #- Plot the predicted neural time course.
-    >>> tr = 2.5
     >>> neural_prediction = events2neural('ds114_sub009_t2r1_cond.txt', tr, data.shape[-1])
     >>> plt.plot(neural_prediction)
     [...]
@@ -99,6 +104,21 @@ without the first volume:
     >>> #- data_no_0 = ?
     >>> data_no_0 = data[..., 1:]
 
+.. solution-start
+.. solution-replace
+
+.. nbplot::
+    :include-source: false
+
+    >>> # This stuff needed to make exercise doctests / build pass
+    >>> import nibabel as nib
+    >>> data = nib.load('ds114_sub009_t2r1.nii').get_data()
+    >>> data_no_0 = data[..., 1:]
+    >>> neural_prediction = events2neural('ds114_sub009_t2r1_cond.txt', tr, data.shape[-1])
+    >>> neural_prediction_no_0 = neural_prediction[1:]
+
+.. solution-end
+
 Our neural prediction time series currently has one value per volume,
 including the first volume. To match the data, make a new neural prediction
 variable that does not include the first value of the time series. Call this
@@ -112,15 +132,15 @@ new variable ``neural_prediction_no_0``.
 
 For now, we're going to play with data for a single voxel.
 
-In an earlier exercise, we subtracted the rest scans from the task scans,
-something like this:
+In :doc:`first_activation_exercise`, we subtracted the rest scans from the
+task scans, something like this:
 
 .. nbplot::
 
     >>> #: subtracting rest from task scans
     >>> task_scans = data_no_0[..., neural_prediction_no_0 == 1]
     >>> rest_scans = data_no_0[..., neural_prediction_no_0 == 0]
-    >>> difference = np.mean(task_scans, axis=-1) - np.mean(rest_scans, axis=-1)
+    >>> difference = task_scans.mean(axis=-1) - rest_scans.mean(axis=-1)
 
 .. nbplot::
 
@@ -169,6 +189,8 @@ your better HRF definition from :doc:`make_an_hrf_exercise`:
     ...     """ Return values for HRF at given times
     ...
     ...     This is the "not_great_hrf" from the "make_an_hrf" exercise.
+    ...     Feel free to replace this function with your improved version from
+    ...     that exercise.
     ...     """
     ...     # Gamma pdf for the peak
     ...     peak_values = gamma.pdf(times, 6)
