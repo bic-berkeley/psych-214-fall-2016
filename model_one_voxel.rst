@@ -15,12 +15,17 @@ Let's get that same voxel time course back again:
     >>> # Only show 6 decimals when printing
     >>> np.set_printoptions(precision=6)
 
+We load the data, and knock off the first four volumes to remove the artefact
+we discovered:
+
+.. nbplot::
+
     >>> img = nib.load('ds114_sub009_t2r1.nii')
     >>> data = img.get_data()
     >>> data = data[..., 4:]
 
-The voxel coordinate (3D coordinate) that we were looking at before was at
-(42, 32, 19):
+The voxel coordinate (3D coordinate) that we were looking at in
+:doc:`voxel_time_courses` was at (42, 32, 19):
 
 .. nbplot::
 
@@ -28,8 +33,9 @@ The voxel coordinate (3D coordinate) that we were looking at before was at
     >>> plt.plot(voxel_time_course)
     [...]
 
-Now we are going to use our new convolved regressor to do a simple regression
-on this voxel time course.
+Now we are going to use the convolved regressor from
+:doc:`convolution_background` to do a simple regression on this voxel time
+course.
 
 If you don't have it already, you will need to download
 :download:`ds114_sub009_t2r1_conv.txt`.

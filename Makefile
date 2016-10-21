@@ -217,7 +217,8 @@ TEMPLATES = anatomical camera \
 			four_dimensions pca arteries \
 			first_activation lab_01 \
 			voxel_correlation correlation_2d \
-			on_estimation make_an_hrf hrf_correlation
+			on_estimation make_an_hrf hrf_correlation \
+			multi_model
 
 TPL_FILES = $(TEMPLATES:=.tpl)
 SOLUTION_FILES = $(TPL_FILES:.tpl=_solution.rst)
