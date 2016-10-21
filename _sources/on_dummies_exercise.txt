@@ -1,11 +1,10 @@
+.. vim: ft=rst
+
 ####################################
 Modeling groups with dummy variables
 ####################################
 
 * For code template see: :download:`on_dummies_code.py`.
-
-.. vim: ft=rst
-
 
 ****************************
 Introduction and definitions

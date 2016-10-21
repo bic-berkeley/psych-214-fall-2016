@@ -1,9 +1,6 @@
 ##################################################
-October 24: the HRF, inference on statistical maps
+October 24: the HRF, modeling and statistical maps
 ##################################################
-
-This page is currently the combination of stuff we have not yet covered.  We
-will move much of this stuff into the following days.
 
 ********
 Teaching
@@ -38,32 +35,35 @@ Homework and reading for next week
 * `Tutorial on correlated regressors`_;
 * `Introduction to smoothing`_;
 * `Smoothing as convolution`_.
-* the `Bonferroni correction`;
-* thresholding with `Random fields`_;
-* thresholding with the `False Discovery Rate`_;
-* Eklund et al 2016 :cite:`eklund2016cluster`.
 
-*************
-Presentations
-*************
+.. other stuff for later days:
 
-How did the cluster correction problem happen?
+    * the `Bonferroni correction`;
+    * thresholding with `Random fields`_;
+    * thresholding with the `False Discovery Rate`_;
+    * Eklund et al 2016 :cite:`eklund2016cluster`.
 
-Who's right about the cluster corrections?
+    *************
+    Presentations
+    *************
 
-********
-Teaching
-********
+    How did the cluster correction problem happen?
 
-* family-wise error and FDR;
-* cluster and voxel-wise correction;
-* permutation and parametric;
-* small volume correction and ROI analysis.
+    Who's right about the cluster corrections?
 
-********************
-Reading and homework
-********************
+    ********
+    Teaching
+    ********
 
-* `slice timing correction`_;
-* `Rotation in 2D`_
-* `optimizing spatial transformations`_.
+    * family-wise error and FDR;
+    * cluster and voxel-wise correction;
+    * permutation and parametric;
+    * small volume correction and ROI analysis.
+
+    ********************
+    Reading and homework
+    ********************
+
+    * `slice timing correction`_;
+    * `Rotation in 2D`_
+    * `optimizing spatial transformations`_.
