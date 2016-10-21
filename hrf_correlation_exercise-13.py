@@ -1,1 +1,2 @@
-#- Make a vector of times at which to sample the HRF
+#- Correlation of predicted neural time course with voxel signal time
+#- course

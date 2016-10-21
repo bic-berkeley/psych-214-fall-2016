@@ -1,2 +1,2 @@
-#- Knock the first element off the neural prediction time series.
-#- neural_prediction_no_0 = ?
+#- Make new array excluding the first volume
+#- data_no_0 = ?

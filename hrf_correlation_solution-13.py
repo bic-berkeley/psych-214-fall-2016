@@ -1,5 +1,18 @@
-#- Make a vector of times at which to sample the HRF
-hrf_times = np.arange(0, 35, tr)
-hrf_times
-# array([  0. ,   2.5,   5. ,   7.5,  10. ,  12.5,  15. ,  17.5,  20. ,
-# 22.5,  25. ,  27.5,  30. ,  32.5])
+#: import the gamma probability density function
+from scipy.stats import gamma
+# >>>
+def mt_hrf(times):
+    """ Return values for HRF at given times
+# ...
+    This is the "not_great_hrf" from the "make_an_hrf" exercise.
+    Feel free to replace this function with your improved version from
+    that exercise.
+    """
+    # Gamma pdf for the peak
+    peak_values = gamma.pdf(times, 6)
+    # Gamma pdf for the undershoot
+    undershoot_values = gamma.pdf(times, 12)
+    # Combine them
+    values = peak_values - 0.35 * undershoot_values
+    # Scale max to 0.6
+    return values / np.max(values) * 0.6

@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Making a predicted neural time course" href="hrf_correlation_solution.html" />
+    <link rel="prev" title="Making our own hemodynamic response function" href="make_an_hrf_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -66,8 +68,8 @@ array. Print the shape.</p>
 <p>Next we read in the stimulus file for this run to make an on - off
 time-series.</p>
 <p>The stimulus file is <a class="reference download internal" href="_downloads/ds114_sub009_t2r1_cond.txt" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1_cond.txt</span></code></a>.</p>
-<p>Here&#8217;s a version of the same thing we did in an earlier exercise, as a
-function:</p>
+<p>Here&#8217;s a version of the same thing we did in <a class="reference internal" href="first_activation_exercise.html"><span class="doc">A first go at finding brain activation</span></a>,
+wrapped up as a function:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Read in stimulus file, return neural prediction</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">events2neural</span><span class="p">(</span><span class="n">task_fname</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">n_trs</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Return predicted neural time course from event file</span>
@@ -92,6 +94,7 @@ function:</p>
 <span class="gp">... </span>    <span class="n">task</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">tr</span>
 <span class="gp">... </span>    <span class="n">time_course</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_trs</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">onset</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">amplitude</span> <span class="ow">in</span> <span class="n">task</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">onset</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">onset</span><span class="p">),</span>  <span class="nb">int</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="n">time_course</span><span class="p">[</span><span class="n">onset</span><span class="p">:</span><span class="n">onset</span> <span class="o">+</span> <span class="n">duration</span><span class="p">]</span> <span class="o">=</span> <span class="n">amplitude</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">time_course</span>
 </pre></div>
@@ -100,6 +103,10 @@ function:</p>
 predicted neural time course.</p>
 <p>The TR for this run is 2.5. You know the number of TRs from the image
 data shape above.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: TR for this run</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tr</span> <span class="o">=</span> <span class="mf">2.5</span>
+</pre></div>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read the stimulus data file and return a predicted neural time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- course.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the predicted neural time course.</span>
@@ -121,18 +128,22 @@ new variable <code class="docutils literal"><span class="pre">neural_prediction_
 </pre></div>
 </div>
 <p>For now, we&#8217;re going to play with data for a single voxel.</p>
-<p>In an earlier exercise, we subtracted the rest scans from the task scans,
-something like this:</p>
+<p>In <a class="reference internal" href="first_activation_exercise.html"><span class="doc">A first go at finding brain activation</span></a>, we subtracted the rest scans from the
+task scans, something like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: subtracting rest from task scans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">task_scans</span> <span class="o">=</span> <span class="n">data_no_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">neural_prediction_no_0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rest_scans</span> <span class="o">=</span> <span class="n">data_no_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">neural_prediction_no_0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">difference</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">task_scans</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rest_scans</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">difference</span> <span class="o">=</span> <span class="n">task_scans</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">rest_scans</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: showing slice 14 from the difference image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">difference</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
+</div>
+<p>(<a class="reference external" href=".//hrf_correlation_exercise-11.png">png</a>, <a class="reference external" href=".//hrf_correlation_exercise-11.hires.png">hires.png</a>, <a class="reference external" href=".//hrf_correlation_exercise-11.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/hrf_correlation_exercise-11.png" src="_images/hrf_correlation_exercise-11.png" />
 </div>
 <p>It looks like there&#8217;s a voxel that is greater for activation than rest at
 about (i, j, k) == (45, 43, 14).</p>
@@ -159,6 +170,8 @@ your better HRF definition from <a class="reference internal" href="make_an_hrf_
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Return values for HRF at given times</span>
 <span class="gp">...</span><span class="sd"></span>
 <span class="gp">... </span><span class="sd">    This is the &quot;not_great_hrf&quot; from the &quot;make_an_hrf&quot; exercise.</span>
+<span class="gp">... </span><span class="sd">    Feel free to replace this function with your improved version from</span>
+<span class="gp">... </span><span class="sd">    that exercise.</span>
 <span class="gp">... </span><span class="sd">    &quot;&quot;&quot;</span>
 <span class="gp">... </span>    <span class="c1"># Gamma pdf for the peak</span>
 <span class="gp">... </span>    <span class="n">peak_values</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
@@ -256,6 +269,8 @@ look?</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="make_an_hrf_solution.html" title="previous chapter">Making our own hemodynamic response function</a></li>
+      <li>Next: <a href="hrf_correlation_solution.html" title="next chapter">Making a predicted neural time course</a></li>
   </ul></li>
 </ul>
 </div>

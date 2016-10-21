@@ -1,12 +1,11 @@
+.. vim: ft=rst
+
 ############################
 Correlation per voxel, in 2D
 ############################
 
 * For code template see: :download:`correlation_2d_code.py`;
 * For solution see: :doc:`correlation_2d_solution`.
-
-.. vim: ft=rst
-
 
 In this exercise, we will take each voxel time course in the brain, and
 calculate a correlation between the task-on / task-off vector and the voxel

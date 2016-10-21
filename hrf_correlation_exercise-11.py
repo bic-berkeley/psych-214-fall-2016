@@ -1,2 +1,3 @@
-#- Correlation of predicted neural time course with voxel signal time
-#- course
+#: showing slice 14 from the difference image
+plt.imshow(difference[:, :, 14], cmap='gray')
+# <...>

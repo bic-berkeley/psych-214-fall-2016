@@ -1,2 +1,5 @@
-#- Convolve predicted neural time course with HRF samples
-hemodynamic_prediction = np.convolve(neural_prediction_no_0, hrf_signal)
+#- Sample HRF at given times
+#- Plot HRF samples against times
+hrf_signal = mt_hrf(hrf_times)
+plt.plot(hrf_times, hrf_signal)
+# [...]

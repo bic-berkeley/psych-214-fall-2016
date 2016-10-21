@@ -1,4 +1,5 @@
-import numpy.linalg as npl
-Xp = npl.pinv(X)
-Xp.shape
-# (2, 169)
+N = len(convolved)
+X = np.ones((N, 2))
+X[:, 0] = convolved
+plt.imshow(X, interpolation='nearest', cmap='gray', aspect=0.1)
+# <...>

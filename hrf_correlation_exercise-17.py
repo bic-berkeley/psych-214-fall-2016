@@ -1,1 +1,1 @@
-#- Plot convolved neural prediction and unconvolved neural prediction
+#- Convolve predicted neural time course with HRF samples

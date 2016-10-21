@@ -1,1 +1,2 @@
-#- Remove extra tail of values put there by the convolution
+#- Sample HRF at given times
+#- Plot HRF samples against times

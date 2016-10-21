@@ -1,7 +1,4 @@
-#- Scatterplot the hemodynamic prediction against the signal
-plt.plot(hemodynamic_prediction, voxel_values, '+')
-# [...]
-plt.xlabel('hemodynamic prediction')
-# <...>
-plt.ylabel('voxel values')
-# <...>
+#- Correlation of the convolved time course with voxel time course
+np.corrcoef(hemodynamic_prediction, voxel_values)
+# array([[ 1.    ,  0.3586],
+# [ 0.3586,  1.    ]])

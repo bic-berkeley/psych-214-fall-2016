@@ -1,5 +1,5 @@
-#- Correlation of predicted neural time course with voxel signal time
-#- course
-np.corrcoef(neural_prediction_no_0, voxel_values)
-# array([[ 1.    ,  0.3117],
-# [ 0.3117,  1.    ]])
+#- Get the values for (i, j, k) = (45, 43, 14) and every volume.
+#- Plot the values (voxel time course).
+voxel_values = data_no_0[45, 43, 14, :]
+plt.plot(voxel_values)
+# [...]

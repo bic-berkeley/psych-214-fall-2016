@@ -22,5 +22,6 @@ def events2neural(task_fname, tr, n_trs):
     task[:, :2] = task[:, :2] / tr
     time_course = np.zeros(n_trs)
     for onset, duration, amplitude in task:
+        onset, duration = int(onset),  int(duration)
         time_course[onset:onset + duration] = amplitude
     return time_course

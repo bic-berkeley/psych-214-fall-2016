@@ -5,7 +5,6 @@ Anatomical exercise
 * For code template see: :download:`anatomical_code.py`;
 * For solution see: :doc:`anatomical_solution`.
 
-
 .. nbplot::
     :include-source: false
 

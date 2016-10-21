@@ -1,1 +1,1 @@
-#- Convolve predicted neural time course with HRF samples
+#- Make a vector of times at which to sample the HRF

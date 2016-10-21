@@ -36,8 +36,12 @@ def events2neural(task_fname, tr, n_trs):
     task[:, :2] = task[:, :2] / tr
     time_course = np.zeros(n_trs)
     for onset, duration, amplitude in task:
+        onset, duration = int(onset),  int(duration)
         time_course[onset:onset + duration] = amplitude
     return time_course
+
+#: TR for this run
+tr = 2.5
 
 #- Read the stimulus data file and return a predicted neural time
 #- course.
@@ -52,7 +56,7 @@ def events2neural(task_fname, tr, n_trs):
 #: subtracting rest from task scans
 task_scans = data_no_0[..., neural_prediction_no_0 == 1]
 rest_scans = data_no_0[..., neural_prediction_no_0 == 0]
-difference = np.mean(task_scans, axis=-1) - np.mean(rest_scans, axis=-1)
+difference = task_scans.mean(axis=-1) - rest_scans.mean(axis=-1)
 
 #: showing slice 14 from the difference image
 plt.imshow(difference[:, :, 14], cmap='gray')
@@ -70,6 +74,8 @@ def mt_hrf(times):
     """ Return values for HRF at given times
 
     This is the "not_great_hrf" from the "make_an_hrf" exercise.
+    Feel free to replace this function with your improved version from
+    that exercise.
     """
     # Gamma pdf for the peak
     peak_values = gamma.pdf(times, 6)

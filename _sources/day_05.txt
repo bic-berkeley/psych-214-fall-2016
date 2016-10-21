@@ -33,7 +33,9 @@ Simple and multiple regression
 ******************************
 
 * finish going through the `introduction to the General Linear Model`_;
-* we get the same results in R::
+* we get the same results in R:
+
+  .. code-block:: R
 
     psychopathy = c(11.416,   4.514,  12.204,  14.835,
                     8.416,   6.563,  17.343, 13.02,

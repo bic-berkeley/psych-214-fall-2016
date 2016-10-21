@@ -1,7 +1,2 @@
-#- Plot convolved neural prediction and unconvolved neural prediction
-plt.plot(neural_prediction, label='unconvolved')
-# [...]
-plt.plot(hemodynamic_prediction, label='convolved')
-# [...]
-plt.legend()
-# <...>
+#- Remove extra tail of values put there by the convolution
+hemodynamic_prediction = hemodynamic_prediction[:len(neural_prediction_no_0)]

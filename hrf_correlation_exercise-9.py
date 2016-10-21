@@ -1,3 +1,2 @@
-#: showing slice 14 from the difference image
-plt.imshow(difference[:, :, 14], cmap='gray')
-# <...>
+#- Knock the first element off the neural prediction time series.
+#- neural_prediction_no_0 = ?

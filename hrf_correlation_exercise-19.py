@@ -1,1 +1,1 @@
-#- Scatterplot the hemodynamic prediction against the signal
+#- Plot convolved neural prediction and unconvolved neural prediction

@@ -1,12 +1,11 @@
+.. vim: ft=rst
+
 ######################################
 Understanding least-squares regression
 ######################################
 
 * For code template see: :download:`on_estimation_code.py`;
 * For solution see: :doc:`on_estimation_solution`.
-
-.. vim: ft=rst
-
 
 ****************************
 Introduction and definitions

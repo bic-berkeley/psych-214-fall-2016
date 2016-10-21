@@ -65,6 +65,7 @@ version control using git.
     lab_04
     lab_05
     lab_06
+    lab_07
     on_loops
     index_reshape
     reshape_and_3d
@@ -120,3 +121,8 @@ version control using git.
     subtract_mean_math
     hypothesis_tests
     github_dummies_homework
+    make_an_hrf_exercise
+    make_an_hrf_solution
+    hrf_correlation_exercise
+    hrf_correlation_solution
+

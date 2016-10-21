@@ -18,7 +18,8 @@ Convolution
 * the concept of a hemodynamic response function (HRF);
 * using convolution with the HRF to make a BOLD regressor;
 * :doc:`convolution_background`;
-* :doc:`make_an_hrf_exercise`.
+* :doc:`make_an_hrf_exercise`;
+* :doc:`hrf_correlation_exercise`.
 
 ****************
 Project template

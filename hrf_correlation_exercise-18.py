@@ -1,1 +1,1 @@
-#- Correlation of the convolved time course with voxel time course
+#- Remove extra tail of values put there by the convolution

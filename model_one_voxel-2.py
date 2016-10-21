@@ -1,3 +1,3 @@
-voxel_time_course = data[42, 32, 19]
-plt.plot(voxel_time_course)
-# [...]
+img = nib.load('ds114_sub009_t2r1.nii')
+data = img.get_data()
+data = data[..., 4:]

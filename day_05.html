@@ -87,14 +87,14 @@
 <li><p class="first">finish going through the <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the General Linear Model</a>;</p>
 </li>
 <li><p class="first">we get the same results in R:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mf">11.416</span><span class="p">,</span>   <span class="mf">4.514</span><span class="p">,</span>  <span class="mf">12.204</span><span class="p">,</span>  <span class="mf">14.835</span><span class="p">,</span>
-                <span class="mf">8.416</span><span class="p">,</span>   <span class="mf">6.563</span><span class="p">,</span>  <span class="mf">17.343</span><span class="p">,</span> <span class="mf">13.02</span><span class="p">,</span>
-                <span class="mf">15.19</span> <span class="p">,</span>  <span class="mf">11.902</span><span class="p">,</span>  <span class="mf">22.721</span><span class="p">,</span>  <span class="mf">22.324</span><span class="p">)</span>
-<span class="n">clammy</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mf">0.389</span><span class="p">,</span>  <span class="mf">0.2</span>  <span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.463</span><span class="p">,</span>
-           <span class="mf">4.585</span><span class="p">,</span>  <span class="mf">1.097</span><span class="p">,</span>  <span class="mf">1.642</span><span class="p">,</span>  <span class="mf">4.972</span><span class="p">,</span>
-           <span class="mf">7.957</span><span class="p">,</span>  <span class="mf">5.585</span><span class="p">,</span>  <span class="mf">5.527</span><span class="p">,</span>  <span class="mf">6.964</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">psychopathy</span> <span class="o">~</span> <span class="n">clammy</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">summary</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<div class="highlight-R"><div class="highlight"><pre><span></span>psychopathy <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">11.416</span><span class="p">,</span>   <span class="m">4.514</span><span class="p">,</span>  <span class="m">12.204</span><span class="p">,</span>  <span class="m">14.835</span><span class="p">,</span>
+                <span class="m">8.416</span><span class="p">,</span>   <span class="m">6.563</span><span class="p">,</span>  <span class="m">17.343</span><span class="p">,</span> <span class="m">13.02</span><span class="p">,</span>
+                <span class="m">15.19</span> <span class="p">,</span>  <span class="m">11.902</span><span class="p">,</span>  <span class="m">22.721</span><span class="p">,</span>  <span class="m">22.324</span><span class="p">)</span>
+clammy <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.389</span><span class="p">,</span>  <span class="m">0.2</span>  <span class="p">,</span>  <span class="m">0.241</span><span class="p">,</span>  <span class="m">0.463</span><span class="p">,</span>
+           <span class="m">4.585</span><span class="p">,</span>  <span class="m">1.097</span><span class="p">,</span>  <span class="m">1.642</span><span class="p">,</span>  <span class="m">4.972</span><span class="p">,</span>
+           <span class="m">7.957</span><span class="p">,</span>  <span class="m">5.585</span><span class="p">,</span>  <span class="m">5.527</span><span class="p">,</span>  <span class="m">6.964</span><span class="p">)</span>
+res <span class="o">=</span> lm<span class="p">(</span>psychopathy <span class="o">~</span> clammy<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>res<span class="p">))</span>
 </pre></div>
 </div>
 </li>
