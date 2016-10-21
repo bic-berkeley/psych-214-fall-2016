@@ -12,8 +12,35 @@ To build and uplaod the website::
     git submodule update --init --recursive
     # Check that octave is installed (needed by build)
     which octave
-    # Build the site
+    # Build the site locally
+    make html
+    # Upload to the website
     make github
+
+Before publishing pages, make sure the doctests pass:
+
+    make clean
+    make doctest
+
+The exercises are built from template files with extension ``.tpl``.  These
+templates contain the solution, and markup for building the exercise page,
+with much of the solution code removed, and a code template for the students
+to fill in.  Building of the solutions and exercises and code templates
+happens via the ``make html`` etc ``make`` steps, but you can trigger the
+build explicitly via ``make rst-exercises``.
+
+See the ``tools/proc_rst.py`` script for the format of the ``.tpl`` files.
+See the existing ``.tpl`` files for examples.
+
+To add a new exercise:
+
+* write a ``.tpl`` file e.g. ``some_concept.tpl``;
+* add the root filename of the ``.tpl`` file to the ``TEMPLATES`` list in the
+  ``Makefile`` - e.g. ``some_concept``;
+* The build will make ``some_concept_exercise.rst``,
+  ``some_concept_solution.rst`` and ``some_concept_code.py``.  Point to
+  ``some_concept_exercise`` in a page, e.g. with
+  ``:doc:`some_concept_exercise```.
 
 See the ``LICENSE`` file in this directory for copyright and your rights to
 copy these pages.
