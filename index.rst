@@ -32,6 +32,7 @@ version control using git.
     labs
     projects
     topics
+    example_data
     bibliography
 
 .. The hidden toctree below is to suppress build warnings
