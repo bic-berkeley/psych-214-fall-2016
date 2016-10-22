@@ -126,4 +126,5 @@ version control using git.
     make_an_hrf_solution
     hrf_correlation_exercise
     hrf_correlation_solution
+    non_tr_onsets
 

@@ -14,6 +14,7 @@ Teaching
 * :doc:`test_one_voxel`;
 * :doc:`multi_multiply`;
 * :doc:`multi_model_exercise`;
+* :doc:`non_tr_onsets`;
 * `Tutorial on correlated regressors`_;
 
 .. stuff we probably won't have time for:
