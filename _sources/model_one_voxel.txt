@@ -16,7 +16,7 @@ Let's get that same voxel time course back again:
     >>> np.set_printoptions(precision=6)
 
 We load the data, and knock off the first four volumes to remove the artefact
-we discovered:
+we discovered in :doc:`first_activation_exercise`:
 
 .. nbplot::
 
