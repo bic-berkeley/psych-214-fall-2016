@@ -127,4 +127,4 @@ version control using git.
     hrf_correlation_exercise
     hrf_correlation_solution
     non_tr_onsets
-
+    multi_model_homework
