@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>October 24: the HRF, modeling and statistical maps &mdash; Functional MRI methods</title>
+    <title>Multiple voxel model homework &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="October 31: slice timing and motion correction" href="day_08.html" />
-    <link rel="prev" title="October 17: project pitch, ANOVA with the GLM" href="day_06.html" />
+    <link rel="prev" title="Using onsets that do not start on a TR" href="non_tr_onsets.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,32 +43,43 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="october-24-the-hrf-modeling-and-statistical-maps">
-<h1>October 24: the HRF, modeling and statistical maps<a class="headerlink" href="#october-24-the-hrf-modeling-and-statistical-maps" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="teaching">
-<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/on_convolution.html">tutorial on convolution</a>;</li>
-<li><a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a>;</li>
-<li><a class="reference internal" href="make_an_hrf_exercise.html"><span class="doc">Making our own hemodynamic response function</span></a>;</li>
-<li><a class="reference internal" href="hrf_correlation_exercise.html"><span class="doc">Making a predicted neural time course</span></a>.</li>
-<li><a class="reference internal" href="model_one_voxel.html"><span class="doc">Modeling a single voxel</span></a>;</li>
-<li><a class="reference internal" href="test_one_voxel.html"><span class="doc">Testing a single voxel</span></a>;</li>
-<li><a class="reference internal" href="multi_multiply.html"><span class="doc">Estimation for many voxels at the same time</span></a>;</li>
-<li><a class="reference internal" href="multi_model_exercise.html"><span class="doc">Basic linear modeling</span></a>;</li>
-<li><a class="reference internal" href="non_tr_onsets.html"><span class="doc">Using onsets that do not start on a TR</span></a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/correlated_regressors.html">Tutorial on correlated regressors</a>;</li>
-</ul>
+<div class="section" id="multiple-voxel-model-homework">
+<h1>Multiple voxel model homework<a class="headerlink" href="#multiple-voxel-model-homework" title="Permalink to this headline">¶</a></h1>
+<p>This exercise follows the same form as <a class="reference internal" href="github_pca_homework.html"><span class="doc">PCA exercise, with some github practice</span></a> and
+<a class="reference internal" href="github_glm_homework.html"><span class="doc">GLM exercise, with some github practice</span></a>.</p>
+<p>As before:</p>
+<ul>
+<li><p class="first">Make sure you have logged into your Github account;</p>
+</li>
+<li><p class="first">Go to the <a class="reference external" href="https://github.com/psych-214-fall-2016">course github organization</a> page.  You should see a private
+repository with a name like <cite>yourname-multi-model-exercise</cite> where
+<code class="docutils literal"><span class="pre">yourname</span></code> is your first name.</p>
+</li>
+<li><p class="first">Fork this repository to your own account;</p>
+</li>
+<li><p class="first">Clone your forked repository;</p>
+</li>
+<li><p class="first">Change directory into your new cloned repository:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">yourname</span><span class="o">-</span><span class="n">multi</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
 </div>
-<div class="section" id="homework-and-reading-for-next-week">
-<h2>Homework and reading for next week<a class="headerlink" href="#homework-and-reading-for-next-week" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="multi_model_homework.html"><span class="doc">Multiple voxel model homework</span></a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/correlated_regressors.html">Tutorial on correlated regressors</a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/smoothing_intro.html">Introduction to smoothing</a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/smoothing_as_convolution.html">Smoothing as convolution</a>.</li>
-</ul>
+</li>
+<li><p class="first">Make a new branch to work on, and checkout this new branch:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="n">multi</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">exercise</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">multi</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">exercise</span>
+</pre></div>
 </div>
+</li>
+<li><p class="first">Finish the dummy coding exercise by filling in <code class="docutils literal"><span class="pre">multi_model_code.py</span></code>;</p>
+</li>
+<li><p class="first">When you&#8217;ve finished, commit <code class="docutils literal"><span class="pre">multi_model_code.py</span></code>, and push these changes
+to your github fork;</p>
+</li>
+<li><p class="first">Make a pull request to the upstream repository.</p>
+</li>
+</ul>
+<p>Any problems, please feel free to contact JB or I.</p>
+<p>Happy multi-modeling.</p>
 </div>
 
 
@@ -89,11 +98,11 @@
 
 
 <h3>Navigation</h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
@@ -116,10 +125,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_06.html" title="previous chapter">October 17: project pitch, ANOVA with the GLM</a></li>
-      <li>Next: <a href="day_08.html" title="next chapter">October 31: slice timing and motion correction</a></li>
-  </ul></li>
+      <li>Previous: <a href="non_tr_onsets.html" title="previous chapter">Using onsets that do not start on a TR</a></li>
   </ul></li>
 </ul>
 </div>
@@ -145,7 +151,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/day_07.txt"
+      <a href="_sources/multi_model_homework.txt"
           rel="nofollow">Page source</a>
     </div>
 

@@ -50,7 +50,8 @@ We used the :download:`convolved regressor <ds114_sub009_t2r1_conv.txt>` from
 :math:`\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}`
 :math:`\newcommand{\bhat}{\hat{\bvec}} \newcommand{\yhat}{\hat{\yvec}}`
 
-As you will remember from :doc:`glm_intro`, our model is:
+As you will remember from `introduction to the general linear model`_, our
+model is:
 
 .. math::
 

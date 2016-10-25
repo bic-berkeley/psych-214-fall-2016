@@ -33,6 +33,7 @@ Teaching
 Homework and reading for next week
 **********************************
 
+* :doc:`multi_model_homework`;
 * `Tutorial on correlated regressors`_;
 * `Introduction to smoothing`_;
 * `Smoothing as convolution`_.
