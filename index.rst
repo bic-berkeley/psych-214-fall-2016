@@ -128,3 +128,7 @@ version control using git.
     hrf_correlation_solution
     non_tr_onsets
     multi_model_homework
+    test_one_voxel
+    multi_multiply
+    multi_model_exercise
+    multi_model_solution
