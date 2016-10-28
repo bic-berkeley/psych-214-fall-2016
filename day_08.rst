@@ -6,6 +6,7 @@ October 31: multiple comparison correction
 Teaching
 ********
 
+* :doc:`validate_against_scipy`;
 * the `Bonferroni correction`;
 * thresholding with `Random fields`_;
 * thresholding with the `False Discovery Rate`_;
