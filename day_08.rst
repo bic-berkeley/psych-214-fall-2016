@@ -13,13 +13,11 @@ Teaching
 * cluster and voxel-wise correction;
 * Eklund et al 2016 :cite:`eklund2016cluster`.
 
-********
-Teaching
-********
+.. other-stuff
 
-* family-wise error and FDR;
-* permutation and parametric;
-* small volume correction and ROI analysis.
+    * family-wise error and FDR;
+    * permutation and parametric;
+    * small volume correction and ROI analysis.
 
 **********************************
 Reading and homework for next week
