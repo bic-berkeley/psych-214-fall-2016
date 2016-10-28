@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>October 31: slice timing and motion correction &mdash; Functional MRI methods</title>
+    <title>October 31: multiple comparison correction &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="November 7: affine and cross-modality registration" href="day_09.html" />
-    <link rel="prev" title="October 24: the HRF, inference on statistical maps" href="day_07.html" />
+    <link rel="next" title="November 7: slice timing and motion correction" href="day_09.html" />
+    <link rel="prev" title="October 24: the HRF, modeling and statistical maps" href="day_07.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,29 +45,34 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="october-31-slice-timing-and-motion-correction">
-<h1>October 31: slice timing and motion correction<a class="headerlink" href="#october-31-slice-timing-and-motion-correction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="project-proposals">
-<h2>Project proposals<a class="headerlink" href="#project-proposals" title="Permalink to this headline">¶</a></h2>
-<p>Presentation of project proposals and feedback.</p>
-</div>
+<div class="section" id="october-31-multiple-comparison-correction">
+<h1>October 31: multiple comparison correction<a class="headerlink" href="#october-31-multiple-comparison-correction" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="teaching">
 <h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>how to do slice timing;</li>
-<li>when to use slice timing;</li>
-<li>slice timing artefacts;</li>
-<li>principles of optimization;</li>
-<li>cost functions for motion correction;</li>
-<li>implementing motion correction.</li>
+<li><a class="reference internal" href="validate_against_scipy.html"><span class="doc">Validating the GLM against scipy</span></a>;</li>
+<li>the <cite>Bonferroni correction</cite>;</li>
+<li>thresholding with <a class="reference external" href="https://matthew-brett.github.io/teaching/random_fields.html">Random fields</a>;</li>
+<li>thresholding with the <a class="reference external" href="https://matthew-brett.github.io/teaching/fdr.html">False Discovery Rate</a>;</li>
+<li>cluster and voxel-wise correction;</li>
+<li>Eklund et al 2016 <a class="reference internal" href="bibliography.html#eklund2016cluster" id="id1">[ENK16]</a>.</li>
 </ul>
 </div>
-<div class="section" id="reading-and-homework">
-<h2>Reading and homework<a class="headerlink" href="#reading-and-homework" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>Teaching<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>family-wise error and FDR;</li>
+<li>permutation and parametric;</li>
+<li>small volume correction and ROI analysis.</li>
+</ul>
+</div>
+<div class="section" id="reading-and-homework-for-next-week">
+<h2>Reading and homework for next week<a class="headerlink" href="#reading-and-homework-for-next-week" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Prepare project presentations;</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/slice_timing.html">slice timing correction</a>;</li>
 <li><a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">Rotation in 2D</a></li>
-<li><a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">Coordinate systems and affine transforms</a>;</li>
-<li>A tutorial on <a class="reference external" href="https://matthew-brett.github.io/teaching/mutual_information.html">mutual information</a>.</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/optimizing_space.html">optimizing spatial transformations</a>.</li>
 </ul>
 </div>
 </div>
@@ -96,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 
@@ -115,8 +121,8 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_07.html" title="previous chapter">October 24: the HRF, inference on statistical maps</a></li>
-      <li>Next: <a href="day_09.html" title="next chapter">November 7: affine and cross-modality registration</a></li>
+      <li>Previous: <a href="day_07.html" title="previous chapter">October 24: the HRF, modeling and statistical maps</a></li>
+      <li>Next: <a href="day_09.html" title="next chapter">November 7: slice timing and motion correction</a></li>
   </ul></li>
   </ul></li>
 </ul>

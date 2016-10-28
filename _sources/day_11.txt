@@ -1,6 +1,6 @@
-############################################
-November 21: capstone; scripting an analysis
-############################################
+#######################################
+November 21: cross-subject registration
+#######################################
 
 *************
 Presentations
@@ -12,9 +12,11 @@ Problems from projects.
 Teaching
 ********
 
-* nipype for scripting;
-* designing a plugin for the analysis;
-* running a full analysis via SPM;
+* example registration problem - anterior cingulate;
+* running cross-subject normalizations in SPM;
+* making a distortion field in SPM;
+* applying the SPM distortion field;
+* evaluating the match.
 
 ********************
 Reading and homework

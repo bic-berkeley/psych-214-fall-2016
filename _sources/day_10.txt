@@ -1,25 +1,22 @@
-#######################################
-November 14: cross-subject registration
-#######################################
-
-*************
-Presentations
-*************
-
-Problems from projects.
+###################################################
+November 14: affine and cross-modality registration
+###################################################
 
 ********
 Teaching
 ********
 
-* example registration problem - anterior cingulate;
-* running cross-subject normalizations in SPM;
-* making a distortion field in SPM;
-* applying the SPM distortion field;
-* evaluating the match.
+* using the image affine for storing the results of registration;
+* cost functions for registration across imaging modalities;
+* rigid-body, linear, affine registration;
+* implementing an affine registration;
+* affine registration in SPM.
 
 ********************
 Reading and homework
 ********************
 
-Working on projects.
+* `Introduction to spatial normalization <https://vimeo.com/126900408>`_
+* 15 minute section from the `lecture on spatial processing by Ged Ridgway
+  <https://www.ucl.ac.uk/stream/media/swatch?v=1d42446d1c34>`_ - section on
+  registration between subjects is from 35.00 - 50.07.

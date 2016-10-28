@@ -1,22 +1,28 @@
-##################################################
-November 7: affine and cross-modality registration
-##################################################
+##############################################
+November 7: slice timing and motion correction
+##############################################
+
+*****************
+Project proposals
+*****************
+
+Presentation of project proposals and feedback.
 
 ********
 Teaching
 ********
 
-* using the image affine for storing the results of registration;
-* cost functions for registration across imaging modalities;
-* rigid-body, linear, affine registration;
-* implementing an affine registration;
-* affine registration in SPM.
+* how to do slice timing;
+* when to use slice timing;
+* slice timing artefacts;
+* principles of optimization;
+* cost functions for motion correction;
+* implementing motion correction.
 
 ********************
 Reading and homework
 ********************
 
-* `Introduction to spatial normalization <https://vimeo.com/126900408>`_
-* 15 minute section from the `lecture on spatial processing by Ged Ridgway
-  <https://www.ucl.ac.uk/stream/media/swatch?v=1d42446d1c34>`_ - section on
-  registration between subjects is from 35.00 - 50.07.
+* `Rotation in 2D`_
+* `Coordinate systems and affine transforms`_;
+* A tutorial on `mutual information`_.
