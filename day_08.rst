@@ -7,7 +7,7 @@ Teaching
 ********
 
 * :doc:`validate_against_scipy`;
-* the `Bonferroni correction`;
+* the `Bonferroni correction`_;
 * thresholding with `Random fields`_;
 * thresholding with the `False Discovery Rate`_;
 * cluster and voxel-wise correction;

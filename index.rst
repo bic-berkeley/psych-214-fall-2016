@@ -132,3 +132,4 @@ version control using git.
     multi_multiply
     multi_model_exercise
     multi_model_solution
+    valide_against_scipy
