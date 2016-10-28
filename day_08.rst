@@ -1,28 +1,30 @@
-##############################################
-October 31: slice timing and motion correction
-##############################################
-
-*****************
-Project proposals
-*****************
-
-Presentation of project proposals and feedback.
+##########################################
+October 31: multiple comparison correction
+##########################################
 
 ********
 Teaching
 ********
 
-* how to do slice timing;
-* when to use slice timing;
-* slice timing artefacts;
-* principles of optimization;
-* cost functions for motion correction;
-* implementing motion correction.
+* the `Bonferroni correction`;
+* thresholding with `Random fields`_;
+* thresholding with the `False Discovery Rate`_;
+* cluster and voxel-wise correction;
+* Eklund et al 2016 :cite:`eklund2016cluster`.
 
-********************
-Reading and homework
-********************
+********
+Teaching
+********
 
+* family-wise error and FDR;
+* permutation and parametric;
+* small volume correction and ROI analysis.
+
+**********************************
+Reading and homework for next week
+**********************************
+
+* Prepare project presentations;
+* `slice timing correction`_;
 * `Rotation in 2D`_
-* `Coordinate systems and affine transforms`_;
-* A tutorial on `mutual information`_.
+* `optimizing spatial transformations`_.

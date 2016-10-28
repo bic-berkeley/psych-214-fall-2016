@@ -37,35 +37,3 @@ Homework and reading for next week
 * `Tutorial on correlated regressors`_;
 * `Introduction to smoothing`_;
 * `Smoothing as convolution`_.
-
-.. other stuff for later days:
-
-    * the `Bonferroni correction`;
-    * thresholding with `Random fields`_;
-    * thresholding with the `False Discovery Rate`_;
-    * Eklund et al 2016 :cite:`eklund2016cluster`.
-
-    *************
-    Presentations
-    *************
-
-    How did the cluster correction problem happen?
-
-    Who's right about the cluster corrections?
-
-    ********
-    Teaching
-    ********
-
-    * family-wise error and FDR;
-    * cluster and voxel-wise correction;
-    * permutation and parametric;
-    * small volume correction and ROI analysis.
-
-    ********************
-    Reading and homework
-    ********************
-
-    * `slice timing correction`_;
-    * `Rotation in 2D`_
-    * `optimizing spatial transformations`_.
