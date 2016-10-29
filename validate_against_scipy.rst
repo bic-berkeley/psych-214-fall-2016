@@ -25,6 +25,23 @@ Make some random but predictable data:
 
 Do a simple linear regression with the GLM:
 
+.. math::
+
+    \newcommand{\yvec}{\vec{y}}
+    \newcommand{\xvec}{\vec{x}}
+    \newcommand{\evec}{\vec{\varepsilon}}
+    \newcommand{Xmat}{\boldsymbol X}
+    \newcommand{\bvec}{\vec{\beta}}
+    \newcommand{\bhat}{\hat{\bvec}}
+    \newcommand{\yhat}{\hat{\yvec}}
+    \newcommand{\ehat}{\hat{\evec}}
+    \newcommand{\cvec}{\vec{c}}
+    \newcommand{\rank}{\textrm{rank}}
+
+    y_i = c + b x_i + e_i \implies \\
+
+   \yvec = \Xmat \bvec + \evec
+
 .. nbplot::
 
     >>> X = np.ones((n, 2))
@@ -35,6 +52,14 @@ Do a simple linear regression with the GLM:
     >>> E = y - X.dot(B)
 
 Build the t statistic:
+
+.. math::
+
+    \newcommand{\cvec}{\vec{c}}
+    \hat\sigma^2 = \frac{1}{n - \rank(\Xmat)} \sum e_i^2 \\
+
+    t = \frac{\cvec^T \bhat}
+    {\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}}
 
 .. nbplot::
 

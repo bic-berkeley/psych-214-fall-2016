@@ -6,12 +6,19 @@ October 31: multiple comparison correction
 Teaching
 ********
 
+* on code quality;
 * :doc:`validate_against_scipy`;
+* Exercise::
+
+    git clone https://github.com/psych-214-fall-2016/glmtools
+    cd glmtools
+    pip3 install --user --editable .
+    py.test glmtools
+
+* pdb++ : ``pip3 install --user pdbpp``;
 * the `Bonferroni correction`_;
 * thresholding with `Random fields`_;
 * thresholding with the `False Discovery Rate`_;
-* cluster and voxel-wise correction;
-* Eklund et al 2016 :cite:`eklund2016cluster`.
 
 .. other-stuff
 
