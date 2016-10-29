@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>October 31: multiple comparison correction &mdash; Functional MRI methods</title>
+    <title>Not a number &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,6 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="November 7: slice timing and motion correction" href="day_09.html" />
-    <link rel="prev" title="October 24: the HRF, modeling and statistical maps" href="day_07.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,41 +42,20 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="october-31-multiple-comparison-correction">
-<h1>October 31: multiple comparison correction<a class="headerlink" href="#october-31-multiple-comparison-correction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="teaching">
-<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">on code quality;</p>
-</li>
-<li><p class="first"><a class="reference internal" href="validate_against_scipy.html"><span class="doc">Validating the GLM against scipy</span></a>;</p>
-</li>
-<li><p class="first">Exercise:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">glmtools</span>
-<span class="n">cd</span> <span class="n">glmtools</span>
-<span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">editable</span> <span class="o">.</span>
-<span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">glmtools</span>
+<div class="section" id="not-a-number">
+<h1>Not a number<a class="headerlink" href="#not-a-number" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="go">array([False,  True], dtype=bool)</span>
 </pre></div>
-</div>
-</li>
-<li><p class="first">pdb++ : <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">pdbpp</span></code>;</p>
-</li>
-<li><p class="first">the <a class="reference external" href="https://matthew-brett.github.io/teaching/bonferroni_correction.html">Bonferroni correction</a>;</p>
-</li>
-<li><p class="first">thresholding with <a class="reference external" href="https://matthew-brett.github.io/teaching/random_fields.html">Random fields</a>;</p>
-</li>
-<li><p class="first">thresholding with the <a class="reference external" href="https://matthew-brett.github.io/teaching/fdr.html">False Discovery Rate</a>;</p>
-</li>
-</ul>
-</div>
-<div class="section" id="reading-and-homework-for-next-week">
-<h2>Reading and homework for next week<a class="headerlink" href="#reading-and-homework-for-next-week" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Prepare project presentations;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/slice_timing.html">slice timing correction</a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">Rotation in 2D</a></li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/optimizing_space.html">optimizing spatial transformations</a>.</li>
-</ul>
 </div>
 </div>
 
@@ -99,11 +75,11 @@
 
 
 <h3>Navigation</h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
@@ -126,10 +102,6 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_07.html" title="previous chapter">October 24: the HRF, modeling and statistical maps</a></li>
-      <li>Next: <a href="day_09.html" title="next chapter">November 7: slice timing and motion correction</a></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -155,7 +127,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/day_08.txt"
+      <a href="_sources/nans.txt"
           rel="nofollow">Page source</a>
     </div>
 
