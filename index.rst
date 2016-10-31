@@ -116,6 +116,7 @@ version control using git.
     on_estimation_solution
     mean_test_example
     on_dummies_exercise
+    on_dummies_solution
     convolution_background
     floating_in_text
     diag_inverse
@@ -132,5 +133,5 @@ version control using git.
     multi_multiply
     multi_model_exercise
     multi_model_solution
-    valide_against_scipy
-    nan
+    validate_against_scipy
+    nans
