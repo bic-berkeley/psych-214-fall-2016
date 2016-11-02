@@ -9,7 +9,7 @@ Logistics
 * project presentations next week;
 * proposal to redistribute 12 percentage points from homework to:
 
-    * project: 50% to 50%
+    * project: 50% to 60%
     * participation : 25% to 27%
 
  See: :doc:`logistics`.
