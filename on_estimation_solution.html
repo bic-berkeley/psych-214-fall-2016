@@ -194,8 +194,9 @@ so the dot product is 0.</p>
 </pre></div>
 </div>
 <p>Look at the diagonal values of the matrix <code class="docutils literal"><span class="pre">X_o.T.dot(X_o)</span></code>.  What is the
-relationship of these values to the lengths of the vectors in the first and
-second columns of <code class="docutils literal"><span class="pre">X_o</span></code>?</p>
+relationship of these values to the <em>vector lengths</em> of the vectors in the
+first and second columns of <code class="docutils literal"><span class="pre">X_o</span></code>? See <a class="reference external" href="http://matthew-brett.github.io/teaching/on_vectors.html">vectors and dot products</a> for a
+refresher on the concept of vector length.</p>
 <div class="admonition-answer admonition">
 <p class="first admonition-title">Answer</p>
 <p class="last">The diagonal contains the squared vector lengths of the columns of
@@ -227,7 +228,8 @@ to <code class="docutils literal"><span class="pre">y_c</span></code>:</p>
 </pre></div>
 </div>
 <p>The first parameter has changed compared to your previous estimate.  Can you
-explain its new value?</p>
+explain why it has this new value by considering the values of <span class="math">\((\Xmat^T
+\Xmat)^{-1} \Xmat^T \yvec\)</span>?</p>
 <div class="admonition-answer admonition">
 <p class="first admonition-title">Answer</p>
 <p>We are working on:</p>
@@ -323,7 +325,7 @@ version <code class="docutils literal"><span class="pre">y_c</span></code>?  Hin
 <p>So:</p>
 <div class="math">
 \[\begin{split}p_2 = \vec{x_c} \cdot (\vec{y_c} + \bar{y} \vec{1}) \\
-= \vec{x_c} \cdot \vec{y_c} + \vec{x_c} \cdot \bar{y} \vec{1}) \\
+= \vec{x_c} \cdot \vec{y_c} + \vec{x_c} \cdot \bar{y} \vec{1} \\
 = \vec{x_c} \cdot \vec{y_c} + 0\end{split}\]</div>
 <p class="last">So <span class="math">\(p_2\)</span> is the same for <span class="math">\(\vec{y_c}\)</span> or <span class="math">\(\yvec\)</span>.  Because <span class="math">\(\Xmat\)</span> is the
 same in both cases, both <span class="math">\(\vec{y_c}\)</span> and <span class="math">\(\yvec\)</span> must give the same output
@@ -404,6 +406,7 @@ the mean-centered model, by adjusting the value of <span class="math">\(c\)</spa
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
 

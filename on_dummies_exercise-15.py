@@ -1,1 +1,1 @@
-#- Calculate c (X.T X) c.T
+#- Calculate c (X.T X)^-1 c.T

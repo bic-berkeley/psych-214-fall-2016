@@ -184,7 +184,7 @@ is the <a class="reference external" href="http://matthew-brett.github.io/teachi
 <em>degrees of freedom of the design</em>.  <span class="math">\(n - m\)</span> is the <em>degrees of freedom of the
 error</em> (see <a class="reference external" href="https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html#unbiased-variance">unbiased variance estimate</a>).</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the degrees of freedom consumed by the design</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculated the degrees of freedom of the error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the degrees of freedom of the error</span>
 </pre></div>
 </div>
 <p>Calculate the unbiased <em>variance</em> estimate <span class="math">\(\hat{\sigma^2}\)</span> by dividing the
@@ -196,7 +196,7 @@ sums of squares of the residuals by the degrees of freedom of the error.</p>
 \Xmat)^+ \cvec\)</span>. You already know that <span class="math">\(\Xmat^T \Xmat\)</span> is invertible, and you
 have its inverse above, so you can use the inverse instead of the more general
 pseudo-inverse.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate c (X.T X) c.T</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate c (X.T X)^-1 c.T</span>
 </pre></div>
 </div>
 <div class="admonition-question admonition">

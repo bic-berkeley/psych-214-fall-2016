@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Not a number" href="nans.html" />
+    <link rel="prev" title="Basic linear modeling" href="multi_model_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -68,16 +70,16 @@
 </div>
 <p>Do a simple linear regression with the GLM:</p>
 <div class="math">
-\[ \begin{align}\begin{aligned} \newcommand{\yvec}{\vec{y}}
- \newcommand{\xvec}{\vec{x}}
- \newcommand{\evec}{\vec{\varepsilon}}
- \newcommand{Xmat}{\boldsymbol X}
- \newcommand{\bvec}{\vec{\beta}}
- \newcommand{\bhat}{\hat{\bvec}}
- \newcommand{\yhat}{\hat{\yvec}}
- \newcommand{\ehat}{\hat{\evec}}
- \newcommand{\cvec}{\vec{c}}
- \newcommand{\rank}{\textrm{rank}}\\\begin{split} y_i = c + b x_i + e_i \implies \\\end{split}\\\yvec = \Xmat \bvec + \evec\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}\newcommand{\yvec}{\vec{y}}
+\newcommand{\xvec}{\vec{x}}
+\newcommand{\evec}{\vec{\varepsilon}}
+\newcommand{Xmat}{\boldsymbol X}
+\newcommand{\bvec}{\vec{\beta}}
+\newcommand{\bhat}{\hat{\bvec}}
+\newcommand{\yhat}{\hat{\yvec}}
+\newcommand{\ehat}{\hat{\evec}}
+\newcommand{\cvec}{\vec{c}}
+\newcommand{\rank}{\textrm{rank}}\\\begin{split}y_i = c + b x_i + e_i \implies \\\end{split}\\\yvec = \Xmat \bvec + \evec\end{aligned}\end{align} \]</div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -225,6 +227,8 @@ independent samples:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="multi_model_solution.html" title="previous chapter">Basic linear modeling</a></li>
+      <li>Next: <a href="nans.html" title="next chapter">Not a number</a></li>
   </ul></li>
 </ul>
 </div>

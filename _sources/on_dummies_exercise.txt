@@ -197,7 +197,7 @@ error* (see `unbiased variance estimate`_).
 .. nbplot::
 
     >>> #- Calculate the degrees of freedom consumed by the design
-    >>> #- Calculated the degrees of freedom of the error
+    >>> #- Calculate the degrees of freedom of the error
 
 Calculate the unbiased *variance* estimate $\hat{\sigma^2}$ by dividing the
 sums of squares of the residuals by the degrees of freedom of the error.
@@ -213,7 +213,7 @@ pseudo-inverse.
 
 .. nbplot::
 
-    >>> #- Calculate c (X.T X) c.T
+    >>> #- Calculate c (X.T X)^-1 c.T
 
 .. admonition:: Question
 

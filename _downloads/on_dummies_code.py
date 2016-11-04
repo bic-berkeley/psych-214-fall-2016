@@ -58,11 +58,11 @@ relationship of the values in the estimated beta vector to the means of of
 #- Calculate the fitted and residual values
 
 #- Calculate the degrees of freedom consumed by the design
-#- Calculated the degrees of freedom of the error
+#- Calculate the degrees of freedom of the error
 
 #- Calculate the unbiased variance estimate
 
-#- Calculate c (X.T X) c.T
+#- Calculate c (X.T X)^-1 c.T
 
 
 """ What is the relationship of ``c.dot(npl.inv(X.T.dot(X)).dot(cvec)`` to
