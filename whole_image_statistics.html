@@ -322,6 +322,8 @@ surviving correction have True, other voxels have False:</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-26.png" src="_images/whole_image_statistics-26.png" />
 </div>
+<p>The voxels outside the brain have p value 0 (see above), so these always
+survive the correction above, and appear white.</p>
 <p>Now we threshold at the Bonferroni correction level.  This does not assume the
 tests are independent:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bonferroni_theta</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">/</span> <span class="n">N</span>

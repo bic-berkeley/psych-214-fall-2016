@@ -318,6 +318,9 @@ surviving correction have True, other voxels have False:
     >>> plt.imshow(p_3d[:, :, 15] < sidak_thresh, cmap='gray')
     <...>
 
+The voxels outside the brain have p value 0 (see above), so these always
+survive the correction above, and appear white.
+
 Now we threshold at the Bonferroni correction level.  This does not assume the
 tests are independent:
 
