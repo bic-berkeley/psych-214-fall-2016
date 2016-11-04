@@ -135,3 +135,5 @@ version control using git.
     multi_model_solution
     validate_against_scipy
     nans
+    whole_image_statistics
+    lab_09

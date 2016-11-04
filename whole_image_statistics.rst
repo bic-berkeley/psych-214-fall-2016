@@ -298,7 +298,7 @@ Multiple comparison correction
 
 We now have a very large number of t statistics and p values.  We want to find
 to control the family-wise error rate, where the "family" is the set of all of
-the voxel t tests / p values.  See: `Bonferonni correction`_.
+the voxel t tests / p values.  See: `Bonferroni correction`_.
 
 We start with the Šidák correction, that gives the correct threshold when all
 the test are independent:
@@ -317,6 +317,9 @@ surviving correction have True, other voxels have False:
 
     >>> plt.imshow(p_3d[:, :, 15] < sidak_thresh, cmap='gray')
     <...>
+
+The voxels outside the brain have p value 0 (see above), so these always
+survive the correction above, and appear white.
 
 Now we threshold at the Bonferroni correction level.  This does not assume the
 tests are independent:
