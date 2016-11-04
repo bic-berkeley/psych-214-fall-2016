@@ -5,6 +5,7 @@ Four dimensions exercise
 * For code template see: :download:`four_dimensions_code.py`;
 * For solution see: :doc:`four_dimensions_solution`.
 
+
 .. nbplot::
     :include-source: false
 

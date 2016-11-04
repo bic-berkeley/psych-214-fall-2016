@@ -1,11 +1,12 @@
-.. vim:ft=rst
-
 ############################################
 Making our own hemodynamic response function
 ############################################
 
 * For code template see: :download:`make_an_hrf_code.py`;
 * For solution see: :doc:`make_an_hrf_solution`.
+
+.. vim:ft=rst
+
 
 .. nbplot::
     :include-source: false

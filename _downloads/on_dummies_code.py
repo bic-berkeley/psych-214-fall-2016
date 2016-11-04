@@ -44,9 +44,9 @@ vector to the values of ``ucb_psycho`` and ``mit_psycho``?
 #- Compare beta vector to means of each group
 
 
-r""" Using your knowledge of the parts of inv(X.T X) X y, explain the
-relationship of the values in the estimated beta vector to the means of of
-``ucb_psycho`` and ``mit_psycho``.
+r""" Using your knowledge of the parts of (X.T X)^{-1} X y, explain the
+relationship of the values in $\bhat$ to the means of of ``ucb_psycho``
+and ``mit_psycho``.
 
 """
 
@@ -58,11 +58,11 @@ relationship of the values in the estimated beta vector to the means of of
 #- Calculate the fitted and residual values
 
 #- Calculate the degrees of freedom consumed by the design
-#- Calculate the degrees of freedom of the error
+#- Calculated the degrees of freedom of the error
 
 #- Calculate the unbiased variance estimate
 
-#- Calculate c (X.T X)^-1 c.T
+#- Calculate c (X.T X) c.T
 
 
 """ What is the relationship of ``c.dot(npl.inv(X.T.dot(X)).dot(cvec)`` to
@@ -71,29 +71,18 @@ relationship of the values in the estimated beta vector to the means of of
 
 
 
-#- Use scipy.stats to test if your t-test value is significant.
 
 
-""" Now imagine your UCB and MIT groups are not of equal size.  The total
-number of students ``n`` has not changed. Call ``b`` the number of
-Berkeley students in the ``n=10``, where ``b in range(1, 10)``.  Write the
-number of MIT students as ``n - b``.  Using your reasoning from the equal
-group sizes case above, derive a simple mathematical formula for the
-result of ``c.dot(npl.inv(X.T.dot(X)).dot(c)`` in terms of ``b`` and
-``n``. ``c`` is the contrast vector you chose above.  If all other things
-remain equal, such as the sigma estimate and the top half of the t
-statistic, then what value of ``b`` should you chose to give the largest
-value for your t statistic?
+""" Using your answer above, derive a formula for the result of
+``c.dot(npl.inv(X.T.dot(X)).dot(c)``.  in terms of ``b`` and ``n``. ``c``
+is the contrast you chose above.  If all other things remain equal, such
+as the sigma estimate and the top half of the t statistic, then what value
+of ``b`` should you chose to give the largest value for your t statistic?
 """
 
 
-#: Clamminess of handshake for UCB and MIT students
-clammy = np.array([2.6386, 9.6094, 8.3379, 6.2871, 7.2775, 2.4787,
-                   8.6037, 12.8713, 10.4906, 5.6766])
 
-
-"""
-Make the alternative full model X_f. Compute the extra degrees of
-freedom nu_1.  Compute the extra sum of squares and the F statistic.
+""" 
+Some solution code here
 """
 

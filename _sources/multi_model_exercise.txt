@@ -1,11 +1,12 @@
-.. vim: ft=rst
-
 #####################
 Basic linear modeling
 #####################
 
 * For code template see: :download:`multi_model_code.py`;
 * For solution see: :doc:`multi_model_solution`.
+
+.. vim: ft=rst
+
 
 In this exercise we will run a simple regression on all voxels in a 4D
 FMRI image :download:`ds114_sub009_t2r1.nii`:

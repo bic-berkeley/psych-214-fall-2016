@@ -5,6 +5,7 @@ Lab 01 exercise
 * For code template see: :download:`lab_01_code.py`;
 * For solution see: :doc:`lab_01_solution`.
 
+
 .. testsetup::
 
     # Here I set up some useful things for the doctests below

@@ -60,6 +60,7 @@ difference = task_scans.mean(axis=-1) - rest_scans.mean(axis=-1)
 
 #: showing slice 14 from the difference image
 plt.imshow(difference[:, :, 14], cmap='gray')
+    <...>
 
 #- Get the values for (i, j, k) = (45, 43, 14) and every volume.
 #- Plot the values (voxel time course).
