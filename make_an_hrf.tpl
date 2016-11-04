@@ -24,7 +24,7 @@ moving visual stimulus (see:
 http://nipy.org/nitime/examples/event_related_fmri.html).
 
 Here are the first four rows. The numbers are in :doc:`exponential floating
-point format <floating_in_text>`_:
+point format <floating_in_text>`:
 
 ::
 
