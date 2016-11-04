@@ -221,6 +221,9 @@
     https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_pseudoinverse
 .. _Bessel's correction:
     https://en.wikipedia.org/wiki/Bessel%27s_correction
+.. _NaN:
+.. _Not a number:
+    https://en.wikipedia.org/wiki/NaN
 
 .. Psych-214
 .. _worked example of GLM:

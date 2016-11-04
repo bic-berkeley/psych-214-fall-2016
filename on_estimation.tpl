@@ -204,8 +204,9 @@ so the dot product is 0.
 
 
 Look at the diagonal values of the matrix ``X_o.T.dot(X_o)``.  What is the
-relationship of these values to the lengths of the vectors in the first and
-second columns of ``X_o``?
+relationship of these values to the *vector lengths* of the vectors in the
+first and second columns of ``X_o``? See `vectors and dot products`_ for a
+refresher on the concept of vector length.
 
 .. admonition:: Answer
 
@@ -275,7 +276,8 @@ to ``y_c``:
     array([-0.    ,  0.8074])
 
 The first parameter has changed compared to your previous estimate.  Can you
-explain its new value?
+explain why it has this new value by considering the values of $(\Xmat^T
+\Xmat)^{-1} \Xmat^T \yvec$?
 
 .. admonition:: Answer
 
@@ -459,7 +461,7 @@ version ``y_c``?  Hint: remember $(\vec{a} + \vec{b}) \cdot \vec{c} = \vec{a}
     .. math::
 
         p_2 = \vec{x_c} \cdot (\vec{y_c} + \bar{y} \vec{1}) \\
-        = \vec{x_c} \cdot \vec{y_c} + \vec{x_c} \cdot \bar{y} \vec{1}) \\
+        = \vec{x_c} \cdot \vec{y_c} + \vec{x_c} \cdot \bar{y} \vec{1} \\
         = \vec{x_c} \cdot \vec{y_c} + 0
 
     So $p_2$ is the same for $\vec{y_c}$ or $\yvec$.  Because $\Xmat$ is the

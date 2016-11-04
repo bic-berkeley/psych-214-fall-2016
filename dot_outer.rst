@@ -155,6 +155,8 @@ vectors, by using the numpy ``np.outer`` function:
            [0, 0, 0],
            [1, 3, 2]])
 
+.. _dot-vectors-matrices:
+
 *************************
 Dot, vectors and matrices
 *************************

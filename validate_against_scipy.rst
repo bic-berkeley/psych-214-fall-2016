@@ -40,7 +40,7 @@ Do a simple linear regression with the GLM:
 
     y_i = c + b x_i + e_i \implies \\
 
-   \yvec = \Xmat \bvec + \evec
+    \yvec = \Xmat \bvec + \evec
 
 .. nbplot::
 
