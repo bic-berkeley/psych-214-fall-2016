@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Multiple comparison correction, whole brain analysis" href="lab_09.html" />
+    <link rel="prev" title="Not a number" href="nans.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -301,7 +303,7 @@ mask as an index on the left hand side:</p>
 <h2>Multiple comparison correction<a class="headerlink" href="#multiple-comparison-correction" title="Permalink to this headline">¶</a></h2>
 <p>We now have a very large number of t statistics and p values.  We want to find
 to control the family-wise error rate, where the &#8220;family&#8221; is the set of all of
-the voxel t tests / p values.  See: <a href="#id3"><span class="problematic" id="id4">`Bonferonni correction`_</span></a>.</p>
+the voxel t tests / p values.  See: <a class="reference external" href="https://matthew-brett.github.io/teaching/bonferroni_correction.html">Bonferroni correction</a>.</p>
 <p>We start with the Šidák correction, that gives the correct threshold when all
 the test are independent:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -379,6 +381,8 @@ tests are independent:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="nans.html" title="previous chapter">Not a number</a></li>
+      <li>Next: <a href="lab_09.html" title="next chapter">Multiple comparison correction, whole brain analysis</a></li>
   </ul></li>
 </ul>
 </div>
