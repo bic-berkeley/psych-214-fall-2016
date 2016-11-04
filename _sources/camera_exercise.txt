@@ -5,7 +5,6 @@ Cameraman exercise
 * For code template see: :download:`camera_code.py`;
 * For solution see: :doc:`camera_solution`.
 
-
 .. nbplot::
     :include-source: false
 

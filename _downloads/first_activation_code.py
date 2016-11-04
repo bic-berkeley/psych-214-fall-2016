@@ -19,7 +19,6 @@ np.set_printoptions(precision=4, suppress=True)
 
 #: try running this if you don't believe me
 len(range(4, 16))
-    12
 
 #- Fill in values of 1 for positions of on blocks in time course
 

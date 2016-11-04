@@ -5,7 +5,6 @@ PCA exercise
 * For code template see: :download:`pca_code.py`;
 * For solution see: :doc:`pca_solution`.
 
-
 .. nbplot::
     :include-source: false
 

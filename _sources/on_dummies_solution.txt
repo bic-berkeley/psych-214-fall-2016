@@ -143,8 +143,8 @@ Calculate the inverse of $\Xmat^T \Xmat$.
 
         (\Xmat^T \Xmat)^{-1} =
         \begin{bmatrix}
-        \frac{1}{p} 0 \\
-        0 \frac{1}{p} \\
+        \frac{1}{p} & 0 \\
+        0 & \frac{1}{p} \\
         \end{bmatrix}
 
     The diagonal values in $(\Xmat^T \Xmat)^{-1}$ are therefore the reciprocal
@@ -165,9 +165,9 @@ $\vec{p} = \Xmat^T \yvec$.
     vector to the values of ``ucb_psycho`` and ``mit_psycho``?
 
 
-    The dot product of the dummy variables resolves to the sum of the values
-    for which the dummy vector value is 1 (and therefore not 0). Therefore the
-    values are just the sums of the values in ``ucb_psycho`` and
+    Answer: The dot product of the dummy variables resolves to the sum of the
+    values for which the dummy vector value is 1 (and therefore not 0).
+    Therefore the values are the sums of the values in ``ucb_psycho`` and
     ``mit_psycho`` respectively:
 
     >>> XtY
@@ -263,21 +263,21 @@ already.
     >>> fitted = X.dot(B)
     >>> residuals = Y - fitted
 
-Remember from `worked example of GLM`_ that we want an unbiased estimator for
-$\sigma^2$, and therefore $\sigma$.  For the case of a single regressor, this
-involved dividing the sum of squares of the residuals by $n - 1$ where $n$ is
-the number of rows in the design.  Now we can generalize this $n - 1$ measure
-to designs with more than one column.  The general rule is that we divide the
-sum of squares by $n - m$ where $m$ is the number of *independent* columns in
-the design matrix.  Specifically, $m$ is the `matrix rank`_ of the design
-$\Xmat$.  $m$ can also be called the *degrees of freedom* consumed by the
-design.*  $n - m$ *is the *degrees of freedom of the error*.
+We want an unbiased variance estimate for $\hat\sigma^2$.  See the `worked
+example of GLM`_ page and the `unbiased variance estimate`_ section for
+details.
+
+The general rule is that we divide the sum of squares by $n - m$ where $m$ is
+the number of *independent* columns in the design matrix.  Specifically, $m$
+is the `matrix rank`_ of the design $\Xmat$.  $m$ can also be called the
+*degrees of freedom of the design*.  $n - m$ is the *degrees of freedom of the
+error* (see `unbiased variance estimate`_).
 
 .. nbplot::
 
     >>> #- Calculate the degrees of freedom consumed by the design
     >>> m = npl.matrix_rank(X)
-    >>> #- Calculated the degrees of freedom of the error
+    >>> #- Calculate the degrees of freedom of the error
     >>> df_error = n - m
     >>> df_error
     8
@@ -299,7 +299,7 @@ pseudo-inverse.
 
 .. nbplot::
 
-    >>> #- Calculate c (X.T X) c.T
+    >>> #- Calculate c (X.T X)^-1 c.T
     >>> c_iXtX_ct = c.dot(npl.inv(X.T.dot(X))).dot(c)
     >>> c_iXtX_ct
     0.40000...
@@ -316,8 +316,8 @@ pseudo-inverse.
 
         (\Xmat^T \Xmat)^{-1} =
         \begin{bmatrix}
-        \frac{1}{p} 0 \\
-        0 \frac{1}{p} \\
+        \frac{1}{p} & 0 \\
+        0 & \frac{1}{p} \\
         \end{bmatrix}
 
     With contrast $c = [-1, 1]$ we get:
@@ -332,10 +332,13 @@ Now, what is our t-value ?
 .. nbplot::
 
     >>> tstat = top_of_t / np.sqrt(var_hat*c.T.dot(iXtX).dot(c))
+    >>> tstat
+    1.49720...
 
 Is this significant ? Use the ``stats`` module from ``scipy`` to create a
-t-distribution with ``df_error`` degrees of freedom.  See the ``t_stat``
-function in `introduction to the general linear model`_ for inspiration:
+t-distribution with ``df_error`` (degrees of freedom of the error).  See the
+``t_stat`` function in `introduction to the general linear model`_ for
+inspiration:
 
 .. nbplot::
 
@@ -351,13 +354,14 @@ function in `introduction to the general linear model`_ for inspiration:
  
 .. admonition:: Question
 
-    Now imagine your UCB and MIT are groups are not equal.  $n$ is constant,
-    the number of students. Call $b$ the number of Berkeley students in the
-    $n=10$, where $b \in [1, 2, ... 9]$.  Write the number of MIT students as
-    $n - b$.  Using your answer above, derive a formula for the result of
+    Now imagine your UCB and MIT groups are not of equal size.  The total
+    number of students $n$ has not changed. Call $b$ the number of Berkeley
+    students in the $n=10$, where $b \in [1, 2, ... 9]$.  Write the number of
+    MIT students as $n - b$.  Using your reasoning for the case of equal group
+    sizes above, derive a simple mathematical formula for the result of
     $\cvec^T (\Xmat^T \Xmat)^{-1} \cvec$ in terms of $b$ and $n$. $\cvec$ is
     the contrast you chose above.  If all other things remain equal, such as
-    $n = 10$, the $\hat{\sigma^2}$ and $\cvec^T \bvec$, then which of the
+    $n = 10$, the $\hat{\sigma^2}$ and $\cvec^T \bhat$, then which of the
     possible values of $b$ should you chose to give the largest value for your
     t statistic?
 
@@ -368,8 +372,8 @@ function in `introduction to the general linear model`_ for inspiration:
 
         (\Xmat^T \Xmat)^{-1} =
         \begin{bmatrix}
-        \frac{1}{r} 0 \\
-        0 \frac{1}{n-r} \\
+        \frac{1}{b} & 0 \\
+        0 & \frac{1}{n-b} \\
         \end{bmatrix}
 
     With contrast $c = [-1, 1]$ we get:
@@ -397,6 +401,24 @@ function in `introduction to the general linear model`_ for inspiration:
     In general, for a fixed $n$, we get the largest t statistic (and greatest
     power) when comparing two groups of equal size.
 
+    We can prove this result by doing some calculus.  Here we are using the
+    sympy_ Python package for computer algebra to show the results of the
+    differentiation and root finding:
+
+    .. nbplot::
+
+        >>> import sympy
+        >>> n, b = sympy.symbols('n, b')
+        >>> # construct the equation in terms of n and b
+        >>> eqn = 1 / b + 1 / (n - b)
+        >>> # differentiate with respect to b
+        >>> d_db = sympy.diff(eqn, b)
+        >>> d_db
+        (-b + n)**(-2) - 1/b**2
+        >>> # find values of b at which differential is 0.
+        >>> sympy.solve(d_db, b)
+        [n/2]
+
 
 ***************************
 Hypothesis testing: F-tests
@@ -412,19 +434,11 @@ students.
     ...                    8.6037, 12.8713, 10.4906, 5.6766])
 
 We want to test whether the clammy score is useful in explaining
-the psychopathy data, over and above the students' college affiliation.  We
-could do a t-test on the clammy score, but the t test only tests one direction
-of the effect.  Because the t-test only tests one direction, we can only test
-whether the clammy score is associated with an *increase* of the psychopathy
-score, or a *decrease*, but we can't simultaneously test for either an
-increase or decrease.  We can use an F test to do that.
+the psychopathy data, over and above the students' college affiliation.
 
-The simplest and generally most useful way of thinking of F test is to think
-as the test between two models: a *full model* and a *reduced model*.  The
-full model contains the regressor or factor that we want to test for.  We will
-use $\Xmat_f$ for the full model.  The reduced model is a model that does not
-contain the effect we want to test for, but does contain all other effects in
-the full model.  We will use $\Xmat_r$ for the reduced model.
+To do this, we will use an `F test <F tests_>`_.
+
+An F-test compares a *full model* $\Xmat_f$ with a *reduced model* $\Xmat_r$.
 
 In our case, $\Xmat_f$ is the model containing the ``clammy`` regressor, as
 well as the two dummy columns for the UCB and MIT group means.
@@ -432,31 +446,9 @@ well as the two dummy columns for the UCB and MIT group means.
 $\Xmat_r$ is our original model, that only contains the dummy columns for the
 UCB and MIT group means.
 
-If the full model is a better fit to the data than the reduced model, then
-adding the new regressor(s) will cause a convincing drop in the size of
-residuals.
-
-The F test is a measure that reflects the drop in the magnitude of squared
-residuals as a result of adding the new regressors.
-
-To help our notation, a reminder that, when we use vectors in matrix
-multiplication, we assume a vector $\vec{x}$ should be treated as a column
-vector.  Thus $\vec{x}^T$ is a row vector.  We can therefore write the dot
-product of a vector with itself in either of these two ways:
-
-.. math::
-
-    \vec{x} \cdot \vec{x} \equiv \vec{x}^T \vec{x}
-
-Read $\equiv$ as "equivalent to".  This gives us several ways of writing the
-sum of squares of a residual vector:
-
-.. math::
-
-    \sum_{i=1}^n e_i \equiv \evec \cdot \evec \equiv \evec^T \evec
-
-Now define we define the $SSR(\Xmat_r)$ and $SSR(\Xmat_f)$.  These are the
-sums of squares of the residuals of the reduced and full model respectively.
+We define $SSR(\Xmat_r)$ and $SSR(\Xmat_f)$ as in `hypothesis tests`_.
+These are the Sums of Squares of the Residuals of the reduced and full model
+respectively.
 
 .. math::
 
@@ -468,45 +460,36 @@ sums of squares of the residuals of the reduced and full model respectively.
     \hat\evec_f = \yvec - \Xmat_f \bhat_f \\
     SSR(\Xmat_f) = \hat\evec_f^T \hat\evec_f
 
-$ESS = SSR(\Xmat_r) - SSR(\Xmat_f$ is the extra sum of squared residuals
-explained by the full compared to the reduced model.  The top half of the
-ratio that forms the F statistic is $ESS / \nu_1$, where $\nu_1$ is the number
-of extra independent regressors (columns) in $\Xmat_f$ compared to $\Xmat_r$.
-Specifically:
-
-.. math::
-
-    \nu_1 = \textrm{rank}(\Xmat_f) - \textrm{rank}(\Xmat_r)
-
-where $\textrm{rank}(\boldsymbol A)$ is the `matrix rank`_ of matrix
-$\boldsymbol A$.  The bottom half of the F statistic is the estimated variance
-$\hat{\sigma^2}$ from the full model.  This can also be written as
-$SSR(\Xmat_f) / \nu_2$ where $\nu_2$ is the *degrees of freedom of the error*:
-
-.. math::
-
-    \begin{eqnarray}
-    F_{\nu_1, \nu_2} & = &
-    \frac{
-    (\hat\evec_r^T \hat\evec_r - \hat\evec_f^T \hat\evec_f)
-    / \nu_{1} }
-    {\hat\evec_f^T \hat\evec_f / \nu_{2}} \\
-    & = &
-    \frac{
-    (\textrm{SSR}(\Xmat_r) - \textrm{SSR}(\Xmat_f)) / \nu_1}
-    {\textrm{SSR}(\Xmat_f) / \nu_2}
-    \end{eqnarray}
+You can calculate the F statistic for adding the ``clammy`` regressor, by
+using these calculations and the formula for the F-test in `F tests`_.
 
 .. admonition:: Question
 
     Make the alternative full model $\Xmat_f$. Compute the extra degrees of
-    freedom ${\nu_1}$.  Compute the extra sum of squares and the F statistic.
+    freedom consumed by the design |--| ${\nu_1}$.  Compute the extra sum of
+    squares and the F statistic.
 
 
-    Answer: we already know that $\nu_2$ == n - m
+    Answer: Construct $\Xmat_f$; compute $\nu_1$:
 
-    Compute the rank of $\Xmat_r$: 2, rank of $\Xmat_f$: 2 (this is 2), hence
-    the numerator of the F statistic is $\nu_1$ == 2 - 1 == 1.
+    .. nbplot::
+
+        >>> # Reduced design, and design matrix rank
+        >>> X_r = X
+        >>> rank_r = npl.matrix_rank(X_r)
+        >>> rank_r
+        2
+        >>> # Full design, and design matrix rank
+        >>> X_f = np.column_stack((clammy, X))
+        >>> rank_f = npl.matrix_rank(X_f)
+        >>> rank_f
+        3
+        >>> nu_1 = rank_f - rank_r
+        >>> nu_1
+        1
+
+    Make a function to compute $\bhat, \textrm{SSR}(\Xmat), \nu_2$ for a
+    given $\Xmat$ and $\yvec$:
 
     .. nbplot::
 
@@ -525,7 +508,7 @@ $SSR(\Xmat_f) / \nu_2$ where $\nu_2$ is the *degrees of freedom of the error*:
         ...     beta : ndarray shape (p,)
         ...        estimated parameters for model `X`
         ...     residual_ss : float
-        ...        sum of squares of residual
+        ...        sum of squares of residuals
         ...     df_error : float
         ...         Degrees of freedom due to error.
         ...     """
@@ -534,11 +517,12 @@ $SSR(\Xmat_f) / \nu_2$ where $\nu_2$ is the *degrees of freedom of the error*:
         ...     df = X.shape[0] - npl.matrix_rank(X)
         ...     return B, resid.T.dot(resid), df
 
-        >>> X_r = X
-        >>> X_f = np.column_stack((clammy, X))
+    Compute F statistic:
+
+    .. nbplot::
+
         >>> b_f, rss_f, df_f = glm(X_f, Y)
         >>> b_r, rss_r, df_r = glm(X_r, Y)
-        >>> nu_1 = npl.matrix_rank(X_f) - npl.matrix_rank(X_r)
         >>> f_stat = ((rss_r - rss_f) / nu_1) / (rss_f / df_f)
         >>> f_stat
         6.15949...
