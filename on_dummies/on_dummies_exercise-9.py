@@ -1,1 +1,0 @@
-#- Calculate beta vector
