@@ -78,6 +78,7 @@ Statistics and brain images
 * `correlation and projection`_.  See :doc:`day_04`;
 * :doc:`voxel_time_courses`.  See :doc:`day_04`;
 * `introduction to the General Linear Model`_.  See :doc:`day_05`;
+* `cumulative density functions`;
 * :doc:`mean_test_example`;
 * :doc:`diag_inverse`;
 * :doc:`subtract_mean_math`;

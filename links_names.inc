@@ -204,6 +204,8 @@
    http://matthew-brett.github.io/teaching/vector_angles.html
 .. _matrix rank:
    http://matthew-brett.github.io/teaching/matrix_rank.html
+.. _cumulative density functions:
+   http://matthew-brett.github.io/teaching/on_cdfs.html
 
 .. Ideas
 .. _principal component analysis:
