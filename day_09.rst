@@ -12,8 +12,10 @@ Presentation of project proposals and feedback.
 Teaching
 ********
 
+* :doc:`otsu_threshold`;
 * Correction with the `false discovery rate`_;
 * `slice timing correction`_;
+* :doc:`slice_timing_exercise`;
 * how to do slice timing;
 * when to use slice timing;
 * slice timing artefacts;
