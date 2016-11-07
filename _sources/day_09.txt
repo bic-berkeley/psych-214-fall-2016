@@ -12,6 +12,8 @@ Presentation of project proposals and feedback.
 Teaching
 ********
 
+* Correction with the `false discovery rate`_;
+* `slice timing correction`_;
 * how to do slice timing;
 * when to use slice timing;
 * slice timing artefacts;

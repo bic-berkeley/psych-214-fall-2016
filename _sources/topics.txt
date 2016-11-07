@@ -87,3 +87,4 @@ Statistics and brain images
 * :doc:`model_one_voxel`;
 * `tutorial on convolution`_;
 * :doc:`convolution_background`;
+* :doc:`otsu_threshold`.
