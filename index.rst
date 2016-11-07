@@ -137,3 +137,4 @@ version control using git.
     nans
     whole_image_statistics
     lab_09
+    otsu_threshold

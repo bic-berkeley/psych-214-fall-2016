@@ -226,6 +226,8 @@
 .. _NaN:
 .. _Not a number:
     https://en.wikipedia.org/wiki/NaN
+.. _Otsu's method:
+    https://en.wikipedia.org/wiki/Otsu%27s_method
 
 .. Psych-214
 .. _worked example of GLM:
