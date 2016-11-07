@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Slice timing exercise &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="slice-timing-exercise">
+<h1>Slice timing exercise<a class="headerlink" href="#slice-timing-exercise" title="Permalink to this headline">¶</a></h1>
+<p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/slice_timing.html">slice timing correction</a> for the background to this exercise.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import common modules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># print to 4 DP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Set defaults for plotting</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
+</pre></div>
+</div>
+<p>Load the image <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a> with nibabel. Get the data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Load the image &#39;ds114_sub009_t2r1.nii&#39; with nibabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the data array from the image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 30, 173)</span>
+</pre></div>
+</div>
+<p>As you remember, the first volume in this dataset is a lot different from the
+rest, and this will mess up our interpolation in time.</p>
+<p>So, we need to remove the first volume from the data first, using slicing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Remove the first volume by slicing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 30, 172)</span>
+</pre></div>
+</div>
+<p>We start off with example time-courses from the first and second slice.</p>
+<p>Use slicing to get a z slice 0 time series for an example voxel at voxel
+coordinates (23, 19, 0).</p>
+<p>Do the same for a z slice 1 time series from (23, 19, 1).</p>
+<p>Plot these time series against volume number on the same graph:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice out time series for voxel (23, 19, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice out time series for voxel (23, 19, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot both these time series against volume number, on the same graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_0_ts</span> <span class="o">=</span> <span class="n">fixed_data</span><span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_1_ts</span> <span class="o">=</span> <span class="n">fixed_data</span><span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_0_ts</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_1_ts</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//slice_timing_solution-6.png">png</a>, <a class="reference external" href=".//slice_timing_solution-6.hires.png">hires.png</a>, <a class="reference external" href=".//slice_timing_solution-6.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/slice_timing_solution-6.png" src="_images/slice_timing_solution-6.png" />
+</div>
+<p>The scanner collected slices for these data in an &#8220;ascending
+interleaved&#8221; order. That is, the scanner first collected z slice 0, then
+z slice 2, up to z slice 28. It then went back to collect z slice 1, 3,
+5 up to z slice 29.</p>
+<p>That means the scanner started collecting slice 0 in each volume, at the
+beginning of the volume.</p>
+<p>The TR (time to collect one volume) is 2.5 seconds.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: The time between scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>
+</pre></div>
+</div>
+<p>Make a time vector, length 172, that corresponds to the start time in seconds
+of each volume. This also gives the slice 0 start times.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make time vector containing start times in second of each volume,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- relative to start of first volume.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call this `slice_0_times`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_0_times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_0_times</span>
+<span class="go">array([   0. ,    2.5,    5. ,    7.5,   10. ,   12.5,   15. ,   17.5,</span>
+<span class="go">         20. ,   22.5,   25. ,   27.5,   30. ,   32.5,   35. ,   37.5,</span>
+<span class="go">         40. ,   42.5,   45. ,   47.5,   50. ,   52.5,   55. ,   57.5,</span>
+<span class="go">         60. ,   62.5,   65. ,   67.5,   70. ,   72.5,   75. ,   77.5,</span>
+<span class="go">         80. ,   82.5,   85. ,   87.5,   90. ,   92.5,   95. ,   97.5,</span>
+<span class="go">        100. ,  102.5,  105. ,  107.5,  110. ,  112.5,  115. ,  117.5,</span>
+<span class="go">        120. ,  122.5,  125. ,  127.5,  130. ,  132.5,  135. ,  137.5,</span>
+<span class="go">        140. ,  142.5,  145. ,  147.5,  150. ,  152.5,  155. ,  157.5,</span>
+<span class="go">        160. ,  162.5,  165. ,  167.5,  170. ,  172.5,  175. ,  177.5,</span>
+<span class="go">        180. ,  182.5,  185. ,  187.5,  190. ,  192.5,  195. ,  197.5,</span>
+<span class="go">        200. ,  202.5,  205. ,  207.5,  210. ,  212.5,  215. ,  217.5,</span>
+<span class="go">        220. ,  222.5,  225. ,  227.5,  230. ,  232.5,  235. ,  237.5,</span>
+<span class="go">        240. ,  242.5,  245. ,  247.5,  250. ,  252.5,  255. ,  257.5,</span>
+<span class="go">        260. ,  262.5,  265. ,  267.5,  270. ,  272.5,  275. ,  277.5,</span>
+<span class="go">        280. ,  282.5,  285. ,  287.5,  290. ,  292.5,  295. ,  297.5,</span>
+<span class="go">        300. ,  302.5,  305. ,  307.5,  310. ,  312.5,  315. ,  317.5,</span>
+<span class="go">        320. ,  322.5,  325. ,  327.5,  330. ,  332.5,  335. ,  337.5,</span>
+<span class="go">        340. ,  342.5,  345. ,  347.5,  350. ,  352.5,  355. ,  357.5,</span>
+<span class="go">        360. ,  362.5,  365. ,  367.5,  370. ,  372.5,  375. ,  377.5,</span>
+<span class="go">        380. ,  382.5,  385. ,  387.5,  390. ,  392.5,  395. ,  397.5,</span>
+<span class="go">        400. ,  402.5,  405. ,  407.5,  410. ,  412.5,  415. ,  417.5,</span>
+<span class="go">        420. ,  422.5,  425. ,  427.5])</span>
+</pre></div>
+</div>
+<p>The scanner starts to collect z slice 1 exactly half way through the volume
+(half way through the TR). Make a new vector that is the start time of
+acquisition of slice 1.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make time vector containing start times in seconds of z slice 1,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- relative to start of first volume.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call this `slice_1_times`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_1_times</span> <span class="o">=</span> <span class="n">slice_0_times</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_1_times</span>
+<span class="go">array([   1.25,    3.75,    6.25,    8.75,   11.25,   13.75,   16.25,</span>
+<span class="go">         18.75,   21.25,   23.75,   26.25,   28.75,   31.25,   33.75,</span>
+<span class="go">         36.25,   38.75,   41.25,   43.75,   46.25,   48.75,   51.25,</span>
+<span class="go">         53.75,   56.25,   58.75,   61.25,   63.75,   66.25,   68.75,</span>
+<span class="go">         71.25,   73.75,   76.25,   78.75,   81.25,   83.75,   86.25,</span>
+<span class="go">         88.75,   91.25,   93.75,   96.25,   98.75,  101.25,  103.75,</span>
+<span class="go">        106.25,  108.75,  111.25,  113.75,  116.25,  118.75,  121.25,</span>
+<span class="go">        123.75,  126.25,  128.75,  131.25,  133.75,  136.25,  138.75,</span>
+<span class="go">        141.25,  143.75,  146.25,  148.75,  151.25,  153.75,  156.25,</span>
+<span class="go">        158.75,  161.25,  163.75,  166.25,  168.75,  171.25,  173.75,</span>
+<span class="go">        176.25,  178.75,  181.25,  183.75,  186.25,  188.75,  191.25,</span>
+<span class="go">        193.75,  196.25,  198.75,  201.25,  203.75,  206.25,  208.75,</span>
+<span class="go">        211.25,  213.75,  216.25,  218.75,  221.25,  223.75,  226.25,</span>
+<span class="go">        228.75,  231.25,  233.75,  236.25,  238.75,  241.25,  243.75,</span>
+<span class="go">        246.25,  248.75,  251.25,  253.75,  256.25,  258.75,  261.25,</span>
+<span class="go">        263.75,  266.25,  268.75,  271.25,  273.75,  276.25,  278.75,</span>
+<span class="go">        281.25,  283.75,  286.25,  288.75,  291.25,  293.75,  296.25,</span>
+<span class="go">        298.75,  301.25,  303.75,  306.25,  308.75,  311.25,  313.75,</span>
+<span class="go">        316.25,  318.75,  321.25,  323.75,  326.25,  328.75,  331.25,</span>
+<span class="go">        333.75,  336.25,  338.75,  341.25,  343.75,  346.25,  348.75,</span>
+<span class="go">        351.25,  353.75,  356.25,  358.75,  361.25,  363.75,  366.25,</span>
+<span class="go">        368.75,  371.25,  373.75,  376.25,  378.75,  381.25,  383.75,</span>
+<span class="go">        386.25,  388.75,  391.25,  393.75,  396.25,  398.75,  401.25,</span>
+<span class="go">        403.75,  406.25,  408.75,  411.25,  413.75,  416.25,  418.75,</span>
+<span class="go">        421.25,  423.75,  426.25,  428.75])</span>
+</pre></div>
+</div>
+<p>Now plot the first 10 values for the slice 0 times, against the first 10
+values of the slice 0 time series.</p>
+<p>Do the same plot for the first 10 values of the slice 1 times, against the
+first 10 values of the slice 1 time series.</p>
+<p>Use the <code class="docutils literal"><span class="pre">:+</span></code> line marker for the plots to get the actual position of the
+points, and dotted lines between them.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot first 10 values of slice 0 times against first 10 of slice 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- time series;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot first 10 values of slice 1 times against first 10 of slice 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- time series.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use &#39;:+&#39; marker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">slice_0_ts</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;:+&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_1_times</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">slice_1_ts</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;:+&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//slice_timing_solution-10.png">png</a>, <a class="reference external" href=".//slice_timing_solution-10.hires.png">hires.png</a>, <a class="reference external" href=".//slice_timing_solution-10.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/slice_timing_solution-10.png" src="_images/slice_timing_solution-10.png" />
+</div>
+<p>Import <code class="docutils literal"><span class="pre">InterpolatedUnivariateSpline</span></code> from <code class="docutils literal"><span class="pre">scipy.interpolate</span></code>. Make a new
+linear (<code class="docutils literal"><span class="pre">k=1</span></code>) interpolation object for slice 1, with the slice 1 times and
+values.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Import `InterpolatedUnivariateSpline` from `scipy.interpolate`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a new linear (`k=1`) interpolation object for slice 1, with</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- slice 1 times and values.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">InterpolatedUnivariateSpline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interp</span> <span class="o">=</span> <span class="n">InterpolatedUnivariateSpline</span><span class="p">(</span><span class="n">slice_1_times</span><span class="p">,</span> <span class="n">slice_1_ts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Call the object you got with the slice 0 times, to get the estimated time
+series values for slice 1, if slice 1 had been collected at the same time as
+slice 0:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call interpolator with `slice_0_times` to get estimated values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_1_ts_est</span> <span class="o">=</span> <span class="n">interp</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Repeat the plot of the first 10 values of the time series. This time, on the
+same plot, add the estimated values for slice 1, if they had been collected at
+the same time as slice 0. Use a black <code class="docutils literal"><span class="pre">x</span></code> for the estimated points (marker
+<code class="docutils literal"><span class="pre">'kx'</span></code>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot first 10 values of slice 0 times against first 10 of slice 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- time series;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot first 10 values of slice 1 times against first 10 of slice 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- time series;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot first 10 values of slice 0 times against first 10 of</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- interpolated slice 1 time series.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">slice_0_ts</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;:+&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_1_times</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">slice_1_ts</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;:+&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">slice_1_ts_est</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;kx&#39;</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//slice_timing_solution-13.png">png</a>, <a class="reference external" href=".//slice_timing_solution-13.hires.png">hires.png</a>, <a class="reference external" href=".//slice_timing_solution-13.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/slice_timing_solution-13.png" src="_images/slice_timing_solution-13.png" />
+</div>
+<p>Use numpy to make a new copy of the data matrix. This will contain the slice
+time corrected values for all voxels. Copying the data matrix will give us the
+data we want for slice 0, because we want to keep the values for z slice 0
+unchanged.  We need to make a copy of the array to make sure we do not
+overwrite the original data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Copy old data to a new array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_data</span> <span class="o">=</span> <span class="n">fixed_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Loop over every x voxel coordinate, and then loop over every y voxel
+coordinate.</p>
+<p>For each x, y voxel coordinate:</p>
+<ul class="simple">
+<li>extract the time series at this x, y coordinate for slice 1;</li>
+<li>make a linear interpolator object with the slice 1 times and the extracted
+time series;</li>
+<li>resample this interpolator at the slice 0 times;</li>
+<li>put this new resampled time series into the new data at the same position.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- loop over all x coordinate values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- loop over all y coordinate values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- extract the time series at this x, y coordinate for slice 1;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- make a linear interpolator object with the slice 1 times and the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- extracted time series;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- resample this interpolator at the slice 0 times;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- put this new resampled time series into the new data at the same</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- position.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="gp">... </span>        <span class="n">time_series</span> <span class="o">=</span> <span class="n">fixed_data</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">... </span>        <span class="n">interp</span> <span class="o">=</span> <span class="n">InterpolatedUnivariateSpline</span><span class="p">(</span><span class="n">slice_1_times</span><span class="p">,</span> <span class="n">time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">new_series</span> <span class="o">=</span> <span class="n">interp</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">new_data</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">new_series</span>
+</pre></div>
+</div>
+<p>Now we need to do the same thing for all the z slices.</p>
+<p>To do this, we want to construct an offset vector (call it <code class="docutils literal"><span class="pre">time_offset</span></code>) of
+length (number of z slices) such that adding the <code class="docutils literal"><span class="pre">time_offset[z]</span></code> to the
+acquisition time of the first slice will give us the time of acquisition of
+slice <code class="docutils literal"><span class="pre">z</span></code>. The next few steps are to get to that <code class="docutils literal"><span class="pre">time_offset</span></code> vector.</p>
+<p>First, make a new vector <code class="docutils literal"><span class="pre">acquisition_order</span></code> that is length 30, where
+<code class="docutils literal"><span class="pre">acquisition_order[i]</span></code> is the order of acquisition of slice index <code class="docutils literal"><span class="pre">i</span></code>. For
+example, the first 4 elements of <code class="docutils literal"><span class="pre">acqusition_order</span></code> should be 0, 15, 1, 16.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make acquisition_order vector, length 30, with values:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 0, 15, 1, 16 ... 14, 29</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquisition_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquisition_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">acquisition_order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquisition_index</span>
+<span class="gp">... </span>    <span class="n">acquisition_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">acquisition_order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">acquisition_index</span>
+<span class="gp">... </span>    <span class="n">acquisition_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquisition_order</span>
+<span class="go">array([  0.,  15.,   1.,  16.,   2.,  17.,   3.,  18.,   4.,  19.,   5.,</span>
+<span class="go">        20.,   6.,  21.,   7.,  22.,   8.,  23.,   9.,  24.,  10.,  25.,</span>
+<span class="go">        11.,  26.,  12.,  27.,  13.,  28.,  14.,  29.])</span>
+</pre></div>
+</div>
+<p>Divide the acquisition order vector by number of slices, and multiply by the
+TR, to get the time offset for each z slice, relative to the start of the
+scan:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Divide acquisition_order by number of slices, multiply by TR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_offsets</span> <span class="o">=</span> <span class="n">acquisition_order</span> <span class="o">/</span> <span class="mi">30</span> <span class="o">*</span> <span class="n">TR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_offsets</span>
+<span class="go">array([ 0.    ,  1.25  ,  0.0833,  1.3333,  0.1667,  1.4167,  0.25  ,</span>
+<span class="go">        1.5   ,  0.3333,  1.5833,  0.4167,  1.6667,  0.5   ,  1.75  ,</span>
+<span class="go">        0.5833,  1.8333,  0.6667,  1.9167,  0.75  ,  2.    ,  0.8333,</span>
+<span class="go">        2.0833,  0.9167,  2.1667,  1.    ,  2.25  ,  1.0833,  2.3333,</span>
+<span class="go">        1.1667,  2.4167])</span>
+</pre></div>
+</div>
+<p>Now we can do our whole slice time correction, for every slice.</p>
+<ul>
+<li><p class="first">For each z coordinate (slice index):</p>
+<ul>
+<li><p class="first">Make a time vector by adding the slice time offset for this slice, to the
+<code class="docutils literal"><span class="pre">slice_0</span></code> times. Call this the <code class="docutils literal"><span class="pre">slice_z_times</span></code> vector;</p>
+</li>
+<li><p class="first">For each x coordinate:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">For each y coordinate:</p>
+<blockquote>
+<div><ul class="simple">
+<li>extract the time series at this x, y, z coordinate;</li>
+<li>make a linear interpolator object with the <code class="docutils literal"><span class="pre">slice_z_times</span></code> and
+the extracted time series;</li>
+<li>resample this interpolator at the slice 0 times;</li>
+<li>put this new resampled time series into the new data at the same
+position</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- For each z coordinate (slice index):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- # Make `slice_z_times` vector for this slice</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- ## For each x coordinate:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- ### For each y coordinate:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- #### extract the time series at this x, y, z coordinate;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- #### make a linear interpolator object with the `slice_z_times` and</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#-      the extracted time series;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- #### resample this interpolator at the slice 0 times;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- #### put this new resampled time series into the new data at the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#-      same position</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">slice_z_times</span> <span class="o">=</span> <span class="n">slice_0_times</span> <span class="o">+</span> <span class="n">time_offsets</span><span class="p">[</span><span class="n">z</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fixed_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+<span class="gp">... </span>            <span class="n">time_series</span> <span class="o">=</span> <span class="n">fixed_data</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gp">... </span>            <span class="n">interp</span> <span class="o">=</span> <span class="n">InterpolatedUnivariateSpline</span><span class="p">(</span><span class="n">slice_z_times</span><span class="p">,</span> <span class="n">time_series</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="n">new_series</span> <span class="o">=</span> <span class="n">interp</span><span class="p">(</span><span class="n">slice_0_times</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="n">new_data</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">new_series</span>
+</pre></div>
+</div>
+<p>Congratulations - you have just done slice timing correction on this 4D image.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/slice_timing_solution.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

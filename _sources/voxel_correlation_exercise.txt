@@ -1,3 +1,5 @@
+.. vim: ft=rst
+
 ##########################
 Voxel correlation exercise
 ##########################
