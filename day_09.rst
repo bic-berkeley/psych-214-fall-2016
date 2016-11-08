@@ -8,6 +8,9 @@ Project proposals
 
 Presentation of project proposals and feedback.
 
+We discussed modeling the baseline (e.g. fixation) trials, and we looked at
+the `tutorial on correlated regressors`_.
+
 ********
 Teaching
 ********
