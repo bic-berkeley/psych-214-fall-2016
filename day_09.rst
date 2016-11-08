@@ -12,16 +12,17 @@ Presentation of project proposals and feedback.
 Teaching
 ********
 
+See the `diagnostics analysis code
+<https://github.com/psych-214-fall-2016/fmri-designs>`_ for an example of code
+organization and testing.
+
 * :doc:`otsu_threshold`;
 * Correction with the `false discovery rate`_;
 * `slice timing correction`_;
 * :doc:`slice_timing_exercise`;
 * how to do slice timing;
 * when to use slice timing;
-* slice timing artefacts;
-* principles of optimization;
-* cost functions for motion correction;
-* implementing motion correction.
+* slice timing artefacts.
 
 ********************
 Reading and homework
