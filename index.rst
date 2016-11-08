@@ -138,3 +138,5 @@ version control using git.
     whole_image_statistics
     lab_09
     otsu_threshold
+    slice_timing_exercise
+    slice_timing_solution
