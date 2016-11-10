@@ -49,6 +49,7 @@ Length of a string:
 Strings and numbers are different:
 
 .. nbplot::
+    :raises: TypeError
 
     >>> number = "9"
     >>> number + 6
@@ -68,6 +69,7 @@ We can convert between numbers and strings:
 However...
 
 .. nbplot::
+    :raises: ValueError
 
     >>> number = "nine"
     >>> int(number)
@@ -194,6 +196,7 @@ You can't index a set, because the indices 0, or 1, or 2 don't correspond to
 any particular element (because the set is unordered):
 
 .. nbplot::
+    :raises: TypeError
 
     >>> our_work[0]
     Traceback (most recent call last):
