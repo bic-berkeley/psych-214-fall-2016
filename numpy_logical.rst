@@ -34,6 +34,7 @@ We have to do a little more work for *arrays* of booleans, because the Python
 do not operate as we expect on arrays:
 
 .. nbplot::
+    :raises: ValueError
 
     >>> import numpy as np
 
