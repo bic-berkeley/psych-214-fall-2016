@@ -206,6 +206,10 @@
    http://matthew-brett.github.io/teaching/matrix_rank.html
 .. _cumulative density functions:
    http://matthew-brett.github.io/teaching/on_cdfs.html
+.. _functions are objects:
+   http://matthew-brett.github.io/teaching/functions_are_objects.html
+.. _global scope:
+   http://matthew-brett.github.io/teaching/global_scope.html
 
 .. Ideas
 .. _principal component analysis:
