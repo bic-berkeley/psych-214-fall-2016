@@ -7,7 +7,7 @@ numpy
 scipy
 sympy>=0.7.3
 texext>=0.3.2
-nb2plots>=0.2
+nb2plots>=0.4
 sphinxcontrib_bibtex
 scikit-image
 mako
