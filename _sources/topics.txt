@@ -67,7 +67,7 @@ Exercises:
 * :doc:`github_pca_homework`.
 
 ***************************
-Statistics and brain images
+General statistics and math
 ***************************
 
 * `algebra of sums`_;
@@ -76,15 +76,26 @@ Statistics and brain images
 * `introduction to Principal Component Analysis`_.  See: :doc:`day_03`;
 * `vector angles`_;
 * `correlation and projection`_.  See :doc:`day_04`;
-* :doc:`voxel_time_courses`.  See :doc:`day_04`;
-* `introduction to the General Linear Model`_.  See :doc:`day_05`;
-* `cumulative density functions`;
-* :doc:`mean_test_example`;
-* :doc:`diag_inverse`;
-* :doc:`subtract_mean_math`;
 * `matrix rank`_
+* :doc:`diag_inverse`;
+* `introduction to the General Linear Model`_.  See :doc:`day_05`;
+* `cumulative density functions`_;
+* :doc:`mean_test_example`;
+* :doc:`subtract_mean_math`;
 * :doc:`hypothesis_tests`;
-* :doc:`model_one_voxel`;
-* `tutorial on convolution`_;
-* :doc:`convolution_background`;
+* `tutorial on correlated regressors`_.
+* `tutorial on convolution`_.
+
+****************
+Image processing
+****************
+
 * :doc:`otsu_threshold`.
+
+****************
+Specific to FMRI
+****************
+
+* :doc:`voxel_time_courses`.  See :doc:`day_04`;
+* :doc:`model_one_voxel`;
+* :doc:`convolution_background`.

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Syllabus &#8212; Functional MRI methods</title>
+    <title>Optimization and image registration &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,6 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="next" title="Preparation" href="preparation.html" />
-    <link rel="prev" title="Psych 214 – functional MRI methods" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,54 +42,21 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="syllabus">
-<h1>Syllabus<a class="headerlink" href="#syllabus" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="imaging-data">
-<h2>Imaging data<a class="headerlink" href="#imaging-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="optimization-and-image-registration">
+<h1>Optimization and image registration<a class="headerlink" href="#optimization-and-image-registration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>the structure of raw brain imaging data;</li>
-<li>loading, manipulating, showing and saving brain images;</li>
-<li>coordinate systems and transforms for brain images;</li>
-<li>working with multiple time courses.</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">Rotation in 2D</a></li>
+<li><a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">coordinate systems and affine transforms</a>;</li>
+<li><a class="reference external" href="http://matthew-brett.github.io/teaching/functions_are_objects.html">functions are objects</a>;</li>
+<li><a class="reference external" href="http://matthew-brett.github.io/teaching/global_scope.html">global scope</a>;</li>
 </ul>
 </div>
-<div class="section" id="analysis-concepts">
-<h2>Analysis concepts<a class="headerlink" href="#analysis-concepts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="registration-optimization">
+<h2>Registration, optimization<a class="headerlink" href="#registration-optimization" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>writing and running diagnostics;</li>
-<li>time-course interpolation to allow for slice-wise acquisition of brain
-volumes;</li>
-<li>cost-functions and numerical optimization for image alignment;</li>
-<li>spatial transformations for image alignment: translations, rotations, zooms
-and shears;</li>
-<li>individual variability of sulci and other brain structure; methods of
-reducing variability by automated alignment and warping; remaining variation
-and statistical analysis;</li>
-<li>smoothing / blurring prior to statistical analysis; cost and benefit;</li>
-<li>multiple regression for modeling the effect of the experiment on time
-courses of brain activity;</li>
-<li>specifying a model of neural activity; transformation of neural activity to
-predicted FMRI signal using a hemodynamic response function; modeling the
-hemodynamic response;</li>
-<li>estimating multiple regression models; hypothesis testing on multiple
-regression models; the General Linear Model as generalization of multiple
-regression;</li>
-<li>inference on maps of statistics; correction for multiple comparisons;
-family-wise error; false discovery rate.</li>
-</ul>
-</div>
-<div class="section" id="collaboration-correctness-and-reproducibility">
-<h2>Collaboration, correctness and reproducibility<a class="headerlink" href="#collaboration-correctness-and-reproducibility" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>collaborating with peers and mentors;</li>
-<li>role of working practice in quality, reproducibility, collaboration;</li>
-<li>choosing and learning simple tools;</li>
-<li>version control with <a class="reference external" href="http://git-scm.com">git</a>;</li>
-<li>sharing code with <a class="reference external" href="https://github.com">https://github.com</a>;</li>
-<li>scripting and coding with Python;</li>
-<li>pair coding and code review;</li>
-<li>testing;</li>
-<li>documentation.</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/optimizing_space.html">optimizing spatial transformations</a>;</li>
 </ul>
 </div>
 </div>
@@ -112,8 +77,8 @@ family-wise error; false discovery rate.</li>
 
 
 <h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Syllabus</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
@@ -139,8 +104,6 @@ family-wise error; false discovery rate.</li>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Psych 214 – functional MRI methods</a></li>
-      <li>Next: <a href="preparation.html" title="next chapter">Preparation</a></li>
   </ul></li>
 </ul>
 </div>
@@ -166,7 +129,7 @@ family-wise error; false discovery rate.</li>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/syllabus.txt"
+      <a href="_sources/lab_10.txt"
           rel="nofollow">Page source</a>
     </div>
 
