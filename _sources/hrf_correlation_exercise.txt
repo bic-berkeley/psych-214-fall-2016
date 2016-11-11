@@ -1,7 +1,7 @@
 .. vim:ft=rst
 
 #####################################
-Making a predicted neural time course
+Predicted neural time course exercise
 #####################################
 
 * For code template see: :download:`hrf_correlation_code.py`;

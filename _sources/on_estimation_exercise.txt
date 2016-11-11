@@ -1,8 +1,8 @@
 .. vim: ft=rst
 
-######################################
-Understanding least-squares regression
-######################################
+#################################
+Least-squares regression exercise
+#################################
 
 * For code template see: :download:`on_estimation_code.py`;
 * For solution see: :doc:`on_estimation_solution`.

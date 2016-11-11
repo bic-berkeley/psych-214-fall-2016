@@ -1,8 +1,8 @@
 .. vim: ft=rst
 
-####################################
-Modeling groups with dummy variables
-####################################
+#############################################
+Modeling groups with dummy variables exercise
+#############################################
 
 ****************************
 Introduction and definitions

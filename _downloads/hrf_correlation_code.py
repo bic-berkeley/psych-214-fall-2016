@@ -1,4 +1,4 @@
-""" Making a predicted neural time course
+""" Predicted neural time course exercise
 """
 #: compatibility with Python 2
 from __future__ import print_function, division

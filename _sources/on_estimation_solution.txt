@@ -1,8 +1,8 @@
 .. vim: ft=rst
 
-######################################
-Understanding least-squares regression
-######################################
+#################################
+Least-squares regression exercise
+#################################
 
 ****************************
 Introduction and definitions

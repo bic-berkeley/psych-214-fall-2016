@@ -1,4 +1,4 @@
-""" A first go at finding brain activation
+""" First go at brain activation exercise
 """
 
 #: import common modules

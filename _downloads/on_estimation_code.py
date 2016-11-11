@@ -1,4 +1,4 @@
-""" Understanding least-squares regression
+""" Least-squares regression exercise
 """
 #: Import numerical and plotting libraries
 import numpy as np

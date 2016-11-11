@@ -1,4 +1,4 @@
-""" Modeling groups with dummy variables
+""" Modeling groups with dummy variables exercise
 """
 #: Import numerical and plotting libraries
 import numpy as np
@@ -65,8 +65,8 @@ relationship of the values in the estimated beta vector to the means of of
 #- Calculate c (X.T X)^-1 c.T
 
 
-""" What is the relationship of ``c.dot(npl.inv(X.T.dot(X)).dot(cvec)`` to
-``p`` - the number of observations in each group?
+""" What is the relationship of ``c.T (X.T.X)^-1 c`` to ``p`` - the number
+of observations in each group?
 """
 
 

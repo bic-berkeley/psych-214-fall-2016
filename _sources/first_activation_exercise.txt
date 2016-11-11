@@ -1,8 +1,8 @@
 .. vim: ft=rst
 
-######################################
-A first go at finding brain activation
-######################################
+#####################################
+First go at brain activation exercise
+#####################################
 
 * For code template see: :download:`first_activation_code.py`;
 * For solution see: :doc:`first_activation_solution`.
