@@ -32,6 +32,7 @@ version control using git.
     labs
     projects
     topics
+    exercises
     example_data
     bibliography
 
@@ -140,3 +141,4 @@ version control using git.
     otsu_threshold
     slice_timing_exercise
     slice_timing_solution
+    lab_10

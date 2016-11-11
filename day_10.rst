@@ -6,6 +6,7 @@ November 14: affine and cross-modality registration
 Teaching
 ********
 
+* finishing `optimizing spatial transformations`;
 * using the image affine for storing the results of registration;
 * cost functions for registration across imaging modalities;
 * rigid-body, linear, affine registration;

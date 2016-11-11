@@ -25,6 +25,8 @@ Correlation and projection
 * `correlation and projection`_;
 * :doc:`pearson_functions` exercise.
 
+.. _stimuli-exercise:
+
 ***********************
 Correlation in practice
 ***********************

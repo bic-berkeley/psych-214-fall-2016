@@ -63,6 +63,11 @@ Teaching
   * https://codecov.io/gh/psych-214-fall-2016/project-red
   * https://codecov.io/gh/psych-214-fall-2016/project-blue
 
+.. _glmtools-exercise:
+
+GLM and testing exercise
+========================
+
 * testing, and t test volumes:
 
     * :doc:`validate_against_scipy`;
@@ -73,6 +78,9 @@ Teaching
         cd glmtools
         pip3 install --user --editable .
         py.test glmtools
+
+Multiple comparison correction
+==============================
 
 * the `Bonferroni correction`_;
 * thresholding with `Random fields`_;

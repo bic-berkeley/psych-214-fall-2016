@@ -1,8 +1,8 @@
 .. vim: ft=rst
 
-######################################
-A first go at finding brain activation
-######################################
+#####################################
+First go at brain activation exercise
+#####################################
 
 .. nbplot::
     :include-source: false
