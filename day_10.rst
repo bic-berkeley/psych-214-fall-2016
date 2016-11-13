@@ -7,11 +7,22 @@ Teaching
 ********
 
 * finishing `optimizing spatial transformations`;
-* using the image affine for storing the results of registration;
-* cost functions for registration across imaging modalities;
-* rigid-body, linear, affine registration;
-* implementing an affine registration;
-* affine registration in SPM.
+* :doc:`rotations_2d_3d`;
+* :doc:`resampling_with_ndimage`;
+* :doc:`more_on_rotation_exercise`;
+* :doc:`optimizing_rotation_exercise`;
+* :doc:`image_header_and_affine`;
+* :doc:`images_and_affines`;
+* :doc:`reslicing_with_affines_exercise`;
+* :doc:`mutual information`;
+
+.. other-stuff:
+
+    * using the image affine for storing the results of registration;
+    * cost functions for registration across imaging modalities;
+    * rigid-body, linear, affine registration;
+    * implementing an affine registration;
+    * affine registration in SPM.
 
 ********************
 Reading and homework

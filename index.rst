@@ -142,3 +142,16 @@ version control using git.
     slice_timing_exercise
     slice_timing_solution
     lab_10
+    printing_floating
+    image_header_and_affine
+    more_on_rotation_exercise
+    more_on_rotation_solution
+    images_and_affines
+    optimizing_rotation_exercise
+    optimizing_rotation_solution
+    resampling_with_ndimage
+    reslicing_with_affines_exercise
+    reslicing_with_affines_solution
+    rotation_2d_3d.rst
+    what_extra_transform_exercise
+    what_extra_transform_solution

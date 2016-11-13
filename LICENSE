@@ -6,28 +6,48 @@ Unless we state otherwise, the files in this website are copyright Matthew
 Brett, JB Poline, 2016, licensed under the Creative Commons attribution 2.0
 generic license (CC-by 2.0): see http://creativecommons.org/licenses/by/2.0/
 
+Unless we state otherwise, all Python, R and MATLAB code files in this
+repository are covered by the license in the file UNLICENSE.  Put simply, we
+the code files into the public domain.
+
 The data in ``camera.txt`` comes from reading the file ``camera.png`` in the
 scikit-image ``data`` directory, and writing the read values out to a text
-file.  I could not find a copyright statement or license for it, but many
+file.  I (MB) could not find a copyright statement or license for it, but many
 image-processing packages use it, and it appears to be in the public domain.
 
-The data from the anatomical image stored in ``anatomical.txt`` is from the
-OpenFMRI project, dataset ``ds114``: https://openfmri.org/dataset/ds000114 . It
-is a version of ``sub009/anatomy/highres001.nii.gz`` from which I (MB) have
-loaded the data and written the data to a text file.
+The brain image data come from two OpenFMRI datasets:
 
-The data for the anatomical image `ds107_sub001_highres.nii` is an
-uncompressed copy of ``sub001/anatomy/highres001.nii.gz`` from OpenFMRI
-dataset ``ds107`` https://openfmri.org/dataset/ds000107.
-
-The BOLD data ``ds107_sub012_t1r2.nii`` comes from the OpenFMRI project
-dataset ``ds107``: https://openfmri.org/dataset/ds000107 . It is a
-decompressed and renamed copy of ``sub012/BOLD/task001_run002/bold.nii.gz``.
-
-The BOLD data ``ds114_sub009_t2r1.nii`` comes from the OpenFMRI project dataset
-``ds114``: https://openfmri.org/dataset/ds000114 . It is a decompressed and
-renamed copy of ``sub009/BOLD/task002_run001/bold.nii.gz``.
+* dataset ds107 : https://openfmri.org/dataset/ds000107
+* dataset ds114 : https://openfmri.org/dataset/ds000114
 
 The files from the ``ds107`` and ``ds114`` datasets are covered by a Public
 Domain Dedication and License version 1.0 :
-http://opendatacommons.org/licenses/pddl/1.0/
+http://opendatacommons.org/licenses/pddl/1.0/ . We release all derivative
+images in this repository under the same license.
+
+The data from the anatomical image stored in ``anatomical.txt`` is from
+dataset ``ds114``. It is a version of ``sub009/anatomy/highres001.nii.gz`` from
+which I (MB) have loaded the data and written the data to a text file.  The
+other brain images have the following provenance:
+
+* ds107_sub001_highres.nii : uncompressed version of
+  `sub001/anatomy/highres001.nii.gz` from ds107;
+* ds107_sub012_highres.nii : uncompressed version of
+  `sub012/anatomy/highres001.nii.gz` from ds107;
+* ds107_sub012_t1r2.nii : uncompressed version of
+  ``sub012/BOLD/task001_run002/bold.nii.gz`` from ds107;
+* ds114_sub009_highres.nii : uncompressed version of
+  `sub009/anatomy/highres001.nii.gz` from ds114;
+* ds114_sub009_t2r1.nii : uncompressed version of
+  ``sub009/BOLD/task002_run001/bold.nii.gz`` from ds114;
+* ds114_sub009_highres_moved.hdr : header from ds114_sub009_highres.nii file
+  with transformations applied from `move_ds114_anat.py`;
+* ds114_sub009_highres_moved.img : copy of ds114_sub009_t2r1.nii
+
+These files:
+
+* rotated_volume.nii
+* secret_rotated_volume.nii
+
+are modified versions of the first volume in the ``ds107_sub012_t1r2.nii`` BOLD
+data file, with modifications applied from the script ``make_rotated.py``.
