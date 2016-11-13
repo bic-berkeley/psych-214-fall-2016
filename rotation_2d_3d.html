@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rotations and rotation matrices &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="rotations-and-rotation-matrices">
+<h1>Rotations and rotation matrices<a class="headerlink" href="#rotations-and-rotation-matrices" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rotations-in-two-dimensions">
+<h2>Rotations in two dimensions<a class="headerlink" href="#rotations-in-two-dimensions" title="Permalink to this headline">¶</a></h2>
+<p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">rotation in 2d</a>.</p>
+<p>In two dimensions, rotating a vector <span class="math">\(\theta\)</span> around the origin can be
+expressed as a 2 by 2 transformation matrix:</p>
+<div class="math">
+\[\begin{split}R(\theta) = \begin{bmatrix}
+\cos \theta &amp; -\sin \theta \\
+\sin \theta &amp; \cos \theta \\
+\end{bmatrix}\end{split}\]</div>
+<p>This matrix rotates column vectors by matrix multiplication on the left:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix}
+x' \\
+y' \\
+\end{bmatrix} = \begin{bmatrix}
+\cos \theta &amp; -\sin \theta \\
+\sin \theta &amp; \cos \theta \\
+\end{bmatrix}\begin{bmatrix}
+x \\
+y \\
+\end{bmatrix}\end{split}\]</div>
+<p>The coordinates <span class="math">\((x',y')\)</span> of the point <span class="math">\((x,y)\)</span> after rotation are:</p>
+<div class="math">
+\[\begin{split}x' = x \cos \theta - y \sin \theta \\
+y' = x \sin \theta + y \cos \theta\end{split}\]</div>
+<p>See <a href="#id3"><span class="problematic" id="id4">`rotations in 2D`_</span></a> for a visual proof.</p>
+</div>
+<div class="section" id="rotations-in-three-dimensions">
+<h2>Rotations in three dimensions<a class="headerlink" href="#rotations-in-three-dimensions" title="Permalink to this headline">¶</a></h2>
+<p>Rotations in three dimensions extend simply from two dimeions. For example, in
+3D, the rotation above would be a rotation around the z axis (z stays
+constant, x and y change):</p>
+<div class="math">
+\[\begin{split}R_z(\theta) &amp;= \begin{bmatrix}
+\cos \theta &amp;  -\sin \theta &amp; 0 \\[3pt]
+\sin \theta &amp; \cos \theta &amp; 0\\[3pt]
+0 &amp; 0 &amp; 1\\
+\end{bmatrix}\end{split}\]</div>
+<p>For a rotation around the x axis, x stays the same, y and z change:</p>
+<div class="math">
+\[\begin{split}R_x(\theta) &amp;= \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; \cos \theta &amp;  -\sin \theta \\[3pt]
+0 &amp; \sin \theta  &amp;  \cos \theta \\[3pt]
+\end{bmatrix}\end{split}\]</div>
+<p>There is a sign flip for the rotation around the y axis.  This is to do with
+the direction of the rotation relative to the direction (positive to negative)
+of the axes.  You may be able to persuade yourself of this by drawing the x,
+y, z axes and thinking about the rotation around the y axis when observing
+from the positive end of the y axis:</p>
+<div class="math">
+\[\begin{split}R_y(\theta) &amp;= \begin{bmatrix}
+\cos \theta &amp; 0 &amp; \sin \theta \\[3pt]
+0 &amp; 1 &amp; 0 \\[3pt]
+-\sin \theta &amp; 0 &amp; \cos \theta \\
+\end{bmatrix}\end{split}\]</div>
+<p>We can combine rotations with matrix multiplication. For example, here is an
+rotation of <span class="math">\(\gamma\)</span> radians around the x axis:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix}
+x'\\
+y'\\
+z'\\
+\end{bmatrix} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; \cos(\gamma) &amp; -\sin(\gamma) \\
+0 &amp; \sin(\gamma) &amp; \cos(\gamma) \\
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y\\
+z\\
+\end{bmatrix}\end{split}\]</div>
+<p>We could then apply a rotation of <span class="math">\(\phi\)</span> radians around the y axis:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix}
+x''\\
+y''\\
+z''\\
+\end{bmatrix} =
+\begin{bmatrix}
+\cos(\phi) &amp; 0 &amp; \sin(\phi) \\
+0 &amp; 1 &amp; 0 \\
+-\sin(\phi) &amp; 0 &amp; \cos(\phi) \\
+\end{bmatrix}
+\begin{bmatrix}
+x'\\
+j'\\
+k'\\
+\end{bmatrix}\end{split}\]</div>
+<p>We could also write the combined rotation as:</p>
+<div class="math">
+\[\begin{split}\begin{bmatrix}
+x''\\
+y''\\
+z''\\
+\end{bmatrix} =
+\begin{bmatrix}
+\cos(\phi) &amp; 0 &amp; \sin(\phi) \\
+0 &amp; 1 &amp; 0 \\
+-\sin(\phi) &amp; 0 &amp; \cos(\phi) \\
+\end{bmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; \cos(\gamma) &amp; -\sin(\gamma) \\
+0 &amp; \sin(\gamma) &amp; \cos(\gamma) \\
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y\\
+z\\
+\end{bmatrix}\end{split}\]</div>
+<p>Because matrix multiplication is associative:</p>
+<div class="math">
+\[\begin{split}\mathbf{Q} = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; \cos(\gamma) &amp; -\sin(\gamma) \\
+0 &amp; \sin(\gamma) &amp; \cos(\gamma) \\
+\end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\mathbf{P} = \begin{bmatrix}
+\cos(\phi) &amp; 0 &amp; \sin(\phi) \\
+0 &amp; 1 &amp; 0 \\
+-\sin(\phi) &amp; 0 &amp; \cos(\phi) \\
+\end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\mathbf{M} = \mathbf{P} \cdot \mathbf{Q}\]</div>
+<div class="math">
+\[\begin{split}\begin{bmatrix}
+x''\\
+y''\\
+z''\\
+\end{bmatrix} =
+\mathbf{M}
+\begin{bmatrix}
+x\\
+y\\
+z\\
+\end{bmatrix}\end{split}\]</div>
+<p><span class="math">\(\mathbf{M}\)</span> is the rotation matrix that encodes a rotation by
+<span class="math">\(\gamma\)</span> radians around the x axis <em>followed by</em> a rotation by
+<span class="math">\(\phi\)</span> radians around the y axis.  We know that the y axis rotation
+follows the x axis rotation because matrix multiplication operates from right
+to left.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/rotation_2d_3d.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

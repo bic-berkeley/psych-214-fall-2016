@@ -1,0 +1,147 @@
+.. vim: ft=rst
+
+###############################
+Reslicing with affines exercise
+###############################
+
+* For code template see: :download:`reslicing_with_affines_code.py`;
+* For solution see: :doc:`reslicing_with_affines_solution`.
+
+.. nbplot::
+    :include-source: false
+
+
+.. nbplot::
+
+    >>> #: standard imports
+    >>> import numpy as np
+    >>> import numpy.linalg as npl
+    >>> import matplotlib.pyplot as plt
+    >>> # print arrays to 4 decimal places
+    >>> np.set_printoptions(precision=4, suppress=True)
+    >>> import nibabel as nib
+
+.. nbplot::
+
+    >>> #: gray colormap and nearest neighbor interpolation by default
+    >>> plt.rcParams['image.cmap'] = 'gray'
+    >>> plt.rcParams['image.interpolation'] = 'nearest'
+
+**************************************
+Reslicing between spaces using affines
+**************************************
+
+Here are a BOLD (4D image) and a structural image for the same subject:
+
+* BOLD image : :download:`ds114_sub009_t2r1.nii`;
+* structural image : :download:`ds114_sub009_highres.nii`.
+
+They have different orientations and voxel sizes.
+
+Confirm this by loading each image, and showing the:
+
+* image shape;
+* image affine from the header.
+
+.. nbplot::
+
+    >>> #- Load structural and BOLD image
+    >>> #- Print image data shape
+    >>> #- Print affine from header
+
+We know this BOLD image now. It has a bad first volume. Load the BOLD data,
+drop the first volume, and make a new volume that is the mean of the rest of
+the BOLD volumes across time. Plot an example slice from the mean volume.
+
+.. nbplot::
+
+    >>> #- Load BOLD image data.  Drop first volume.  Make mean volume
+    >>> #- Plot an example slice from the mean volume
+
+Load the structural data, plot an example slice:
+
+.. nbplot::
+
+    >>> #- Load structural data, plot example slice
+
+Now we are going to reslice the anatomical to match the mean functional
+volume.
+
+Remember :doc:`pull resampling <resampling_with_ndimage>`? We are going to
+need the transform that maps a coordinate in the mean functional volume, to
+the corresponding coordinate in the structural volume.
+
+In order to do this, we need:
+
+* the affine mapping from mean functional voxel coordinates to mm space
+  (``mean_vox2mm``);
+* the affine mapping from mm space to structural voxel coordinates
+  (``mm2struct_vox``).
+
+We combine these by matrix multiplication (*from right to left!*) to give
+``mean_vox2struct_vox``:
+
+.. nbplot::
+
+    >>> #- Get `mean_vox2mm` mapping
+    >>> #- Get `mm2struct_vox` mapping
+    >>> #- Calculate `mean_vox2struct_vox`
+
+Split this affine matrix up into its component 3 x 3 ``M`` matrix and the 3
+element translation vector:
+
+.. nbplot::
+
+    >>> #- Split `mean_vox2struct_vox` into 3x3 transformation, 3 element
+    >>> #- translation.
+
+Now we can use ``affine_transform`` to make a new copy of the structural
+image, resampled into the voxel coordinates of the mean functional image:
+
+.. nbplot::
+
+    >>> #: import affine_transform function
+    >>> from scipy.ndimage import affine_transform
+
+.. nbplot::
+
+    >>> #- Use affine_transform and the tranformation components to resample
+    >>> #- structural to functional
+
+Use :doc:`subplots` to display and example slice from the mean image and the
+resliced structural side by side:
+
+.. nbplot::
+
+    >>> #- Display example slice from mean vol and resliced structural side by
+    >>> #- side.
+
+Now let's go in the opposite direction.
+
+We are going to resample the mean functional volume into the voxel space of
+the structural volume.
+
+We need the affine transformation from voxel coordinates in the structural to
+voxel coordinates in the mean functional volume |--| call this
+``struct_vox2mean_vox``:
+
+.. nbplot::
+
+    >>> #- Get affine transformation `struct_vox2mean_vox`
+
+Use the contents of ``struct_vox2mean_vox`` to reslice the mean functional to
+the structural voxel space:
+
+.. nbplot::
+
+    >>> #- Reslice mean functional to structural voxel space
+
+Display example slice for resliced mean functional side by side with
+structural:
+
+.. nbplot::
+
+    >>> #- Display example slices for resliced mean and structural
+
+Can you think of situations where you would prefer to use one direction (e.g.
+functional to anatomy) over the other?

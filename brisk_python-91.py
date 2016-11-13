@@ -1,2 +1,0 @@
-software['Python']
-# 100

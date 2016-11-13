@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Images and affines &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="images-and-affines">
+<h1>Images and affines<a class="headerlink" href="#images-and-affines" title="Permalink to this headline">¶</a></h1>
+<p>See: <a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">coordinate systems and affine transforms</a> for background.</p>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># import common modules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4DP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="affines-inverses">
+<h2>Affines, inverses<a class="headerlink" href="#affines-inverses" title="Permalink to this headline">¶</a></h2>
+<p>We often have the situation where we compose an affine of several
+transformations. We do the composing using matrix multiplication. For example,
+the following code composes two rotations and a translation.  We are using the
+<a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> module to make the <a class="reference internal" href="rotation_2d_3d.html"><span class="doc">3D rotation matrices</span></a>.  Remember – matrix multiplication works right to left.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># get functions to make 3D rotation matrices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
+</pre></div>
+</div>
+</div>
+<p>Here is a rotation matrix (3 x 3) for a rotation of -0.2 radians around the x
+axis:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first_rotation</span> <span class="o">=</span> <span class="n">x_rotmat</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_rotation</span>
+<span class="go">array([[ 1.    ,  0.    ,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.9801,  0.1987],</span>
+<span class="go">       [ 0.    , -0.1987,  0.9801]])</span>
+</pre></div>
+</div>
+</div>
+<p>We can make this rotation matrix into an affine transformation, by putting it
+into the top left of a 4 x 4 identity matrix:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># The identity affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">first_rotation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_affine</span>
+<span class="go">array([[ 1.    ,  0.    ,  0.    ,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.9801,  0.1987,  0.    ],</span>
+<span class="go">       [ 0.    , -0.1987,  0.9801,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.    ,  0.    ,  1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<p>Now we made a second affine matrix for a rotation around y of 0.4 radians:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">second_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">second_affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_rotmat</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">second_affine</span>
+<span class="go">array([[ 0.9211,  0.    ,  0.3894,  0.    ],</span>
+<span class="go">       [ 0.    ,  1.    ,  0.    ,  0.    ],</span>
+<span class="go">       [-0.3894,  0.    ,  0.9211,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.    ,  0.    ,  1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<p>Finally we make a translation of 10 in x, 20 in y and 30 in z:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">third_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">third_affine</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">third_affine</span>
+<span class="go">array([[  1.,   0.,   0.,  10.],</span>
+<span class="go">       [  0.,   1.,   0.,  20.],</span>
+<span class="go">       [  0.,   0.,   1.,  30.],</span>
+<span class="go">       [  0.,   0.,   0.,   1.]])</span>
+</pre></div>
+</div>
+</div>
+<p>We compose these three affine matrices to give an affine implementing <em>first</em>
+a rotation of -0.2 around the x axis, <em>then</em> a rotation of 0.4 around the y
+axis, and <em>finally</em> a translation [10, 20, 30] in [x, y, z]. Note the order
+– matrix multiplication goes from right to left:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span> <span class="o">=</span> <span class="n">third_affine</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">second_affine</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">first_affine</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span>
+<span class="go">array([[  0.9211,  -0.0774,   0.3817,  10.    ],</span>
+<span class="go">       [  0.    ,   0.9801,   0.1987,  20.    ],</span>
+<span class="go">       [ -0.3894,  -0.183 ,   0.9027,  30.    ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-nibabel-affines-module">
+<h2>The <a class="reference external" href="http://nipy.org/nibabel/reference/nibabel.affines.html#module-nibabel.affines">nibabel.affines</a> module<a class="headerlink" href="#the-nibabel-affines-module" title="Permalink to this headline">¶</a></h2>
+<p>In fact, nibabel has a short-cut routine to make a 4x4 affine matrix from a
+3 x 3 matrix and an (optional) vector of translations:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Affine from a 3x3 matrix (the &#39;mat&#39; in &#39;matvec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">from_matvec</span><span class="p">(</span><span class="n">y_rotmat</span><span class="p">(</span><span class="mf">0.4</span><span class="p">))</span>
+<span class="go">array([[ 0.9211,  0.    ,  0.3894,  0.    ],</span>
+<span class="go">       [ 0.    ,  1.    ,  0.    ,  0.    ],</span>
+<span class="go">       [-0.3894,  0.    ,  0.9211,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.    ,  0.    ,  1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Affine from a 3x3 matrix (&#39;mat&#39;) and a translation vector (&#39;vec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">from_matvec</span><span class="p">(</span><span class="n">y_rotmat</span><span class="p">(</span><span class="mf">0.4</span><span class="p">),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="go">array([[  0.9211,   0.    ,   0.3894,  10.    ],</span>
+<span class="go">       [  0.    ,   1.    ,   0.    ,  20.    ],</span>
+<span class="go">       [ -0.3894,   0.    ,   0.9211,  30.    ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="manipulating-affines-with-inverses">
+<h2>Manipulating affines with inverses<a class="headerlink" href="#manipulating-affines-with-inverses" title="Permalink to this headline">¶</a></h2>
+<p>Let us say we have an affine, like the one we just made:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">combined</span>
+<span class="go">array([[  0.9211,  -0.0774,   0.3817,  10.    ],</span>
+<span class="go">       [  0.    ,   0.9801,   0.1987,  20.    ],</span>
+<span class="go">       [ -0.3894,  -0.183 ,   0.9027,  30.    ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<p>Imagine that we knew that this affine was composed of three affines, and we
+knew the last two, but not the first. How would we find what the first affine
+was?</p>
+<p>Call our combined affine <span class="math">\(\mathbf{D}\)</span>. We know that <span class="math">\(\mathbf{D} =
+\mathbf{C} \cdot \mathbf{B} \cdot \mathbf{A}\)</span>. We know <span class="math">\(\mathbf{C}\)</span> and
+<span class="math">\(\mathbf{B}\)</span> but we want to find <span class="math">\(\mathbf{A}\)</span>.</p>
+<p>Above I&#8217;ve written matrix multiplication with a dot - as in <span class="math">\(\mathbf{B}
+\cdot \mathbf{A}\)</span>, but in what follows I&#8217;ll omit the dot, just writing
+<span class="math">\(\mathbf{B} \mathbf{A}\)</span> to mean matrix multiplication.</p>
+<p>We find <span class="math">\(\mathbf{A}\)</span> using matrix inverses. Call <span class="math">\(\mathbf{E} =
+\mathbf{C} \mathbf{B}\)</span>. Then <span class="math">\(\mathbf{D} = \mathbf{E} \mathbf{A}\)</span>. If we
+can find the inverse of <span class="math">\(\mathbf{E}\)</span> (written as
+<span class="math">\(\mathbf{E^{-1}}\)</span>) then (by the definition of the inverse):</p>
+<div class="math">
+\[\mathbf{E^{-1}} \mathbf{E} = \mathbf{I}\]</div>
+<p>and:</p>
+<div class="math">
+\[\begin{split}\mathbf{E^{-1}} \mathbf{D} = \mathbf{E^{-1}} \mathbf{E} \mathbf{A} \\
+\mathbf{E^{-1}} \mathbf{D} = \mathbf{I} \mathbf{A} \\
+\mathbf{E^{-1}} \mathbf{D} = \mathbf{A}\end{split}\]</div>
+<p>For reasons we do not have time to go into, our affine matrices are almost
+invariably invertible.</p>
+<p>Let&#8217;s see if we can reconstruct our <code class="docutils literal"><span class="pre">first_affine</span></code> from the <code class="docutils literal"><span class="pre">combined</span></code>
+affine, given we know the <code class="docutils literal"><span class="pre">third_affine</span></code> and <code class="docutils literal"><span class="pre">second_affine</span></code>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">third_affine</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">second_affine</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_inv</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_inv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+<span class="go">array([[ 1.    ,  0.    , -0.    ,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.9801,  0.1987,  0.    ],</span>
+<span class="go">       [ 0.    , -0.1987,  0.9801,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.    ,  0.    ,  1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<p>This is the same as our first affine:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first_affine</span>
+<span class="go">array([[ 1.    ,  0.    ,  0.    ,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.9801,  0.1987,  0.    ],</span>
+<span class="go">       [ 0.    , -0.1987,  0.9801,  0.    ],</span>
+<span class="go">       [ 0.    ,  0.    ,  0.    ,  1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<p>What about the situation where we know the first part of the affine, but we
+want to find the rest?</p>
+<p>To solve this problem, we will need the <em>right inverse</em>.</p>
+<p>The inverse we have used so far is the <em>left inverse</em> - so called because we
+apply it multiplying on the left of the original matrix:</p>
+<div class="math">
+\[\mathbf{E^{-1}} \mathbf{E} = \mathbf{I}\]</div>
+<p>Luckily, it turns out that, for square matrices, if there is a <em>left inverse</em>
+<span class="math">\(\mathbf{E^{-1}}\)</span> then this is also the right inverse:</p>
+<div class="math">
+\[\mathbf{E^{-1}} \mathbf{E} = \mathbf{E} \mathbf{E^{-1}} = \mathbf{I}\]</div>
+<p>It is a little tricky to prove that there must be a right inverse, but it is
+easy to prove that, if there is a right inverse, it must be the same as the
+left inverse. Call the left inverse <span class="math">\(\mathbf{L}\)</span> and the right inverse
+<span class="math">\(\mathbf{R}\)</span>:</p>
+<div class="math">
+\[\begin{split}\mathbf{LA} = \mathbf{I}\\
+\mathbf{AR} = \mathbf{I}\\\end{split}\]</div>
+<p>then:</p>
+<div class="math">
+\[\begin{split}\mathbf{LAR} = \mathbf{LAR}\\
+\mathbf{L(AR)} = \mathbf{(LA)R}\\
+\mathbf{L} = \mathbf{R}\end{split}\]</div>
+<p>So, in our case, where we want to find the transformations <em>following</em> the
+first affine, we can do this:</p>
+<div class="math">
+\[\begin{split}\mathbf{D} = \mathbf{C} \mathbf{B} \mathbf{A} \\
+\mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B} \mathbf{A} \mathbf{A^{-1}} \\
+\mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B}\end{split}\]</div>
+<p>For our actual affines:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">third_with_second</span> <span class="o">=</span> <span class="n">combined</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">first_affine</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">third_with_second</span>
+<span class="go">array([[  0.9211,  -0.    ,   0.3894,  10.    ],</span>
+<span class="go">       [  0.    ,   1.    ,   0.    ,  20.    ],</span>
+<span class="go">       [ -0.3894,  -0.    ,   0.9211,  30.    ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is the same as</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">third_affine</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">second_affine</span><span class="p">)</span>
+<span class="go">array([[  0.9211,   0.    ,   0.3894,  10.    ],</span>
+<span class="go">       [  0.    ,   1.    ,   0.    ,  20.    ],</span>
+<span class="go">       [ -0.3894,   0.    ,   0.9211,  30.    ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/images_and_affines.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

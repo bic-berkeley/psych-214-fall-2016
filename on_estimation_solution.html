@@ -48,6 +48,7 @@
 <h1>Least-squares regression exercise<a class="headerlink" href="#least-squares-regression-exercise" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction-and-definitions">
 <h2>Introduction and definitions<a class="headerlink" href="#introduction-and-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import numerical and plotting libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print to four digits of precision</span>
@@ -56,11 +57,13 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
+</div>
 <p>These exercises are to practice thinking about how the regression estimation
 works, and the relationship of correlation and regression.</p>
 <p>To give us some concrete data to play with, here are some more samples of the
 &#8220;psychopathy&#8221; and &#8220;clamminess&#8221; scores that we saw in the <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the
 general linear model</a>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: The data, that we are trying to model.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">11.914</span><span class="p">,</span>   <span class="mf">4.289</span><span class="p">,</span>  <span class="mf">10.825</span><span class="p">,</span>  <span class="mf">14.987</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">7.572</span><span class="p">,</span>   <span class="mf">5.447</span><span class="p">,</span>   <span class="mf">17.332</span><span class="p">,</span>  <span class="mf">12.105</span><span class="p">,</span>
@@ -72,6 +75,7 @@ general linear model</a>:</p>
 <span class="gp">... </span>                    <span class="mf">1.398</span><span class="p">,</span>  <span class="mf">1.952</span><span class="p">,</span>  <span class="mf">5.095</span><span class="p">,</span> <span class="mf">8.092</span><span class="p">,</span>  <span class="mf">5.685</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="mf">5.167</span><span class="p">,</span>  <span class="mf">7.257</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 <p><span class="math">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
 <p>Our simple linear model can be expressed by:</p>
@@ -109,6 +113,7 @@ by:</p>
 <h2>Correlation coefficient and regression<a class="headerlink" href="#correlation-coefficient-and-regression" title="Permalink to this headline">¶</a></h2>
 <p>Create the <span class="math">\(\Xmat\)</span> matrix from a vector of ones and the vector of <code class="docutils literal"><span class="pre">clammy</span></code>
 scores:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create X design matrix fron column of ones and clammy vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">clammy</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -128,70 +133,89 @@ scores:</p>
 <span class="go">       [ 1.   ,  7.257]])</span>
 </pre></div>
 </div>
+</div>
 <p>Are the columns of <code class="docutils literal"><span class="pre">X</span></code> orthogonal to each other?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether the columns of X are orthogonal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="go">array([[  12.    ,   41.212 ],</span>
 <span class="go">       [  41.212 ,  232.3887]])</span>
 </pre></div>
 </div>
+</div>
 <p>Is <span class="math">\(\Xmat^T \Xmat\)</span> invertible?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether X.T.dot(X) is invertible</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iXtX</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>  <span class="c1"># No error in inversion</span>
 </pre></div>
 </div>
+</div>
 <p>Calculate <span class="math">\((\Xmat^T \Xmat)^{-1} \Xmat^T\)</span>.  What shape is it?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate (X.T X)^-1 X.T (the pseudoinverse)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">piX</span> <span class="o">=</span> <span class="n">iXtX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">piX</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 12)</span>
 </pre></div>
 </div>
+</div>
 <p>Calculate the least squares fit value for <span class="math">\(\bvec\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate least squares fit for beta vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">piX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span>
 <span class="go">array([ 9.8016,  0.8074])</span>
 </pre></div>
 </div>
+</div>
 <p>Calculate the fitted values <span class="math">\(c + b \xvec\)</span>, and the residuals <span class="math">\(\evec\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the fitted values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fitted</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">residuals</span> <span class="o">=</span> <span class="n">psychopathy</span> <span class="o">-</span> <span class="n">fitted</span>
 </pre></div>
 </div>
+</div>
 <p>Confirm that the mean of the residuals is close to zero:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- mean of residuals near zero</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">residuals</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
+</div>
 <p>Confirm that residuals are orthogonal to both columns of the design matrix:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Residuals orthogonal to design</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
 <span class="go">array([-0., -0.])</span>
 </pre></div>
+</div>
 </div>
 <p>We will not modify the design to see what happens to the parameters and the
 fitted values.</p>
 <p>To keep our calculations for the original and new designs, start by copying
 <code class="docutils literal"><span class="pre">X</span></code> to make a new array <code class="docutils literal"><span class="pre">X_o</span></code>.  Hint: tab complete on the array object in
 IPython.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Copy X to new array X_o</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_o</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 <p>We found that above that the columns of <code class="docutils literal"><span class="pre">X</span></code> are not orthogonal.  How can we
 modify the second column of <code class="docutils literal"><span class="pre">X</span></code> to make it orthogonal to the first?  Hint:
 write out the dot product of the first column with the second as a sum, and
 simplify. Use that result to work out what to subtract from the second column
 so the dot product is 0.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make second column orthogonal to first. Confirm orthogonality</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">)</span>
 <span class="go">array([[ 12.    ,   0.    ],</span>
 <span class="go">       [  0.    ,  90.8529]])</span>
 </pre></div>
+</div>
 </div>
 <p>Look at the diagonal values of the matrix <code class="docutils literal"><span class="pre">X_o.T.dot(X_o)</span></code>.  What is the
 relationship of these values to the <em>vector lengths</em> of the vectors in the
@@ -214,18 +238,22 @@ columns of <code class="docutils literal"><span class="pre">X_o</span></code>.</
 </div>
 <p>Make a new data vector <code class="docutils literal"><span class="pre">y_c</span></code> by subtracting the mean from the psychopathy
 vector:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make mean-centered version of psychopathy vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_c</span> <span class="o">=</span> <span class="n">psychopathy</span> <span class="o">-</span> <span class="n">psychopathy</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
 <p>Calculate a new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector for the least-squares fit of <code class="docutils literal"><span class="pre">X_o</span></code>
 to <code class="docutils literal"><span class="pre">y_c</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate fit of X_o to y_o</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iXtX</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">iXtX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y_c</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
 <span class="go">array([-0.    ,  0.8074])</span>
 </pre></div>
+</div>
 </div>
 <p>The first parameter has changed compared to your previous estimate.  Can you
 explain why it has this new value by considering the values of <span class="math">\((\Xmat^T
@@ -244,11 +272,13 @@ multiple of the first value in <span class="math">\(\vec{p}\)</span>, and is the
 </div>
 <p>Calculate the correlation coefficient between <code class="docutils literal"><span class="pre">y_c</span></code> and the second column of
 <code class="docutils literal"><span class="pre">X_o</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Correlation coefficient of y_c and the second column of X_o</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">y_c</span><span class="p">,</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r_xy</span>
 <span class="go">0.42245241...</span>
 </pre></div>
+</div>
 </div>
 <p>What is the relationship between this correlation coefficient and <code class="docutils literal"><span class="pre">B_o[1]</span></code>?
 Hint: what is the relationship of the correlation coefficient to vector dot
@@ -260,8 +290,10 @@ can be written as:</p>
 <div class="math">
 \[r_{xy} = \frac{\vec{x^c} \cdot \vec{y^c}} {\VL{x^c} \VL{y^c}}\]</div>
 <p>Set:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x_c</span> <span class="o">=</span> <span class="n">X_o</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 <p>From the derivation of <code class="docutils literal"><span class="pre">y_c</span></code> and <code class="docutils literal"><span class="pre">x_c</span></code>, and the formula for deriving
 <span class="math">\(\bvec\)</span>:</p>
@@ -269,30 +301,36 @@ can be written as:</p>
 \[\begin{split}\texttt{B_o[1]} = \frac{\vec{x^c} \cdot \vec{y^c}}{\VL{x_c}^2} \\
 = r_{xy} \frac{\VL{y_c}}{\VL{x_c}}\end{split}\]</div>
 <p>Let&#8217;s check that:</p>
+<div class="nbplot last container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">vector_length</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
 <span class="go">array([-0.    ,  0.8074])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r_xy</span> <span class="o">*</span> <span class="n">vector_length</span><span class="p">(</span><span class="n">y_c</span><span class="p">)</span> <span class="o">/</span> <span class="n">vector_length</span><span class="p">(</span><span class="n">x_c</span><span class="p">)</span>
 <span class="go">0.8074...</span>
 </pre></div>
 </div>
 </div>
+</div>
 <p>Now try calculating <span class="math">\(\bvec\)</span> fitting the <code class="docutils literal"><span class="pre">X_o</span></code> design to the original
 psychopathy data (not the mean-centered version).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fit X_o to psychopathy data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span> <span class="o">=</span> <span class="n">iXtX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psychopathy</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B_o</span>
 <span class="go">array([ 12.5746,   0.8074])</span>
 </pre></div>
 </div>
+</div>
 <p>Compare the first value in the new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector with the mean of
 the <code class="docutils literal"><span class="pre">psychpathy</span></code> vector.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="go">12.57458...</span>
 </pre></div>
+</div>
 </div>
 <p>Can you explain the relationship?</p>
 <div class="admonition-answer admonition">
@@ -333,10 +371,12 @@ same in both cases, both <span class="math">\(\vec{y_c}\)</span> and <span class
 </div>
 <p>Calculate the fitted values for the <code class="docutils literal"><span class="pre">X_o</span></code> model, and compare them to the
 fitted values for the original model:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fitted_X_o</span> <span class="o">=</span> <span class="n">X_o</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B_o</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">fitted_X_o</span><span class="p">,</span> <span class="n">fitted</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
+</div>
 </div>
 <p>For even more extra points, explain the relationship between the fitted values
 for the original model and those for the new model, where the clammy regressor
@@ -358,6 +398,7 @@ be:</p>
 <p>Therefore any fit possible with the original model can be achieved with
 the mean-centered model, by adjusting the value of <span class="math">\(c\)</span> to include the <span class="math">\(b
 \bar{x}\)</span> term.  Specifically:</p>
+<div class="nbplot last container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fit again to original model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">psychopathy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -371,12 +412,13 @@ the mean-centered model, by adjusting the value of <span class="math">\(c\)</spa
 <span class="go">array([ 12.5746,   0.8074])</span>
 </pre></div>
 </div>
-<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The difference in B_o[0] (c) is b * X[:, 1].mean()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The difference in B_o[0] (c) is b * X[:, 1].mean()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="go">2.7729...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="go">12.57458...</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>

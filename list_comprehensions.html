@@ -27,7 +27,7 @@
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
     <link rel="next" title="Methods vs functions in NumPy" href="methods_vs_functions.html" />
-    <link rel="prev" title="A first go at finding brain activation" href="first_activation_solution.html" />
+    <link rel="prev" title="First go at brain activation exercise" href="first_activation_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -51,6 +51,7 @@
 element.</p>
 <p>Let&#8217;s say you wanted to create a list of values for squared numbers. You might
 do it like this:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">squared_numbers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>  <span class="c1"># numbers 0 through 9</span>
 <span class="gp">... </span>    <span class="n">squared_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -58,14 +59,17 @@ do it like this:</p>
 <span class="go">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
 </pre></div>
 </div>
+</div>
 <p>It turns out this kind of thing is a very common pattern in Python. The
 pattern is: create an empty list, then use a for loop to fill in values for
 the list.</p>
 <p>List comprehensions are a short cut for that pattern:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">squared_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">squared_numbers</span>
 <span class="go">[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span>
 </pre></div>
+</div>
 </div>
 <p>The list comprehesion is an <em>expression</em>, starting and ending with square
 brackets. The first thing inside the square brackets is the expression that
@@ -104,6 +108,7 @@ be easier to read than the longer <code class="docutils literal"><span class="pr
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
@@ -123,7 +128,7 @@ be easier to read than the longer <code class="docutils literal"><span class="pr
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="first_activation_solution.html" title="previous chapter">A first go at finding brain activation</a></li>
+      <li>Previous: <a href="first_activation_solution.html" title="previous chapter">First go at brain activation exercise</a></li>
       <li>Next: <a href="methods_vs_functions.html" title="next chapter">Methods vs functions in NumPy</a></li>
   </ul></li>
 </ul>

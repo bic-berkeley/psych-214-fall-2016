@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="next" title="Modeling groups with dummy variables" href="on_dummies_exercise.html" />
-    <link rel="prev" title="Understanding least-squares regression" href="on_estimation_solution.html" />
+    <link rel="next" title="Modeling groups with dummy variables exercise" href="on_dummies_exercise.html" />
+    <link rel="prev" title="Least-squares regression exercise" href="on_estimation_solution.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -55,6 +55,7 @@ from zero.</p>
 questionnaire.  We score the questionnaires, and then, for each couple, we
 subtract the woman&#8217;s score from the man&#8217;s score, to get a difference score.</p>
 <p>We have 10 difference scores:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
@@ -62,9 +63,12 @@ subtract the woman&#8217;s score from the man&#8217;s score, to get a difference
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">differences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.5993</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13</span>  <span class="p">,</span>  <span class="mf">2.3806</span><span class="p">,</span>  <span class="mf">1.3761</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3595</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">1.0286</span><span class="p">,</span>  <span class="mf">0.8466</span><span class="p">,</span>  <span class="mf">1.6669</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8241</span><span class="p">,</span>  <span class="mf">0.4469</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 <p>Our hypothesis is that the females in the couple have a lower psychopathy
 score. We therefore predict that, in the whole population of male-female
@@ -102,6 +106,7 @@ value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
 <div class="math">
 \[t = \frac{\bar{x}}{SE_{\bar{x}}}\]</div>
 <p>In our case:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">differences</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -120,6 +125,7 @@ value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="the-standard-error-as-an-estimator">
 <h2>The standard error as an estimator<a class="headerlink" href="#the-standard-error-as-an-estimator" title="Permalink to this headline">¶</a></h2>
 <p>Imagine that we repeat the following procedure many times, collecting each
@@ -134,6 +140,9 @@ values in <span class="math">\(\vec{m}\)</span>.</p>
 in the population.  For example, let us imagine that we know that the
 population distribution is a normal distribution with population mean 10 (<span class="math">\(\mu
 = 10\)</span>) and population standard deviation 1.5 (<span class="math">\(\sigma = 1.5\)</span>).</p>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 10 samples from normal distribution with mean 5 and sd 1.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span>
@@ -141,15 +150,19 @@ population distribution is a normal distribution with population mean 10 (<span 
 <span class="go">        6.1512,  4.2958,  5.8138])</span>
 </pre></div>
 </div>
+</div>
 <p>We know the exact mean (<span class="math">\(\mu\)</span>) and standard deviation (<span class="math">\(\sigma\)</span>).  If we draw
 a near-infinite number of samples like this, then the standard deviation of
 the mean of these samples will be <span class="math">\(\frac{\sigma}{\sqrt{n}}\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="go">0.474341...</span>
 </pre></div>
 </div>
+</div>
 <p>We can compare this number to an estimate of the same thing from a very large
 number of means from samples size 10:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pop_mean</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pop_sd</span> <span class="o">=</span> <span class="mf">1.5</span>
@@ -164,10 +177,12 @@ number of means from samples size 10:</p>
 <span class="go">0.474735...</span>
 </pre></div>
 </div>
+</div>
 <p>Normally we do not know the exact standard deviation of the population.  The
 standard error of the mean is for that situation.  First we use the sample
 that we have to get an <em>unbiased estimate</em> of the population standard
 deviation:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">sample</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_bar</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -175,15 +190,19 @@ deviation:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">unbiased_var_estimate</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>Of course, this estimate will not be exactly the same as the population
 standard deviation (<span class="math">\(\sigma = 1.5\)</span>):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span>
 <span class="go">1.433659...</span>
 </pre></div>
 </div>
+</div>
 <p>We use the unbiased standard deviation estimate to give an unbiased estimate
 for the standard error of the mean. This estimate will be close to the
 standard deviation of means from many samples of size <span class="math">\(n\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Standard deviation of means from population</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="go">0.474341...</span>
@@ -191,6 +210,7 @@ standard deviation of means from many samples of size <span class="math">\(n\)</
 <span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="go">0.453362...</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="testing-using-the-general-linear-model">
@@ -204,6 +224,7 @@ show how the machinery works in the simplest case.</p>
 \[\yvec = \Xmat \bvec + \evec\]</div>
 <p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span></p>
 <p>Define our design matrix <span class="math">\(\Xmat\)</span> to have a single column of ones:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
 <span class="go">array([[ 1.],</span>
@@ -217,6 +238,7 @@ show how the machinery works in the simplest case.</p>
 <span class="go">       [ 1.],</span>
 <span class="go">       [ 1.]])</span>
 </pre></div>
+</div>
 </div>
 <p><span class="math">\(\newcommand{\bhat}{\hat{\bvec}} \newcommand{\yhat}{\hat{\yvec}}\)</span></p>
 <p><span class="math">\(\bhat\)</span> is The least squares estimate for <span class="math">\(\bvec\)</span>, and is given by:</p>
@@ -269,6 +291,7 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
@@ -288,8 +311,8 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="on_estimation_solution.html" title="previous chapter">Understanding least-squares regression</a></li>
-      <li>Next: <a href="on_dummies_exercise.html" title="next chapter">Modeling groups with dummy variables</a></li>
+      <li>Previous: <a href="on_estimation_solution.html" title="previous chapter">Least-squares regression exercise</a></li>
+      <li>Next: <a href="on_dummies_exercise.html" title="next chapter">Modeling groups with dummy variables exercise</a></li>
   </ul></li>
 </ul>
 </div>

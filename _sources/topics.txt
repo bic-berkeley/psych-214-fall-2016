@@ -42,7 +42,8 @@ Numpy, arrays and images
 * :doc:`arange`;
 * :doc:`methods_vs_functions`;
 * :doc:`subtract_means`;
-* :doc:`newaxis`
+* :doc:`newaxis`;
+* :doc:`printing_floating`.
 
 **********
 Matplotlib

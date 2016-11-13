@@ -52,6 +52,7 @@
 <p>We often find ourselves doing complicated reshape operations when we are
 dealing with images.   For example, we may find ourselves reshaping the first
 few dimensions, but leaving the last intact:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="c1"># now define first of 2 2D arrays (arr_3d[0, :, :])</span>
 <span class="gp">... </span>                    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
@@ -72,6 +73,7 @@ few dimensions, but leaving the last intact:</p>
 <span class="go">        [20, 21, 22, 23]]])</span>
 </pre></div>
 </div>
+</div>
 <p>For example, we might want to reshape only the first two dimensions, leaving
 the last the same. This will take us from an array of shape (2, 3, 4), to an
 array of shape (6, 4). The procedure is the same for all reshapes in NumPy.
@@ -79,6 +81,7 @@ NumPy makes an output array shape (6, 4), then takes each element over the
 last dimension in the input, and fills the last dimension of the output, moves
 one across on the second dimension of the input, then fills a line in the
 first dimension of the output, and so on.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_2d</span> <span class="o">=</span> <span class="n">arr_3d</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_2d</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(6, 4)</span>
@@ -91,12 +94,14 @@ first dimension of the output, and so on.</p>
 <span class="go">       [20, 21, 22, 23]])</span>
 </pre></div>
 </div>
+</div>
 <p>See also: <a class="reference internal" href="reshape_and_3d.html"><span class="doc">Reshaping and three-dimensional arrays</span></a>.</p>
 </div>
 <div class="section" id="to-4d">
 <h2>To 4D<a class="headerlink" href="#to-4d" title="Permalink to this headline">¶</a></h2>
 <p>It is a common to do this kind of operation on image data arrays.  Here we
 have a 4D array from an FMRI run (<a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
@@ -104,26 +109,33 @@ have a 4D array from an FMRI run (<a class="reference download internal" href="_
 <span class="go">(64, 64, 30, 173)</span>
 </pre></div>
 </div>
+</div>
 <p>We can think of the 4D array as a sequence of 3D volumes:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vol_shape</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol_shape</span>
 <span class="go">(64, 64, 30)</span>
 </pre></div>
 </div>
+</div>
 <p>To get the number of voxels in the volume, we can use the <code class="docutils literal"><span class="pre">np.prod</span></code>
 function on the shape. <code class="docutils literal"><span class="pre">np.prod</span></code> is like <code class="docutils literal"><span class="pre">np.sum</span></code>, but instead of adding
 the elements, it multiplies them:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_voxels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">vol_shape</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_voxels</span>
 <span class="go">122880</span>
 </pre></div>
 </div>
+</div>
 <p>Then we can reshape the array to 2D, with voxels on the first axis, and time
 (volume) on the second.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_by_time</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_by_time</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(122880, 173)</span>
 </pre></div>
+</div>
 </div>
 <p>This is a useful operation when we want to apply some processing on all
 voxels, without regard to their relative spatial position.</p>
@@ -154,6 +166,7 @@ voxels, without regard to their relative spatial position.</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

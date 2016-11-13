@@ -50,6 +50,9 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/hrf_correlation_code.py" download=""><code class="xref download docutils literal"><span class="pre">hrf_correlation_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="hrf_correlation_solution.html"><span class="doc">Predicted neural time course exercise</span></a>.</li>
 </ul>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -57,19 +60,23 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>We are going to be analyzing the data for the 4D image
 <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a> again.</p>
 <p>Load the image into an image object with nibabel, and get the image data
 array. Print the shape.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the image with nibabel.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the image data array, print the data shape.</span>
 </pre></div>
 </div>
+</div>
 <p>Next we read in the stimulus file for this run to make an on - off
 time-series.</p>
 <p>The stimulus file is <a class="reference download internal" href="_downloads/ds114_sub009_t2r1_cond.txt" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1_cond.txt</span></code></a>.</p>
-<p>Here&#8217;s a version of the same thing we did in <a class="reference internal" href="first_activation_exercise.html"><span class="doc">A first go at finding brain activation</span></a>,
+<p>Here&#8217;s a version of the same thing we did in <a class="reference internal" href="first_activation_exercise.html"><span class="doc">First go at brain activation exercise</span></a>,
 wrapped up as a function:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Read in stimulus file, return neural prediction</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">events2neural</span><span class="p">(</span><span class="n">task_fname</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="n">n_trs</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Return predicted neural time course from event file</span>
@@ -99,43 +106,57 @@ wrapped up as a function:</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">time_course</span>
 </pre></div>
 </div>
+</div>
 <p>Use this function to read <code class="docutils literal"><span class="pre">ds114_sub009_t2r1_cond.txt</span></code> and return a
 predicted neural time course.</p>
 <p>The TR for this run is 2.5. You know the number of TRs from the image
 data shape above.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: TR for this run</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tr</span> <span class="o">=</span> <span class="mf">2.5</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read the stimulus data file and return a predicted neural time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- course.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the predicted neural time course.</span>
 </pre></div>
 </div>
+</div>
 <p>We had previously found that the first volume in this run was bad. Use your
 slicing skills to make a new array called <code class="docutils literal"><span class="pre">data_no_0</span></code> that is the data array
 without the first volume:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make new array excluding the first volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- data_no_0 = ?</span>
 </pre></div>
+</div>
+</div>
+<div class="nbplot container">
 </div>
 <p>Our neural prediction time series currently has one value per volume,
 including the first volume. To match the data, make a new neural prediction
 variable that does not include the first value of the time series. Call this
 new variable <code class="docutils literal"><span class="pre">neural_prediction_no_0</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Knock the first element off the neural prediction time series.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- neural_prediction_no_0 = ?</span>
 </pre></div>
 </div>
+</div>
 <p>For now, we&#8217;re going to play with data for a single voxel.</p>
-<p>In <a class="reference internal" href="first_activation_exercise.html"><span class="doc">A first go at finding brain activation</span></a>, we subtracted the rest scans from the
+<p>In <a class="reference internal" href="first_activation_exercise.html"><span class="doc">First go at brain activation exercise</span></a>, we subtracted the rest scans from the
 task scans, something like this:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: subtracting rest from task scans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">task_scans</span> <span class="o">=</span> <span class="n">data_no_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">neural_prediction_no_0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rest_scans</span> <span class="o">=</span> <span class="n">data_no_0</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">neural_prediction_no_0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">difference</span> <span class="o">=</span> <span class="n">task_scans</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">rest_scans</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: showing slice 14 from the difference image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">difference</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -145,24 +166,30 @@ task scans, something like this:</p>
 <div class="figure">
 <img alt="_images/hrf_correlation_exercise-11.png" src="_images/hrf_correlation_exercise-11.png" />
 </div>
+</div>
 <p>It looks like there&#8217;s a voxel that is greater for activation than rest at
 about (i, j, k) == (45, 43, 14).</p>
 <p>Get and plot the values for this voxel position, for every volume in the 4D
 data (not including the first volume). You can do it with a loop, but slicing
 is much nicer.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the values for (i, j, k) = (45, 43, 14) and every volume.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the values (voxel time course).</span>
 </pre></div>
 </div>
+</div>
 <p>Correlate the predicted neural time series with the voxel time course:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Correlation of predicted neural time course with voxel signal time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- course</span>
 </pre></div>
+</div>
 </div>
 <p>Now we will do a predicted hemodynamic time course using convolution.</p>
 <p>Next we need to get the HRF vector to convolve with.</p>
 <p>Here is my not-that-good HRF definition.  Feel free to replace this one with
 your better HRF definition from <a class="reference internal" href="make_an_hrf_exercise.html"><span class="doc">Making our own hemodynamic response function</span></a>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import the gamma probability density function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gamma</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -183,6 +210,7 @@ your better HRF definition from <a class="reference internal" href="make_an_hrf_
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">values</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.6</span>
 </pre></div>
 </div>
+</div>
 <p>Remember we have defined the HRF as a function of time, not TRs.</p>
 <p>For our convolution, we need to <em>sample</em> the HRF at times corresponding the
 start of the TRs.</p>
@@ -190,40 +218,54 @@ start of the TRs.</p>
 <p>Make a vector of times at which to sample the HRF. We want to sample every TR
 up until (but not including) somewhere near 35 seconds (where the HRF should
 have got close to zero again).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a vector of times at which to sample the HRF</span>
 </pre></div>
 </div>
+</div>
 <p>Sample your HRF function at these times and plot:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sample HRF at given times</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot HRF samples against times</span>
 </pre></div>
 </div>
+</div>
 <p>Convolve the predicted neural time course with the HRF samples:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Convolve predicted neural time course with HRF samples</span>
 </pre></div>
+</div>
 </div>
 <p>The default output of convolve is longer than the input neural prediction
 vector, by the length of the convolving vector (the HRF samples) minus 1.
 Knock these last values off the result of the convolution to get a vector the
 same length as the neural prediction:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Remove extra tail of values put there by the convolution</span>
 </pre></div>
 </div>
+</div>
 <p>Plot the convolved neural prediction, and then, on the same plot, plot the
 unconvolved neural prediction.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot convolved neural prediction and unconvolved neural prediction</span>
 </pre></div>
 </div>
+</div>
 <p>Does the new convolved time course correlate better with the voxel time
 course?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Correlation of the convolved time course with voxel time course</span>
 </pre></div>
+</div>
 </div>
 <p>Plot the hemodynamic prediction against the actual signal (voxel values).
 Remember to use a marker such as &#8216;+&#8217; to give you a scatter plot. How does it
 look?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Scatterplot the hemodynamic prediction against the signal</span>
 </pre></div>
+</div>
 </div>
 </div>
 

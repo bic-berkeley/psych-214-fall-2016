@@ -49,6 +49,7 @@
 <p>Let&#8217;s make a 3D array by taking a 1D array from 0 through 23, and filling the
 3D array by depth (the last axis), and then by column (the second axis) and
 then by row (the first axis):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fill in a NumPy array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
@@ -67,6 +68,7 @@ then by row (the first axis):</p>
 <span class="go">[[  1.   5.   9.]</span>
 <span class="go"> [ 13.  17.  21.]]</span>
 </pre></div>
+</div>
 </div>
 <p>We can do the same thing in MATLAB, or its open-source version, Octave:</p>
 <div class="highlight-octave"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c">% Fill in a MATLAB / Octave array</span>
@@ -107,12 +109,14 @@ elements from the first array in some order, and puts them into the new array
 using the same order.  The default order in NumPy is to take the elements off
 the last axis first, then the second to last, back to the first axis.  This is
 the same order as the loop above:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is exactly the same as the original ``py_arr``</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">reshaped</span> <span class="o">==</span> <span class="n">py_arr</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
+</div>
 </div>
 <p>MATLAB does a reshape using the opposite order, taking the elements off the
 first axis first:</p>
@@ -132,6 +136,7 @@ first axis first:</p>
 </div>
 <p>If you prefer this ordering, you can ask NumPy to do the same, by using the
 <code class="docutils literal"><span class="pre">order</span></code> parameter to <code class="docutils literal"><span class="pre">reshape</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># First axis first fetching, like MATLAB</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">first_1_reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">first_1_reshaped</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
@@ -141,6 +146,7 @@ first axis first:</p>
 <span class="go">[[ 6  8 10]</span>
 <span class="go"> [ 7  9 11]]</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -168,6 +174,7 @@ first axis first:</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

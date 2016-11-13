@@ -53,6 +53,7 @@ important differences:</p>
 list (Python 2);</li>
 <li><code class="docutils literal"><span class="pre">arange</span></code> arguments can be floating point values.</li>
 </ul>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -63,12 +64,15 @@ list (Python 2);</li>
 <span class="go">         8.5,   9. ,   9.5,  10. ,  10.5])</span>
 </pre></div>
 </div>
+</div>
 <p>Because <code class="docutils literal"><span class="pre">arange</span></code> returns arrays, you can use NumPy element-wise operations
 to multiply by the step size and add a start value.  This is one way to create
 equally spaced vectors (<code class="docutils literal"><span class="pre">np.linspace</span></code> is another):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">4</span>
 <span class="go">array([ 4. ,  4.5,  5. ,  5.5,  6. ,  6.5,  7. ,  7.5,  8. ,  8.5])</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -96,6 +100,7 @@ equally spaced vectors (<code class="docutils literal"><span class="pre">np.lins
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

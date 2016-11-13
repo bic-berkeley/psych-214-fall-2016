@@ -54,51 +54,67 @@ you type <code class="docutils literal"><span class="pre">python3</span></code> 
 the IPython terminal by installing IPython with <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a>, then typing <code class="docutils literal"><span class="pre">ipython</span></code>.</p>
 <p>First we will have a look at Python strings. Here is a variable called
 <code class="docutils literal"><span class="pre">my_string</span></code> with value &#8220;PNA is hard but fair&#8221;</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span> <span class="o">=</span> <span class="s2">&quot;neuroimaging is hard but fair&quot;</span>
 </pre></div>
 </div>
+</div>
 <p>We can see what type of thing this variable contains (points to) using
 the <code class="docutils literal"><span class="pre">type</span></code> function:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_string</span><span class="p">)</span>
 <span class="go">&lt;... &#39;str&#39;&gt;</span>
 </pre></div>
 </div>
+</div>
 <p>We can see how many characters the string has with the <code class="docutils literal"><span class="pre">len</span></code> function:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">my_string</span><span class="p">)</span>
 <span class="go">29</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The first character of the string</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="go">n</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The last character of the string (don&#39;t forget indexing starts at 0)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">28</span><span class="p">])</span>
 <span class="go">r</span>
 </pre></div>
+</div>
 </div>
 <p>Now we introduce string <em>slicing</em>. This is where you take some sequential
 characters from the string, using the colon (<code class="docutils literal"><span class="pre">:</span></code>) between the square
 brackets. The value before the colon is the index to the first character you
 want, and the value after the colon is the index to the character <em>after</em> the
 last character you want. It sounds strange, but you will get used to it...</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The first two characters of the string</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># from index 0 up to, but not including, 2</span>
 <span class="go">ne</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The first 5 characters of the string</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">my_string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># from index 0 up to, but not including, 5</span>
 <span class="go">neuro</span>
 </pre></div>
 </div>
+</div>
 <p>We will go into more details on strings and slicing soon.</p>
 <p>Now we will try loading an example image and seeing if we can understand
 the image data.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is a Python module</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>  <span class="c1"># module for interacting with the operating system</span>
 </pre></div>
+</div>
 </div>
 <p>If you want to explore modules or objects, type their name followed by a
 period, and press tab to see what functions or classes are available.</p>
@@ -107,44 +123,62 @@ what functions are in the <code class="docutils literal"><span class="pre">os</s
 <code class="docutils literal"><span class="pre">os.getcwd</span></code>, and then type <code class="docutils literal"><span class="pre">?</span></code> followed by Return. This shows you
 the help for the <code class="docutils literal"><span class="pre">os.getcwd</span></code> function.</p>
 <p>The image we are going to explore is in the same directory as this exercise.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the current working directory (CWD)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>
 <span class="go">/Users/...</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># List files and directories in the current working directory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">))</span>
 <span class="go">[...]</span>
 </pre></div>
 </div>
+</div>
 <p>Let&#8217;s read the image into memory.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Open a file in Read Binary mode</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">fobj</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># read all the characters into a variable in memory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">contents</span> <span class="o">=</span> <span class="n">fobj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
 <p>How do I find out what <code class="docutils literal"><span class="pre">type</span></code> of object is attached to this variable
 called <code class="docutils literal"><span class="pre">contents</span></code>?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># your code here</span>
 </pre></div>
+</div>
 </div>
 <p>How big is this file in terms of bytes? Can you find out from the
 <code class="docutils literal"><span class="pre">contents</span></code> variable? (Hint: you want to know the length of
 <code class="docutils literal"><span class="pre">contents</span></code>).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_bytes = ?</span>
 </pre></div>
+</div>
+</div>
+<div class="nbplot container">
 </div>
 <p>If 1 mebibyte (MiB) (<a class="reference external" href="http://en.wikipedia.org/wiki/Megabyte">http://en.wikipedia.org/wiki/Megabyte</a>) is size 1024 *
 1024, what is the file size in MiB? (Hint - the right answer is between 0 and
 100).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_mib = ?</span>
 </pre></div>
+</div>
+</div>
+<div class="nbplot container">
 </div>
 <p>This is a <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">NIfTI1 format</a> file.
 That means that the first 352 bytes contains the &#8220;header&#8221; that describes
@@ -153,8 +187,12 @@ the parameters of the image and the data following.</p>
 to have a look at it.</p>
 <p>To do this, we are going to need string slicing to get the first 352
 bytes:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Here you print out the first 352 characters of `contents`</span>
 </pre></div>
+</div>
+</div>
+<div class="nbplot container">
 </div>
 <p>Which software wrote this image?</p>
 <p>Here is the format of the NIfTI1 header :
@@ -167,16 +205,22 @@ stored in?</p>
 <p>How would you get the bytes in <code class="docutils literal"><span class="pre">contents</span></code> that contain the <code class="docutils literal"><span class="pre">datatype</span></code>
 value? (Hint - you need slicing again, and the information from <code class="docutils literal"><span class="pre">Byte</span>
 <span class="pre">offset</span></code> column in the NIfTI1 header page above):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># data_type_chars = ?</span>
 </pre></div>
+</div>
+</div>
+<div class="nbplot container">
 </div>
 <p>The <code class="docutils literal"><span class="pre">datatype</span></code> value is stored in binary form (rather than text form).
 The value for <code class="docutils literal"><span class="pre">datatype</span></code> is stored in the header in the same format
 that the computer stores the number in memory. We want to convert this
 binary format to a number that Python understands. To do that, we use
 the <a class="reference external" href="https://docs.python.org/2/library/struct.html">struct module</a>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">struct</span>
 </pre></div>
+</div>
 </div>
 <p>We are going to use the <code class="docutils literal"><span class="pre">struct.unpack</span></code> function. Open a new cell
 below this one with <code class="docutils literal"><span class="pre">b</span></code> and type <code class="docutils literal"><span class="pre">struct.unpack?</span></code> followed by
@@ -190,39 +234,50 @@ at the <a class="reference external" href="https://docs.python.org/2/library/str
 strings</a>
 in the Python documentation and the NIfTI web page above.</p>
 <p>Here is the format specifier for our value:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt_specifier</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>  <span class="c1"># Why? (check the web pages above)</span>
 </pre></div>
 </div>
+</div>
 <p>Now we read the datatype value into a number that Python understands:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">datatype</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">fmt_specifier</span><span class="p">,</span> <span class="n">data_type_chars</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span>
 <span class="go">(16,)</span>
 </pre></div>
+</div>
 </div>
 <p>This is a numerical <em>code</em> for a data type. What actual data type is this?
 (See:
 <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1/documentation/nifti1fields/nifti1fields_pages/datatype.html">http://nifti.nimh.nih.gov/nifti-1/documentation/nifti1fields/nifti1fields_pages/datatype.html</a>)</p>
 <p>We could continue reading the NIfTI header in the same way, but luckily
 someone has done that work for us. Enter the <code class="docutils literal"><span class="pre">nibabel</span></code> package:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span>
 </pre></div>
+</div>
 </div>
 <p>For now, we will use this package without worrying much about how it works.
 Have a look to see what <code class="docutils literal"><span class="pre">nibabel</span></code> can do by opening up a new cell with <code class="docutils literal"><span class="pre">b</span></code>
 and typing <code class="docutils literal"><span class="pre">nibabel?</span></code> and <code class="docutils literal"><span class="pre">nibabel.</span></code> followed by Tab.</p>
 <p>As with most Python packages, you can check what version of nibabel you have
 by printing the <code class="docutils literal"><span class="pre">__version__</span></code> variable of the package:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">nibabel</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>  
 <span class="go">2.1.0</span>
 </pre></div>
 </div>
+</div>
 <p>If you have a nibabel version below 2.0.0, please let your instructor know so
 they can fix that.</p>
 <p>You can load an image into memory like this:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>Let&#8217;s have a look at the header:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>  
 <span class="go">&lt;class &#39;nibabel.nifti1.Nifti1Header&#39;&gt; object, endian=&#39;&lt;&#39;</span>
 <span class="go">sizeof_hdr      : 348</span>
@@ -271,6 +326,7 @@ they can fix that.</p>
 <span class="go">magic           : n+1</span>
 </pre></div>
 </div>
+</div>
 <p>As you can see, it has worked out the datatype for us.</p>
 <p>Soon, we do some more work to get used to basic Python.  After that we will
 start playing with the image using the Python tools for arrays, and for
@@ -301,6 +357,7 @@ plotting.</p>
 <li class="toctree-l1"><a class="reference internal" href="../../labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
 </ul>

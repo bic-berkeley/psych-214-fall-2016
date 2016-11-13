@@ -48,19 +48,26 @@
 <h1>Introduction to Python for beginners<a class="headerlink" href="#introduction-to-python-for-beginners" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="variables">
 <h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 <span class="go">10</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
 <span class="go">6</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;MATLAB&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="s2">&quot; &gt; &quot;</span>
@@ -68,19 +75,25 @@
 <span class="go">&#39;Python &gt; MATLAB&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>Strings can have quotes or double quotes, there&#8217;s no difference in Python:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span> <span class="o">=</span> <span class="s1">&#39;a string&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">second</span> <span class="o">=</span> <span class="s2">&quot;b string&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">first</span> <span class="o">+</span> <span class="n">second</span>
 <span class="go">&#39;a stringb string&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>Length of a string:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
 <span class="go">8</span>
 </pre></div>
 </div>
+</div>
 <p>Strings and numbers are different:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="s2">&quot;9&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">+</span> <span class="mi">6</span>
 <span class="gt">Traceback (most recent call last):</span>
@@ -88,14 +101,18 @@
 <span class="gr">TypeError</span>: <span class="n">cannot concatenate &#39;str&#39; and &#39;int&#39; objects</span>
 </pre></div>
 </div>
+</div>
 <p>We can convert between numbers and strings:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="mi">6</span>
 <span class="go">15</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 <span class="go">&#39;9&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>However...</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">number</span> <span class="o">=</span> <span class="s2">&quot;nine&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
@@ -104,28 +121,38 @@
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="lists">
 <h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_empty_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">list_with_two_items</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">items_can_be_diverse</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Obama&quot;</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">]</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;experiment1&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span>
 <span class="go">[&#39;experiment1&#39;]</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">&#39;experiment1&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>The length of a list (or any object that can have a length):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
 <span class="go">1</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;failed_experiment&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
 <span class="go">[&#39;experiment1&#39;, &#39;failed_experiment&#39;]</span>
@@ -134,48 +161,65 @@
 <span class="go">[&#39;experiment1&#39;, &#39;failed_experiment&#39;, &#39;failed_experiment&#39;]</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 <span class="go">&#39;failed_experiment&#39;</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span>
 <span class="go">[&#39;experiment1&#39;, &#39;failed_experiment&#39;]</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">example_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">example_list</span>
 <span class="go">[&#39;failed_experiment&#39;]</span>
 </pre></div>
 </div>
+</div>
 <p><code class="docutils literal"><span class="pre">range</span></code> in Python 3 returns a &#8220;range object&#8221;.  It&#8217;s like a list, but isn&#8217;t
 quite a list.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="go">range(0, 10)</span>
 </pre></div>
 </div>
+</div>
 <p>You can make it into a list by using the <code class="docutils literal"><span class="pre">list</span></code> constructor.  A constructor
 is like a function, but it creates a new object, in this case a new object of
 type <code class="docutils literal"><span class="pre">list</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 <span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
 </pre></div>
 </div>
+</div>
 <p>You can also set the start element for <code class="docutils literal"><span class="pre">range</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="go">[2, 3, 4, 5, 6]</span>
 </pre></div>
 </div>
+</div>
 <p>Use <code class="docutils literal"><span class="pre">in</span></code> to ask if a element is a collection of things, such as a range, or
 a list:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 <span class="go">True</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">9</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="go">False</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="sets">
@@ -183,31 +227,40 @@ a list:</p>
 <p>Sets are unordered, and unique.</p>
 <p>&#8220;Unordered&#8221; means the order is arbitrary, and Python reserves the right to
 return the elements in any order it likes:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">our_work</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;metacognition&quot;</span><span class="p">,</span> <span class="s2">&quot;mindwandering&quot;</span><span class="p">,</span> <span class="s2">&quot;perception&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">our_work</span><span class="p">)</span>  
 <span class="go">{&#39;mindwandering&#39;, &#39;perception&#39;, &#39;metacognition&#39;}</span>
 </pre></div>
 </div>
+</div>
 <p>If you want to get a version of the set that is ordered, use <code class="docutils literal"><span class="pre">sorted</span></code>, which
 returns a sorted list:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">our_work</span><span class="p">)</span>
 <span class="go">[&#39;metacognition&#39;, &#39;mindwandering&#39;, &#39;perception&#39;]</span>
 </pre></div>
 </div>
+</div>
 <p>You can&#8217;t index a set, because the indices 0, or 1, or 2 don&#8217;t correspond to
 any particular element (because the set is unordered):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">our_work</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="c">...</span>
 <span class="gr">TypeError</span>: <span class="n">&#39;set&#39; object does not support indexing</span>
 </pre></div>
 </div>
+</div>
 <p>Add to a set with the <code class="docutils literal"><span class="pre">add</span></code> method:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">our_work</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;consciousness&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">our_work</span><span class="p">)</span>  
 <span class="go">{&#39;mindwandering&#39;, &#39;perception&#39;, &#39;metacognition&#39;, &#39;consciousness&#39;}</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">our_work</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;consciousness&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">our_work</span><span class="p">)</span>  
 <span class="go">{&#39;mindwandering&#39;, &#39;perception&#39;, &#39;metacognition&#39;, &#39;consciousness&#39;}</span>
@@ -216,58 +269,78 @@ any particular element (because the set is unordered):</p>
 <span class="go">{&#39;mindwandering&#39;, &#39;perception&#39;, &#39;metacognition&#39;, &#39;consciousness&#39;}</span>
 </pre></div>
 </div>
+</div>
 <p>You can subtract sets:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">competing_labs_work</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;motor control&quot;</span><span class="p">,</span> <span class="s2">&quot;decision making&quot;</span><span class="p">,</span> <span class="s2">&quot;memory&quot;</span><span class="p">,</span> <span class="s2">&quot;consciousness&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">what_we_should_focus_on</span> <span class="o">=</span> <span class="n">our_work</span> <span class="o">-</span> <span class="n">competing_labs_work</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">what_we_should_focus_on</span><span class="p">)</span>  
 <span class="go">{&#39;mindwandering&#39;, &#39;perception&#39;, &#39;metacognition&#39;}</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">what_we_should_avoid</span> <span class="o">=</span> <span class="n">our_work</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">competing_labs_work</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">what_we_should_avoid</span><span class="p">)</span>
 <span class="go">{&#39;consciousness&#39;}</span>
 </pre></div>
 </div>
+</div>
 <p>Sets have lengths as well:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">what_we_should_focus_on</span><span class="p">)</span>
 <span class="go">3</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="strings">
 <h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="s2">&quot;mary had a little lamb&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
 <span class="go">mary had a little lamb</span>
 </pre></div>
 </div>
+</div>
 <p>String slicing:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="go">&#39;m&#39;</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 <span class="go">&#39;mary&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>You can split strings with any character.  This breaks up the string,
 returning a list of strings broken at the separator character:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 <span class="go">[&#39;mary&#39;, &#39;had&#39;, &#39;a&#39;, &#39;little&#39;, &#39;lamb&#39;]</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span>
 <span class="go">&#39;lamb&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>You can split with any character:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">another_example</span> <span class="o">=</span> <span class="s1">&#39;one:two:three&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">another_example</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
 <span class="go">[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;]</span>
 </pre></div>
 </div>
+</div>
 <p>You can also <code class="docutils literal"><span class="pre">strip</span></code> a string.  That returns a new string with spaces, tabs
 and end of line characters removed from the beginning and end:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span> <span class="o">=</span> <span class="s1">&#39; a string</span><span class="se">\n</span><span class="s1">&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_string</span>
 <span class="go">&#39; a string\n&#39;</span>
@@ -275,32 +348,42 @@ and end of line characters removed from the beginning and end:</p>
 <span class="go">&#39;a string&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>Adding strings:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">+</span> <span class="s2">&quot; or two&quot;</span>
 <span class="go">&#39;mary had a little lamb or two&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>Puting strings into other strings:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">subject_id</span> <span class="o">=</span> <span class="s2">&quot;sub1&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Subject {} is excellent&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subject_id</span><span class="p">))</span>
 <span class="go">Subject sub1 is excellent</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">age</span> <span class="o">=</span> <span class="mi">29</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Subject {} is {} years old&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subject_id</span><span class="p">,</span> <span class="n">age</span><span class="p">))</span>
 <span class="go">Subject sub1 is 29 years old</span>
 </pre></div>
 </div>
+</div>
 <p>You can do more complex formatting of numbers and strings using formatting
 options after a <code class="docutils literal"><span class="pre">:</span></code> in the placeholder for the string.  See:
 <a class="reference external" href="https://docs.python.org/3.5/library/string.html#format-examples">https://docs.python.org/3.5/library/string.html#format-examples</a>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Subject {:02d} is here&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Subject 04 is here</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="for-loop">
 <h2>For loop<a class="headerlink" href="#for-loop" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 <span class="go">0</span>
@@ -315,12 +398,16 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">9</span>
 </pre></div>
 </div>
+</div>
 <p>Identation is crucial!</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># for i in range(10):</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># print(i)</span>
 </pre></div>
 </div>
+</div>
 <p>Watch out for mistakes:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
@@ -328,8 +415,10 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="ifs-and-breaks">
 <h2>Ifs and breaks<a class="headerlink" href="#ifs-and-breaks" title="Permalink to this headline">¶</a></h2>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
@@ -337,6 +426,8 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">else</span><span class="p">:</span>
@@ -344,6 +435,8 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">no</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">elif</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
@@ -353,15 +446,21 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">no</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;true, true!&quot;</span><span class="p">)</span>
 <span class="go">true, true!</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;never!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="k">break</span>
@@ -374,6 +473,8 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">5</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="k">continue</span>
@@ -390,9 +491,11 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="logic">
 <h2>Logic<a class="headerlink" href="#logic" title="Permalink to this headline">¶</a></h2>
 <p>You can use logical operators like <code class="docutils literal"><span class="pre">and</span></code>, <code class="docutils literal"><span class="pre">or</span></code> and <code class="docutils literal"><span class="pre">not</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">strange_election</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uncomfortable_choices</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">satisfying_experience</span> <span class="o">=</span> <span class="bp">False</span>
@@ -404,21 +507,27 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">True</span>
 </pre></div>
 </div>
+</div>
 <p>We often use these in <code class="docutils literal"><span class="pre">if</span></code> statements:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">strange_election</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">satisfying_experience</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Watching a lot of news&#39;</span><span class="p">)</span>
 <span class="go">Watching a lot of news</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <p>Write lines to a text file:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/important_notes.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">fobj</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;captains log 672828: I had a banana for breakfast.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="go">51</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;captains log 672829: I should watch less TV.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -426,7 +535,9 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
 <p>Read lines from a text file:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/important_notes.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
 <span class="go">captains log 672828: I had a banana for breakfast.</span>
@@ -435,14 +546,20 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="go">captains log 672829: I should watch less TV.</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">fobj</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
 </pre></div>
 </div>
+</div>
 <p>Close a file when you&#8217;ve finished with it:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fobj</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
 <p>One way to read all the lines from a text file:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/important_notes.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">fobj</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fobj</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -454,6 +571,7 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="go">captains log 672829: I should watch less TV.</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -482,6 +600,7 @@ options after a <code class="docutils literal"><span class="pre">:</span></code>
 <li class="toctree-l1"><a class="reference internal" href="../../labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
 </ul>

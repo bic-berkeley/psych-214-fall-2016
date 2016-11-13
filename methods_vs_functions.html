@@ -48,6 +48,7 @@
 <h1>Methods vs functions in NumPy<a class="headerlink" href="#methods-vs-functions-in-numpy" title="Permalink to this headline">¶</a></h1>
 <p>Many things are implemented in NumPy as both <em>functions</em> and <em>methods</em>.  For
 example, there is a <code class="docutils literal"><span class="pre">np.sum</span></code> function, that adds up all the elements:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -56,14 +57,19 @@ example, there is a <code class="docutils literal"><span class="pre">np.sum</spa
 <span class="go">4</span>
 </pre></div>
 </div>
+</div>
 <p>There is also a <code class="docutils literal"><span class="pre">sum</span></code> method of the numpy <code class="docutils literal"><span class="pre">array</span></code> object:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 <span class="go">&lt;class &#39;numpy.ndarray&#39;&gt;</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="go">4</span>
 </pre></div>
+</div>
 </div>
 <p>Nearly all the method versions do the same thing as the function versions.
 Examples are <code class="docutils literal"><span class="pre">mean</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, <code class="docutils literal"><span class="pre">sum</span></code>, <code class="docutils literal"><span class="pre">reshape</span></code>.  Choosing the
@@ -94,6 +100,7 @@ method or the function will usually depend on which one is easier to read.</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

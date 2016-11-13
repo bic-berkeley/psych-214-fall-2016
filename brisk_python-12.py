@@ -1,2 +1,0 @@
-type(None)
-# <class 'NoneType'>

@@ -47,6 +47,9 @@
 <div class="section" id="reshaping-4d-images-to-2d-arrays">
 <h1>Reshaping 4D images to 2D arrays<a class="headerlink" href="#reshaping-4d-images-to-2d-arrays" title="Permalink to this headline">¶</a></h1>
 <p>See also: <a class="reference internal" href="reshape_and_4d.html"><span class="doc">Reshaping, 4D to 2D</span></a>.</p>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
@@ -54,25 +57,31 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>In this example, we calculate the standard deviation across voxels at each
 time point.</p>
 <p>We&#8217;re working on <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>.  This is a 4D FMRI image.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 30, 173)</span>
 </pre></div>
 </div>
+</div>
 <p>We want to calculate the standard deviation across all voxels.  Remember that
 a <a class="reference internal" href="glossary.html#term-voxel"><span class="xref std std-term">voxel</span></a> is a pixel with volume, and refers to a position in space.
 Therefore we have this number of voxels in each volume:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_voxels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_voxels</span>
 <span class="go">122880</span>
 </pre></div>
 </div>
+</div>
 <p>To calculate the standard deviation across voxels, we could loop across all
 volumes, and calculate the standard deviation for each volume:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_trs</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">std_devs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -88,15 +97,18 @@ volumes, and calculate the standard deviation for each volume:</p>
 <div class="figure">
 <img alt="_images/voxels_by_time-5.png" src="_images/voxels_by_time-5.png" />
 </div>
+</div>
 <p>We could also flatten the three voxel axes out into one long voxel axis, using
 reshape – see: <a class="reference internal" href="reshape_and_4d.html"><span class="doc">Reshaping, 4D to 2D</span></a>.  Then we can use the <code class="docutils literal"><span class="pre">axis</span></code>
 parameter to the <code class="docutils literal"><span class="pre">np.std</span></code> function to calculate the standard deviation
 across voxels, in one shot.  This is &#8220;vectorizing&#8221;, where we take an operation
 that needed a loop, and use array operations to do the work instead:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voxels_by_time</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">n_trs</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">std_devs_vectorized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">voxels_by_time</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">std_devs_vectorized</span><span class="p">,</span> <span class="n">std_devs</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -124,6 +136,7 @@ that needed a loop, and use array operations to do the work instead:</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

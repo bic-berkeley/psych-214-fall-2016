@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reslicing with affines exercise &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="reslicing-with-affines-exercise">
+<h1>Reslicing with affines exercise<a class="headerlink" href="#reslicing-with-affines-exercise" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>For code template see: <a class="reference download internal" href="_downloads/reslicing_with_affines_code.py" download=""><code class="xref download docutils literal"><span class="pre">reslicing_with_affines_code.py</span></code></a>;</li>
+<li>For solution see: <a class="reference internal" href="reslicing_with_affines_solution.html"><span class="doc">Reslicing with affines exercise</span></a>.</li>
+</ul>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reslicing-between-spaces-using-affines">
+<h2>Reslicing between spaces using affines<a class="headerlink" href="#reslicing-between-spaces-using-affines" title="Permalink to this headline">¶</a></h2>
+<p>Here are a BOLD (4D image) and a structural image for the same subject:</p>
+<ul class="simple">
+<li>BOLD image : <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>;</li>
+<li>structural image : <a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a>.</li>
+</ul>
+<p>They have different orientations and voxel sizes.</p>
+<p>Confirm this by loading each image, and showing the:</p>
+<ul class="simple">
+<li>image shape;</li>
+<li>image affine from the header.</li>
+</ul>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load structural and BOLD image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Print image data shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Print affine from header</span>
+</pre></div>
+</div>
+</div>
+<p>We know this BOLD image now. It has a bad first volume. Load the BOLD data,
+drop the first volume, and make a new volume that is the mean of the rest of
+the BOLD volumes across time. Plot an example slice from the mean volume.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load BOLD image data.  Drop first volume.  Make mean volume</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot an example slice from the mean volume</span>
+</pre></div>
+</div>
+</div>
+<p>Load the structural data, plot an example slice:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load structural data, plot example slice</span>
+</pre></div>
+</div>
+</div>
+<p>Now we are going to reslice the anatomical to match the mean functional
+volume.</p>
+<p>Remember <a class="reference internal" href="resampling_with_ndimage.html"><span class="doc">pull resampling</span></a>? We are going to
+need the transform that maps a coordinate in the mean functional volume, to
+the corresponding coordinate in the structural volume.</p>
+<p>In order to do this, we need:</p>
+<ul class="simple">
+<li>the affine mapping from mean functional voxel coordinates to mm space
+(<code class="docutils literal"><span class="pre">mean_vox2mm</span></code>);</li>
+<li>the affine mapping from mm space to structural voxel coordinates
+(<code class="docutils literal"><span class="pre">mm2struct_vox</span></code>).</li>
+</ul>
+<p>We combine these by matrix multiplication (<em>from right to left!</em>) to give
+<code class="docutils literal"><span class="pre">mean_vox2struct_vox</span></code>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get `mean_vox2mm` mapping</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get `mm2struct_vox` mapping</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate `mean_vox2struct_vox`</span>
+</pre></div>
+</div>
+</div>
+<p>Split this affine matrix up into its component 3 x 3 <code class="docutils literal"><span class="pre">M</span></code> matrix and the 3
+element translation vector:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Split `mean_vox2struct_vox` into 3x3 transformation, 3 element</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- translation.</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can use <code class="docutils literal"><span class="pre">affine_transform</span></code> to make a new copy of the structural
+image, resampled into the voxel coordinates of the mean functional image:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import affine_transform function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use affine_transform and the tranformation components to resample</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- structural to functional</span>
+</pre></div>
+</div>
+</div>
+<p>Use <a class="reference internal" href="subplots.html"><span class="doc">Subplots and axes in matplotlib</span></a> to display and example slice from the mean image and the
+resliced structural side by side:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display example slice from mean vol and resliced structural side by</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- side.</span>
+</pre></div>
+</div>
+</div>
+<p>Now let&#8217;s go in the opposite direction.</p>
+<p>We are going to resample the mean functional volume into the voxel space of
+the structural volume.</p>
+<p>We need the affine transformation from voxel coordinates in the structural to
+voxel coordinates in the mean functional volume – call this
+<code class="docutils literal"><span class="pre">struct_vox2mean_vox</span></code>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get affine transformation `struct_vox2mean_vox`</span>
+</pre></div>
+</div>
+</div>
+<p>Use the contents of <code class="docutils literal"><span class="pre">struct_vox2mean_vox</span></code> to reslice the mean functional to
+the structural voxel space:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reslice mean functional to structural voxel space</span>
+</pre></div>
+</div>
+</div>
+<p>Display example slice for resliced mean functional side by side with
+structural:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display example slices for resliced mean and structural</span>
+</pre></div>
+</div>
+</div>
+<p>Can you think of situations where you would prefer to use one direction (e.g.
+functional to anatomy) over the other?</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/reslicing_with_affines_exercise.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

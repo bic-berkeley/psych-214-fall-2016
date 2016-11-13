@@ -50,10 +50,12 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/arteries_code.py" download=""><code class="xref download docutils literal"><span class="pre">arteries_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="arteries_solution.html"><span class="doc">Find the arteries solution</span></a>.</li>
 </ul>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our usual imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># Python array library</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># Python plotting library</span>
 </pre></div>
+</div>
 </div>
 <p>The major arteries in a T1 MRI image often have high signal (white when
 displaying in gray-scale).</p>
@@ -63,23 +65,29 @@ arteries on this image.</p>
 <p>The image is <code class="docutils literal"><span class="pre">ds107_sub001_highres.nii</span></code>. Download
 <a class="reference download internal" href="_downloads/ds107_sub001_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub001_highres.nii</span></code></a> to your working directory.</p>
 <p>This time we are going to load the image using the <code class="docutils literal"><span class="pre">nibabel</span></code> library.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import nibabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
+</div>
 </div>
 <p>Try loading the image using nibabel, to make an image object. Use tab
 completion on <code class="docutils literal"><span class="pre">nib.</span></code> in IPython to see if you can fund the function you
 need.  Go back to have a look at <a class="reference internal" href="classwork/day_00/what_is_an_image.html"><span class="doc">What is an image?</span></a> if
 you are stuck.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use nibabel to load the image ds107_sub001_highres.nii</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- img = ?</span>
 </pre></div>
 </div>
+</div>
 <p>Now get the image array data from the nibabel image object. Don&#8217;t forget to
 use tab completion on the image object if you can&#8217;t remember or don&#8217;t know the
 methods of the object.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- data = ?</span>
 </pre></div>
+</div>
 </div>
 <p>Try plotting a few slices over the third dimension to see whether you can see
 the arteries. For example, if <code class="docutils literal"><span class="pre">data</span></code> is your image array data, then you
@@ -87,33 +95,43 @@ might plot the first slice over the third dimension, you might use:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plotting some slices over the third dimension</span>
 </pre></div>
+</div>
 </div>
 <p>Now try looking for a good threshold so that you pick up only the very high
 signal in the brain. A good place to start is to use <code class="docutils literal"><span class="pre">plt.hist</span></code> to get an
 idea of the spread of values within the volume and within the slice.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Here you might try plt.hist or something else to find a threshold</span>
 </pre></div>
 </div>
+</div>
 <p>Try making a binarized image with your threshold and displaying slices
 with that. What structures are you picking up?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Maybe display some slices from the data binarized with a threshold</span>
 </pre></div>
+</div>
 </div>
 <p>Now try taking a 3D subvolume out of the middle of the image.  Take the approximate
 middle in all three axes.  Use this to pick out a good subvolume of the image
 that still contains the big arteries.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create a smaller 3D subvolume from the image data that still</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- contains the arteries</span>
 </pre></div>
 </div>
+</div>
 <p>Try binarizing the subvolume with some thresholds to see whether you can pick
 out the arteries without much other stuff. Hint - you might consider using
 <code class="docutils literal"><span class="pre">np.percentile</span></code> or <code class="docutils literal"><span class="pre">plt.hist</span></code> to find a good threshold.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Try a few plots of binarized slices and other stuff to find a good</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- threshold</span>
 </pre></div>
+</div>
 </div>
 <p>If you have a good threshold and a good binarized subset, see if you can see
 the arterial structure using the following fancy function to plot the
@@ -128,12 +146,15 @@ install scikit-image with:</p>
 <p>Careful – do <em>not</em> run this <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span></code> command from Python / IPython,
 but from the terminal command window.</p>
 <p>When you have done the scikit-image install, uncomment this code:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Uncomment the next line after installing scikit-image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># from skimage import measure</span>
 </pre></div>
 </div>
+</div>
 <p>With that import done, here is the fancy function to display your subvolume in
 3D:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: This function uses matplotlib 3D plotting and sckit-image for</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rendering</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.art3d</span> <span class="kn">import</span> <span class="n">Poly3DCollection</span>
@@ -156,6 +177,7 @@ but from the terminal command window.</p>
 <span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">binary_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">... </span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">binary_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 <p>For example, let&#8217;s say you have a binarized subvolume of the original
 data called <code class="docutils literal"><span class="pre">binarized_subvolume</span></code>. You could do a 3D rendering of this
@@ -189,6 +211,7 @@ binary image with:</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>

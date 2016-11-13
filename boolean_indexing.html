@@ -46,12 +46,15 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="indexing-with-boolean-masks">
 <h1>Indexing with boolean masks<a class="headerlink" href="#indexing-with-boolean-masks" title="Permalink to this headline">¶</a></h1>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># - import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 </pre></div>
 </div>
+</div>
 <p>First we make a 3D array of shape (4, 3, 2)</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slab0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slab0</span>
 <span class="go">array([[ 0,  1,  2],</span>
@@ -60,6 +63,8 @@
 <span class="go">       [ 9, 10, 11]])</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slab1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">112</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slab1</span>
 <span class="go">array([[100, 101, 102],</span>
@@ -68,6 +73,8 @@
 <span class="go">       [109, 110, 111]])</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">slab0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">slab1</span>
@@ -89,8 +96,10 @@
 <span class="go">        [  11.,  111.]]])</span>
 </pre></div>
 </div>
+</div>
 <p>We can index this with a one-dimensional boolean array. This selects
 elements from the first axis.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span><span class="p">[</span><span class="n">bool_1d</span><span class="p">]</span>
 <span class="go">array([[[   3.,  103.],</span>
@@ -102,8 +111,10 @@ elements from the first axis.</p>
 <span class="go">        [   8.,  108.]]])</span>
 </pre></div>
 </div>
+</div>
 <p>We can also index with a two-dimensional boolean array, this selects elements
 from the first two axes.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span>
@@ -116,6 +127,8 @@ from the first two axes.</p>
 <span class="go">       [False, False,  True]], dtype=bool)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span><span class="p">[</span><span class="n">bool_2d</span><span class="p">]</span>
 <span class="go">array([[   1.,  101.],</span>
 <span class="go">       [   3.,  103.],</span>
@@ -124,8 +137,10 @@ from the first two axes.</p>
 <span class="go">       [  11.,  111.]])</span>
 </pre></div>
 </div>
+</div>
 <p>We can even index with a 3D array, this selects elements over all three
 dimensions.  In which order does it get the elements?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr_is_odd</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr_3d</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_is_odd</span>
 <span class="go">array([[[False, False],</span>
@@ -148,8 +163,10 @@ dimensions.  In which order does it get the elements?</p>
 <span class="go">        109.,   11.,  111.])</span>
 </pre></div>
 </div>
+</div>
 <p>We can mix 1D boolean arrays with ordinary slicing to select elements on
 a single axis.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool_1d_dim3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">bool_1d_dim3</span><span class="p">]</span>
 <span class="go">array([[[ 100.],</span>
@@ -168,6 +185,7 @@ a single axis.</p>
 <span class="go">        [ 110.],</span>
 <span class="go">        [ 111.]]])</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -195,6 +213,7 @@ a single axis.</p>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homeworks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 </ul>
