@@ -44,6 +44,8 @@ and I made a new copy, in ``img, hdr`` format (see
 I then modified the affine in ``ds114_sub009_highres_moved.hdr`` to add an
 extra rotation and translation.
 
+.. The script to do the transform is make_ds114_anat.py
+
 What extra translation and rotation did I add?
 
 Hint: remember the rotation formulae from :doc:`rotation_2d_3d`:
