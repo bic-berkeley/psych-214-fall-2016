@@ -2,6 +2,12 @@
 November 14: affine and cross-modality registration
 ###################################################
 
+*******
+Grading
+*******
+
+See: :doc:`project_grading`.
+
 ********
 Teaching
 ********
