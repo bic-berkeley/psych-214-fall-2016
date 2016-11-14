@@ -7,7 +7,7 @@ Teaching
 ********
 
 * :doc:`coding_style`;
-* finishing `optimizing spatial transformations`;
+* finishing `optimizing spatial transformations`_;
 * :doc:`rotation_2d_3d`;
 * :doc:`resampling_with_ndimage`;
 * :doc:`more_on_rotation_exercise`;
