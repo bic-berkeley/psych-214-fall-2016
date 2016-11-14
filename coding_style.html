@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>November 14: affine and cross-modality registration &mdash; Functional MRI methods</title>
+    <title>Python coding style &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="up" title="Classes" href="classes.html" />
-    <link rel="next" title="November 21: cross-subject registration" href="day_11.html" />
-    <link rel="prev" title="November 7: slice timing and motion correction" href="day_09.html" />
+    <link rel="prev" title="Project grading" href="project_grading.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,31 +43,35 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="november-14-affine-and-cross-modality-registration">
-<h1>November 14: affine and cross-modality registration<a class="headerlink" href="#november-14-affine-and-cross-modality-registration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="teaching">
-<h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-coding-style">
+<h1>Python coding style<a class="headerlink" href="#python-coding-style" title="Permalink to this headline">¶</a></h1>
+<p>As you become more experienced in coding in general and Python coding in
+particular, you will find that your code improves in various ways if you use a
+consistent coding style.</p>
+<p>Using a consistent style makes your code easier to read.  Once you have
+learned the guidelines, you will spend less time thinking about formatting and
+more time thinking about the algorithm and code structure.</p>
 <ul class="simple">
-<li><a class="reference internal" href="coding_style.html"><span class="doc">Python coding style</span></a>;</li>
-<li>finishing <cite>optimizing spatial transformations</cite>;</li>
-<li><a class="reference internal" href="rotation_2d_3d.html"><span class="doc">Rotations and rotation matrices</span></a>;</li>
-<li><a class="reference internal" href="resampling_with_ndimage.html"><span class="doc">Resampling with scipy.ndimage</span></a>;</li>
-<li><a class="reference internal" href="more_on_rotation_exercise.html"><span class="doc">Rotation exercise</span></a>;</li>
-<li><a class="reference internal" href="optimizing_rotation_exercise.html"><span class="doc">Optimizing rotation exercise</span></a>;</li>
-<li><a class="reference internal" href="image_header_and_affine.html"><span class="doc">The image header and affine</span></a>;</li>
-<li><a class="reference internal" href="images_and_affines.html"><span class="doc">Images and affines</span></a>;</li>
-<li><a class="reference internal" href="reslicing_with_affines_exercise.html"><span class="doc">Reslicing with affines exercise</span></a>;</li>
-<li><a class="reference external" href="https://matthew-brett.github.io/teaching/mutual_information.html">mutual information</a>.</li>
+<li><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a></li>
+<li><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style">https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style</a></li>
 </ul>
-</div>
-<div class="section" id="reading-and-homework">
-<h2>Reading and homework<a class="headerlink" href="#reading-and-homework" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference external" href="https://vimeo.com/126900408">Introduction to spatial normalization</a></li>
-<li>15 minute section from the <a class="reference external" href="https://www.ucl.ac.uk/stream/media/swatch?v=1d42446d1c34">lecture on spatial processing by Ged Ridgway</a> - section on
-registration between subjects is from 35.00 - 50.07.</li>
-</ul>
-</div>
+<p>The first link above is the official &#8220;Style Guide for Python Code&#8221;, usually
+referred to as <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> PEP is an acronym for Python Enhancement Proposal.
+There are a couple of potentially helpful tools for helping you conform to the
+standard. The <a class="reference external" href="https://pypi.python.org/pypi/pep8">pep8</a> package that
+provides a commandline tool to check your code against some of the PEP8
+standard conventions. Similarly, <a class="reference external" href="https://pypi.python.org/pypi/autopep8">autopep8</a> provides a tool to automatically
+format your code so that it conforms to the PEP8 standards.</p>
+<p>You will also want to document your code in a consistent way, so you and
+others can see at a glance how the code works.  You should write the
+documentation as you write the code, to help you think about what the code
+should do, and to find the cleanest code design.</p>
+<p>Nearly all scientific Python projects use the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">numpy docstring standard</a>.
+This is a well-defined set of rules for writing a standard docstring, that
+makes the docstring easier to read, and later, allows the docstring to be
+parsed by automatic tools that can make nice online document like <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray">this</a>.</p>
+<p>You&#8217;ll see that the example code that we give you often uses this style, even
+for short snippets of code.</p>
 </div>
 
 
@@ -88,11 +90,11 @@ registration between subjects is from 35.00 - 50.07.</li>
 
 
 <h3>Navigation</h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
@@ -116,10 +118,7 @@ registration between subjects is from 35.00 - 50.07.</li>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="classes.html">Classes</a><ul>
-      <li>Previous: <a href="day_09.html" title="previous chapter">November 7: slice timing and motion correction</a></li>
-      <li>Next: <a href="day_11.html" title="next chapter">November 21: cross-subject registration</a></li>
-  </ul></li>
+      <li>Previous: <a href="project_grading.html" title="previous chapter">Project grading</a></li>
   </ul></li>
 </ul>
 </div>
@@ -145,7 +144,7 @@ registration between subjects is from 35.00 - 50.07.</li>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/day_10.txt"
+      <a href="_sources/coding_style.txt"
           rel="nofollow">Page source</a>
     </div>
 

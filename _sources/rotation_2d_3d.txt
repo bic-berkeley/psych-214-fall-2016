@@ -40,14 +40,14 @@ The coordinates :math:`(x',y')` of the point :math:`(x,y)` after rotation are:
    x' = x \cos \theta - y \sin \theta \\
    y' = x \sin \theta + y \cos \theta
 
-See `rotations in 2D`_ for a visual proof.
+See `rotation in 2D`_ for a visual proof.
 
 *****************************
 Rotations in three dimensions
 *****************************
 
-Rotations in three dimensions extend simply from two dimeions. For example, in
-3D, the rotation above would be a rotation around the z axis (z stays
+Rotations in three dimensions extend simply from two dimensions. For example,
+in 3D, the rotation above would be a rotation around the z axis (z stays
 constant, x and y change):
 
 .. math::

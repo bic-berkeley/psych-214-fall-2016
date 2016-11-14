@@ -6,6 +6,7 @@ November 14: affine and cross-modality registration
 Teaching
 ********
 
+* :doc:`coding_style`;
 * finishing `optimizing spatial transformations`;
 * :doc:`rotation_2d_3d`;
 * :doc:`resampling_with_ndimage`;
