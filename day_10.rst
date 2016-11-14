@@ -7,14 +7,14 @@ Teaching
 ********
 
 * finishing `optimizing spatial transformations`;
-* :doc:`rotations_2d_3d`;
+* :doc:`rotation_2d_3d`;
 * :doc:`resampling_with_ndimage`;
 * :doc:`more_on_rotation_exercise`;
 * :doc:`optimizing_rotation_exercise`;
 * :doc:`image_header_and_affine`;
 * :doc:`images_and_affines`;
 * :doc:`reslicing_with_affines_exercise`;
-* :doc:`mutual information`;
+* `mutual information`_.
 
 .. other-stuff:
 

@@ -34,6 +34,7 @@ extensions = [
     'sphinxcontrib.bibtex',
     'sphinx.ext.doctest',
     'nb2plots.nbplots',
+    'nb2plots.to_notebook',
     'autorun',
     'writefile',
     'workrun',

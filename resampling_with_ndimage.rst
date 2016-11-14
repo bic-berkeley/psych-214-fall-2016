@@ -99,7 +99,7 @@ Let's say we know that the resampling transformation :math:`\mathbf{I} \to
 * a rotation by 0.2 radians about the x axis;
 * a translation of [1, 2, 3] voxels.
 
-See :doc:`rotations_2d_3d` for more on 2D and 3D rotation matrices.
+See :doc:`rotation_2d_3d` for more on 2D and 3D rotation matrices.
 
 Download the file :download:`rotations.py`. It has routines that will make
 3 by 3 rotation matrices for rotations by given angles around the x, y, and z

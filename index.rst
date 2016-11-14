@@ -155,3 +155,4 @@ version control using git.
     rotation_2d_3d.rst
     what_extra_transform_exercise
     what_extra_transform_solution
+    project_grading
