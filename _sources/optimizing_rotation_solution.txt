@@ -51,8 +51,9 @@ This is a good job for optimization.
     >>> data = img_4d.get_data()
     >>> vol0 = data[..., 0]
 
-Here is the volume with some rotations I have applied.  This time I'm not
-going to tell you what rotations I applied:
+Here is the volume with some rotations I have applied:
+:download:`secret_rotated_volume`.  This time I'm not going to tell you what
+rotations I applied:
 
 .. nbplot::
 
