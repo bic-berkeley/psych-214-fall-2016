@@ -156,3 +156,4 @@ version control using git.
     what_extra_transform_exercise
     what_extra_transform_solution
     project_grading
+    coding_style

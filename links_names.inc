@@ -79,6 +79,10 @@
     https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html
 .. _scipy.ndimage.affine_transform:
     https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.affine_transform.html
+.. _PEP8:
+   https://www.python.org/dev/peps/pep-0008/
+.. _numpy docstring standard:
+   https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 
 .. IPython
 .. _ipython: http://ipython.org/
