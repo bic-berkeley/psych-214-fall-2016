@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Affine optimization exercise &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="affine-optimization-exercise">
+<h1>Affine optimization exercise<a class="headerlink" href="#affine-optimization-exercise" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>For code template see: <a class="reference download internal" href="_downloads/optimizing_affine_code.py" download=""><code class="xref download docutils literal"><span class="pre">optimizing_affine_code.py</span></code></a>;</li>
+<li>For solution see: <a class="reference internal" href="optimizing_affine_solution.html"><span class="doc">Affine optimization exercise</span></a>.</li>
+</ul>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>We need the <a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> code:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Check import of rotations code</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-affine-normalization">
+<h2>An affine normalization<a class="headerlink" href="#an-affine-normalization" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference internal" href="optimizing_rotation_exercise.html"><span class="doc">Optimizing rotation exercise</span></a> we used optimization to find what
+rotations I had applied to a functional volume.</p>
+<p>Now we&#8217;re going to have a shot at using optimization to do an affine spatial
+normalization.</p>
+<p>First – the images. We will be using  skull-stripped version of the
+structural image we have been using for the other exercises –
+<a class="reference download internal" href="_downloads/ds114_sub009_highres_brain_222.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_brain_222.nii</span></code></a>.</p>
+<p>The skull-stripped version comes from the OpenFMRI dataset, but the authors
+have used the FSL <code class="docutils literal"><span class="pre">bet</span></code> utility to do the skull stripping:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: ds114 subject 9 highres, skull stripped</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres_brain_222.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_data</span> <span class="o">=</span> <span class="n">subject_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(88, 78, 128)</span>
+</pre></div>
+</div>
+</div>
+<p>An example slice, over the third dimension:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: an example slice of skull-stripped structural</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">subject_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">80</span><span class="p">])</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//optimizing_affine_exercise-6.png">png</a>, <a class="reference external" href=".//optimizing_affine_exercise-6.hires.png">hires.png</a>, <a class="reference external" href=".//optimizing_affine_exercise-6.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/optimizing_affine_exercise-6.png" src="_images/optimizing_affine_exercise-6.png" />
+</div>
+</div>
+<p>The MNI template we want to match to is :download:<a href="#id1"><span class="problematic" id="id2">`</span></a></p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the MNI template - also skull stripped</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;mni_icbm152_t1_tal_nlin_asym_09a_masked_222.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_data</span> <span class="o">=</span> <span class="n">template_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(99, 117, 95)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: example slice over the third dimension of the template</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">template_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">42</span><span class="p">])</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//optimizing_affine_exercise-8.png">png</a>, <a class="reference external" href=".//optimizing_affine_exercise-8.hires.png">hires.png</a>, <a class="reference external" href=".//optimizing_affine_exercise-8.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/optimizing_affine_exercise-8.png" src="_images/optimizing_affine_exercise-8.png" />
+</div>
+</div>
+<p>We have a current mapping from the voxels in the <em>template</em> image to the
+voxels in the <em>subject</em> image, using the image affines. What is that mapping
+(<code class="docutils literal"><span class="pre">template_vox2subject_vox</span></code>)?</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get affine mapping from template voxels to subject voxels</span>
+</pre></div>
+</div>
+</div>
+<p>Break up this affine into the 3 x 3 <code class="docutils literal"><span class="pre">mat</span></code> component and length 3 <code class="docutils literal"><span class="pre">vec</span></code>
+translation component. We&#8217;ll need to use those in <code class="docutils literal"><span class="pre">affine_transform</span></code>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Break up `template_vox2subject_vox` into 3x3 `mat` and</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- length 3 `vec`</span>
+</pre></div>
+</div>
+</div>
+<p>Use <code class="docutils literal"><span class="pre">scipy.ndimage.affine_transform</span></code> to make a new version of the subject
+image, resampled into the array size / shape of the template:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use affine_transform to make a copy of the subject image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- resampled into the array dimensions of the template image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call this resampled copy `subject_resampled`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- (we are going to use this array later).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use order=1 for the resampling (it is quicker)</span>
+</pre></div>
+</div>
+</div>
+<p>Plot a slice from the resampled subject data next to the matching slice from
+the template using <code class="docutils literal"><span class="pre">subplots</span></code>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot slice from resampled subject data next to slice</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- from template data</span>
+</pre></div>
+</div>
+</div>
+<p>Now we are going to try and do an affine match between these two images, using
+optimization.</p>
+<p>We are going to need a <em>cost function</em>.</p>
+<p>Remember, this takes the set of parameters we are using to transform the data,
+and returns a value that should be low when the images are well matched.</p>
+<p>The value our cost function returns, is a mismatch metric.</p>
+<p>I suggest you use the correlation mismatch function for the metric. Here is an
+implementation of the formula for Pearson&#8217;s product-moment correlation
+coefficient from <a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">wikipedia</a>:</p>
+<div class="math">
+\[r = r_{xy} =\frac{\sum ^n _{i=1}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum ^n _{i=1}(x_i - \bar{x})^2} \sqrt{\sum ^n _{i=1}(y_i - \bar{y})^2}}\]</div>
+<p>where <span class="math">\(\bar{x}\)</span> is the mean:</p>
+<div class="math">
+\[\bar{x} = \frac{1}{n} \sum ^n _{i=1} x_i\]</div>
+<p>The correlation makes sense here, because both the subject scan and the
+template are T1-weighted images, meaning that we expect gray matter to be
+gray, white matter to be white, and CSF to be black. So, when the images are
+well-matched, the signal in one image should correlate highly with the signal
+from matching voxels in the other.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the negative correlation mismatch metric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">correl_mismatch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Negative correlation between the two images, flattened to 1D</span>
+<span class="gp">... </span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="gp">... </span>    <span class="n">x_mean0</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">y_mean0</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">corr_top</span> <span class="o">=</span> <span class="n">x_mean0</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y_mean0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">corr_bottom</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x_mean0</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_mean0</span><span class="p">))</span> <span class="o">*</span>
+<span class="gp">... </span>                   <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y_mean0</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y_mean0</span><span class="p">)))</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="o">-</span><span class="n">corr_top</span> <span class="o">/</span> <span class="n">corr_bottom</span>
+</pre></div>
+</div>
+</div>
+<p>Let&#8217;s check this gives the same answer as the standard numpy function:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: check numpy agrees with our negative correlation calculation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">correl_mismatch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Now we need a function that will transform the subject image, given a set of
+transformation parameters.</p>
+<p>Let&#8217;s use these transformation parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">x_t</span></code> : translation in x;</li>
+<li><code class="docutils literal"><span class="pre">y_t</span></code> : translation in y;</li>
+<li><code class="docutils literal"><span class="pre">z_t</span></code> : translation in z;</li>
+<li><code class="docutils literal"><span class="pre">x_r</span></code> : rotation around x axis;</li>
+<li><code class="docutils literal"><span class="pre">y_r</span></code> : rotation around y axis;</li>
+<li><code class="docutils literal"><span class="pre">z_r</span></code> : rotation around z axis;</li>
+<li><code class="docutils literal"><span class="pre">x_z</span></code> : zoom (scaling) in x;</li>
+<li><code class="docutils literal"><span class="pre">y_z</span></code> : zoom (scaling) in y;</li>
+<li><code class="docutils literal"><span class="pre">z_z</span></code> : zoom (scaling) in z.</li>
+</ul>
+<p>Say <code class="docutils literal"><span class="pre">vol_arr</span></code> is the image that we will transform.</p>
+<p>Our function then returns a copy of <code class="docutils literal"><span class="pre">vol_arr</span></code> with those transformations
+applied.</p>
+<p>Let&#8217;s also say that these transformations are in millimeters.</p>
+<p>That means we are going to make these transformations into a new 4 x 4 affine
+<code class="docutils literal"><span class="pre">P</span></code>, and compose it with the template and subject affines:</p>
+<ul class="simple">
+<li>first - apply <code class="docutils literal"><span class="pre">template_vox2mm</span></code> mapping to map to millimeters;</li>
+<li>next - apply <code class="docutils literal"><span class="pre">P</span></code> affine made up of our transformations above;</li>
+<li>next - apply <code class="docutils literal"><span class="pre">mm2subject_vox</span></code>;</li>
+<li>call the result <code class="docutils literal"><span class="pre">Q</span></code>.</li>
+</ul>
+<p>Finally, we want to apply the transformations in <code class="docutils literal"><span class="pre">Q</span></code> to make a resampled
+copy of the subject image.</p>
+<p>Our first task is to take the 9 parameters above, and return the affine matrix
+<code class="docutils literal"><span class="pre">P</span></code>.</p>
+<p>This function will look something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">params2affine</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Unpack the parameter vector to individual parameters</span>
+    <span class="n">x_t</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">z_t</span><span class="p">,</span> <span class="n">x_r</span><span class="p">,</span> <span class="n">y_r</span><span class="p">,</span> <span class="n">z_r</span><span class="p">,</span> <span class="n">x_z</span><span class="p">,</span> <span class="n">y_z</span><span class="p">,</span> <span class="n">z_z</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="c1"># Matrix for zooms?</span>
+    <span class="c1"># Matrix for rotations?</span>
+    <span class="c1"># Vector for translations?</span>
+    <span class="c1"># Build into affine</span>
+</pre></div>
+</div>
+<p>Hint: remember you have already imported <code class="docutils literal"><span class="pre">x_rotmat</span></code> etc from our
+<code class="docutils literal"><span class="pre">rotations</span></code> module.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make params2affine function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * accepts params vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * builds matrix for zooms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * builds atrix for rotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * builds vector for translations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * compile into affine and return</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: some checks that the function does the right thing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Identity params gives identity affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Some zooms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Some translations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Some rotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Translation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">params2affine</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                   <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">... </span>                    <span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Now we know how to make our affine <code class="docutils literal"><span class="pre">P</span></code>, we can make our cost function.</p>
+<p>The cost function should accept the same vector of parameters as
+<code class="docutils literal"><span class="pre">params2affine</span></code>, then:</p>
+<ul class="simple">
+<li>generate <code class="docutils literal"><span class="pre">P</span></code>;</li>
+<li>compose template_vox2mm, then P then mm2subject_vox to give <code class="docutils literal"><span class="pre">Q</span></code>;</li>
+<li>resample the subject data using the matrix and vector from <code class="docutils literal"><span class="pre">Q</span></code> (use
+order=1 resampling - it is quicker);</li>
+<li>return the mismatch metric for the resampled image and template.</li>
+</ul>
+<p>We can pick up the subject data and template data from the global namespace.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a cost function called `cost_function` that will:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * accept the vector of parameters containing x_t ... z_z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * generate `P`;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * compose template_vox2mm, then P then mm2subject_vox to give `Q`;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * resample the subject data using the matrix and vector from `Q`.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#-   Use `order=1` for the resampling - otherwise it will be slow.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * return the mismatch metric for the resampled image and template.</span>
+</pre></div>
+</div>
+</div>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: check the cost function returns the previous value if params</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># say to do no transformation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">current</span> <span class="o">=</span> <span class="n">correl_mismatch</span><span class="p">(</span><span class="n">subject_resampled</span><span class="p">,</span> <span class="n">template_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">redone</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">redone</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we are ready to optimize. We are going to need at least one of the cost
+functions from <code class="docutils literal"><span class="pre">scipy.optimize</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">fmin_powell</span></code> is a good place to start:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- get fmin_powell</span>
+</pre></div>
+</div>
+</div>
+<p>Let&#8217;s define a callback so we can see what <code class="docutils literal"><span class="pre">fmin_powell</span></code> is doing:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: a callback we will pass to the fmin_powell function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Trying parameters &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Now call <code class="docutils literal"><span class="pre">fmin_powell</span></code> with a starting guess for the parameters.  Remember
+to pass the callback with <code class="docutils literal"><span class="pre">callback=my_callback</span></code>.</p>
+<p>This is going to take a crazy long time. Maybe 10 minutes.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call optimizing function and collect best estimates for rotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Collect best estimates in `best_params` variable</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, use these parameters to:</p>
+<ul class="simple">
+<li>compile the P affine from the optimized parameters;</li>
+<li>compile the Q affine from the image affines and P;</li>
+<li>resample the subject image using the matrix and vector from this Q affine.</li>
+</ul>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * compile the P affine from the optimized parameters;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * compile the Q affine from the image affines and P;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * resample the subject image using the matrix and vector from the Q</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#-   affine.</span>
+</pre></div>
+</div>
+</div>
+<p>Now you can look at the template and the resampled affine-normalized image
+side by side, using <a class="reference internal" href="subplots.html"><span class="doc">Subplots and axes in matplotlib</span></a>:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- show example slice from template and normalized image</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/optimizing_affine_exercise.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

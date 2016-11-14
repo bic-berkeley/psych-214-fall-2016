@@ -137,3 +137,9 @@ We'll ask you to start thinking about your project in the first class.
 
 * December 5 : project presentation;
 * December 17 : final project submission.
+
+*******
+Grading
+*******
+
+See :doc:`project_grading`.
