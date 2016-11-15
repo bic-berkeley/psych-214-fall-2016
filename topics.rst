@@ -14,9 +14,12 @@ Python
 * :doc:`on_modules`;
 * :doc:`packages_namespaces`;
 * :doc:`list_comprehensions`;
+* :doc:`two_dunders`;
+* :doc:`string_literals`;
+* :doc:`docstrings`;
+* :doc:`keyword_arguments`;
 * :doc:`path_manipulation`.  See: :doc:`lab_04`;
 * :doc:`sys_path`.  See: :doc:`lab_04`;
-* :doc:`two_dunders`;
 * :doc:`using_pythonpath`;
 * :doc:`coding_style`.
 

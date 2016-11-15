@@ -210,9 +210,10 @@ Luckily, it turns out that, for square matrices, if there is a *left inverse*
 
    \mathbf{E^{-1}} \mathbf{E} = \mathbf{E} \mathbf{E^{-1}} = \mathbf{I}
 
-It is a little tricky to prove that there must be a right inverse, but it is
-easy to prove that, if there is a right inverse, it must be the same as the
-left inverse. Call the left inverse :math:`\mathbf{L}` and the right inverse
+It is a bit out of our way to prove that a matrix with a left inverse must
+also have a right inverse.  If you accept that on faith for now, it is easy to
+prove that, if there is a right inverse, it must be the same as the left
+inverse. Call the left inverse :math:`\mathbf{L}` and the right inverse
 :math:`\mathbf{R}`:
 
 .. math::
@@ -233,9 +234,10 @@ first affine, we can do this:
 
 .. math::
 
-   \mathbf{D} = \mathbf{C} \mathbf{B} \mathbf{A} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B} \mathbf{A} \mathbf{A^{-1}} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B} 
+   \mathbf{E} \triangleq \mathbf{C} \mathbf{B} \\
+   \mathbf{D} = \mathbf{E} \mathbf{A} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E} \mathbf{A} \mathbf{A^{-1}} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E}
 
 For our actual affines:
 

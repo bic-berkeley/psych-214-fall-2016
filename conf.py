@@ -42,6 +42,7 @@ extensions = [
     'texext.mathcode',
     'sphinx.ext.autodoc',
     'texext.math_dollar',
+    'IPython.sphinxext.ipython_directive',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

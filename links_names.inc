@@ -75,6 +75,8 @@
    http://www.stat.washington.edu/~hoytak/blog/whypython.html
 .. _install pip with get-pip.py: https://pip.pypa.io/en/stable/installing/#installing-with-get-pip-py
 .. _making a Python package: https://packaging.python.org/distributing
+.. _numpy.ndarray:
+    https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray
 .. _scipy.optimize:
     https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html
 .. _scipy.ndimage.affine_transform:
@@ -83,6 +85,10 @@
    https://www.python.org/dev/peps/pep-0008/
 .. _numpy docstring standard:
    https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+.. _Python glossary:
+    https://docs.python.org/3/glossary.html
+.. _sphinx:
+    http://www.sphinx-doc.org
 
 .. IPython
 .. _ipython: http://ipython.org/
@@ -249,6 +255,9 @@
 .. _rotation matrices:
 .. _Wikipedia on rotation matrices:
     https://en.wikipedia.org/wiki/Rotation_matrix
+.. _spline interpolation:
+.. _cubic spline interpolation:
+    https://en.wikipedia.org/wiki/Spline_interpolation
 
 .. Psych-214
 .. _worked example of GLM:
