@@ -48,7 +48,7 @@
 <h1>Rotations and rotation matrices<a class="headerlink" href="#rotations-and-rotation-matrices" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="rotations-in-two-dimensions">
 <h2>Rotations in two dimensions<a class="headerlink" href="#rotations-in-two-dimensions" title="Permalink to this headline">¶</a></h2>
-<p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">rotation in 2d</a>.</p>
+<p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">rotation in 2d</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Rotation_matrix">Wikipedia on rotation matrices</a>.</p>
 <p>In two dimensions, rotating a vector <span class="math">\(\theta\)</span> around the origin can be
 expressed as a 2 by 2 transformation matrix:</p>
 <div class="math">
@@ -89,9 +89,12 @@ the 2D rotation formula above:</p>
 \sin \theta &amp; \cos \theta &amp; 0\\[3pt]
 0 &amp; 0 &amp; 1\\
 \end{bmatrix}\end{split}\]</div>
-<p>For a rotation around x, we look down from positive x to the y and z axes
-pointing right and up respectively.  A rotation around x leaves x unchanged
-but changes y and z according to the 2D rotation formula:</p>
+<p>For a rotation around x, we look down from positive x to the y and z axes,
+pointing right and up, respectively.  y replaces x in the 2D formula, and z
+replaces y, to give:</p>
+<div class="math">
+\[\begin{split}y' = y \cos \theta - z \sin \theta \\
+z' = y \sin \theta + z \cos \theta\end{split}\]</div>
 <div class="math">
 \[\begin{split}R_x(\theta) &amp;= \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
@@ -99,20 +102,11 @@ but changes y and z according to the 2D rotation formula:</p>
 0 &amp; \sin \theta  &amp;  \cos \theta \\[3pt]
 \end{bmatrix}\end{split}\]</div>
 <p>Now consider a rotation around the y axis.   We look from positive y down the
-y axis at the other two axes on a plane.  The z axis points up, but the x axis
-now points <em>left</em> instead of right.  A positive rotation around the y axis now
-corresponds to a negative rotation in 2D.  Remembering that <span class="math">\(\cos (-\alpha) =
-\cos \alpha\)</span> and <span class="math">\(\sin (-\alpha) = -\sin \alpha\)</span>, we have:</p>
+y axis to the z and x axes, pointing right and up respectively.  <span class="math">\(z\)</span> replaces
+<span class="math">\(x\)</span> in the 2D formula, and <span class="math">\(x\)</span> replaces <span class="math">\(y\)</span>:</p>
 <div class="math">
-\[\begin{split}\begin{bmatrix}
-\cos (-\alpha) &amp; -\sin (-\alpha) \\
-\sin (-\alpha) &amp; \cos (-\alpha) \\
-\end{bmatrix} =
-\begin{bmatrix}
-\cos \alpha &amp; \sin \alpha \\
--\sin \alpha &amp; \cos \alpha \\
-\end{bmatrix}\end{split}\]</div>
-<p>The formula for a rotation around the y axis in 3D is:</p>
+\[\begin{split}z' = z \cos \theta - x \sin \theta \\
+x' = z \sin \theta + x \cos \theta\end{split}\]</div>
 <div class="math">
 \[\begin{split}R_y(\theta) &amp;= \begin{bmatrix}
 \cos \theta &amp; 0 &amp; \sin \theta \\[3pt]

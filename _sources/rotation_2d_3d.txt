@@ -6,7 +6,7 @@ Rotations and rotation matrices
 Rotations in two dimensions
 ***************************
 
-See: `rotation in 2d`_.
+See: `rotation in 2d`_ and `Wikipedia on rotation matrices`_.
 
 In two dimensions, rotating a vector :math:`\theta` around the origin can be
 expressed as a 2 by 2 transformation matrix:
@@ -62,9 +62,14 @@ the 2D rotation formula above:
    0 & 0 & 1\\
    \end{bmatrix}
 
-For a rotation around x, we look down from positive x to the y and z axes
-pointing right and up respectively.  A rotation around x leaves x unchanged
-but changes y and z according to the 2D rotation formula:
+For a rotation around x, we look down from positive x to the y and z axes,
+pointing right and up, respectively.  y replaces x in the 2D formula, and z
+replaces y, to give:
+
+.. math::
+
+   y' = y \cos \theta - z \sin \theta \\
+   z' = y \sin \theta + z \cos \theta
 
 .. math::
 
@@ -75,23 +80,13 @@ but changes y and z according to the 2D rotation formula:
    \end{bmatrix}
 
 Now consider a rotation around the y axis.   We look from positive y down the
-y axis at the other two axes on a plane.  The z axis points up, but the x axis
-now points *left* instead of right.  A positive rotation around the y axis now
-corresponds to a negative rotation in 2D.  Remembering that $\cos (-\alpha) =
-\cos \alpha$ and $\sin (-\alpha) = -\sin \alpha$, we have:
+y axis to the z and x axes, pointing right and up respectively.  $z$ replaces
+$x$ in the 2D formula, and $x$ replaces $y$:
 
 .. math::
 
-   \begin{bmatrix}
-   \cos (-\alpha) & -\sin (-\alpha) \\
-   \sin (-\alpha) & \cos (-\alpha) \\
-   \end{bmatrix} =
-   \begin{bmatrix}
-   \cos \alpha & \sin \alpha \\
-   -\sin \alpha & \cos \alpha \\
-   \end{bmatrix}
-
-The formula for a rotation around the y axis in 3D is:
+   z' = z \cos \theta - x \sin \theta \\
+   x' = z \sin \theta + x \cos \theta
 
 .. math::
 
