@@ -56,6 +56,8 @@ Then I rotated it by:
 * 0.2 radians around the y axis, then;
 * 0.3 radians around the z axis.
 
+Here is that image for download :download:`rotated_volume.nii`.
+
 .. nbplot::
 
     >>> #: the resulting rotated image
