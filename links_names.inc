@@ -243,9 +243,12 @@
 .. _Otsu's method:
     https://en.wikipedia.org/wiki/Otsu%27s_method
 .. _right-handed:
-    https://en.wikipedia.org/wiki/Right-hand_rule
 .. _right-hand rule:
     https://en.wikipedia.org/wiki/Right-hand_rule
+.. _rotation matrix:
+.. _rotation matrices:
+.. _Wikipedia on rotation matrices:
+    https://en.wikipedia.org/wiki/Rotation_matrix
 
 .. Psych-214
 .. _worked example of GLM:
