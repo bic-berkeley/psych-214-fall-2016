@@ -17,6 +17,7 @@ Python
 * :doc:`two_dunders`;
 * :doc:`string_literals`;
 * :doc:`docstrings`;
+* :doc:`assert`;
 * :doc:`keyword_arguments`;
 * :doc:`path_manipulation`.  See: :doc:`lab_04`;
 * :doc:`sys_path`.  See: :doc:`lab_04`;
@@ -47,6 +48,7 @@ Numpy, arrays and images
 * :doc:`methods_vs_functions`;
 * :doc:`subtract_means`;
 * :doc:`newaxis`;
+* :doc:`numpy_diag`;
 * :doc:`printing_floating`.
 
 **********

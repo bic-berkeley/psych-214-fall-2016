@@ -160,3 +160,5 @@ version control using git.
     string_literals
     docstrings
     keyword_arguments
+    numpy_diag
+    assert
