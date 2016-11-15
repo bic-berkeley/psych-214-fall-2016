@@ -46,9 +46,13 @@ See `rotation in 2D`_ for a visual proof.
 Rotations in three dimensions
 *****************************
 
-Rotations in three dimensions extend simply from two dimensions. For example,
-in 3D, the rotation above would be a rotation around the z axis (z stays
-constant, x and y change):
+Rotations in three dimensions extend simply from two dimensions.  Consider a
+`right-handed`_ set of x, y, z axes, maybe forming the x axis with your right
+thumb, the y axis with your index finger, and the z axis with your middle
+finger.  Now look down the z axis, from positive z toward negative z.  You see
+the x and y axes pointing right and up respectively, on a plane in front of
+you.  A rotation around z leaves z unchanged, but changes x and y according to
+the 2D rotation formula above:
 
 .. math::
 
@@ -58,7 +62,9 @@ constant, x and y change):
    0 & 0 & 1\\
    \end{bmatrix}
 
-For a rotation around the x axis, x stays the same, y and z change:
+For a rotation around x, we look down from positive x to the y and z axes
+pointing right and up respectively.  A rotation around x leaves x unchanged
+but changes y and z according to the 2D rotation formula:
 
 .. math::
 
@@ -68,11 +74,24 @@ For a rotation around the x axis, x stays the same, y and z change:
    0 & \sin \theta  &  \cos \theta \\[3pt]
    \end{bmatrix}
 
-There is a sign flip for the rotation around the y axis.  This is to do with
-the direction of the rotation relative to the direction (positive to negative)
-of the axes.  You may be able to persuade yourself of this by drawing the x,
-y, z axes and thinking about the rotation around the y axis when observing
-from the positive end of the y axis:
+Now consider a rotation around the y axis.   We look from positive y down the
+y axis at the other two axes on a plane.  The z axis points up, but the x axis
+now points *left* instead of right.  A positive rotation around the y axis now
+corresponds to a negative rotation in 2D.  Remembering that $\cos (-\alpha) =
+\cos \alpha$ and $\sin (-\alpha) = -\sin \alpha$, we have:
+
+.. math::
+
+   \begin{bmatrix}
+   \cos (-\alpha) & -\sin (-\alpha) \\
+   \sin (-\alpha) & \cos (-\alpha) \\
+   \end{bmatrix} =
+   \begin{bmatrix}
+   \cos \alpha & \sin \alpha \\
+   -\sin \alpha & \cos \alpha \\
+   \end{bmatrix}
+
+The formula for a rotation around the y axis in 3D is:
 
 .. math::
 
