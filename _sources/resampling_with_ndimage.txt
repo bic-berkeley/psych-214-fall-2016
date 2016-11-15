@@ -126,16 +126,8 @@ We use the routines in ``rotation.py`` to make the rotation matrix we need:
     >>> translation
     [1, 2, 3]
 
-The ``affine_transform`` function does the work of resampling:
-
-.. nbplot::
-
-    >>> # order=1 for linear interpolation
-    >>> K = affine_transform(J, M, translation, order=1)
-    >>> K.shape
-    (64, 64, 35)
-
-``affine_transform`` implements the following algorithm:
+The ``affine_transform`` function does the work of resampling.  By default, it
+implements the following algorithm:
 
 * makes the new empty volume ``K``, assuming it will be the same shape as
   ``J``;
@@ -146,3 +138,50 @@ The ``affine_transform`` function does the work of resampling:
      :math:`(x_j, y_j, z_j)`;
    * resample ``J`` at :math:`(x_j, y_j, z_j)` to get :math:`v`;
    * place :math:`v` at :math:`(x_i, y_i, z_i)` in ``K``
+
+.. nbplot::
+
+    >>> # order=1 for linear interpolation
+    >>> K = affine_transform(J, M, translation, order=1)
+    >>> K.shape
+    (64, 64, 35)
+    >>> plt.imshow(K[:, :, 17])
+    <...>
+
+******************************************
+Resampling with images of different shapes
+******************************************
+
+Notice the assumption that ``affine_transform`` makes above - that the output
+image will be the same shape as the input image.
+
+This need not be the case.  In fact we can tell ``affine_transform`` to start
+with an empty volume ``K`` with another shape.  To do this, we use the
+``output_shape`` parameter.  Specifically, the default call we used above:
+
+.. nbplot::
+
+    >>> K = affine_transform(J, M, translation, order=1)
+    >>> K.shape
+    (64, 64, 35)
+
+is the same as the following call, where we specify the shape explicitly:
+
+.. nbplot::
+
+    >>> K = affine_transform(J, M, translation, output_shape=J.shape, order=1)
+    >>> K.shape
+    (64, 64, 35)
+
+The output shape can be different from the input shape, if you use the
+``output_shape`` parameter.
+
+.. nbplot::
+
+    >>> K = affine_transform(J, M, translation,
+    ...                      output_shape=(65, 65, 36), order=1)
+    >>> K.shape
+    (65, 65, 36)
+
+Remember that the ``M`` matrix and ``traslation`` vector apply to the
+coordinates implied by the output shape.

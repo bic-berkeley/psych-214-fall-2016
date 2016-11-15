@@ -150,16 +150,8 @@ run the following from your terminal:</p>
 </pre></div>
 </div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">affine_transform</span></code> function does the work of resampling:</p>
-<div class="nbplot container">
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># order=1 for linear interpolation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(64, 64, 35)</span>
-</pre></div>
-</div>
-</div>
-<p><code class="docutils literal"><span class="pre">affine_transform</span></code> implements the following algorithm:</p>
+<p>The <code class="docutils literal"><span class="pre">affine_transform</span></code> function does the work of resampling.  By default, it
+implements the following algorithm:</p>
 <ul>
 <li><p class="first">makes the new empty volume <code class="docutils literal"><span class="pre">K</span></code>, assuming it will be the same shape as
 <code class="docutils literal"><span class="pre">J</span></code>;</p>
@@ -176,6 +168,55 @@ run the following from your terminal:</p>
 </div></blockquote>
 </li>
 </ul>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># order=1 for linear interpolation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 35)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">K</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">17</span><span class="p">])</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//resampling_with_ndimage-7.png">png</a>, <a class="reference external" href=".//resampling_with_ndimage-7.hires.png">hires.png</a>, <a class="reference external" href=".//resampling_with_ndimage-7.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/resampling_with_ndimage-7.png" src="_images/resampling_with_ndimage-7.png" />
+</div>
+</div>
+</div>
+<div class="section" id="resampling-with-images-of-different-shapes">
+<h2>Resampling with images of different shapes<a class="headerlink" href="#resampling-with-images-of-different-shapes" title="Permalink to this headline">¶</a></h2>
+<p>Notice the assumption that <code class="docutils literal"><span class="pre">affine_transform</span></code> makes above - that the output
+image will be the same shape as the input image.</p>
+<p>This need not be the case.  In fact we can tell <code class="docutils literal"><span class="pre">affine_transform</span></code> to start
+with an empty volume <code class="docutils literal"><span class="pre">K</span></code> with another shape.  To do this, we use the
+<code class="docutils literal"><span class="pre">output_shape</span></code> parameter.  Specifically, the default call we used above:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 35)</span>
+</pre></div>
+</div>
+</div>
+<p>is the same as the following call, where we specify the shape explicitly:</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">output_shape</span><span class="o">=</span><span class="n">J</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(64, 64, 35)</span>
+</pre></div>
+</div>
+</div>
+<p>The output shape can be different from the input shape, if you use the
+<code class="docutils literal"><span class="pre">output_shape</span></code> parameter.</p>
+<div class="nbplot container">
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">output_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(65, 65, 36)</span>
+</pre></div>
+</div>
+</div>
+<p>Remember that the <code class="docutils literal"><span class="pre">M</span></code> matrix and <code class="docutils literal"><span class="pre">traslation</span></code> vector apply to the
+coordinates implied by the output shape.</p>
 </div>
 </div>
 
