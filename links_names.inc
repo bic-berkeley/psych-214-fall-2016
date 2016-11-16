@@ -89,6 +89,10 @@
     https://docs.python.org/3/glossary.html
 .. _sphinx:
     http://www.sphinx-doc.org
+.. _truth value testing:
+    https://docs.python.org/3/library/stdtypes.html#truth
+.. _truthiness in Python:
+    https://www.udacity.com/wiki/cs258/truthiness-in-python
 
 .. IPython
 .. _ipython: http://ipython.org/

@@ -5,6 +5,7 @@ matplotlib>=1.4.3
 nibabel
 numpy
 scipy
+ipython
 sympy>=0.7.3
 texext>=0.3.2
 nb2plots>=0.4
