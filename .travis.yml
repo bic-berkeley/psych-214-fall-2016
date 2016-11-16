@@ -1,0 +1,19 @@
+# This file runs automated testing on travis-ci.org cloud machines
+language: python
+
+python:
+    - 2.7
+    - 3.4
+    - 3.5
+
+before_install:
+    - python -m pip install -U pip
+
+install:
+    # Install project requirements
+    - pip install -r requirements.txt
+    - git submodule update --init --recursive
+
+script:
+    - make doctest
+    - make html

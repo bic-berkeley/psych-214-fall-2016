@@ -10,8 +10,6 @@ To build and uplaod the website::
 
     pip install -r requirements.txt
     git submodule update --init --recursive
-    # Check that octave is installed (needed by build)
-    which octave
     # Build the site locally
     make html
     # Upload to the website
