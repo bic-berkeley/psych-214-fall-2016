@@ -175,13 +175,22 @@ affine, given we know the ``third_affine`` and ``second_affine``:
 
     >>> E = third_affine.dot(second_affine)
     >>> E_inv = npl.inv(E)
+    >>> E_inv.dot(combined)  # doctest: +SKIP
+    array([[ 1.    ,  0.    , -0.    ,  0.    ],
+           [ 0.    ,  0.9801,  0.1987,  0.    ],
+           [ 0.    , -0.1987,  0.9801,  0.    ],
+           [ 0.    ,  0.    ,  0.    ,  1.    ]])
 
-This is very close to our first affine:
+This is the same as our first affine:
 
 .. nbplot::
 
-    >>> first_reconstructed = E_inv.dot(combined)
-    >>> np.allclose(first_reconstructed, first_affine)
+    >>> first_affine
+    array([[ 1.    ,  0.    ,  0.    ,  0.    ],
+           [ 0.    ,  0.9801,  0.1987,  0.    ],
+           [ 0.    , -0.1987,  0.9801,  0.    ],
+           [ 0.    ,  0.    ,  0.    ,  1.    ]])
+    >>> np.allclose(E_inv.dot(combined), first_affine)
     True
 
 What about the situation where we know the first part of the affine, but we
@@ -227,25 +236,30 @@ first affine, we can do this:
 
 .. math::
 
-   \mathbf{E} \triangleq \mathbf{C} \mathbf{B} \\
-   \mathbf{D} = \mathbf{E} \mathbf{A} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E} \mathbf{A} \mathbf{A^{-1}} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E}
+   \mathbf{F} \triangleq \mathbf{C} \mathbf{B} \\
+   \mathbf{D} = \mathbf{F} \mathbf{A} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{F} \mathbf{A} \mathbf{A^{-1}} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{F}
 
 For our actual affines:
 
 .. nbplot::
 
     >>> third_with_second = combined.dot(npl.inv(first_affine))
-    >>> third_with_second
+    >>> third_with_second  # doctest: +SKIP
     array([[  0.9211,  -0.    ,   0.3894,  10.    ],
            [  0.    ,   1.    ,   0.    ,  20.    ],
            [ -0.3894,  -0.    ,   0.9211,  30.    ],
            [  0.    ,   0.    ,   0.    ,   1.    ]])
 
-This is very close to the third matrix multiplied by the second:
-
 .. nbplot::
 
-    >>> np.allclose(third_with_second, third_affine.dot(second_affine))
+    >>> # This is the same as
+    >>> F = third_affine.dot(second_affine)
+    >>> F  # doctest: +SKIP
+    array([[  0.9211,   0.    ,   0.3894,  10.    ],
+           [  0.    ,   1.    ,   0.    ,  20.    ],
+           [ -0.3894,   0.    ,   0.9211,  30.    ],
+           [  0.    ,   0.    ,   0.    ,   1.    ]])
+    >>> np.allclose(third_with_second, F)
     True
