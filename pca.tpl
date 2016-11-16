@@ -1,3 +1,5 @@
+.. vim: ft=rst
+
 ############
 PCA exercise
 ############
@@ -211,7 +213,7 @@ by a negative number for it to look nice on the plot:
     >>> plt.plot([0, scaled_u[0]], [0, scaled_u[1]], 'r')
     [...]
     >>> scaled_u[0]
-    3157.9395737007...
+    3157.9395737...
 
 Remember the projection formula :math:`c = \hat{u} \cdot \vec{v}`.
 
