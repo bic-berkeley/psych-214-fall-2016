@@ -175,21 +175,14 @@ affine, given we know the ``third_affine`` and ``second_affine``:
 
     >>> E = third_affine.dot(second_affine)
     >>> E_inv = npl.inv(E)
-    >>> E_inv.dot(combined)
-    array([[ 1.    ,  0.    , -0.    ,  0.    ],
-           [ 0.    ,  0.9801,  0.1987,  0.    ],
-           [ 0.    , -0.1987,  0.9801,  0.    ],
-           [ 0.    ,  0.    ,  0.    ,  1.    ]])
 
-This is the same as our first affine:
+This is very close to our first affine:
 
 .. nbplot::
 
-    >>> first_affine
-    array([[ 1.    ,  0.    ,  0.    ,  0.    ],
-           [ 0.    ,  0.9801,  0.1987,  0.    ],
-           [ 0.    , -0.1987,  0.9801,  0.    ],
-           [ 0.    ,  0.    ,  0.    ,  1.    ]])
+    >>> first_reconstructed = E_inv.dot(combined)
+    >>> np.allclose(first_reconstructed, first_affine)
+    True
 
 What about the situation where we know the first part of the affine, but we
 want to find the rest?
@@ -250,11 +243,9 @@ For our actual affines:
            [ -0.3894,  -0.    ,   0.9211,  30.    ],
            [  0.    ,   0.    ,   0.    ,   1.    ]])
 
+This is very close to the third matrix multiplied by the second:
+
 .. nbplot::
 
-    >>> # This is the same as
-    >>> third_affine.dot(second_affine)
-    array([[  0.9211,   0.    ,   0.3894,  10.    ],
-           [  0.    ,   1.    ,   0.    ,  20.    ],
-           [ -0.3894,   0.    ,   0.9211,  30.    ],
-           [  0.    ,   0.    ,   0.    ,   1.    ]])
+    >>> np.allclose(third_with_second, third_affine.dot(second_affine))
+    True
