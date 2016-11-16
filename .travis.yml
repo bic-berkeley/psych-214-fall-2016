@@ -1,4 +1,10 @@
 # This file runs automated testing on travis-ci.org cloud machines
+
+addons:
+  apt:
+    packages:
+      - texlive-latex-base
+
 language: python
 
 python:

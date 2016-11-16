@@ -6,6 +6,7 @@ nibabel
 numpy
 scipy
 ipython
+nbformat
 sympy>=0.7.3
 texext>=0.3.2
 nb2plots>=0.4
