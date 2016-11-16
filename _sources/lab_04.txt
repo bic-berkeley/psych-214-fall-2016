@@ -23,28 +23,11 @@ The mystery of where ``mymodule`` comes from, when you do ``import mymodule``.
 
 See: :doc:`sys_path`.
 
-*******
-Testing
-*******
+*******************
+Testing with assert
+*******************
 
-Using assert statements:
-
->>> # No error
->>> assert True
->>> # Tests whether expression evaluates to True
->>> assert 10 == 10
-
->>> # Error
->>> assert False
-Traceback (most recent call last):
-   ...
-AssertionError
-
->>> # Tests whether statement evaluates to True
->>> assert 10 == 11
-Traceback (most recent call last):
-   ...
-AssertionError
+* :doc:`assert`.
 
 ****************
 Some numpy stuff

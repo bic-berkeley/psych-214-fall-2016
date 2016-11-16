@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>String literals in Python &#8212; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Docstrings" href="docstrings.html" />
+    <link rel="prev" title="Python coding style" href="coding_style.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="string-literals-in-python">
+<h1>String literals in Python<a class="headerlink" href="#string-literals-in-python" title="Permalink to this headline">¶</a></h1>
+<p>A string literal is where you specify the contents of a string in a program.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;A string&#39;</span>
+</pre></div>
+</div>
+<p>Here &#8216;A string&#8217; is a string literal.  The variable <cite>a</cite> is a string variable,
+or, better put in Python, a variable that points to a string.</p>
+<p>String literals can use single or double quote delimiters.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;A string&#39;</span>  <span class="c1"># string literal with single quotes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;A string&quot;</span>  <span class="c1"># string literal with double quotes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">==</span> <span class="n">a</span>  <span class="c1"># there is no difference between these strings</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Literal strings with single quote delimiters can use double quotes inside them
+without any extra work.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Single quoted string with &quot; is no problem&#39;</span><span class="p">)</span>
+<span class="go">Single quoted string with &quot; is no problem</span>
+</pre></div>
+</div>
+<p>If you need an actual single quote character inside a literal string delimited
+by single quotes, you can use the backslash character before the single quote,
+to tell Python not to terminate the string:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Single quoted string containing </span><span class="se">\&#39;</span><span class="s1"> is OK with backslash&#39;</span><span class="p">)</span>
+<span class="go">Single quoted string containing &#39; is OK with backslash</span>
+</pre></div>
+</div>
+<p>Likewise for double quotes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Double quoted string with &#39; is no problem&quot;</span><span class="p">)</span>
+<span class="go">Double quoted string with &#39; is no problem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Double quoted string containing </span><span class="se">\&quot;</span><span class="s2"> is OK with backslash&quot;</span><span class="p">)</span>
+<span class="go">Double quoted string containing &quot; is OK with backslash</span>
+</pre></div>
+</div>
+<p>Some characters preceded by a backslash have special meaning.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Backslash before &quot;n&quot;, as in </span><span class="se">\n</span><span class="s1">, inserts a new line character&#39;</span><span class="p">)</span>  
+<span class="go">Backslash before &quot;n&quot;, as in</span>
+<span class="go">, inserts a new line character</span>
+</pre></div>
+</div>
+<p>If you do not want the backslash to have this special meaning, prefix your
+string literal with &#8216;r&#8217;, meaning &#8220;raw&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">r&#39;Prefixed by &quot;r&quot; the \n no longer inserts a new line&#39;</span><span class="p">)</span>
+<span class="go">Prefixed by &quot;r&quot; the \n no longer inserts a new line</span>
+</pre></div>
+</div>
+<p>You can use triple quotes to enclose strings with more than one line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;This string literal</span>
+<span class="gp">... </span><span class="s1">has more than one</span>
+<span class="gp">... </span><span class="s1">line&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">This string literal</span>
+<span class="go">has more than one</span>
+<span class="go">line</span>
+</pre></div>
+</div>
+<p>Triple quotes can use single or double quote marks:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;This string literal</span>
+<span class="gp">... </span><span class="s2">also has more than one</span>
+<span class="gp">... </span><span class="s2">line&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="go">This string literal</span>
+<span class="go">also has more than one</span>
+<span class="go">line</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="coding_style.html" title="previous chapter">Python coding style</a></li>
+      <li>Next: <a href="docstrings.html" title="next chapter">Docstrings</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/string_literals.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

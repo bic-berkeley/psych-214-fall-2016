@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Git and github workflow &mdash; Functional MRI methods</title>
+    <title>Git and github workflow &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -62,29 +62,11 @@
 <p>The mystery of where <code class="docutils literal"><span class="pre">mymodule</span></code> comes from, when you do <code class="docutils literal"><span class="pre">import</span> <span class="pre">mymodule</span></code>.</p>
 <p>See: <a class="reference internal" href="sys_path.html"><span class="doc">Where does Python look for modules?</span></a>.</p>
 </div>
-<div class="section" id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
-<p>Using assert statements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># No error</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="bp">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Tests whether expression evaluates to True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">10</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Error</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="bp">False</span>
-<span class="gt">Traceback (most recent call last):</span>
-   <span class="c">...</span>
-<span class="gr">AssertionError</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Tests whether statement evaluates to True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">11</span>
-<span class="gt">Traceback (most recent call last):</span>
-   <span class="c">...</span>
-<span class="gr">AssertionError</span>
-</pre></div>
-</div>
+<div class="section" id="testing-with-assert">
+<h2>Testing with assert<a class="headerlink" href="#testing-with-assert" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="assert.html"><span class="doc">Using assert for testing</span></a>.</li>
+</ul>
 </div>
 <div class="section" id="some-numpy-stuff">
 <h2>Some numpy stuff<a class="headerlink" href="#some-numpy-stuff" title="Permalink to this headline">¶</a></h2>
@@ -174,7 +156,7 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

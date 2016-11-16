@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Git walk-through &mdash; Functional MRI methods</title>
+    <title>Git walk-through &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -70,34 +70,44 @@ output of git easier to read:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>$ git
 usage: git <span class="o">[</span>--version<span class="o">]</span> <span class="o">[</span>--help<span class="o">]</span> <span class="o">[</span>-C &lt;path&gt;<span class="o">]</span> <span class="o">[</span>-c <span class="nv">name</span><span class="o">=</span>value<span class="o">]</span>
            <span class="o">[</span>--exec-path<span class="o">[=</span>&lt;path&gt;<span class="o">]]</span> <span class="o">[</span>--html-path<span class="o">]</span> <span class="o">[</span>--man-path<span class="o">]</span> <span class="o">[</span>--info-path<span class="o">]</span>
-           <span class="o">[</span>-p<span class="p">|</span>--paginate<span class="p">|</span>--no-pager<span class="o">]</span> <span class="o">[</span>--no-replace-objects<span class="o">]</span> <span class="o">[</span>--bare<span class="o">]</span>
+           <span class="o">[</span>-p <span class="p">|</span> --paginate <span class="p">|</span> --no-pager<span class="o">]</span> <span class="o">[</span>--no-replace-objects<span class="o">]</span> <span class="o">[</span>--bare<span class="o">]</span>
            <span class="o">[</span>--git-dir<span class="o">=</span>&lt;path&gt;<span class="o">]</span> <span class="o">[</span>--work-tree<span class="o">=</span>&lt;path&gt;<span class="o">]</span> <span class="o">[</span>--namespace<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
            &lt;command&gt; <span class="o">[</span>&lt;args&gt;<span class="o">]</span>
 
-The most commonly used git commands are:
-   add        Add file contents to the index
-   bisect     Find by binary search the change that introduced a bug
-   branch     List, create, or delete branches
-   checkout   Checkout a branch or paths to the working tree
+These are common Git commands used in various situations:
+
+start a working area <span class="o">(</span>see also: git <span class="nb">help</span> tutorial<span class="o">)</span>
    clone      Clone a repository into a new directory
-   commit     Record changes to the repository
-   diff       Show changes between commits, commit and working tree, etc
-   fetch      Download objects and refs from another repository
-   grep       Print lines matching a pattern
    init       Create an empty Git repository or reinitialize an existing one
-   log        Show commit logs
-   merge      Join two or more development histories together
+
+work on the current change <span class="o">(</span>see also: git <span class="nb">help</span> everyday<span class="o">)</span>
+   add        Add file contents to the index
    mv         Move or rename a file, a directory, or a symlink
-   pull       Fetch from and integrate with another repository or a <span class="nb">local</span> branch
-   push       Update remote refs along with associated objects
-   rebase     Forward-port <span class="nb">local</span> commits to the updated upstream head
    reset      Reset current HEAD to the specified state
    rm         Remove files from the working tree and from the index
+
+examine the <span class="nb">history</span> and state <span class="o">(</span>see also: git <span class="nb">help</span> revisions<span class="o">)</span>
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
    show       Show various types of objects
    status     Show the working tree status
+
+grow, mark and tweak your common <span class="nb">history</span>
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
    tag        Create, list, delete or verify a tag object signed with GPG
 
-<span class="s1">&#39;git help -a&#39;</span> and <span class="s1">&#39;git help -g&#39;</span> lists available subcommands and some
+collaborate <span class="o">(</span>see also: git <span class="nb">help</span> workflows<span class="o">)</span>
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a <span class="nb">local</span> branch
+   push       Update remote refs along with associated objects
+
+<span class="s1">&#39;git help -a&#39;</span> and <span class="s1">&#39;git help -g&#39;</span> list available subcommands and some
 concept guides. See <span class="s1">&#39;git help &lt;command&gt;&#39;</span> or <span class="s1">&#39;git help &lt;concept&gt;&#39;</span>
 to <span class="nb">read</span> about a specific subcommand or concept.
 </pre></div>
@@ -509,7 +519,7 @@ repository.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

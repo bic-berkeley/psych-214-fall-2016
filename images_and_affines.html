@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Images and affines &mdash; Functional MRI methods</title>
+    <title>Images and affines &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -227,9 +227,10 @@ apply it multiplying on the left of the original matrix:</p>
 <span class="math">\(\mathbf{E^{-1}}\)</span> then this is also the right inverse:</p>
 <div class="math">
 \[\mathbf{E^{-1}} \mathbf{E} = \mathbf{E} \mathbf{E^{-1}} = \mathbf{I}\]</div>
-<p>It is a little tricky to prove that there must be a right inverse, but it is
-easy to prove that, if there is a right inverse, it must be the same as the
-left inverse. Call the left inverse <span class="math">\(\mathbf{L}\)</span> and the right inverse
+<p>It is a bit out of our way to prove that a matrix with a left inverse must
+also have a right inverse.  If you accept that on faith for now, it is easy to
+prove that, if there is a right inverse, it must be the same as the left
+inverse. Call the left inverse <span class="math">\(\mathbf{L}\)</span> and the right inverse
 <span class="math">\(\mathbf{R}\)</span>:</p>
 <div class="math">
 \[\begin{split}\mathbf{LA} = \mathbf{I}\\
@@ -242,9 +243,10 @@ left inverse. Call the left inverse <span class="math">\(\mathbf{L}\)</span> and
 <p>So, in our case, where we want to find the transformations <em>following</em> the
 first affine, we can do this:</p>
 <div class="math">
-\[\begin{split}\mathbf{D} = \mathbf{C} \mathbf{B} \mathbf{A} \\
-\mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B} \mathbf{A} \mathbf{A^{-1}} \\
-\mathbf{D} \mathbf{A^{-1}} = \mathbf{C} \mathbf{B}\end{split}\]</div>
+\[\begin{split}\mathbf{E} \triangleq \mathbf{C} \mathbf{B} \\
+\mathbf{D} = \mathbf{E} \mathbf{A} \\
+\mathbf{D} \mathbf{A^{-1}} = \mathbf{E} \mathbf{A} \mathbf{A^{-1}} \\
+\mathbf{D} \mathbf{A^{-1}} = \mathbf{E}\end{split}\]</div>
 <p>For our actual affines:</p>
 <div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">third_with_second</span> <span class="o">=</span> <span class="n">combined</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">first_affine</span><span class="p">))</span>
@@ -336,7 +338,7 @@ first affine, we can do this:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
