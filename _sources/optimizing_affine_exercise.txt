@@ -380,6 +380,12 @@ minutes.
     :include-source: false
 
 
+.. result on travis boxes:
+
+    array([ -1.7745,  39.9285, -19.1182,   0.0234,  -0.0088,   0.0241,
+             0.9026,   0.9994,   0.8791])
+
+
 Finally, use these parameters to:
 
 * compile the P affine from the optimized parameters;
