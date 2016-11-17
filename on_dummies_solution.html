@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modeling groups with dummy variables exercise &#8212; Functional MRI methods</title>
+    <title>Modeling groups with dummy variables exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,7 +48,6 @@
 <h1>Modeling groups with dummy variables exercise<a class="headerlink" href="#modeling-groups-with-dummy-variables-exercise" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction-and-definitions">
 <h2>Introduction and definitions<a class="headerlink" href="#introduction-and-definitions" title="Permalink to this headline">¶</a></h2>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import numerical and plotting libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print to four digits of precision</span>
@@ -57,29 +56,22 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-</div>
 <p>We return to the psychopathy of students from Berkeley and MIT.</p>
 <p>We get psychopathy questionnaire scores from another set of 5 students from
 Berkeley:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Psychopathy scores from UCB students</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ucb_psycho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.9277</span><span class="p">,</span> <span class="mf">9.7348</span><span class="p">,</span> <span class="mf">12.1932</span><span class="p">,</span> <span class="mf">12.2576</span><span class="p">,</span> <span class="mf">5.4834</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
 <p>We do the same for another set of 5 students from MIT:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Psychopathy scores from MIT students</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mit_psycho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.2937</span><span class="p">,</span> <span class="mf">11.1465</span><span class="p">,</span> <span class="mf">13.5204</span><span class="p">,</span> <span class="mf">15.053</span><span class="p">,</span> <span class="mf">12.6863</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
 <p>Concatenate these into a <code class="docutils literal"><span class="pre">psychopathy</span></code> vector:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Concatenate UCB and MIT student scores</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">ucb_psycho</span><span class="p">,</span> <span class="n">mit_psycho</span><span class="p">))</span>
 </pre></div>
-</div>
 </div>
 <p>We will use the general linear model to a two-level (UCB, MIT) single factor
 (college) analysis of variance on these data.</p>
@@ -107,7 +99,6 @@ general linear model to do estimation and testing:</p>
 <div class="section" id="anova-design">
 <h2>ANOVA design<a class="headerlink" href="#anova-design" title="Permalink to this headline">¶</a></h2>
 <p>Create the design matrix for this ANOVA, with dummy variables corresponding to the UCB and MIT student groups:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create design matrix for UCB / MIT ANOVA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">psychopathy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
@@ -127,13 +118,11 @@ general linear model to do estimation and testing:</p>
 <span class="go">       [ 0.,  1.]])</span>
 </pre></div>
 </div>
-</div>
 <p>Remember that, when <span class="math">\(\Xmat^T \Xmat\)</span> is invertible, our least-squares parameter
 estimates <span class="math">\(\bhat\)</span> are given by:</p>
 <div class="math">
 \[\bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\]</div>
 <p>First calculate <span class="math">\(\Xmat^T \Xmat\)</span>. Are the columns of this design orthogonal?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate transpose of design with itself.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Are the design columns orthogonal?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -141,16 +130,13 @@ estimates <span class="math">\(\bhat\)</span> are given by:</p>
 <span class="go">       [ 0.,  5.]])</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate the inverse of <span class="math">\(\Xmat^T \Xmat\)</span>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate inverse of transpose of design with itself.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iXtX</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iXtX</span>
 <span class="go">array([[ 0.2,  0. ],</span>
 <span class="go">       [ 0. ,  0.2]])</span>
 </pre></div>
-</div>
 </div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
@@ -171,11 +157,9 @@ of the number of values in each group.</p>
 </div>
 <p>Now calculate the second half of <span class="math">\((\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\)</span>:
 <span class="math">\(\vec{p} = \Xmat^T \yvec\)</span>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate transpose of design matrix multiplied by data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">XtY</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
@@ -196,24 +180,20 @@ Therefore the values are the sums of the values in <code class="docutils literal
 </div>
 </div>
 <p>Now calculate <span class="math">\(\bhat\)</span> using <span class="math">\((\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate beta vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">iXtX</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">XtY</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span>
 <span class="go">array([  8.5193,  11.94  ])</span>
 </pre></div>
 </div>
-</div>
 <p>Compare this vector to the means of the values in <code class="docutils literal"><span class="pre">ucb_psycho</span></code> and
 <code class="docutils literal"><span class="pre">mit_psycho</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Compare beta vector to means of each group</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ucb_psycho</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="go">8.51933...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mit_psycho</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="go">11.93998...</span>
 </pre></div>
-</div>
 </div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
@@ -243,7 +223,6 @@ t = \frac{\cvec^T \bhat}
 <span class="math">\(\mu_{Berkeley}\)</span>.  What contrast vector <span class="math">\(\cvec\)</span> do we need to apply to <span class="math">\(\bhat\)</span>
 to express the difference between these means?  Apply this contrast vector to
 <span class="math">\(\bhat\)</span> to get the top half of the t statistic.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Contrast vector to express difference between UCB and MIT</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Resulting value will be high and positive when MIT students have</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- higher psychopathy scores than UCB students</span>
@@ -253,18 +232,15 @@ to express the difference between these means?  Apply this contrast vector to
 <span class="go">3.42064...</span>
 </pre></div>
 </div>
-</div>
 <p>Now the bottom half of the t statistic.  Remember this is
 <span class="math">\(\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}\)</span>.</p>
 <p>First we generate <span class="math">\(\hat{\sigma^2}\)</span> from the residuals of the model.</p>
 <p>Calculate the fitted values and the residuals given the <span class="math">\(\bhat\)</span> that you have
 already.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the fitted and residual values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fitted</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">residuals</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">fitted</span>
 </pre></div>
-</div>
 </div>
 <p>We want an unbiased variance estimate for <span class="math">\(\hat\sigma^2\)</span>.  See the <a class="reference external" href="https://github.com/bic-berkeley/psych-214-fall-2014/mean_test_example.html">worked
 example of GLM</a> page and the <a class="reference external" href="https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html#unbiased-variance">unbiased variance estimate</a> section for
@@ -274,7 +250,6 @@ the number of <em>independent</em> columns in the design matrix.  Specifically, 
 is the <a class="reference external" href="http://matthew-brett.github.io/teaching/matrix_rank.html">matrix rank</a> of the design <span class="math">\(\Xmat\)</span>.  <span class="math">\(m\)</span> can also be called the
 <em>degrees of freedom of the design</em>.  <span class="math">\(n - m\)</span> is the <em>degrees of freedom of the
 error</em> (see <a class="reference external" href="https://bic-berkeley.github.io/psych-214-fall-2016/hypothesis_tests.html#unbiased-variance">unbiased variance estimate</a>).</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the degrees of freedom consumed by the design</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the degrees of freedom of the error</span>
@@ -283,28 +258,23 @@ error</em> (see <a class="reference external" href="https://bic-berkeley.github.
 <span class="go">8</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate the unbiased <em>variance</em> estimate <span class="math">\(\hat{\sigma^2}\)</span> by dividing the
 sums of squares of the residuals by the degrees of freedom of the error.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the unbiased variance estimate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">var_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">residuals</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">df_error</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">var_hat</span>
 <span class="go">13.04946...</span>
 </pre></div>
 </div>
-</div>
 <p>Now the calculate second part of the t statistic denominator,  <span class="math">\(\cvec^T (\Xmat^T
 \Xmat)^+ \cvec\)</span>. You already know that <span class="math">\(\Xmat^T \Xmat\)</span> is invertible, and you
 have its inverse above, so you can use the inverse instead of the more general
 pseudo-inverse.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate c (X.T X)^-1 c.T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c_iXtX_ct</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c_iXtX_ct</span>
 <span class="go">0.40000...</span>
 </pre></div>
-</div>
 </div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
@@ -322,18 +292,15 @@ pseudo-inverse.</p>
 \[\cvec^T (\Xmat^T \Xmat)^{-1} \cvec = \frac{2}{p}\]</div>
 </div>
 <p>Now, what is our t-value ?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tstat</span> <span class="o">=</span> <span class="n">top_of_t</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_hat</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">iXtX</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tstat</span>
 <span class="go">1.49720...</span>
 </pre></div>
 </div>
-</div>
 <p>Is this significant ? Use the <code class="docutils literal"><span class="pre">stats</span></code> module from <code class="docutils literal"><span class="pre">scipy</span></code> to create a
 t-distribution with <code class="docutils literal"><span class="pre">df_error</span></code> (degrees of freedom of the error).  See the
 <code class="docutils literal"><span class="pre">t_stat</span></code> function in <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a> for
 inspiration:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use scipy.stats to test if your t-test value is significant.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">sst</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdistrib</span> <span class="o">=</span> <span class="n">sst</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">df_error</span><span class="p">)</span>
@@ -344,7 +311,6 @@ inspiration:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdistrib</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">tstat</span><span class="p">)</span>
 <span class="go">0.08635...</span>
 </pre></div>
-</div>
 </div>
 <div class="admonition-question admonition">
 <p class="first admonition-title">Question</p>
@@ -370,7 +336,6 @@ t statistic?</p>
 \[\cvec^T (\Xmat^T \Xmat)^{-1} \cvec = \frac{1}{b} + \frac{1}{n-b}\]</div>
 <p>To investigate, we make a Python function returning the result for a given
 <code class="docutils literal"><span class="pre">b</span></code> and <code class="docutils literal"><span class="pre">n</span></code>, and evalulate for the possible values of <code class="docutils literal"><span class="pre">b</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">two_group_ct_ixtx_c</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
 <span class="gp">...</span>
@@ -378,7 +343,6 @@ t statistic?</p>
 <span class="go">array([ 1.1111,  0.625 ,  0.4762,  0.4167,  0.4   ,  0.4167,  0.4762,</span>
 <span class="go">        0.625 ,  1.1111])</span>
 </pre></div>
-</div>
 </div>
 <p>We want <span class="math">\(\cvec^T (\Xmat^T \Xmat)^{-1} \cvec\)</span> to be small so that the t
 value will be large.  So, all other things being equal, <span class="math">\(b = 5\)</span> will give
@@ -388,7 +352,6 @@ power) when comparing two groups of equal size.</p>
 <p>We can prove this result by doing some calculus.  Here we are using the
 <a class="reference external" href="http://sympy.org">sympy</a> Python package for computer algebra to show the results of the
 differentiation and root finding:</p>
-<div class="nbplot last container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sympy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n, b&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># construct the equation in terms of n and b</span>
@@ -404,17 +367,14 @@ differentiation and root finding:</p>
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="hypothesis-testing-f-tests">
 <h2>Hypothesis testing: F-tests<a class="headerlink" href="#hypothesis-testing-f-tests" title="Permalink to this headline">¶</a></h2>
 <p>Imagine we have also measured the clammy score for the Berkeley and MIT
 students.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Clamminess of handshake for UCB and MIT students</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.6386</span><span class="p">,</span> <span class="mf">9.6094</span><span class="p">,</span> <span class="mf">8.3379</span><span class="p">,</span> <span class="mf">6.2871</span><span class="p">,</span> <span class="mf">7.2775</span><span class="p">,</span> <span class="mf">2.4787</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="mf">8.6037</span><span class="p">,</span> <span class="mf">12.8713</span><span class="p">,</span> <span class="mf">10.4906</span><span class="p">,</span> <span class="mf">5.6766</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 <p>We want to test whether the clammy score is useful in explaining
 the psychopathy data, over and above the students&#8217; college affiliation.</p>
@@ -441,7 +401,6 @@ using these calculations and the formula for the F-test in <a class="reference e
 freedom consumed by the design – <span class="math">\({\nu_1}\)</span>.  Compute the extra sum of
 squares and the F statistic.</p>
 <p>Answer: Construct <span class="math">\(\Xmat_f\)</span>; compute <span class="math">\(\nu_1\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Reduced design, and design matrix rank</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_r</span> <span class="o">=</span> <span class="n">X</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rank_r</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X_r</span><span class="p">)</span>
@@ -457,10 +416,8 @@ squares and the F statistic.</p>
 <span class="go">1</span>
 </pre></div>
 </div>
-</div>
 <p>Make a function to compute <span class="math">\(\bhat, \textrm{SSR}(\Xmat), \nu_2\)</span> for a
 given <span class="math">\(\Xmat\)</span> and <span class="math">\(\yvec\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">glm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Compute GLM on design `X` and data `Y`</span>
 <span class="gp">...</span><span class="sd"></span>
@@ -486,16 +443,13 @@ given <span class="math">\(\Xmat\)</span> and <span class="math">\(\yvec\)</span
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">B</span><span class="p">,</span> <span class="n">resid</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">resid</span><span class="p">),</span> <span class="n">df</span>
 </pre></div>
 </div>
-</div>
 <p>Compute F statistic:</p>
-<div class="nbplot last container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b_f</span><span class="p">,</span> <span class="n">rss_f</span><span class="p">,</span> <span class="n">df_f</span> <span class="o">=</span> <span class="n">glm</span><span class="p">(</span><span class="n">X_f</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b_r</span><span class="p">,</span> <span class="n">rss_r</span><span class="p">,</span> <span class="n">df_r</span> <span class="o">=</span> <span class="n">glm</span><span class="p">(</span><span class="n">X_r</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f_stat</span> <span class="o">=</span> <span class="p">((</span><span class="n">rss_r</span> <span class="o">-</span> <span class="n">rss_f</span><span class="p">)</span> <span class="o">/</span> <span class="n">nu_1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">rss_f</span> <span class="o">/</span> <span class="n">df_f</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f_stat</span>
 <span class="go">6.15949...</span>
 </pre></div>
-</div>
 </div>
 </div>
 <p class="rubric">Footnotes</p>
@@ -576,7 +530,7 @@ column vector, and therefore that <span class="math">\(\vec{v}^T\)</span> is a r
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

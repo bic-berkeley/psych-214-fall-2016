@@ -28,7 +28,14 @@ then by row (the first axis):
 
 We can do the same thing in MATLAB, or its open-source version, Octave:
 
-.. runblock:: octave
+.. We previously did this live, with
+    .. runblock:: octave
+
+        >> % Fill in a MATLAB / Octave array
+
+    etc.  But then we need octave for every build, which seemed a bit much.
+
+.. code-block:: matlab
 
     >> % Fill in a MATLAB / Octave array
     >> numbers = 0:23;
@@ -43,7 +50,16 @@ We can do the same thing in MATLAB, or its open-source version, Octave:
            end
        end
     >> m_arr(:, :, 1)
+    ans =
+
+        0    4    8
+       12   16   20
+
     >> m_arr(:, :, 2)
+    ans =
+
+        1    5    9
+       13   17   21
 
 Remember that MATLAB and Octave have 1-based indices.  That is, the index to
 the first element on an axis is 1.  Python has 0-based indices.  Given that,
@@ -72,11 +88,24 @@ the same order as the loop above:
 MATLAB does a reshape using the opposite order, taking the elements off the
 first axis first:
 
-.. runblock:: octave
+.. was:
+
+    .. runblock:: octave
+
+.. code-block:: matlab
 
     >> m_reshaped = reshape(0:23, [2 3 4]);
     >> m_reshaped(:, :, 1)
+    ans =
+
+       0   2   4
+       1   3   5
+
     >> m_reshaped(:, :, 2)
+    ans =
+
+        6    8   10
+        7    9   11
 
 If you prefer this ordering, you can ask NumPy to do the same, by using the
 ``order`` parameter to ``reshape``:

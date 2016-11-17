@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reslicing with affines exercise &#8212; Functional MRI methods</title>
+    <title>Reslicing with affines exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,9 +46,6 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="reslicing-with-affines-exercise">
 <h1>Reslicing with affines exercise<a class="headerlink" href="#reslicing-with-affines-exercise" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
@@ -58,19 +55,16 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
 </div>
-</div>
 <div class="section" id="reslicing-between-spaces-using-affines">
 <h2>Reslicing between spaces using affines<a class="headerlink" href="#reslicing-between-spaces-using-affines" title="Permalink to this headline">¶</a></h2>
 <p>Here are a BOLD (4D image) and a structural image for the same subject:</p>
 <ul class="simple">
-<li>BOLD image : <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>;</li>
+<li>BOLD (functional) image : <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>;</li>
 <li>structural image : <a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a>.</li>
 </ul>
 <p>They have different orientations and voxel sizes.</p>
@@ -79,7 +73,6 @@
 <li>image shape;</li>
 <li>image affine from the header.</li>
 </ul>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load structural and BOLD image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Print image data shape</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Print affine from header</span>
@@ -101,11 +94,9 @@
 <span class="go"> [   0.        0.        0.        1.    ]]</span>
 </pre></div>
 </div>
-</div>
 <p>We know this BOLD image now. It has a bad first volume. Load the BOLD data,
 drop the first volume, and make a new volume that is the mean of the rest of
 the BOLD volumes across time. Plot an example slice from the mean volume.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load BOLD image data.  Drop first volume.  Make mean volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot an example slice from the mean volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bold_data</span> <span class="o">=</span> <span class="n">bold_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
@@ -118,9 +109,7 @@ the BOLD volumes across time. Plot an example slice from the mean volume.</p>
 <div class="figure">
 <img alt="_images/reslicing_with_affines_solution-5.png" src="_images/reslicing_with_affines_solution-5.png" />
 </div>
-</div>
 <p>Load the structural data, plot an example slice:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load structural data, plot example slice</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">structural_data</span> <span class="o">=</span> <span class="n">structural_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">structural_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">127</span><span class="p">])</span>
@@ -130,7 +119,6 @@ the BOLD volumes across time. Plot an example slice from the mean volume.</p>
 <p>(<a class="reference external" href=".//reslicing_with_affines_solution-6.png">png</a>, <a class="reference external" href=".//reslicing_with_affines_solution-6.hires.png">hires.png</a>, <a class="reference external" href=".//reslicing_with_affines_solution-6.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/reslicing_with_affines_solution-6.png" src="_images/reslicing_with_affines_solution-6.png" />
-</div>
 </div>
 <p>Now we are going to reslice the anatomical to match the mean functional
 volume.</p>
@@ -146,7 +134,6 @@ the corresponding coordinate in the structural volume.</p>
 </ul>
 <p>We combine these by matrix multiplication (<em>from right to left!</em>) to give
 <code class="docutils literal"><span class="pre">mean_vox2struct_vox</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get `mean_vox2mm` mapping</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get `mm2struct_vox` mapping</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate `mean_vox2struct_vox`</span>
@@ -160,10 +147,8 @@ the corresponding coordinate in the structural volume.</p>
 <span class="go">       [   0.    ,    0.    ,    0.    ,    1.    ]])</span>
 </pre></div>
 </div>
-</div>
 <p>Split this affine matrix up into its component 3 x 3 <code class="docutils literal"><span class="pre">M</span></code> matrix and the 3
 element translation vector:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Split `mean_vox2struct_vox` into 3x3 transformation, 3 element</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- translation.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">mean_vox2struct_vox</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
@@ -176,16 +161,12 @@ element translation vector:</p>
 <span class="go">array([ 252.0885,  -17.1005,  113.2972])</span>
 </pre></div>
 </div>
-</div>
 <p>Now we can use <code class="docutils literal"><span class="pre">affine_transform</span></code> to make a new copy of the structural
 image, resampled into the voxel coordinates of the mean functional image:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import affine_transform function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use affine_transform and the tranformation components to resample</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- structural to functional</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">struct_in_mean_space</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">structural_data</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mean_vol</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -193,10 +174,8 @@ image, resampled into the voxel coordinates of the mean functional image:</p>
 <span class="go">(64, 64, 30)</span>
 </pre></div>
 </div>
-</div>
 <p>Use <a class="reference internal" href="subplots.html"><span class="doc">Subplots and axes in matplotlib</span></a> to display and example slice from the mean image and the
 resliced structural side by side:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display example slice from mean vol and resliced structural side by</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- side.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -210,14 +189,12 @@ resliced structural side by side:</p>
 <div class="figure">
 <img alt="_images/reslicing_with_affines_solution-11.png" src="_images/reslicing_with_affines_solution-11.png" />
 </div>
-</div>
 <p>Now let&#8217;s go in the opposite direction.</p>
 <p>We are going to resample the mean functional volume into the voxel space of
 the structural volume.</p>
 <p>We need the affine transformation from voxel coordinates in the structural to
 voxel coordinates in the mean functional volume – call this
 <code class="docutils literal"><span class="pre">struct_vox2mean_vox</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get affine transformation `struct_vox2mean_vox`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">struct_vox2mean_vox</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">mean_vox2struct_vox</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">struct_vox2mean_vox</span>
@@ -227,19 +204,15 @@ voxel coordinates in the mean functional volume – call this
 <span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
 </pre></div>
 </div>
-</div>
 <p>Use the contents of <code class="docutils literal"><span class="pre">struct_vox2mean_vox</span></code> to reslice the mean functional to
 the structural voxel space:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reslice mean functional to structural voxel space</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">to_matvec</span><span class="p">(</span><span class="n">struct_vox2mean_vox</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mean_in_struct_space</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">mean_vol</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">structural_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Display example slice for resliced mean functional side by side with
 structural:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display example slices for resliced mean and structural</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mean_in_struct_space</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">127</span><span class="p">])</span>
@@ -251,7 +224,6 @@ structural:</p>
 <p>(<a class="reference external" href=".//reslicing_with_affines_solution-14.png">png</a>, <a class="reference external" href=".//reslicing_with_affines_solution-14.hires.png">hires.png</a>, <a class="reference external" href=".//reslicing_with_affines_solution-14.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/reslicing_with_affines_solution-14.png" src="_images/reslicing_with_affines_solution-14.png" />
-</div>
 </div>
 <p>Can you think of situations where you would prefer to use one direction (e.g.
 functional to anatomy) over the other?</p>
@@ -325,7 +297,7 @@ functional to anatomy) over the other?</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

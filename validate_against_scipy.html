@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Validating the GLM against scipy &#8212; Functional MRI methods</title>
+    <title>Validating the GLM against scipy &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,7 +46,6 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="validating-the-glm-against-scipy">
 <h1>Validating the GLM against scipy<a class="headerlink" href="#validating-the-glm-against-scipy" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -54,9 +53,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<p>Make some random but predictable data:</p>
-<div class="nbplot container">
+<p>Make some random but predictable data with <a class="reference internal" href="numpy_random.html"><span class="doc">numpy.random</span></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Make random number generation predictable</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1966</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Make a fake regressor and data.</span>
@@ -71,7 +68,6 @@
 <div class="figure">
 <img alt="_images/validate_against_scipy-2.png" src="_images/validate_against_scipy-2.png" />
 </div>
-</div>
 <p>Do a simple linear regression with the GLM:</p>
 <div class="math">
 \[ \begin{align}\begin{aligned}\newcommand{\yvec}{\vec{y}}
@@ -84,7 +80,6 @@
 \newcommand{\ehat}{\hat{\evec}}
 \newcommand{\cvec}{\vec{c}}
 \newcommand{\rank}{\textrm{rank}}\\\begin{split}y_i = c + b x_i + e_i \implies \\\end{split}\\\yvec = \Xmat \bvec + \evec\end{aligned}\end{align} \]</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -93,13 +88,11 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Build the t statistic:</p>
 <div class="math">
 \[ \begin{align}\begin{aligned}\begin{split}\newcommand{\cvec}{\vec{c}}
 \hat\sigma^2 = \frac{1}{n - \rank(\Xmat)} \sum e_i^2 \\\end{split}\\t = \frac{\cvec^T \bhat}
 {\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}}\end{aligned}\end{align} \]</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Contrast vector selects slope parameter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">npl</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -110,9 +103,7 @@
 <span class="go">0.82220...</span>
 </pre></div>
 </div>
-</div>
 <p>Test the t statistic against a t distribution with <code class="docutils literal"><span class="pre">df</span></code> degrees of freedom:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t_dist</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">t_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -125,9 +116,7 @@
 <span class="go">0.42171...</span>
 </pre></div>
 </div>
-</div>
 <p>Now do the same test with <code class="docutils literal"><span class="pre">scipy.stats.linregress</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">slope</span>
 <span class="go">0.07227...</span>
@@ -143,9 +132,7 @@
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
 <p>Now do the same thing with the two-sample t-test.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span><span class="p">[</span><span class="mi">10</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -189,14 +176,11 @@
 <span class="go">0.76167...</span>
 </pre></div>
 </div>
-</div>
 <p>The same thing using <code class="docutils literal"><span class="pre">scipy.stats.ttest_ind</span></code> for t test between two
 independent samples:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">:])</span>
 <span class="go">Ttest_indResult(statistic=0.30792..., pvalue=0.76167...)</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -267,7 +251,7 @@ independent samples:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

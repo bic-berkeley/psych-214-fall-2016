@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Project grading &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="project-grading">
+<h1>Project grading<a class="headerlink" href="#project-grading" title="Permalink to this headline">¶</a></h1>
+<p>To receive an &#8220;A&#8221; on this assignment you will need to have
+roughly seven check marks and two check pluses.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="29%" />
+<col width="30%" />
+<col width="29%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&nbsp;</td>
+<td>✓-</td>
+<td>✓</td>
+<td>✓+</td>
+</tr>
+<tr class="row-even"><td>Questions</td>
+<td>Questions overly simplistic,
+unrelated, or unmotivated</td>
+<td>Questions appropriate, coherent,
+and motivated</td>
+<td>Questions well motivated,
+interesting, insightful, and novel</td>
+</tr>
+<tr class="row-odd"><td>Analysis</td>
+<td>Choice of analysis is overly
+simplistic or incomplete</td>
+<td>Analysis appropriate</td>
+<td>Analysis appropriate, complete,
+advanced, and informative</td>
+</tr>
+<tr class="row-even"><td>Results</td>
+<td><p class="first">Conclusions are missing,
+incorrect, or not based on
+analysis</p>
+<p class="last">Inappropriate choice of
+plots; poorly labeled plots;
+plots missing</p>
+</td>
+<td><p class="first">Conclusions relevant, but partially
+correct or partially complete</p>
+<p class="last">Plots convey information but lack
+context for interpretation</p>
+</td>
+<td><p class="first">Relevant conclusions explicitly
+tied to analysis and to context</p>
+<p class="last">Plots convey information
+correctly with adequate and
+appropriate reference
+information</p>
+</td>
+</tr>
+<tr class="row-odd"><td>Collaboration</td>
+<td>Only a few members
+contributed substantial
+effort or members each
+only worked on part of
+project</td>
+<td>All members contributed
+substantial effort and
+everyone contributed to all
+aspects of project</td>
+<td>All members contributed
+substantial effort to each
+project aspect</td>
+</tr>
+<tr class="row-even"><td>Tests</td>
+<td>Tests incomplete, incorrect, or
+missing</td>
+<td>Tests cover most of the project
+code</td>
+<td>Extensive and
+comprehensive testing</td>
+</tr>
+<tr class="row-odd"><td>Code review</td>
+<td>Pull requests not adequately used,
+reviewed, or improved</td>
+<td>Pull requests adequately used,
+reviewed, and improved</td>
+<td>Code review substantial
+and extensive</td>
+</tr>
+<tr class="row-even"><td>Documentation</td>
+<td>Poorly documented</td>
+<td>Adequately documented</td>
+<td>Well documented</td>
+</tr>
+<tr class="row-odd"><td>Readability</td>
+<td>Code readability inconsistent or
+poor</td>
+<td>Code readability consistent and
+good quality</td>
+<td>Code readability excellent</td>
+</tr>
+<tr class="row-even"><td>Organization</td>
+<td>Poorly organized and structured
+repository</td>
+<td>Reasonably organized and clear
+structure</td>
+<td>Elegant and transparent
+code organization</td>
+</tr>
+<tr class="row-odd"><td>Presentation</td>
+<td><p class="first">Verbal presentation is
+illogical, incorrect, or
+incoherent.</p>
+<p>Visual presentation is
+cluttered, disjoint, or
+illegible</p>
+<p class="last">Verbal and visual
+presentation unrelated</p>
+</td>
+<td><p class="first">Verbal presentation partially
+correct but incomplete or
+unconvincing</p>
+<p>Visual presentation is
+readable and clear</p>
+<p class="last">Verbal and visual
+presentation related</p>
+</td>
+<td><p class="first">Verbal presentation is
+correct, complete,
+and convincing</p>
+<p>Visual presentation is
+appealing, informative,
+and crisp</p>
+<p class="last">Verbal and visual
+presentation clearly related</p>
+</td>
+</tr>
+<tr class="row-even"><td>Writing</td>
+<td>Explanation is illogical,
+incorrect, or incoherent</td>
+<td>Explanation is correct, complete,
+and convincing</td>
+<td>Explanation is correct, complete,
+convincing, and elegant</td>
+</tr>
+<tr class="row-odd"><td>Reproduciblity</td>
+<td>Code didn&#8217;t run</td>
+<td>Makefile recipes fetch data,
+validates fetched data,
+generates all results and
+figures in report</td>
+<td>Makefiles additionally generate
+all EDA work and supplementary
+analysis</td>
+</tr>
+</tbody>
+</table>
+<p>To receive an &#8220;A&#8221; on this assignment you will need to have roughly seven check
+marks and two check pluses.</p>
+<p>✓-</p>
+<p>✓</p>
+<p>✓+</p>
+<p>Questions</p>
+<p>Questions overly simplistic, unrelated, or
+unmotivated</p>
+<p>Questions appropriate, coherent, and
+motivated</p>
+<p>Questions well motivated, interesting,
+insightful, and novel</p>
+<p>Analysis</p>
+<p>Choice of analysis is overly simplistic or
+incomplete</p>
+<p>Analysis appropriate</p>
+<p>Analysis appropriate, complete, advanced,
+and informative</p>
+<p>Results</p>
+<p>Conclusions are missing, incorrect, or not
+based on analysis
+Inappropriate choice of plots; poorly labeled
+plots; plots missing</p>
+<p>Conclusions relevant, but partially correct or
+partially complete
+Plots convey information but lack context for
+interpretation</p>
+<p>Relevant conclusions explicitly tied to
+analysis and to context
+Plots convey information correctly with
+adequate and appropriate reference
+information</p>
+<p>Collaboration</p>
+<p>Only a few members contributed substantial
+effort or members each only worked on part
+of project</p>
+<p>All members contributed substantial effort and
+everyone contributed to all aspects of project</p>
+<p>All members contributed substantial effort to
+each project aspect</p>
+<p>Tests</p>
+<p>Tests incomplete, incorrect, or missing</p>
+<p>Tests cover most of the project code</p>
+<p>Extensive and comprehensive testing</p>
+<p>Code review</p>
+<p>Pull requests not adequately used,
+reviewed, or improved</p>
+<p>Pull requests adequately used, reviewed, and
+improved</p>
+<p>Code review substantial and extensive</p>
+<p>Documentation</p>
+<p>Poorly documented</p>
+<p>Adequately documented</p>
+<p>Well documented</p>
+<p>Readability</p>
+<p>Code readability inconsistent or poor</p>
+<p>Code readability consistent and good quality</p>
+<p>Code readability excellent</p>
+<p>Organization</p>
+<p>Poorly organized and structured repository</p>
+<p>Reasonably organized and clear structure</p>
+<p>Elegant and transparent code organization</p>
+<p>Presentation</p>
+<p>Verbal presentation is illogical, incorrect, or
+incoherent.
+Visual presentation is cluttered, disjoint, or
+illegible
+Verbal and visual presentation unrelated</p>
+<p>Verbal presentation partially correct but
+incomplete or unconvincing
+Visual presentation is readable and clear
+Verbal and visual presentation related</p>
+<p>Verbal presentation is correct, complete,
+and convincing
+Visual presentation is appealing,
+informative, and crisp
+Verbal and visual presentation clearly
+related</p>
+<p>Writing</p>
+<p>Explanation is illogical, incorrect, or
+incoherent</p>
+<p>Explanation is correct, complete, and
+convincing</p>
+<p>Explanation is correct, complete, convincing,
+and elegant</p>
+<p>Reproduciblity</p>
+<p>Code didn&#8217;t run</p>
+<p>Makefile recipes fetch data, validates fetched
+data, generates all results and figures in
+report</p>
+<p>Makefiles additionally generate all EDA work
+and supplementary analysis</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/rubric.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Slicing with boolean vectors &#8212; Functional MRI methods</title>
+    <title>Slicing with boolean vectors &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,7 +48,6 @@
 <h1>Slicing with boolean vectors<a class="headerlink" href="#slicing-with-boolean-vectors" title="Permalink to this headline">¶</a></h1>
 <p>We have already seen how to slice arrays using colons and integers.</p>
 <p>The colon means &#8216;all the elements on this axis&#8217;:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># All rows, only the second column</span>
@@ -61,10 +60,8 @@
 <span class="go">array([1, 2, 3])</span>
 </pre></div>
 </div>
-</div>
 <p>We have also seen how to slice using a boolean array the same shape as the
 original:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt_5</span> <span class="o">=</span> <span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_gt_5</span>
 <span class="go">array([[False, False, False, False],</span>
@@ -76,12 +73,10 @@ original:</p>
 <span class="go">array([6, 7])</span>
 </pre></div>
 </div>
-</div>
 <p>We can also use boolean vectors to select elements on a particular axis.  So,
 for example, let&#8217;s say we want the first and last elements on the second axis.
 We can use a boolean vector to select these elements from a particular axis,
 while still using integer and colon syntax for the other axes:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">want_first_last</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -90,7 +85,6 @@ while still using integer and colon syntax for the other axes:</p>
 <span class="go">array([[0, 3],</span>
 <span class="go">       [4, 7]])</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -161,7 +155,7 @@ while still using integer and colon syntax for the other axes:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

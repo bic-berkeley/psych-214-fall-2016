@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basic linear modeling &#8212; Functional MRI methods</title>
+    <title>Basic linear modeling &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,7 +48,6 @@
 <h1>Basic linear modeling<a class="headerlink" href="#basic-linear-modeling" title="Permalink to this headline">¶</a></h1>
 <p>In this exercise we will run a simple regression on all voxels in a 4D
 FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import some standard librares</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print to 4 DP</span>
@@ -60,25 +59,19 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Load the image as an image object</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Load the image data as an array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Drop the first 4 3D volumes from the array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># (We already saw that these were abnormal)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span>
 </pre></div>
 </div>
-</div>
 <p>We make the design matrix from the convolved regressor from
 <a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the pre-written convolved time course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Knock off the first four elements</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">)[</span><span class="mi">4</span><span class="p">:]</span>
@@ -90,8 +83,6 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <div class="figure">
 <img alt="_images/multi_model_solution-4.png" src="_images/multi_model_solution-4.png" />
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Compile the design matrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- First column is convolved regressor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Second column all ones</span>
@@ -107,8 +98,6 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <div class="figure">
 <img alt="_images/multi_model_solution-5.png" src="_images/multi_model_solution-5.png" />
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape the 4D data to voxel by time 2D</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose to give time by voxel 2D</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the pseudoinverse of the design</span>
@@ -119,16 +108,12 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <span class="go">(2, 122880)</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose betas to give voxels by 2 array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape into 4D array, with same 3D shape as original data,</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- last dimension length 2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">betas_4d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">betas</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the middle slice from the first beta volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">betas_4d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -138,8 +123,6 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <div class="figure">
 <img alt="_images/multi_model_solution-8.png" src="_images/multi_model_solution-8.png" />
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the middle slice from the second beta volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">betas_4d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -148,7 +131,6 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
 <p>(<a class="reference external" href=".//multi_model_solution-9.png">png</a>, <a class="reference external" href=".//multi_model_solution-9.hires.png">hires.png</a>, <a class="reference external" href=".//multi_model_solution-9.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/multi_model_solution-9.png" src="_images/multi_model_solution-9.png" />
-</div>
 </div>
 </div>
 
@@ -219,7 +201,7 @@ FMRI image <a class="reference download internal" href="_downloads/ds114_sub009_
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

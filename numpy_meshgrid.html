@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Making coordinate arrays with meshgrid &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="General resampling between images with scipy.ndimage.map_coordinates" href="map_coordinates.html" />
+    <link rel="prev" title="Affine transformations" href="lab_11.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="making-coordinate-arrays-with-meshgrid">
+<h1>Making coordinate arrays with meshgrid<a class="headerlink" href="#making-coordinate-arrays-with-meshgrid" title="Permalink to this headline">¶</a></h1>
+<p><span class="xref doc">affine_transform &lt;resampling_with_ndimage</span> works by using voxel
+coordinate implied by the <code class="docutils literal"><span class="pre">output_shape</span></code>, and transforming those. See:
+<a class="reference internal" href="resampling_with_ndimage.html#implied-coordinate-grid"><span class="std std-ref">Resampling with images of different shapes</span></a>.</p>
+<p><code class="docutils literal"><span class="pre">numpy.meshgrid</span></code> is a way of making an actual coordinate grid.</p>
+<p>This is particularly useful when we want to use the more general form of image
+resampling in <code class="docutils literal"><span class="pre">scipy.ndimage.map_coordinates</span></code>.</p>
+<p>If we have some shape – say <code class="docutils literal"><span class="pre">output_shape</span></code> – then this implies a set
+of coordinates. Let&#8217;s say <code class="docutils literal"><span class="pre">output_shape</span> <span class="pre">=</span> <span class="pre">(5,</span> <span class="pre">4)</span></code> – implying a 2D array.</p>
+<p>The implied coordinate grid will therefore have one coordinate for each pixel
+(2D voxel) in the (5, 4) array.</p>
+<p>Because this array is 2D, there are two coordinate values for each pixel. For
+example, the coordinate of the first element in the array is (0, 0). We can
+make these i- and j- coordinates with <code class="docutils literal"><span class="pre">meshgrid</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_coords</span><span class="p">,</span> <span class="n">j_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_coords</span>
+<span class="go">array([[0, 0, 0, 0],</span>
+<span class="go">       [1, 1, 1, 1],</span>
+<span class="go">       [2, 2, 2, 2],</span>
+<span class="go">       [3, 3, 3, 3],</span>
+<span class="go">       [4, 4, 4, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j_coords</span>
+<span class="go">array([[0, 1, 2, 3],</span>
+<span class="go">       [0, 1, 2, 3],</span>
+<span class="go">       [0, 1, 2, 3],</span>
+<span class="go">       [0, 1, 2, 3],</span>
+<span class="go">       [0, 1, 2, 3]])</span>
+</pre></div>
+</div>
+<p>We can make this into a shape (2, 5, 4) array where the first axis contains
+the (i, j) coordinate.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i_coords</span><span class="p">,</span> <span class="n">j_coords</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 5, 4)</span>
+</pre></div>
+</div>
+<p>Because we have not done any transformation on the coordinate, the i, j
+coordinate will be the same as the index we use to get the i, j coordinate:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="go">array([0, 1])</span>
+</pre></div>
+</div>
+<p>This is the coordinate grid <em>implied by</em> a shape of (5, 4).</p>
+<p>Now imagine I wanted to do a transformation on these coordinates. Say I wanted
+to add 2 to the first (i) coordinate:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Now my coordinate grid expresses a <em>mapping</em> between a given (<span class="math">\(i, j\)</span>)
+coordinate, and the new coordinate (<span class="math">\(i', j'\)</span>. I look up the new
+coordinate using the <span class="math">\(i, j\)</span> index into the coordinate grid:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># look up new coordinate for (0, 0)</span>
+<span class="go">array([2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># look up new coordinate for (1, 0)</span>
+<span class="go">array([3, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># look up new coordinate for (0, 1)</span>
+<span class="go">array([2, 1])</span>
+</pre></div>
+</div>
+<p>This means we can use these coordinate grids as a <em>mapping</em> from an input set
+of coordinates to an output set of coordinates, for each pixel / voxel.</p>
+<p>As you can imagine, meshgrid extends to three dimensions or more:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">output_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">output_shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_coords</span><span class="p">,</span> <span class="n">j_coords</span><span class="p">,</span> <span class="n">k_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">),</span>
+<span class="gp">... </span>                                           <span class="nb">range</span><span class="p">(</span><span class="n">J</span><span class="p">),</span>
+<span class="gp">... </span>                                           <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span>
+<span class="gp">... </span>                                           <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i_coords</span><span class="p">,</span> <span class="n">j_coords</span><span class="p">,</span> <span class="n">k_coords</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 5, 6, 7)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([1, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">array([0, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordinate_grid</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="go">array([0, 0, 1])</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="lab_11.html" title="previous chapter">Affine transformations</a></li>
+      <li>Next: <a href="map_coordinates.html" title="next chapter">General resampling between images with <code class="docutils literal"><span class="pre">scipy.ndimage.map_coordinates</span></code></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/numpy_meshgrid.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

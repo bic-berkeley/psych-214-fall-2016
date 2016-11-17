@@ -194,6 +194,10 @@ Now call ``fmin_powell`` with some starting guess for the rotations:
 
     >>> #- Call optimizing function and collect best estimates for rotations
 
+.. nbplot::
+    :include-source: false
+
+
 Finally, use these parameters to:
 
 * compile the rotation matrix from the optimized parameters. This gives the

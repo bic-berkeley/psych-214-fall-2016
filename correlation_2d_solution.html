@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Correlation per voxel, in 2D &#8212; Functional MRI methods</title>
+    <title>Correlation per voxel, in 2D &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,26 +50,19 @@
 calculate a correlation between the task-on / task-off vector and the voxel
 time course.  We then make a new 3D volume that contains correlation values
 for each voxel.</p>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-</div>
 <p>Import the <code class="docutils literal"><span class="pre">events2neural</span></code> function from the <a class="reference download internal" href="_downloads/stimuli.py" download=""><code class="xref download docutils literal"><span class="pre">stimuli.py</span></code></a> module:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- import events2neural from stimuli module</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">stimuli</span> <span class="kn">import</span> <span class="n">events2neural</span>
 </pre></div>
 </div>
-</div>
 <p>If you don&#8217;t have it already, download the <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>
 image.  Load it with nibabel.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the ds114_sub009_t2r1.nii image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 </pre></div>
@@ -78,84 +71,64 @@ image.  Load it with nibabel.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_trs</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
 <p>The TR (time between scans) is 2.5 seconds.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: TR</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>
 </pre></div>
 </div>
-</div>
 <p>Call the <code class="docutils literal"><span class="pre">events2neural</span></code> function to give you a time course that is 1 for
 the volumes during the task (thinking of verbs) and 0 for the volumes during
 rest.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call events2neural to give on-off values for each volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_course</span> <span class="o">=</span> <span class="n">events2neural</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_cond.txt&#39;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">n_trs</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Using slicing, drop the first 4 volumes, and the corresponding on-off values:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Drop the first 4 volumes, and the first 4 on-off values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_course</span> <span class="o">=</span> <span class="n">time_course</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the number of voxels (number of elements in one volume)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_voxels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
 <p>Reshape the 4D data to a 2D array shape (number of voxels, number
 of volumes).</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape 4D array to 2D array n_voxels by n_volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a 1D array of size (n_voxels,) to hold the correlation values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">correlations_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_voxels</span><span class="p">,))</span>
 </pre></div>
-</div>
 </div>
 <p>If you finished the <a class="reference internal" href="pearson_functions.html"><span class="doc">Pearson 1D and 2D function exercise</span></a> exercise, you can use your
 <code class="docutils literal"><span class="pre">pearson_2d</span></code> routine for calculating Pearson correlations across a 2D array.
 Otherwise, loop over all voxels, calculate the correlation coefficient with
 <code class="docutils literal"><span class="pre">time_course</span></code> at this voxel, and fill in the corresponding entry in your 1D
 array.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Loop over voxels filling in correlation at this voxel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">correlations_1d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">time_course</span><span class="p">,</span> <span class="n">data_2d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Or (much faster) use pearson_2d function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pearson</span> <span class="kn">import</span> <span class="n">pearson_2d</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">correlations_1d</span> <span class="o">=</span> <span class="n">pearson_2d</span><span class="p">(</span><span class="n">time_course</span><span class="p">,</span> <span class="n">data_2d</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Reshape the correlations 1D array back to a 3D array, using the original 3D
 shape.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape the correlations array back to 3D</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">correlations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">correlations_1d</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 <p>Test that your brain-at-a-time correlation image gives the same answer when
 you run the correlation on a single voxel time course.  Select an example
 voxel – say <code class="docutils literal"><span class="pre">data[42,</span> <span class="pre">32,</span> <span class="pre">19]</span></code> – and check that this gives the same
 answer as you found for the matching voxel in your correlations 3D array:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check you get the same answer when selecting a voxel time course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- and running the correlation on that time course.  One example voxel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- could be the voxel at array coordinate [42, 32, 19]</span>
@@ -164,10 +137,8 @@ answer as you found for the matching voxel in your correlations 3D array:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">correlations</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="n">single_cc</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Plot the middle slice (plane) of the third axis from the correlations array.
 Look for any voxels with a high task correlation in the frontal lobe:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the middle slice of the third axis from the correlations array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">correlations</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -176,7 +147,6 @@ Look for any voxels with a high task correlation in the frontal lobe:</p>
 <p>(<a class="reference external" href=".//correlation_2d_solution-15.png">png</a>, <a class="reference external" href=".//correlation_2d_solution-15.hires.png">hires.png</a>, <a class="reference external" href=".//correlation_2d_solution-15.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/correlation_2d_solution-15.png" src="_images/correlation_2d_solution-15.png" />
-</div>
 </div>
 </div>
 
@@ -247,7 +217,7 @@ Look for any voxels with a high task correlation in the frontal lobe:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

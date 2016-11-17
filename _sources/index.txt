@@ -162,3 +162,14 @@ version control using git.
     keyword_arguments
     numpy_diag
     assert
+    numpy_random
+    nibabel_affines
+    numpy_transpose
+    numpy_squeeze
+    optimizing_affine_exercise
+    optimizing_affine_solution
+    nibabel_apply_affine
+    diagonal_zooms
+    lab_11
+    numpy_meshgrid
+    map_coordinates

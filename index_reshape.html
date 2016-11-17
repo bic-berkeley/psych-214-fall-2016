@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index ordering and reshape in NumPy and MATLAB &#8212; Functional MRI methods</title>
+    <title>Index ordering and reshape in NumPy and MATLAB &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,7 +49,6 @@
 <p>Let&#8217;s make a 3D array by taking a 1D array from 0 through 23, and filling the
 3D array by depth (the last axis), and then by column (the second axis) and
 then by row (the first axis):</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fill in a NumPy array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
@@ -69,31 +68,30 @@ then by row (the first axis):</p>
 <span class="go"> [ 13.  17.  21.]]</span>
 </pre></div>
 </div>
-</div>
 <p>We can do the same thing in MATLAB, or its open-source version, Octave:</p>
-<div class="highlight-octave"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c">% Fill in a MATLAB / Octave array</span>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="c">% Fill in a MATLAB / Octave array</span>
 <span class="o">&gt;&gt;</span> <span class="n">numbers</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="mi">23</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">m_arr</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">n_index</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="o">&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span>  <span class="c">% row index changes slowest</span>
-       <span class="k">for</span> <span class="n">j</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span>  <span class="c">% then column index</span>
+<span class="o">&gt;&gt;</span> <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span>  <span class="c">% row index changes slowest</span>
+       <span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span>  <span class="c">% then column index</span>
            <span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span>  <span class="c">% depth index changes fastest</span>
-               <span class="n">m_arr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">n_index</span><span class="p">);</span>
+               <span class="n">m_arr</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span> <span class="nb">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">n_index</span><span class="p">);</span>
                <span class="n">n_index</span> <span class="p">=</span> <span class="n">n_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
            <span class="k">end</span>
        <span class="k">end</span>
    <span class="k">end</span>
 <span class="o">&gt;&gt;</span> <span class="n">m_arr</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">ans</span> <span class="p">=</span>
+
+    <span class="mi">0</span>    <span class="mi">4</span>    <span class="mi">8</span>
+   <span class="mi">12</span>   <span class="mi">16</span>   <span class="mi">20</span>
+
 <span class="o">&gt;&gt;</span> <span class="n">m_arr</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">ans</span> <span class="p">=</span>
+<span class="nb">ans</span> <span class="p">=</span>
 
-        <span class="mi">0</span>        <span class="mi">4</span>        <span class="mi">8</span>
-       <span class="mi">12</span>       <span class="mi">16</span>       <span class="mi">20</span>
-
-<span class="n">ans</span> <span class="p">=</span>
-
-        <span class="mi">1</span>        <span class="mi">5</span>        <span class="mi">9</span>
-       <span class="mi">13</span>       <span class="mi">17</span>       <span class="mi">21</span>
+    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">9</span>
+   <span class="mi">13</span>   <span class="mi">17</span>   <span class="mi">21</span>
 </pre></div>
 </div>
 <p>Remember that MATLAB and Octave have 1-based indices.  That is, the index to
@@ -109,7 +107,6 @@ elements from the first array in some order, and puts them into the new array
 using the same order.  The default order in NumPy is to take the elements off
 the last axis first, then the second to last, back to the first axis.  This is
 the same order as the loop above:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is exactly the same as the original ``py_arr``</span>
@@ -117,26 +114,24 @@ the same order as the loop above:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
 <p>MATLAB does a reshape using the opposite order, taking the elements off the
 first axis first:</p>
-<div class="highlight-octave"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]);</span>
+<div class="highlight-matlab"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]);</span>
 <span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">ans</span> <span class="p">=</span>
+
+   <span class="mi">0</span>   <span class="mi">2</span>   <span class="mi">4</span>
+   <span class="mi">1</span>   <span class="mi">3</span>   <span class="mi">5</span>
+
 <span class="o">&gt;&gt;</span> <span class="n">m_reshaped</span><span class="p">(:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">ans</span> <span class="p">=</span>
+<span class="nb">ans</span> <span class="p">=</span>
 
-        <span class="mi">0</span>        <span class="mi">2</span>        <span class="mi">4</span>
-        <span class="mi">1</span>        <span class="mi">3</span>        <span class="mi">5</span>
-
-<span class="n">ans</span> <span class="p">=</span>
-
-        <span class="mi">6</span>        <span class="mi">8</span>       <span class="mi">10</span>
-        <span class="mi">7</span>        <span class="mi">9</span>       <span class="mi">11</span>
+    <span class="mi">6</span>    <span class="mi">8</span>   <span class="mi">10</span>
+    <span class="mi">7</span>    <span class="mi">9</span>   <span class="mi">11</span>
 </pre></div>
 </div>
 <p>If you prefer this ordering, you can ask NumPy to do the same, by using the
 <code class="docutils literal"><span class="pre">order</span></code> parameter to <code class="docutils literal"><span class="pre">reshape</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># First axis first fetching, like MATLAB</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">first_1_reshaped</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">first_1_reshaped</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
@@ -146,7 +141,6 @@ first axis first:</p>
 <span class="go">[[ 6  8 10]</span>
 <span class="go"> [ 7  9 11]]</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -217,7 +211,7 @@ first axis first:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

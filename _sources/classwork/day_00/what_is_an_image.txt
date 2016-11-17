@@ -92,8 +92,8 @@ The image we are going to explore is in the same directory as this exercise.
 
     >>> # Get the current working directory (CWD)
     >>> cwd = os.getcwd()
-    >>> print(cwd)
-    /Users/...
+    >>> print(cwd)  # doctest: +SKIP
+    /Users/myuser/for-class
 
 .. nbplot::
 

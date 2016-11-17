@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Course material by topic &#8212; Functional MRI methods</title>
+    <title>Course material by topic &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -91,6 +91,10 @@ teaching day.</p>
 <li><a class="reference internal" href="subtract_means.html"><span class="doc">Subtracting the mean from columns or rows</span></a>;</li>
 <li><a class="reference internal" href="newaxis.html"><span class="doc">Adding length 1 dimensions with newaxis</span></a>;</li>
 <li><a class="reference internal" href="numpy_diag.html"><span class="doc">Diagonal matrices</span></a>;</li>
+<li><a class="reference internal" href="numpy_transpose.html"><span class="doc">numpy.tranpose for swapping axes</span></a>;</li>
+<li><a class="reference internal" href="numpy_random.html"><span class="doc">Random numbers with np.random</span></a>;</li>
+<li><a class="reference internal" href="numpy_squeeze.html"><span class="doc">Removing length 1 axes with numpy.squeeze</span></a>;</li>
+<li><a class="reference internal" href="numpy_meshgrid.html"><span class="doc">Making coordinate arrays with meshgrid</span></a>;</li>
 <li><a class="reference internal" href="printing_floating.html"><span class="doc">Making floating points numbers print nicely</span></a>.</li>
 </ul>
 </div>
@@ -136,11 +140,20 @@ teaching day.</p>
 <li><a class="reference external" href="https://matthew-brett.github.io/teaching/on_convolution.html">tutorial on convolution</a>.</li>
 </ul>
 </div>
-<div class="section" id="image-processing">
-<h2>Image processing<a class="headerlink" href="#image-processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="image-processing-and-spatial-transformations">
+<h2>Image processing and spatial transformations<a class="headerlink" href="#image-processing-and-spatial-transformations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="otsu_threshold.html"><span class="doc">Otsu&#8217;s method for binarizing images</span></a>.</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html">rotation in 2D</a>;</li>
+<li><a class="reference internal" href="rotation_2d_3d.html"><span class="doc">Rotations and rotation matrices</span></a>;</li>
+<li><a class="reference internal" href="diagonal_zooms.html"><span class="doc">Encoding zooms (scaling) with a diagonal matrix</span></a>;</li>
+<li><a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">coordinate systems and affine transforms</a>;</li>
+<li><a class="reference external" href="https://matthew-brett.github.io/teaching/mutual_information.html">mutual information</a>;</li>
+<li><a class="reference internal" href="nibabel_affines.html"><span class="doc">The nibabel.affines module</span></a>;</li>
+<li><a class="reference internal" href="nibabel_apply_affine.html"><span class="doc">Applying coordinate transforms with nibabel.affines.apply_affine</span></a>.</li>
 </ul>
+<p>: <a class="reference internal" href="resampling_with_ndimage.html"><span class="doc">Resampling with scipy.ndimage</span></a>;
+* <a class="reference internal" href="map_coordinates.html"><span class="doc">General resampling between images with scipy.ndimage.map_coordinates</span></a>;</p>
 </div>
 <div class="section" id="specific-to-fmri">
 <h2>Specific to FMRI<a class="headerlink" href="#specific-to-fmri" title="Permalink to this headline">¶</a></h2>
@@ -148,6 +161,9 @@ teaching day.</p>
 <li><a class="reference internal" href="voxel_time_courses.html"><span class="doc">Voxel time courses</span></a>.  See <a class="reference internal" href="day_04.html"><span class="doc">October 3: statistics on brain images</span></a>;</li>
 <li><a class="reference internal" href="model_one_voxel.html"><span class="doc">Modeling a single voxel</span></a>;</li>
 <li><a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a>.</li>
+<li><a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">Coordinate systems and affine transforms</a>;</li>
+<li><a class="reference internal" href="nibabel_affines.html"><span class="doc">The nibabel.affines module</span></a>;</li>
+<li><a class="reference internal" href="nibabel_apply_affine.html"><span class="doc">Applying coordinate transforms with nibabel.affines.apply_affine</span></a>.</li>
 </ul>
 </div>
 </div>
@@ -219,7 +235,7 @@ teaching day.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Resampling with scipy.ndimage &#8212; Functional MRI methods</title>
+    <title>Resampling with scipy.ndimage &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,15 +46,11 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="resampling-with-scipy-ndimage">
 <h1>Resampling with scipy.ndimage<a class="headerlink" href="#resampling-with-scipy-ndimage" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># print arrays to 4DP</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
-</div>
 </div>
 <div class="section" id="reampling-pull-push">
 <h2>Reampling, pull, push<a class="headerlink" href="#reampling-pull-push" title="Permalink to this headline">¶</a></h2>
@@ -97,27 +93,21 @@ transform</em>.</p>
 <h2>Scipy ndimage and affine_transform<a class="headerlink" href="#scipy-ndimage-and-affine-transform" title="Permalink to this headline">¶</a></h2>
 <p>Scipy has a function for doing reampling with transformations, called
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.affine_transform.html">scipy.ndimage.affine_transform</a>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
 </pre></div>
-</div>
 </div>
 <p>It does all the heavy work of resampling for us.</p>
 <p>For example, lets say we have an image volume <span class="math">\(\mathbf{I}\)</span>
 (<a class="reference download internal" href="_downloads/ds107_sub012_t1r2.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code></a>):</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># I is the first volume</span>
 </pre></div>
 </div>
-</div>
 <p>We have another image volume <span class="math">\(\mathbf{J}\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># I is the second volume</span>
 </pre></div>
-</div>
 </div>
 <p>Let&#8217;s say we know that the resampling transformation <span class="math">\(\mathbf{I} \to
 \mathbf{J}\)</span> is given by:</p>
@@ -136,7 +126,6 @@ run the following from your terminal:</p>
 </pre></div>
 </div>
 <p>We use the routines in <code class="docutils literal"><span class="pre">rotation.py</span></code> to make the rotation matrix we need:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span>  <span class="c1"># from rotations.py</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rotation matrix for rotation of 0.2 radians around x axis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">x_rotmat</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
@@ -148,7 +137,6 @@ run the following from your terminal:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">translation</span>
 <span class="go">[1, 2, 3]</span>
 </pre></div>
-</div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">affine_transform</span></code> function does the work of resampling.  By default, it
 implements the following algorithm:</p>
@@ -168,7 +156,6 @@ implements the following algorithm:</p>
 </div></blockquote>
 </li>
 </ul>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># order=1 for linear interpolation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
@@ -182,40 +169,52 @@ implements the following algorithm:</p>
 <img alt="_images/resampling_with_ndimage-7.png" src="_images/resampling_with_ndimage-7.png" />
 </div>
 </div>
-</div>
 <div class="section" id="resampling-with-images-of-different-shapes">
-<h2>Resampling with images of different shapes<a class="headerlink" href="#resampling-with-images-of-different-shapes" title="Permalink to this headline">¶</a></h2>
-<p>Notice the assumption that <code class="docutils literal"><span class="pre">affine_transform</span></code> makes above - that the output
-image will be the same shape as the input image.</p>
+<span id="implied-coordinate-grid"></span><h2>Resampling with images of different shapes<a class="headerlink" href="#resampling-with-images-of-different-shapes" title="Permalink to this headline">¶</a></h2>
+<p>Notice the assumption that <code class="docutils literal"><span class="pre">affine_transform</span></code> makes above – that the
+output image will be the same shape as the input image.</p>
 <p>This need not be the case.  In fact we can tell <code class="docutils literal"><span class="pre">affine_transform</span></code> to start
 with an empty volume <code class="docutils literal"><span class="pre">K</span></code> with another shape.  To do this, we use the
-<code class="docutils literal"><span class="pre">output_shape</span></code> parameter.  Specifically, the default call we used above:</p>
-<div class="nbplot container">
+<code class="docutils literal"><span class="pre">output_shape</span></code> parameter.</p>
+<p>Now we can be more precise about the algorithm of <code class="docutils literal"><span class="pre">affine_transform</span></code>.
+<code class="docutils literal"><span class="pre">affine_transform</span></code> accepts:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">input</span></code> – an array to resample from.  Say this array as <code class="docutils literal"><span class="pre">n</span></code>
+dimensions (<code class="docutils literal"><span class="pre">len(input.shape)</span></code>);</li>
+<li><code class="docutils literal"><span class="pre">matrix</span></code> – an <code class="docutils literal"><span class="pre">n</span></code> by <code class="docutils literal"><span class="pre">n</span></code> transformation matrix (the top left
+<code class="docutils literal"><span class="pre">mat</span></code> part of an <a class="reference internal" href="nibabel_affines.html"><span class="doc">affine</span></a>);</li>
+<li><code class="docutils literal"><span class="pre">offset</span></code> – a optional length <code class="docutils literal"><span class="pre">n</span></code> translation vector to be applied
+after the the <code class="docutils literal"><span class="pre">matrix</span></code> transformation (the <code class="docutils literal"><span class="pre">vec</span></code> part of an <a class="reference internal" href="nibabel_affines.html"><span class="doc">affine</span></a>);</li>
+<li><code class="docutils literal"><span class="pre">output_shape</span></code> : an optional tuple giving the shape of the output array
+into which we will put the values resampled from <code class="docutils literal"><span class="pre">input</span></code>. <code class="docutils literal"><span class="pre">output_shape</span></code>
+defaults to <code class="docutils literal"><span class="pre">input.shape</span></code>; this is the default we have been using above.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">affine_transform</span></code> then generates all the voxel coordinates <em>implied by</em> the
+<code class="docutils literal"><span class="pre">output_shape</span></code>, and transforms them with the <code class="docutils literal"><span class="pre">matrix</span></code> and <code class="docutils literal"><span class="pre">offset</span></code>
+transforms to get a new set of coordinates <code class="docutils literal"><span class="pre">C</span></code>. It then samples the
+<code class="docutils literal"><span class="pre">input</span></code> array at the coordinates given by <code class="docutils literal"><span class="pre">C</span></code> to generate the output
+array.</p>
+<p>Here is the call to <code class="docutils literal"><span class="pre">affine_transform</span></code> that we used above, where we allowed
+the routine to assume that the output shape was the same as the input shape:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 35)</span>
 </pre></div>
 </div>
-</div>
-<p>is the same as the following call, where we specify the shape explicitly:</p>
-<div class="nbplot container">
+<p>The is the same as the following call, where we specify the shape explicitly:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">output_shape</span><span class="o">=</span><span class="n">J</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 35)</span>
 </pre></div>
 </div>
-</div>
-<p>The output shape can be different from the input shape, if you use the
-<code class="docutils literal"><span class="pre">output_shape</span></code> parameter.</p>
-<div class="nbplot container">
+<p>The output shape can be different from the input shape:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span>
 <span class="gp">... </span>                     <span class="n">output_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(65, 65, 36)</span>
 </pre></div>
 </div>
-</div>
-<p>Remember that the <code class="docutils literal"><span class="pre">M</span></code> matrix and <code class="docutils literal"><span class="pre">traslation</span></code> vector apply to the
+<p>Remember that the <code class="docutils literal"><span class="pre">M</span></code> matrix and <code class="docutils literal"><span class="pre">translation</span></code> vector apply to the
 coordinates implied by the output shape.</p>
 </div>
 </div>
@@ -287,7 +286,7 @@ coordinates implied by the output shape.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

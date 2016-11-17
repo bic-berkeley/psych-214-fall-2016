@@ -173,8 +173,10 @@ Confirm that residuals are orthogonal to both columns of the design matrix:
 .. nbplot::
 
     >>> #- Residuals orthogonal to design
-    >>> X.T.dot(residuals)
+    >>> X.T.dot(residuals) # doctest: +SKIP
     array([-0., -0.])
+    >>> np.allclose(X.T.dot(residuals), 0)
+    True
 
 We will not modify the design to see what happens to the parameters and the
 fitted values.

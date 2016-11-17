@@ -1,14 +1,4 @@
-#- slices on z, y, and x axis from original and un-rotated image
-fig, axes = plt.subplots(3, 2, figsize=(10, 15))
-axes[0, 0].imshow(vol0[:, :, 17])
-# <...>
-axes[0, 1].imshow(best_vol0[:, :, 17])
-# <...>
-axes[1, 0].imshow(vol0[:, 31, :])
-# <...>
-axes[1, 1].imshow(best_vol0[:, 31, :])
-# <...>
-axes[2, 0].imshow(vol0[31, :, :])
-# <...>
-axes[2, 1].imshow(best_vol0[31, :, :])
-# <...>
+#- Use 'apply_rotations' and the estimated parameters to un-rotate the
+#- rotated image
+#- Put the new un-rotated image into a variable `best_vol0`
+best_vol0 = apply_rotations(rotated_vol0, best_params)

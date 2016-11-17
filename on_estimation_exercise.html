@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Least-squares regression exercise &#8212; Functional MRI methods</title>
+    <title>Least-squares regression exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -52,7 +52,6 @@
 </ul>
 <div class="section" id="introduction-and-definitions">
 <h2>Introduction and definitions<a class="headerlink" href="#introduction-and-definitions" title="Permalink to this headline">¶</a></h2>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import numerical and plotting libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print to four digits of precision</span>
@@ -61,13 +60,11 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-</div>
 <p>These exercises are to practice thinking about how the regression estimation
 works, and the relationship of correlation and regression.</p>
 <p>To give us some concrete data to play with, here are some more samples of the
 &#8220;psychopathy&#8221; and &#8220;clamminess&#8221; scores that we saw in the <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the
 general linear model</a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: The data, that we are trying to model.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">11.914</span><span class="p">,</span>   <span class="mf">4.289</span><span class="p">,</span>  <span class="mf">10.825</span><span class="p">,</span>  <span class="mf">14.987</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">7.572</span><span class="p">,</span>   <span class="mf">5.447</span><span class="p">,</span>   <span class="mf">17.332</span><span class="p">,</span>  <span class="mf">12.105</span><span class="p">,</span>
@@ -79,7 +76,6 @@ general linear model</a>:</p>
 <span class="gp">... </span>                    <span class="mf">1.398</span><span class="p">,</span>  <span class="mf">1.952</span><span class="p">,</span>  <span class="mf">5.095</span><span class="p">,</span> <span class="mf">8.092</span><span class="p">,</span>  <span class="mf">5.685</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="mf">5.167</span><span class="p">,</span>  <span class="mf">7.257</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 <p><span class="math">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
 <p>Our simple linear model can be expressed by:</p>
@@ -117,72 +113,52 @@ by:</p>
 <h2>Correlation coefficient and regression<a class="headerlink" href="#correlation-coefficient-and-regression" title="Permalink to this headline">¶</a></h2>
 <p>Create the <span class="math">\(\Xmat\)</span> matrix from a vector of ones and the vector of <code class="docutils literal"><span class="pre">clammy</span></code>
 scores:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create X design matrix fron column of ones and clammy vector</span>
 </pre></div>
 </div>
-</div>
 <p>Are the columns of <code class="docutils literal"><span class="pre">X</span></code> orthogonal to each other?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether the columns of X are orthogonal</span>
 </pre></div>
 </div>
-</div>
 <p>Is <span class="math">\(\Xmat^T \Xmat\)</span> invertible?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Check whether X.T.dot(X) is invertible</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate <span class="math">\((\Xmat^T \Xmat)^{-1} \Xmat^T\)</span>.  What shape is it?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate (X.T X)^-1 X.T (the pseudoinverse)</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate the least squares fit value for <span class="math">\(\bvec\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate least squares fit for beta vector</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate the fitted values <span class="math">\(c + b \xvec\)</span>, and the residuals <span class="math">\(\evec\)</span>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the fitted values</span>
 </pre></div>
 </div>
-</div>
 <p>Confirm that the mean of the residuals is close to zero:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- mean of residuals near zero</span>
 </pre></div>
 </div>
-</div>
 <p>Confirm that residuals are orthogonal to both columns of the design matrix:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Residuals orthogonal to design</span>
 </pre></div>
-</div>
 </div>
 <p>We will not modify the design to see what happens to the parameters and the
 fitted values.</p>
 <p>To keep our calculations for the original and new designs, start by copying
 <code class="docutils literal"><span class="pre">X</span></code> to make a new array <code class="docutils literal"><span class="pre">X_o</span></code>.  Hint: tab complete on the array object in
 IPython.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Copy X to new array X_o</span>
 </pre></div>
-</div>
 </div>
 <p>We found that above that the columns of <code class="docutils literal"><span class="pre">X</span></code> are not orthogonal.  How can we
 modify the second column of <code class="docutils literal"><span class="pre">X</span></code> to make it orthogonal to the first?  Hint:
 write out the dot product of the first column with the second as a sum, and
 simplify. Use that result to work out what to subtract from the second column
 so the dot product is 0.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make second column orthogonal to first. Confirm orthogonality</span>
 </pre></div>
-</div>
 </div>
 <p>Look at the diagonal values of the matrix <code class="docutils literal"><span class="pre">X_o.T.dot(X_o)</span></code>.  What is the
 relationship of these values to the <em>vector lengths</em> of the vectors in the
@@ -203,17 +179,13 @@ diagonal, what must <span class="math">\(A^{-1}\)</span> be for this to be true?
 </div>
 <p>Make a new data vector <code class="docutils literal"><span class="pre">y_c</span></code> by subtracting the mean from the psychopathy
 vector:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make mean-centered version of psychopathy vector</span>
 </pre></div>
 </div>
-</div>
 <p>Calculate a new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector for the least-squares fit of <code class="docutils literal"><span class="pre">X_o</span></code>
 to <code class="docutils literal"><span class="pre">y_c</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate fit of X_o to y_o</span>
 </pre></div>
-</div>
 </div>
 <p>The first parameter has changed compared to your previous estimate.  Can you
 explain why it has this new value by considering the values of <span class="math">\((\Xmat^T
@@ -224,10 +196,8 @@ explain why it has this new value by considering the values of <span class="math
 </div>
 <p>Calculate the correlation coefficient between <code class="docutils literal"><span class="pre">y_c</span></code> and the second column of
 <code class="docutils literal"><span class="pre">X_o</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Correlation coefficient of y_c and the second column of X_o</span>
 </pre></div>
-</div>
 </div>
 <p>What is the relationship between this correlation coefficient and <code class="docutils literal"><span class="pre">B_o[1]</span></code>?
 Hint: what is the relationship of the correlation coefficient to vector dot
@@ -238,10 +208,8 @@ products?  See: <a class="reference external" href="http://matthew-brett.github.
 </div>
 <p>Now try calculating <span class="math">\(\bvec\)</span> fitting the <code class="docutils literal"><span class="pre">X_o</span></code> design to the original
 psychopathy data (not the mean-centered version).</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fit X_o to psychopathy data</span>
 </pre></div>
-</div>
 </div>
 <p>Compare the first value in the new <code class="docutils literal"><span class="pre">B_o</span></code> parameter vector with the mean of
 the <code class="docutils literal"><span class="pre">psychpathy</span></code> vector.</p>
@@ -337,7 +305,7 @@ is mean centered.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

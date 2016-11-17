@@ -1,3 +1,5 @@
+.. vim: ft=rst
+
 ############
 PCA exercise
 ############

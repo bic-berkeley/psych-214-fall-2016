@@ -97,30 +97,8 @@ axis, and *finally* a translation [10, 20, 30] in [x, y, z]. Note the order
            [ -0.3894,  -0.183 ,   0.9027,  30.    ],
            [  0.    ,   0.    ,   0.    ,   1.    ]])
 
-*****************************
-The `nibabel.affines`_ module
-*****************************
-
-In fact, nibabel has a short-cut routine to make a 4x4 affine matrix from a
-3 x 3 matrix and an (optional) vector of translations:
-
-.. nbplot::
-
-    >>> # Affine from a 3x3 matrix (the 'mat' in 'matvec')
-    >>> nib.affines.from_matvec(y_rotmat(0.4))
-    array([[ 0.9211,  0.    ,  0.3894,  0.    ],
-           [ 0.    ,  1.    ,  0.    ,  0.    ],
-           [-0.3894,  0.    ,  0.9211,  0.    ],
-           [ 0.    ,  0.    ,  0.    ,  1.    ]])
-
-.. nbplot::
-
-    >>> # Affine from a 3x3 matrix ('mat') and a translation vector ('vec')
-    >>> nib.affines.from_matvec(y_rotmat(0.4), [10, 20, 30])
-    array([[  0.9211,   0.    ,   0.3894,  10.    ],
-           [  0.    ,   1.    ,   0.    ,  20.    ],
-           [ -0.3894,   0.    ,   0.9211,  30.    ],
-           [  0.    ,   0.    ,   0.    ,   1.    ]])
+See :doc:`nibabel_affines` for a module with useful functions for working with
+affine matrices.
 
 **********************************
 Manipulating affines with inverses
@@ -175,7 +153,7 @@ affine, given we know the ``third_affine`` and ``second_affine``:
 
     >>> E = third_affine.dot(second_affine)
     >>> E_inv = npl.inv(E)
-    >>> E_inv.dot(combined)
+    >>> E_inv.dot(combined)  # doctest: +SKIP
     array([[ 1.    ,  0.    , -0.    ,  0.    ],
            [ 0.    ,  0.9801,  0.1987,  0.    ],
            [ 0.    , -0.1987,  0.9801,  0.    ],
@@ -190,6 +168,8 @@ This is the same as our first affine:
            [ 0.    ,  0.9801,  0.1987,  0.    ],
            [ 0.    , -0.1987,  0.9801,  0.    ],
            [ 0.    ,  0.    ,  0.    ,  1.    ]])
+    >>> np.allclose(E_inv.dot(combined), first_affine)
+    True
 
 What about the situation where we know the first part of the affine, but we
 want to find the rest?
@@ -234,17 +214,17 @@ first affine, we can do this:
 
 .. math::
 
-   \mathbf{E} \triangleq \mathbf{C} \mathbf{B} \\
-   \mathbf{D} = \mathbf{E} \mathbf{A} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E} \mathbf{A} \mathbf{A^{-1}} \\
-   \mathbf{D} \mathbf{A^{-1}} = \mathbf{E}
+   \mathbf{F} \triangleq \mathbf{C} \mathbf{B} \\
+   \mathbf{D} = \mathbf{F} \mathbf{A} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{F} \mathbf{A} \mathbf{A^{-1}} \\
+   \mathbf{D} \mathbf{A^{-1}} = \mathbf{F}
 
 For our actual affines:
 
 .. nbplot::
 
     >>> third_with_second = combined.dot(npl.inv(first_affine))
-    >>> third_with_second
+    >>> third_with_second  # doctest: +SKIP
     array([[  0.9211,  -0.    ,   0.3894,  10.    ],
            [  0.    ,   1.    ,   0.    ,  20.    ],
            [ -0.3894,  -0.    ,   0.9211,  30.    ],
@@ -253,8 +233,11 @@ For our actual affines:
 .. nbplot::
 
     >>> # This is the same as
-    >>> third_affine.dot(second_affine)
+    >>> F = third_affine.dot(second_affine)
+    >>> F  # doctest: +SKIP
     array([[  0.9211,   0.    ,   0.3894,  10.    ],
            [  0.    ,   1.    ,   0.    ,  20.    ],
            [ -0.3894,   0.    ,   0.9211,  30.    ],
            [  0.    ,   0.    ,   0.    ,   1.    ]])
+    >>> np.allclose(third_with_second, F)
+    True

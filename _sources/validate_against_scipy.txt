@@ -10,7 +10,7 @@ Validating the GLM against scipy
     >>> # Print array values to 4 decimal places
     >>> np.set_printoptions(precision=4)
 
-Make some random but predictable data:
+Make some random but predictable data with :doc:`numpy.random <numpy_random>`:
 
 .. nbplot::
 

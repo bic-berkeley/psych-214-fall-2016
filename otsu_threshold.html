@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Otsu’s method for binarizing images &#8212; Functional MRI methods</title>
+    <title>Otsu’s method for binarizing images &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -88,7 +88,6 @@ bin <span class="math">\(z\)</span>:</p>
 </li>
 </ul>
 <p>Here is Otsu&#8217;s threshold in action.  First we load an image:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cameraman</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;camera.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">))</span>
@@ -100,9 +99,7 @@ bin <span class="math">\(z\)</span>:</p>
 <div class="figure">
 <img alt="_images/otsu_threshold-1.png" src="_images/otsu_threshold-1.png" />
 </div>
-</div>
 <p>Make a histogram:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cameraman_1d</span> <span class="o">=</span> <span class="n">cameraman</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n_bins</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">cameraman_1d</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
@@ -115,9 +112,7 @@ bin <span class="math">\(z\)</span>:</p>
 <div class="figure">
 <img alt="_images/otsu_threshold-2.png" src="_images/otsu_threshold-2.png" />
 </div>
-</div>
 <p>Calculate the threshold:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">ssd</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">centers</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Sum of squared deviations from mean &quot;&quot;&quot;</span>
 <span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
@@ -125,8 +120,6 @@ bin <span class="math">\(z\)</span>:</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">counts</span> <span class="o">*</span> <span class="p">((</span><span class="n">centers</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">total_ssds</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">bin_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">left_ssd</span> <span class="o">=</span> <span class="n">ssd</span><span class="p">(</span><span class="n">counts</span><span class="p">[:</span><span class="n">bin_no</span><span class="p">],</span> <span class="n">bin_centers</span><span class="p">[:</span><span class="n">bin_no</span><span class="p">])</span>
@@ -140,9 +133,7 @@ bin <span class="math">\(z\)</span>:</p>
 <span class="go">Otsu threshold (c[z]): 0.33984375</span>
 </pre></div>
 </div>
-</div>
 <p>This gives the same result as the <a class="reference external" href="http://scikit-image.org/">scikit-image</a> implementation:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">cameraman</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">)</span>
 <span class="go">0.33984375</span>
@@ -150,9 +141,7 @@ bin <span class="math">\(z\)</span>:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
 <p>The original image binarized with this threshold:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">binarized</span> <span class="o">=</span> <span class="n">cameraman</span> <span class="o">&gt;</span> <span class="n">t</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">binarized</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -161,7 +150,6 @@ bin <span class="math">\(z\)</span>:</p>
 <p>(<a class="reference external" href=".//otsu_threshold-6.png">png</a>, <a class="reference external" href=".//otsu_threshold-6.hires.png">hires.png</a>, <a class="reference external" href=".//otsu_threshold-6.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/otsu_threshold-6.png" src="_images/otsu_threshold-6.png" />
-</div>
 </div>
 </div>
 
@@ -232,7 +220,7 @@ bin <span class="math">\(z\)</span>:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

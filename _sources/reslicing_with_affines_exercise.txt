@@ -33,7 +33,7 @@ Reslicing between spaces using affines
 
 Here are a BOLD (4D image) and a structural image for the same subject:
 
-* BOLD image : :download:`ds114_sub009_t2r1.nii`;
+* BOLD (functional) image : :download:`ds114_sub009_t2r1.nii`;
 * structural image : :download:`ds114_sub009_highres.nii`.
 
 They have different orientations and voxel sizes.

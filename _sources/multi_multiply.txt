@@ -29,8 +29,9 @@ To fit this design to any data, we take the pseudoinverse:
     >>> piX.shape
     (2, 12)
 
-Now let's make some data to fit to.  We use `np.random.seed` to make sure the
-random numbers are predictable:
+Now let's make some data to fit to. We will draw some somples from the standar
+normal distribution using :doc:`numpy.random <numpy_random>`.  We use
+``numpy.random.seed`` to make sure the random numbers are predictable:
 
 .. nbplot::
 

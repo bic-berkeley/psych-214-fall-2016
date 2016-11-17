@@ -49,6 +49,10 @@ Numpy, arrays and images
 * :doc:`subtract_means`;
 * :doc:`newaxis`;
 * :doc:`numpy_diag`;
+* :doc:`numpy_transpose`;
+* :doc:`numpy_random`;
+* :doc:`numpy_squeeze`;
+* :doc:`numpy_meshgrid`;
 * :doc:`printing_floating`.
 
 **********
@@ -93,11 +97,20 @@ General statistics and math
 * `tutorial on correlated regressors`_.
 * `tutorial on convolution`_.
 
-****************
-Image processing
-****************
+********************************************
+Image processing and spatial transformations
+********************************************
 
 * :doc:`otsu_threshold`.
+* `rotation in 2D`_;
+* :doc:`rotation_2d_3d`;
+* :doc:`diagonal_zooms`;
+* `coordinate systems and affine transforms`_;
+* `mutual information`_;
+* :doc:`nibabel_affines`;
+* :doc:`nibabel_apply_affine`.
+: :doc:`resampling_with_ndimage`;
+* :doc:`map_coordinates`;
 
 ****************
 Specific to FMRI
@@ -106,3 +119,6 @@ Specific to FMRI
 * :doc:`voxel_time_courses`.  See :doc:`day_04`;
 * :doc:`model_one_voxel`;
 * :doc:`convolution_background`.
+* `Coordinate systems and affine transforms`_;
+* :doc:`nibabel_affines`;
+* :doc:`nibabel_apply_affine`.

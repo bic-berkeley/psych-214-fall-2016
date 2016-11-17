@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Extra transform exercise &#8212; Functional MRI methods</title>
+    <title>Extra transform exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,9 +46,6 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="extra-transform-exercise">
 <h1>Extra transform exercise<a class="headerlink" href="#extra-transform-exercise" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
@@ -58,13 +55,10 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
-</div>
 </div>
 <div class="section" id="what-transforms-did-i-add">
 <h2>What transforms did I add?<a class="headerlink" href="#what-transforms-did-i-add" title="Permalink to this headline">¶</a></h2>
@@ -102,17 +96,14 @@ R_z(\theta) &amp;= \begin{bmatrix}
 \end{alignat}\end{split}\]</div>
 <p>You might also want to compare against results from the
 <a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> module:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: functions to make rotation matrices</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
 </pre></div>
-</div>
 </div>
 <p>Final hint:</p>
 <ul class="simple">
 <li>inverse sine, cosine are <code class="docutils literal"><span class="pre">np.arcsin,</span> <span class="pre">np.arccos</span></code>.</li>
 </ul>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the original image affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orig_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">)</span>
@@ -123,8 +114,6 @@ R_z(\theta) &amp;= \begin{bmatrix}
 <span class="go"> [   0.        0.        0.        1.    ]]</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the new image affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">moved_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres_moved.img&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">moved_img</span><span class="o">.</span><span class="n">affine</span>
@@ -134,8 +123,6 @@ R_z(\theta) &amp;= \begin{bmatrix}
 <span class="go">       [   0.    ,    0.    ,    0.    ,    1.    ]])</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Work out what transform has been added in the new affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">extra</span> <span class="o">=</span> <span class="n">moved_img</span><span class="o">.</span><span class="n">affine</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">orig_img</span><span class="o">.</span><span class="n">affine</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">extra</span>
@@ -145,15 +132,12 @@ R_z(\theta) &amp;= \begin{bmatrix}
 <span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- What rotation and translation has been applied?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">extra</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">translation</span> <span class="o">=</span> <span class="n">extra</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z_angle</span><span class="p">,</span> <span class="n">translation</span>
-<span class="go">(0.30000001985761038, array([-10., -12., -15.]))</span>
+<span class="go">(0.3000000..., array([-10., -12., -15.]))</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -225,7 +209,7 @@ R_z(\theta) &amp;= \begin{bmatrix}
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
