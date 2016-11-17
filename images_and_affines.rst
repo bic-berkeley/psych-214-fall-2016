@@ -97,30 +97,8 @@ axis, and *finally* a translation [10, 20, 30] in [x, y, z]. Note the order
            [ -0.3894,  -0.183 ,   0.9027,  30.    ],
            [  0.    ,   0.    ,   0.    ,   1.    ]])
 
-*****************************
-The `nibabel.affines`_ module
-*****************************
-
-In fact, nibabel has a short-cut routine to make a 4x4 affine matrix from a
-3 x 3 matrix and an (optional) vector of translations:
-
-.. nbplot::
-
-    >>> # Affine from a 3x3 matrix (the 'mat' in 'matvec')
-    >>> nib.affines.from_matvec(y_rotmat(0.4))
-    array([[ 0.9211,  0.    ,  0.3894,  0.    ],
-           [ 0.    ,  1.    ,  0.    ,  0.    ],
-           [-0.3894,  0.    ,  0.9211,  0.    ],
-           [ 0.    ,  0.    ,  0.    ,  1.    ]])
-
-.. nbplot::
-
-    >>> # Affine from a 3x3 matrix ('mat') and a translation vector ('vec')
-    >>> nib.affines.from_matvec(y_rotmat(0.4), [10, 20, 30])
-    array([[  0.9211,   0.    ,   0.3894,  10.    ],
-           [  0.    ,   1.    ,   0.    ,  20.    ],
-           [ -0.3894,   0.    ,   0.9211,  30.    ],
-           [  0.    ,   0.    ,   0.    ,   1.    ]])
+See :doc:`nibabel_affines` for a module with useful functions for working with
+affine matrices.
 
 **********************************
 Manipulating affines with inverses

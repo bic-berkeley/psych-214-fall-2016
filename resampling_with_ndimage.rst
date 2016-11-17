@@ -148,16 +148,41 @@ implements the following algorithm:
     >>> plt.imshow(K[:, :, 17])
     <...>
 
+.. _implied-coordinate-grid:
+
 ******************************************
 Resampling with images of different shapes
 ******************************************
 
-Notice the assumption that ``affine_transform`` makes above - that the output
-image will be the same shape as the input image.
+Notice the assumption that ``affine_transform`` makes above |--| that the
+output image will be the same shape as the input image.
 
 This need not be the case.  In fact we can tell ``affine_transform`` to start
 with an empty volume ``K`` with another shape.  To do this, we use the
-``output_shape`` parameter.  Specifically, the default call we used above:
+``output_shape`` parameter.
+
+Now we can be more precise about the algorithm of ``affine_transform``.
+``affine_transform`` accepts:
+
+* ``input`` |--| an array to resample from.  Say this array as ``n``
+  dimensions (``len(input.shape)``);
+* ``matrix`` |--| an ``n`` by ``n`` transformation matrix (the top left
+  ``mat`` part of an :doc:`affine <nibabel_affines>`);
+* ``offset`` |--| a optional length ``n`` translation vector to be applied
+  after the the ``matrix`` transformation (the ``vec`` part of an :doc:`affine
+  <nibabel_affines>`);
+* ``output_shape`` : an optional tuple giving the shape of the output array
+  into which we will put the values resampled from ``input``. ``output_shape``
+  defaults to ``input.shape``; this is the default we have been using above.
+
+``affine_transform`` then generates all the voxel coordinates *implied by* the
+``output_shape``, and transforms them with the ``matrix`` and ``offset``
+transforms to get a new set of coordinates ``C``. It then samples the
+``input`` array at the coordinates given by ``C`` to generate the output
+array.
+
+Here is the call to ``affine_transform`` that we used above, where we allowed
+the routine to assume that the output shape was the same as the input shape:
 
 .. nbplot::
 
@@ -165,7 +190,7 @@ with an empty volume ``K`` with another shape.  To do this, we use the
     >>> K.shape
     (64, 64, 35)
 
-is the same as the following call, where we specify the shape explicitly:
+The is the same as the following call, where we specify the shape explicitly:
 
 .. nbplot::
 
@@ -173,8 +198,7 @@ is the same as the following call, where we specify the shape explicitly:
     >>> K.shape
     (64, 64, 35)
 
-The output shape can be different from the input shape, if you use the
-``output_shape`` parameter.
+The output shape can be different from the input shape:
 
 .. nbplot::
 
@@ -183,5 +207,5 @@ The output shape can be different from the input shape, if you use the
     >>> K.shape
     (65, 65, 36)
 
-Remember that the ``M`` matrix and ``traslation`` vector apply to the
+Remember that the ``M`` matrix and ``translation`` vector apply to the
 coordinates implied by the output shape.

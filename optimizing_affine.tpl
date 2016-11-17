@@ -67,7 +67,8 @@ An example slice, over the third dimension:
     >>> plt.imshow(subject_data[:, :, 80])
     <...>
 
-The MNI template we want to match to is :download:`
+The MNI template we want to match to is
+:download:`mni_icbm152_t1_tal_nlin_asym_09a_masked_222.nii`:
 
 .. nbplot::
 
@@ -151,13 +152,17 @@ and returns a value that should be low when the images are well matched.
 The value our cost function returns, is a mismatch metric.
 
 I suggest you use the correlation mismatch function for the metric. Here is an
-implementation of the formula for Pearson's product-moment correlation
-coefficient from `wikipedia
-<https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient>`__:
+implementation of the formula for the `Pearson product-moment correlation
+coefficient`_:
 
 .. math::
 
-   r = r_{xy} =\frac{\sum ^n _{i=1}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum ^n _{i=1}(x_i - \bar{x})^2} \sqrt{\sum ^n _{i=1}(y_i - \bar{y})^2}}
+   r = r_{xy} =\frac{
+   \sum ^n _{i=1}(x_i - \bar{x})(y_i - \bar{y})
+   } {
+   \sqrt{
+   \sum ^n _{i=1}(x_i - \bar{x})^2} \sqrt{\sum ^n _{i=1}(y_i - \bar{y})^2
+   } }
 
 where :math:`\bar{x}` is the mean:
 
@@ -184,7 +189,9 @@ from matching voxels in the other.
     ...                    np.sqrt(y_mean0.dot(y_mean0)))
     ...     return -corr_top / corr_bottom
 
-Let's check this gives the same answer as the standard numpy function:
+Let's check this gives the same answer as the standard numpy function. Here we
+are using :doc:`numpy_random` to give us samples from the standard normal
+distribution:
 
 .. nbplot::
 
@@ -213,7 +220,8 @@ Say ``vol_arr`` is the image that we will transform.
 Our function then returns a copy of ``vol_arr`` with those transformations
 applied.
 
-Let's also say that these transformations are in millimeters.
+Let's also say that these transformations are in millimeters (x, y, z
+coordinates).
 
 That means we are going to make these transformations into a new 4 x 4 affine
 ``P``, and compose it with the template and subject affines:
@@ -341,12 +349,14 @@ The cost function should accept the same vector of parameters as
 ``params2affine``, then:
 
 * generate ``P``;
-* compose template\_vox2mm, then P then mm2subject\_vox to give ``Q``;
+* compose ``template_vox2mm``, then ``P`` then ``mm2subject_vox`` to give
+  ``Q``;
 * resample the subject data using the matrix and vector from ``Q`` (use
-  order=1 resampling - it is quicker);
+  ``order=1`` resampling - it is quicker);
 * return the mismatch metric for the resampled image and template.
 
-We can pick up the subject data and template data from the global namespace.
+We can pick up the subject data and template data from the `global namespace
+<global scope_>`:
 
 .. solution-start
 .. solution-replace
@@ -407,7 +417,8 @@ Let's define a callback so we can see what ``fmin_powell`` is doing:
 Now call ``fmin_powell`` with a starting guess for the parameters.  Remember
 to pass the callback with ``callback=my_callback``.
 
-This is going to take a crazy long time. Maybe 10 minutes.
+This is going to take a crazy long time, dependingn on your computer. Maybe 10
+minutes.
 
 .. nbplot::
 

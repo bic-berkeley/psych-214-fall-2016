@@ -18,7 +18,6 @@ Teaching
 * :doc:`resampling_with_ndimage`;
 * :doc:`more_on_rotation_exercise`;
 * :doc:`optimizing_rotation_exercise`;
-* :doc:`what_extra_transform`;
 * :doc:`image_header_and_affine`;
 * :doc:`images_and_affines`;
 * :doc:`reslicing_with_affines_exercise`;

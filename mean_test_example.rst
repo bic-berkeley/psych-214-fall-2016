@@ -121,7 +121,8 @@ values in $\vec{m}$.
 We can simulate this process when we know the exact distribution of the values
 in the population.  For example, let us imagine that we know that the
 population distribution is a normal distribution with population mean 10 ($\mu
-= 10$) and population standard deviation 1.5 ($\sigma = 1.5$).
+= 10$) and population standard deviation 1.5 ($\sigma = 1.5$).  We can use
+:doc:`numpy.random <numpy_random>` to draw samples from this distribution:
 
 .. nbplot::
     :include-source: false
