@@ -26,7 +26,6 @@ See :cite:`Brett2002`;
 
 * Matching structural to functional with `mutual information`_.
 
-* :doc:`numpy_diag`;
 * :doc:`nibabel_affines`;
 * :doc:`resampling_with_ndimage`;
 * :doc:`what_extra_transform_exercise`;
