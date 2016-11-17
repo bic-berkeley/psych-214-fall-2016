@@ -61,7 +61,7 @@ scaling factors on the diagonal:
     z\\
     \end{bmatrix}
 
-You can make these zooming matrices with :doc:`np.diag <numpy_diag>`_:
+You can make these zooming matrices with :doc:`np.diag <numpy_diag>`:
 
 .. nbplot::
 
