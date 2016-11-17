@@ -1,2 +1,3 @@
-#- Call optimizing function and collect best estimates for rotations
-#- Collect best estimates in `best_params` variable
+#: a callback we will pass to the fmin_powell function
+def my_callback(params):
+   print("Trying parameters " + str(params))

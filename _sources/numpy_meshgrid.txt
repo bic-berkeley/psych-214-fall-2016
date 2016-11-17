@@ -2,7 +2,7 @@
 Making coordinate arrays with meshgrid
 ######################################
 
-:doc:`affine_transform <resampling_with_ndimage` works by using voxel
+:doc:`affine_transform <resampling_with_ndimage>` works by using voxel
 coordinate implied by the ``output_shape``, and transforming those. See:
 :ref:`implied-coordinate-grid`.
 

@@ -109,7 +109,7 @@ Image processing and spatial transformations
 * `mutual information`_;
 * :doc:`nibabel_affines`;
 * :doc:`nibabel_apply_affine`.
-: :doc:`resampling_with_ndimage`;
+* :doc:`resampling_with_ndimage`;
 * :doc:`map_coordinates`;
 
 ****************

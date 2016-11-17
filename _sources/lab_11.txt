@@ -12,7 +12,7 @@ Revision
 Background
 **********
 
-See :cite:`brett2002`;
+See :cite:`Brett2002`;
 
 * the MNI templates;
 * review of spatial processing:

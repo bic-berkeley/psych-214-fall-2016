@@ -322,6 +322,7 @@ We can pick up the subject data and template data from the `global namespace
 
 .. nbplot::
     :include-source: false
+
     >>> # dummies to make exercise pass tests
     >>> apply_rotations = lambda x, y : x
     >>> correl_mismatch = lambda x, y : 0
