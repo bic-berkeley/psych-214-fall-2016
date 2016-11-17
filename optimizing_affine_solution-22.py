@@ -1,9 +1,5 @@
-#- * compile the P affine from the optimized parameters;
-#- * compile the Q affine from the image affines and P;
-#- * resample the subject image using the matrix and vector from the Q
-#-   affine.
-P = params2affine(best_params)
-Q = npl.inv(subject_img.affine).dot(P).dot(template_img.affine)
-mat, vec = nib.affines.to_matvec(Q)
-best_subject_data = affine_transform(subject_data, mat, vec,
-                                     output_shape=template_img.shape)
+# Optimization above varies slightly across platforms; test here.
+np.allclose(best_params,
+            [ -2.0349, 38.6679, -18.986 , 0.0287, -0.0075, 0.028,
+               0.9215, 0.9484, 0.8877], atol=0.005)
+# True
