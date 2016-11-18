@@ -428,7 +428,7 @@ minutes.
     >>> #- Collect best estimates in `best_params` variable
     >>> best_params = fmin_powell(cost_function, [0, 0, 0, 0, 0, 0, 1, 1, 1],
     ...                           callback=my_callback)
-    Trying parameters [ ... ]
+    Trying parameters [...]
     Optimization terminated successfully.
              Current function value: -0.92...
              Iterations: ...
