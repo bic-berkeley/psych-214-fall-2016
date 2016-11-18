@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rotation exercise &mdash; Functional MRI methods</title>
+    <title>Rotation exercise &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,6 +46,9 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="rotation-exercise">
 <h1>Rotation exercise<a class="headerlink" href="#rotation-exercise" title="Permalink to this headline">¶</a></h1>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -53,28 +56,35 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
 </div>
+</div>
 <div class="section" id="preliminaries">
 <h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this headline">¶</a></h2>
 <p>Check the you have <a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> in your current directory, or
 elsewhere on you Python path:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Check import of rotations code</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
 </pre></div>
 </div>
 </div>
+</div>
 <div class="section" id="your-task">
 <h2>Your task...<a class="headerlink" href="#your-task" title="Permalink to this headline">¶</a></h2>
 <p>I have taken a copy of the first volume in <code class="docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the first volume of ds107_sub012_t1r2.nii</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img_4d</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img_4d</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 <p>Then I rotated it by:</p>
 <ul class="simple">
@@ -83,6 +93,7 @@ elsewhere on you Python path:</p>
 <li>0.3 radians around the z axis.</li>
 </ul>
 <p>Here is that image for download <a class="reference download internal" href="_downloads/rotated_volume.nii" download=""><code class="xref download docutils literal"><span class="pre">rotated_volume.nii</span></code></a>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the resulting rotated image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;rotated_volume.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_vol0</span> <span class="o">=</span> <span class="n">rotated_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
@@ -90,7 +101,9 @@ elsewhere on you Python path:</p>
 <span class="go">(64, 64, 35)</span>
 </pre></div>
 </div>
+</div>
 <p>Here are slices over z, y, and x, for rotated and not-rotated images</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: slices on z, y, and x axis for original and rotated images</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">17</span><span class="p">])</span>
@@ -110,6 +123,7 @@ elsewhere on you Python path:</p>
 <p>(<a class="reference external" href=".//more_on_rotation_solution-7.png">png</a>, <a class="reference external" href=".//more_on_rotation_solution-7.hires.png">hires.png</a>, <a class="reference external" href=".//more_on_rotation_solution-7.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/more_on_rotation_solution-7.png" src="_images/more_on_rotation_solution-7.png" />
+</div>
 </div>
 <p>Of course, I have to be more specific by what I mean when I say that I rotated
 this image by:</p>
@@ -149,6 +163,7 @@ we need to supply the transformation <span class="math">\(t\)</span>.</p>
 <p><code class="docutils literal"><span class="pre">M</span></code> is the matrix that <code class="docutils literal"><span class="pre">scipy.ndimage.affine_transform</span></code> will use to get
 the transformation between coordinates in the new empty image and the
 corresponding coordinates in the rotated image.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a 3 by 3 transformation matrix that applies this sequence</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * 0.1 radians around the x axis, then</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * 0.2 radians around the y axis, then</span>
@@ -160,8 +175,10 @@ corresponding coordinates in the rotated image.</p>
 <span class="go">       [-0.1987,  0.0978,  0.9752]])</span>
 </pre></div>
 </div>
+</div>
 <p>Use <code class="docutils literal"><span class="pre">scipy.ndimage.affine_transform</span></code> to create the new image and use the
 transform to sample from the rotated image:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use affine_transform to resample from `rotated_vol0` using the transform.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the result into a variable `derotated_vol0`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
@@ -170,6 +187,8 @@ transform to sample from the rotated image:</p>
 <span class="go">(64, 64, 35)</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- plot slices from the image to see if you got the right transformation.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">17</span><span class="p">])</span>
@@ -189,6 +208,7 @@ transform to sample from the rotated image:</p>
 <p>(<a class="reference external" href=".//more_on_rotation_solution-10.png">png</a>, <a class="reference external" href=".//more_on_rotation_solution-10.hires.png">hires.png</a>, <a class="reference external" href=".//more_on_rotation_solution-10.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/more_on_rotation_solution-10.png" src="_images/more_on_rotation_solution-10.png" />
+</div>
 </div>
 </div>
 </div>
@@ -260,7 +280,7 @@ transform to sample from the rotated image:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

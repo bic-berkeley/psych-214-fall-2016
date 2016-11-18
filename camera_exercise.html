@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Cameraman exercise &mdash; Functional MRI methods</title>
+    <title>Cameraman exercise &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,8 +50,12 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/camera_code.py" download=""><code class="xref download docutils literal"><span class="pre">camera_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="camera_solution.html"><span class="doc">Cameraman solution</span></a>.</li>
 </ul>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Our usual imports</span>
 </pre></div>
+</div>
 </div>
 <p>Download the file <a class="reference download internal" href="_downloads/camera.txt" download=""><code class="xref download docutils literal"><span class="pre">camera.txt</span></code></a> and save it in your working
 directory. It contains the pixel values for a picture, and it&#8217;s your job to
@@ -68,8 +72,10 @@ You probably want to start with something like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pixel_values</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># empty list</span>
 </pre></div>
 </div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read lines from file and convert to list of floats</span>
 </pre></div>
+</div>
 </div>
 <p>How many pixel values does this image contain? (Call this number <code class="docutils literal"><span class="pre">P</span></code>).</p>
 <p>The array that forms the image is two-dimensional (it has a number of rows
@@ -78,48 +84,62 @@ values then <code class="docutils literal"><span class="pre">M</span> <span clas
 <code class="docutils literal"><span class="pre">P</span></code> (the number of pixel values).</p>
 <p>We don&#8217;t know what <code class="docutils literal"><span class="pre">M</span></code> and <code class="docutils literal"><span class="pre">N</span></code> are, we will have to guess. Given the
 number of pixel values, what would your guess be for <code class="docutils literal"><span class="pre">M</span></code> and <code class="docutils literal"><span class="pre">N</span></code>?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Guess M, N</span>
 </pre></div>
+</div>
 </div>
 <p>Next we want to convert the list of pixel values to an array (that forms the
 image).</p>
 <p>Convert the <code class="docutils literal"><span class="pre">pixel_values</span></code> list to a pixel values array, and reshape it to
 your guess for the shape <code class="docutils literal"><span class="pre">(M,</span> <span class="pre">N)</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Convert list to array and reshape</span>
 </pre></div>
 </div>
+</div>
 <p>Show this as an image using matplotlib&#8217;s <code class="docutils literal"><span class="pre">plt</span></code> module:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show image using plt module</span>
 </pre></div>
+</div>
 </div>
 <p>Is this the right shape already?</p>
 <p>What do we need to do to make it look right on the plot?</p>
 <p>Hint – the default <code class="docutils literal"><span class="pre">colormap</span></code> (<code class="docutils literal"><span class="pre">cmap</span></code>) in matplotlib version &lt; 2.0 is
 called <code class="docutils literal"><span class="pre">jet</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- A nicer version of the original plot</span>
 </pre></div>
+</div>
 </div>
 <p>Now let&#8217;s say we want to binarize this image at some threshold <code class="docutils literal"><span class="pre">T</span></code>, so the
 man&#8217;s coat and hair and the camera tripod are black (pixel value of 0) and
 most everything else is white (pixel value of 1). How would we choose a good
 threshold? One step might be to plot a line out of the array (image) to get an
 idea of the values on that line.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- A plot of the pixel position in x and the pixel value in y, for an image line.</span>
 </pre></div>
+</div>
 </div>
 <p>Now you need to apply your threshold to the image to make a binary image where
 values less than the threshold are == 0 and greater than the threshold are ==
 1. You might want to play with the threshold a little to get a good result.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Apply threshold to make new binary image, and show binary image</span>
 </pre></div>
+</div>
 </div>
 <p>For extra points - the camera guy has a pocket on side of his coat, that
 you can&#8217;t see well at the moment, because the range of values is too
 large to distinguish the different dark levels on his coat. Can you make a
 good picture to show the pocket? Hint: you might want to explore the
 <code class="docutils literal"><span class="pre">np.clip</span></code> function.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Extra points - a good image of the man&#39;s pocket.</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -190,7 +210,7 @@ good picture to show the pocket? Hint: you might want to explore the
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

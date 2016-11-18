@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>“for” and “while”, “break” and “else:” &mdash; Functional MRI methods</title>
+    <title>“for” and “while”, “break” and “else:” &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -55,6 +55,7 @@ during the loop.</p>
 from 2 through 30.  In this basic <code class="docutils literal"><span class="pre">for</span></code> loop, we use the <code class="docutils literal"><span class="pre">is_prime</span></code>
 variable as a flag to indicate whether we have found the current number to be
 prime:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="c1"># Assume x is prime until shown otherwise</span>
@@ -71,8 +72,10 @@ prime:</p>
 <span class="go">Primes in 2 through 30 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
 </pre></div>
 </div>
+</div>
 <p>Using a flag variable like <code class="docutils literal"><span class="pre">is_prime</span></code> is a common pattern, so Python allows
 us to do the same thing with an extra <code class="docutils literal"><span class="pre">else:</span></code> clause:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
@@ -86,6 +89,7 @@ us to do the same thing with an extra <code class="docutils literal"><span class
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Primes in 2 through 30&quot;</span><span class="p">,</span> <span class="n">primes</span><span class="p">)</span>
 <span class="go">Primes in 2 through 30 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -156,7 +160,7 @@ us to do the same thing with an extra <code class="docutils literal"><span class
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

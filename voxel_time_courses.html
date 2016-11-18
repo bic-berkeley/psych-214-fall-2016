@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Voxel time courses &mdash; Functional MRI methods</title>
+    <title>Voxel time courses &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -52,6 +52,7 @@ example the data could be:</p>
 <li>A series of 3D volumes (slicing over the last axis);</li>
 <li>A collection of 1D voxel time courses (slicing over the first three axes).</li>
 </ul>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Our usual set-up</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -59,15 +60,19 @@ example the data could be:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>We load a 4D file:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 30, 173)</span>
 </pre></div>
 </div>
+</div>
 <p>We drop the first volume; as you remember, the first volume is very different
 from the rest of the volumes in the series:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Drop the first volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
@@ -75,13 +80,16 @@ from the rest of the volumes in the series:</p>
 <span class="go">(64, 64, 30, 172)</span>
 </pre></div>
 </div>
+</div>
 <p>We can think of this 4D data as a series of 3D volumes.  That is the way we
 have been thinking of the 4D data so far:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is slicing over the last (time) axis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol0</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 30)</span>
 </pre></div>
+</div>
 </div>
 <p>We can also index over the first three axes.  The first three axes in this
 array represent space.</p>
@@ -100,6 +108,7 @@ the left of the brain (&gt; 31).  The second index of 32 refers to a position
 almost in the center front to back.  The last index of 19 refers to a position
 a little further towards the top of the brain – in this image.</p>
 <p>This coordinate therefore refers to a particular part of the image:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Where is this in the brain?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mean_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Make a nice bright dot in the right place</span>
@@ -112,8 +121,10 @@ a little further towards the top of the brain – in this image.</p>
 <div class="figure">
 <img alt="_images/voxel_time_courses-5.png" src="_images/voxel_time_courses-5.png" />
 </div>
+</div>
 <p>If I slice into the data array with these coordinates, I will get a vector,
 with the image value at that position (43, 32, 19), for every point in time:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is slicing over all three of the space axes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_time_course</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_time_course</span><span class="o">.</span><span class="n">shape</span>
@@ -126,6 +137,7 @@ with the image value at that position (43, 32, 19), for every point in time:</p>
 <div class="figure">
 <img alt="_images/voxel_time_courses-6.png" src="_images/voxel_time_courses-6.png" />
 </div>
+</div>
 <p>We could call this a &#8220;voxel time course&#8221;.</p>
 <p>We might want to do ordinary statistical type things with this time course.
 For example, we might want to correlate this time course with a measure of
@@ -137,6 +149,7 @@ relevant brain area will switch on when the task starts (value = 1) and then
 switch off when the task stops (value = 0).</p>
 <p>To get this on-off measure, we will use our pre-packaged function for OpenFMRI
 data:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load the neural time course using pre-packaged function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">stimuli</span> <span class="kn">import</span> <span class="n">events2neural</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># time between volumes</span>
@@ -150,7 +163,9 @@ data:</p>
 <div class="figure">
 <img alt="_images/voxel_time_courses-7.png" src="_images/voxel_time_courses-7.png" />
 </div>
+</div>
 <p>Here we plot the voxel time course against this neural prediction:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Plot the neural prediction against the data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">neural</span> <span class="o">=</span> <span class="n">neural</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notice the &#39;o&#39; to specify the &quot;line marker&quot;</span>
@@ -166,13 +181,16 @@ data:</p>
 <div class="figure">
 <img alt="_images/voxel_time_courses-8.png" src="_images/voxel_time_courses-8.png" />
 </div>
+</div>
 <p>We can look at the correlation between the on-off prediction and the voxel
 time course:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Correlate the neural time course with the voxel time course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">neural</span><span class="p">,</span> <span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="go">array([[ 1.    ,  0.5429],</span>
 <span class="go">       [ 0.5429,  1.    ]])</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -243,7 +261,7 @@ time course:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

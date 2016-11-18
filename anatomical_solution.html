@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Anatomical solution &mdash; Functional MRI methods</title>
+    <title>Anatomical solution &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,10 +46,14 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="anatomical-solution">
 <h1>Anatomical solution<a class="headerlink" href="#anatomical-solution" title="Permalink to this headline">¶</a></h1>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Our usual imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 </pre></div>
+</div>
 </div>
 <p>Now we will work with a 3D brain image.</p>
 <p>Like the camera image in <a class="reference internal" href="camera_solution.html"><span class="doc">Cameraman solution</span></a>, the pixel data for the 3D
@@ -69,17 +73,21 @@ what <code class="docutils literal"><span class="pre">I</span></code> and <code 
 <p>The data is in the same floating point text format as the camera picture pixel
 data.</p>
 <p>Read all the lines of the file into a list of float values, as before.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read file into list of float values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pixel_values</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;anatomical.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">pixel_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
 <p>How many pixel values does this file contain?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- How many pixel values?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span>
 <span class="go">848640</span>
 </pre></div>
+</div>
 </div>
 <p>When I have my image array correctly shaped, then, if I take a slice over the
 third dimension:</p>
@@ -91,12 +99,14 @@ dimensions).</p>
 <p>How many pixel values does a slice in the third dimension contain - given that
 we know the third dimension is length 32? Put another way, what is the value
 for <code class="docutils literal"><span class="pre">I</span> <span class="pre">*</span> <span class="pre">J</span></code>?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Find the size of a slice over the third dimension</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># P = ?</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span> <span class="o">/</span> <span class="mi">32</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span>
 <span class="go">26520.0</span>
 </pre></div>
+</div>
 </div>
 <p>Call <code class="docutils literal"><span class="pre">P</span></code> the number of values per slice on the third dimension (so <code class="docutils literal"><span class="pre">P</span> <span class="pre">==</span> <span class="pre">I</span>
 <span class="pre">*</span> <span class="pre">J</span></code> where we don&#8217;t yet know <code class="docutils literal"><span class="pre">I</span></code> or <code class="docutils literal"><span class="pre">J</span></code>).</p>
@@ -105,6 +115,7 @@ for <code class="docutils literal"><span class="pre">I</span> <span class="pre">
 <p>Find candidates for <code class="docutils literal"><span class="pre">I</span></code> by using the modulus operator (<code class="docutils literal"><span class="pre">%</span></code>) to find a few
 numbers between 120 and 200 that divide exactly into the slice size <code class="docutils literal"><span class="pre">P</span></code>.
 Hint: the first value will be 120.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Find candidates for I</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">candidates</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
@@ -114,12 +125,14 @@ Hint: the first value will be 120.</p>
 <span class="go">[120, 130, 136, 156, 170, 195]</span>
 </pre></div>
 </div>
+</div>
 <p>These numbers are candidates for <code class="docutils literal"><span class="pre">I</span></code> - the first number in the pair <code class="docutils literal"><span class="pre">(I,</span>
 <span class="pre">J)</span></code>. We now need to find the corresponding <code class="docutils literal"><span class="pre">J</span></code> for each candidate for
 <code class="docutils literal"><span class="pre">I</span></code>.</p>
 <p>Use the integer division operator (<code class="docutils literal"><span class="pre">//</span></code>) to get a list of pairs of numbers
 <code class="docutils literal"><span class="pre">I</span></code> and <code class="docutils literal"><span class="pre">J</span></code> such that <code class="docutils literal"><span class="pre">I</span> <span class="pre">*</span> <span class="pre">J</span> <span class="pre">==</span> <span class="pre">P</span></code>. Hint: the first pair of <code class="docutils literal"><span class="pre">I,</span> <span class="pre">J</span></code> is
 (120, 221).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Find candidate pairs for I, J</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
@@ -129,11 +142,13 @@ Hint: the first value will be 120.</p>
 <span class="go">[[120, 221.0], [130, 204.0], [136, 195.0], [156, 170.0], [170, 156.0], [195, 136.0]]</span>
 </pre></div>
 </div>
+</div>
 <p>The full image shape will be three values, with one of these <code class="docutils literal"><span class="pre">(I,</span> <span class="pre">J)</span></code> pairs
 followed by 32. For example, the correct shape might be (120, 221 , 32) (it
 isn&#8217;t!). Try reshaping the pixel data with a few of the <code class="docutils literal"><span class="pre">(I,</span> <span class="pre">J,</span> <span class="pre">32)</span></code>
 candidates to see which one is likely to be right. You might want to plot a
 slice over the third dimension to see how it looks.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Try reshaping using some candidate pairs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pixel_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pixel_values</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">try1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
@@ -145,6 +160,8 @@ slice over the third dimension to see how it looks.</p>
 <div class="figure">
 <img alt="_images/anatomical_solution-8.png" src="_images/anatomical_solution-8.png" />
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">try2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">195</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">try2</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">15</span><span class="p">])</span>  <span class="c1"># Same slice</span>
 <span class="go">&lt;...&gt;</span>
@@ -154,6 +171,8 @@ slice over the third dimension to see how it looks.</p>
 <div class="figure">
 <img alt="_images/anatomical_solution-9.png" src="_images/anatomical_solution-9.png" />
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">try3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">try3</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">15</span><span class="p">])</span>
 <span class="go">&lt;...&gt;</span>
@@ -167,6 +186,7 @@ slice over the third dimension to see how it looks.</p>
 <p>(<a class="reference external" href=".//anatomical_solution-10.png">png</a>, <a class="reference external" href=".//anatomical_solution-10.hires.png">hires.png</a>, <a class="reference external" href=".//anatomical_solution-10.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/anatomical_solution-10.png" src="_images/anatomical_solution-10.png" />
+</div>
 </div>
 </div>
 
@@ -237,7 +257,7 @@ slice over the third dimension to see how it looks.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

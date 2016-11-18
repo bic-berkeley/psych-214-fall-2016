@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Testing a single voxel &mdash; Functional MRI methods</title>
+    <title>Testing a single voxel &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,6 +49,7 @@
 <p>A short ago (<a class="reference internal" href="model_one_voxel.html"><span class="doc">Modeling a single voxel</span></a>), we were modeling a single voxel time
 course.</p>
 <p>Let&#8217;s get that same voxel time course back again:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print array values to 4 decimal places</span>
@@ -61,8 +62,10 @@ course.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span>
 </pre></div>
 </div>
+</div>
 <p>The voxel coordinate (3D coordinate) that we were looking at in
 <a class="reference internal" href="voxel_time_courses.html"><span class="doc">Voxel time courses</span></a> was at (42, 32, 19):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_time_course</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -72,9 +75,11 @@ course.</p>
 <div class="figure">
 <img alt="_images/test_one_voxel-2.png" src="_images/test_one_voxel-2.png" />
 </div>
+</div>
 <p>We then compiled a design for this time-course and estimated it.</p>
 <p>We used the <a class="reference download internal" href="_downloads/ds114_sub009_t2r1_conv.txt" download=""><code class="xref download docutils literal"><span class="pre">convolved</span> <span class="pre">regressor</span></code></a> from
 <a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a> in a simple regression.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Knock off first 4 elements to match data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">convolved</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
@@ -88,6 +93,7 @@ course.</p>
 <p>(<a class="reference external" href=".//test_one_voxel-3.png">png</a>, <a class="reference external" href=".//test_one_voxel-3.hires.png">hires.png</a>, <a class="reference external" href=".//test_one_voxel-3.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/test_one_voxel-3.png" src="_images/test_one_voxel-3.png" />
+</div>
 </div>
 <p><span class="math">\(\newcommand{\yvec}{\vec{y}}\)</span>
 <span class="math">\(\newcommand{\xvec}{\vec{x}}\)</span>
@@ -106,12 +112,14 @@ invertible, the pseudoinverse is given by:</p>
 <div class="math">
 \[\Xmat^+ = (\Xmat^T \Xmat)^{-1} \Xmat^T\]</div>
 <p>We find the <span class="math">\(\bhat\)</span> for our data and design:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span> <span class="o">=</span> <span class="n">Xp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span>
 <span class="go">array([   31.1855,  2029.3677])</span>
 </pre></div>
+</div>
 </div>
 <p>Our plan now is to do an hypothesis test on our <span class="math">\(\bhat\)</span> values.</p>
 <p>The <span class="math">\(\bhat\)</span> values are sample estimates of the unobservable true <span class="math">\(\bvec\)</span>
@@ -129,6 +137,7 @@ proof</a>,
 and <a class="reference external" href="http://stats.stackexchange.com/questions/72940/covariance-matrix-of-least-squares-estimator-hat-beta">stackoverflow proof</a>.</p>
 <p>We can use an estimate <span class="math">\(\hat\sigma^2\)</span> of <span class="math">\(\sigma^2\)</span> to give us estimated
 standard errors of the variance covariance (see: <a class="reference internal" href="hypothesis_tests.html#unbiased-variance"><span class="std std-ref">Unbiased estimate of population variance</span></a>):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">voxel_time_course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta_hat</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">residuals</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span>
@@ -146,12 +155,16 @@ standard errors of the variance covariance (see: <a class="reference internal" h
 <span class="go">15.7460...</span>
 </pre></div>
 </div>
+</div>
 <p>We now have an standard estimate of the variance / covariance of the <span class="math">\(\bhat\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v_cov</span> <span class="o">=</span> <span class="n">s2_hat</span> <span class="o">*</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
 <p>In particular, I can now divide my estimate for the first parameter, by the
 standard error of that estimate:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numerator</span> <span class="o">=</span> <span class="n">beta_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v_cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t_stat</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
@@ -159,7 +172,9 @@ standard error of that estimate:</p>
 <span class="go">12.8267...</span>
 </pre></div>
 </div>
+</div>
 <p>I can look up the probability of this t statistic using <code class="docutils literal"><span class="pre">scipy.stats</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span> <span class="k">as</span> <span class="n">t_dist</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get p value for t value using cumulative density dunction</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># (CDF) of t distribution</span>
@@ -169,12 +184,15 @@ standard error of that estimate:</p>
 <span class="go">0.0</span>
 </pre></div>
 </div>
+</div>
 <div class="section" id="compare-our-manual-estimation-to-r">
 <h2>Compare our manual estimation to R<a class="headerlink" href="#compare-our-manual-estimation-to-r" title="Permalink to this headline">¶</a></h2>
 <p>Finally let&#8217;s save the voxel time course for us to compare this analysis to
 the <code class="docutils literal"><span class="pre">lm</span></code> estimation in R:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;voxel_time_course.txt&#39;</span><span class="p">,</span> <span class="n">voxel_time_course</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 <p>Here are the commands to run the same analysis in R:</p>
 <div class="highlight-R"><div class="highlight"><pre><span></span><span class="c1"># Simple regression model in R</span>
@@ -259,7 +277,7 @@ res <span class="o">=</span> lm<span class="p">(</span>voxels <span class="o">~<
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

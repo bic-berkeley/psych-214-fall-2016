@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Arrays as images, images as arrays &mdash; Functional MRI methods</title>
+    <title>Arrays as images, images as arrays &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,11 +48,14 @@
 <h1>Arrays as images, images as arrays<a class="headerlink" href="#arrays-as-images-images-as-arrays" title="Permalink to this headline">¶</a></h1>
 <p>You can consider arrays as images, and images as arrays.</p>
 <p>We start off with our usual imports:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
+</div>
 <p>Let&#8217;s make an array of numbers between 0 through 99:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
@@ -72,9 +75,11 @@
 <span class="go">(15, 8)</span>
 </pre></div>
 </div>
+</div>
 <p>In fact this array represents a monochrome picture of a letter.</p>
 <p>We can show arrays as images using the <code class="docutils literal"><span class="pre">plt.imshow</span></code> command from
 <a class="reference external" href="http://matplotlib.org/">matplotlib</a>. Here is the default output:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -83,12 +88,14 @@
 <div class="figure">
 <img alt="_images/arrays_and_images-3.png" src="_images/arrays_and_images-3.png" />
 </div>
+</div>
 <p>If you have a version of matplotlib older than version 2.0, this image will
 look rather blurry. This is because matplotlib is drawing an image with many
 more pixels than the array has values. For the pixels in-between array values,
 older matplotlib has a default of using <a class="reference external" href="http://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a> to estimate a
 good pixel value. We can turn off this blurring effect by using <a class="reference external" href="https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation">nearest
 neighbor interpolation</a> instead of linear interpolation:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -97,12 +104,15 @@ neighbor interpolation</a> instead of linear interpolation:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-4.png" src="_images/arrays_and_images-4.png" />
 </div>
+</div>
 <p><code class="docutils literal"><span class="pre">nearest</span></code> interpolation is the default value for matplotlib 2.0 and later.
 If you have an older matplotllib and you&#8217;d like <code class="docutils literal"><span class="pre">nearest</span></code> interpolation to
 be the default for the current session, use:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
+</div>
 </div>
 <p>The image is weirdly colorful. That is because matplotlib is using the default
 <em>colormap</em>. A colormap is a mapping from values in the array to colors. In
@@ -113,6 +123,7 @@ red. For matplotlib version 2.0 and above the default colormap is called
 yellow.</p>
 <p>We can see the relationship of the numbers to the colors by asking matplotlib
 to show the colormap:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nearest interpolation is now the default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -124,8 +135,10 @@ to show the colormap:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-6.png" src="_images/arrays_and_images-6.png" />
 </div>
+</div>
 <p>In our case, our image would make more sense as grayscale, so we use the
 <code class="docutils literal"><span class="pre">gray</span></code> colormap, like this:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
@@ -136,16 +149,20 @@ to show the colormap:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-7.png" src="_images/arrays_and_images-7.png" />
 </div>
+</div>
 <p>A grayscale image is an array containing numbers giving the pixel intensity
 values - in our case between 0 and 99.</p>
 <p>Here we set <code class="docutils literal"><span class="pre">gray</span></code> to the default colormap for the rest of our plots:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set &#39;gray&#39; as the default colormap</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>We can also plot lines in matplotlib. For example, we might want to plot the
 values in row 8 from this array.  Because Python indices start at 0, this is
 the 9th row of the array.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">an_array</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
 <span class="go">[...]</span>
 </pre></div>
@@ -154,12 +171,14 @@ the 9th row of the array.</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-9.png" src="_images/arrays_and_images-9.png" />
 </div>
+</div>
 <p>The x axis is the position in the array (0 through 7) and the y axis is the
 value of the array row at that position.</p>
 <p>The plot shows us the 0 values at the edges of the bar of the &#8220;i&#8221;, an the ramp
 up to the peak at the middle of the bar of the &#8220;i&#8221;, in columns number 3 and 4.</p>
 <p>A transpose in numpy uses the <code class="docutils literal"><span class="pre">.T</span></code> method on the array. This has the effect
 of flipping the rows and columns (in 2D):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="o">.</span><span class="n">T</span>
 <span class="go">array([[ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],</span>
 <span class="go">       [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1, 16,  0],</span>
@@ -171,6 +190,8 @@ of flipping the rows and columns (in 2D):</p>
 <span class="go">       [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Defaults of nearest interpolation and gray colormap</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -180,8 +201,10 @@ of flipping the rows and columns (in 2D):</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-11.png" src="_images/arrays_and_images-11.png" />
 </div>
+</div>
 <p>We can also reshape the original array to a 1D array, by stacking all the rows
 end to end:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_shape</span> <span class="o">=</span> <span class="n">an_array</span><span class="o">.</span><span class="n">shape</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">old_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">old_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span>
@@ -195,12 +218,16 @@ end to end:</p>
 <span class="go">        0])</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(120,)</span>
 </pre></div>
 </div>
+</div>
 <p>Reshaping the array to one dimension is a common operation, so there is a
 separate numpy command for that, <code class="docutils literal"><span class="pre">np.ravel</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">array([ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  9, 99, 99, 94,  0,  0,</span>
 <span class="go">        0,  0, 25, 99, 99, 79,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,</span>
@@ -212,8 +239,10 @@ separate numpy command for that, <code class="docutils literal"><span class="pre
 <span class="go">        0])</span>
 </pre></div>
 </div>
+</div>
 <p>One use of the 1D version of the array, is for making a histogram of the
 distribution of values in the array:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">)</span>
 <span class="go">(...)</span>
 </pre></div>
@@ -222,8 +251,10 @@ distribution of values in the array:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-15.png" src="_images/arrays_and_images-15.png" />
 </div>
+</div>
 <p>By default, the <code class="docutils literal"><span class="pre">plt.hist</span></code> function uses 50 bins, but you can specify how
 many bins you want with the <code class="docutils literal"><span class="pre">bins</span></code> keyword:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
 <span class="go">(...)</span>
 </pre></div>
@@ -232,8 +263,10 @@ many bins you want with the <code class="docutils literal"><span class="pre">bin
 <div class="figure">
 <img alt="_images/arrays_and_images-16.png" src="_images/arrays_and_images-16.png" />
 </div>
+</div>
 <p>As you can imagine, it&#8217;s not hard to go back to the 2D shape, by splitting the
 1D array back into 15 rows of 8 values each (and therefore 8 columns):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array_back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">array_back</span>
 <span class="go">array([[ 0,  0,  0,  0,  0,  0,  0,  0],</span>
@@ -259,8 +292,10 @@ many bins you want with the <code class="docutils literal"><span class="pre">bin
 <div class="figure">
 <img alt="_images/arrays_and_images-17.png" src="_images/arrays_and_images-17.png" />
 </div>
+</div>
 <p>In numpy, basic operations like multiplication, addition, comparison, are
 always elementwise. For example, this multiplies every array value by 10:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="go">array([[  0,   0,   0,   0,   0,   0,   0,   0],</span>
 <span class="go">       [  0,   0,   0,  90, 990, 990, 940,   0],</span>
@@ -279,8 +314,10 @@ always elementwise. For example, this multiplies every array value by 10:</p>
 <span class="go">       [  0,   0,   0,   0,   0,   0,   0,   0]])</span>
 </pre></div>
 </div>
+</div>
 <p>Comparison is also elementwise. For example, this gives True for every value &gt;
 50, and False for every value &lt;= 50:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span>
 <span class="go">array([[False, False, False, False, False, False, False, False],</span>
 <span class="go">       [False, False, False, False,  True,  True,  True, False],</span>
@@ -299,8 +336,10 @@ always elementwise. For example, this multiplies every array value by 10:</p>
 <span class="go">       [False, False, False, False, False, False, False, False]], dtype=bool)</span>
 </pre></div>
 </div>
+</div>
 <p>Matplotlib will treat False as 0 and True as 1, so this is one way of
 binarizing the image at a threshold (of 50 in this case):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -309,10 +348,12 @@ binarizing the image at a threshold (of 50 in this case):</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-20.png" src="_images/arrays_and_images-20.png" />
 </div>
+</div>
 <p>We can slice arrays as we slice strings or lists. The difference for arrays is
 that we can slice in any or all dimensions at the same time.  For example, to
 get the dot of the &#8220;i&#8221; it looks (from the numbers at the sides of the ploat)
 that we want to the top 4 rows, and the last 5 columns:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:]</span>
 <span class="go">array([[ 0,  0,  0,  0,  0],</span>
 <span class="go">       [ 9, 99, 99, 94,  0],</span>
@@ -325,6 +366,7 @@ that we want to the top 4 rows, and the last 5 columns:</p>
 <p>(<a class="reference external" href=".//arrays_and_images-21.png">png</a>, <a class="reference external" href=".//arrays_and_images-21.hires.png">hires.png</a>, <a class="reference external" href=".//arrays_and_images-21.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-21.png" src="_images/arrays_and_images-21.png" />
+</div>
 </div>
 </div>
 
@@ -395,7 +437,7 @@ that we want to the top 4 rows, and the last 5 columns:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

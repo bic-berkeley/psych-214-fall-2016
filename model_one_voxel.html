@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Modeling a single voxel &mdash; Functional MRI methods</title>
+    <title>Modeling a single voxel &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,6 +49,7 @@
 <p>Earlier – <a class="reference internal" href="voxel_time_courses.html"><span class="doc">Voxel time courses</span></a> – we were looking at a single voxel
 time course.</p>
 <p>Let&#8217;s get that same voxel time course back again:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
@@ -56,15 +57,19 @@ time course.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>We load the data, and knock off the first four volumes to remove the artefact
 we discovered in <a class="reference internal" href="first_activation_exercise.html"><span class="doc">First go at brain activation exercise</span></a>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span>
 </pre></div>
 </div>
+</div>
 <p>The voxel coordinate (3D coordinate) that we were looking at in
 <a class="reference internal" href="voxel_time_courses.html"><span class="doc">Voxel time courses</span></a> was at (42, 32, 19):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">voxel_time_course</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -74,11 +79,13 @@ we discovered in <a class="reference internal" href="first_activation_exercise.h
 <div class="figure">
 <img alt="_images/model_one_voxel-3.png" src="_images/model_one_voxel-3.png" />
 </div>
+</div>
 <p>Now we are going to use the convolved regressor from
 <a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a> to do a simple regression on this voxel time
 course.</p>
 <p>If you don&#8217;t have it already, you will need to download
 <a class="reference download internal" href="_downloads/ds114_sub009_t2r1_conv.txt" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1_conv.txt</span></code></a>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Knock off first 4 elements to match data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">convolved</span> <span class="o">=</span> <span class="n">convolved</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
@@ -90,8 +97,10 @@ course.</p>
 <div class="figure">
 <img alt="_images/model_one_voxel-4.png" src="_images/model_one_voxel-4.png" />
 </div>
+</div>
 <p>First we make our <em>design matrix</em>.  It has a column for the convolved
 regressor, and a column of ones:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">convolved</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">convolved</span>
@@ -102,6 +111,7 @@ regressor, and a column of ones:</p>
 <p>(<a class="reference external" href=".//model_one_voxel-5.png">png</a>, <a class="reference external" href=".//model_one_voxel-5.hires.png">hires.png</a>, <a class="reference external" href=".//model_one_voxel-5.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/model_one_voxel-5.png" src="_images/model_one_voxel-5.png" />
+</div>
 </div>
 <p><span class="math">\(\newcommand{\yvec}{\vec{y}}\)</span>
 <span class="math">\(\newcommand{\xvec}{\vec{x}}\)</span>
@@ -120,19 +130,24 @@ invertible, the pseudoinverse is given by:</p>
 <div class="math">
 \[\Xmat^+ = (\Xmat^T \Xmat)^{-1} \Xmat^T\]</div>
 <p>Let&#8217;s calculate the pseudoinverse for our design:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 169)</span>
 </pre></div>
 </div>
+</div>
 <p>We calculate <span class="math">\(\bhat\)</span>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span> <span class="o">=</span> <span class="n">Xp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">voxel_time_course</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">beta_hat</span>
 <span class="go">array([   31.185514,  2029.367689])</span>
 </pre></div>
 </div>
+</div>
 <p>We can then calculate <span class="math">\(\yhat\)</span> (also called the <em>fitted data</em>):</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta_hat</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e_vec</span> <span class="o">=</span> <span class="n">voxel_time_course</span> <span class="o">-</span> <span class="n">y_hat</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e_vec</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
@@ -146,6 +161,7 @@ invertible, the pseudoinverse is given by:</p>
 <p>(<a class="reference external" href=".//model_one_voxel-8.png">png</a>, <a class="reference external" href=".//model_one_voxel-8.hires.png">hires.png</a>, <a class="reference external" href=".//model_one_voxel-8.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/model_one_voxel-8.png" src="_images/model_one_voxel-8.png" />
+</div>
 </div>
 </div>
 
@@ -216,7 +232,7 @@ invertible, the pseudoinverse is given by:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

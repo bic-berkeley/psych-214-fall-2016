@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Four dimensions exercise &mdash; Functional MRI methods</title>
+    <title>Four dimensions exercise &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,37 +50,49 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/four_dimensions_code.py" download=""><code class="xref download docutils literal"><span class="pre">four_dimensions_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="four_dimensions_solution.html"><span class="doc">Four dimensions solution</span></a>.</li>
 </ul>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our usual imports</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 </pre></div>
 </div>
+</div>
 <p>We are going to load a four-dimensional (X, Y, Z, t) BOLD image called
 <a class="reference download internal" href="_downloads/ds107_sub012_t1r2.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_t1r2.nii</span></code></a>. Download the file using the link.  Import
 the <code class="docutils literal"><span class="pre">nibabel</span></code> module, and load the image with nibabel to create an image
 object.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load image object using nibabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Turn off nibabel memory mapping.</span>
 </pre></div>
 </div>
+</div>
 <p>In the usual way get the array data from this image and show the image shape.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get image array data from image object</span>
 </pre></div>
 </div>
+</div>
 <p>Select the 10th volume (time index 9) from 4D image data array, by slicing
 over the last dimension. What shape is it?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the 10th volume and show shape</span>
 </pre></div>
 </div>
+</div>
 <p>Get the standard deviation across all voxels in this 3D volume:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Standard deviation across all voxels for 10th volume</span>
 </pre></div>
+</div>
 </div>
 <p>Loop over all volumes in the 4D image and store the standard deviation for
 each volume in a list. Plot these to see if there are any volumes with
 particularly unusual standard deviation.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get standard deviation for each volume; then plot the values</span>
 </pre></div>
+</div>
 </div>
 <p>SPM uses a measure called &#8220;global signal&#8221; to give a very rough estimate of the
 average signal value within the brain. The idea is that you need a threshold
@@ -109,8 +121,10 @@ The script saved the SPM global values to a text file
 </pre></div>
 </div>
 <p>Read these global values calculated by SPM into a list, and plot the values.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read global signal values calculated by SPM, and plot</span>
 </pre></div>
+</div>
 </div>
 <p>Now implement the algorithm above to recalculate the SPM global signal for the
 first volume (volume index zero). Hint: you will likely need to index using a
@@ -124,17 +138,21 @@ boolean (mask) array. Remember, the steps are:</p>
 </ul>
 <p>You should get the same value as SPM - the first value you read from
 <code class="docutils literal"><span class="pre">global_signals.txt</span></code>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Apply algorithm for SPM global calculation to first volume</span>
 </pre></div>
+</div>
 </div>
 <p>Make a function called <code class="docutils literal"><span class="pre">spm_global</span></code> that accepts a 3D array as input, and
 returns the global signal using the SPM algorithm. Call that function on the
 first volume to show that it is working (as in <code class="docutils literal"><span class="pre">print(spm_global(data[:,</span> <span class="pre">:,</span>
 <span class="pre">:,</span> <span class="pre">0]))</span></code>).</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make an `spm_global` function that accepts a 3D array as input,</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- and returns the global mean for the volume according to the SPM</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- algorithm</span>
 </pre></div>
+</div>
 </div>
 <p>Make a function called <code class="docutils literal"><span class="pre">get_spm_globals</span></code> that accepts an image filename as
 an argument. The function will load the image, get the array data for the
@@ -146,9 +164,11 @@ like:</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_globals</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Write a function `get_spm_globals` that returns the global values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for each volume</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -219,7 +239,7 @@ like:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

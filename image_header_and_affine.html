@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>The image header and affine &mdash; Functional MRI methods</title>
+    <title>The image header and affine &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,16 +47,22 @@
 <div class="section" id="the-image-header-and-affine">
 <h1>The image header and affine<a class="headerlink" href="#the-image-header-and-affine" title="Permalink to this headline">¶</a></h1>
 <p>See: <a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">coordinate systems and affine transforms</a> for an introduction.</p>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># print arrays to 4DP</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
+</div>
 </div>
 <div class="section" id="the-image-affine">
 <h2>The image affine<a class="headerlink" href="#the-image-affine" title="Permalink to this headline">¶</a></h2>
@@ -70,6 +76,7 @@ the image header in <a class="reference internal" href="classwork/day_00/what_is
 <p>The header contains the metadata for the image.</p>
 <p>One piece of metadata, is the image affine.  You can download the anatomical
 image below from <a class="reference download internal" href="_downloads/ds107_sub012_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_highres.nii</span></code></a>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_highres.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span><span class="o">.</span><span class="n">affine</span>
@@ -79,7 +86,9 @@ image below from <a class="reference download internal" href="_downloads/ds107_s
 <span class="go">       [   0.    ,    0.    ,    0.    ,    1.    ]])</span>
 </pre></div>
 </div>
+</div>
 <p>As you can imagine, nibabel is getting the affine from the header:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="go">&lt;class &#39;nibabel.nifti1.Nifti1Header&#39;&gt; object, endian=&#39;&lt;&#39;</span>
 <span class="go">sizeof_hdr      : 348</span>
@@ -127,6 +136,7 @@ image below from <a class="reference download internal" href="_downloads/ds107_s
 <span class="go">magic           : b&#39;n+1&#39;</span>
 </pre></div>
 </div>
+</div>
 <p>Notice the <code class="docutils literal"><span class="pre">srow_x,</span> <span class="pre">srow_y,</span> <span class="pre">srow_z</span></code> fields in the header, that contain the
 affine for this image. It is not always this simple though – see
 <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">http://nifti.nimh.nih.gov/nifti-1</a> for more details. In general, nibabel will
@@ -145,6 +155,7 @@ extension <code class="docutils literal"><span class="pre">.img</span></code> st
 <a class="reference download internal" href="_downloads/ds114_sub009_highres_moved.img" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_moved.img</span></code></a> and
 <a class="reference download internal" href="_downloads/ds114_sub009_highres_moved.hdr" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_moved.hdr</span></code></a>. These two files together form one
 NIfTI image. You can load these with nibabel in the usual way:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pair_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres_moved.img&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pair_img</span><span class="o">.</span><span class="n">affine</span>
 <span class="go">array([[   0.9416,   -0.4311,   -0.0586,  -98.8336],</span>
@@ -152,6 +163,7 @@ NIfTI image. You can load these with nibabel in the usual way:</p>
 <span class="go">       [  -0.0215,   -0.3028,    0.9723, -158.4178],</span>
 <span class="go">       [   0.    ,    0.    ,    0.    ,    1.    ]])</span>
 </pre></div>
+</div>
 </div>
 <p>This form of the NIfTI image is getting less common, because it is
 inconvenient to have to keep the <code class="docutils literal"><span class="pre">.img</span></code> and <code class="docutils literal"><span class="pre">.hdr</span></code> files together, but you
@@ -229,7 +241,7 @@ data and the header.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

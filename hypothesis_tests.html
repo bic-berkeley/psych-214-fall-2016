@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Hypothesis tesing with the general linear model &mdash; Functional MRI methods</title>
+    <title>Hypothesis tesing with the general linear model &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,6 +49,7 @@
 <div class="section" id="general-linear-model-reprise">
 <h2>General linear model reprise<a class="headerlink" href="#general-linear-model-reprise" title="Permalink to this headline">¶</a></h2>
 <p>This page starts at the same place as <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a>.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import numerical and plotting libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
@@ -57,18 +58,23 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <p>In that page, we had questionnaire measures of psychopathy from 12 students:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">11.416</span><span class="p">,</span>   <span class="mf">4.514</span><span class="p">,</span>  <span class="mf">12.204</span><span class="p">,</span>  <span class="mf">14.835</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">8.416</span><span class="p">,</span>   <span class="mf">6.563</span><span class="p">,</span>  <span class="mf">17.343</span><span class="p">,</span> <span class="mf">13.02</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">15.19</span> <span class="p">,</span>  <span class="mf">11.902</span><span class="p">,</span>  <span class="mf">22.721</span><span class="p">,</span>  <span class="mf">22.324</span><span class="p">])</span>
 </pre></div>
 </div>
+</div>
 <p>We also had skin-conductance scores from the palms of the each of the same 12
 students, to get a measure of how sweaty they are:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.389</span><span class="p">,</span>  <span class="mf">0.2</span>  <span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.463</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="mf">4.585</span><span class="p">,</span>  <span class="mf">1.097</span><span class="p">,</span>  <span class="mf">1.642</span><span class="p">,</span>  <span class="mf">4.972</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="mf">7.957</span><span class="p">,</span>  <span class="mf">5.585</span><span class="p">,</span>  <span class="mf">5.527</span><span class="p">,</span>  <span class="mf">6.964</span><span class="p">])</span>
 </pre></div>
+</div>
 </div>
 <p>We believe that the <code class="docutils literal"><span class="pre">clammy</span></code> score has some straight-line relationship to
 the <code class="docutils literal"><span class="pre">psychopathy</span></code> scores.  <span class="math">\(n\)</span> is the number of elements in <code class="docutils literal"><span class="pre">psychopathy</span></code>
@@ -190,6 +196,7 @@ t = \frac{\cvec^T \bhat}
 {\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}}\]</div>
 <p>where <span class="math">\(\hat{\sigma^2}\)</span> is our unbiased estimate of the population variance.</p>
 <p>Here is the t statistic calculation in Python:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Data vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">psychopathy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Covariate vector</span>
@@ -217,6 +224,7 @@ t = \frac{\cvec^T \bhat}
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">array([[ 1.914389]])</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="f-tests">
@@ -269,6 +277,7 @@ F_{\nu_1, \nu_2} &amp; = &amp;
 {\textrm{SSR}(\Xmat_f) / \nu_2}
 \end{eqnarray}\end{split}\]</div>
 <p>Here is the F-statistic calculation in Python:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># We already have X, e, rank_x, for the full model, from</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># the t calculation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_f</span><span class="p">,</span> <span class="n">e_f</span><span class="p">,</span> <span class="n">rank_f</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">rank_x</span>
@@ -289,11 +298,14 @@ F_{\nu_1, \nu_2} &amp; = &amp;
 <span class="go">3.66488...</span>
 </pre></div>
 </div>
+</div>
 <p>For reasons that we haven&#8217;t explained here, the F statistic for a single
 column is the square of the t statistic testing the same column:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="go">array([[ 3.664886]])</span>
 </pre></div>
+</div>
 </div>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="effects-in-design" rules="none">
@@ -406,7 +418,7 @@ same range of data vectors.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

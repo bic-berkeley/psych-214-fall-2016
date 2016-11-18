@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Voxel correlation exercise &mdash; Functional MRI methods</title>
+    <title>Voxel correlation exercise &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,43 +50,59 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/voxel_correlation_code.py" download=""><code class="xref download docutils literal"><span class="pre">voxel_correlation_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="voxel_correlation_solution.html"><span class="doc">Voxel correlation exercise</span></a>.</li>
 </ul>
+<div class="nbplot container">
+</div>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
+</div>
 <p>Import the <code class="docutils literal"><span class="pre">events2neural</span></code> function from the <a class="reference download internal" href="_downloads/stimuli.py" download=""><code class="xref download docutils literal"><span class="pre">stimuli.py</span></code></a> module:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- import events2neural from stimuli module</span>
 </pre></div>
 </div>
+</div>
 <p>If you don&#8217;t have it already, download the <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>
 image.  Load it with nibabel.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the ds114_sub009_t2r1.nii image</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the number of volumes in ds114_sub009_t2r1.nii</span>
 </pre></div>
 </div>
+</div>
 <p>The TR (time between scans) is 2.5 seconds.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: TR</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>
 </pre></div>
 </div>
+</div>
 <p>Call the <code class="docutils literal"><span class="pre">events2neural</span></code> function to give you a time course that is 1 for
 the volumes during the task (thinking of verbs) and 0 for the volumes during
 rest.</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call the events2neural function to generate the on-off values for</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- each volume.  Plot these values.</span>
 </pre></div>
 </div>
+</div>
 <p>Using slicing, drop the first 4 volumes, and the corresponding on-off values:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Drop the first 4 volumes, and the first 4 on-off values.</span>
 </pre></div>
 </div>
+</div>
 <p>Make a single brain-volume-sized array of all zero to hold the correlations:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a brain-volume-size array of 0 to hold the correlations</span>
 </pre></div>
+</div>
 </div>
 <ul class="simple">
 <li>Loop over all voxel indices on the first, then second, then third dimension;</li>
@@ -94,16 +110,20 @@ rest.</p>
 <li>get the correlation between the voxel time course and neural prediction;</li>
 <li>fill in the value in the correlations array.</li>
 </ul>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Loop over all voxel indices.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Extract the voxel time courses at each voxel.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get correlation value for voxel time course with on-off vector.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fill value in the correlations array.</span>
 </pre></div>
 </div>
+</div>
 <p>Plot the middle slice (plane) of the third axis from the correlations array.
 Can you see any sign of activity (high correlation) in the frontal lobe?</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the middle slice of the third axis from the correlations array</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -174,7 +194,7 @@ Can you see any sign of activity (high correlation) in the frontal lobe?</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

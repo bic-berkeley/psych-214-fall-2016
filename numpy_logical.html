@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Logical operations on boolean arrays &mdash; Functional MRI methods</title>
+    <title>Logical operations on boolean arrays &#8212; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,6 +49,7 @@
 <p><code class="docutils literal"><span class="pre">np.logical_and</span></code>, <code class="docutils literal"><span class="pre">np.logical_or</span></code>:</p>
 <p>Sometimes we want to combine boolean values using logical operators like AND,
 OR, NOT.  This is straightforward for Python booleans:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Logical AND - True only if both are True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="bp">True</span> <span class="ow">and</span> <span class="bp">True</span>
 <span class="go">True</span>
@@ -72,9 +73,11 @@ OR, NOT.  This is straightforward for Python booleans:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
+</div>
 <p>We have to do a little more work for <em>arrays</em> of booleans, because the Python
 <code class="docutils literal"><span class="pre">and</span></code>, <code class="docutils literal"><span class="pre">or</span></code>, <code class="docutils literal"><span class="pre">not</span></code> operators only return a single boolean values, and so
 do not operate as we expect on arrays:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -94,8 +97,10 @@ do not operate as we expect on arrays:</p>
 <span class="gr">ValueError</span>: <span class="n">The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()</span>
 </pre></div>
 </div>
+</div>
 <p>To do elementwise AND, OR, NOT, we can use <code class="docutils literal"><span class="pre">np.logical_and,</span> <span class="pre">np.logical_or,</span>
 <span class="pre">np.logical_not</span></code>:</p>
+<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># &quot;logical_and&quot; True where both of bool1 and bool2 are True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">bool1</span><span class="p">,</span> <span class="n">bool2</span><span class="p">)</span>
 <span class="go">array([False,  True, False, False], dtype=bool)</span>
@@ -110,6 +115,7 @@ do not operate as we expect on arrays:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">bool1</span><span class="p">)</span>
 <span class="go">array([False, False,  True,  True], dtype=bool)</span>
 </pre></div>
+</div>
 </div>
 </div>
 
@@ -180,7 +186,7 @@ do not operate as we expect on arrays:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
