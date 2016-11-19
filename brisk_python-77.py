@@ -1,5 +1,4 @@
-my_range = range(1, 7)
-my_range
-# range(1, 7)
-list(my_range)
-# [1, 2, 3, 4, 5, 6]
+# Only unique elements collected in the set
+my_set = set((5, 3, 1, 3))
+my_set  # doctest: +SKIP
+# {1, 5, 3}

@@ -1,8 +1,3 @@
-for i in range(5):
-   print(i)
-# ...
-# 0
-# 1
-# 2
-# 3
-# 4
+my_set.add(10)
+my_set  # doctest: +SKIP
+# {1, 3, 5, 10}

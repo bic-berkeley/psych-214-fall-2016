@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Whole-brain t tests and p values &#8212; Functional MRI methods</title>
+    <title>Whole-brain t tests and p values &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,7 +47,6 @@
 <div class="section" id="whole-brain-t-tests-and-p-values">
 <h1>Whole-brain t tests and p values<a class="headerlink" href="#whole-brain-t-tests-and-p-values" title="Permalink to this headline">¶</a></h1>
 <p>Here we do a whole brain analysis on our example dataset:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># print arrays to 4 dp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
@@ -55,10 +54,8 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-</div>
 <p>We load the hemodynamic regressor from <a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a>.  We used
 this regressor in <a class="reference internal" href="model_one_voxel.html"><span class="doc">Modeling a single voxel</span></a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1_conv.txt&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">regressor</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -68,9 +65,7 @@ this regressor in <a class="reference internal" href="model_one_voxel.html"><spa
 <div class="figure">
 <img alt="_images/whole_image_statistics-2.png" src="_images/whole_image_statistics-2.png" />
 </div>
-</div>
 <p>Load the FMRI data, drop the first four volumes:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
@@ -78,15 +73,11 @@ this regressor in <a class="reference internal" href="model_one_voxel.html"><spa
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
 <p>Drop the matching time points in the regressor:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regressor</span> <span class="o">=</span> <span class="n">regressor</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
 </pre></div>
 </div>
-</div>
 <p>Make the design matrix for the simple regression:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">regressor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -97,17 +88,14 @@ this regressor in <a class="reference internal" href="model_one_voxel.html"><spa
 <div class="figure">
 <img alt="_images/whole_image_statistics-5.png" src="_images/whole_image_statistics-5.png" />
 </div>
-</div>
 <div class="section" id="analysis-on-whole-volume-reshaped">
 <h2>Analysis on whole volume, reshaped<a class="headerlink" href="#analysis-on-whole-volume-reshaped" title="Permalink to this headline">¶</a></h2>
 <p>Reshape data to time by voxels:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(169, 122880)</span>
 </pre></div>
-</div>
 </div>
 <p>Fit the design to the data:</p>
 <div class="math">
@@ -123,40 +111,31 @@ this regressor in <a class="reference internal" href="model_one_voxel.html"><spa
 \newcommand{\rank}{\textrm{rank}}\\\yvec = \Xmat \bvec + \evec\end{aligned}\end{align} \]</div>
 <p>Here we calculate the fit for all the columns in <cite>Y</cite> in one shot - see
 <a class="reference internal" href="multi_multiply.html"><span class="doc">Estimation for many voxels at the same time</span></a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 122880)</span>
 </pre></div>
 </div>
-</div>
 <p>Contrast to test the difference of the slope from 0:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 <p>Numerator of t test:</p>
 <div class="math">
 \[ \begin{align}\begin{aligned}\begin{split}\newcommand{\cvec}{\vec{c}}
 \hat\sigma^2 = \frac{1}{n - \rank(\Xmat)} \sum e_i^2 \\\end{split}\\t = \frac{\cvec^T \bhat}
 {\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}}\end{aligned}\end{align} \]</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">top_of_t</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">top_of_t</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(122880,)</span>
 </pre></div>
 </div>
-</div>
 <p>This selected the second row of the <code class="docutils literal"><span class="pre">B</span></code> array:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">top_of_t</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
 <p>The denominator of the t statistic:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_error</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">npl</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df_error</span>
 <span class="go">167</span>
@@ -172,21 +151,17 @@ this regressor in <a class="reference internal" href="model_one_voxel.html"><spa
 <span class="go">0.0238...</span>
 </pre></div>
 </div>
-</div>
 <p>Here we left <code class="docutils literal"><span class="pre">c</span></code> as a 1D vector, and let the default of the <code class="docutils literal"><span class="pre">dot</span></code> method
 treat the 1D vector as a row vector on the left, and as a column vector on the
 right.  See: <a class="reference internal" href="dot_outer.html#dot-vectors-matrices"><span class="std std-ref">Dot, vectors and matrices</span></a>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
 <span class="go">array([0, 1])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2,)</span>
 </pre></div>
 </div>
-</div>
 <p>We could also make <code class="docutils literal"><span class="pre">c</span></code> into an explicit row vector to match the formula of
 the t statistic above.  See <a class="reference internal" href="newaxis.html"><span class="doc">Adding length 1 dimensions with newaxis</span></a>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(2, 1)</span>
@@ -195,19 +170,15 @@ the t statistic above.  See <a class="reference internal" href="newaxis.html"><s
 <span class="go">array([[ 0.0238]])</span>
 </pre></div>
 </div>
-</div>
 <p>Now we can have the parts that we need for the denominator, we can calculate
 the t statistic, one for each voxel:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">top_of_t</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma_2</span> <span class="o">*</span> <span class="n">c_b_cov</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(1, 122880)</span>
 </pre></div>
 </div>
-</div>
 <p>Reshape the 1D t statistic vector back into three dimensions to put the t
 statistic back into the correct voxel position:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_3d</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t_3d</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(64, 64, 30)</span>
@@ -219,20 +190,16 @@ statistic back into the correct voxel position:</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-15.png" src="_images/whole_image_statistics-15.png" />
 </div>
-</div>
 <p>Notice the white areas at the edge of the image.  These are voxels where the t
 value is <code class="docutils literal"><span class="pre">nan</span></code> – <a class="reference external" href="https://en.wikipedia.org/wiki/NaN">Not a number</a>.  See also <a class="reference internal" href="nans.html"><span class="doc">Not a number</span></a>.  <code class="docutils literal"><span class="pre">nan</span></code> values
 arise when all the scans have 0 at this voxel, so the numerator and
 denominator of the t statistic are both 0.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="go">nan</span>
 </pre></div>
 </div>
-</div>
 <p>For example, this is the voxel corresponding to the top left corner of the
 image above:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_3d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="go">nan</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
@@ -242,7 +209,6 @@ image above:</p>
 <span class="go">0.0</span>
 </pre></div>
 </div>
-</div>
 <p>Can we avoid these uninteresting voxels, and only analyze voxels within the
 brain?</p>
 </div>
@@ -250,7 +216,6 @@ brain?</p>
 <h2>Analysis on voxels within the brain<a class="headerlink" href="#analysis-on-voxels-within-the-brain" title="Permalink to this headline">¶</a></h2>
 <p>Here we make a mask of the voxels within the brain using <a class="reference external" href="https://en.wikipedia.org/wiki/Otsu%27s_method">Otsu&#8217;s method</a>.  You will need
 <a class="reference external" href="http://scikit-image.org/">scikit-image</a> installed for this to work:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="o">.</span><span class="n">shape</span>
@@ -272,35 +237,27 @@ brain?</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-18.png" src="_images/whole_image_statistics-18.png" />
 </div>
-</div>
 <p>This is the number of voxels for which the mask value is True:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
 <span class="go">memmap(21604)</span>
 </pre></div>
 </div>
-</div>
 <p>We can use the 3D mask to slice into the 4D data matrix.  For every True value
 in the 3D mask, the result has the vector of values over time for that voxel.
 See: <a class="reference internal" href="boolean_indexing.html"><span class="doc">Indexing with boolean masks</span></a>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(21604, 169)</span>
 </pre></div>
 </div>
-</div>
 <p>For our GLM, we want a time by in-mask voxel array, which is the transpose of
 the result above:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(169, 21604)</span>
 </pre></div>
 </div>
-</div>
 <p>Now we can run our GLM on the voxels inside the brain:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fitted</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">fitted</span>
@@ -313,10 +270,8 @@ the result above:</p>
 <span class="go">(21604,)</span>
 </pre></div>
 </div>
-</div>
 <p>We can put the t values back into their correct positions in 3D by using the
 mask as an index on the left hand side:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t_3d</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">t_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
@@ -327,9 +282,7 @@ mask as an index on the left hand side:</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-23.png" src="_images/whole_image_statistics-23.png" />
 </div>
-</div>
 <p>Now we calculate the p value for each t statistic:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="n">df_error</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">t_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -346,7 +299,6 @@ mask as an index on the left hand side:</p>
 <img alt="_images/whole_image_statistics-24.png" src="_images/whole_image_statistics-24.png" />
 </div>
 </div>
-</div>
 <div class="section" id="multiple-comparison-correction">
 <h2>Multiple comparison correction<a class="headerlink" href="#multiple-comparison-correction" title="Permalink to this headline">¶</a></h2>
 <p>We now have a very large number of t statistics and p values.  We want to find
@@ -354,17 +306,14 @@ to control the family-wise error rate, where the &#8220;family&#8221; is the set
 the voxel t tests / p values.  See: <a class="reference external" href="https://matthew-brett.github.io/teaching/bonferroni_correction.html">Bonferroni correction</a>.</p>
 <p>We start with the Šidák correction, that gives the correct threshold when all
 the test are independent:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sidak_thresh</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sidak_thresh</span>
 <span class="go">2.3742...e-06</span>
 </pre></div>
 </div>
-</div>
 <p>Binarize the voxel p values at the Šidák correction threshold, so voxels
 surviving correction have True, other voxels have False:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">p_3d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">15</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">sidak_thresh</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -373,12 +322,10 @@ surviving correction have True, other voxels have False:</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-26.png" src="_images/whole_image_statistics-26.png" />
 </div>
-</div>
 <p>The voxels outside the brain have p value 0 (see above), so these always
 survive the correction above, and appear white.</p>
 <p>Now we threshold at the Bonferroni correction level.  This does not assume the
 tests are independent:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bonferroni_theta</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">/</span> <span class="n">N</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bonferroni_theta</span>
 <span class="go">2.3143...e-06</span>
@@ -389,7 +336,6 @@ tests are independent:</p>
 <p>(<a class="reference external" href=".//whole_image_statistics-27.png">png</a>, <a class="reference external" href=".//whole_image_statistics-27.hires.png">hires.png</a>, <a class="reference external" href=".//whole_image_statistics-27.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/whole_image_statistics-27.png" src="_images/whole_image_statistics-27.png" />
-</div>
 </div>
 </div>
 </div>
@@ -461,7 +407,7 @@ tests are independent:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

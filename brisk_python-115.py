@@ -1,2 +1,2 @@
-3 < 5
-# True
+sorted(people)
+# [('JB', 'Poline'), ('Mark', 'DEsposito'), ('Matthew', 'Brett')]

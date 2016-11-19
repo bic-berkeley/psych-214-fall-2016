@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Making our own hemodynamic response function &#8212; Functional MRI methods</title>
+    <title>Making our own hemodynamic response function &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,16 +50,12 @@
 <li>For code template see: <a class="reference download internal" href="_downloads/make_an_hrf_code.py" download=""><code class="xref download docutils literal"><span class="pre">make_an_hrf_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="make_an_hrf_solution.html"><span class="doc">Making our own hemodynamic response function</span></a>.</li>
 </ul>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Import array and plotting libraries.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print arrays to 4 decimal places</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 <p>The file <a class="reference download internal" href="_downloads/mt_hrf_estimates.txt" download=""><code class="xref download docutils literal"><span class="pre">mt_hrf_estimates.txt</span></code></a> contains the estimated FMRI signal
 from voxels in the MT motion area at 0, 2, 4, ..., 28 seconds after a brief
@@ -76,12 +72,10 @@ point format</span></a>:</p>
 <p>Read the values from the file into an array <code class="docutils literal"><span class="pre">mt_hrf_estimates</span></code>. Make a
 new array <code class="docutils literal"><span class="pre">mt_hrf_times</span></code> with the times of acquisition (0, 2, ...).
 Plot them together to see the HRF estimate at these times:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the estimated values from the text file into an array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make an array of corresponding times</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot signal by time</span>
 </pre></div>
-</div>
 </div>
 <p>We want to make a <em>hemodynamic response function</em> that matches this shape.</p>
 <p>Our function will accept an array that gives the times we want to calculate
@@ -90,14 +84,11 @@ that the true HRF starts at zero, and gets to zero sometime before 35 seconds.</
 <p>Like SPM, I&#8217;m going to try using the sum of two <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma
 distribution</a>
 probability density functions.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import the gamma density function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gamma</span>
 </pre></div>
 </div>
-</div>
 <p>Here&#8217;s my first shot:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: my attempt - you can do better than this</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">not_great_hrf</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Return values for HRF at given times &quot;&quot;&quot;</span>
@@ -111,10 +102,6 @@ probability density functions.</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">values</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.6</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: plot the data against my estimate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mt_hrf_times</span><span class="p">,</span> <span class="n">not_great_hrf</span><span class="p">(</span><span class="n">mt_hrf_times</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;not_great_hrf&#39;</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -128,26 +115,19 @@ probability density functions.</p>
 <div class="figure">
 <img alt="_images/make_an_hrf_exercise-7.png" src="_images/make_an_hrf_exercise-7.png" />
 </div>
-</div>
 <p>Now see if you can make a better function by playing with the Gamma
 distribution PDF parameter, and the mix of the two gamma distribution
 functions. Call your function <code class="docutils literal"><span class="pre">mt_hrf</span></code></p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Your &quot;mt_hrf&quot; function here</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot your function against the mt_hrf_estimates data to test</span>
 </pre></div>
 </div>
-</div>
 <p>For extra points - other than looking at these plots, how would you
 convince me your function is better than mine?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Evidence that your function is better than mine?</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -218,7 +198,7 @@ convince me your function is better than mine?</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

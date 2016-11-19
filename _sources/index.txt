@@ -173,3 +173,9 @@ version control using git.
     lab_11
     numpy_meshgrid
     map_coordinates
+    applying_deformations_solution
+    applying_deformations_exercise
+    comparing_arrays
+    comparing_floats
+    saving_images
+    string_formatting

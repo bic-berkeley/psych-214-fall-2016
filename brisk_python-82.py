@@ -1,3 +1,4 @@
-my_set.add(10)
-my_set  # doctest: +SKIP
-# {1, 3, 5, 10}
+5 in my_set
+# True
+11 in my_set
+# False

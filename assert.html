@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using assert for testing &#8212; Functional MRI methods</title>
+    <title>Using assert for testing &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Random numbers with np.random" href="numpy_random.html" />
     <link rel="prev" title="Diagonal matrices" href="numpy_diag.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -47,8 +48,8 @@
 <h1>Using <code class="docutils literal"><span class="pre">assert</span></code> for testing<a class="headerlink" href="#using-assert-for-testing" title="Permalink to this headline">¶</a></h1>
 <p>The Python <code class="docutils literal"><span class="pre">assert</span></code> statement means - &#8220;raise an error unles the following
 expression is equivalent to True&#8221;.</p>
-<p>By &#8220;equivalent to True&#8221;, I mean the expression returns True from Python <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#truth">truth
-value testing</a>.  See <a class="reference internal" href="#equivalent-to-true"><span class="std std-ref">Equivalent to True</span></a> for more.</p>
+<p>By &#8220;equivalent to True&#8221;, I mean the expression returns True from Python
+<a class="reference internal" href="truthiness.html"><span class="doc">truth value testing</span></a>.</p>
 <p><code class="docutils literal"><span class="pre">assert</span></code> raises an <code class="docutils literal"><span class="pre">AssertionError</span></code> if the statement is equivalent to
 False.  It does nothing if the statement is equivalent to True.</p>
 <p>So, if you <code class="docutils literal"><span class="pre">assert</span> <span class="pre">an_expression</span></code> and there is no error, then the result of
@@ -70,30 +71,10 @@ to True, and therefore the asserts do not raise an error:</p>
 <span class="gr">AssertionError</span>
 </pre></div>
 </div>
-<div class="section" id="equivalent-to-true">
-<span id="id1"></span><h2>Equivalent to True<a class="headerlink" href="#equivalent-to-true" title="Permalink to this headline">¶</a></h2>
-<p>See: <a class="reference external" href="https://www.udacity.com/wiki/cs258/truthiness-in-python">truthiness in Python</a> and Python <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#truth">truth value testing</a>.</p>
-<p>You can see the results of truth value testing using <code class="docutils literal"><span class="pre">bool()</span></code> in Python.
-For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">([</span><span class="s1">&#39;some&#39;</span><span class="p">,</span> <span class="s1">&#39;elements&#39;</span><span class="p">])</span>  <span class="c1"># not-empty list tests as True</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">([])</span>  <span class="c1"># an empty list tests as False</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># any number other than zero evaluates as True</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>  <span class="c1"># None tests as False</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-<p>This is the truth testing that <code class="docutils literal"><span class="pre">assert</span></code> is using:</p>
+<p>Although <code class="docutils literal"><span class="pre">assert</span></code> does work with expression values of True and False, the test
+that assert uses is more general than <code class="docutils literal"><span class="pre">expr_result</span> <span class="pre">==</span> <span class="pre">True</span></code>.  In fact,
+assert uses <a class="reference internal" href="truthiness.html"><span class="doc">truth value testing</span></a> to decide whether to raise
+an <code class="docutils literal"><span class="pre">AssertionError</span></code> or not:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">[</span><span class="s1">&#39;some&#39;</span><span class="p">,</span> <span class="s1">&#39;elements&#39;</span><span class="p">]</span>  <span class="c1"># not-empty list tests as True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">[]</span>  <span class="c1"># an empty list tests as False</span>
 <span class="gt">Traceback (most recent call last):</span>
@@ -110,7 +91,6 @@ For example:</p>
    <span class="c">...</span>
 <span class="gr">AssertionError</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -159,6 +139,7 @@ For example:</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="numpy_diag.html" title="previous chapter">Diagonal matrices</a></li>
+      <li>Next: <a href="numpy_random.html" title="next chapter">Random numbers with <code class="docutils literal"><span class="pre">np.random</span></code></a></li>
   </ul></li>
 </ul>
 </div>
@@ -180,7 +161,7 @@ For example:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

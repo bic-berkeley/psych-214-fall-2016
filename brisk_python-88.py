@@ -1,2 +1,2 @@
-# This is an empty dictionary
-software = {}
+software['Python']
+# 100

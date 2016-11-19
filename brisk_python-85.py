@@ -1,4 +1,2 @@
-5 in my_set
-# True
-11 in my_set
-# False
+# This is an empty dictionary
+software = {}

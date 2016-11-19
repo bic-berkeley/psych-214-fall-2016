@@ -1,3 +1,5 @@
-software['Python'] = 100
-software  #doctest: +SKIP
-# {'Python': 100, 'MATLAB': 50}
+for value in software.values():  #doctest: +SKIP
+    print(value)
+# ...
+# 50
+# 100

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Subplots and axes in matplotlib &#8212; Functional MRI methods</title>
+    <title>Subplots and axes in matplotlib &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,8 +46,6 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="subplots-and-axes-in-matplotlib">
 <h1>Subplots and axes in matplotlib<a class="headerlink" href="#subplots-and-axes-in-matplotlib" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
-</div>
 <p>We often want to do several plots or images on the same figure.</p>
 <p>We can do this with the matplotlib <code class="docutils literal"><span class="pre">subplots</span></code> command.</p>
 <p>The standard input arguments to <code class="docutils literal"><span class="pre">subplots</span></code> are the number of rows and the
@@ -58,13 +56,10 @@ one column.</p>
 figure containing the axes. It also returns a list of <code class="docutils literal"><span class="pre">axes</span></code>. The axes are
 objects representing the axes on which we can plot. The axis objects have
 methods like <code class="docutils literal"><span class="pre">plot</span></code> and <code class="docutils literal"><span class="pre">imshow</span></code> that allow us to plot on the given axes:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -76,7 +71,6 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
 <p>(<a class="reference external" href=".//subplots-3.png">png</a>, <a class="reference external" href=".//subplots-3.hires.png">hires.png</a>, <a class="reference external" href=".//subplots-3.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/subplots-3.png" src="_images/subplots-3.png" />
-</div>
 </div>
 </div>
 
@@ -147,7 +141,7 @@ methods like <code class="docutils literal"><span class="pre">plot</span></code>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Packages and namespaces &#8212; Functional MRI methods</title>
+    <title>Packages and namespaces &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,39 +47,31 @@
 <div class="section" id="packages-and-namespaces">
 <h1>Packages and namespaces<a class="headerlink" href="#packages-and-namespaces" title="Permalink to this headline">¶</a></h1>
 <p>Here is an example of <em>importing</em> a package:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
-</div>
 </div>
 <p>This Python code <em>imports</em> the <em>module</em> called <code class="docutils literal"><span class="pre">numpy</span></code> and gives it the new
 name <code class="docutils literal"><span class="pre">np</span></code>.</p>
 <p>What <code class="docutils literal"><span class="pre">type()</span></code> of thing is <code class="docutils literal"><span class="pre">np</span></code> now?</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
 <span class="go">&lt;class &#39;module&#39;&gt;</span>
 </pre></div>
 </div>
-</div>
 <p>A module contains stuff with <em>names</em>. For example, numpy contains a <em>function</em>
 named <code class="docutils literal"><span class="pre">sqrt</span></code>:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span>
 <span class="go">&lt;ufunc &#39;sqrt&#39;&gt;</span>
 </pre></div>
-</div>
 </div>
 <p>Because a module contains stuff with names, it is a <em>namespace</em>.</p>
 <p>Numpy is also a <em>package</em> because it is a set of modules that get installed
 together. For example, after you have installed numpy, you not only have the
 <code class="docutils literal"><span class="pre">numpy</span></code> module, but other submodules such as <code class="docutils literal"><span class="pre">numpy.linalg</span></code>, for linear
 algebra on numpy arrays:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">npl</span><span class="p">)</span>
 <span class="go">&lt;class &#39;module&#39;&gt;</span>
 </pre></div>
-</div>
 </div>
 <p>In IPython, try tab completing on <code class="docutils literal"><span class="pre">npl.</span></code> (<code class="docutils literal"><span class="pre">npl</span></code> followed by a period -
 <code class="docutils literal"><span class="pre">.</span></code>) to see what is in there.</p>
@@ -93,19 +85,15 @@ arrays.</p>
 original author wrote matplotlib to be similar to MATLAB (hence the name).</p>
 <p>The best module for standard use is <code class="docutils literal"><span class="pre">matplotlib.pyplot</span></code> and we will import
 it like this:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
 <span class="go">&lt;class &#39;module&#39;&gt;</span>
 </pre></div>
 </div>
-</div>
 <p>Lastly, we will be using the <code class="docutils literal"><span class="pre">nibabel</span></code> package for loading neuroimaging
 format images:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 </pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="getting-help">
@@ -195,7 +183,7 @@ the square root function in numpy, you could try <code class="docutils literal">
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

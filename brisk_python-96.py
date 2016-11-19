@@ -1,3 +1,13 @@
-software = {'MATLAB': 50, 'Python': 100, 'MATLAB': 45}
-software  # doctest: +SKIP
-# {'Python': 100, 'MATLAB': 45}
+for i in range(10):
+    if i == 6:
+        continue
+    print(i)
+# 0
+# 1
+# 2
+# 3
+# 4
+# 5
+# 7
+# 8
+# 9

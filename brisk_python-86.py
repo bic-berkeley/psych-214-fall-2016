@@ -1,2 +1,3 @@
-11 not in my_set
-# True
+software['MATLAB'] = 50
+software
+# {'MATLAB': 50}

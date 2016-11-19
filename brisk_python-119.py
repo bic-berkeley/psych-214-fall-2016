@@ -1,2 +1,1 @@
-def get_last_name(person):
-    return person[1]  # The last name
+my_file = open("a_text_file.txt", "wt")

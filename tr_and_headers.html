@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sometimes, the NIfTI image stores the TR in the header &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="sometimes-the-nifti-image-stores-the-tr-in-the-header">
+<h1>Sometimes, the NIfTI image stores the TR in the header<a class="headerlink" href="#sometimes-the-nifti-image-stores-the-tr-in-the-header" title="Permalink to this headline">¶</a></h1>
+<p>The <a href="#id4"><span class="problematic" id="id5">`NIfTI standard`_</span></a> suggests putting the TR of a functional image, into the
+voxel dimension field of the header.</p>
+<p>You can get the voxel (plus TR) dimensions with the <code class="docutils literal"><span class="pre">get_zooms</span></code> method of
+the header object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span> <span class="o">=</span> <span class="n">func_img</span><span class="o">.</span><span class="n">header</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span><span class="o">.</span><span class="n">get_zooms</span><span class="p">()</span>
+<span class="go">(4.0, 4.0, 4.0000162, 2.5)</span>
+</pre></div>
+</div>
+<p>In this case, the image spatial voxel sizes are (4 by 4 by 4)
+millimeters, and the TR is 2.5 seconds.</p>
+<p>In fact these values come from the NIfTI header field called <code class="docutils literal"><span class="pre">pixdim</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="go">&lt;class &#39;nibabel.nifti1.Nifti1Header&#39;&gt; object, endian=&#39;&lt;&#39;</span>
+<span class="go">sizeof_hdr      : 348</span>
+<span class="go">data_type       : b&#39;&#39;</span>
+<span class="go">db_name         : b&#39;?TR:2500.000 TE:50&#39;</span>
+<span class="go">extents         : 0</span>
+<span class="go">session_error   : 0</span>
+<span class="go">regular         : b&#39;r&#39;</span>
+<span class="go">dim_info        : 0</span>
+<span class="go">dim             : [  4  64  64  30 173   1   1   1]</span>
+<span class="go">intent_p1       : 0.0</span>
+<span class="go">intent_p2       : 0.0</span>
+<span class="go">intent_p3       : 0.0</span>
+<span class="go">intent_code     : none</span>
+<span class="go">datatype        : int16</span>
+<span class="go">bitpix          : 16</span>
+<span class="go">slice_start     : 0</span>
+<span class="go">pixdim          : [-1.   4.   4.   4.   2.5  1.   1.   1. ]</span>
+<span class="go">vox_offset      : 0.0</span>
+<span class="go">scl_slope       : nan</span>
+<span class="go">scl_inter       : nan</span>
+<span class="go">slice_end       : 0</span>
+<span class="go">slice_code      : unknown</span>
+<span class="go">xyzt_units      : 10</span>
+<span class="go">cal_max         : 0.0</span>
+<span class="go">cal_min         : 0.0</span>
+<span class="go">slice_duration  : 0.0</span>
+<span class="go">toffset         : 0.0</span>
+<span class="go">glmax           : 255</span>
+<span class="go">glmin           : 0</span>
+<span class="go">descrip         : b&#39;&#39;</span>
+<span class="go">aux_file        : b&#39;&#39;</span>
+<span class="go">qform_code      : scanner</span>
+<span class="go">sform_code      : scanner</span>
+<span class="go">quatern_b       : 0.0</span>
+<span class="go">quatern_c       : 0.9958999752998352</span>
+<span class="go">quatern_d       : -0.090460866689682</span>
+<span class="go">qoffset_x       : 124.24400329589844</span>
+<span class="go">qoffset_y       : -103.4496841430664</span>
+<span class="go">qoffset_z       : -33.49285888671875</span>
+<span class="go">srow_x          : [  -4.       0.       0.     124.244]</span>
+<span class="go">srow_y          : [   0.        3.9345    0.7207 -103.4497]</span>
+<span class="go">srow_z          : [  0.      -0.7207   3.9346 -33.4929]</span>
+<span class="go">intent_name     : b&#39;&#39;</span>
+<span class="go">magic           : b&#39;n+1&#39;</span>
+</pre></div>
+</div>
+<p>Unfortunately, it is common for people writing NIfTI images not to write this
+information correctly into the header, so we have to be careful, and very
+suspicious, if the TR value appears to be 0 or 1.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/tr_and_headers.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

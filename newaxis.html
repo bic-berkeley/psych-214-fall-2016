@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Adding length 1 dimensions with newaxis &#8212; Functional MRI methods</title>
+    <title>Adding length 1 dimensions with newaxis &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,7 +48,6 @@
 <h1>Adding length 1 dimensions with newaxis<a class="headerlink" href="#adding-length-1-dimensions-with-newaxis" title="Permalink to this headline">¶</a></h1>
 <p>NumPy has a nice shortcut for adding a length 1 dimension to an array.  It is
 a little brain-bending, because it operates via array slicing:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -70,23 +69,18 @@ a little brain-bending, because it operates via array slicing:</p>
 <span class="go">       [3]])</span>
 </pre></div>
 </div>
-</div>
 <p>Read this last slicing operation as &#8220;do slicing as normal, except, before
 slicing, insert a length 1 dimension at the position of <code class="docutils literal"><span class="pre">np.newaxis</span></code>&#8221;.</p>
 <p>In fact the name <code class="docutils literal"><span class="pre">np.newaxis</span></code> points to the familiar Python <code class="docutils literal"><span class="pre">None</span></code> object:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span> <span class="ow">is</span> <span class="bp">None</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-</div>
 <p>So, you also use the <code class="docutils literal"><span class="pre">np.newaxis</span></code> trick like this:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">:]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_v</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(1, 2)</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -157,7 +151,7 @@ slicing, insert a length 1 dimension at the position of <code class="docutils li
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

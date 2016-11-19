@@ -1,3 +1,4 @@
-software['MATLAB'] = 50
-software
-# {'MATLAB': 50}
+for key in software.keys():  #doctest: +SKIP
+    print(key)
+# MATLAB
+# Python

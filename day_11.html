@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>November 21: cross-subject registration &#8212; Functional MRI methods</title>
+    <title>November 21: cross-subject registration &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -47,18 +47,55 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="november-21-cross-subject-registration">
 <h1>November 21: cross-subject registration<a class="headerlink" href="#november-21-cross-subject-registration" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="presentations">
-<h2>Presentations<a class="headerlink" href="#presentations" title="Permalink to this headline">¶</a></h2>
-<p>Problems from projects.</p>
+<div class="section" id="logistics">
+<h2>Logistics<a class="headerlink" href="#logistics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>problems from projects;</li>
+<li>participation grading.</li>
+</ul>
 </div>
 <div class="section" id="teaching">
 <h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>example registration problem - anterior cingulate;</li>
-<li>running cross-subject normalizations in SPM;</li>
-<li>making a distortion field in SPM;</li>
-<li>applying the SPM distortion field;</li>
-<li>evaluating the match.</li>
+<ul>
+<li><p class="first"><a class="reference internal" href="saving_images.html"><span class="doc">Making and saving new images in nibabel</span></a>;</p>
+</li>
+<li><p class="first">SPM coregistration:</p>
+<ul>
+<li><p class="first">copy the structural:</p>
+<p>cp ds107_sub012_highres.nii a_structural.nii</p>
+</li>
+<li><p class="first">create the mean of the functional image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_vol</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">mean_vol</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">mean_img</span><span class="p">,</span> <span class="s1">&#39;mean_functional.nii&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">run coregistration in SPM.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">running cross-subject normalizations in SPM;</p>
+</li>
+<li><p class="first">making a distortion field in SPM;</p>
+</li>
+<li><p class="first">applying the SPM distortion field;</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="numpy_squeeze.html"><span class="doc">Removing length 1 axes with numpy.squeeze</span></a>;</li>
+<li><a class="reference internal" href="numpy_transpose.html"><span class="doc">numpy.tranpose for swapping axes</span></a>;</li>
+<li><a class="reference internal" href="numpy_meshgrid.html"><span class="doc">Making coordinate arrays with meshgrid</span></a>;</li>
+<li><a class="reference internal" href="map_coordinates.html"><span class="doc">General resampling between images with scipy.ndimage.map_coordinates</span></a>;</li>
+<li><a class="reference internal" href="applying_deformations_exercise.html"><span class="doc">Applying deformations exercise</span></a>.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">example registration problem - anterior cingulate;</p>
+</li>
+<li><p class="first">evaluating the match.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="reading-and-homework">
@@ -136,7 +173,7 @@
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

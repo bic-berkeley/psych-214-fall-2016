@@ -1,2 +1,1 @@
-sorted('adcea')
-# ['a', 'a', 'c', 'd', 'e']
+people = [('JB', 'Poline'), ('Matthew', 'Brett'), ('Mark', 'DEsposito')]

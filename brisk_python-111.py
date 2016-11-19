@@ -1,2 +1,2 @@
-my_fourth_function(10)
-# 111
+sorted((1, 5, 3, 2))
+# [1, 2, 3, 5]

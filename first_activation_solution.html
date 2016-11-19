@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>First go at brain activation exercise &#8212; Functional MRI methods</title>
+    <title>First go at brain activation exercise &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -46,16 +46,12 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="first-go-at-brain-activation-exercise">
 <h1>First go at brain activation exercise<a class="headerlink" href="#first-go-at-brain-activation-exercise" title="Permalink to this headline">¶</a></h1>
-<div class="nbplot container">
-</div>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import common modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display array values to 6 digits of precision</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 <div class="section" id="the-task-time-course">
 <h2>The task time-course<a class="headerlink" href="#the-task-time-course" title="Permalink to this headline">¶</a></h2>
@@ -81,7 +77,6 @@ block (in seconds), the duration of the block (in seconds) and the amplitude
 </pre></div>
 </div>
 <p>Read the file into a (number of blocks by 3) array called <code class="docutils literal"><span class="pre">task</span></code>.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Read the file into an array called &quot;task&quot;.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- &quot;task&quot; should have 3 columns (onset, duration, amplitude)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- HINT: np.loadtxt</span>
@@ -90,13 +85,11 @@ block (in seconds), the duration of the block (in seconds) and the amplitude
 <span class="go">(7, 3)</span>
 </pre></div>
 </div>
-</div>
 <p>The repetition time (time to repeat, TR) for this FMRI run was 2.5 seconds. We
 need to convert the onsets and durations to TRs - so for example the first
 onset was at 10 seconds, which was the start of TR 4 (10 / 2.5).</p>
 <p>Select out the first two columns of task, and divide by the TR to convert the
 onset and duration times to be in terms of TRs instead of seconds:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Select first two columns and divide by TR</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ons_durs</span> <span class="o">=</span> <span class="n">task</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ons_durs</span>
@@ -109,13 +102,11 @@ onset and duration times to be in terms of TRs instead of seconds:</p>
 <span class="go">       [ 148.,   12.]])</span>
 </pre></div>
 </div>
-</div>
 <p>Our next step is to make an on-off vector that is 0 when the subject is doing
 nothing and 1 when the subject is doing the covert verb task.</p>
 <p>The vector will have one value (either 0 or 1) for each TR.</p>
 <p>First use nibabel to load the image <code class="docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code>. Check the image
 shape to find the number of TRs.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the image and check the image shape to get the number of TRs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
@@ -123,14 +114,11 @@ shape to find the number of TRs.</p>
 <span class="go">(64, 64, 30, 173)</span>
 </pre></div>
 </div>
-</div>
 <p>Next make a new vector called <code class="docutils literal"><span class="pre">time_course</span></code> with one entry per TR, with all
 elements in the vector being zero:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make new zero vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_course</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 <p>Loop over the rows in the onsets / durations array to give you an onset /
 duration pair. For each of these pairs, set the matching positions in the
@@ -140,16 +128,13 @@ That means the task started at the beginning of scan index 4, and lasted for
 <code class="docutils literal"><span class="pre">time_course</span></code>, starting at index 4. That means that index 4 + 12 = 16 should
 be zero again, because there are 12 values starting at (including 4) going up
 to (but <em>not</em> including) 16.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: try running this if you don&#39;t believe me</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 <span class="go">12</span>
 </pre></div>
 </div>
-</div>
 <p>So, for the first row, you will want to set <code class="docutils literal"><span class="pre">time_course[4]</span></code> through
 <code class="docutils literal"><span class="pre">time_course[15]</span></code> equal to 1.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Fill in values of 1 for positions of on blocks in time course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Convert onsets, durations to integers first</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ons_durs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ons_durs</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -157,9 +142,7 @@ to (but <em>not</em> including) 16.</p>
 <span class="gp">... </span>    <span class="n">time_course</span><span class="p">[</span><span class="n">onset</span><span class="p">:</span><span class="n">onset</span> <span class="o">+</span> <span class="n">duration</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-</div>
 <p>Plot the time course:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the time course</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_course</span><span class="p">)</span>
 <span class="go">[...]</span>
@@ -170,47 +153,37 @@ to (but <em>not</em> including) 16.</p>
 <img alt="_images/first_activation_solution-9.png" src="_images/first_activation_solution-9.png" />
 </div>
 </div>
-</div>
 <div class="section" id="comparing-task-to-rest">
 <h2>Comparing task to rest<a class="headerlink" href="#comparing-task-to-rest" title="Permalink to this headline">¶</a></h2>
 <p>Make a boolean array <code class="docutils literal"><span class="pre">is_task_tr</span></code> which is True when <code class="docutils literal"><span class="pre">time_course</span></code> is 1
 and False otherwise.</p>
 <p>Make another array <code class="docutils literal"><span class="pre">is_rest_tr</span></code> that is the opposite - True when
 <code class="docutils literal"><span class="pre">time_course</span></code> is 0 and False otherwise.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make two boolean arrays encoding task, rest</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_task_tr</span> <span class="o">=</span> <span class="p">(</span><span class="n">time_course</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_rest_tr</span> <span class="o">=</span> <span class="p">(</span><span class="n">time_course</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Read the image data into an array:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read the image data into an array.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
 <p>Remember that the 4D array consists of one volume (3D array) per TR.</p>
 <p>We want to select the volumes where the time course is 1 (task volumes).  Do
 this by slicing, using the boolean array you just made.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create a new 4D array only containing the task volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">on_volumes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">is_task_tr</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
 <p>Select the volumes where the time course is 0 (rest volumes):</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create a new 4D array only containing the rest volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">off_volumes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">is_rest_tr</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
 <p>We want to know whether there is a difference in signal in the task volumes
 compared to the rest volumes. Take the mean over the task volumes and mean
 over the rest volumes. You should end up with two 3D volumes.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create the mean volume across all the task volumes.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Then create the mean volume across all the rest volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Hint: remember the `axis` keyword.</span>
@@ -218,17 +191,13 @@ over the rest volumes. You should end up with two 3D volumes.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">off_mean</span> <span class="o">=</span> <span class="n">off_volumes</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>Now subtract the rest mean from the task mean to get a difference volume.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create a difference volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">difference</span> <span class="o">=</span> <span class="n">on_mean</span> <span class="o">-</span> <span class="n">off_mean</span>
 </pre></div>
 </div>
-</div>
 <p>Show a slice over the third dimension of the difference volume, from somewhere
 around the center of the third axis:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show a slice over the third dimension</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">difference</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -237,7 +206,6 @@ around the center of the third axis:</p>
 <p>(<a class="reference external" href=".//first_activation_solution-16.png">png</a>, <a class="reference external" href=".//first_activation_solution-16.hires.png">hires.png</a>, <a class="reference external" href=".//first_activation_solution-16.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/first_activation_solution-16.png" src="_images/first_activation_solution-16.png" />
-</div>
 </div>
 <p>This is the difference between activation and rest. It looks a little strange.
 Maybe there are some artefacts here.</p>
@@ -251,7 +219,6 @@ deviation.</p>
 <p>In fact, the bad volume is one of the rest volumes.</p>
 <p>Find that volume, by calculating the standard deviation across voxels for each
 volume:</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the SD across voxels for each volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Identify the outlier volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voxels_by_time</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
@@ -260,29 +227,23 @@ volume:</p>
 <span class="go">0</span>
 </pre></div>
 </div>
-</div>
 <p>Use your slicing skills to remove this volume from your selection of rest
 volumes.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use slicing to remove outlier volume from rest volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">off_volumes_fixed</span> <span class="o">=</span> <span class="n">off_volumes</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>
 </pre></div>
-</div>
 </div>
 <p>Make a new mean for the rest volumes, and subtract this mean from the mean for
 the task volumes to make a new difference image.</p>
 <p>Give the new difference image a new name, so we can compare to the old
 difference image later.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make new mean for rest volumes, subtract from task mean</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">off_mean_fixed</span> <span class="o">=</span> <span class="n">off_volumes_fixed</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">difference_fixed</span> <span class="o">=</span> <span class="n">on_mean</span> <span class="o">-</span> <span class="n">off_mean_fixed</span>
 </pre></div>
 </div>
-</div>
 <p>Show an example slice from the new difference volume. Show the same slice from
 the old difference volume, using matplotlib.</p>
-<div class="nbplot container">
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- show same slice from old and new difference volume</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">difference_fixed</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
@@ -291,7 +252,6 @@ the old difference volume, using matplotlib.</p>
 <p>(<a class="reference external" href=".//first_activation_solution-20.png">png</a>, <a class="reference external" href=".//first_activation_solution-20.hires.png">hires.png</a>, <a class="reference external" href=".//first_activation_solution-20.pdf">pdf</a>)</p>
 <div class="figure">
 <img alt="_images/first_activation_solution-20.png" src="_images/first_activation_solution-20.png" />
-</div>
 </div>
 </div>
 </div>
@@ -363,7 +323,7 @@ the old difference volume, using matplotlib.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

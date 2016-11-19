@@ -1,3 +1,3 @@
-shepherd = "Mary"
-print("Shepherd {} is on duty.".format(shepherd))
-# Shepherd Mary is on duty.
+my_range = range(5)
+my_range
+# range(0, 5)

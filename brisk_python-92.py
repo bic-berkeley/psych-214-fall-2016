@@ -1,4 +1,3 @@
-for key in software.keys():  #doctest: +SKIP
-    print(key)
-# MATLAB
-# Python
+software = {'MATLAB': 50, 'Python': 100}
+software  #doctest: +SKIP
+# {'Python': 100, 'MATLAB': 50}

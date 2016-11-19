@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Course material by topic &#8212; Functional MRI methods</title>
+    <title>Course material by topic &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -58,7 +58,9 @@ teaching day.</p>
 <li><a class="reference internal" href="list_comprehensions.html"><span class="doc">List comprehensions</span></a>;</li>
 <li><a class="reference internal" href="two_dunders.html"><span class="doc">Two double underscore variables</span></a>;</li>
 <li><a class="reference internal" href="string_literals.html"><span class="doc">String literals in Python</span></a>;</li>
+<li><a class="reference internal" href="string_formatting.html"><span class="doc">Inserting values into strings</span></a>;</li>
 <li><a class="reference internal" href="docstrings.html"><span class="doc">Docstrings</span></a>;</li>
+<li><a class="reference internal" href="truthiness.html"><span class="doc">Kind-of True</span></a>;</li>
 <li><a class="reference internal" href="assert.html"><span class="doc">Using assert for testing</span></a>;</li>
 <li><a class="reference internal" href="keyword_arguments.html"><span class="doc">Keyword arguments</span></a>;</li>
 <li><a class="reference internal" href="path_manipulation.html"><span class="doc">Making and breaking file paths in Python</span></a>.  See: <a class="reference internal" href="lab_04.html"><span class="doc">Git and github workflow</span></a>;</li>
@@ -95,6 +97,8 @@ teaching day.</p>
 <li><a class="reference internal" href="numpy_random.html"><span class="doc">Random numbers with np.random</span></a>;</li>
 <li><a class="reference internal" href="numpy_squeeze.html"><span class="doc">Removing length 1 axes with numpy.squeeze</span></a>;</li>
 <li><a class="reference internal" href="numpy_meshgrid.html"><span class="doc">Making coordinate arrays with meshgrid</span></a>;</li>
+<li><a class="reference internal" href="comparing_arrays.html"><span class="doc">Comparing arrays</span></a>;</li>
+<li><a class="reference internal" href="comparing_floats.html"><span class="doc">Comparing floats and floating point error</span></a>;</li>
 <li><a class="reference internal" href="printing_floating.html"><span class="doc">Making floating points numbers print nicely</span></a>.</li>
 </ul>
 </div>
@@ -153,6 +157,7 @@ teaching day.</p>
 <li><a class="reference internal" href="nibabel_apply_affine.html"><span class="doc">Applying coordinate transforms with nibabel.affines.apply_affine</span></a>.</li>
 <li><a class="reference internal" href="resampling_with_ndimage.html"><span class="doc">Resampling with scipy.ndimage</span></a>;</li>
 <li><a class="reference internal" href="map_coordinates.html"><span class="doc">General resampling between images with scipy.ndimage.map_coordinates</span></a>;</li>
+<li><a class="reference internal" href="saving_images.html"><span class="doc">Making and saving new images in nibabel</span></a>;</li>
 </ul>
 </div>
 <div class="section" id="specific-to-fmri">
@@ -163,7 +168,8 @@ teaching day.</p>
 <li><a class="reference internal" href="convolution_background.html"><span class="doc">Convolving with the hemodyamic response function</span></a>.</li>
 <li><a class="reference external" href="http://nipy.org/nibabel/coordinate_systems.html">Coordinate systems and affine transforms</a>;</li>
 <li><a class="reference internal" href="nibabel_affines.html"><span class="doc">The nibabel.affines module</span></a>;</li>
-<li><a class="reference internal" href="nibabel_apply_affine.html"><span class="doc">Applying coordinate transforms with nibabel.affines.apply_affine</span></a>.</li>
+<li><a class="reference internal" href="nibabel_apply_affine.html"><span class="doc">Applying coordinate transforms with nibabel.affines.apply_affine</span></a>;</li>
+<li><a class="reference internal" href="tr_and_headers.html"><span class="doc">Sometimes, the NIfTI image stores the TR in the header</span></a>;</li>
 </ul>
 </div>
 </div>
@@ -235,7 +241,7 @@ teaching day.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |

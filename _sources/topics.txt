@@ -16,7 +16,9 @@ Python
 * :doc:`list_comprehensions`;
 * :doc:`two_dunders`;
 * :doc:`string_literals`;
+* :doc:`string_formatting`;
 * :doc:`docstrings`;
+* :doc:`truthiness`;
 * :doc:`assert`;
 * :doc:`keyword_arguments`;
 * :doc:`path_manipulation`.  See: :doc:`lab_04`;
@@ -53,6 +55,8 @@ Numpy, arrays and images
 * :doc:`numpy_random`;
 * :doc:`numpy_squeeze`;
 * :doc:`numpy_meshgrid`;
+* :doc:`comparing_arrays`;
+* :doc:`comparing_floats`;
 * :doc:`printing_floating`.
 
 **********
@@ -111,6 +115,7 @@ Image processing and spatial transformations
 * :doc:`nibabel_apply_affine`.
 * :doc:`resampling_with_ndimage`;
 * :doc:`map_coordinates`;
+* :doc:`saving_images`;
 
 ****************
 Specific to FMRI
@@ -121,4 +126,5 @@ Specific to FMRI
 * :doc:`convolution_background`.
 * `Coordinate systems and affine transforms`_;
 * :doc:`nibabel_affines`;
-* :doc:`nibabel_apply_affine`.
+* :doc:`nibabel_apply_affine`;
+* :doc:`tr_and_headers`;

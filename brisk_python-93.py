@@ -1,5 +1,3 @@
-for value in software.values():  #doctest: +SKIP
-    print(value)
-# ...
-# 50
-# 100
+software = {'MATLAB': 50, 'Python': 100, 'MATLAB': 45}
+software  # doctest: +SKIP
+# {'Python': 100, 'MATLAB': 45}

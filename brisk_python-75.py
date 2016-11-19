@@ -1,2 +1,5 @@
-list(range(5))
-# [0, 1, 2, 3, 4]
+my_range = range(1, 7, 2)
+my_range
+# range(1, 7, 2)
+list(my_range)
+# [1, 3, 5]

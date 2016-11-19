@@ -1,2 +1,2 @@
-type(my_fourth_function)
-# <class 'function'>
+sorted('adcea')
+# ['a', 'a', 'c', 'd', 'e']
