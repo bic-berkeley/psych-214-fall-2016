@@ -82,7 +82,7 @@ Matplotlib, then try these steps:
   suggestions;
 * In IPython, get the help for particular functions or classes with the
   question mark at the end of the function or class name * e.g.  ``np.round?``
-  followed by in the notebook.
+  followed by the Return key;
 * In numpy or scipy (we'll come across scipy later), you can find stuff using
   ``lookfor``. For example, let's say you hadn't guessed that ``np.sqrt`` was
   the square root function in numpy, you could try ``np.lookfor('square
