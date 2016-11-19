@@ -868,29 +868,7 @@ characters removed from the beginning and end of the string:
 Inserting values into strings
 =============================
 
-Use the ``format`` method to create new strings with inserted values:
-
-.. nbplot::
-
-    >>> shepherd = "Mary"
-    >>> print("Shepherd {} is on duty.".format(shepherd))
-    Shepherd Mary is on duty.
-
-.. nbplot::
-
-    >>> shepherd = "Mary"
-    >>> age = 32
-    >>> print("Shepherd {} is {} years old.".format(shepherd, age))
-    Shepherd Mary is 32 years old.
-
-You can do more complex formatting of numbers and strings using formatting
-options within the curly brackets |--| see the `Python string format examples
-<https://docs.python.org/3/library/string.html#format-examples>`_.
-
-.. nbplot::
-
-    >>> print("Number {:03d} is here.".format(11))
-    Number 011 is here.
+See: :doc:`string_formatting`.
 
 .. _ranges:
 

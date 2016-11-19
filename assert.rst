@@ -5,8 +5,8 @@ Using ``assert`` for testing
 The Python ``assert`` statement means - "raise an error unles the following
 expression is equivalent to True".
 
-By "equivalent to True", I mean the expression returns True from Python `truth
-value testing`_.  See :ref:`equivalent-to-true` for more.
+By "equivalent to True", I mean the expression returns True from Python
+:doc:`truth value testing <truthiness>`.
 
 ``assert`` raises an ``AssertionError`` if the statement is equivalent to
 False.  It does nothing if the statement is equivalent to True.
@@ -30,35 +30,10 @@ Traceback (most recent call last):
    ...
 AssertionError
 
-.. _equivalent-to-true:
-
-******************
-Equivalent to True
-******************
-
-See: `truthiness in Python`_ and Python `truth value testing`_.
-
-You can see the results of truth value testing using ``bool()`` in Python.
-For example:
-
->>> bool(True)
-True
->>> bool(False)
-False
->>> bool(['some', 'elements'])  # not-empty list tests as True
-True
->>> bool([])  # an empty list tests as False
-False
->>> bool(10)  # any number other than zero evaluates as True
-True
->>> bool(1)
-True
->>> bool(0)
-False
->>> bool(None)  # None tests as False
-False
-
-This is the truth testing that ``assert`` is using:
+Although ``assert`` does work with expression values of True and False, the test
+that assert uses is more general than ``expr_result == True``.  In fact,
+assert uses :doc:`truth value testing <truthiness>` to decide whether to raise
+an ``AssertionError`` or not:
 
 >>> assert ['some', 'elements']  # not-empty list tests as True
 >>> assert []  # an empty list tests as False

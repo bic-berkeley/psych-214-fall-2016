@@ -93,6 +93,8 @@
     https://docs.python.org/3/library/stdtypes.html#truth
 .. _truthiness in Python:
     https://www.udacity.com/wiki/cs258/truthiness-in-python
+.. _string formatting:
+    https://docs.python.org/3/library/string.html#format-string-syntax
 
 .. IPython
 .. _ipython: http://ipython.org/
@@ -288,6 +290,8 @@
 .. _convolution: https://en.wikipedia.org/wiki/Convolution
 .. _impulse response: https://en.wikipedia.org/wiki/Impulse_response
 .. _boxcar function: https://en.wikipedia.org/wiki/Boxcar_function
+.. _nifti1 standard:
+.. _NIfTI1 format: http://nifti.nimh.nih.gov/nifti-1
 
 .. OpenFMRI projects
 .. _ds005: https://openfmri.org/dataset/ds000005
