@@ -2,6 +2,13 @@
 Sometimes, the NIfTI image stores the TR in the header
 ######################################################
 
+.. nbplot::
+
+    >>> import numpy as np
+    >>> # print arrays to 4 decimal places
+    >>> np.set_printoptions(precision=4, suppress=True)
+    >>> import nibabel as nib
+
 The `NIfTI standard`_ suggests putting the TR of a functional image, into the
 voxel dimension field of the header.
 
@@ -10,7 +17,6 @@ the header object:
 
 .. nbplot::
 
-    >>> import nibabel as nib
     >>> func_img = nib.load('ds114_sub009_t2r1.nii')
     >>> header = func_img.header
     >>> header.get_zooms()

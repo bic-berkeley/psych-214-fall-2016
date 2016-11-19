@@ -44,12 +44,17 @@
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="sometimes-the-nifti-image-stores-the-tr-in-the-header">
 <h1>Sometimes, the NIfTI image stores the TR in the header<a class="headerlink" href="#sometimes-the-nifti-image-stores-the-tr-in-the-header" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
 <p>The <a href="#id4"><span class="problematic" id="id5">`NIfTI standard`_</span></a> suggests putting the TR of a functional image, into the
 voxel dimension field of the header.</p>
 <p>You can get the voxel (plus TR) dimensions with the <code class="docutils literal"><span class="pre">get_zooms</span></code> method of
 the header object:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">func_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">header</span> <span class="o">=</span> <span class="n">func_img</span><span class="o">.</span><span class="n">header</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">header</span><span class="o">.</span><span class="n">get_zooms</span><span class="p">()</span>
 <span class="go">(4.0, 4.0, 4.0000162, 2.5)</span>
