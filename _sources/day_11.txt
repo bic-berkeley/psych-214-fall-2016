@@ -18,7 +18,7 @@ Teaching
 
   * copy the structural::
 
-    cp ds107_sub012_highres.nii a_structural.nii
+      cp ds107_sub012_highres.nii a_structural.nii
 
   * create the mean of the functional image::
 

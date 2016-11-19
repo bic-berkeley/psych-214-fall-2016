@@ -179,3 +179,5 @@ version control using git.
     comparing_floats
     saving_images
     string_formatting
+    tr_and_headers
+    truthiness

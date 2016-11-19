@@ -9,7 +9,7 @@ Sometimes, the NIfTI image stores the TR in the header
     >>> np.set_printoptions(precision=4, suppress=True)
     >>> import nibabel as nib
 
-The `NIfTI standard`_ suggests putting the TR of a functional image, into the
+The `NIfTI1 standard`_ suggests putting the TR of a functional image, into the
 voxel dimension field of the header.
 
 You can get the voxel (plus TR) dimensions with the ``get_zooms`` method of
