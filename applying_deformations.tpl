@@ -10,7 +10,6 @@ Requirements:
 * :doc:`numpy_transpose`;
 * :doc:`resampling_with_ndimage`;
 * :doc:`nibabel_affines`;
-* (optional) :doc:`numpy_meshgrid`;
 * :doc:`map_coordinates`.
 
 .. nbplot::
@@ -183,9 +182,9 @@ Here is the new version of the template image:
 
 Now, what to do with with the SPM distortion field in ``deformations_data``?
 
-By checking in the SPM source code, it is possible to work out that
-``deformations_data`` contains, for every voxel in TPM, the corresponding mm
-coordinate in the *mm space* of the subject image.
+By checking in the SPM source code [#spm-deform-detective]_, it is possible to
+work out that ``deformations_data`` contains, for every voxel in TPM, the
+corresponding mm coordinate in the *mm space* of the subject image.
 
 That is, ``deformations_data[i, j, k]`` is a length 3 vector ``[x, y, z]``
 where ``[x, y, z]`` are the mm coordinates of voxel ``[i, j, k]`` when mapped
@@ -236,3 +235,24 @@ resampled into the TPM voxel grid:
     <...>
     >>> axes[1].imshow(subject_into_tpm[:, :, 60])
     <...>
+
+.. rubric:: Footnotes
+
+.. [#spm-deform-detective] It's not very easy to work through the SPM12 source
+   code for this, but if you want to check for yourself, you'll find that the
+   SPM batch interface for "Normalise: Write" is in `config/spm_run_norm.m
+   <https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&fileviewer=file-view-default#spm_run_norm.m-29>`_.
+   The batch interface calls the sub-function `norm_write
+   <https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&fileviewer=file-view-default#spm_run_norm.m-77>`_.
+   ``norm_write`` collects the NIfTI file with the ``y_`` prefix that contains
+   the deformations, if the user did not specify the file, and calls the
+   ``spm_deformations`` function.  This function in turn calls down into the
+   `pull_def
+   <https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/spm_deformations.m?at=master&fileviewer=file-view-default#spm_deformations.m-360>`_
+   sub-function, in which SPM calculates the matrix ``Y``, which is the (I, J,
+   K, 3) image data from the deformations NIfTI file, left multiplied by the
+   mm to voxel mapping for the image being resampled.  ``pull_def`` then
+   resamples from the image to which we are applying "Normalize: Write", using
+   the ``Y`` array as voxel coordinates.  Therefore the ``y_``-prefixed
+   deformation field image contains the coodinates mapping from voxels in the
+   template to millimeters in the image that was registered.
