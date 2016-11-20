@@ -181,3 +181,4 @@ version control using git.
     string_formatting
     tr_and_headers
     truthiness
+    dipy_registration

@@ -128,3 +128,4 @@ Specific to FMRI
 * :doc:`nibabel_affines`;
 * :doc:`nibabel_apply_affine`;
 * :doc:`tr_and_headers`;
+* :doc:`dipy_registration`.
