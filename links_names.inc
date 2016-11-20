@@ -132,6 +132,10 @@
 .. _dipy: http://nipy.org/dipy
 .. _nipype: http://nipy.org/nipype
 .. _gitwash: http://github.com/matthew-brett/gitwash
+.. _dipy affine registration tutorial:
+    http://nipy.org/dipy/examples_built/affine_registration_3d.html
+.. _dipy non-linear registration tutorial:
+    http://nipy.org/dipy/examples_built/syn_registration_3d.html#example-syn-registration-3d
 
 .. FMRI datasets
 .. _openfmri: https://openfmri.org/
@@ -150,6 +154,8 @@
 .. _FreeSurfer: http://surfer.nmr.mgh.harvard.edu
 .. _voxbo: http://www.voxbo.org
 .. _fmristat: http://www.math.mcgill.ca/keith/fmristat
+.. _Brain Extraction Tool:
+.. _BET: http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET
 
 .. Installation
 .. _Python(X,Y): https://python-xy.github.io
@@ -292,6 +298,9 @@
 .. _boxcar function: https://en.wikipedia.org/wiki/Boxcar_function
 .. _nifti1 standard:
 .. _NIfTI1 format: http://nifti.nimh.nih.gov/nifti-1
+.. _ANTS:
+.. _Advanced normalization tools:
+    http://picsl.upenn.edu/software/ants/
 
 .. OpenFMRI projects
 .. _ds005: https://openfmri.org/dataset/ds000005

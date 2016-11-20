@@ -12,4 +12,5 @@ texext>=0.3.2
 nb2plots>=0.4
 sphinxcontrib_bibtex
 scikit-image
+dipy>=0.11
 mako

@@ -40,7 +40,8 @@ Teaching
     * :doc:`map_coordinates`;
     * :doc:`applying_deformations_exercise`.
 
-* example registration problem - anterior cingulate;
+* :doc:`dipy_registration`;
+* example registration problem |--| anterior cingulate;
 * evaluating the match.
 
 ********************
