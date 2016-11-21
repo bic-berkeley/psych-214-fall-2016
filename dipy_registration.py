@@ -150,6 +150,29 @@ def register_diffeo(t_masked, m_masked, start_affine, registration=None):
 
 def register_save(template_fname, template_mask_fname,
                   moving_fname, moving_mask_fname):
+    """ Resister individual image `moving_fname` to template `template_fname`
+
+    Save warped image and mapping object to directory of `moving_fname`.
+
+    Parameters
+    ----------
+    template_fname : str
+        string giving image filename of template image to register to
+    template_mask_fname : str
+        string giving image filename of brain mask corresponding to
+        `template_fname`
+    moving_fname : str
+        string giving image filename of individual image to register
+    moving_mask_fname : str
+        string giving image filename of brain mask corresponding to
+        `moving_fname`
+
+    Returns
+    -------
+    mapping : mapping instance
+        Instance giving affine + non-linear mapping between voxels in
+        `template_fname` and voxels in `moving_fname`.
+    """
     path, basename = psplit(moving_fname)
     root, ext = splitext(basename)
     if ext == '.gz':  # ignore .gz suffix
@@ -184,6 +207,12 @@ def write_warped(fname, mapping, interpolation='nearest', template_header=None):
     ----------
     fmame : str
         Filename of image to warp in template space
+    mapping : mapping instance
+        object containing mapping from individual space to template space
+    interpolation : str, optional
+        interpolation to use when resampling data from `fname`
+    template_header : None or header instance
+        template header with which to save image.  If None, use default header.
     """
     img = nib.load(fname)
     mapping = as_mapping(mapping)
@@ -196,9 +225,21 @@ def write_warped(fname, mapping, interpolation='nearest', template_header=None):
     nib.save(warped_img, out_fname)
 
 
-def find_anatomicals(path):
+def find_anatomicals(root):
+    """ Find anatomical image, mask pairs from OpenFMRI directory root `root`
+
+    Parameters
+    ----------
+    root : str
+        root directory of OpenFMRI dataset - e.g. "ds114"
+
+    Returns
+    -------
+    anatomicals : list
+        List of anatomical, mask image pairs for each subject in `root`
+    """
     anatomicals = []
-    for dirpath, dirnames, filenames in os.walk(path):
+    for dirpath, dirnames, filenames in os.walk(root):
         if not 'highres001.nii.gz' in filenames:
             continue
         full_image = pjoin(dirpath, 'highres001.nii.gz')
@@ -210,6 +251,22 @@ def find_anatomicals(path):
 
 
 def sub2img_mask(root, sub_no):
+    """ Return anatomical image, mask pair from OpenFMRI root, subject no
+
+    Parameters
+    ----------
+    root : str
+        root directory of OpenFMRI dataset - e.g. "ds114"
+    sub_no : int
+        subject no, where 1 is the first subject
+
+    Returns
+    -------
+    anatomical_fname : str
+        filename of anatomical image, beginning with path `root`
+    mask_fname : str
+        filename of anatomical image brain mask, beginning with path `root`
+    """
     anatomical_path = pjoin(root, 'sub{:03d}'.format(sub_no), 'anatomy')
     ret = (pjoin(anatomical_path, 'highres001.nii.gz'),
            pjoin(anatomical_path, 'highres001_brain_mask.nii.gz'))
@@ -218,16 +275,33 @@ def sub2img_mask(root, sub_no):
     return ()
 
 
-def write_highres(path):
-    for moving_img, moving_mask in find_anatomicals(path):
+def write_highres(root):
+    """ Calculcate parameters, write anatomicals from OpenFMRI directory `root`
+
+    Parameters
+    ----------
+    root : str
+        root directory of OpenFMRI dataset - e.g. "ds114"
+    """
+    for moving_img, moving_mask in find_anatomicals(root):
         register_save(TEMPLATE_IMG, TEMPLATE_MASK,
                       moving_img, moving_mask)
 
 
-def write_highres_parallel(path):
+def write_highres_parallel(root):
+    """ Calculcate parameters, write anatomicals from OpenFMRI directory `root`
+
+    Use parallel execution.  Careful, this can crash your machine with too many
+    images found at `root`.
+
+    Parameters
+    ----------
+    root : str
+        root directory of OpenFMRI dataset - e.g. "ds114"
+    """
     import multiprocessing
     jobs = []
-    for moving_img, moving_mask in find_anatomicals(path):
+    for moving_img, moving_mask in find_anatomicals(root):
         p = multiprocessing.Process(target=register_save, args=(
             TEMPLATE_IMG, TEMPLATE_MASK, moving_img, moving_mask))
         jobs.append(p)
@@ -235,6 +309,21 @@ def write_highres_parallel(path):
 
 
 def register_subject(root, sub_no):
+    """ Calculcate parameters, write anatomical for subject at OpenFMRI `root`
+
+    Parameters
+    ----------
+    root : str
+        root directory of OpenFMRI dataset - e.g. "ds114"
+    sub_no : int
+        subject no, where 1 is the first subject
+
+    Returns
+    -------
+    mapping : mapping instance
+        Instance giving affine + non-linear mapping between voxels in
+        `t_masked` and voxels in `m_masked`.
+    """
     moving_img, moving_mask = sub2img_mask(root, sub_no)
     return register_save(TEMPLATE_IMG, TEMPLATE_MASK,
                          moving_img, moving_mask)
