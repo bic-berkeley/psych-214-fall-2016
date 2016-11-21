@@ -301,6 +301,14 @@
 .. _ANTS:
 .. _Advanced normalization tools:
     http://picsl.upenn.edu/software/ants/
+.. _mricron:
+    http://people.cas.sc.edu/rorden/mricron/index.html
+.. _mricron at NITRC:
+    http://www.nitrc.org/projects/mricron
+.. _install mricron:
+    http://people.cas.sc.edu/rorden/mricron/install.html
+.. _draw with mricron:
+    http://people.cas.sc.edu/rorden/mricron/stats.html
 
 .. OpenFMRI projects
 .. _ds005: https://openfmri.org/dataset/ds000005

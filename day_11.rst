@@ -7,7 +7,6 @@ Logistics
 *********
 
 * problems from projects;
-* participation grading.
 
 ********
 Teaching
@@ -41,8 +40,7 @@ Teaching
     * :doc:`applying_deformations_exercise`.
 
 * :doc:`dipy_registration`;
-* example registration problem |--| anterior cingulate;
-* evaluating the match.
+* example registration problem |--| :doc:`anterior cingulate`.
 
 ********************
 Reading and homework
