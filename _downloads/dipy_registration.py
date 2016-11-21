@@ -24,6 +24,10 @@ from dipy.align.imwarp import SymmetricDiffeomorphicRegistration
 from dipy.align.metrics import CCMetric
 
 
+TEMPLATE_IMG = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
+TEMPLATE_MASK = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
+
+
 def as_image(image):
     """ If `image` is string, assume filename and load image, else pass through
     """
@@ -68,28 +72,6 @@ def apply_mask(brain_img, mask_img):
 
 def register_affine(t_masked, m_masked, affreg=None,
                     final_iters=(10000, 1000, 100)):
-    """ Run affine registration between images `t_masked`, `m_masked`
-
-    Parameters
-    ----------
-    t_masked : image
-        Template image object, with image data masked to set out-of-brain
-        voxels to zero.
-    m_masked : image
-        Moving (individual) image object, with image data masked to set
-        out-of-brain voxels to zero.
-    affreg : None or AffineRegistration instance, optional
-        AffineRegistration with which to register `m_masked` to `t_masked`.  If
-        None, we make an instance with default parameters.
-    final_iters : tuple, optional
-        Length 3 tuple of level iterations to use on final affine pass of the
-        registration.
-
-    Returns
-    -------
-    affine : shape (4, 4) ndarray
-        Final affine mapping from voxels in `t_masked` to voxels in `m_masked`.
-    """
     if affreg is None:
         metric = MutualInformationMetric(nbins=32,
                                          sampling_proportion=None)
@@ -111,28 +93,6 @@ def register_affine(t_masked, m_masked, affreg=None,
 
 
 def register_diffeo(t_masked, m_masked, start_affine, registration=None):
-    """ Run non-linear registration between `t_masked` and `m_masked`
-
-    Parameters
-    ----------
-    t_masked : image
-        Template image object, with image data masked to set out-of-brain
-        voxels to zero.
-    m_masked : image
-        Moving (individual) image object, with image data masked to set
-        out-of-brain voxels to zero.
-    start_affine : shape (4, 4) ndarray
-        Affine mapping from voxels in `t_masked` to voxels in `m_masked`.
-    registration : None or SymmetricDiffeoMorphicRegistration instance
-        Registration instance we will use to register `t_masked` and
-        `m_masked`.  If None, make a default registration object.
-
-    Returns
-    -------
-    mapping : mapping instance
-        Instance giving affine + non-linear mapping between voxels in
-        `t_masked` and voxels in `m_masked`.
-    """
     if registration is None:
         registration = SymmetricDiffeomorphicRegistration(
             metric=CCMetric(3),
@@ -174,13 +134,6 @@ def as_mapping(mapping):
 
 
 def write_warped(fname, mapping, interpolation='nearest', template_header=None):
-    """ Warp an image in individual space to template space
-
-    Parameters
-    ----------
-    fmame : str
-        Filename of image to warp in template space
-    """
     img = nib.load(fname)
     mapping = as_mapping(mapping)
     template_affine = mapping.codomain_grid2world
@@ -205,21 +158,32 @@ def find_anatomicals(path):
     return anatomicals
 
 
+def sub2img_mask(root, sub_no):
+    anatomical_path = pjoin(root, 'sub{:03d}'.format(sub_no), 'anatomy')
+    ret = (pjoin(anatomical_path, 'highres001.nii.gz'),
+           pjoin(anatomical_path, 'highres001_brain_mask.nii.gz'))
+    if all(exists(p) for p in ret):
+        return ret
+    return ()
+
+
 def write_highres(path):
-    template_img = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
-    template_mask = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
     for moving_img, moving_mask in find_anatomicals(path):
-        register_save(template_img, template_mask,
+        register_save(TEMPLATE_IMG, TEMPLATE_MASK,
                       moving_img, moving_mask)
 
 
 def write_highres_parallel(path):
     import multiprocessing
-    template_img = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
-    template_mask = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
     jobs = []
     for moving_img, moving_mask in find_anatomicals(path):
         p = multiprocessing.Process(target=register_save, args=(
-            template_img, template_mask, moving_img, moving_mask))
+            TEMPLATE_IMG, TEMPLATE_MASK, moving_img, moving_mask))
         jobs.append(p)
         p.start()
+
+
+def register_subject(root, sub_no):
+    moving_img, moving_mask = sub2img_mask(root, sub_no)
+    return register_save(TEMPLATE_IMG, TEMPLATE_MASK,
+                         moving_img, moving_mask)
