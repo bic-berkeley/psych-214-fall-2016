@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Anterior cingulate &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="anterior-cingulate">
+<h1>Anterior cingulate<a class="headerlink" href="#anterior-cingulate" title="Permalink to this headline">¶</a></h1>
+<p>See: <a class="reference internal" href="bibliography.html#vogt1995human" id="id1">[VNVH95]</a>.</p>
+<p>Most brain hemispheres (65%) have a single <em>cingulate sulcus</em> delimited by a
+<em>cingulate sulcus</em> above it:</p>
+<img alt="_images/vogt_1995_single_cs.png" src="_images/vogt_1995_single_cs.png" />
+<p>The rest have two cingulate sulci, with an extra <em>superior cingulate sulcus</em>
+and <em>superior cingulate gyrus</em>:</p>
+<img alt="_images/vogt_1995_alternatives.png" src="_images/vogt_1995_alternatives.png" />
+<p>The cytoarchitectonic regions appear to correspond to the sulcal anatomy:</p>
+<img alt="_images/vogt_1995_cytoarchitecture.png" src="_images/vogt_1995_cytoarchitecture.png" />
+<div class="section" id="match-brain-to-template-in-high-resolution">
+<h2>Match brain to template in high resolution<a class="headerlink" href="#match-brain-to-template-in-high-resolution" title="Permalink to this headline">¶</a></h2>
+<p>We are going to run the dipy non-linear registration to match a
+high-resolution structural image to a high-resolution version of the template.</p>
+<p>Then we&#8217;re going to see what kind of job this does of matching anterior
+cingulate anatomy to the template.</p>
+<ul>
+<li><p class="first">make sure you have these files in your working directory:</p>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a>;</li>
+<li><a class="reference download internal" href="_downloads/ds114_sub009_highres_brain_mask.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_brain_mask.nii</span></code></a>;</li>
+<li><a class="reference download internal" href="_downloads/mni_icbm152_t1_tal_nlin_asym_09a.nii" download=""><code class="xref download docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code></a>;</li>
+<li><a class="reference download internal" href="_downloads/mni_icbm152_t1_tal_nlin_asym_09a_mask.nii" download=""><code class="xref download docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a_mask.nii</span></code></a>;</li>
+<li><a class="reference download internal" href="_downloads/ds114_sub009_highres_brain_mask.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_brain_mask.nii</span></code></a>;</li>
+<li><a class="reference download internal" href="_downloads/dipy_registration.py" download=""><code class="xref download docutils literal"><span class="pre">dipy_registration.py</span></code></a>;</li>
+</ul>
+</li>
+<li><p class="first">have a look at <code class="docutils literal"><span class="pre">dipy_registration.py</span></code> for useful functions;</p>
+</li>
+<li><p class="first">open IPython and:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">ipython</span><span class="p">::</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>In [1]: run dipy_registration.py
+In [2]: mapping = register_save(&#8216;mni_icbm152_t1_tal_nlin_asym_09a.nii&#8217;,
+...:                            &#8216;mni_icbm152_t1_tal_nlin_asym_09a_mask.nii&#8217;,
+...:                            &#8216;ds114_sub009_highres.nii&#8217;,
+...:                            &#8216;ds114_sub009_highres_brain_mask.nii&#8217;)</p>
+</div></blockquote>
+</li>
+<li><p class="first">leave that running - it will take something like 10-20 minutes depending on
+your machine.  Meanwhile...</p>
+</li>
+</ul>
+</div>
+<div class="section" id="reviewing-anatomy">
+<h2>Reviewing anatomy<a class="headerlink" href="#reviewing-anatomy" title="Permalink to this headline">¶</a></h2>
+<p>We will be using <a class="reference external" href="http://people.cas.sc.edu/rorden/mricron/index.html">MRIcron</a>:</p>
+<ul>
+<li><p class="first"><a class="reference external" href="http://people.cas.sc.edu/rorden/mricron/install.html">install MRIcron</a>;</p>
+</li>
+<li><p class="first">review the help on how to <a class="reference external" href="http://people.cas.sc.edu/rorden/mricron/stats.html">draw with MRIcron</a>.</p>
+</li>
+<li><p class="first">open <a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a> with MRIcron.  Scroll around the
+image, and have a look at the controls and menu items;</p>
+</li>
+<li><p class="first">what kind of cingulate anatomy (single, double) does this subject have in
+each hemisphere;</p>
+</li>
+<li><p class="first">make a new MRIcron window and open <code class="docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>;</p>
+</li>
+<li><p class="first">on a piece of paper, write down what you would like the registration to do
+to the subject&#8217;s brain:</p>
+<ul class="simple">
+<li>sketch the sulcal anatomy of the medial surface of each hemisphere for the
+subject and the template, as in the Vogt figure above;</li>
+<li>do the same for the template image;</li>
+<li>draw arrows from the subject hemisphere to the matching part of the
+template;</li>
+</ul>
+</li>
+<li><p class="first">in MRIcron, use the &#8220;View&#8221; menu to go to the coronal sections of the
+individual subject brain image;</p>
+</li>
+<li><p class="first">using the Vogt paper diagram, draw your estimate for the position for left
+and right area 24 (a, b, c combined) on three or four adjacent slices
+through the anterior cingulate.  Be careful: watch the y slice index at the
+top left to make sure you are moving one slice at a time; have a look at the
+VOI display to make sure it looks OK before saving;</p>
+</li>
+<li><p class="first">using the &#8220;Draw&#8221; menu in MRICron; &#8220;Save VOI&#8221; to save this definition in
+MRIcron&#8217;s own format.  Add something like <code class="docutils literal"><span class="pre">_area_24</span></code> to the VOI name when
+saving;</p>
+</li>
+<li><p class="first">using the Draw menu &#8220;Convert&#8221; item, convert the VOI to a NIfTI file;</p>
+</li>
+<li><p class="first">if the registration has finished, open the new
+<code class="docutils literal"><span class="pre">w_ds114_sub002_highres.nii</span></code> file in MRIcron.  Compare it to the template,
+visually.  What do you think of the match?  How does it correspond to your
+drawing?</p>
+</li>
+<li><p class="first">try loading the template image, and using the warped individual brain as an
+overlay.  Play with the overlay settings to get an idea of the quality of
+the registration;</p>
+</li>
+<li><p class="first">investigate the <code class="docutils literal"><span class="pre">dipy_registration.py</span></code> code for a useful function to
+resample the region definition file to the template voxel space.  Apply this
+function (or your own, if you prefer) to your region definition, to write
+out a version of the region image in template space;</p>
+</li>
+<li><p class="first">use the &#8220;Overlay&#8221; menu to load the resampled region on the:</p>
+<ul class="simple">
+<li>template image;</li>
+<li>resampled (warped) individual image;</li>
+</ul>
+<p>What do you think of the registration?  Do you think the cytoarchitecture
+lines up?</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/anterior_cingulate.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

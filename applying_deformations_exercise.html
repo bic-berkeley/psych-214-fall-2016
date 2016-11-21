@@ -97,8 +97,7 @@ your working directory.</p>
 <p>We are going to work out how to apply this <em>deformations</em> image to reslice our
 original image <a class="reference download internal" href="_downloads/ds107_sub012_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_highres.nii</span></code></a>.</p>
 <p>Oddly - this is a 5 dimensional image, where the 4th dimension is length 1.</p>
-<p>The length-1 4th dimension is an artefact of the <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">NIfTI image format</a> – so let&#8217;s get rid of this dimension with <a href="#id1"><span class="problematic" id="id2">:doc:`np.squeeze
-&lt;numpy_squeeze&gt;`_</span></a>:</p>
+<p>The length-1 4th dimension is an artefact of the <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">NIfTI image format</a> – so let&#8217;s get rid of this dimension with <a class="reference internal" href="numpy_squeeze.html"><span class="doc">np.squeeze</span></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: remove length-1 4th dimension from deformation data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">deformations_data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_data</span><span class="o">.</span><span class="n">shape</span>
@@ -192,7 +191,7 @@ as the TPM image.</p>
 <img alt="_images/applying_deformations_exercise-11.png" src="_images/applying_deformations_exercise-11.png" />
 </div>
 <p>Now, what to do with with the SPM distortion field in <code class="docutils literal"><span class="pre">deformations_data</span></code>?</p>
-<p>By checking in the SPM source code <a class="footnote-reference" href="#spm-deform-detective" id="id3">[1]</a>, it is possible to
+<p>By checking in the SPM source code <a class="footnote-reference" href="#spm-deform-detective" id="id1">[1]</a>, it is possible to
 work out that <code class="docutils literal"><span class="pre">deformations_data</span></code> contains, for every voxel in TPM, the
 corresponding mm coordinate in the <em>mm space</em> of the subject image.</p>
 <p>That is, <code class="docutils literal"><span class="pre">deformations_data[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code> is a length 3 vector <code class="docutils literal"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code>
@@ -231,7 +230,7 @@ resampled into the TPM voxel grid:</p>
 <table class="docutils footnote" frame="void" id="spm-deform-detective" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>It&#8217;s not very easy to work through the SPM12 source
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It&#8217;s not very easy to work through the SPM12 source
 code for this, but if you want to check for yourself, you&#8217;ll find that the
 SPM batch interface for &#8220;Normalise: Write&#8221; is in <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&amp;fileviewer=file-view-default#spm_run_norm.m-29">config/spm_run_norm.m</a>.
 The batch interface calls the sub-function <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&amp;fileviewer=file-view-default#spm_run_norm.m-77">norm_write</a>.

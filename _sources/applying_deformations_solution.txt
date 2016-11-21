@@ -71,7 +71,7 @@ Oddly - this is a 5 dimensional image, where the 4th dimension is length 1.
 
 The length-1 4th dimension is an artefact of the `NIfTI image format <nifti1
 format_>`_ |--| so let's get rid of this dimension with :doc:`np.squeeze
-<numpy_squeeze>`_:
+<numpy_squeeze>`:
 
 .. nbplot::
 

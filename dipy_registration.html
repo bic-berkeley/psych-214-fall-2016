@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Registration with dipy &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="prev" title="Kind-of True" href="truthiness.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="registration-with-dipy">
+<h1>Registration with dipy<a class="headerlink" href="#registration-with-dipy" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://nipy.org/dipy">Dipy</a> is a Python package for diffusion imaging.</p>
+<p>Install in the usual way from the terminal:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">dipy</span>
+</pre></div>
+</div>
+<p>It has general image registration algorithms, including affine and non-linear
+registration.</p>
+<p>These are based on the model and algorithms implemented in the <a class="reference external" href="http://picsl.upenn.edu/software/ants/">ANTS</a> toolbox.
+ANTS is written in C++.</p>
+<p>Python is an excellent language to work in for this problem because Python
+code is easier for most scientists to read than C++. Dipy uses an optimized,
+compiled Python / C fusion language called <a class="reference external" href="http://cython.org/">Cython</a>, that allows us to mix
+Python code and C-like code, to give speed of execution close to that of
+hand-written C code.</p>
+<p>This page is closely based on the 3D registration tutorials in the
+Dipy documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://nipy.org/dipy/examples_built/affine_registration_3d.html">dipy affine registration tutorial</a>;</li>
+<li><a class="reference external" href="http://nipy.org/dipy/examples_built/syn_registration_3d.html#example-syn-registration-3d">dipy non-linear registration tutorial</a>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set up our usual routines and configuration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># - set gray colormap and nearest neighbor interpolation by default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+<div class="section" id="affine-registration">
+<h2>Affine registration<a class="headerlink" href="#affine-registration" title="Permalink to this headline">¶</a></h2>
+<p>Import the Dipy routines we are going to need:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.viz</span> <span class="kn">import</span> <span class="n">regtools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.align.imaffine</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AffineMap</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">MutualInformationMetric</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">AffineRegistration</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.align.transforms</span> <span class="kn">import</span> <span class="p">(</span><span class="n">TranslationTransform3D</span><span class="p">,</span>
+<span class="gp">... </span>                                   <span class="n">RigidTransform3D</span><span class="p">,</span>
+<span class="gp">... </span>                                   <span class="n">AffineTransform3D</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next we load the subject structural image and the template image. These images
+have already had all voxels outside the brain set to zero. For the individual
+subject image, the <a class="reference external" href="https://openfmri.org/">OpenFMRI</a> project ran the <a class="reference external" href="http://www.fmrib.ox.ac.uk/fsl">FSL</a> <a class="reference external" href="http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET">Brain Extraction Tool</a> on
+the image before uploading to the OpenFMRI website.  The template comes with
+an image defining in-brain voxels. The registration works better on images for
+which we have masked out the skull and face.</p>
+<ul class="simple">
+<li>masked structural: <a class="reference download internal" href="_downloads/ds114_sub009_highres_brain_222.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_brain_222.nii</span></code></a>;</li>
+<li>masked template:
+<a class="reference download internal" href="_downloads/mni_icbm152_t1_tal_nlin_asym_09a_masked_222.nii" download=""><code class="xref download docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a_masked_222.nii</span></code></a>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">moving_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres_brain_222.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;mni_icbm152_t1_tal_nlin_asym_09a_masked_222.nii&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dipy works on the image data arrays. It also needs the affine arrays of each
+of the images:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">moving_data</span> <span class="o">=</span> <span class="n">moving_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moving_affine</span> <span class="o">=</span> <span class="n">moving_img</span><span class="o">.</span><span class="n">affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_data</span> <span class="o">=</span> <span class="n">template_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template_affine</span> <span class="o">=</span> <span class="n">template_img</span><span class="o">.</span><span class="n">affine</span>
+</pre></div>
+</div>
+<p>We use the nice Dipy routines to show the spatial correspondence of the
+images, as recorded in the affines.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">identity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine_map</span> <span class="o">=</span> <span class="n">AffineMap</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">template_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">template_affine</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">moving_data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">moving_affine</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resampled</span> <span class="o">=</span> <span class="n">affine_map</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">moving_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">resampled</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Moving&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">resampled</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Moving&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">resampled</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Moving&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<div class="figure" id="id4">
+<img alt="_images/dipy_registration-5_00.png" src="_images/dipy_registration-5_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-5_00.png">png</a>, <a class="reference external" href=".//dipy_registration-5_00.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-5_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id5">
+<img alt="_images/dipy_registration-5_01.png" src="_images/dipy_registration-5_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-5_01.png">png</a>, <a class="reference external" href=".//dipy_registration-5_01.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-5_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id6">
+<img alt="_images/dipy_registration-5_02.png" src="_images/dipy_registration-5_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-5_02.png">png</a>, <a class="reference external" href=".//dipy_registration-5_02.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-5_02.pdf">pdf</a>)</span></p>
+</div>
+<p>Next we define an affine registration, by giving a few standard parameters.
+See the Dipy registration tutorial for the details of what these parameters
+mean:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The mismatch metric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sampling_prop</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metric</span> <span class="o">=</span> <span class="n">MutualInformationMetric</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span> <span class="n">sampling_prop</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The optimization strategy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level_iters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We set up the registration object, ready to do the registration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">affreg</span> <span class="o">=</span> <span class="n">AffineRegistration</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">level_iters</span><span class="o">=</span><span class="n">level_iters</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">sigmas</span><span class="o">=</span><span class="n">sigmas</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First we optimize the translations. We do the translations first to get these
+in the ballpark. After that we will estimate translations and rotations
+together, using the estimated translations as a starting point. Last we will
+use the translations and rotations as a starting point for a full affine
+registration.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">TranslationTransform3D</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params0</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translation</span> <span class="o">=</span> <span class="n">affreg</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">moving_data</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">params0</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="n">template_affine</span><span class="p">,</span> <span class="n">moving_affine</span><span class="p">)</span>
+<span class="go">Optimizing level 2 [max iter: 10]</span>
+<span class="go">Optimizing level 1 [max iter: 10]</span>
+<span class="go">Optimizing level 0 [max iter: 5]</span>
+</pre></div>
+</div>
+<p>We now have our estimated translations.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">translation</span><span class="o">.</span><span class="n">affine</span>
+<span class="go">array([[  1.    ,   0.    ,   0.    ,  -1.8557],</span>
+<span class="go">       [  0.    ,   1.    ,   0.    ,  39.6567],</span>
+<span class="go">       [  0.    ,   0.    ,   1.    , -22.0912],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+<p>The visualization tool now shows the images overlay much better than they did
+before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformed</span> <span class="o">=</span> <span class="n">translation</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">moving_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<div class="figure" id="id7">
+<img alt="_images/dipy_registration-10_00.png" src="_images/dipy_registration-10_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-10_00.png">png</a>, <a class="reference external" href=".//dipy_registration-10_00.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-10_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id8">
+<img alt="_images/dipy_registration-10_01.png" src="_images/dipy_registration-10_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-10_01.png">png</a>, <a class="reference external" href=".//dipy_registration-10_01.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-10_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id9">
+<img alt="_images/dipy_registration-10_02.png" src="_images/dipy_registration-10_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-10_02.png">png</a>, <a class="reference external" href=".//dipy_registration-10_02.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-10_02.pdf">pdf</a>)</span></p>
+</div>
+<p>Next we use the estimated translations as a starting point to optimize a
+rigid-body transform. A rigid-body transform is a transform that does not
+change the shape of the object. It allows only translations and rotations.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">RigidTransform3D</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rigid</span> <span class="o">=</span> <span class="n">affreg</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">moving_data</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">params0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">template_affine</span><span class="p">,</span> <span class="n">moving_affine</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">starting_affine</span><span class="o">=</span><span class="n">translation</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="go">Optimizing level 2 [max iter: 10]</span>
+<span class="go">Optimizing level 1 [max iter: 10]</span>
+<span class="go">Optimizing level 0 [max iter: 5]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rigid</span><span class="o">.</span><span class="n">affine</span>
+<span class="go">array([[  0.9995,  -0.0269,  -0.0166,  -2.3604],</span>
+<span class="go">       [  0.0265,   0.9993,  -0.0268,  40.0467],</span>
+<span class="go">       [  0.0173,   0.0264,   0.9995, -21.0786],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+<p>The estimated rotations are small, so they don&#8217;t make much difference to the
+overlay of the image.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformed</span> <span class="o">=</span> <span class="n">rigid</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">moving_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<div class="figure" id="id10">
+<img alt="_images/dipy_registration-13_00.png" src="_images/dipy_registration-13_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-13_00.png">png</a>, <a class="reference external" href=".//dipy_registration-13_00.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-13_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id11">
+<img alt="_images/dipy_registration-13_01.png" src="_images/dipy_registration-13_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-13_01.png">png</a>, <a class="reference external" href=".//dipy_registration-13_01.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-13_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id12">
+<img alt="_images/dipy_registration-13_02.png" src="_images/dipy_registration-13_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-13_02.png">png</a>, <a class="reference external" href=".//dipy_registration-13_02.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-13_02.pdf">pdf</a>)</span></p>
+</div>
+<p>Last, we do a full affine registration, using the rigid body estimate as a
+starting point.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">AffineTransform3D</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Bump up the iterations to get an more exact fit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affreg</span><span class="o">.</span><span class="n">level_iters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span> <span class="o">=</span> <span class="n">affreg</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">moving_data</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">params0</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">template_affine</span><span class="p">,</span> <span class="n">moving_affine</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">starting_affine</span><span class="o">=</span><span class="n">rigid</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="go">Optimizing level 2 [max iter: 1000]</span>
+<span class="go">Optimizing level 1 [max iter: 1000]</span>
+<span class="go">Optimizing level 0 [max iter: 100]</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">affine</span><span class="o">.</span><span class="n">affine</span>
+<span class="go">array([[  0.935 ,  -0.0268,   0.0009,  -2.1728],</span>
+<span class="go">       [  0.0438,   0.9553,  -0.0418,  39.0283],</span>
+<span class="go">       [  0.0117,   0.0239,   0.8903, -19.107 ],</span>
+<span class="go">       [  0.    ,   0.    ,   0.    ,   1.    ]])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transformed</span> <span class="o">=</span> <span class="n">affine</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">moving_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">transformed</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<div class="figure" id="id13">
+<img alt="_images/dipy_registration-16_00.png" src="_images/dipy_registration-16_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-16_00.png">png</a>, <a class="reference external" href=".//dipy_registration-16_00.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-16_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id14">
+<img alt="_images/dipy_registration-16_01.png" src="_images/dipy_registration-16_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-16_01.png">png</a>, <a class="reference external" href=".//dipy_registration-16_01.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-16_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id15">
+<img alt="_images/dipy_registration-16_02.png" src="_images/dipy_registration-16_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-16_02.png">png</a>, <a class="reference external" href=".//dipy_registration-16_02.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-16_02.pdf">pdf</a>)</span></p>
+</div>
+</div>
+<div class="section" id="non-linear-registration">
+<h2>Non-linear registration<a class="headerlink" href="#non-linear-registration" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.align.imwarp</span> <span class="kn">import</span> <span class="n">SymmetricDiffeomorphicRegistration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.align.imwarp</span> <span class="kn">import</span> <span class="n">DiffeomorphicMap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dipy.align.metrics</span> <span class="kn">import</span> <span class="n">CCMetric</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The mismatch metric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metric</span> <span class="o">=</span> <span class="n">CCMetric</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The optimization strategy:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level_iters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Registration object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sdr</span> <span class="o">=</span> <span class="n">SymmetricDiffeomorphicRegistration</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">level_iters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do the registration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="n">sdr</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">moving_data</span><span class="p">,</span> <span class="n">template_affine</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">moving_affine</span><span class="p">,</span> <span class="n">affine</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="go">Creating scale space from the moving image. Levels: 3. Sigma factor: 0.200000.</span>
+<span class="go">Creating scale space from the static image. Levels: 3. Sigma factor: 0.200000.</span>
+<span class="go">Optimizing level 2</span>
+<span class="go">Optimizing level 1</span>
+<span class="go">Optimizing level 0</span>
+</pre></div>
+</div>
+<p>Resample using the new parameters:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">warped_moving</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">moving_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Display the transformed (warped) image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">warped_moving</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">warped_moving</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regtools</span><span class="o">.</span><span class="n">overlay_slices</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">warped_moving</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Template&quot;</span><span class="p">,</span> <span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<div class="figure" id="id16">
+<img alt="_images/dipy_registration-21_00.png" src="_images/dipy_registration-21_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-21_00.png">png</a>, <a class="reference external" href=".//dipy_registration-21_00.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-21_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id17">
+<img alt="_images/dipy_registration-21_01.png" src="_images/dipy_registration-21_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-21_01.png">png</a>, <a class="reference external" href=".//dipy_registration-21_01.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-21_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id18">
+<img alt="_images/dipy_registration-21_02.png" src="_images/dipy_registration-21_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//dipy_registration-21_02.png">png</a>, <a class="reference external" href=".//dipy_registration-21_02.hires.png">hires.png</a>, <a class="reference external" href=".//dipy_registration-21_02.pdf">pdf</a>)</span></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="truthiness.html" title="previous chapter">Kind-of True</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/dipy_registration.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
