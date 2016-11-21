@@ -40,7 +40,7 @@ Teaching
     * :doc:`applying_deformations_exercise`.
 
 * :doc:`dipy_registration`;
-* example registration problem |--| :doc:`anterior cingulate`.
+* example registration problem |--| :doc:`anterior_cingulate`.
 
 ********************
 Reading and homework

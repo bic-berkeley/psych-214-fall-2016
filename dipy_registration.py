@@ -24,6 +24,10 @@ from dipy.align.imwarp import SymmetricDiffeomorphicRegistration
 from dipy.align.metrics import CCMetric
 
 
+TEMPLATE_IMG = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
+TEMPLATE_MASK = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
+
+
 def as_image(image):
     """ If `image` is string, assume filename and load image, else pass through
     """
@@ -205,21 +209,32 @@ def find_anatomicals(path):
     return anatomicals
 
 
+def sub2img_mask(root, sub_no):
+    anatomical_path = pjoin(root, 'sub{:03d}'.format(sub_no), 'anatomy')
+    ret = (pjoin(anatomical_path, 'highres001.nii.gz'),
+           pjoin(anatomical_path, 'highres001_brain_mask.nii.gz'))
+    if all(exists(p) for p in ret):
+        return ret
+    return ()
+
+
 def write_highres(path):
-    template_img = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
-    template_mask = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
     for moving_img, moving_mask in find_anatomicals(path):
-        register_save(template_img, template_mask,
+        register_save(TEMPLATE_IMG, TEMPLATE_MASK,
                       moving_img, moving_mask)
 
 
 def write_highres_parallel(path):
     import multiprocessing
-    template_img = 'mni_icbm152_t1_tal_nlin_asym_09a.nii'
-    template_mask = 'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii'
     jobs = []
     for moving_img, moving_mask in find_anatomicals(path):
         p = multiprocessing.Process(target=register_save, args=(
-            template_img, template_mask, moving_img, moving_mask))
+            TEMPLATE_IMG, TEMPLATE_MASK, moving_img, moving_mask))
         jobs.append(p)
         p.start()
+
+
+def register_subject(root, sub_no):
+    moving_img, moving_mask = sub2img_mask(root, sub_no)
+    return register_save(TEMPLATE_IMG, TEMPLATE_MASK,
+                         moving_img, moving_mask)

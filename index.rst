@@ -182,3 +182,4 @@ version control using git.
     tr_and_headers
     truthiness
     dipy_registration
+    anterior_cingulate
