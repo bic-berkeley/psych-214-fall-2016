@@ -25,11 +25,14 @@ Later on, I am sure your students will be asking for more time and help, as
 the project deadlines come nearer |--| see the project :ref:`project-timing`
 for the relevant dates.
 
-Some of these projects may turn into papers.  Of course we are expecting that
-you will be an author on these papers, with the order to be negotiated by you
-all, but our default will be to assume that you, the mentors, will be the
-senior author on the paper unless you agree otherwise, or there's a good
-reason to do otherwise.
+You will be helping the students to choose a project.  We expect the students
+to do about 40 hours of work each, in groups of 2 or 3.  Many projects will be
+exploratory, in that they start off by exploring a particular dataset, and may
+continue to evaluate a previous analysis, and / or analyze the dataset in a
+new way.
+
+It is possible that some projects will turn out to be publishable or part of a
+paper, in which case we expect both student and mentor to be authors.
 
 We :ref:`instructors` are always happy to hear from you, and answer any of
 your questions, and pitch in to discussions with students.
