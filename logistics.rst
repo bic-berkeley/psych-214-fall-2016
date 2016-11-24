@@ -32,9 +32,9 @@ Instructors
 Grading
 *******
 
-* 27% participation;
+* 27% participation |--| see :doc:`participate`;
 * 13% homework;
-* 60% final project.
+* 60% final project |--| see :doc:`project_grading`.
 
 Please read the `UCB academic polices on student conduct
 <http://guide.berkeley.edu/academic-policies/#studentconductappealstext>`_.
