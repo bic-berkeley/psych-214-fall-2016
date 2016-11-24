@@ -8,20 +8,20 @@ Participation |--| self evaluation
     send your self-evaluation emails.
 
 Your participation grade is 27% of your final grade |--| see
-:doc:`logiistics`.
+:doc:`logistics`.
 
 You can earn participation points from:
 
 * contributions to your project (25 / 27);
 * work on the three last exercise / homeworks (2 / 27):
 
-  * :ref:`glm-tools`;
+  * :ref:`glmtools-exercise`;
   * :doc:`slice_timing_exercise`;
   * :doc:`applying_deformations_exercise`;
 
- There is one grade point for each completed exercise.  For three completed
- exercises you earn an extra point to be counted to your project participation
- score.
+There is one grade point for one completed exercise, two for two completed
+exercises.  For three completed exercises you earn an extra point to be
+counted to your project participation score.
 
 .. _self-evaluation:
 
@@ -29,16 +29,15 @@ You can earn participation points from:
 Project self-evaluation
 ***********************
 
-Email me (Matthew) a 3-page self evaluation with subject line by 5PM on
-Friday, December 16th.
+Email me (Matthew) a 3-page self evaluation by 5PM on Friday, December 16th.
 
 Please follow this structure:
 
-#. briefly describe your previous background in Python and git;
-#. describe your overall role in the project;
-#. discuss two significant pull requests that you worked on for the final
+#. Briefly describe your previous background in Python and git;
+#. Describe your overall role in the project;
+#. Discuss two significant pull requests that you worked on for the final
    project.
-#. discuss one pull request for which you did a significant part of the
+#. Discuss one pull request for which you did a significant part of the
    review.
 #. Conclude by answering a few questions.
 
@@ -56,7 +55,7 @@ Overall role in the project
 #. How did you help organize the work that your team did?  Give evidence from
    discussions on the github interface or other discussions we (your graders)
    have access to, where you can;
-#. in what other ways did you contribute to the team, in addition to the pull
+#. In what other ways did you contribute to the team, in addition to the pull
    requests you have used in the "pull requests" and "pull request review"
    sections below.  For example, did you raise issues, or help others with the
    technical or neuroscience aspect of the work?  Again, give evidence from
@@ -67,8 +66,8 @@ Pull requests
 
 Choose two pull requests that you worked on for the final project. It is OK to
 discuss a pull request, which was ultimately not merged in the project
-repository either because it is unfinished or because it was rejected. One of
-Please provide links to the two pull requests.
+repository either because it is unfinished or because it was rejected.  Please
+provide links to the two pull requests.
 
 For each pull request discuss the review process. How did your code or text
 contribution evolve during the review process? Did you uncover bugs or errors
@@ -105,10 +104,8 @@ General instructions
 Here are few things to keep in mind while working on your self
 evaluation:
 
-#. outline constraints you faced as well as reasons performance was hampered.
-
-#. be objective about the things you found difficult as well as the things
+#. Outline constraints you faced as well as reasons performance was hampered.
+#. Be objective about the things you found difficult as well as the things
    that you learned;
-
-#. include a discussion of problem-solving abilities you used during the
+#. Include a discussion of problem-solving methods you used during the
    project.
