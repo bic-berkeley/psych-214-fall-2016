@@ -1,6 +1,6 @@
-############################################
-November 28: capstone; scripting an analysis
-############################################
+#######################################
+November 28: registration and scripting
+#######################################
 
 *************
 Presentations
@@ -12,9 +12,16 @@ Problems from projects.
 Teaching
 ********
 
-* nipype for scripting;
-* designing a plugin for the analysis;
-* running a full analysis via SPM;
+Registration
+============
+
+* :doc:`dipy_registration`;
+* example registration problem |--| :doc:`anterior_cingulate`.
+
+Scripting
+=========
+
+* :doc:`introducing_nipype`;
 
 ********************
 Reading and homework

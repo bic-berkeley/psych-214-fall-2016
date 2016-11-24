@@ -183,3 +183,5 @@ version control using git.
     truthiness
     dipy_registration
     anterior_cingulate
+    participate
+    introducing_nipype

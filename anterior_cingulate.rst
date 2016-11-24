@@ -41,9 +41,8 @@ cingulate anatomy to the template.
 
 * open IPython and::
 
-  .. ipython::
-
      In [1]: run dipy_registration.py
+
      In [2]: mapping = register_save('mni_icbm152_t1_tal_nlin_asym_09a.nii',
      ...:                            'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii',
      ...:                            'ds114_sub009_highres.nii',
@@ -62,9 +61,20 @@ We will be using `MRIcron`_:
 * review the help on how to `draw with MRIcron`_.
 * open :download:`ds114_sub009_highres.nii` with MRIcron.  Scroll around the
   image, and have a look at the controls and menu items;
+* use the "View" menu "Display" option to switch to a display with larger
+  versions of coronal, or axial or sagittal slices:
+
+  .. image:: images/mricron_display.png
+
 * what kind of cingulate anatomy (single, double) does this subject have in
-  each hemisphere;
-* make a new MRIcron window and open ``mni_icbm152_t1_tal_nlin_asym_09a.nii``;
+  each hemisphere?  The sagittal slices might be most useful for that
+  question;
+* make a new MRIcron window and open ``mni_icbm152_t1_tal_nlin_asym_09a.nii``.
+  You might want to play with the upper and lower image display thresholds to
+  get good contrast in the image:
+
+  .. image:: images/mricron_contrast.png
+
 * on a piece of paper, write down what you would like the registration to do
   to the subject's brain:
 
@@ -74,13 +84,24 @@ We will be using `MRIcron`_:
   * draw arrows from the subject hemisphere to the matching part of the
     template;
 
-* in MRIcron, use the "View" menu to go to the coronal sections of the
+* in MRIcron, use the "View, Display" to go to the *coronal* sections of the
   individual subject brain image;
-* using the Vogt paper diagram, draw your estimate for the position for left
-  and right area 24 (a, b, c combined) on three or four adjacent slices
-  through the anterior cingulate.  Be careful: watch the y slice index at the
-  top left to make sure you are moving one slice at a time; have a look at the
-  VOI display to make sure it looks OK before saving;
+* find a coronal slice a little posterior to the genu of corpus callosum to
+  start drawing:
+
+  .. image:: images/mricron_draw.png
+
+* using the diagram from the Vogt paper, draw your estimate for the position
+  for left and right area 24 (a, b, c combined) on five adjacent
+  slices through the anterior cingulate.  Click on the lower arrow of the y
+  slice index at the top left to make sure you are moving in a posterior
+  direction, one slice at a time:
+
+  .. image:: images/mricron_y_scrolling.png
+
+* when you've finished drawing, use the y slice index arrow buttons to scroll
+  through the image one slice at a time to make sure you haven't missed any
+  slices, and you have drawn what you meant to;
 * using the "Draw" menu in MRICron; "Save VOI" to save this definition in
   MRIcron's own format.  Add something like ``_area_24`` to the VOI name when
   saving;
@@ -90,7 +111,11 @@ We will be using `MRIcron`_:
   visually.  What do you think of the match?  How does it correspond to your
   drawing?
 * try loading the template image, and using the warped individual brain as an
-  overlay.  Play with the overlay settings to get an idea of the quality of
+  overlay:
+
+  .. image:: images/mricron_overlays.png
+
+  Play with the overlay settings to get an idea of the quality of
   the registration;
 * investigate the ``dipy_registration.py`` code for a useful function to
   resample the region definition file to the template voxel space.  Apply this
@@ -101,5 +126,7 @@ We will be using `MRIcron`_:
   * template image;
   * resampled (warped) individual image;
 
-  What do you think of the registration?  Do you think the cytoarchitecture
-  lines up?
+  What do you think of the registration?  How does it compare to your drawing?
+  Do you think the cytoarchitecture lines up with where you think it should
+  be, given your drawing and the anatomy of the template and the individual
+  subject image?
