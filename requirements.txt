@@ -14,3 +14,4 @@ sphinxcontrib_bibtex
 scikit-image
 dipy>=0.11
 mako
+nipype>=0.12
