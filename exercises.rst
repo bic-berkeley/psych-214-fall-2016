@@ -67,3 +67,9 @@ Exercises and homework
 
     * :doc:`slice_timing_exercise` |--| solution:
       :doc:`slice_timing_solution`.
+
+***************
+Extra exercises
+***************
+
+* :doc:`smoothing_exercise` |--| solution: :doc:`smoothing_solution`.

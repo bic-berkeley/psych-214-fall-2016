@@ -224,7 +224,8 @@ TEMPLATES = anatomical camera \
 			what_extra_transform \
 			reslicing_with_affines \
 			optimizing_affine \
-			applying_deformations
+			applying_deformations \
+			smoothing
 
 TPL_FILES = $(TEMPLATES:=.tpl)
 SOLUTION_FILES = $(TPL_FILES:.tpl=_solution.rst)

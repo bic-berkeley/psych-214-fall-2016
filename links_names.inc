@@ -270,6 +270,9 @@
 .. _spline interpolation:
 .. _cubic spline interpolation:
     https://en.wikipedia.org/wiki/Spline_interpolation
+.. _normal distribution:
+.. _gaussian distribution:
+    https://en.wikipedia.org/wiki/Normal_distribution
 
 .. Psych-214
 .. _worked example of GLM:

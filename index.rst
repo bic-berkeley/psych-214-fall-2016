@@ -185,3 +185,5 @@ version control using git.
     anterior_cingulate
     participate
     introducing_nipype
+    smoothing_solution
+    smoothing_exercise
