@@ -21,14 +21,13 @@ shutil.copyfile(structural_orig, structural_fname)
 TR = 2.5
 slice_time_ref_slice = 1  # 1-based indexing
 n_dummies = 4
-# Realign "write_which" input. The 0 means 'do not write resmapled versions of
-# any of the individual volumes`.  The 1 means 'write mean of across volumes
-# after motion correction'.  See config/spm_cfg_realign.m in the SPM12
-# distribution.
+# Realign "write_which" input. The 0 means 'do not write resampled versions of
+# any of the individual volumes`.  The 1 means 'write mean across volumes after
+# motion correction'.  See config/spm_cfg_realign.m in the SPM12 distribution.
 write_which = [0, 1]
-# Normalize write parameters.  Bounding box gives [[left, posterior, inferior],
-# [right, anterior, superior]] millimeter coordinates of the voxel grid that
-# SPM will use to write out the new images in template space.  See
+# Normalize write parameters.  Bounding box gives extreme [[left, posterior,
+# inferior], [right, anterior, superior]] millimeter coordinates of the voxel
+# grid that SPM will use to write out the new images in template space.  See
 # spm_preproc_write8.m for use of the bounding box values.
 bounding_box = [[-78., -112., -46.], [78., 76., 86.]]
 
