@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>November 28: capstone; scripting an analysis &mdash; Functional MRI methods</title>
+    <title>November 28: registration and scripting &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -45,19 +45,38 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="november-28-capstone-scripting-an-analysis">
-<h1>November 28: capstone; scripting an analysis<a class="headerlink" href="#november-28-capstone-scripting-an-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="november-28-registration-and-scripting">
+<h1>November 28: registration and scripting<a class="headerlink" href="#november-28-registration-and-scripting" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="presentations">
 <h2>Presentations<a class="headerlink" href="#presentations" title="Permalink to this headline">¶</a></h2>
 <p>Problems from projects.</p>
 </div>
 <div class="section" id="teaching">
 <h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="registration">
+<h3>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>nipype for scripting;</li>
-<li>designing a plugin for the analysis;</li>
-<li>running a full analysis via SPM;</li>
+<li><a class="reference internal" href="dipy_registration.html"><span class="doc">Registration with dipy</span></a>;</li>
+<li>example registration problem – <a class="reference internal" href="anterior_cingulate.html"><span class="doc">Anterior cingulate</span></a>.</li>
 </ul>
+</div>
+<div class="section" id="scripting">
+<h3>Scripting<a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="introducing_nipype.html"><span class="doc">Introducing nipype</span></a>;</li>
+<li><a class="reference internal" href="spm_slice_timing_exercise.html"><span class="doc">SPM slice timing exercise</span></a>;</li>
+<li>the rest of the analysis in SPM:<ul>
+<li>motion correction (registration between first image and later images in
+time series);</li>
+<li>coregistration (registration between structural and functional);</li>
+<li>spatial normalization (registration between structural and template);</li>
+<li>reslicing (resampling images in to space of template);</li>
+<li>smoothing;</li>
+</ul>
+</li>
+<li><a class="reference internal" href="full_scripting.html"><span class="doc">Scripting of SPM analysis with nipype</span></a>.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="reading-and-homework">
 <h2>Reading and homework<a class="headerlink" href="#reading-and-homework" title="Permalink to this headline">¶</a></h2>

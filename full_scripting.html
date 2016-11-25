@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Scripting of SPM analysis with nipype &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="prev" title="SPM slice timing solution" href="spm_slice_timing_solution.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="scripting-of-spm-analysis-with-nipype">
+<h1>Scripting of SPM analysis with nipype<a class="headerlink" href="#scripting-of-spm-analysis-with-nipype" title="Permalink to this headline">¶</a></h1>
+<p>Requirements:</p>
+<ul class="simple">
+<li><a class="reference internal" href="saving_images.html"><span class="doc">Making and saving new images in nibabel</span></a>;</li>
+<li><a class="reference internal" href="introducing_nipype.html"><span class="doc">Introducing nipype</span></a>;</li>
+<li><a class="reference internal" href="spm_slice_timing_exercise.html"><span class="doc">SPM slice timing exercise</span></a>;</li>
+</ul>
+<p>Can you write a Nipype script to do all the pre-processing in SPM?</p>
+<p>You are doing an analysis for the following scans:</p>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>; (functional);</li>
+<li><a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a> (structural).</li>
+</ul>
+<p>In the following, remember you can explore the individual Nipype objects like
+this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipype.interfaces</span> <span class="kn">import</span> <span class="n">spm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_timer</span> <span class="o">=</span> <span class="n">spm</span><span class="o">.</span><span class="n">SliceTiming</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slice_timer</span><span class="o">.</span><span class="n">help</span><span class="p">()</span>
+<span class="go">Use spm to perform slice timing correction.</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>The script should do the following, using nibabel and Nipype:</p>
+<ul class="simple">
+<li>copy the structural image with a prefix of <code class="docutils literal"><span class="pre">c</span></code> because SPM will modify the
+image during registration (it modifies the image affine);</li>
+<li>drop the first 4 volumes from the functional run.  Save the new functional
+image with a filename prefix of <cite>f</cite>.</li>
+<li>run slice timing, assuming an ascending interleaved slice acqusition order
+(0, 2, ..., 1, 3, ... assuming 0-based indexing).  See
+<a class="reference internal" href="spm_slice_timing_exercise.html"><span class="doc">SPM slice timing exercise</span></a> for details.  The resulting funcitonal
+image will have a filename prefix of <cite>af</cite>;</li>
+<li>run motion correction estimation, and write out the mean image across
+volumes.  You will need <cite>nipype.interfaces.spm.Realign</cite>.  The mean image
+will have filename prefix <cite>meanaf</cite>.   Hint: to write only the mean image,
+you need a <code class="docutils literal"><span class="pre">inputs.write_which</span></code> value of <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1]</span></code>.  See the script
+fragment below;</li>
+<li>estimate the registration of the structural image to the mean functional
+image: <cite>nipype.interfaces.spm.Coregister</cite>;</li>
+<li>register the (registered) structural image to the template and write the
+slice-time corrected functional image with these estimated parameters:
+<code class="docutils literal"><span class="pre">nipype.interfaces.spm.Normalize12</span></code>.  SPM calls this &#8220;spatial
+normalization&#8221;. The resulting functional image will have a prefix of <cite>waf</cite>.
+Hint: I&#8217;ve put suggested values for the <code class="docutils literal"><span class="pre">bounding_box</span></code> input parameter in
+the script fragment below;</li>
+<li>smooth the spatially normalized 4D functional image by 8mm FWHM:
+<code class="docutils literal"><span class="pre">nipype.interfaces.spm.Smooth</span></code>.  The resulting functional image will have
+the prefix <cite>swaf</cite>.</li>
+</ul>
+<p>Your script will likely start something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Script to run SPM processing in nipype</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+
+<span class="c1"># Import our own configuration for nipype</span>
+<span class="kn">import</span> <span class="nn">nipype_settings</span>
+
+<span class="kn">import</span> <span class="nn">nipype.interfaces.spm</span> <span class="kn">as</span> <span class="nn">spm</span>
+
+<span class="c1"># Start at the original image</span>
+<span class="n">base_fname</span> <span class="o">=</span> <span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span>
+<span class="n">structural_orig</span> <span class="o">=</span> <span class="s1">&#39;ds114_sub009_highres.nii&#39;</span>
+<span class="n">structural_fname</span> <span class="o">=</span> <span class="s1">&#39;cds114_sub009_highres.nii&#39;</span>
+
+<span class="c1"># Copy the structural, because SPM will modify it</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">structural_orig</span><span class="p">,</span> <span class="n">structural_fname</span><span class="p">)</span>
+
+<span class="c1"># Analysis parameters</span>
+<span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">slice_time_ref_slice</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 1-based indexing</span>
+<span class="n">n_dummies</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="c1"># Realign &quot;write_which&quot; input. The 0 means &#39;do not write resmapled versions of</span>
+<span class="c1"># any of the individual volumes`.  The 1 means &#39;write mean of across volumes</span>
+<span class="c1"># after motion correction&#39;.  See config/spm_cfg_realign.m in the SPM12</span>
+<span class="c1"># distribution.</span>
+<span class="n">write_which</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># Normalize write parameters.  Bounding box gives [[left, posterior, inferior],</span>
+<span class="c1"># [right, anterior, superior]] millimeter coordinates of the voxel grid that</span>
+<span class="c1"># SPM will use to write out the new images in template space.  See</span>
+<span class="c1"># spm_preproc_write8.m for use of the bounding box values.</span>
+<span class="n">bounding_box</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">78.</span><span class="p">,</span> <span class="o">-</span><span class="mf">112.</span><span class="p">,</span> <span class="o">-</span><span class="mf">46.</span><span class="p">],</span> <span class="p">[</span><span class="mf">78.</span><span class="p">,</span> <span class="mf">76.</span><span class="p">,</span> <span class="mf">86.</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>When you have finished, have a look at the solution script at
+<a class="reference download internal" href="_downloads/nipype_ds114_sub009_t2r1.py" download=""><code class="xref download docutils literal"><span class="pre">nipype_ds114_sub009_t2r1.py</span></code></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="spm_slice_timing_solution.html" title="previous chapter">SPM slice timing solution</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/full_scripting.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

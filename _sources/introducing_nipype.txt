@@ -1,0 +1,128 @@
+##################
+Introducing nipype
+##################
+
+.. nbplot::
+    :include-source: false
+
+    >>> # compatibility with Python 2
+    >>> from __future__ import print_function
+    >>> from __future__ import division
+
+.. nbplot::
+
+    >>> #: standard imports
+    >>> import numpy as np
+    >>> import matplotlib.pyplot as plt
+    >>> # print arrays to 4 decimal places
+    >>> np.set_printoptions(precision=4, suppress=True)
+    >>> import numpy.linalg as npl
+    >>> import nibabel as nib
+
+.. nbplot::
+
+    >>> #: gray colormap and nearest neighbor interpolation by default
+    >>> plt.rcParams['image.cmap'] = 'gray'
+    >>> plt.rcParams['image.interpolation'] = 'nearest'
+
+`Nipype`_ is a Python module that provides Python interfaces to many imaging
+tools, including SPM, AFNI and FSL.
+
+We install it with ``pip`` in the usual way::
+
+    pip3 install --user nipype
+
+We install like this (from your ``cmd`` or ``Terminal.app`` window):
+
+::
+
+    pip install git+https://github.com/nipy/nipype.git
+
+After this has run, check that you can import nipype with:
+
+.. nbplot::
+
+    >>> import nipype
+
+We are interested in the nipype ``interfaces`` sub-package.  Specifically, we
+want the interfaces to the SPM routines:
+
+.. nbplot::
+
+    >>> from nipype.interfaces import spm
+
+Our first job is to make sure that nipype can run MATLAB. Let's check with a
+test call:
+
+.. nbplot::
+
+    >>> import nipype.interfaces.matlab as nim
+    >>> mlab = nim.MatlabCommand()
+    >>> mlab.inputs.script = "version"  # get MATLAB version
+    >>> mlab.run()
+    <...>
+
+If ``nipype`` does not have the right command to start MATLAB, this will fail
+with an error. We can set the command to start MATLAB like this:
+
+.. nbplot::
+
+    >>> nim.MatlabCommand.set_default_matlab_cmd('/Applications/MATLAB_R2014a.app/bin/matlab')
+
+Check this is working by running the code above.
+
+Next we need to make sure that nipype has SPM on the MATLAB path when it
+is running MATLAB. Try running this command to get the SPM version.
+
+.. nbplot::
+    :raises: RuntimeError
+
+    >>> mlab = nim.MatlabCommand()
+    >>> mlab.inputs.script = "spm ver"  # get SPM version
+    >>> mlab.run()
+    <...>
+
+If this gives an error message, you may not have SPM set up on your MATLAB
+path by default. You can add SPM to the MATLAB path like this:
+
+.. nbplot::
+
+    >>> nim.MatlabCommand.set_default_paths('/Users/mb312/dev_trees/spm12')
+
+Now try running the ``spm ver`` command again:
+
+.. nbplot::
+
+    >>> mlab = nim.MatlabCommand()
+    >>> mlab.inputs.script = "spm ver"  # get SPM version
+    >>> mlab.run()
+    <...>
+
+We are going to put the setup we need into a Python file we can import from
+any script that we write that uses nipype.
+
+In your current directory, make a new file called ``nipype_settings.py`` with
+contents like this:
+
+.. writefile:: nipype_settings.py
+
+    """ Defaults for using nipype
+    """
+    import nipype.interfaces.matlab as nim
+    # If you needed to set the default matlab command above
+    nim.MatlabCommand.set_default_matlab_cmd('/Applications/MATLAB_R2014a.app/bin/matlab')
+    # If you needed to set the SPM path above
+    nim.MatlabCommand.set_default_paths('/Users/mb312/dev_trees/spm12')
+
+Now try:
+
+.. nbplot::
+
+    >>> import nipype_settings
+    >>> import nipype.interfaces.matlab as nim
+    >>> mlab = nim.MatlabCommand()
+    >>> mlab.inputs.script = "spm ver"  # get SPM version
+    >>> mlab.run()
+    <...>
+
+These should run without error.

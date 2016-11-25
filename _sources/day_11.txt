@@ -39,9 +39,6 @@ Teaching
     * :doc:`map_coordinates`;
     * :doc:`applying_deformations_exercise`.
 
-* :doc:`dipy_registration`;
-* example registration problem |--| :doc:`anterior_cingulate`.
-
 ********************
 Reading and homework
 ********************

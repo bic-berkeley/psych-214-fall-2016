@@ -116,6 +116,8 @@ Image processing and spatial transformations
 * :doc:`resampling_with_ndimage`;
 * :doc:`map_coordinates`;
 * :doc:`saving_images`;
+* `introduction to smoothing`_;
+* `smoothing as convolution`_.
 
 ****************
 Specific to FMRI

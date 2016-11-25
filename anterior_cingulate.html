@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="Participation – self evaluation" href="participate.html" />
     <link rel="prev" title="Registration with dipy" href="dipy_registration.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -74,16 +75,14 @@ cingulate anatomy to the template.</p>
 <li><p class="first">have a look at <code class="docutils literal"><span class="pre">dipy_registration.py</span></code> for useful functions;</p>
 </li>
 <li><p class="first">open IPython and:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">ipython</span><span class="p">::</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">run</span> <span class="n">dipy_registration</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">mapping</span> <span class="o">=</span> <span class="n">register_save</span><span class="p">(</span><span class="s1">&#39;mni_icbm152_t1_tal_nlin_asym_09a.nii&#39;</span><span class="p">,</span>
+<span class="o">...</span><span class="p">:</span>                            <span class="s1">&#39;mni_icbm152_t1_tal_nlin_asym_09a_mask.nii&#39;</span><span class="p">,</span>
+<span class="o">...</span><span class="p">:</span>                            <span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">,</span>
+<span class="o">...</span><span class="p">:</span>                            <span class="s1">&#39;ds114_sub009_highres_brain_mask.nii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>In [1]: run dipy_registration.py
-In [2]: mapping = register_save(&#8216;mni_icbm152_t1_tal_nlin_asym_09a.nii&#8217;,
-...:                            &#8216;mni_icbm152_t1_tal_nlin_asym_09a_mask.nii&#8217;,
-...:                            &#8216;ds114_sub009_highres.nii&#8217;,
-...:                            &#8216;ds114_sub009_highres_brain_mask.nii&#8217;)</p>
-</div></blockquote>
 </li>
 <li><p class="first">leave that running - it will take something like 10-20 minutes depending on
 your machine.  Meanwhile...</p>
@@ -101,10 +100,18 @@ your machine.  Meanwhile...</p>
 <li><p class="first">open <a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a> with MRIcron.  Scroll around the
 image, and have a look at the controls and menu items;</p>
 </li>
-<li><p class="first">what kind of cingulate anatomy (single, double) does this subject have in
-each hemisphere;</p>
+<li><p class="first">use the &#8220;View&#8221; menu &#8220;Display&#8221; option to switch to a display with larger
+versions of coronal, or axial or sagittal slices:</p>
+<img alt="_images/mricron_display.png" src="_images/mricron_display.png" />
 </li>
-<li><p class="first">make a new MRIcron window and open <code class="docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>;</p>
+<li><p class="first">what kind of cingulate anatomy (single, double) does this subject have in
+each hemisphere?  The sagittal slices might be most useful for that
+question;</p>
+</li>
+<li><p class="first">make a new MRIcron window and open <code class="docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>.
+You might want to play with the upper and lower image display thresholds to
+get good contrast in the image:</p>
+<img alt="_images/mricron_contrast.png" src="_images/mricron_contrast.png" />
 </li>
 <li><p class="first">on a piece of paper, write down what you would like the registration to do
 to the subject&#8217;s brain:</p>
@@ -116,14 +123,25 @@ subject and the template, as in the Vogt figure above;</li>
 template;</li>
 </ul>
 </li>
-<li><p class="first">in MRIcron, use the &#8220;View&#8221; menu to go to the coronal sections of the
+<li><p class="first">in MRIcron, use the &#8220;View, Display&#8221; to go to the <em>coronal</em> sections of the
 individual subject brain image;</p>
 </li>
-<li><p class="first">using the Vogt paper diagram, draw your estimate for the position for left
-and right area 24 (a, b, c combined) on three or four adjacent slices
-through the anterior cingulate.  Be careful: watch the y slice index at the
-top left to make sure you are moving one slice at a time; have a look at the
-VOI display to make sure it looks OK before saving;</p>
+<li><p class="first">find a coronal slice a little posterior to the genu of corpus callosum to
+start drawing:</p>
+<img alt="_images/mricron_draw.png" src="_images/mricron_draw.png" />
+<p>Have a look at <a class="reference external" href="http://people.cas.sc.edu/rorden/mricron/stats.html">draw with mricron</a> for the drawing actions you will need
+using the keyboard and mouse.</p>
+</li>
+<li><p class="first">using the diagram from the Vogt paper, draw your estimate for the position
+for left and right area 24 (a, b, c combined) on five adjacent
+slices through the anterior cingulate.  Click on the lower arrow of the y
+slice index at the top left to make sure you are moving in a posterior
+direction, one slice at a time:</p>
+<img alt="_images/mricron_y_scrolling.png" src="_images/mricron_y_scrolling.png" />
+</li>
+<li><p class="first">when you&#8217;ve finished drawing, use the y slice index arrow buttons to scroll
+through the image one slice at a time to make sure you haven&#8217;t missed any
+slices, and you have drawn what you meant to;</p>
 </li>
 <li><p class="first">using the &#8220;Draw&#8221; menu in MRICron; &#8220;Save VOI&#8221; to save this definition in
 MRIcron&#8217;s own format.  Add something like <code class="docutils literal"><span class="pre">_area_24</span></code> to the VOI name when
@@ -137,7 +155,9 @@ visually.  What do you think of the match?  How does it correspond to your
 drawing?</p>
 </li>
 <li><p class="first">try loading the template image, and using the warped individual brain as an
-overlay.  Play with the overlay settings to get an idea of the quality of
+overlay:</p>
+<img alt="_images/mricron_overlays.png" src="_images/mricron_overlays.png" />
+<p>Play with the overlay settings to get an idea of the quality of
 the registration;</p>
 </li>
 <li><p class="first">investigate the <code class="docutils literal"><span class="pre">dipy_registration.py</span></code> code for a useful function to
@@ -150,8 +170,10 @@ out a version of the region image in template space;</p>
 <li>template image;</li>
 <li>resampled (warped) individual image;</li>
 </ul>
-<p>What do you think of the registration?  Do you think the cytoarchitecture
-lines up?</p>
+<p>What do you think of the registration?  How does it compare to your drawing?
+Do you think the cytoarchitecture lines up with where you think it should
+be, given your drawing and the anatomy of the template and the individual
+subject image?</p>
 </li>
 </ul>
 </div>
@@ -202,6 +224,7 @@ lines up?</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="dipy_registration.html" title="previous chapter">Registration with dipy</a></li>
+      <li>Next: <a href="participate.html" title="next chapter">Participation – self evaluation</a></li>
   </ul></li>
 </ul>
 </div>

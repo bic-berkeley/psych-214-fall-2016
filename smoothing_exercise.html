@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Smoothing exercise &mdash; Functional MRI methods</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Functional MRI methods" href="index.html" />
+    <link rel="next" title="SPM slice timing exercise" href="spm_slice_timing_exercise.html" />
+    <link rel="prev" title="Smoothing exercise" href="smoothing_solution.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+<div class="section" id="smoothing-exercise">
+<h1>Smoothing exercise<a class="headerlink" href="#smoothing-exercise" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>For code template see: <a class="reference download internal" href="_downloads/smoothing_code.py" download=""><code class="xref download docutils literal"><span class="pre">smoothing_code.py</span></code></a>;</li>
+<li>For solution see: <a class="reference internal" href="smoothing_solution.html"><span class="doc">Smoothing exercise</span></a>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="smoothing-and-convolution">
+<h2>Smoothing and convolution<a class="headerlink" href="#smoothing-and-convolution" title="Permalink to this headline">¶</a></h2>
+<p>Start by smoothing in 1D. We first load a functional image
+(<a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>), and get the first volume:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get first volume from functional</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vol0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Get a plane of the first volume by taking a slice on the third dimension:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get slice over third dimension</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mid_slice</span> <span class="o">=</span> <span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">14</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mid_slice</span><span class="p">)</span>
+<span class="go">&lt;...&gt;</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//smoothing_exercise-5.png">png</a>, <a class="reference external" href=".//smoothing_exercise-5.hires.png">hires.png</a>, <a class="reference external" href=".//smoothing_exercise-5.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/smoothing_exercise-5.png" src="_images/smoothing_exercise-5.png" />
+</div>
+<p>Get one line of this slice, from left to right, from the middle of the brain:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get middle line from middle slice</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mid_line</span> <span class="o">=</span> <span class="n">mid_slice</span><span class="p">[:,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mid_line</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//smoothing_exercise-6.png">png</a>, <a class="reference external" href=".//smoothing_exercise-6.hires.png">hires.png</a>, <a class="reference external" href=".//smoothing_exercise-6.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/smoothing_exercise-6.png" src="_images/smoothing_exercise-6.png" />
+</div>
+<p>We are going to start by smoothing this line.  This is smoothing in one
+dimension.</p>
+<p>Here is the <code class="docutils literal"><span class="pre">fwhm2sigma</span></code> function from the page <a class="reference external" href="https://matthew-brett.github.io/teaching/smoothing_as_convolution.html">smoothing as convolution</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Full-width at half-maximum to sigma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fwhm2sigma</span><span class="p">(</span><span class="n">fwhm</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">fwhm</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Here is a test that the function returns an expected result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Test output of fwhm2sigma for a single FWHM</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">fwhm2sigma</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mf">1.698643600576</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We are going to smooth by 8 pixels full-width at half maximum (FWHM), so we
+need the corresponding <code class="docutils literal"><span class="pre">sigma</span></code> (standard deviation):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- sigma for FWHM 8?</span>
+</pre></div>
+</div>
+<p>We use the probability density function (PDF) of a <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian distribution</a>
+for our kernel:</p>
+<div class="math">
+\[f(x, \mu, \sigma) = p e^q\]</div>
+<p>where:</p>
+<div class="math">
+\[\begin{split}p = \frac{1}{\sqrt{2\pi\sigma^2}} \\
+q = -\frac{(x-\mu)^2}{2\sigma^2}\end{split}\]</div>
+<p>To make our smoothing kernel, we can sample the PDF, for a given <span class="math">\(\mu\)</span> and
+<span class="math">\(\sigma\)</span>.</p>
+<p>We can use <code class="docutils literal"><span class="pre">scipy.stats</span></code> to sample from the PDF.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import the Gaussian (normal) distribution function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">norm_pdf</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span>
+</pre></div>
+</div>
+<p>Next we need to make our smoothing kernel from values in the Gaussian PDF:</p>
+<ul class="simple">
+<li>Work out the +/- limit for the kernel x values with <code class="docutils literal"><span class="pre">limit</span> <span class="pre">=</span> <span class="pre">round(sigma</span> <span class="pre">*</span>
+<span class="pre">4)</span></code></li>
+<li>Make a vector of integers <code class="docutils literal"><span class="pre">x</span></code> to sample the PDF from <code class="docutils literal"><span class="pre">-limit</span></code> to
+<code class="docutils literal"><span class="pre">limit</span></code> - <em>inclusive</em>;</li>
+<li>Sample the PDF at these x values, for <span class="math">\(\mu = 0\)</span> and given
+<span class="math">\(\sigma\)</span>, to get the <code class="docutils literal"><span class="pre">kernel</span></code> vector;</li>
+<li>Plot the x values against the y values;</li>
+<li>Work out how many elements there are from the start of the <code class="docutils literal"><span class="pre">kernel</span></code>
+vector, to the value corresponding to <span class="math">\(x=0\)</span> – this is the
+<code class="docutils literal"><span class="pre">kernel_offset</span></code>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Work out the +/- limit for the kernel x values;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a vector `x` to sample the PDF;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get `kernel` vector by sampling the PDF at these x values (mu=0);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Work out `kernel_offset`.</span>
+</pre></div>
+</div>
+<p>Now we can convolve the line from the image plane with the <code class="docutils literal"><span class="pre">kernel</span></code>. We take
+the result starting at <code class="docutils literal"><span class="pre">kernel_offset</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Convolve image line with kernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice out the result we want using kernel_offset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot smoothed with unsmoothed line</span>
+</pre></div>
+</div>
+<p>Smoothing the whole image slice is a simple extension.  It turns out that we
+can apply smoothing in two dimensions, by first applying the smoothing to each
+line in one dimension. Then we take the output of this smoothing and apply the
+smoothing to the second dimension.</p>
+<ul class="simple">
+<li>Make a new array the same shape as <code class="docutils literal"><span class="pre">mid_slice</span></code> called <code class="docutils literal"><span class="pre">smoothed_slice</span></code>;</li>
+<li>Loop over the first dimension of <code class="docutils literal"><span class="pre">mid_slice</span></code>, and fill each line of
+<code class="docutils literal"><span class="pre">smoothed_slice</span></code> with the smoothed version;</li>
+<li>Loop over the second dimension of <code class="docutils literal"><span class="pre">smoothed_slice</span></code> and replace each line
+with the smoothed version;</li>
+<li>Show.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a new array `smoothed_slice` for smoothed output</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Loop over first dimension applying kernel as above</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Loop over second dimension of smoothed image, applying kernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show with `imshow`</span>
+</pre></div>
+</div>
+<p>We can do the same thing with <code class="docutils literal"><span class="pre">scipy.ndimage.gaussian_filter</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import gaussian_filter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">gaussian_filter</span>
+</pre></div>
+</div>
+<p>Have a look at the help for <code class="docutils literal"><span class="pre">gaussian_filter</span></code>.</p>
+<p>Use <code class="docutils literal"><span class="pre">gaussian_filter</span></code> to make another smoothed version of <code class="docutils literal"><span class="pre">mid_slice</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use gaussian filter to smooth `mid_slice`</span>
+</pre></div>
+</div>
+<p>Subtract the <code class="docutils literal"><span class="pre">gaussian_filter</span></code> version from your handcrafted version.</p>
+<p>Can you explain the difference?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Subtract two versions of the smoothed slice, show</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PSYCH 214 Fall 2016</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_data.html">Example datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="_downloads">Website downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://nipy.bic.berkeley.edu/psych-214">Dataset downloads</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/psych-214-fall-2016">Github organization</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="smoothing_solution.html" title="previous chapter">Smoothing exercise</a></li>
+      <li>Next: <a href="spm_slice_timing_exercise.html" title="next chapter">SPM slice timing exercise</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Matthew Brett, JB Poline.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/smoothing_exercise.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

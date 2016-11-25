@@ -183,3 +183,10 @@ version control using git.
     truthiness
     dipy_registration
     anterior_cingulate
+    participate
+    introducing_nipype
+    smoothing_solution
+    smoothing_exercise
+    spm_slice_timing_exercise
+    spm_slice_timing_solution
+    full_scripting
