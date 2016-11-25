@@ -117,14 +117,13 @@ the prefix <cite>swaf</cite>.</li>
 <span class="n">TR</span> <span class="o">=</span> <span class="mf">2.5</span>
 <span class="n">slice_time_ref_slice</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 1-based indexing</span>
 <span class="n">n_dummies</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="c1"># Realign &quot;write_which&quot; input. The 0 means &#39;do not write resmapled versions of</span>
-<span class="c1"># any of the individual volumes`.  The 1 means &#39;write mean of across volumes</span>
-<span class="c1"># after motion correction&#39;.  See config/spm_cfg_realign.m in the SPM12</span>
-<span class="c1"># distribution.</span>
+<span class="c1"># Realign &quot;write_which&quot; input. The 0 means &#39;do not write resampled versions of</span>
+<span class="c1"># any of the individual volumes`.  The 1 means &#39;write mean across volumes after</span>
+<span class="c1"># motion correction&#39;.  See config/spm_cfg_realign.m in the SPM12 distribution.</span>
 <span class="n">write_which</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="c1"># Normalize write parameters.  Bounding box gives [[left, posterior, inferior],</span>
-<span class="c1"># [right, anterior, superior]] millimeter coordinates of the voxel grid that</span>
-<span class="c1"># SPM will use to write out the new images in template space.  See</span>
+<span class="c1"># Normalize write parameters.  Bounding box gives extreme [[left, posterior,</span>
+<span class="c1"># inferior], [right, anterior, superior]] millimeter coordinates of the voxel</span>
+<span class="c1"># grid that SPM will use to write out the new images in template space.  See</span>
 <span class="c1"># spm_preproc_write8.m for use of the bounding box values.</span>
 <span class="n">bounding_box</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">78.</span><span class="p">,</span> <span class="o">-</span><span class="mf">112.</span><span class="p">,</span> <span class="o">-</span><span class="mf">46.</span><span class="p">],</span> <span class="p">[</span><span class="mf">78.</span><span class="p">,</span> <span class="mf">76.</span><span class="p">,</span> <span class="mf">86.</span><span class="p">]]</span>
 </pre></div>
