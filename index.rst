@@ -187,3 +187,6 @@ version control using git.
     introducing_nipype
     smoothing_solution
     smoothing_exercise
+    spm_slice_timing_exercise
+    spm_slice_timing_solution
+    full_scripting

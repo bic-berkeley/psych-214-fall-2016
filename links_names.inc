@@ -201,6 +201,7 @@
    https://matthew-brett.github.io/teaching/fdr.html
 .. _random fields:
    https://matthew-brett.github.io/teaching/random_fields.html
+.. _slice timing:
 .. _slice timing correction:
    https://matthew-brett.github.io/teaching/slice_timing.html
 .. _optimizing space:

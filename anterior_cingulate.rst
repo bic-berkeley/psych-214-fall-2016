@@ -91,6 +91,9 @@ We will be using `MRIcron`_:
 
   .. image:: images/mricron_draw.png
 
+  Have a look at `draw with mricron`_ for the drawing actions you will need
+  using the keyboard and mouse.
+
 * using the diagram from the Vogt paper, draw your estimate for the position
   for left and right area 24 (a, b, c combined) on five adjacent
   slices through the anterior cingulate.  Click on the lower arrow of the y

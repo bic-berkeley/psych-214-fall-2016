@@ -77,4 +77,6 @@ clipped_image.nii
 git_*.pdf
 .ropeproject/
 nipype_settings.py
-pyscript.m
+pyscript*.m
+*fds114_sub*.*
+*cds114_sub*.*

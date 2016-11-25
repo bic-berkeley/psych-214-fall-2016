@@ -225,6 +225,7 @@ TEMPLATES = anatomical camera \
 			reslicing_with_affines \
 			optimizing_affine \
 			applying_deformations \
+			spm_slice_timing \
 			smoothing
 
 TPL_FILES = $(TEMPLATES:=.tpl)
