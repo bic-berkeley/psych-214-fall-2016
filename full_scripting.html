@@ -77,12 +77,12 @@ image with a filename prefix of <cite>f</cite>.</li>
 <a class="reference internal" href="spm_slice_timing_exercise.html"><span class="doc">SPM slice timing exercise</span></a> for details.  The resulting funcitonal
 image will have a filename prefix of <cite>af</cite>;</li>
 <li>run motion correction estimation, and write out the mean image across
-volumes.  You will need <cite>nipype.interfaces.spm.Realign</cite>.  The mean image
+volumes.  You will need <code class="docutils literal"><span class="pre">nipype.interfaces.spm.Realign</span></code>.  The mean image
 will have filename prefix <cite>meanaf</cite>.   Hint: to write only the mean image,
 you need a <code class="docutils literal"><span class="pre">inputs.write_which</span></code> value of <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1]</span></code>.  See the script
 fragment below;</li>
 <li>estimate the registration of the structural image to the mean functional
-image: <cite>nipype.interfaces.spm.Coregister</cite>;</li>
+image: <code class="docutils literal"><span class="pre">nipype.interfaces.spm.Coregister</span></code>;</li>
 <li>register the (registered) structural image to the template and write the
 slice-time corrected functional image with these estimated parameters:
 <code class="docutils literal"><span class="pre">nipype.interfaces.spm.Normalize12</span></code>.  SPM calls this &#8220;spatial

@@ -35,12 +35,12 @@ The script should do the following, using nibabel and Nipype:
   :doc:`spm_slice_timing_exercise` for details.  The resulting funcitonal
   image will have a filename prefix of `af`;
 * run motion correction estimation, and write out the mean image across
-  volumes.  You will need `nipype.interfaces.spm.Realign`.  The mean image
+  volumes.  You will need ``nipype.interfaces.spm.Realign``.  The mean image
   will have filename prefix `meanaf`.   Hint: to write only the mean image,
   you need a ``inputs.write_which`` value of ``[0, 1]``.  See the script
   fragment below;
 * estimate the registration of the structural image to the mean functional
-  image: `nipype.interfaces.spm.Coregister`;
+  image: ``nipype.interfaces.spm.Coregister``;
 * register the (registered) structural image to the template and write the
   slice-time corrected functional image with these estimated parameters:
   ``nipype.interfaces.spm.Normalize12``.  SPM calls this "spatial

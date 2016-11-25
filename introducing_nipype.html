@@ -118,16 +118,14 @@ path by default. You can add SPM to the MATLAB path like this:</p>
 any script that we write that uses nipype.</p>
 <p>In your current directory, make a new file called <code class="docutils literal"><span class="pre">nipype_settings.py</span></code> with
 contents like this:</p>
-<div class="admonition">
-<em class="first">Contents of </em><code class="docutils literal"><span class="pre">nipype_settings.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>&quot;&quot;&quot; Defaults for using nipype
-&quot;&quot;&quot;
-import nipype.interfaces.matlab as nim
-# If you needed to set the default matlab command above
-nim.MatlabCommand.set_default_matlab_cmd(&#39;/Applications/MATLAB_R2014a.app/bin/matlab&#39;)
-# If you needed to set the SPM path above
-nim.MatlabCommand.set_default_paths(&#39;/Users/mb312/dev_trees/spm12&#39;)
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Defaults for using nipype</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">nipype.interfaces.matlab</span> <span class="kn">as</span> <span class="nn">nim</span>
+<span class="c1"># If you needed to set the default matlab command above</span>
+<span class="n">nim</span><span class="o">.</span><span class="n">MatlabCommand</span><span class="o">.</span><span class="n">set_default_matlab_cmd</span><span class="p">(</span><span class="s1">&#39;/Applications/MATLAB_R2014a.app/bin/matlab&#39;</span><span class="p">)</span>
+<span class="c1"># If you needed to set the SPM path above</span>
+<span class="n">nim</span><span class="o">.</span><span class="n">MatlabCommand</span><span class="o">.</span><span class="n">set_default_paths</span><span class="p">(</span><span class="s1">&#39;/Users/mb312/dev_trees/spm12&#39;</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 <p>Now try:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nipype_settings</span>
