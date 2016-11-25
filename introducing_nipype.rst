@@ -102,9 +102,7 @@ We are going to put the setup we need into a Python file we can import from
 any script that we write that uses nipype.
 
 In your current directory, make a new file called ``nipype_settings.py`` with
-contents like this:
-
-.. writefile:: nipype_settings.py
+contents like this::
 
     """ Defaults for using nipype
     """

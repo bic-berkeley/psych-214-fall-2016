@@ -23,7 +23,7 @@ There is one grade point for one completed exercise, two for two completed
 exercises.  For three completed exercises you earn an extra point to be
 counted to your project participation score.
 
-.. _self-evaluation:
+.. _project-self-evaluation:
 
 ***********************
 Project self-evaluation
