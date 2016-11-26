@@ -31,7 +31,7 @@ The script should do the following, using nibabel and Nipype:
 * drop the first 4 volumes from the functional run.  Save the new functional
   image with a filename prefix of `f`.
 * run slice timing, assuming an ascending interleaved slice acqusition order
-  (0, 2, ..., 1, 3, ... assuming 0-based indexing).  See
+  (first, third, ..., second, fourth, ...).  See
   :doc:`spm_slice_timing_exercise` for details.  The resulting funcitonal
   image will have a filename prefix of `af`;
 * run motion correction estimation, and write out the mean image across
