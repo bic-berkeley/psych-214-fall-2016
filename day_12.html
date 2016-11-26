@@ -55,9 +55,23 @@
 <h2>Teaching<a class="headerlink" href="#teaching" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="registration">
 <h3>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><a class="reference internal" href="dipy_registration.html"><span class="doc">Registration with dipy</span></a>;</li>
-<li>example registration problem – <a class="reference internal" href="anterior_cingulate.html"><span class="doc">Anterior cingulate</span></a>.</li>
+<ul>
+<li><p class="first">nibabel image viewer:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">In [3]: </span><span class="o">%</span><span class="k">matplotlib</span>
+<span class="gp">In [4]: </span><span class="n">structural</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">)</span>
+<span class="gp">In [5]: </span><span class="n">functional</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
+<span class="gp">In [6]: </span><span class="n">func_viewer</span> <span class="o">=</span> <span class="n">functional</span><span class="o">.</span><span class="n">orthoview</span><span class="p">()</span>
+<span class="gp">In [7]: </span><span class="n">struct_viewer</span> <span class="o">=</span> <span class="n">structural</span><span class="o">.</span><span class="n">orthoview</span><span class="p">()</span>
+<span class="gp">In [8]: </span><span class="n">func_viewer</span><span class="o">.</span><span class="n">link_to</span><span class="p">(</span><span class="n">struct_viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference internal" href="dipy_registration.html"><span class="doc">Registration with dipy</span></a>;</p>
+</li>
+<li><p class="first">example registration problem – <a class="reference internal" href="anterior_cingulate.html"><span class="doc">Anterior cingulate</span></a>.</p>
+</li>
 </ul>
 </div>
 <div class="section" id="scripting">

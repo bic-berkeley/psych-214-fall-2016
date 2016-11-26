@@ -48,7 +48,7 @@ One of the most useful features of IPython_ is its ability to return
 docstrings when you add a question mark and press return after the name of the
 function you are interested in:
 
-.. ipython::
+.. code-block:: ipython
 
     In [1]: def func(arg1):
        ...:     "This is the function docstring"
