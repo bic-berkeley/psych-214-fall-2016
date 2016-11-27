@@ -28,14 +28,14 @@ Conceptually, Otsu's method proceeds like this:
       n_k^{left} = \sum_{i=1}^{k} c_i \\
       \mu_k^{left} = \frac{1}{n_k^{left}} \sum_{i=1}^{k} c_i v_i \\
       n_k^{right} = \sum_{i={k+1}}^{L} c_i \\
-      \mu_k^{right} = \frac{1}{n_k^{right}} \sum_{i={k+1}}^{L} v_i c_i
+      \mu_k^{right} = \frac{1}{n_k^{right}} \sum_{i={k+1}}^{L} c_i v_i
 
 * calculate the sum of squared deviations from the left and right means:
 
   .. math::
 
-      \mathrm{SSD}_k^{left} = \sum_{i=1}^{k} (v_i - \mu_k^{left}) c_i \\
-      \mathrm{SSD}_k^{right} = \sum_{i={k+1}}^{L} (v_i - \mu_k^{right}) c_i \\
+      \mathrm{SSD}_k^{left} = \sum_{i=1}^{k} c_i (v_i - \mu_k^{left}) \\
+      \mathrm{SSD}_k^{right} = \sum_{i={k+1}}^{L} c_i (v_i - \mu_k^{right}) \\
       \mathrm{SSD}_k^{total} = SSD_k^{left} + SSD_k^{right}
 
 * find the bin number $k$ that minimizes $\mathrm{SSD}_k^{total}$:
