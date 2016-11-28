@@ -69,12 +69,12 @@ histogram:</p>
 \[\begin{split}n_k^{left} = \sum_{i=1}^{k} c_i \\
 \mu_k^{left} = \frac{1}{n_k^{left}} \sum_{i=1}^{k} c_i v_i \\
 n_k^{right} = \sum_{i={k+1}}^{L} c_i \\
-\mu_k^{right} = \frac{1}{n_k^{right}} \sum_{i={k+1}}^{L} v_i c_i\end{split}\]</div>
+\mu_k^{right} = \frac{1}{n_k^{right}} \sum_{i={k+1}}^{L} c_i v_i\end{split}\]</div>
 </li>
 <li><p class="first">calculate the sum of squared deviations from the left and right means:</p>
 <div class="math">
-\[\begin{split}\mathrm{SSD}_k^{left} = \sum_{i=1}^{k} (v_i - \mu_k^{left}) c_i \\
-\mathrm{SSD}_k^{right} = \sum_{i={k+1}}^{L} (v_i - \mu_k^{right}) c_i \\
+\[\begin{split}\mathrm{SSD}_k^{left} = \sum_{i=1}^{k} c_i (v_i - \mu_k^{left}) \\
+\mathrm{SSD}_k^{right} = \sum_{i={k+1}}^{L} c_i (v_i - \mu_k^{right}) \\
 \mathrm{SSD}_k^{total} = SSD_k^{left} + SSD_k^{right}\end{split}\]</div>
 </li>
 <li><p class="first">find the bin number <span class="math">\(k\)</span> that minimizes <span class="math">\(\mathrm{SSD}_k^{total}\)</span>:</p>

@@ -34,15 +34,15 @@ cingulate anatomy to the template.
   * :download:`ds114_sub009_highres_brain_mask.nii`;
   * :download:`mni_icbm152_t1_tal_nlin_asym_09a.nii`;
   * :download:`mni_icbm152_t1_tal_nlin_asym_09a_mask.nii`;
-  * :download:`ds114_sub009_highres_brain_mask.nii`;
   * :download:`dipy_registration.py`;
 
 * have a look at ``dipy_registration.py`` for useful functions;
 
-* open IPython and::
+* open IPython and:
+
+  .. code-block:: ipython
 
      In [1]: run dipy_registration.py
-
      In [2]: mapping = register_save('mni_icbm152_t1_tal_nlin_asym_09a.nii',
      ...:                            'mni_icbm152_t1_tal_nlin_asym_09a_mask.nii',
      ...:                            'ds114_sub009_highres.nii',
