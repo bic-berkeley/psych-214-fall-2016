@@ -190,3 +190,4 @@ version control using git.
     spm_slice_timing_exercise
     spm_slice_timing_solution
     full_scripting
+    lab_12
