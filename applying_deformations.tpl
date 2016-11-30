@@ -211,6 +211,8 @@ Hint: remember that :doc:`map_coordinates <map_coordinates>` expects the
 3-length coordinate dimension to be first, but ``deformations_data`` |--| at
 the moment |--| has the 3-length coordinate dimension last.
 
+.. rewrite using reshape, mat vec
+
 .. nbplot::
 
     >>> #- * get mapping from voxels in TPM to voxels in the subject image;

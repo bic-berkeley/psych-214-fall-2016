@@ -10,6 +10,8 @@ Requirements:
 * :doc:`nibabel_affines`;
 * :doc:`nibabel_apply_affine`;
 
+.. see coordinate_board.jpg for diagram needed about here.
+
 :doc:`scipy.ndimage.affine_transform <resampling_with_ndimage>` is a routine
 that samples between images where there is an affine transform between the
 coordinates of the output image and the input image.
@@ -137,6 +139,8 @@ coordinates ourselves, and apply the transform to them.  We need
 
     >>> in_vox_coords[:, 1, 0, 0]
     array([1, 0, 0])
+
+.. rewrite using reshape, mat vec
 
 We transform the coordinate grid using nibabel's :doc:`apply_affine
 <nibabel_apply_affine>` function:
