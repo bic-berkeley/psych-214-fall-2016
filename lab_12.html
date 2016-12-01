@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Labs &mdash; Functional MRI methods</title>
+    <title>Scripting using nipype &mdash; Functional MRI methods</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,7 @@
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="Functional MRI methods" href="index.html" />
-    <link rel="next" title="Projects" href="projects.html" />
-    <link rel="prev" title="November 28: registration and scripting" href="day_12.html" />
+    <link rel="prev" title="Scripting of SPM analysis with nipype" href="full_scripting.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -44,43 +43,21 @@
           <div class="body" role="main">
             
   <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
-<div class="section" id="labs">
-<h1>Labs<a class="headerlink" href="#labs" title="Permalink to this headline">¶</a></h1>
-<p>Labs are Fridays from 2pm – 3pm at 10 Giannini Hall.</p>
-<ul>
-<li><p class="first">Friday September 2 – <a class="reference internal" href="lab_00.html"><span class="doc">Lab 00</span></a>;</p>
-</li>
-<li><p class="first">Friday September 9 – <a class="reference internal" href="lab_01_exercise.html"><span class="doc">Lab 01 exercise</span></a>;</p>
-<blockquote>
-<div><ul class="simple">
-<li>See discussion at <a class="reference internal" href="index_reshape.html"><span class="doc">Index ordering and reshape in NumPy and MATLAB</span></a>;</li>
+<div class="section" id="scripting-using-nipype">
+<h1>Scripting using nipype<a class="headerlink" href="#scripting-using-nipype" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="introducing_nipype.html"><span class="doc">Introducing nipype</span></a>;</li>
+<li><a class="reference internal" href="spm_slice_timing_exercise.html"><span class="doc">SPM slice timing exercise</span></a>;</li>
+<li>the rest of the analysis in SPM:<ul>
+<li>motion correction (registration between first image and later images in
+time series);</li>
+<li>coregistration (registration between structural and functional);</li>
+<li>spatial normalization (registration between structural and template);</li>
+<li>reslicing (resampling images in to space of template);</li>
+<li>smoothing;</li>
 </ul>
-</div></blockquote>
 </li>
-<li><p class="first">Thursday September 15 – <a class="reference internal" href="lab_02.html"><span class="doc">Git walk-through</span></a>;</p>
-</li>
-<li><p class="first">Thursday September 22 – <a class="reference internal" href="lab_03.html"><span class="doc">Outlier detection and git / github workflow</span></a>;</p>
-</li>
-<li><p class="first">Thursday September 29 – <a class="reference internal" href="lab_04.html"><span class="doc">Git and github workflow</span></a>;</p>
-</li>
-<li><p class="first">Thursday October 6 – <a class="reference internal" href="lab_05.html"><span class="doc">Some git, some multiple regression</span></a>;</p>
-</li>
-<li><p class="first">Thursday October 13 – <a class="reference internal" href="lab_06.html"><span class="doc">Github workflow</span></a>;</p>
-</li>
-<li><p class="first">Thursday October 20 – <a class="reference internal" href="lab_07.html"><span class="doc">F tests; convolution; project template</span></a>;</p>
-</li>
-<li><p class="first">Thursday October 27 – continued work from <a class="reference internal" href="day_07.html"><span class="doc">October 24: the HRF, modeling and statistical maps</span></a>;</p>
-</li>
-<li><p class="first">Thursday November 3 – <a class="reference internal" href="lab_09.html"><span class="doc">Multiple comparison correction, whole brain analysis</span></a>;</p>
-</li>
-<li><p class="first">Thursday November 10 – <a class="reference internal" href="lab_10.html"><span class="doc">Optimization and image registration</span></a>.</p>
-</li>
-<li><p class="first">Thursday November 17 – <a class="reference internal" href="lab_11.html"><span class="doc">Affine transformations</span></a>.</p>
-</li>
-<li><p class="first">Thursday November 17 – <a class="reference internal" href="lab_11.html"><span class="doc">Affine transformations</span></a>.</p>
-</li>
-<li><p class="first">Thursday December 1 – <a class="reference internal" href="lab_12.html"><span class="doc">Scripting using nipype</span></a>.</p>
-</li>
+<li><a class="reference internal" href="full_scripting.html"><span class="doc">Scripting of SPM analysis with nipype</span></a>.</li>
 </ul>
 </div>
 
@@ -100,12 +77,12 @@
 
 
 <h3>Navigation</h3>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparation.html">Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Labs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs.html">Labs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topics.html">Course material by topic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises and homework</a></li>
@@ -128,8 +105,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="day_12.html" title="previous chapter">November 28: registration and scripting</a></li>
-      <li>Next: <a href="projects.html" title="next chapter">Projects</a></li>
+      <li>Previous: <a href="full_scripting.html" title="previous chapter">Scripting of SPM analysis with nipype</a></li>
   </ul></li>
 </ul>
 </div>
@@ -155,7 +131,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
       
       |
-      <a href="_sources/labs.txt"
+      <a href="_sources/lab_12.txt"
           rel="nofollow">Page source</a>
     </div>
 
