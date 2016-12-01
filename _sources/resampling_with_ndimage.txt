@@ -71,6 +71,8 @@ transform*.
 Scipy ndimage and affine_transform
 **********************************
 
+.. see coordinate_board.jpg for diagram needed about here.
+
 Scipy has a function for doing reampling with transformations, called
 `scipy.ndimage.affine_transform`_.
 

@@ -9,34 +9,12 @@ Introducing nipype
     >>> from __future__ import print_function
     >>> from __future__ import division
 
-.. nbplot::
-
-    >>> #: standard imports
-    >>> import numpy as np
-    >>> import matplotlib.pyplot as plt
-    >>> # print arrays to 4 decimal places
-    >>> np.set_printoptions(precision=4, suppress=True)
-    >>> import numpy.linalg as npl
-    >>> import nibabel as nib
-
-.. nbplot::
-
-    >>> #: gray colormap and nearest neighbor interpolation by default
-    >>> plt.rcParams['image.cmap'] = 'gray'
-    >>> plt.rcParams['image.interpolation'] = 'nearest'
-
 `Nipype`_ is a Python module that provides Python interfaces to many imaging
 tools, including SPM, AFNI and FSL.
 
 We install it with ``pip`` in the usual way::
 
     pip3 install --user nipype
-
-We install like this (from your ``cmd`` or ``Terminal.app`` window):
-
-::
-
-    pip install git+https://github.com/nipy/nipype.git
 
 After this has run, check that you can import nipype with:
 
