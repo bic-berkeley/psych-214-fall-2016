@@ -15,6 +15,7 @@
 import sys
 import os
 from collections import OrderedDict
+from distutils.spawn import find_executable
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -335,6 +336,9 @@ texinfo_documents = [
 # Trim doctest flags from doctest blocks (not just .. doctest:: directives)
 trim_doctest_flags = True
 
+# Config of nbplot directive
+nbplot_flags = {"have_matlab": bool(find_executable('matlab'))}
+
 # Config of dyntable directive
 dyntable_use_plot_ns = True
 dyntable_plot_context = 'nb2plots.nbplots.plot_context'
@@ -351,8 +355,7 @@ autorun_languages = {}
 autorun_languages['octave'] = u'octave --silent --verbose --traditional'
 autorun_languages['octave_prefix_chars'] = 3
 
-# Add the 'copybutton' javascript, to hide/show the prompt in code
-# examples
+# Add the 'copybutton' javascript, to hide/show the prompt in code examples
 def setup(app):
     app.add_javascript('copybutton.js')
 

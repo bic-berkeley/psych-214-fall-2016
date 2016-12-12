@@ -108,7 +108,7 @@ the bottom, and then came back and collected the even index slices:
 
 .. nbplot::
 
-    >>> # - generate acq_order list
+    >>> #- generate acq_order list
     >>> odd = range(1, num_slices+1, 2)
     >>> even = range(2, num_slices+1, 2)
     >>> acq_order = list(odd) + list(even)
@@ -135,7 +135,7 @@ If you just ran SPM slice timing via the GUI, delete the image that SPM saved:
 
     >>> #: import the routines for working with the operating system
     >>> import os
-    >>> # Delete file if it exists
+    >>> # Delete previous slice-time corrected file if it exists
     >>> if os.path.exists('afds114_sub009_t2r1.nii'):
     ...     os.unlink('afds114_sub009_t2r1.nii')  # delete file
 
@@ -173,6 +173,7 @@ Hints:
     >>> st.inputs.ref_slice = 1
 
 .. nbplot::
+    :run-parts: () if not have_matlab else 0
 
     >>> #- Run the batch job
     >>> st.run()
@@ -184,6 +185,7 @@ directory.
 .. solution-start
 
 .. nbplot::
+    :run-parts: () if not have_matlab else 0
 
     >>> # check for file created by nipype slice timing
     >>> assert os.path.exists('afds114_sub009_t2r1.nii')

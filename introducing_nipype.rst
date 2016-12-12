@@ -1,5 +1,5 @@
 ##################
-Introducing nipype
+Introducing Nipype
 ##################
 
 .. nbplot::
@@ -16,23 +16,24 @@ We install it with ``pip`` in the usual way::
 
     pip3 install --user nipype
 
-After this has run, check that you can import nipype with:
+After this has run, check that you can import Nipype with:
 
 .. nbplot::
 
     >>> import nipype
 
-We are interested in the nipype ``interfaces`` sub-package.  Specifically, we
+We are interested in the Nipype ``interfaces`` sub-package.  Specifically, we
 want the interfaces to the SPM routines:
 
 .. nbplot::
 
     >>> from nipype.interfaces import spm
 
-Our first job is to make sure that nipype can run MATLAB. Let's check with a
+Our first job is to make sure that Nipype can run MATLAB. Let's check with a
 test call:
 
 .. nbplot::
+    :run-parts: () if not have_matlab else 0
 
     >>> import nipype.interfaces.matlab as nim
     >>> mlab = nim.MatlabCommand()
@@ -40,8 +41,8 @@ test call:
     >>> mlab.run()
     <...>
 
-If ``nipype`` does not have the right command to start MATLAB, this will fail
-with an error. We can set the command to start MATLAB like this:
+If Nipype does not have the right command to start MATLAB, this will fail with
+an error. We can set the command to start MATLAB like this:
 
 .. nbplot::
 
@@ -49,11 +50,14 @@ with an error. We can set the command to start MATLAB like this:
 
 Check this is working by running the code above.
 
-Next we need to make sure that nipype has SPM on the MATLAB path when it
+Next we need to make sure that Nipype has SPM on the MATLAB path when it
 is running MATLAB. Try running this command to get the SPM version.
 
+.. The following assumes that, if MATLAB is on the path, then it also has SPM
+   on the MATLAB path.
+
 .. nbplot::
-    :raises: RuntimeError
+    :run-parts: () if not have_matlab else 0
 
     >>> mlab = nim.MatlabCommand()
     >>> mlab.inputs.script = "spm ver"  # get SPM version
@@ -70,6 +74,7 @@ path by default. You can add SPM to the MATLAB path like this:
 Now try running the ``spm ver`` command again:
 
 .. nbplot::
+    :run-parts: () if not have_matlab else 0
 
     >>> mlab = nim.MatlabCommand()
     >>> mlab.inputs.script = "spm ver"  # get SPM version
@@ -77,7 +82,7 @@ Now try running the ``spm ver`` command again:
     <...>
 
 We are going to put the setup we need into a Python file we can import from
-any script that we write that uses nipype.
+any script that we write that uses Nipype.
 
 In your current directory, make a new file called ``nipype_settings.py`` with
 contents like this::
@@ -93,6 +98,7 @@ contents like this::
 Now try:
 
 .. nbplot::
+    :run-parts: () if not have_matlab else 0
 
     >>> import nipype_settings
     >>> import nipype.interfaces.matlab as nim
