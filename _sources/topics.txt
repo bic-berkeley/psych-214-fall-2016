@@ -118,6 +118,7 @@ Image processing and spatial transformations
 * :doc:`saving_images`;
 * `introduction to smoothing`_;
 * `smoothing as convolution`_.
+* `optimizing spatial transformations`_.
 
 ****************
 Specific to FMRI
@@ -130,4 +131,6 @@ Specific to FMRI
 * :doc:`nibabel_affines`;
 * :doc:`nibabel_apply_affine`;
 * :doc:`tr_and_headers`;
-* :doc:`dipy_registration`.
+* :doc:`dipy_registration` and the :doc:`anterior_cingulate` exercise;
+* :doc:`introducing_nipype`;
+* See also: :doc:`spm_slice_timing_exercise`; :doc:`full_scripting` exercise.

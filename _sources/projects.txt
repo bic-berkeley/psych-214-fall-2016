@@ -143,3 +143,5 @@ Grading
 *******
 
 See :doc:`project_grading`.
+
+See also :doc:`participate`.

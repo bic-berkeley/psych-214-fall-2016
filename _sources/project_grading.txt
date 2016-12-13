@@ -58,3 +58,5 @@ marks and three check pluses.
 |                | results and figures in project      | generates all results and           | analysis.  Recipes short, simple          |
 |                | report                              | figures in report                   | and well automated with few manual steps. |
 +----------------+-------------------------------------+-------------------------------------+-------------------------------------------+
+
+See also :doc:`participate`.

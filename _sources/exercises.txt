@@ -68,6 +68,36 @@ Exercises and homework
     * :doc:`slice_timing_exercise` |--| solution:
       :doc:`slice_timing_solution`.
 
+* :doc:`day_10`:
+
+    * :doc:`optimizing_rotation_exercise` |--| solution:
+      :doc:`optimizing_rotation_solution`;
+    * :doc:`reslicing_with_affines_exercise` |--| solution:
+      :doc:`reslicing_with_affines_solution`.
+
+* :doc:`lab_11`:
+
+    * :doc:`what_extra_transform_exercise` |--| solution:
+      :doc:`what_extra_transform_solution`;
+    * :doc:`optimizing_affine_exercise` |--|
+      :doc:`optimizing_affine_solution`.
+
+* :doc:`day_11`:
+
+    * :doc:`applying_deformations_exercise` |--| solution:
+      :doc:`applying_deformations_solution`.
+
+* :doc:`day_12`:
+
+    * :doc:`anterior_cingulate` exercise.
+
+* :doc:`lab_12`:
+
+    * :doc:`spm_slice_timing_exercise` |--| solution:
+      :doc:`spm_slice_timing_solution`;
+    * :doc:`full_scripting` |--| solution:
+      :download:`nipype_ds114_sub009_t2r1.py`.
+
 ***************
 Extra exercises
 ***************
