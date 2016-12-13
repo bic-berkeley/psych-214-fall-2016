@@ -1,4 +1,4 @@
-# Sadly, you'll also need Octave on the PATH
+# Full tests should have MATLAB on the PATH
 sphinx
 ghp-import
 matplotlib>=1.4.3
