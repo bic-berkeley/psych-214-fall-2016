@@ -109,3 +109,5 @@ evaluation:
    that you learned;
 #. Include a discussion of problem-solving methods you used during the
    project.
+
+See :doc:`participate_grading`.

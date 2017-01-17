@@ -1,8 +1,8 @@
-######
-Lab 00
-######
+######################
+Basic Python exercises
+######################
 
-Make sure you have read and understood * :doc:`brisk_python`.
+Make sure you have read and understood :doc:`brisk_python`.
 
 Next fetch the exercises using the ``git clone`` command below.  The exercises
 are slightly modified versions of the exercises from the `Google Python

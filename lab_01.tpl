@@ -1,6 +1,6 @@
-###############
-Lab 01 solution
-###############
+####################################
+Lab 01 - September 9th - basic Numpy
+####################################
 
 .. testsetup::
 
@@ -178,6 +178,8 @@ Simple visualizations
 ************************************
 Indexing and slicing, array creation
 ************************************
+
+See discussion at :doc:`index_reshape`.
 
 .. 10 minutes.
 

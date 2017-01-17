@@ -28,8 +28,7 @@ version control using git.
     syllabus
     preparation
     logistics
-    classes
-    labs
+    classes_and_labs
     projects
     topics
     exercises
@@ -191,3 +190,6 @@ version control using git.
     spm_slice_timing_solution
     full_scripting
     lab_12
+    classes
+    labs
+    participate_grading
