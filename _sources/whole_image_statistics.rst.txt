@@ -243,8 +243,7 @@ This is the number of voxels for which the mask value is True:
 .. nbplot::
     :include-source: false
 
-    >>> np.sum(mask) == 21604
-    True
+    >>> assert np.sum(mask) == 21604
 
 We can use the 3D mask to slice into the 4D data matrix.  For every True value
 in the 3D mask, the result has the vector of values over time for that voxel.
