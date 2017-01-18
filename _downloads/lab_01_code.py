@@ -1,4 +1,4 @@
-""" Lab 01 exercise
+""" Basic numpy exercises
 """
 #: Compatibility with Python 2
 from __future__ import print_function  # print('me') instead of print 'me'

@@ -28,18 +28,22 @@ import numpy.linalg as npl
 
 #- Calculate the mean across columns
 
+
 #- Row means copied N times to become a 2 by N array
 
 #- Subtract the means for each row, put the result into X
 #- Show the means over the columns, after the subtraction
 
+
 #- Plot the signal in the first row against the signal in the second
 
 #- Calculate unscaled covariance matrix for X
 
+
 #- Use SVD to return U, S, VT matrices from unscaled covariance
 
 #- Show that the columns in U each have vector length 1
+
 
 #- Confirm orthogonality of columns in U
 
@@ -47,6 +51,7 @@ import numpy.linalg as npl
 
 #- Show the total sum of squares in X
 #- Is this (nearly) the same as the sum of the values in S?
+
 
 #- Plot the signal in the first row against the signal in the second
 #- Plot line corresponding to a scaled version of the first principal component

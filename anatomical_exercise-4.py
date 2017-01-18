@@ -1,1 +1,0 @@
-#- How many pixel values?

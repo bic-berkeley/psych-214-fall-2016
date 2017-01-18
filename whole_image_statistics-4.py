@@ -1,1 +1,0 @@
-regressor = regressor[4:]
