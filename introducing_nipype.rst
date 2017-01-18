@@ -33,9 +33,14 @@ Our first job is to make sure that nipype can run MATLAB. Let's check with a
 test call:
 
 .. nbplot::
+    :render-parts: (0, 1)
+    :run-parts: (0, 1) if have_matlab else 0
 
     >>> import nipype.interfaces.matlab as nim
     >>> mlab = nim.MatlabCommand()
+
+    .. part
+
     >>> mlab.inputs.script = "version"  # get MATLAB version
     >>> mlab.run()
     <...>
@@ -47,13 +52,16 @@ with an error. We can set the command to start MATLAB like this:
 
     >>> nim.MatlabCommand.set_default_matlab_cmd('/Applications/MATLAB_R2014a.app/bin/matlab')
 
+where ``/Applications/MATLAB_R2014a.app/bin/matlab`` is the path to the MATLAB
+application file.
+
 Check this is working by running the code above.
 
 Next we need to make sure that nipype has SPM on the MATLAB path when it
 is running MATLAB. Try running this command to get the SPM version.
 
 .. nbplot::
-    :raises: RuntimeError
+    :run-parts: 0 if have_spm else ()
 
     >>> mlab = nim.MatlabCommand()
     >>> mlab.inputs.script = "spm ver"  # get SPM version
@@ -61,15 +69,19 @@ is running MATLAB. Try running this command to get the SPM version.
     <...>
 
 If this gives an error message, you may not have SPM set up on your MATLAB
-path by default. You can add SPM to the MATLAB path like this:
+path by default. You can use Nipype to add SPM to the MATLAB path like this:
 
 .. nbplot::
 
     >>> nim.MatlabCommand.set_default_paths('/Users/mb312/dev_trees/spm12')
 
+Another option is to use the MATLAB GUI to add this directory to the MATLAB
+path, and save this path for future sessions.
+
 Now try running the ``spm ver`` command again:
 
 .. nbplot::
+    :run-parts: 0 if have_spm else ()
 
     >>> mlab = nim.MatlabCommand()
     >>> mlab.inputs.script = "spm ver"  # get SPM version
@@ -93,6 +105,7 @@ contents like this::
 Now try:
 
 .. nbplot::
+    :run-parts: 0 if have_spm else ()
 
     >>> import nipype_settings
     >>> import nipype.interfaces.matlab as nim

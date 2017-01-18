@@ -80,3 +80,6 @@ nipype_settings.py
 pyscript*.m
 *fds114_sub*.*
 *cds114_sub*.*
+
+# Configuration file
+nbplot_flags.toml

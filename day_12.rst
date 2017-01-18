@@ -1,6 +1,6 @@
-##########################
-Registration and scripting
-##########################
+####################################
+Exploring cross-subject registration
+####################################
 
 *************
 Presentations

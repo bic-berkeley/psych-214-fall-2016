@@ -173,6 +173,7 @@ Hints:
     >>> st.inputs.ref_slice = 1
 
 .. nbplot::
+    :run-parts: 0 if have_spm else ()
 
     >>> #- Run the batch job
     >>> st.run()
@@ -184,6 +185,7 @@ directory.
 .. solution-start
 
 .. nbplot::
+    :run-parts: 0 if have_spm else ()
 
     >>> # check for file created by nipype slice timing
     >>> assert os.path.exists('afds114_sub009_t2r1.nii')

@@ -16,6 +16,8 @@ import sys
 import os
 from collections import OrderedDict
 
+import pytoml
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -358,3 +360,9 @@ def setup(app):
 # Use local mathjax when environment variable IN_CUBA is set
 if os.environ.get('IN_CUBA'):
     mathjax_path="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+
+# nbplot parts variables
+nbplot_flags = dict(have_matlab=False, have_spm=False)
+if os.path.isfile('nbplot_flags.toml'):
+    with open('nbplot_flags.toml', 'rt') as fobj:
+        nbplot_flags.update(pytoml.load(fobj))
