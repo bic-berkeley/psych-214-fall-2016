@@ -192,11 +192,17 @@ image above:
 
     >>> t_3d[0, 0, 15]
     nan
-    >>> np.all(data[0, 0, 15] == 0)
-    memmap(True, dtype=bool)
+    >>> np.all(data[0, 0, 15] == 0)  #doctest: +SKIP
+    True
     >>> sigma_2_3d = sigma_2.reshape(data.shape[:3])
     >>> sigma_2_3d[0, 0, 15]
     0.0
+
+.. nbplot::
+    :include-source: false
+
+    >>> # np.all above can be memmap or array
+    >>> assert np.all(data[0, 0, 15] == 0)
 
 Can we avoid these uninteresting voxels, and only analyze voxels within the
 brain?
@@ -231,8 +237,14 @@ This is the number of voxels for which the mask value is True:
 
 .. nbplot::
 
-    >>> np.sum(mask)
-    memmap(21604)
+    >>> np.sum(mask)  # doctest: +SKIP
+    21604
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.sum(mask) == 21604
+    True
 
 We can use the 3D mask to slice into the 4D data matrix.  For every True value
 in the 3D mask, the result has the vector of values over time for that voxel.

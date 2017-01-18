@@ -25,8 +25,13 @@ to clip them down to a more reasonable number:
 .. nbplot::
 
     >>> data = img.get_data()
-    >>> data.max()
-    memmap(3237.0, dtype=float32)
+    >>> data.max()  # doctest: +SKIP
+    3237.0
+
+.. nbplot::
+    :include-source: false
+
+    >>> assert data.max() == 3237.0
 
 We might consider clipping the top 5 percent of voxel values:
 
@@ -41,8 +46,13 @@ We might consider clipping the top 5 percent of voxel values:
 
     >>> new_data = data.copy()
     >>> new_data[new_data > top_95_thresh] = top_95_thresh
-    >>> new_data.max()
-    memmap(722.0, dtype=float32)
+    >>> new_data.max()  # doctest: +SKIP
+    722.0
+
+.. nbplot::
+    :include-source: false
+
+    >>> assert new_data.max() == 722.0
 
 We can make a new ``Nifti1Image`` by constructing it directly.  We pass the
 new data, the image affine, and (optionally) a template :doc:`header
@@ -89,5 +99,11 @@ This image has the clipped data:
 
 .. nbplot::
 
-    >>> nib.load('clipped_image.nii').get_data().max()
-    memmap(722.0, dtype=float32)
+    >>> clipped_back = nib.load('clipped_image.nii')
+    >>> clipped_back.get_data().max()  # doctest: +SKIP
+    722.0
+
+.. nbplot::
+    :include-source: false
+
+    >>> assert clipped_back.get_data().max() == 722.0

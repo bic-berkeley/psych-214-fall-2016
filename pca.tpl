@@ -101,8 +101,14 @@ variable ``row_means``.
 
     >>> #- Calculate the mean across columns
     >>> row_means = np.mean(first_two, axis=1)
-    >>> row_means
-    memmap([ 414.4011,  336.6994])
+    >>> row_means  # doctest: +SKIP
+    array([ 414.4011,  336.6994])
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.allclose(row_means, [ 414.4011,  336.6994])
+    True
 
 Expand the ``row_means`` vector out to a 2 by N array by using ``np.outer``
 and a vector of ones:
@@ -123,8 +129,14 @@ to check they are now very close to 0:
     >>> #- Subtract the means for each row, put the result into X
     >>> #- Show the means over the columns, after the subtraction
     >>> X = first_two - row_means
-    >>> np.mean(X, axis=1)
-    memmap([-0.,  0.])
+    >>> np.mean(X, axis=1)  # doctest: +SKIP
+    array([-0.,  0.])
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.allclose(np.mean(X, axis=1), 0)
+    True
 
 Plot the two rows against each other to get a feel for the variation.
 Remember that each row in ``X`` is a volume, so you are plotting the signal
@@ -145,9 +157,16 @@ the matrix multiplication of ``X`` with its transpose. Calculate this:
 
     >>> #- Calculate unscaled covariance matrix for X
     >>> unscaled_covariance = X.dot(X.T)
-    >>> unscaled_covariance
-    memmap([[  8.0424e+10,   6.1264e+10],
-           [  6.1264e+10,   4.9249e+10]])
+    >>> unscaled_covariance # doctest: +SKIP
+    array([[  8.0424e+10,   6.1264e+10],
+          [  6.1264e+10,   4.9249e+10]])
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.allclose(unscaled_covariance, [[8.0424e+10, 6.1264e+10],
+    ...                                   [6.1264e+10, 4.9249e+10]])
+    True
 
 Use SVD to get the ``U``, ``S`` and ``VT`` matrices from the unscaled
 covariance:
@@ -163,8 +182,14 @@ has vector length (vector *norm*) 1:
 .. nbplot::
 
     >>> #- Show that the columns in U each have vector length 1
-    >>> np.sum(U ** 2, axis=0)
-    memmap([ 1.,  1.])
+    >>> np.sum(U ** 2, axis=0)  # doctest: +SKIP
+    array([ 1.,  1.])
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.allclose(np.sum(U ** 2, axis=0), 1)
+    True
 
 Confirm that the first column in ``U`` is orthogonal to the second:
 
@@ -190,10 +215,16 @@ from the SVD:
 
     >>> #- Show the total sum of squares in X
     >>> #- Is this (nearly) the same as the sum of the values in S?
-    >>> print(np.sum(X ** 2))
-    129672885307.41481
+    >>> print(np.sum(X ** 2))  # doctest: +SKIP
+    129672885307.0
     >>> print(np.sum(S))
     129672885307.0
+
+.. nbplot::
+    :include-source: false
+
+    >>> np.allclose(np.sum(X ** 2), np.sum(S))
+    True
 
 Plot the first row in ``X`` against the second row in ``X`` again. This
 time add a line to the plot that corresponds to the first principal component.
