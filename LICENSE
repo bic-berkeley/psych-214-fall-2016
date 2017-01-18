@@ -6,9 +6,9 @@ Unless we state otherwise, the files in this website are copyright Matthew
 Brett, JB Poline, 2016, licensed under the Creative Commons attribution 2.0
 generic license (CC-by 2.0): see http://creativecommons.org/licenses/by/2.0/
 
-Unless we state otherwise, all Python, R and MATLAB code files in this
-repository are covered by the license in the file UNLICENSE.  Put simply, we
-the code files into the public domain.
+Unless we state otherwise, all Python (``.py``), R (``.R) and MATLAB (``.m``)
+code files in this repository are covered by the license in the file
+UNLICENSE.  Put simply, we put the code files into the public domain.
 
 The data in ``camera.txt`` comes from reading the file ``camera.png`` in the
 scikit-image ``data`` directory, and writing the read values out to a text
@@ -25,12 +25,13 @@ Domain Dedication and License version 1.0 :
 http://opendatacommons.org/licenses/pddl/1.0/ . We release all derivative
 images in this repository under the same license.
 
-The brain image template with names starting `mni_icbm152` are contained in, or
-derived from the MNI non-linear templates archive
+The brain image template with names starting `mni_icbm152` are contained in,
+or derived from the MNI non-linear templates archive
 'mni_icbm152_t1_tal_nlin_asym_09a' last found at
 http://www.bic.mni.mcgill.ca/~vfonov/icbm/2009/mni_icbm152_nlin_asym_09a_nifti.zip
-via http://www.bic.mni.mcgill.ca/ServicesAtlases/ICBM152NLin2009.  The original
-images have the following license (where 'software' refers to the image):
+via http://www.bic.mni.mcgill.ca/ServicesAtlases/ICBM152NLin2009.  The
+original images have the following license (where 'software' refers to the
+image):
 
     Copyright (C) 1993-2004 Louis Collins, McConnell Brain Imaging Centre,
     Montreal Neurological Institute, McGill University.
