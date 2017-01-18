@@ -1,6 +1,6 @@
-###############
-Github workflow
-###############
+#######################
+More on github workflow
+#######################
 
 * reviewing code;
 * raising issues;

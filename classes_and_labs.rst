@@ -4,8 +4,8 @@ Classes and labs
 
 The initial plan for this course was that we would use the classes (on Monday,
 for 3 hours) for the main teaching, and the labs (Thursday, 90 minutes) for
-practical exercises, but in fact we ended up using both sessions in about the
-same way.
+practical exercises, but in fact we ended up using both sessions for teaching
+and exercises.
 
 For a separate list of classes, see :doc:`classes`.  For a separate list of
 labs, see :doc:`labs`.
@@ -17,7 +17,7 @@ labs, see :doc:`labs`.
     lab_00
     lab_01_exercise
     day_01
-    lab_02
+    git_walk_through
     day_02
     lab_03
     day_03
