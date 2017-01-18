@@ -2,7 +2,9 @@
 Exercises and homework
 ######################
 
-* lab 1:
+* :doc:`lab_00`;
+
+* Numpy exercises:
 
     * :doc:`lab_01_exercise` |--| solution: :doc:`lab_01_solution`;
 

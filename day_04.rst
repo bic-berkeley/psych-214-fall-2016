@@ -1,6 +1,6 @@
-##########################
-Statistics on brain images
-##########################
+###################################################
+Correlation, regression, statistics on brain images
+###################################################
 
 ******************
 Project discussion

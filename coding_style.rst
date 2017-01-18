@@ -18,7 +18,7 @@ more time thinking about the algorithm and code structure.
 * https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style
 
 The first link above is the official "Style Guide for Python Code", usually
-referred to as PEP8_ PEP is an acronym for Python Enhancement Proposal.
+referred to as PEP8_. PEP is an acronym for Python Enhancement Proposal.
 There are a couple of potentially helpful tools for helping you conform to the
 standard. The `pep8 <https://pypi.python.org/pypi/pep8>`__ package that
 provides a commandline tool to check your code against some of the PEP8
