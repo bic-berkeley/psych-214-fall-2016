@@ -83,3 +83,6 @@ pyscript*.m
 
 # Configuration file
 nbplot_flags.toml
+
+# OS cruft
+.DS_Store
