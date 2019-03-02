@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Modules and scripts &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="NumPy and Matplotlib: reshape, dot products, lines and subplots" href="dot_and_outer.html" />
@@ -36,27 +26,28 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="modules-and-scripts">
 <h1>Modules and scripts<a class="headerlink" href="#modules-and-scripts" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Usual imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Usual imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-<p>Let&#8217;s say I have a function that loads a 4D image, and returns a list with
+<p>Let’s say I have a function that loads a 4D image, and returns a list with
 mean values across all voxels in each volume:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">vol_means</span><span class="p">(</span><span class="n">image_fname</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">vol_means</span><span class="p">(</span><span class="n">image_fname</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">image_fname</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
@@ -67,7 +58,7 @@ mean values across all voxels in each volume:</p>
 </pre></div>
 </div>
 <p>First we check that works:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_means</span> <span class="o">=</span> <span class="n">vol_means</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_means</span> <span class="o">=</span> <span class="n">vol_means</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">my_means</span><span class="p">)</span>
 <span class="go">[...]</span>
 </pre></div>
@@ -77,15 +68,15 @@ mean values across all voxels in each volume:</p>
 <img alt="_images/on_modules-4.png" src="_images/on_modules-4.png" />
 </div>
 <p>That seems like a useful function to me. I want to make a module called
-<code class="docutils literal"><span class="pre">mymodule</span></code> so I can do this in some Python script or at the IPython prompt:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mymodule</span>
+<code class="docutils literal notranslate"><span class="pre">mymodule</span></code> so I can do this in some Python script or at the IPython prompt:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mymodule</span>
 <span class="n">means</span> <span class="o">=</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">vol_means</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In fact, what I would really like to do, is to be able to have a script called
-<code class="docutils literal"><span class="pre">my_script.py</span></code> that prints the scan means out to the terminal window like
+<code class="docutils literal notranslate"><span class="pre">my_script.py</span></code> that prints the scan means out to the terminal window like
 this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mymodule</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mymodule</span>
 
 <span class="n">means</span> <span class="o">=</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">vol_means</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">mean</span> <span class="ow">in</span> <span class="n">means</span><span class="p">:</span>
@@ -93,83 +84,83 @@ this:</p>
 </pre></div>
 </div>
 <p>And I want to be able to run it like this from the command line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>A Python <em>module</em> is a Python file with functions (and variables and other
 things) that other modules and scripts may use. These other modules and
-scripts will <code class="docutils literal"><span class="pre">import</span></code> the module.</p>
-<p>A script is a file that you can run with <code class="docutils literal"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>. The script
+scripts will <code class="docutils literal notranslate"><span class="pre">import</span></code> the module.</p>
+<p>A script is a file that you can run with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>. The script
 will usually do some processing, and may print something to the terminal, put
 up a plot or save some data to the filesystem.</p>
-<p>You store modules in text files ending in <code class="docutils literal"><span class="pre">.py</span></code>. For example, the module
-<code class="docutils literal"><span class="pre">mymodule</span></code> would be in a file called <code class="docutils literal"><span class="pre">mymodule.py</span></code>.</p>
-<p>A module needs to <code class="docutils literal"><span class="pre">import</span></code> everything it uses.</p>
-<p>You can store scripts with any extension, but it is common to use <code class="docutils literal"><span class="pre">.py</span></code>
+<p>You store modules in text files ending in <code class="docutils literal notranslate"><span class="pre">.py</span></code>. For example, the module
+<code class="docutils literal notranslate"><span class="pre">mymodule</span></code> would be in a file called <code class="docutils literal notranslate"><span class="pre">mymodule.py</span></code>.</p>
+<p>A module needs to <code class="docutils literal notranslate"><span class="pre">import</span></code> everything it uses.</p>
+<p>You can store scripts with any extension, but it is common to use <code class="docutils literal notranslate"><span class="pre">.py</span></code>
 extensions for Python scripts as well.</p>
 <div class="section" id="the-name-main-trick">
-<h2>The __name___ == &#8220;__main__&#8221; trick<a class="headerlink" href="#the-name-main-trick" title="Permalink to this headline">¶</a></h2>
+<h2>The __name___ == “__main__” trick<a class="headerlink" href="#the-name-main-trick" title="Permalink to this headline">¶</a></h2>
 <p>You can execute a module in two different contexts:</p>
 <ul class="simple">
-<li>execute as a script (<code class="docutils literal"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>);</li>
-<li>import as a module (<code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">import</span> <span class="pre">my_script</span></code>).</li>
+<li>execute as a script (<code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>);</li>
+<li>import as a module (<code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">import</span> <span class="pre">my_script</span></code>).</li>
 </ul>
-<p>It is reasonably common to want to use your <code class="docutils literal"><span class="pre">.py</span></code> file in either of these
+<p>It is reasonably common to want to use your <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in either of these
 two ways.  For example, you may want to use and debug the functions in your
-code after <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">import</span> <span class="pre">my_script</span></code>, and then run the code as a script with
-<code class="docutils literal"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>.</p>
+code after <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">import</span> <span class="pre">my_script</span></code>, and then run the code as a script with
+<code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">my_script.py</span></code>.</p>
 <p>How does a Python file know whether it is being executed as a script or
 imported as a module?</p>
 <p>To help with this problem, Python sets a variable that tells you whether you
-are currently being <code class="docutils literal"><span class="pre">import</span></code>-ed or not.   This is the <code class="docutils literal"><span class="pre">__name__</span></code> variable.</p>
+are currently being <code class="docutils literal notranslate"><span class="pre">import</span></code>-ed or not.   This is the <code class="docutils literal notranslate"><span class="pre">__name__</span></code> variable.</p>
 <p>Notice the double underscores on either side of the variable name.  Variables
-with double underscores on either side are often referred to as &#8220;dunder&#8221;
+with double underscores on either side are often referred to as “dunder”
 variables (for Double UNDERscore).  When Python is going to set or use a
 variable or method name for its own purposes, it usually uses a dunder name,
 as here.</p>
-<p>For our purposes <code class="docutils literal"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> if our Python file is running as a
-script and <code class="docutils literal"><span class="pre">__name__</span></code> is set to the module name if the module is being
-imported.  For example, if we did <code class="docutils literal"><span class="pre">import</span> <span class="pre">my_script</span></code>, then, when
-<code class="docutils literal"><span class="pre">my_script.py</span></code> gets run, <code class="docutils literal"><span class="pre">__name__</span></code> will be set to <code class="docutils literal"><span class="pre">my_script</span></code>.</p>
-<p>When you do want to use your <code class="docutils literal"><span class="pre">.py</span></code> file as a script, or for importing, you
-often see this pattern at the bottom of the <code class="docutils literal"><span class="pre">.py</span></code> file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<p>For our purposes <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;</span></code> if our Python file is running as a
+script and <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is set to the module name if the module is being
+imported.  For example, if we did <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">my_script</span></code>, then, when
+<code class="docutils literal notranslate"><span class="pre">my_script.py</span></code> gets run, <code class="docutils literal notranslate"><span class="pre">__name__</span></code> will be set to <code class="docutils literal notranslate"><span class="pre">my_script</span></code>.</p>
+<p>When you do want to use your <code class="docutils literal notranslate"><span class="pre">.py</span></code> file as a script, or for importing, you
+often see this pattern at the bottom of the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Only run this function when used as a script</span>
     <span class="c1"># The name &quot;main&quot; is only a common convention, the function could have</span>
     <span class="c1"># any name.</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># We only get here if running the file as a script</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>See <a class="reference external" href="https://docs.python.org/3/library/__main__.html">if __name__ == &#8216;__main__&#8217;</a> in the Python
+<p>See <a class="reference external" href="https://docs.python.org/3/library/__main__.html">if __name__ == ‘__main__’</a> in the Python
 documentation.</p>
 </div>
 <div class="section" id="command-line-arguments">
 <h2>Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
 <p>When you run a script, you can also pass command line arguments, e.g.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span> <span class="n">a_string</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span> <span class="n">a_string</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal"><span class="pre">my_script.py</span></code> is the script, and <code class="docutils literal"><span class="pre">a_string</span></code> is the command line
+<p>Here <code class="docutils literal notranslate"><span class="pre">my_script.py</span></code> is the script, and <code class="docutils literal notranslate"><span class="pre">a_string</span></code> is the command line
 argument.</p>
 <p>You can do the same thing from within IPython:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span> <span class="n">a_string</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span> <span class="n">a_string</span>
 </pre></div>
 </div>
-<p>In your script, you can get the command line arguments from the <code class="docutils literal"><span class="pre">argv</span></code>
-list within the <code class="docutils literal"><span class="pre">sys</span></code> module.  The first element of the <code class="docutils literal"><span class="pre">sys.argv</span></code> list is
-always the name of the program – in our case this will be <code class="docutils literal"><span class="pre">my_script.py</span></code>.
-The second and subsequent entries in <code class="docutils literal"><span class="pre">sys.argv</span></code> are the arguments entered at
+<p>In your script, you can get the command line arguments from the <code class="docutils literal notranslate"><span class="pre">argv</span></code>
+list within the <code class="docutils literal notranslate"><span class="pre">sys</span></code> module.  The first element of the <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> list is
+always the name of the program – in our case this will be <code class="docutils literal notranslate"><span class="pre">my_script.py</span></code>.
+The second and subsequent entries in <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code> are the arguments entered at
 the command line.  For example, in our case:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;my_script.py&#39;</span><span class="p">,</span> <span class="s1">&#39;a_string&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;my_script.py&#39;</span><span class="p">,</span> <span class="s1">&#39;a_string&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>The entries in this list are always strings.  For <code class="docutils literal"><span class="pre">python3</span> <span class="pre">my_script.py</span> <span class="pre">1</span></code>
+<p>The entries in this list are always strings.  For <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">my_script.py</span> <span class="pre">1</span></code>
 you would get:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;my_script.py&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;my_script.py&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -177,14 +168,15 @@ you would get:</p>
 <h2>Example files<a class="headerlink" href="#example-files" title="Permalink to this headline">¶</a></h2>
 <p>Example files at:</p>
 <ul class="simple">
-<li><a class="reference download internal" href="_downloads/mymodule.py" download=""><code class="xref download docutils literal"><span class="pre">mymodule.py</span></code></a>;</li>
-<li><a class="reference download internal" href="_downloads/my_script.py" download=""><code class="xref download docutils literal"><span class="pre">my_script.py</span></code></a>.</li>
+<li><a class="reference download internal" download="" href="_downloads/cade911666145ddb29ffe9934b83393b/mymodule.py"><code class="xref download docutils literal notranslate"><span class="pre">mymodule.py</span></code></a>;</li>
+<li><a class="reference download internal" download="" href="_downloads/c3d95066e06f18cb23524009303cf95b/my_script.py"><code class="xref download docutils literal notranslate"><span class="pre">my_script.py</span></code></a>.</li>
 </ul>
 </div>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -233,14 +225,24 @@ you would get:</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -249,8 +251,8 @@ you would get:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/on_modules.rst.txt"

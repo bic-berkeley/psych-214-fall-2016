@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Using PYTHONPATH &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Voxel correlation exercise" href="voxel_correlation_exercise.html" />
@@ -36,19 +26,20 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="using-pythonpath">
 <h1>Using PYTHONPATH<a class="headerlink" href="#using-pythonpath" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal"><span class="pre">PYTHONPATH</span></code> is an <a class="reference internal" href="glossary.html#term-environment-variable"><span class="xref std std-term">environment variable</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> is an <a class="reference internal" href="glossary.html#term-environment-variable"><span class="xref std std-term">environment variable</span></a>.</p>
 <p>See the <a class="reference external" href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">Python 3 docs for PYTHONPATH</a>.</p>
 <p>The PYTHONPATH variable has a value that is a string with a list of
 directories that Python should add to the <a class="reference internal" href="sys_path.html#sys-path"><span class="std std-ref">sys.path</span></a> directory
@@ -58,34 +49,33 @@ be able to import from Python, but that we have not yet made into an
 installable Python package (see: <cite>making a Python package</cite>).</p>
 <p>Returning to the example module and script in <a class="reference internal" href="sys_path.html"><span class="doc">Where does Python look for modules?</span></a>:</p>
 <div class="admonition">
-<em class="first">Contents of </em><code class="docutils literal"><span class="pre">code/a_module.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>def func():
+<em class="first">Contents of </em><code class="docutils literal notranslate"><span class="pre">code/a_module.py</span></code><div class="last highlight-none notranslate"><div class="highlight"><pre><span></span>def func():
     print(&quot;Running useful function&quot;)
 </pre></div>
 </div>
 </div>
 <div class="admonition">
-<em class="first">Contents of </em><code class="docutils literal"><span class="pre">scripts/a_script.py</span></code><div class="last highlight-none"><div class="highlight"><pre><span></span>import a_module
+<em class="first">Contents of </em><code class="docutils literal notranslate"><span class="pre">scripts/a_script.py</span></code><div class="last highlight-none notranslate"><div class="highlight"><pre><span></span>import a_module
 
 a_module.func()
 </pre></div>
 </div>
 </div>
 <p>At the moment, on my machine, PYTHONPATH is empty:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
-/Users/mb312/for-class/code
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
-<p>Before we set PYTHONPATH correctly, <code class="docutils literal"><span class="pre">a_script.py</span></code> will fail with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ python3 scripts/a_script.py
+<p>Before we set PYTHONPATH correctly, <code class="docutils literal notranslate"><span class="pre">a_script.py</span></code> will fail with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python3 scripts/a_script.py
 Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
-  File <span class="s2">&quot;scripts/a_script.py&quot;</span>, line 1, in &lt;module&gt;
+  File <span class="s2">&quot;scripts/a_script.py&quot;</span>, line <span class="m">1</span>, in &lt;module&gt;
     import a_module
-ImportError: No module named <span class="s1">&#39;a_module&#39;</span>
+ModuleNotFoundError: No module named <span class="s1">&#39;a_module&#39;</span>
 </pre></div>
 </div>
 <p>Now I set the PYTHONPATH environment variable value to be the path to the
-<code class="docutils literal"><span class="pre">code</span></code> directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ <span class="c1"># Set PYTHONPATH to path to the working directory + /code</span>
+<code class="docutils literal notranslate"><span class="pre">code</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="c1"># Set PYTHONPATH to path to the working directory + /code</span>
 $ <span class="c1"># This is for the &quot;bash&quot; shell on Unix / git bash on Windows</span>
 $ <span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/code&quot;</span>
 $ <span class="c1"># Now the script can find &quot;a_module&quot;</span>
@@ -95,34 +85,34 @@ Running useful <span class="k">function</span>
 </div>
 <div class="section" id="setting-pythonpath-more-permanently">
 <h2>Setting PYTHONPATH more permanently<a class="headerlink" href="#setting-pythonpath-more-permanently" title="Permalink to this headline">¶</a></h2>
-<p>You probably don&#8217;t want to have to set PYTHONPATH every time you start up a
+<p>You probably don’t want to have to set PYTHONPATH every time you start up a
 terminal and run a Python script.</p>
 <p>Luckily, we can make the PYTHONPATH value be set for any terminal session, by
 setting the environment variable default.</p>
-<p>For example, let&#8217;s say I wanted add the directory <code class="docutils literal"><span class="pre">/Users/my_user/code</span></code> to
+<p>For example, let’s say I wanted add the directory <code class="docutils literal notranslate"><span class="pre">/Users/my_user/code</span></code> to
 the PYTHONPATH:</p>
 <div class="section" id="if-you-are-on-a-mac">
 <h3>If you are on a Mac<a class="headerlink" href="#if-you-are-on-a-mac" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Open <code class="docutils literal"><span class="pre">Terminal.app</span></code>;</p>
+<li><p class="first">Open <code class="docutils literal notranslate"><span class="pre">Terminal.app</span></code>;</p>
 </li>
-<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bash_profile</span></code> in your text editor – e.g. <code class="docutils literal"><span class="pre">atom</span>
+<li><p class="first">Open the file <code class="docutils literal notranslate"><span class="pre">~/.bash_profile</span></code> in your text editor – e.g. <code class="docutils literal notranslate"><span class="pre">atom</span>
 <span class="pre">~/.bash_profile</span></code>;</p>
 </li>
 <li><p class="first">Add the following line to the end:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/Users/my_user/code&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/Users/my_user/code&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Save the file.</p>
 </li>
-<li><p class="first">Close <code class="docutils literal"><span class="pre">Terminal.app</span></code>;</p>
+<li><p class="first">Close <code class="docutils literal notranslate"><span class="pre">Terminal.app</span></code>;</p>
 </li>
-<li><p class="first">Start <code class="docutils literal"><span class="pre">Terminal.app</span></code> again, to read in the new settings, and type this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
+<li><p class="first">Start <code class="docutils literal notranslate"><span class="pre">Terminal.app</span></code> again, to read in the new settings, and type this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
-<p>It should show something like <code class="docutils literal"><span class="pre">/Users/my_user/code</span></code>.</p>
+<p>It should show something like <code class="docutils literal notranslate"><span class="pre">/Users/my_user/code</span></code>.</p>
 </li>
 </ul>
 </div>
@@ -131,12 +121,12 @@ the PYTHONPATH:</p>
 <ul>
 <li><p class="first">Open your favorite terminal program;</p>
 </li>
-<li><p class="first">Open the file <code class="docutils literal"><span class="pre">~/.bashrc</span></code> in your text editor – e.g. <code class="docutils literal"><span class="pre">atom</span>
+<li><p class="first">Open the file <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> in your text editor – e.g. <code class="docutils literal notranslate"><span class="pre">atom</span>
 <span class="pre">~/.bashrc</span></code>;</p>
 </li>
 <li><p class="first">Add the following line to the end:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">my_user</span><span class="o">/</span><span class="n">code</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">my_user</span><span class="o">/</span><span class="n">code</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -146,42 +136,42 @@ the PYTHONPATH:</p>
 </li>
 <li><p class="first">Start your terminal application again, to read in the new settings, and
 type this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYTHONPATH</span>
 </pre></div>
 </div>
-<p>It should show something like <code class="docutils literal"><span class="pre">/home/my_user/code</span></code>.</p>
+<p>It should show something like <code class="docutils literal notranslate"><span class="pre">/home/my_user/code</span></code>.</p>
 </li>
 </ul>
 </div>
 <div class="section" id="if-you-are-on-windows">
 <h3>If you are on Windows<a class="headerlink" href="#if-you-are-on-windows" title="Permalink to this headline">¶</a></h3>
-<p>Got to the Windows menu, right-click on &#8220;Computer&#8221; and select &#8220;Properties&#8221;:</p>
-<p>From the computer properties dialog, select &#8220;Advanced system settings&#8221; on the
+<p>Got to the Windows menu, right-click on “Computer” and select “Properties”:</p>
+<p>From the computer properties dialog, select “Advanced system settings” on the
 left:</p>
-<p>From the advanced system settings dialog, choose the &#8220;Environment variables&#8221;
+<p>From the advanced system settings dialog, choose the “Environment variables”
 button:</p>
-<p>In the Environment variables dialog, click the &#8220;New&#8221; button in the top half of
+<p>In the Environment variables dialog, click the “New” button in the top half of
 the dialog, to make a new <em>user</em> variable:</p>
-<p>Give the variable name as <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> and the value is the path to
-the <code class="docutils literal"><span class="pre">code</span></code> directory. Choose OK and OK again to save this
+<p>Give the variable name as <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and the value is the path to
+the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. Choose OK and OK again to save this
 variable.</p>
-<p>Now open a <code class="docutils literal"><span class="pre">cmd</span></code> Window (Windows key, then type <code class="docutils literal"><span class="pre">cmd</span></code> and press
+<p>Now open a <code class="docutils literal notranslate"><span class="pre">cmd</span></code> Window (Windows key, then type <code class="docutils literal notranslate"><span class="pre">cmd</span></code> and press
 Return). Type:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">%</span><span class="n">PYTHONPATH</span><span class="o">%</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">%</span><span class="n">PYTHONPATH</span><span class="o">%</span>
 </pre></div>
 </div>
 <p>to confirm the environment variable is correctly set.</p>
-<p>If you want your IPython sessions to see this new <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> variable,
-you&#8217;ll have to restart your terminal and restart IPython so that it picks up
-<code class="docutils literal"><span class="pre">PYTHONPATH</span></code> from the environment settings.</p>
+<p>If you want your IPython sessions to see this new <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> variable,
+you’ll have to restart your terminal and restart IPython so that it picks up
+<code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> from the environment settings.</p>
 </div>
 <div class="section" id="checking-system-environment-variables-in-python">
 <h3>Checking system environment variables in Python<a class="headerlink" href="#checking-system-environment-variables-in-python" title="Permalink to this headline">¶</a></h3>
 <p>You can check the current setting of environment variables, using the
-<code class="docutils literal"><span class="pre">os.environ</span></code> dictionary.   It contains all the defined environment variables
+<code class="docutils literal notranslate"><span class="pre">os.environ</span></code> dictionary.   It contains all the defined environment variables
 of the shell that started Python. For example, you can check the value of the
 PYTHONPATH environment variable, if it is defined:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PYTHONPATH&#39;</span><span class="p">]</span>
 <span class="go">&#39;/home/my_user/code&#39;</span>
 </pre></div>
@@ -192,6 +182,7 @@ PYTHONPATH environment variable, if it is defined:</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -240,14 +231,24 @@ PYTHONPATH environment variable, if it is defined:</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -256,8 +257,8 @@ PYTHONPATH environment variable, if it is defined:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/using_pythonpath.rst.txt"

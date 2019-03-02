@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>SPM slice timing exercise &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="SPM slice timing solution" href="spm_slice_timing_solution.html" />
@@ -36,20 +26,21 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="spm-slice-timing-exercise">
 <h1>SPM slice timing exercise<a class="headerlink" href="#spm-slice-timing-exercise" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>For code template see: <a class="reference download internal" href="_downloads/spm_slice_timing_code.py" download=""><code class="xref download docutils literal"><span class="pre">spm_slice_timing_code.py</span></code></a>;</li>
+<li>For code template see: <a class="reference download internal" download="" href="_downloads/2ed189926e4f79c219663ca62c7bd582/spm_slice_timing_code.py"><code class="xref download docutils literal notranslate"><span class="pre">spm_slice_timing_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="spm_slice_timing_solution.html"><span class="doc">SPM slice timing solution</span></a>.</li>
 </ul>
 <p>Requirements:</p>
@@ -59,27 +50,27 @@
 <li><a class="reference external" href="https://matthew-brett.github.io/teaching/slice_timing.html">slice timing</a>;</li>
 <li><a class="reference internal" href="tr_and_headers.html"><span class="doc">Sometimes, the NIfTI image stores the TR in the header</span></a>;</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
 </div>
 <div class="section" id="preparing-the-data">
 <h2>Preparing the data<a class="headerlink" href="#preparing-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We will be using the functional image <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>.</p>
+<p>We will be using the functional image <a class="reference download internal" download="" href="_downloads/6a7796486499152f0bd6ac9cd119ddc1/ds114_sub009_t2r1.nii"><code class="xref download docutils literal notranslate"><span class="pre">ds114_sub009_t2r1.nii</span></code></a>.</p>
 <p>In <a class="reference internal" href="four_dimensions_exercise.html"><span class="doc">Four dimensions exercise</span></a> we found that the first volumes had higher
 signal than the rest of the volumes in the time-series.  To start, we drop the
 first four volumes, and save the new 4D image to disk (<a class="reference internal" href="saving_images.html"><span class="doc">Making and saving new images in nibabel</span></a>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: save new copy of image with first four volumes dropped</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: save new copy of image with first four volumes dropped</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fixed</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">4</span><span class="p">:],</span> <span class="n">img</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
@@ -91,44 +82,44 @@ first four volumes, and save the new 4D image to disk (<a class="reference inter
 <h2>Parameters for SPM slice timing<a class="headerlink" href="#parameters-for-spm-slice-timing" title="Permalink to this headline">¶</a></h2>
 <p>To prepare for <a class="reference external" href="https://matthew-brett.github.io/teaching/slice_timing.html">slice timing</a> with SPM, we need first need some parameters,
 to give SPM the information it needs on when the slices were collected.</p>
-<p>First we need the number of &#8220;slices&#8221; (length of the third image dimension):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the fixed &quot;f&quot; image to get parameters</span>
+<p>First we need the number of “slices” (length of the third image dimension):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the fixed &quot;f&quot; image to get parameters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;fds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">num_slices</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">num_slices</span>
 <span class="go">30</span>
 </pre></div>
 </div>
-<p>Next we need the TR.  We can&#8217;t always get the correct TR from the image header
+<p>Next we need the TR.  We can’t always get the correct TR from the image header
 (see <a class="reference internal" href="tr_and_headers.html"><span class="doc">Sometimes, the NIfTI image stores the TR in the header</span></a>), but we can in this case.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get the TR from this image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get the TR from this image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_zooms</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TR</span>
 <span class="go">2.5</span>
 </pre></div>
 </div>
-<p>We need the time to acquire <em>all but the last slice</em>. SPM calls this <code class="docutils literal"><span class="pre">TA</span></code>
+<p>We need the time to acquire <em>all but the last slice</em>. SPM calls this <code class="docutils literal notranslate"><span class="pre">TA</span></code>
 (time of acquisition).  This odd parameter comes from deep in the history of
 the SPM slice-timing routine.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: calculate TA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: calculate TA</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time_for_one_slice</span> <span class="o">=</span> <span class="n">TR</span> <span class="o">/</span> <span class="n">num_slices</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TA</span> <span class="o">=</span> <span class="n">TR</span> <span class="o">-</span> <span class="n">time_for_one_slice</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TA</span>
 <span class="go">2.41666...</span>
 </pre></div>
 </div>
-<p>Next we need the acquisition order. This is a list <code class="docutils literal"><span class="pre">acq_order</span></code> of length
-<code class="docutils literal"><span class="pre">num_slices</span></code> where <code class="docutils literal"><span class="pre">acq_order[i]</span></code> gives the slice index of the slice
-acquired at position <code class="docutils literal"><span class="pre">i</span></code> in time.</p>
+<p>Next we need the acquisition order. This is a list <code class="docutils literal notranslate"><span class="pre">acq_order</span></code> of length
+<code class="docutils literal notranslate"><span class="pre">num_slices</span></code> where <code class="docutils literal notranslate"><span class="pre">acq_order[i]</span></code> gives the slice index of the slice
+acquired at position <code class="docutils literal notranslate"><span class="pre">i</span></code> in time.</p>
 <p>SPM uses MATLAB.  We are going to pass these parameters to SPM.  Because this
 is for MATLAB, the array indices start at 1 rather than 0 as they do for
 Python.</p>
-<p>So, if <code class="docutils literal"><span class="pre">acq_order</span></code> is <code class="docutils literal"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">9,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code> that means
+<p>So, if <code class="docutils literal notranslate"><span class="pre">acq_order</span></code> is <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">9,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10]</span></code> that means
 that the first slice acquired was (1-based) slice index 1, followed by
 slice index 3, followed by slice index 5, and so on.</p>
 <p>For our image, the scanner collected the odd index slices first, starting at
 the bottom, and then came back and collected the even index slices:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <p>Lastly, SPM slice timing also asks for a <em>reference slice</em>. This is the
@@ -142,36 +133,36 @@ would be 1 (bottom slice, with 1-based indexing).</p>
 <h2>Batching using the nipype interface<a class="headerlink" href="#batching-using-the-nipype-interface" title="Permalink to this headline">¶</a></h2>
 <p>We are going to use the <a class="reference external" href="http://nipy.org/nipype">nipype</a> interface to run the same thing.</p>
 <p>If you just ran SPM slice timing via the GUI, delete the image that SPM saved:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import the routines for working with the operating system</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import the routines for working with the operating system</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Delete file if it exists</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;afds114_sub009_t2r1.nii&#39;</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;afds114_sub009_t2r1.nii&#39;</span><span class="p">)</span>  <span class="c1"># delete file</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import initilization of nipype / MATLAB interface from &quot;introducing</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import initilization of nipype / MATLAB interface from &quot;introducing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#  nipype&quot; page.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nipype_settings</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import slice timing from nipype SPM interfaces</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipype.interfaces.spm</span> <span class="kn">import</span> <span class="n">SliceTiming</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import slice timing from nipype SPM interfaces</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipype.interfaces.spm</span> <span class="k">import</span> <span class="n">SliceTiming</span>
 </pre></div>
 </div>
-<p>Your job is to create the <code class="docutils literal"><span class="pre">SliceTiming</span></code> SPM batch job from the parameters
+<p>Your job is to create the <code class="docutils literal notranslate"><span class="pre">SliceTiming</span></code> SPM batch job from the parameters
 you need.</p>
 <p>Hints:</p>
 <ul class="simple">
-<li>try using IPython to look for help on the <code class="docutils literal"><span class="pre">SliceTiming</span></code> object;</li>
-<li>use the <code class="docutils literal"><span class="pre">help</span></code> methods for <code class="docutils literal"><span class="pre">SliceTiming</span></code> with <code class="docutils literal"><span class="pre">SliceTiming.help()</span></code>;</li>
-<li>create a <code class="docutils literal"><span class="pre">SliceTiming</span></code> instances (<cite>st = SliceTiming()`</cite>) and use IPython
+<li>try using IPython to look for help on the <code class="docutils literal notranslate"><span class="pre">SliceTiming</span></code> object;</li>
+<li>use the <code class="docutils literal notranslate"><span class="pre">help</span></code> methods for <code class="docutils literal notranslate"><span class="pre">SliceTiming</span></code> with <code class="docutils literal notranslate"><span class="pre">SliceTiming.help()</span></code>;</li>
+<li>create a <code class="docutils literal notranslate"><span class="pre">SliceTiming</span></code> instances (<cite>st = SliceTiming()`</cite>) and use IPython
 to look for help the inputs you need at <cite>st.inputs</cite>;</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Initialize the SliceTiming batch object, and fill parameters</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Initialize the SliceTiming batch object, and fill parameters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Run the slice timing on the fixed image `fds114_sub009_t2r1.nii`</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Run the batch job</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Run the batch job</span>
 </pre></div>
 </div>
 <p>Check that you did write a new slice-time corrected file into the current
@@ -181,6 +172,7 @@ directory.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -229,14 +221,24 @@ directory.</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -245,8 +247,8 @@ directory.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/spm_slice_timing_exercise.rst.txt"

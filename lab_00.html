@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Basic Python exercises &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Basic numpy exercises" href="lab_01_exercise.html" />
@@ -36,66 +26,67 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="basic-python-exercises">
 <h1>Basic Python exercises<a class="headerlink" href="#basic-python-exercises" title="Permalink to this headline">¶</a></h1>
 <p>Make sure you have read and understood <a class="reference internal" href="brisk_python.html"><span class="doc">Brisk introduction to Python</span></a>.</p>
-<p>Next fetch the exercises using the <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></code> command below.  The exercises
+<p>Next fetch the exercises using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command below.  The exercises
 are slightly modified versions of the exercises from the <a class="reference external" href="https://developers.google.com/edu/python">Google Python
 class</a>.  Specifically, the edited versions run correctly on Python 3.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">day_00_lab</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">day_00_lab</span>
 <span class="n">cd</span> <span class="n">day_00_lab</span>
 </pre></div>
 </div>
 <p>Check that all is well by running the test program:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">hello</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">hello</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>Next get ready to start the <a class="reference external" href="https://developers.google.com/edu/python/exercises/basic">basic exercises</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">basic</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">basic</span>
 </pre></div>
 </div>
 <p>First do these exercises:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">list1.py</span></code>;</li>
-<li><code class="docutils literal"><span class="pre">list2.py</span></code>;</li>
-<li><code class="docutils literal"><span class="pre">string1.py</span></code>;</li>
-<li><code class="docutils literal"><span class="pre">string2.py</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">list1.py</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">list2.py</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">string1.py</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">string2.py</span></code>.</li>
 </ul>
 <p>To do the exercises:</p>
 <ul class="simple">
-<li>open <a class="reference external" href="http://ipython.org/">IPython</a> (<code class="docutils literal"><span class="pre">ipython</span></code> at the terminal command line);</li>
-<li>in IPython, type <code class="docutils literal"><span class="pre">run</span> <span class="pre">list1.py</span></code> (or <code class="docutils literal"><span class="pre">list2.py</span></code> etc).  This will run the
+<li>open <a class="reference external" href="http://ipython.org/">IPython</a> (<code class="docutils literal notranslate"><span class="pre">ipython</span></code> at the terminal command line);</li>
+<li>in IPython, type <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">list1.py</span></code> (or <code class="docutils literal notranslate"><span class="pre">list2.py</span></code> etc).  This will run the
 tests embedded in the exercise.  These should fail until you have edited the
 file to add the code you need;</li>
-<li>open <code class="docutils literal"><span class="pre">list1.py</span></code> (etc) in Atom;</li>
+<li>open <code class="docutils literal notranslate"><span class="pre">list1.py</span></code> (etc) in Atom;</li>
 <li>look at the instructions in the file, and fill out the functions that the
-instructions suggest.  Rerun <code class="docutils literal"><span class="pre">run</span> <span class="pre">list.py</span></code> in IPython when you&#8217;ve finished
+instructions suggest.  Rerun <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">list.py</span></code> in IPython when you’ve finished
 a function, to see whether the tests pass.</li>
 </ul>
-<p>Now you are ready for the more extended exercises in <code class="docutils literal"><span class="pre">wordcount.py</span></code> and
-<code class="docutils literal"><span class="pre">mimic.py</span></code>.  To test <code class="docutils literal"><span class="pre">wordcount.py</span></code>, do:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">wordcount</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">count</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
+<p>Now you are ready for the more extended exercises in <code class="docutils literal notranslate"><span class="pre">wordcount.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mimic.py</span></code>.  To test <code class="docutils literal notranslate"><span class="pre">wordcount.py</span></code>, do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">wordcount</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">count</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>and:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">wordcount</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">topcount</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">wordcount</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">topcount</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
-<p>in IPython.  See the instructions in <code class="docutils literal"><span class="pre">wordcount.py</span></code> for the meaning of
-<code class="docutils literal"><span class="pre">--count</span></code> and <code class="docutils literal"><span class="pre">--topcount</span></code>.  You might also try using <code class="docutils literal"><span class="pre">alice.txt</span></code>
-instead of <code class="docutils literal"><span class="pre">small.txt</span></code>.</p>
-<p>For <code class="docutils literal"><span class="pre">mimic.py</span></code> use:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">mimic</span><span class="o">.</span><span class="n">py</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
+<p>in IPython.  See the instructions in <code class="docutils literal notranslate"><span class="pre">wordcount.py</span></code> for the meaning of
+<code class="docutils literal notranslate"><span class="pre">--count</span></code> and <code class="docutils literal notranslate"><span class="pre">--topcount</span></code>.  You might also try using <code class="docutils literal notranslate"><span class="pre">alice.txt</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">small.txt</span></code>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">mimic.py</span></code> use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="n">mimic</span><span class="o">.</span><span class="n">py</span> <span class="n">small</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>in IPython.</p>
@@ -103,6 +94,7 @@ instead of <code class="docutils literal"><span class="pre">small.txt</span></co
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -153,14 +145,24 @@ instead of <code class="docutils literal"><span class="pre">small.txt</span></co
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -169,8 +171,8 @@ instead of <code class="docutils literal"><span class="pre">small.txt</span></co
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/lab_00.rst.txt"

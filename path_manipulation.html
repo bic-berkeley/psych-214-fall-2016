@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Making and breaking file paths in Python &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Testing for near equality with “allclose”" href="allclose.html" />
@@ -36,48 +26,49 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="making-and-breaking-file-paths-in-python">
 <h1>Making and breaking file paths in Python<a class="headerlink" href="#making-and-breaking-file-paths-in-python" title="Permalink to this headline">¶</a></h1>
 <p>See: <a class="reference external" href="https://docs.python.org/3.5/library/os.path.html">https://docs.python.org/3.5/library/os.path.html</a></p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">os.path</span></code></li>
-<li><code class="docutils literal"><span class="pre">dirname,</span> <span class="pre">basename,</span> <span class="pre">join,</span> <span class="pre">splitext,</span> <span class="pre">abspath</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">os.path</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">dirname,</span> <span class="pre">basename,</span> <span class="pre">join,</span> <span class="pre">splitext,</span> <span class="pre">abspath</span></code></li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span>
 </pre></div>
 </div>
-<p>In IPython, you can tab complete on <code class="docutils literal"><span class="pre">os.path</span></code> to list the functions and
+<p>In IPython, you can tab complete on <code class="docutils literal notranslate"><span class="pre">os.path</span></code> to list the functions and
 attributes there.</p>
-<p>The first function we will use from <code class="docutils literal"><span class="pre">os.path</span></code> is <code class="docutils literal"><span class="pre">dirname</span></code>.  To avoid
-typing <code class="docutils literal"><span class="pre">os.path.dirname</span></code> all the time, import the <code class="docutils literal"><span class="pre">dirname</span></code> function
-directly into the current name-space, by using the <code class="docutils literal"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">...</span></code>
-version of the <code class="docutils literal"><span class="pre">import</span></code> command:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span>
+<p>The first function we will use from <code class="docutils literal notranslate"><span class="pre">os.path</span></code> is <code class="docutils literal notranslate"><span class="pre">dirname</span></code>.  To avoid
+typing <code class="docutils literal notranslate"><span class="pre">os.path.dirname</span></code> all the time, import the <code class="docutils literal notranslate"><span class="pre">dirname</span></code> function
+directly into the current name-space, by using the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">...</span></code>
+version of the <code class="docutils literal notranslate"><span class="pre">import</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">dirname</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span>
 <span class="go">&lt;function dirname at 0x...&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This gives &quot;os.path.dirname&quot; the name &quot;dirname&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This gives &quot;os.path.dirname&quot; the name &quot;dirname&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span>
 <span class="go">&lt;function dirname at 0x...&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span> <span class="ow">is</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">dirname</span></code> function gives the directory name from a full file path. It
+<p>The <code class="docutils literal notranslate"><span class="pre">dirname</span></code> function gives the directory name from a full file path. It
 works correctly for Unix paths on Unix machines, and Windows paths on Windows
 machines:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;/a/full/path/then_filename.txt&#39;</span><span class="p">)</span>
 <span class="go">&#39;/a/full/path&#39;</span>
 </pre></div>
@@ -87,25 +78,25 @@ machines:</p>
 <p>Windows, backslash and strings</p>
 <p class="last">On Windows, we have the extra problem that Python uses the backslash character
 in strings to indicate a special character follows.  For example the string
-<code class="docutils literal"><span class="pre">&quot;Tab</span> <span class="pre">\t,</span> <span class="pre">newline</span> <span class="pre">\n&quot;</span></code> contains a tab character and a newline character,
-indicated by <code class="docutils literal"><span class="pre">&quot;\t&quot;</span></code> and <code class="docutils literal"><span class="pre">&quot;\n&quot;</span></code>.  So we need to prepend a backslash to
+<code class="docutils literal notranslate"><span class="pre">&quot;Tab</span> <span class="pre">\t,</span> <span class="pre">newline</span> <span class="pre">\n&quot;</span></code> contains a tab character and a newline character,
+indicated by <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code>.  So we need to prepend a backslash to
 each backslash we want in the output string:</p>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">a</span><span class="se">\\</span><span class="s1">full</span><span class="se">\\</span><span class="s1">path</span><span class="se">\\</span><span class="s1">then_filename.txt&#39;</span><span class="p">)</span> 
 <span class="go">&#39;c:\\a\\full\\path&#39;</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">dirname</span></code> also works for relative paths,  A relative path where the starting
+<p><code class="docutils literal notranslate"><span class="pre">dirname</span></code> also works for relative paths,  A relative path where the starting
 directory is relative to the current directory, rather than absolute, in terms
 of the root of the file system:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dirname</span><span class="p">(</span><span class="s1">&#39;relative/path/then_filename.txt&#39;</span><span class="p">)</span>
 <span class="go">&#39;relative/path&#39;</span>
 </pre></div>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">basename</span></code> to get the filename rather than the directory name:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">basename</span>
+<p>Use <code class="docutils literal notranslate"><span class="pre">basename</span></code> to get the filename rather than the directory name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">basename</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basename</span><span class="p">(</span><span class="s1">&#39;/a/full/path/then_filename.txt&#39;</span><span class="p">)</span>
 <span class="go">&#39;then_filename.txt&#39;</span>
@@ -113,34 +104,34 @@ of the root of the file system:</p>
 </div>
 <p>Sometimes you want to join one or more directory names with a filename to get
 a path.   Windows and Unix have different characters to separate directories
-in a path.  Windows uses the backslash: <code class="docutils literal"><span class="pre">\</span></code>, Unix uses a forward slash:
-<code class="docutils literal"><span class="pre">/</span></code>.  If your code will run on Windows and Unix, you need to take care that
-you get the right character joining your paths.  This is what <code class="docutils literal"><span class="pre">os.path.join</span></code>
+in a path.  Windows uses the backslash: <code class="docutils literal notranslate"><span class="pre">\</span></code>, Unix uses a forward slash:
+<code class="docutils literal notranslate"><span class="pre">/</span></code>.  If your code will run on Windows and Unix, you need to take care that
+you get the right character joining your paths.  This is what <code class="docutils literal notranslate"><span class="pre">os.path.join</span></code>
 does:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Unix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;relative&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;then_filename.txt&#39;</span><span class="p">)</span>
 <span class="go">&#39;relative/path/then_filename.txt&#39;</span>
 </pre></div>
 </div>
 <p>This also works on Windows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># On Windows</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;relative&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;then_filename.txt&#39;</span><span class="p">)</span>  
 <span class="go">&#39;relative\\path\\then_filename.txt&#39;</span>
 </pre></div>
 </div>
-<p>To convert a relative to an absolute path, use <code class="docutils literal"><span class="pre">abspath</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span>
+<p>To convert a relative to an absolute path, use <code class="docutils literal notranslate"><span class="pre">abspath</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">abspath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show the current working directory</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>  <span class="c1">#doctest: +SKIP</span>
 <span class="go">/Users/mb312/dev_trees/psych-214-fall-2016</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;relative/path/then_filename.txt&#39;</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;relative/path/then_filename.txt&#39;</span><span class="p">)</span>  <span class="c1">#doctest: +SKIP</span>
 <span class="go">/Users/mb312/dev_trees/psych-214-fall-2016/relative/path/then_filename.txt</span>
 </pre></div>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">splitext</span></code> to split a path into: the path + filename; and the file
+<p>Use <code class="docutils literal notranslate"><span class="pre">splitext</span></code> to split a path into: the path + filename; and the file
 extension:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">splitext</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">splitext</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">splitext</span><span class="p">(</span><span class="s1">&#39;relative/path/then_filename.txt&#39;</span><span class="p">)</span>
 <span class="go">(&#39;relative/path/then_filename&#39;, &#39;.txt&#39;)</span>
 </pre></div>
@@ -149,6 +140,7 @@ extension:</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -191,20 +183,30 @@ extension:</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="pca_solution.html" title="previous chapter">PCA exercise</a></li>
-      <li>Next: <a href="allclose.html" title="next chapter">Testing for near equality with &#8220;allclose&#8221;</a></li>
+      <li>Next: <a href="allclose.html" title="next chapter">Testing for near equality with “allclose”</a></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -213,8 +215,8 @@ extension:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/path_manipulation.rst.txt"

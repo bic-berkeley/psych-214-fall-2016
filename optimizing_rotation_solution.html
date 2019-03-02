@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Optimizing rotation exercise &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Resampling with scipy.ndimage" href="resampling_with_ndimage.html" />
@@ -36,52 +26,53 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="optimizing-rotation-exercise">
 <h1>Optimizing rotation exercise<a class="headerlink" href="#optimizing-rotation-exercise" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># print arrays to 4 DP</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
 </div>
-<p>You will need <a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> for this exercise:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: rotations module</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
+<p>You will need <a class="reference download internal" download="" href="_downloads/7e24b7b12ea31f2ac9d29765845f4361/rotations.py"><code class="xref download docutils literal notranslate"><span class="pre">rotations.py</span></code></a> for this exercise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: rotations module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="k">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
 </pre></div>
 </div>
 <div class="section" id="an-affine-normalization">
 <h2>An affine normalization<a class="headerlink" href="#an-affine-normalization" title="Permalink to this headline">¶</a></h2>
 <p>In the last exercise – <a class="reference internal" href="more_on_rotation_exercise.html"><span class="doc">Rotation exercise</span></a> – you undid a
 rotation.</p>
-<p>In that case, I told you what the rotation was. What if I didn&#8217;t tell you?
+<p>In that case, I told you what the rotation was. What if I didn’t tell you?
 Could you work it out?</p>
 <p>This is a good job for optimization.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the first volume of ds107_sub012_t1r2.nii</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the first volume of ds107_sub012_t1r2.nii</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img_4d</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_t1r2.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">img_4d</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vol0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Here is the volume with some rotations I have applied:
-<a class="reference download internal" href="_downloads/secret_rotated_volume.nii" download=""><code class="xref download docutils literal"><span class="pre">secret_rotated_volume.nii</span></code></a>.  This time I&#8217;m not going to tell you
+<a class="reference download internal" download="" href="_downloads/0132fd7f279334a16300992e337378f0/secret_rotated_volume.nii"><code class="xref download docutils literal notranslate"><span class="pre">secret_rotated_volume.nii</span></code></a>.  This time I’m not going to tell you
 what rotations I applied:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the secretly rotated image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: the secretly rotated image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;secret_rotated_volume.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_vol0</span> <span class="o">=</span> <span class="n">rotated_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rotated_vol0</span><span class="o">.</span><span class="n">shape</span>
@@ -89,7 +80,7 @@ what rotations I applied:</p>
 </pre></div>
 </div>
 <p>Displayed side by side with the original (not-rotated) image:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: slices on z, y, and x axis from</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: slices on z, y, and x axis from</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">17</span><span class="p">])</span>
 <span class="go">&lt;...&gt;</span>
@@ -117,7 +108,7 @@ can get that from code in the <a class="reference external" href="https://matthe
 Feel free to try another mismatch metric if you like. Remember it is a
 function that accepts two images and returns a scalar that is low when the
 images are well matched.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get correlation mismatch metric from `optimizing_space`, paste here</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get correlation mismatch metric from `optimizing_space`, paste here</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">correl_mismatch</span><span class="p">(</span><span class="n">slice0</span><span class="p">,</span> <span class="n">slice1</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot; Negative correlation between the two images, flattened to 1D</span>
 <span class="gp">... </span><span class="sd">    &quot;&quot;&quot;</span>
@@ -128,34 +119,34 @@ images are well matched.</p>
 <p>Now we need a function that will transform a given image by a given set of
 rotations. The arguments will be:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">vol_arr</span></code> : the image that we will transform;</li>
-<li><code class="docutils literal"><span class="pre">rotations</span></code> - a vector of rotations (one value for each of x, y, and z
+<li><code class="docutils literal notranslate"><span class="pre">vol_arr</span></code> : the image that we will transform;</li>
+<li><code class="docutils literal notranslate"><span class="pre">rotations</span></code> - a vector of rotations (one value for each of x, y, and z
 rotation).</li>
 </ul>
-<p>The function then returns a copy of <code class="docutils literal"><span class="pre">vol_arr</span></code> with those rotations applied.</p>
-<p>Specifically, the <code class="docutils literal"><span class="pre">rotations</span></code> give the <em>resampling transform</em> that gives the
-mapping from coordinates in a new empty copy of <code class="docutils literal"><span class="pre">vol_arr</span></code> – call this
-<code class="docutils literal"><span class="pre">K</span></code> – to coordinates in <code class="docutils literal"><span class="pre">vol_arr</span></code>.</p>
-<p>Our vector of rotations is length 3, containing the <span class="math">\(r_x, r_y, r_z\)</span>,
+<p>The function then returns a copy of <code class="docutils literal notranslate"><span class="pre">vol_arr</span></code> with those rotations applied.</p>
+<p>Specifically, the <code class="docutils literal notranslate"><span class="pre">rotations</span></code> give the <em>resampling transform</em> that gives the
+mapping from coordinates in a new empty copy of <code class="docutils literal notranslate"><span class="pre">vol_arr</span></code> – call this
+<code class="docutils literal notranslate"><span class="pre">K</span></code> – to coordinates in <code class="docutils literal notranslate"><span class="pre">vol_arr</span></code>.</p>
+<p>Our vector of rotations is length 3, containing the <span class="math notranslate nohighlight">\(r_x, r_y, r_z\)</span>,
 which are, respectively, the rotations about the x, y and z axis.</p>
 <p>In order to do this transformation, you will need to take the three
 parameters, and convert them to the corresponding rotation matrix.</p>
-<p>You then need to apply this transformation matrix to the coordinates of <code class="docutils literal"><span class="pre">K</span></code>
-to return a new copy of <code class="docutils literal"><span class="pre">vol_arr</span></code> with <span class="math">\(r_x, r_y, r_z\)</span> applied. Of
-course, this will be a job for <code class="docutils literal"><span class="pre">affine_transform</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: affine_transform function</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
+<p>You then need to apply this transformation matrix to the coordinates of <code class="docutils literal notranslate"><span class="pre">K</span></code>
+to return a new copy of <code class="docutils literal notranslate"><span class="pre">vol_arr</span></code> with <span class="math notranslate nohighlight">\(r_x, r_y, r_z\)</span> applied. Of
+course, this will be a job for <code class="docutils literal notranslate"><span class="pre">affine_transform</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: affine_transform function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="k">import</span> <span class="n">affine_transform</span>
 </pre></div>
 </div>
 <p>Your new function will look something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_rotations</span><span class="p">(</span><span class="n">vol_arr</span><span class="p">,</span> <span class="n">rotations</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_rotations</span><span class="p">(</span><span class="n">vol_arr</span><span class="p">,</span> <span class="n">rotations</span><span class="p">):</span>
     <span class="n">r_x</span><span class="p">,</span> <span class="n">r_y</span><span class="p">,</span> <span class="n">r_z</span> <span class="o">=</span> <span class="n">rotations</span>
     <span class="n">rotation_matrix</span> <span class="o">=</span> <span class="s2">&quot;what goes here?&quot;</span>
     <span class="c1"># apply rotations with affine_transform to make new image</span>
     <span class="c1"># return new image</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make apply_rotations function, accepting `vol_arr` and `rotations`</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make apply_rotations function, accepting `vol_arr` and `rotations`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- vector, returning image with rotations applied.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">apply_rotations</span><span class="p">(</span><span class="n">vol_arr</span><span class="p">,</span> <span class="n">rotations</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">r_x</span><span class="p">,</span> <span class="n">r_y</span><span class="p">,</span> <span class="n">r_z</span> <span class="o">=</span> <span class="n">rotations</span>
@@ -165,7 +156,7 @@ course, this will be a job for <code class="docutils literal"><span class="pre">
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">vol_arr</span><span class="p">,</span> <span class="n">rotation_matrix</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: You could try this quick check that 0 rotations give the same</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: You could try this quick check that 0 rotations give the same</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># output back</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">not_changed</span> <span class="o">=</span> <span class="n">apply_rotations</span><span class="p">(</span><span class="n">rotated_vol0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">not_changed</span><span class="p">,</span> <span class="n">rotated_vol0</span><span class="p">)</span>
@@ -173,9 +164,9 @@ course, this will be a job for <code class="docutils literal"><span class="pre">
 </div>
 <p>Now we have the function to apply the rotations, and the matching function, we
 can make the cost function to optimize.</p>
-<p>Use the <a class="reference external" href="http://matthew-brett.github.io/teaching/global_scope.html">global scope</a> to pick up and use <code class="docutils literal"><span class="pre">rotated_vol0</span></code> and <code class="docutils literal"><span class="pre">vol0</span></code> in
+<p>Use the <a class="reference external" href="http://matthew-brett.github.io/teaching/global_scope.html">global scope</a> to pick up and use <code class="docutils literal notranslate"><span class="pre">rotated_vol0</span></code> and <code class="docutils literal notranslate"><span class="pre">vol0</span></code> in
 the function.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a cost function, that</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make a cost function, that</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * is called &#39;cost_function&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * accepts a vector of rotations as input</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * applies the vector of rotations to `rotated_vol0` from the global</span>
@@ -187,7 +178,7 @@ the function.</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">correl_mismatch</span><span class="p">(</span><span class="n">vol0</span><span class="p">,</span> <span class="n">Y_t</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: a quick check the cost function returns the current value without rotations</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: a quick check the cost function returns the current value without rotations</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">current</span> <span class="o">=</span> <span class="n">correl_mismatch</span><span class="p">(</span><span class="n">vol0</span><span class="p">,</span> <span class="n">rotated_vol0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">redone</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">redone</span><span class="p">)</span>
@@ -195,39 +186,39 @@ the function.</p>
 </div>
 <p>Now we are ready to optimize. We are going to need at least one of the cost
 functions from <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">scipy.optimize</a>.</p>
-<p><code class="docutils literal"><span class="pre">fmin_powell</span></code> is a good place to start:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get fmin_powell</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fmin_powell</span>
+<p><code class="docutils literal notranslate"><span class="pre">fmin_powell</span></code> is a good place to start:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get fmin_powell</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">fmin_powell</span>
 </pre></div>
 </div>
-<p>Now call <code class="docutils literal"><span class="pre">fmin_powell</span></code> with some starting guess for the rotations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call optimizing function and collect best estimates for rotations</span>
+<p>Now call <code class="docutils literal notranslate"><span class="pre">fmin_powell</span></code> with some starting guess for the rotations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Call optimizing function and collect best estimates for rotations</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">best_params</span> <span class="o">=</span> <span class="n">fmin_powell</span><span class="p">(</span><span class="n">cost_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="go">Optimization terminated successfully.</span>
 <span class="go">         Current function value: -0.919...</span>
 <span class="go">         Iterations: 5</span>
 <span class="go">         Function evaluations: ...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">best_params</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best_params</span>  <span class="c1"># doctest: +SKIP</span>
 <span class="go">array([-0.01  , -0.1038,  0.1975])</span>
 </pre></div>
 </div>
 <p>Finally, use these parameters to:</p>
 <ul class="simple">
 <li>compile the rotation matrix from the optimized parameters. This gives the
-matrix mapping from coordinates in <code class="docutils literal"><span class="pre">vol0</span></code> to coordinates in
-<code class="docutils literal"><span class="pre">rotated_vol0</span></code>;</li>
-<li>Use <code class="docutils literal"><span class="pre">affine_transform</span></code> on <code class="docutils literal"><span class="pre">rotated_vol0</span></code> to get an un-rotated version of
+matrix mapping from coordinates in <code class="docutils literal notranslate"><span class="pre">vol0</span></code> to coordinates in
+<code class="docutils literal notranslate"><span class="pre">rotated_vol0</span></code>;</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">affine_transform</span></code> on <code class="docutils literal notranslate"><span class="pre">rotated_vol0</span></code> to get an un-rotated version of
 that image.</li>
 </ul>
-<p>You should be able to do this with your <code class="docutils literal"><span class="pre">apply_rotations</span></code> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use &#39;apply_rotations&#39; and the estimated parameters to un-rotate the</span>
+<p>You should be able to do this with your <code class="docutils literal notranslate"><span class="pre">apply_rotations</span></code> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use &#39;apply_rotations&#39; and the estimated parameters to un-rotate the</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- rotated image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put the new un-rotated image into a variable `best_vol0`</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">best_vol0</span> <span class="o">=</span> <span class="n">apply_rotations</span><span class="p">(</span><span class="n">rotated_vol0</span><span class="p">,</span> <span class="n">best_params</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now you can look at the original and the un-rotated image side by side:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- slices on z, y, and x axis from original and un-rotated image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- slices on z, y, and x axis from original and un-rotated image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vol0</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">17</span><span class="p">])</span>
 <span class="go">&lt;...&gt;</span>
@@ -247,13 +238,13 @@ that image.</li>
 <div class="figure">
 <img alt="_images/optimizing_rotation_solution-18.png" src="_images/optimizing_rotation_solution-18.png" />
 </div>
-<p>If you like, you can check in the file <a class="reference download internal" href="_downloads/make_rotated.py" download=""><code class="xref download docutils literal"><span class="pre">make_rotated.py</span></code></a> to see what
+<p>If you like, you can check in the file <a class="reference download internal" download="" href="_downloads/837af760017d9906e2dd6ae03df9b09b/make_rotated.py"><code class="xref download docutils literal notranslate"><span class="pre">make_rotated.py</span></code></a> to see what
 rotation I actually applied.</p>
 </div>
 <div class="section" id="if-you-raced-ahead">
 <h2>If you raced ahead<a class="headerlink" href="#if-you-raced-ahead" title="Permalink to this headline">¶</a></h2>
 <p>Why not try another mismatch function?</p>
-<p>And / or try another <code class="docutils literal"><span class="pre">fmin_</span></code> function from <code class="docutils literal"><span class="pre">scipy.optimize</span></code>?</p>
+<p>And / or try another <code class="docutils literal notranslate"><span class="pre">fmin_</span></code> function from <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>?</p>
 <p>Is it easy for the optimization to go wrong, or is it nearly always right
 whatever parameter you choose?</p>
 </div>
@@ -261,6 +252,7 @@ whatever parameter you choose?</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -309,14 +301,24 @@ whatever parameter you choose?</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -325,8 +327,8 @@ whatever parameter you choose?</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/optimizing_rotation_solution.rst.txt"

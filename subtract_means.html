@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Subtracting the mean from columns or rows &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Array reduction operations" href="array_reductions.html" />
@@ -36,27 +26,28 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="subtracting-the-mean-from-columns-or-rows">
 <h1>Subtracting the mean from columns or rows<a class="headerlink" href="#subtracting-the-mean-from-columns-or-rows" title="Permalink to this headline">¶</a></h1>
 <p>We often want to do operations like subtract the mean from the columns or rows
 of a 2D array. For example, here is a 4 by 3 array:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display array values to 6 digits of precision</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
 <span class="go">array([[ 3.,  1.,  4.],</span>
 <span class="go">       [ 1.,  5.,  9.],</span>
@@ -64,21 +55,21 @@ of a 2D array. For example, here is a 4 by 3 array:</p>
 <span class="go">       [ 3.,  5.,  8.]])</span>
 </pre></div>
 </div>
-<p>Let&#8217;s say I wanted to remove the mean across the columns (the row mean).  Here
+<p>Let’s say I wanted to remove the mean across the columns (the row mean).  Here
 is the row mean:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Mean across the second (column) axis</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Mean across the second (column) axis</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span>
 <span class="go">array([ 2.666667,  5.      ,  4.333333,  5.333333])</span>
 </pre></div>
 </div>
 <p>This is a 1D array:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_means</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(4,)</span>
 </pre></div>
 </div>
 <p>I want do something like the following, but in a neater and faster way:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use a loop to subtract the mean from each row</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use a loop to subtract the mean from each row</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">de_meaned</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>  <span class="c1"># iterate over rows</span>
 <span class="gp">... </span>    <span class="n">de_meaned</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">de_meaned</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">row_means</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -88,12 +79,12 @@ is the row mean:</p>
 </pre></div>
 </div>
 <div class="section" id="an-inefficient-way-using-np-outer">
-<h2>An inefficient way using &#8220;np.outer&#8221;<a class="headerlink" href="#an-inefficient-way-using-np-outer" title="Permalink to this headline">¶</a></h2>
+<h2>An inefficient way using “np.outer”<a class="headerlink" href="#an-inefficient-way-using-np-outer" title="Permalink to this headline">¶</a></h2>
 <p>One way of doing this subtraction, is to expand the 1D shape (4,) mean vector
 out to a shape (3, 4) array, where the new columns are all the same as the
-(4,) mean vector.  In fact you can do this with <code class="docutils literal"><span class="pre">np.outer</span></code> and a vector of
+(4,) mean vector.  In fact you can do this with <code class="docutils literal notranslate"><span class="pre">np.outer</span></code> and a vector of
 ones:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">means_expanded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">row_means</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">means_expanded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">row_means</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">means_expanded</span>
 <span class="go">array([[ 2.666667,  2.666667,  2.666667],</span>
 <span class="go">       [ 5.      ,  5.      ,  5.      ],</span>
@@ -102,7 +93,7 @@ ones:</p>
 </pre></div>
 </div>
 <p>Now we can subtract this expanded array to remove the row means:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">re_de_meaned</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">-</span> <span class="n">means_expanded</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">re_de_meaned</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">-</span> <span class="n">means_expanded</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># The row means are now very close to zero</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">re_de_meaned</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">array([ 0.,  0.,  0.,  0.])</span>
@@ -115,25 +106,25 @@ of the matrix.</p>
 <div class="section" id="an-efficient-way-using-numpy-broadcasting">
 <h2>An efficient way using NumPy broadcasting<a class="headerlink" href="#an-efficient-way-using-numpy-broadcasting" title="Permalink to this headline">¶</a></h2>
 <p>Our example array is shape (4, 3):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(4, 3)</span>
 </pre></div>
 </div>
-<p>Above we used <code class="docutils literal"><span class="pre">np.outer</span></code> to make a new array shape (4, 3) that replicates
+<p>Above we used <code class="docutils literal notranslate"><span class="pre">np.outer</span></code> to make a new array shape (4, 3) that replicates
 the shape (4,) row mean values across 3 columns.  We then subtract the new (4,
 3) mean array from the original to subtract the mean.</p>
 <p><a class="reference external" href="http://www.scipy-lectures.org/intro/numpy/operations.html#broadcasting">NumPy broadcasting</a> is a way to get to the same outcome, but without
 creating a new (4, 3) shaped array.  Although broadcasting takes a while to
 get used to, it usually results in code that is more concise and saves memory
 by avoiding large temporary arrays.  In our case, the temporary means array of
-shape (4, 3) is very small, but if <code class="docutils literal"><span class="pre">arr</span></code> had many more rows and / or
+shape (4, 3) is very small, but if <code class="docutils literal notranslate"><span class="pre">arr</span></code> had many more rows and / or
 columns, then the temporary means array could be very large.</p>
 <p>See <a class="reference external" href="http://www.scipy-lectures.org/intro/numpy/operations.html#broadcasting">NumPy broadcasting</a> for a detailed description of how broadcasting
 works. Here, we can summarize by saying that broadcasting tries to guess what
 full arrays we will need by replicating rows or columns or planes until the
 shapes of the two input arrays match.</p>
 <p>Here is the broadcasting way of subtracting the row means:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Make row_means into column vector so numpy knows to replicate</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Make row_means into column vector so numpy knows to replicate</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># the columns during broadcasting.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">row_means_col_vec</span> <span class="o">=</span> <span class="n">row_means</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># Better: np.newaxis.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">broadcast_demeaned</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">-</span> <span class="n">row_means_col_vec</span>
@@ -141,18 +132,18 @@ shapes of the two input arrays match.</p>
 <span class="go">array([ 0.,  0.,  0.,  0.])</span>
 </pre></div>
 </div>
-<p>When NumPy sees <code class="docutils literal"><span class="pre">arr</span> <span class="pre">-</span> <span class="pre">row_means_col_vec</span></code> it notices that <code class="docutils literal"><span class="pre">arr</span></code> is shape
-(4, 3) and <code class="docutils literal"><span class="pre">row_mean_col_vec</span></code> is shape (4, 1).  It can&#8217;t do an elementwise
+<p>When NumPy sees <code class="docutils literal notranslate"><span class="pre">arr</span> <span class="pre">-</span> <span class="pre">row_means_col_vec</span></code> it notices that <code class="docutils literal notranslate"><span class="pre">arr</span></code> is shape
+(4, 3) and <code class="docutils literal notranslate"><span class="pre">row_mean_col_vec</span></code> is shape (4, 1).  It can’t do an elementwise
 operation like subtract with these shapes, so it will try and work out if it
 can expand any missing or length 1 dimensions in the input arrays to make the
 shapes match.  In this case, it sees that it can replicate the column of
-<code class="docutils literal"><span class="pre">row_mean_col_vec</span></code> 3 times to make an array shape (4, 3).   It does this in
+<code class="docutils literal notranslate"><span class="pre">row_mean_col_vec</span></code> 3 times to make an array shape (4, 3).   It does this in
 an efficient way that re-uses the memory from the first column to make up the
 data for the other columns, therefore saving memory compared to creating a new
 full (4, 3) array.</p>
 <p>You can see what NumPy is going to do when it tries to do elementwise
-operations on arrays of these shapes by using <code class="docutils literal"><span class="pre">np.broadcast_arrays</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show what arrays NumPy will broadcast to.</span>
+operations on arrays of these shapes by using <code class="docutils literal notranslate"><span class="pre">np.broadcast_arrays</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show what arrays NumPy will broadcast to.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bc_arr</span><span class="p">,</span> <span class="n">bc_row_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">row_means_col_vec</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># The (4, 3) array is unchanged when broadcasting.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bc_arr</span> <span class="o">==</span> <span class="n">arr</span><span class="p">)</span>
@@ -170,6 +161,7 @@ operations on arrays of these shapes by using <code class="docutils literal"><sp
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -218,14 +210,24 @@ operations on arrays of these shapes by using <code class="docutils literal"><sp
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -234,8 +236,8 @@ operations on arrays of these shapes by using <code class="docutils literal"><sp
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/subtract_means.rst.txt"

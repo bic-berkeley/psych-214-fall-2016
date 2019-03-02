@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Hypothesis tesing with the general linear model &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Dummy coding GLM exercise" href="github_dummies_homework.html" />
@@ -36,48 +26,49 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="hypothesis-tesing-with-the-general-linear-model">
 <h1>Hypothesis tesing with the general linear model<a class="headerlink" href="#hypothesis-tesing-with-the-general-linear-model" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="general-linear-model-reprise">
 <h2>General linear model reprise<a class="headerlink" href="#general-linear-model-reprise" title="Permalink to this headline">¶</a></h2>
 <p>This page starts at the same place as <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import numerical and plotting libraries</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import numerical and plotting libraries</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Only show 6 decimals when printing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In that page, we had questionnaire measures of psychopathy from 12 students:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">11.416</span><span class="p">,</span>   <span class="mf">4.514</span><span class="p">,</span>  <span class="mf">12.204</span><span class="p">,</span>  <span class="mf">14.835</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psychopathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">11.416</span><span class="p">,</span>   <span class="mf">4.514</span><span class="p">,</span>  <span class="mf">12.204</span><span class="p">,</span>  <span class="mf">14.835</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">8.416</span><span class="p">,</span>   <span class="mf">6.563</span><span class="p">,</span>  <span class="mf">17.343</span><span class="p">,</span> <span class="mf">13.02</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">15.19</span> <span class="p">,</span>  <span class="mf">11.902</span><span class="p">,</span>  <span class="mf">22.721</span><span class="p">,</span>  <span class="mf">22.324</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>We also had skin-conductance scores from the palms of the each of the same 12
 students, to get a measure of how sweaty they are:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.389</span><span class="p">,</span>  <span class="mf">0.2</span>  <span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.463</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clammy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.389</span><span class="p">,</span>  <span class="mf">0.2</span>  <span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.463</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="mf">4.585</span><span class="p">,</span>  <span class="mf">1.097</span><span class="p">,</span>  <span class="mf">1.642</span><span class="p">,</span>  <span class="mf">4.972</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="mf">7.957</span><span class="p">,</span>  <span class="mf">5.585</span><span class="p">,</span>  <span class="mf">5.527</span><span class="p">,</span>  <span class="mf">6.964</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>We believe that the <code class="docutils literal"><span class="pre">clammy</span></code> score has some straight-line relationship to
-the <code class="docutils literal"><span class="pre">psychopathy</span></code> scores.  <span class="math">\(n\)</span> is the number of elements in <code class="docutils literal"><span class="pre">psychopathy</span></code>
-and <code class="docutils literal"><span class="pre">clammy</span></code>: <span class="math">\(n = 12\)</span>.  Call the 12 values for <code class="docutils literal"><span class="pre">psychopathy</span></code> <span class="math">\(\vec{y} =
-[y_1, y_2, .... , y_n]\)</span>. The 12 values for <code class="docutils literal"><span class="pre">clammy</span></code> are <span class="math">\(\vec{x} = [x_1,
+<p>We believe that the <code class="docutils literal notranslate"><span class="pre">clammy</span></code> score has some straight-line relationship to
+the <code class="docutils literal notranslate"><span class="pre">psychopathy</span></code> scores.  <span class="math notranslate nohighlight">\(n\)</span> is the number of elements in <code class="docutils literal notranslate"><span class="pre">psychopathy</span></code>
+and <code class="docutils literal notranslate"><span class="pre">clammy</span></code>: <span class="math notranslate nohighlight">\(n = 12\)</span>.  Call the 12 values for <code class="docutils literal notranslate"><span class="pre">psychopathy</span></code> <span class="math notranslate nohighlight">\(\vec{y} =
+[y_1, y_2, .... , y_n]\)</span>. The 12 values for <code class="docutils literal notranslate"><span class="pre">clammy</span></code> are <span class="math notranslate nohighlight">\(\vec{x} = [x_1,
 x_2, ... , x_n]\)</span>.  Our straight line model is:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\newcommand{\yvec}{\vec{y}}
 \newcommand{\xvec}{\vec{x}}
 \newcommand{\evec}{\vec{\varepsilon}}
@@ -88,20 +79,20 @@ x_2, ... , x_n]\)</span>.  Our straight line model is:</p>
 \newcommand{\ehat}{\hat{\evec}}
 \newcommand{\cvec}{\vec{c}}
 \newcommand{\rank}{\textrm{rank}}\\y_i = c + b x_i + e_i\end{aligned}\end{align} \]</div>
-<p>where <span class="math">\(c\)</span> is the intercept, <span class="math">\(b\)</span> is the slope, and <span class="math">\(e_i\)</span> is the remainder of
-<span class="math">\(y_i\)</span> after subtracting <span class="math">\(c + b x_i\)</span>.</p>
-<p>We then defined a new vector <span class="math">\(\evec = [e_1, e_2, ... e_n]\)</span> for remaining
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the intercept, <span class="math notranslate nohighlight">\(b\)</span> is the slope, and <span class="math notranslate nohighlight">\(e_i\)</span> is the remainder of
+<span class="math notranslate nohighlight">\(y_i\)</span> after subtracting <span class="math notranslate nohighlight">\(c + b x_i\)</span>.</p>
+<p>We then defined a new vector <span class="math notranslate nohighlight">\(\evec = [e_1, e_2, ... e_n]\)</span> for remaining
 error, and rewrote the same formula in vector notation:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\yvec = c + b \xvec + \evec\]</div>
-<p>We defined a new <span class="math">\(n=12\)</span> element vector <span class="math">\(\vec{1}\)</span> containing all ones, and
-used this to build a two-column <em>design matrix</em> <span class="math">\(\Xmat\)</span>, with first column
-<span class="math">\(\vec{1}\)</span> and second column <span class="math">\(\vec{x}\)</span>.  This allowed us to rewrite the vector
+<p>We defined a new <span class="math notranslate nohighlight">\(n=12\)</span> element vector <span class="math notranslate nohighlight">\(\vec{1}\)</span> containing all ones, and
+used this to build a two-column <em>design matrix</em> <span class="math notranslate nohighlight">\(\Xmat\)</span>, with first column
+<span class="math notranslate nohighlight">\(\vec{1}\)</span> and second column <span class="math notranslate nohighlight">\(\vec{x}\)</span>.  This allowed us to rewrite the vector
 formulation as a matrix multiplication and addition:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\yvec = \Xmat \bvec + \evec\]</div>
-<p>where <span class="math">\(\bvec\)</span> is:</p>
-<div class="math">
+<p>where <span class="math notranslate nohighlight">\(\bvec\)</span> is:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\left[
 \begin{array}{\bvec}
 c \\
@@ -109,90 +100,90 @@ b \\
 \end{array}
 \right]\end{split}\]</div>
 <span class="target" id="vector-as-column"></span><p>Using the matrix formulation of the general linear model, we found the least
-squares <em>estimate</em> for <span class="math">\(\bvec\)</span> is:</p>
-<div class="math">
+squares <em>estimate</em> for <span class="math notranslate nohighlight">\(\bvec\)</span> is:</p>
+<div class="math notranslate nohighlight">
 \[\bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\]</div>
-<p>The formula above applies when <span class="math">\(\Xmat^T \Xmat\)</span> is invertible.  Generalizing to
-the case where <span class="math">\(\Xmat^T \Xmat\)</span> is not invertible, the least squares estimate
+<p>The formula above applies when <span class="math notranslate nohighlight">\(\Xmat^T \Xmat\)</span> is invertible.  Generalizing to
+the case where <span class="math notranslate nohighlight">\(\Xmat^T \Xmat\)</span> is not invertible, the least squares estimate
 is:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\bhat = \Xmat^+ \yvec\]</div>
-<p>where <span class="math">\(\Xmat^+\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_pseudoinverse">Moore-Penrose pseudoinverse</a> of <span class="math">\(\Xmat\)</span>.</p>
-<p>The <code class="docutils literal"><span class="pre">^</span></code> on <span class="math">\(\bhat\)</span> reminds us that this is an <em>estimate</em> of <span class="math">\(\bvec\)</span>.  We
-derived this <span class="math">\(\bhat\)</span> estimate from our sample, hoping that it will be a
-reasonable estimate for the <span class="math">\(\bvec\)</span> that applies to the whole population.</p>
+<p>where <span class="math notranslate nohighlight">\(\Xmat^+\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_pseudoinverse">Moore-Penrose pseudoinverse</a> of <span class="math notranslate nohighlight">\(\Xmat\)</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">^</span></code> on <span class="math notranslate nohighlight">\(\bhat\)</span> reminds us that this is an <em>estimate</em> of <span class="math notranslate nohighlight">\(\bvec\)</span>.  We
+derived this <span class="math notranslate nohighlight">\(\bhat\)</span> estimate from our sample, hoping that it will be a
+reasonable estimate for the <span class="math notranslate nohighlight">\(\bvec\)</span> that applies to the whole population.</p>
 </div>
 <div class="section" id="the-residual-error">
 <h2>The residual error<a class="headerlink" href="#the-residual-error" title="Permalink to this headline">¶</a></h2>
-<p><span class="math">\(\bhat\)</span> gives us a corresponding estimate of <span class="math">\(\evec\)</span>:</p>
-<div class="math">
+<p><span class="math notranslate nohighlight">\(\bhat\)</span> gives us a corresponding estimate of <span class="math notranslate nohighlight">\(\evec\)</span>:</p>
+<div class="math notranslate nohighlight">
 \[\ehat = \yvec - \Xmat \bhat\]</div>
-<p>The least squares criterion that we used to derive <span class="math">\(\bhat\)</span> specifies that
-<span class="math">\(\bhat\)</span> is the vector giving us the smallest sum of squares of <span class="math">\(\ehat\)</span>. We can
-write that criterion for <span class="math">\(\bhat\)</span> like this:</p>
-<div class="math">
+<p>The least squares criterion that we used to derive <span class="math notranslate nohighlight">\(\bhat\)</span> specifies that
+<span class="math notranslate nohighlight">\(\bhat\)</span> is the vector giving us the smallest sum of squares of <span class="math notranslate nohighlight">\(\ehat\)</span>. We can
+write that criterion for <span class="math notranslate nohighlight">\(\bhat\)</span> like this:</p>
+<div class="math notranslate nohighlight">
 \[\bhat = \textrm{argmin}_{\bvec} \sum_{i=1}^n e_i^2\]</div>
-<p>Read this as &#8220;<span class="math">\(\bhat\)</span> is the value of the vector <span class="math">\(\bvec\)</span> that gives the
-minimum value for the sum of the squared residual errors&#8221;.</p>
-<p>From now on, we will abbreviate <span class="math">\(\sum_{i=1}^n e_i^2\)</span> as <span class="math">\(\sum e_i^2\)</span>, assuming
-it is the sum over all elements index <span class="math">\(1 .. n\)</span>.</p>
-<p>Remembering the definition of the dot product, we can also write <span class="math">\(\sum e_i^2\)</span>
-as the dot product of <span class="math">\(\ehat\)</span> with itself:</p>
-<div class="math">
+<p>Read this as “<span class="math notranslate nohighlight">\(\bhat\)</span> is the value of the vector <span class="math notranslate nohighlight">\(\bvec\)</span> that gives the
+minimum value for the sum of the squared residual errors”.</p>
+<p>From now on, we will abbreviate <span class="math notranslate nohighlight">\(\sum_{i=1}^n e_i^2\)</span> as <span class="math notranslate nohighlight">\(\sum e_i^2\)</span>, assuming
+it is the sum over all elements index <span class="math notranslate nohighlight">\(1 .. n\)</span>.</p>
+<p>Remembering the definition of the dot product, we can also write <span class="math notranslate nohighlight">\(\sum e_i^2\)</span>
+as the dot product of <span class="math notranslate nohighlight">\(\ehat\)</span> with itself:</p>
+<div class="math notranslate nohighlight">
 \[\sum e_i^2 \equiv \ehat \cdot \ehat\]</div>
-<p>Read <span class="math">\(\equiv\)</span> as &#8220;equivalent to&#8221;.  We can also express <span class="math">\(\sum e_i^2\)</span> as the
-matrix multiplication of <span class="math">\(\ehat\)</span> as a row vector with <span class="math">\(\ehat\)</span> as a column
+<p>Read <span class="math notranslate nohighlight">\(\equiv\)</span> as “equivalent to”.  We can also express <span class="math notranslate nohighlight">\(\sum e_i^2\)</span> as the
+matrix multiplication of <span class="math notranslate nohighlight">\(\ehat\)</span> as a row vector with <span class="math notranslate nohighlight">\(\ehat\)</span> as a column
 vector.  Because we assume that <a class="reference internal" href="#vector-as-column"><span class="std std-ref">vectors are column vectors in matrix
 operations</span></a>, we can write that formulation as:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\sum e_i^2 \equiv \ehat^T \ehat\]</div>
 </div>
 <div class="section" id="unbiased-estimate-of-population-variance">
 <span id="unbiased-variance"></span><h2>Unbiased estimate of population variance<a class="headerlink" href="#unbiased-estimate-of-population-variance" title="Permalink to this headline">¶</a></h2>
 <p>We will soon need an unbiased estimate of the population variance.  The
-population variance is <span class="math">\(\frac{1}{N} \sum e_i^2\)</span> where the population has <span class="math">\(N\)</span>
-elements, and <span class="math">\(e_1, e_2, ... e_N\)</span> are the remaining errors for all <span class="math">\(N\)</span>
+population variance is <span class="math notranslate nohighlight">\(\frac{1}{N} \sum e_i^2\)</span> where the population has <span class="math notranslate nohighlight">\(N\)</span>
+elements, and <span class="math notranslate nohighlight">\(e_1, e_2, ... e_N\)</span> are the remaining errors for all <span class="math notranslate nohighlight">\(N\)</span>
 observations in the population.</p>
-<p>However, we do not have all <span class="math">\(N\)</span> observations in the population, we only have a
-<span class="math">\(n\)</span>-size <em>sample</em> from the population.  In our particular case <span class="math">\(n=12\)</span>.</p>
-<p>We could use the sample variance as this estimate: <span class="math">\(\frac{1}{n} \sum e_i\)</span>.
-Unfortunately, for <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel%27s_correction">reasons</a> we don&#8217;t have space to go
+<p>However, we do not have all <span class="math notranslate nohighlight">\(N\)</span> observations in the population, we only have a
+<span class="math notranslate nohighlight">\(n\)</span>-size <em>sample</em> from the population.  In our particular case <span class="math notranslate nohighlight">\(n=12\)</span>.</p>
+<p>We could use the sample variance as this estimate: <span class="math notranslate nohighlight">\(\frac{1}{n} \sum e_i\)</span>.
+Unfortunately, for <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel%27s_correction">reasons</a> we don’t have space to go
 into, this is a <em>biased estimate of the population variance</em>.</p>
 <p>To get an unbiased estimate of the variance, we need to allow for the number
-of independent columns in the design <span class="math">\(\Xmat\)</span>.  The number of independent
-columns in the design is given by the <a class="reference external" href="http://matthew-brett.github.io/teaching/matrix_rank.html">matrix rank</a> of <span class="math">\(\Xmat\)</span>. Specifically,
-if <span class="math">\(\rank(\Xmat)\)</span> is the matrix rank of <span class="math">\(\Xmat\)</span>, an unbiased estimate of
+of independent columns in the design <span class="math notranslate nohighlight">\(\Xmat\)</span>.  The number of independent
+columns in the design is given by the <a class="reference external" href="http://matthew-brett.github.io/teaching/matrix_rank.html">matrix rank</a> of <span class="math notranslate nohighlight">\(\Xmat\)</span>. Specifically,
+if <span class="math notranslate nohighlight">\(\rank(\Xmat)\)</span> is the matrix rank of <span class="math notranslate nohighlight">\(\Xmat\)</span>, an unbiased estimate of
 population variance is given by:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\hat\sigma^2 = \frac{1}{n - \rank(\Xmat)} \sum e_i^2\]</div>
 <p>For example, we saw in the <a class="reference external" href="https://github.com/bic-berkeley/psych-214-fall-2014/mean_test_example.html">worked example of GLM</a>, that when we have a
-single regressor, and <span class="math">\(\rank(\Xmat) = 1\)</span>, we divide the sum of squares of the
-residuals by <span class="math">\(n - 1\)</span> where <span class="math">\(n\)</span> is the number of rows in the design.  This
-<span class="math">\(n-1\)</span> divisor is <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel&#8217;s correction</a>.</p>
+single regressor, and <span class="math notranslate nohighlight">\(\rank(\Xmat) = 1\)</span>, we divide the sum of squares of the
+residuals by <span class="math notranslate nohighlight">\(n - 1\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of rows in the design.  This
+<span class="math notranslate nohighlight">\(n-1\)</span> divisor is <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel’s correction</a>.</p>
 <p>We will also use these terms below:</p>
 <ul class="simple">
-<li><span class="math">\(\rank(\Xmat)\)</span>: <em>degrees of freedom of the design</em>;</li>
-<li><span class="math">\(n - \rank(\Xmat)\)</span>: <em>degrees of freedom of the error</em>.</li>
+<li><span class="math notranslate nohighlight">\(\rank(\Xmat)\)</span>: <em>degrees of freedom of the design</em>;</li>
+<li><span class="math notranslate nohighlight">\(n - \rank(\Xmat)\)</span>: <em>degrees of freedom of the error</em>.</li>
 </ul>
 </div>
 <div class="section" id="hypothesis-testing">
 <h2>Hypothesis testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">¶</a></h2>
 <p>We used contrast vectors to form particular linear combinations of the
-parameter estimates in <span class="math">\(\bhat\)</span>.  For example, we used the contrast vector
-<span class="math">\(\cvec = [0, 1]\)</span> to select the estimate for <span class="math">\(b\)</span> – the slope of the line:</p>
-<div class="math">
+parameter estimates in <span class="math notranslate nohighlight">\(\bhat\)</span>.  For example, we used the contrast vector
+<span class="math notranslate nohighlight">\(\cvec = [0, 1]\)</span> to select the estimate for <span class="math notranslate nohighlight">\(b\)</span> – the slope of the line:</p>
+<div class="math notranslate nohighlight">
 \[b = [0, 1] \bhat\]</div>
 <div class="section" id="t-tests-using-contrast-vectors">
 <h3>t tests using contrast vectors<a class="headerlink" href="#t-tests-using-contrast-vectors" title="Permalink to this headline">¶</a></h3>
 <p>The formula for a t statistic test on any linear combination of the parameters
-in <span class="math">\(\bhat\)</span> is:</p>
-<div class="math">
+in <span class="math notranslate nohighlight">\(\bhat\)</span> is:</p>
+<div class="math notranslate nohighlight">
 \[\newcommand{\cvec}{\vec{c}}
 t = \frac{\cvec^T \bhat}
 {\sqrt{\hat{\sigma}^2 \cvec^T (\Xmat^T \Xmat)^+ \cvec}}\]</div>
-<p>where <span class="math">\(\hat{\sigma^2}\)</span> is our unbiased estimate of the population variance.</p>
+<p>where <span class="math notranslate nohighlight">\(\hat{\sigma^2}\)</span> is our unbiased estimate of the population variance.</p>
 <p>Here is the t statistic calculation in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Data vector</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Data vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">psychopathy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Covariate vector</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">clammy</span>
@@ -228,37 +219,37 @@ particularly useful for testing whether there is a significant reduction in
 the residual error when adding one or more regressors.</p>
 <p>The simplest and generally most useful way of thinking of F test is as a test
 comparing two models: a <em>full model</em> and a <em>reduced model</em>.  The full model
-contains the regressors that we want to test.  We will use <span class="math">\(\Xmat_f\)</span> for the
+contains the regressors that we want to test.  We will use <span class="math notranslate nohighlight">\(\Xmat_f\)</span> for the
 full model.  The reduced model is a model that does not contain the regressors
 we want to test, but does contain all other regressors in the full model
-<a class="footnote-reference" href="#effects-in-design" id="id2">[1]</a>.  We will use <span class="math">\(\Xmat_r\)</span> for the reduced model.</p>
-<p>In our case, <span class="math">\(\Xmat_f\)</span> is the model containing the <code class="docutils literal"><span class="pre">clammy</span></code> regressor, as
+<a class="footnote-reference" href="#effects-in-design" id="id2">[1]</a>.  We will use <span class="math notranslate nohighlight">\(\Xmat_r\)</span> for the reduced model.</p>
+<p>In our case, <span class="math notranslate nohighlight">\(\Xmat_f\)</span> is the model containing the <code class="docutils literal notranslate"><span class="pre">clammy</span></code> regressor, as
 well as the column of ones that models the intercept.</p>
-<p><span class="math">\(\Xmat_r\)</span> is our original model, that only contains the column of ones.</p>
+<p><span class="math notranslate nohighlight">\(\Xmat_r\)</span> is our original model, that only contains the column of ones.</p>
 <p>If the full model is a better fit to the data than the reduced model, then
 adding the new regressor(s) will cause a convincing drop in the size of
 residuals.</p>
 <p>The F test is a measure that reflects the drop in the magnitude of squared
 residuals as a result of adding the new regressors.</p>
-<p>Now we define the <span class="math">\(SSR(\Xmat_r)\)</span> and <span class="math">\(SSR(\Xmat_f)\)</span>.  These are the Sums of
+<p>Now we define the <span class="math notranslate nohighlight">\(SSR(\Xmat_r)\)</span> and <span class="math notranslate nohighlight">\(SSR(\Xmat_f)\)</span>.  These are the Sums of
 Squares of the Residuals of the reduced and full model respectively.</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\begin{split}\bhat_r = \Xmat_r^+ \yvec \\
 \hat\evec_r = \yvec - \Xmat_r \bhat_r \\
 SSR(\Xmat_r) = \hat\evec_r^T \hat\evec_r \\\end{split}\\\begin{split}\bhat_f = \Xmat_f^+ \yvec \\
 \hat\evec_f = \yvec - \Xmat_f \bhat_f \\
 SSR(\Xmat_f) = \hat\evec_f^T \hat\evec_f\end{split}\end{aligned}\end{align} \]</div>
-<p><span class="math">\(ESS = SSR(\Xmat_r) - SSR(\Xmat_f)\)</span> is the Extra Sum of Squared residuals
+<p><span class="math notranslate nohighlight">\(ESS = SSR(\Xmat_r) - SSR(\Xmat_f)\)</span> is the Extra Sum of Squared residuals
 explained by the full compared to the reduced model.  The top half of the
-ratio that forms the F statistic is <span class="math">\(ESS / \nu_1\)</span>, where <span class="math">\(\nu_1\)</span> is the number
-of extra independent regressors (columns) in <span class="math">\(\Xmat_f\)</span> compared to <span class="math">\(\Xmat_r\)</span>.
+ratio that forms the F statistic is <span class="math notranslate nohighlight">\(ESS / \nu_1\)</span>, where <span class="math notranslate nohighlight">\(\nu_1\)</span> is the number
+of extra independent regressors (columns) in <span class="math notranslate nohighlight">\(\Xmat_f\)</span> compared to <span class="math notranslate nohighlight">\(\Xmat_r\)</span>.
 Specifically:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\nu_1 = \rank(\Xmat_f) - \rank(\Xmat_r)\]</div>
-<p>The bottom half of the F statistic is the estimated variance <span class="math">\(\hat{\sigma^2}\)</span>
-from the full model.  This can also be written as <span class="math">\(SSR(\Xmat_f) / \nu_2\)</span> where
-<span class="math">\(\nu_2\)</span> is the <em>degrees of freedom of the error</em>:</p>
-<div class="math">
+<p>The bottom half of the F statistic is the estimated variance <span class="math notranslate nohighlight">\(\hat{\sigma^2}\)</span>
+from the full model.  This can also be written as <span class="math notranslate nohighlight">\(SSR(\Xmat_f) / \nu_2\)</span> where
+<span class="math notranslate nohighlight">\(\nu_2\)</span> is the <em>degrees of freedom of the error</em>:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
 F_{\nu_1, \nu_2} &amp; = &amp;
 \frac{
@@ -271,7 +262,7 @@ F_{\nu_1, \nu_2} &amp; = &amp;
 {\textrm{SSR}(\Xmat_f) / \nu_2}
 \end{eqnarray}\end{split}\]</div>
 <p>Here is the F-statistic calculation in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># We already have X, e, rank_x, for the full model, from</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># We already have X, e, rank_x, for the full model, from</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># the t calculation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_f</span><span class="p">,</span> <span class="n">e_f</span><span class="p">,</span> <span class="n">rank_f</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">rank_x</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now calculate the same for the reduced model</span>
@@ -291,9 +282,9 @@ F_{\nu_1, \nu_2} &amp; = &amp;
 <span class="go">3.66488...</span>
 </pre></div>
 </div>
-<p>For reasons that we haven&#8217;t explained here, the F statistic for a single
+<p>For reasons that we haven’t explained here, the F statistic for a single
 column is the square of the t statistic testing the same column:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">**</span> <span class="mi">2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="go">array([[ 3.664886]])</span>
 </pre></div>
 </div>
@@ -304,9 +295,9 @@ column is the square of the t statistic testing the same column:</p>
 <tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td><p class="first">Actually, the full model need not contain exactly the
 same regressors as the reduced model, but it must be able to model all the
 data vectors that the reduced design can, once matrix multiplied by a
-suitable parameter vector <span class="math">\(\bvec\)</span>.  For example, consider the following two
+suitable parameter vector <span class="math notranslate nohighlight">\(\bvec\)</span>.  For example, consider the following two
 designs:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol X_1 =
 \begin{bmatrix}
 1 &amp; 0 \\
@@ -321,9 +312,9 @@ designs:</p>
 0 &amp; 0 \\
 \end{bmatrix}\end{split}\]</div>
 <p>These designs do not contain the same regressors, but, with suitable
-<span class="math">\(\bvec\)</span> vectors, they can both give an exact fit to any data vector of
+<span class="math notranslate nohighlight">\(\bvec\)</span> vectors, they can both give an exact fit to any data vector of
 form:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}y =
 \begin{bmatrix}
 p \\
@@ -331,7 +322,7 @@ q \\
 0 \\
 \end{bmatrix}\end{split}\]</div>
 <p class="last">In fact, these are the only vectors they can fit.  So, although the two
-designs <span class="math">\(\boldsymbol X_1\)</span> and <span class="math">\(\boldsymbol X_2\)</span> do not have the same
+designs <span class="math notranslate nohighlight">\(\boldsymbol X_1\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol X_2\)</span> do not have the same
 regressors, they do model the same <em>effects</em> – meaning, they can fit the
 same range of data vectors.</p>
 </td></tr>
@@ -343,6 +334,7 @@ same range of data vectors.</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -391,14 +383,24 @@ same range of data vectors.</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -407,8 +409,8 @@ same range of data vectors.</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/hypothesis_tests.rst.txt"

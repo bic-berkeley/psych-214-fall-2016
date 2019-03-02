@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Basic numpy exercises &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Arrays, images and plotting" href="day_01.html" />
@@ -36,51 +26,52 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="basic-numpy-exercises">
 <h1>Basic numpy exercises<a class="headerlink" href="#basic-numpy-exercises" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>For code template see: <a class="reference download internal" href="_downloads/lab_01_code.py" download=""><code class="xref download docutils literal"><span class="pre">lab_01_code.py</span></code></a>;</li>
+<li>For code template see: <a class="reference download internal" download="" href="_downloads/3d69b793aaf962cf32a32186ed5189ff/lab_01_code.py"><code class="xref download docutils literal notranslate"><span class="pre">lab_01_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="lab_01_solution.html"><span class="doc">Basic numpy exercises</span></a>.</li>
 </ul>
 <div class="section" id="simple-arrays">
 <h2>Simple arrays<a class="headerlink" href="#simple-arrays" title="Permalink to this headline">¶</a></h2>
-<p>Create an array with variable name <code class="docutils literal"><span class="pre">a</span></code> and the following contents (shape (3,
+<p>Create an array with variable name <code class="docutils literal notranslate"><span class="pre">a</span></code> and the following contents (shape (3,
 4)):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">9</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- create array &quot;a&quot; with values</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- create array &quot;a&quot; with values</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#-     2  7 12  0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#-     3  9  3  4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#-     4  0  1  3</span>
 </pre></div>
 </div>
-<p>What is the array <code class="docutils literal"><span class="pre">shape</span></code>?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array shape?</span>
+<p>What is the array <code class="docutils literal notranslate"><span class="pre">shape</span></code>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array shape?</span>
 </pre></div>
 </div>
-<p>What is the array <code class="docutils literal"><span class="pre">ndim</span></code>?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array ndim?</span>
+<p>What is the array <code class="docutils literal notranslate"><span class="pre">ndim</span></code>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array ndim?</span>
 </pre></div>
 </div>
-<p>How about the <code class="docutils literal"><span class="pre">len</span></code> of the array?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array length</span>
+<p>How about the <code class="docutils literal notranslate"><span class="pre">len</span></code> of the array?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array length</span>
 </pre></div>
 </div>
-<p>Can you get the <code class="docutils literal"><span class="pre">ndim</span></code> and <code class="docutils literal"><span class="pre">len</span></code> from the shape?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get ndim and length from the shape</span>
+<p>Can you get the <code class="docutils literal notranslate"><span class="pre">ndim</span></code> and <code class="docutils literal notranslate"><span class="pre">len</span></code> from the shape?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get ndim and length from the shape</span>
 </pre></div>
 </div>
 </div>
@@ -89,84 +80,84 @@
 <ol class="arabic simple">
 <li>Create a 1D array from 2 through 5 inclusive.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 1D array 2 through 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 1D array 2 through 5</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li>Make an array with 10 equally spaced elements between 2 and 5 inclusive.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 10 equally spaced elementd between 2 and 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 10 equally spaced elementd between 2 and 5</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
 <li>Make an all-ones array shape (4, 4).</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Shape 4,4 array of 1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Shape 4,4 array of 1</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
 <li>Make an identity array shape (6, 6).</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Identity array shape 6, 6</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Identity array shape 6, 6</span>
 </pre></div>
 </div>
 <ol class="arabic" start="5">
 <li><p class="first">Make this array with a single Python / numpy command:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>
 <span class="mi">0</span>  <span class="mi">2</span>  <span class="mi">0</span>
 <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array with top left value == 1 etc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array with top left value == 1 etc</span>
 </pre></div>
 </div>
-<p>Look at the docstring for <code class="docutils literal"><span class="pre">np.random.randn</span></code>.  Make a shape (3, 5) array with
+<p>Look at the docstring for <code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code>.  Make a shape (3, 5) array with
 random numbers from a standard normal distribution (a normal distribution with
 mean 0 and variance 1).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array of random numbers shape 3, 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Array of random numbers shape 3, 5</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="simple-visualizations">
 <h2>Simple visualizations<a class="headerlink" href="#simple-visualizations" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Make an array <code class="docutils literal"><span class="pre">x</span></code> with 100 evenly spaced values between 0 and 2 * pi;</li>
+<li>Make an array <code class="docutils literal notranslate"><span class="pre">x</span></code> with 100 evenly spaced values between 0 and 2 * pi;</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- x is an array with 100 evenly spaced numbers 0 - 2 pi</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- x is an array with 100 evenly spaced numbers 0 - 2 pi</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Make an array <code class="docutils literal"><span class="pre">y</span></code> which contains the cosine of the corresponding value in
-<code class="docutils literal"><span class="pre">x</span></code> - so <code class="docutils literal"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">cos(x[i])</span></code> (hint: <code class="docutils literal"><span class="pre">np.lookfor('cosine')</span></code>).</li>
+<li>Make an array <code class="docutils literal notranslate"><span class="pre">y</span></code> which contains the cosine of the corresponding value in
+<code class="docutils literal notranslate"><span class="pre">x</span></code> - so <code class="docutils literal notranslate"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">cos(x[i])</span></code> (hint: <code class="docutils literal notranslate"><span class="pre">np.lookfor('cosine')</span></code>).</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- y has cosines of values in x</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- y has cosines of values in x</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Plot <code class="docutils literal"><span class="pre">x</span></code> against <code class="docutils literal"><span class="pre">y</span></code>;</li>
+<li>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>;</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- plot x against y</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- plot x against y</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
 <li>Make a 10 by 20 array of mean 0 variance 1 normal random numbers;</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Shape 10, 20 array of random numbers</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Shape 10, 20 array of random numbers</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
 <li>Display this array as an image;</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display as image</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Display as image</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
-<li>Investigate <code class="docutils literal"><span class="pre">plt.cm</span></code>.  See if you can work out how to make the displayed
+<li>Investigate <code class="docutils literal notranslate"><span class="pre">plt.cm</span></code>.  See if you can work out how to make the displayed
 image be grayscale instead of color.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Grayscale image of array</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Grayscale image of array</span>
 </pre></div>
 </div>
 </div>
@@ -174,32 +165,32 @@ image be grayscale instead of color.</li>
 <h2>Indexing and slicing, array creation<a class="headerlink" href="#indexing-and-slicing-array-creation" title="Permalink to this headline">¶</a></h2>
 <p>See discussion at <a class="reference internal" href="index_reshape.html"><span class="doc">Index ordering and reshape in NumPy and MATLAB</span></a>.</p>
 <ol class="arabic">
-<li><p class="first">Create the following array, call this <code class="docutils literal"><span class="pre">a</span></code> (you did this before):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
+<li><p class="first">Create the following array, call this <code class="docutils literal notranslate"><span class="pre">a</span></code> (you did this before):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">9</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create array &quot;a&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create array &quot;a&quot;</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li>Get the 2nd row of <code class="docutils literal"><span class="pre">a</span></code> (<code class="docutils literal"><span class="pre">[</span> <span class="pre">3</span> <span class="pre">9</span> <span class="pre">3</span> <span class="pre">4]</span></code>);</li>
+<li>Get the 2nd row of <code class="docutils literal notranslate"><span class="pre">a</span></code> (<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">3</span> <span class="pre">9</span> <span class="pre">3</span> <span class="pre">4]</span></code>);</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 2nd row of a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 2nd row of a</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Get the 3rd column of <code class="docutils literal"><span class="pre">a</span></code> (<code class="docutils literal"><span class="pre">[12</span> <span class="pre">3</span> <span class="pre">1]</span></code>);</li>
+<li>Get the 3rd column of <code class="docutils literal notranslate"><span class="pre">a</span></code> (<code class="docutils literal notranslate"><span class="pre">[12</span> <span class="pre">3</span> <span class="pre">1]</span></code>);</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 3rd column of a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- 3rd column of a</span>
 </pre></div>
 </div>
 <ol class="arabic" start="4">
 <li><p class="first">Create the following arrays (with correct data types):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
@@ -214,17 +205,17 @@ image be grayscale instead of color.</li>
 </div>
 <p>Par on course: 3 statements for each</p>
 <p><em>Hint</em>: Individual array elements can be accessed similarly to a list, e.g.
-<code class="docutils literal"><span class="pre">a[1]</span></code> or <code class="docutils literal"><span class="pre">a[1,</span> <span class="pre">2]</span></code>.</p>
-<p><em>Hint</em>: Examine the docstring for <code class="docutils literal"><span class="pre">diag</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">a[1]</span></code> or <code class="docutils literal notranslate"><span class="pre">a[1,</span> <span class="pre">2]</span></code>.</p>
+<p><em>Hint</em>: Examine the docstring for <code class="docutils literal notranslate"><span class="pre">diag</span></code>.</p>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Build given arrays</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Build given arrays</span>
 </pre></div>
 </div>
 <ol class="arabic" start="5">
-<li><p class="first">Skim through the documentation for <code class="docutils literal"><span class="pre">np.tile</span></code>, and use this function to
+<li><p class="first">Skim through the documentation for <code class="docutils literal notranslate"><span class="pre">np.tile</span></code>, and use this function to
 construct the array:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
@@ -232,98 +223,98 @@ construct the array:</p>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use np.tile to construct array</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use np.tile to construct array</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="fancy-indexing-using-boolean-arrays">
 <h2>Fancy indexing using boolean arrays<a class="headerlink" href="#fancy-indexing-using-boolean-arrays" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Create the following array <code class="docutils literal"><span class="pre">a</span></code> (same as before):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
+<li><p class="first">Create the following array <code class="docutils literal notranslate"><span class="pre">a</span></code> (same as before):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">9</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create array a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Create array a</span>
 </pre></div>
 </div>
 <ol class="arabic" start="2">
-<li><p class="first">Use <code class="docutils literal"><span class="pre">&gt;</span></code> to make a mask that is true where the elements are greater than
+<li><p class="first">Use <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> to make a mask that is true where the elements are greater than
 5, like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">False</span> <span class="bp">True</span>  <span class="bp">True</span>  <span class="bp">False</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">False</span> <span class="bp">True</span>  <span class="bp">True</span>  <span class="bp">False</span>
 <span class="bp">False</span> <span class="bp">True</span>  <span class="bp">False</span> <span class="bp">False</span>
 <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make mask for values greater than 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make mask for values greater than 5</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li>Return all the elements in <code class="docutils literal"><span class="pre">a</span></code> that are greater than 5.</li>
+<li>Return all the elements in <code class="docutils literal notranslate"><span class="pre">a</span></code> that are greater than 5.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Return all values in a that are greater than 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Return all values in a that are greater than 5</span>
 </pre></div>
 </div>
 <ol class="arabic" start="4">
 <li><p class="first">Set all the elements greater than 5 to be equal to 5, to get this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">5</span>  <span class="mi">0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">5</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">5</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Set all elements greater than 5 to equal 5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Set all elements greater than 5 to equal 5</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="elementwise-operations">
 <h2>Elementwise operations<a class="headerlink" href="#elementwise-operations" title="Permalink to this headline">¶</a></h2>
-<p>Remember our array <code class="docutils literal"><span class="pre">a</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
+<p>Remember our array <code class="docutils literal notranslate"><span class="pre">a</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">9</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
 </div>
 <ol class="arabic simple">
 <li>Use array slicing to get a new array composed of the even columns (0, 2) of
-<code class="docutils literal"><span class="pre">a</span></code>. Now get array that contains the odd columns (1, 3) of <code class="docutils literal"><span class="pre">a</span></code>.  Add
+<code class="docutils literal notranslate"><span class="pre">a</span></code>. Now get array that contains the odd columns (1, 3) of <code class="docutils literal notranslate"><span class="pre">a</span></code>.  Add
 these two arrays.</li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Add even and odd columns of a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Add even and odd columns of a</span>
 </pre></div>
 </div>
 <ol class="arabic" start="2">
 <li><p class="first">Generate this array:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Generate array of powers of 2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Generate array of powers of 2</span>
 </pre></div>
 </div>
 <ol class="arabic" start="3">
 <li><p class="first">Generate an array length 10 such that this is true of the elements (where
-<code class="docutils literal"><span class="pre">x[i]</span></code> is the element of <code class="docutils literal"><span class="pre">x</span></code> at index <code class="docutils literal"><span class="pre">i</span></code>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span>
+<code class="docutils literal notranslate"><span class="pre">x[i]</span></code> is the element of <code class="docutils literal notranslate"><span class="pre">x</span></code> at index <code class="docutils literal notranslate"><span class="pre">i</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Generate array</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Generate array</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="summary-functions">
 <h2>Summary functions<a class="headerlink" href="#summary-functions" title="Permalink to this headline">¶</a></h2>
-<p>Remember our array <code class="docutils literal"><span class="pre">a</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
+<p>Remember our array <code class="docutils literal notranslate"><span class="pre">a</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span>  <span class="mi">7</span> <span class="mi">12</span>  <span class="mi">0</span>
 <span class="mi">3</span>  <span class="mi">9</span>  <span class="mi">3</span>  <span class="mi">4</span>
 <span class="mi">4</span>  <span class="mi">0</span>  <span class="mi">1</span>  <span class="mi">3</span>
 </pre></div>
@@ -332,37 +323,37 @@ these two arrays.</li>
 <ul class="simple">
 <li>sum of all the values?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of values in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of values in a</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>sum of the columns?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of the values of the columns in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of the values of the columns in a</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>sum of the rows?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of the values of the rows in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Sum of the values of the rows in a</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>mean?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Mean of all the values in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Mean of all the values in a</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>min?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Minimum of all the values in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Minimum of all the values in a</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>max?</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Maximum of all the values in a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Maximum of all the values in a</span>
 </pre></div>
 </div>
 </div>
@@ -370,6 +361,7 @@ these two arrays.</li>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -420,14 +412,24 @@ these two arrays.</li>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -436,8 +438,8 @@ these two arrays.</li>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/lab_01_exercise.rst.txt"

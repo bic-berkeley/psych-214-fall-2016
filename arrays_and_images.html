@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Arrays as images, images as arrays &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Find the arteries exercise" href="arteries_exercise.html" />
@@ -36,26 +26,27 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="arrays-as-images-images-as-arrays">
 <h1>Arrays as images, images as arrays<a class="headerlink" href="#arrays-as-images-images-as-arrays" title="Permalink to this headline">¶</a></h1>
 <p>You can consider arrays as images, and images as arrays.</p>
 <p>We start off with our usual imports:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-<p>Let&#8217;s make an array of numbers between 0 through 99:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+<p>Let’s make an array of numbers between 0 through 99:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
@@ -75,9 +66,9 @@
 </pre></div>
 </div>
 <p>In fact this array represents a monochrome picture of a letter.</p>
-<p>We can show arrays as images using the <code class="docutils literal"><span class="pre">plt.imshow</span></code> command from
+<p>We can show arrays as images using the <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> command from
 <a class="reference external" href="http://matplotlib.org/">matplotlib</a>. Here is the default output:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
@@ -91,7 +82,7 @@ more pixels than the array has values. For the pixels in-between array values,
 older matplotlib has a default of using <a class="reference external" href="http://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a> to estimate a
 good pixel value. We can turn off this blurring effect by using <a class="reference external" href="https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation">nearest
 neighbor interpolation</a> instead of linear interpolation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
@@ -99,23 +90,23 @@ neighbor interpolation</a> instead of linear interpolation:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-4.png" src="_images/arrays_and_images-4.png" />
 </div>
-<p><code class="docutils literal"><span class="pre">nearest</span></code> interpolation is the default value for matplotlib 2.0 and later.
-If you have an older matplotllib and you&#8217;d like <code class="docutils literal"><span class="pre">nearest</span></code> interpolation to
+<p><code class="docutils literal notranslate"><span class="pre">nearest</span></code> interpolation is the default value for matplotlib 2.0 and later.
+If you have an older matplotllib and you’d like <code class="docutils literal notranslate"><span class="pre">nearest</span></code> interpolation to
 be the default for the current session, use:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set nearest neighbor interpolation by default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
 </div>
 <p>The image is weirdly colorful. That is because matplotlib is using the default
 <em>colormap</em>. A colormap is a mapping from values in the array to colors. In
-matplotlib &lt; 2.0 the default colormap is called <code class="docutils literal"><span class="pre">jet</span></code> and maps low numbers
+matplotlib &lt; 2.0 the default colormap is called <code class="docutils literal notranslate"><span class="pre">jet</span></code> and maps low numbers
 in the image (0 in our case) to blue, and high numbers (99 in our case) to
 red. For matplotlib version 2.0 and above the default colormap is called
-<code class="docutils literal"><span class="pre">viridis</span></code>.  <code class="docutils literal"><span class="pre">viridis</span></code> maps low numbers to purple and high numbers to
+<code class="docutils literal notranslate"><span class="pre">viridis</span></code>.  <code class="docutils literal notranslate"><span class="pre">viridis</span></code> maps low numbers to purple and high numbers to
 yellow.</p>
 <p>We can see the relationship of the numbers to the colors by asking matplotlib
 to show the colormap:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nearest interpolation is now the default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nearest interpolation is now the default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
@@ -127,8 +118,8 @@ to show the colormap:</p>
 <img alt="_images/arrays_and_images-6.png" src="_images/arrays_and_images-6.png" />
 </div>
 <p>In our case, our image would make more sense as grayscale, so we use the
-<code class="docutils literal"><span class="pre">gray</span></code> colormap, like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<code class="docutils literal notranslate"><span class="pre">gray</span></code> colormap, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="go">&lt;...&gt;</span>
@@ -140,15 +131,15 @@ to show the colormap:</p>
 </div>
 <p>A grayscale image is an array containing numbers giving the pixel intensity
 values - in our case between 0 and 99.</p>
-<p>Here we set <code class="docutils literal"><span class="pre">gray</span></code> to the default colormap for the rest of our plots:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set &#39;gray&#39; as the default colormap</span>
+<p>Here we set <code class="docutils literal notranslate"><span class="pre">gray</span></code> to the default colormap for the rest of our plots:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set &#39;gray&#39; as the default colormap</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 </pre></div>
 </div>
 <p>We can also plot lines in matplotlib. For example, we might want to plot the
 values in row 8 from this array.  Because Python indices start at 0, this is
 the 9th row of the array.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">an_array</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">an_array</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
 <span class="go">[...]</span>
 </pre></div>
 </div>
@@ -158,11 +149,11 @@ the 9th row of the array.</p>
 </div>
 <p>The x axis is the position in the array (0 through 7) and the y axis is the
 value of the array row at that position.</p>
-<p>The plot shows us the 0 values at the edges of the bar of the &#8220;i&#8221;, an the ramp
-up to the peak at the middle of the bar of the &#8220;i&#8221;, in columns number 3 and 4.</p>
-<p>A transpose in numpy uses the <code class="docutils literal"><span class="pre">.T</span></code> method on the array. This has the effect
+<p>The plot shows us the 0 values at the edges of the bar of the “i”, an the ramp
+up to the peak at the middle of the bar of the “i”, in columns number 3 and 4.</p>
+<p>A transpose in numpy uses the <code class="docutils literal notranslate"><span class="pre">.T</span></code> method on the array. This has the effect
 of flipping the rows and columns (in 2D):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="o">.</span><span class="n">T</span>
 <span class="go">array([[ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],</span>
 <span class="go">       [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1, 16,  0],</span>
 <span class="go">       [ 0,  0,  0,  0,  0,  0,  0,  9, 27, 45, 63, 80, 96, 99,  0],</span>
@@ -173,7 +164,7 @@ of flipping the rows and columns (in 2D):</p>
 <span class="go">       [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Defaults of nearest interpolation and gray colormap</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Defaults of nearest interpolation and gray colormap</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -184,7 +175,7 @@ of flipping the rows and columns (in 2D):</p>
 </div>
 <p>We can also reshape the original array to a 1D array, by stacking all the rows
 end to end:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_shape</span> <span class="o">=</span> <span class="n">an_array</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_shape</span> <span class="o">=</span> <span class="n">an_array</span><span class="o">.</span><span class="n">shape</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">an_array</span><span class="p">,</span> <span class="n">old_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">old_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span>
 <span class="go">array([ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  9, 99, 99, 94,  0,  0,</span>
@@ -197,13 +188,13 @@ end to end:</p>
 <span class="go">        0])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_1d_array</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(120,)</span>
 </pre></div>
 </div>
 <p>Reshaping the array to one dimension is a common operation, so there is a
-separate numpy command for that, <code class="docutils literal"><span class="pre">np.ravel</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
+separate numpy command for that, <code class="docutils literal notranslate"><span class="pre">np.ravel</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">an_array</span><span class="p">)</span>
 <span class="go">array([ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  9, 99, 99, 94,  0,  0,</span>
 <span class="go">        0,  0, 25, 99, 99, 79,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,</span>
 <span class="go">        0, 56, 99, 99, 49,  0,  0,  0,  0, 73, 99, 99, 31,  0,  0,  0,  0,</span>
@@ -216,7 +207,7 @@ separate numpy command for that, <code class="docutils literal"><span class="pre
 </div>
 <p>One use of the 1D version of the array, is for making a histogram of the
 distribution of values in the array:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">)</span>
 <span class="go">(...)</span>
 </pre></div>
 </div>
@@ -224,9 +215,9 @@ distribution of values in the array:</p>
 <div class="figure">
 <img alt="_images/arrays_and_images-15.png" src="_images/arrays_and_images-15.png" />
 </div>
-<p>By default, the <code class="docutils literal"><span class="pre">plt.hist</span></code> function uses 50 bins, but you can specify how
-many bins you want with the <code class="docutils literal"><span class="pre">bins</span></code> keyword:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> function uses 50 bins, but you can specify how
+many bins you want with the <code class="docutils literal notranslate"><span class="pre">bins</span></code> keyword:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
 <span class="go">(...)</span>
 </pre></div>
 </div>
@@ -234,9 +225,9 @@ many bins you want with the <code class="docutils literal"><span class="pre">bin
 <div class="figure">
 <img alt="_images/arrays_and_images-16.png" src="_images/arrays_and_images-16.png" />
 </div>
-<p>As you can imagine, it&#8217;s not hard to go back to the 2D shape, by splitting the
+<p>As you can imagine, it’s not hard to go back to the 2D shape, by splitting the
 1D array back into 15 rows of 8 values each (and therefore 8 columns):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array_back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">array_back</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a_1d_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">array_back</span>
 <span class="go">array([[ 0,  0,  0,  0,  0,  0,  0,  0],</span>
 <span class="go">       [ 0,  0,  0,  9, 99, 99, 94,  0],</span>
@@ -263,7 +254,7 @@ many bins you want with the <code class="docutils literal"><span class="pre">bin
 </div>
 <p>In numpy, basic operations like multiplication, addition, comparison, are
 always elementwise. For example, this multiplies every array value by 10:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">*</span> <span class="mi">10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="go">array([[  0,   0,   0,   0,   0,   0,   0,   0],</span>
 <span class="go">       [  0,   0,   0,  90, 990, 990, 940,   0],</span>
 <span class="go">       [  0,   0,   0, 250, 990, 990, 790,   0],</span>
@@ -283,7 +274,7 @@ always elementwise. For example, this multiplies every array value by 10:</p>
 </div>
 <p>Comparison is also elementwise. For example, this gives True for every value &gt;
 50, and False for every value &lt;= 50:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span>
 <span class="go">array([[False, False, False, False, False, False, False, False],</span>
 <span class="go">       [False, False, False, False,  True,  True,  True, False],</span>
 <span class="go">       [False, False, False, False,  True,  True,  True, False],</span>
@@ -303,7 +294,7 @@ always elementwise. For example, this multiplies every array value by 10:</p>
 </div>
 <p>Matplotlib will treat False as 0 and True as 1, so this is one way of
 binarizing the image at a threshold (of 50 in this case):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">an_array</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
 </div>
@@ -313,9 +304,9 @@ binarizing the image at a threshold (of 50 in this case):</p>
 </div>
 <p>We can slice arrays as we slice strings or lists. The difference for arrays is
 that we can slice in any or all dimensions at the same time.  For example, to
-get the dot of the &#8220;i&#8221; it looks (from the numbers at the sides of the ploat)
+get the dot of the “i” it looks (from the numbers at the sides of the ploat)
 that we want to the top 4 rows, and the last 5 columns:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">an_array</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:]</span>
 <span class="go">array([[ 0,  0,  0,  0,  0],</span>
 <span class="go">       [ 9, 99, 99, 94,  0],</span>
 <span class="go">       [25, 99, 99, 79,  0],</span>
@@ -332,6 +323,7 @@ that we want to the top 4 rows, and the last 5 columns:</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -380,14 +372,24 @@ that we want to the top 4 rows, and the last 5 columns:</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -396,8 +398,8 @@ that we want to the top 4 rows, and the last 5 columns:</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/arrays_and_images.rst.txt"

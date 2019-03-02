@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Multiple comparison correction &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Multiple comparison correction, whole brain analysis" href="lab_09.html" />
@@ -36,16 +26,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="multiple-comparison-correction">
 <h1>Multiple comparison correction<a class="headerlink" href="#multiple-comparison-correction" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="logistics">
@@ -75,27 +66,27 @@ solutions</span></a>.</li>
 <li><p class="first">on code quality:</p>
 <p><a class="reference external" href="http://www.samueljohnson.com/editing.html#536">http://www.samueljohnson.com/editing.html#536</a></p>
 <blockquote>
-<div><p>&#8220;I would say to Robertson what an old tutor of a college said to one of
-his pupils: &#8216;Read over your compositions, and where ever you meet with a
-passage which you think is particularly fine, strike it out.&#8217;&#8221;</p>
-<p>Samuel Johnson in James Boswell&#8217;s &#8220;Life of Samuel Johnson&#8221;.</p>
+<div><p>“I would say to Robertson what an old tutor of a college said to one of
+his pupils: ‘Read over your compositions, and where ever you meet with a
+passage which you think is particularly fine, strike it out.’”</p>
+<p>Samuel Johnson in James Boswell’s “Life of Samuel Johnson”.</p>
 </div></blockquote>
 <p>There are some automated metrics, of which, be careful:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">radon</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">radon</span>
 <span class="n">radon</span> <span class="n">cc</span> <span class="o">.</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">learning to code well:</p>
 <ul class="simple">
-<li>read other people&#8217;s code;</li>
+<li>read other people’s code;</li>
 <li>review code;</li>
 <li>make other people review your code;</li>
 <li>pair coding.</li>
-<li>&#8220;is this the right way to think of the problem?&#8221;;</li>
-<li>&#8220;have I expressed my thinking clearly in this code?&#8221;;</li>
-<li>&#8220;what guarantee can I give that the code is correct?;</li>
-<li>&#8220;under what circumstances is the code correct?&#8221;.</li>
+<li>“is this the right way to think of the problem?”;</li>
+<li>“have I expressed my thinking clearly in this code?”;</li>
+<li>“what guarantee can I give that the code is correct?;</li>
+<li>“under what circumstances is the code correct?”.</li>
 </ul>
 </li>
 </ul>
@@ -124,10 +115,10 @@ passage which you think is particularly fine, strike it out.&#8217;&#8221;</p>
 <div><ul>
 <li><p class="first"><a class="reference internal" href="validate_against_scipy.html"><span class="doc">Validating the GLM against scipy</span></a>;</p>
 </li>
-<li><p class="first">pdb++ : <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">pdbpp</span></code>;</p>
+<li><p class="first">pdb++ : <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">pdbpp</span></code>;</p>
 </li>
 <li><p class="first">Exercise:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">glmtools</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">psych</span><span class="o">-</span><span class="mi">214</span><span class="o">-</span><span class="n">fall</span><span class="o">-</span><span class="mi">2016</span><span class="o">/</span><span class="n">glmtools</span>
 <span class="n">cd</span> <span class="n">glmtools</span>
 <span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">editable</span> <span class="o">.</span>
 <span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="n">glmtools</span>
@@ -161,6 +152,7 @@ passage which you think is particularly fine, strike it out.&#8217;&#8221;</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -211,14 +203,24 @@ passage which you think is particularly fine, strike it out.&#8217;&#8221;</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -227,8 +229,8 @@ passage which you think is particularly fine, strike it out.&#8217;&#8221;</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/day_08.rst.txt"

@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Applying deformations exercise &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Applying deformations exercise" href="applying_deformations_exercise.html" />
@@ -36,16 +26,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="applying-deformations-exercise">
 <h1>Applying deformations exercise<a class="headerlink" href="#applying-deformations-exercise" title="Permalink to this headline">¶</a></h1>
 <p>Requirements:</p>
@@ -56,16 +47,16 @@
 <li><a class="reference internal" href="nibabel_affines.html"><span class="doc">The nibabel.affines module</span></a>;</li>
 <li><a class="reference internal" href="map_coordinates.html"><span class="doc">General resampling between images with scipy.ndimage.map_coordinates</span></a>.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
@@ -73,18 +64,18 @@
 <div class="section" id="applying-a-deformation-field">
 <h2>Applying a deformation field<a class="headerlink" href="#applying-a-deformation-field" title="Permalink to this headline">¶</a></h2>
 <p>We should have already calculated the deformation field for the image
-<code class="docutils literal"><span class="pre">ds107_sub012_highres.nii</span></code>.</p>
-<p>We did this using the SPM12 <code class="docutils literal"><span class="pre">Normalise:</span> <span class="pre">Estimate</span></code> option from the GUI.</p>
-<p>This should have left an image called <code class="docutils literal"><span class="pre">y_ds107_sub012_highres.nii</span></code> in
+<code class="docutils literal notranslate"><span class="pre">ds107_sub012_highres.nii</span></code>.</p>
+<p>We did this using the SPM12 <code class="docutils literal notranslate"><span class="pre">Normalise:</span> <span class="pre">Estimate</span></code> option from the GUI.</p>
+<p>This should have left an image called <code class="docutils literal notranslate"><span class="pre">y_ds107_sub012_highres.nii</span></code> in
 your working directory.</p>
 <p>If not:</p>
 <ul class="simple">
 <li>Ask for help;</li>
 <li>If you get stuck, you can download the image from
-<a class="reference download internal" href="_downloads/y_ds107_sub012_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">y_ds107_sub012_highres.nii</span></code></a>.</li>
+<a class="reference download internal" download="" href="_downloads/16386b0263ace523c187bad30b188717/y_ds107_sub012_highres.nii"><code class="xref download docutils literal notranslate"><span class="pre">y_ds107_sub012_highres.nii</span></code></a>.</li>
 </ul>
 <p>We make an image object for this deformations image by loading with nibabel.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load y_ds107_sub012_highres.nii with nibabel</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load y_ds107_sub012_highres.nii with nibabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># get the image array data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;y_ds107_sub012_highres.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_data</span> <span class="o">=</span> <span class="n">deformations_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
@@ -93,10 +84,10 @@ your working directory.</p>
 </pre></div>
 </div>
 <p>We are going to work out how to apply this <em>deformations</em> image to reslice our
-original image <a class="reference download internal" href="_downloads/ds107_sub012_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds107_sub012_highres.nii</span></code></a>.</p>
+original image <a class="reference download internal" download="" href="_downloads/eef3e29dbb757d41f0bc9435e0d45461/ds107_sub012_highres.nii"><code class="xref download docutils literal notranslate"><span class="pre">ds107_sub012_highres.nii</span></code></a>.</p>
 <p>Oddly - this is a 5 dimensional image, where the 4th dimension is length 1.</p>
-<p>The length-1 4th dimension is an artefact of the <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">NIfTI image format</a> – so let&#8217;s get rid of this dimension with <a class="reference internal" href="numpy_squeeze.html"><span class="doc">np.squeeze</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: remove length-1 4th dimension from deformation data</span>
+<p>The length-1 4th dimension is an artefact of the <a class="reference external" href="http://nifti.nimh.nih.gov/nifti-1">NIfTI image format</a> – so let’s get rid of this dimension with <a class="reference internal" href="numpy_squeeze.html"><span class="doc">np.squeeze</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: remove length-1 4th dimension from deformation data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">deformations_data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deformations_data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(121, 145, 121, 3)</span>
@@ -110,14 +101,14 @@ are:</p>
 <li>z coordinates</li>
 </ul>
 <p>respectively.</p>
-<p>Put another way, the vector <code class="docutils literal"><span class="pre">deformations_data[i,</span> <span class="pre">j,</span> <span class="pre">k,</span> <span class="pre">:]</span></code> gives the (x, y,
-z) coordinates for the voxel <code class="docutils literal"><span class="pre">[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code>. More on this later.</p>
+<p>Put another way, the vector <code class="docutils literal notranslate"><span class="pre">deformations_data[i,</span> <span class="pre">j,</span> <span class="pre">k,</span> <span class="pre">:]</span></code> gives the (x, y,
+z) coordinates for the voxel <code class="docutils literal notranslate"><span class="pre">[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code>. More on this later.</p>
 <p>If you were looking carefully at the SPM interface, SPM has calculated the
 distortions necessary to go from a template of <em>tissue probability maps</em>
-(called <code class="docutils literal"><span class="pre">TPM.nii</span></code>) to the <code class="docutils literal"><span class="pre">ds107_sub012_highres.nii</span></code> image.</p>
-<p>We can get the original 3D shape and affine of <code class="docutils literal"><span class="pre">TPM.nii</span></code> because SPM stored
-them in <code class="docutils literal"><span class="pre">y_ds107_sub012_highres.nii</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get original TPM.nii 3D shape and affine</span>
+(called <code class="docutils literal notranslate"><span class="pre">TPM.nii</span></code>) to the <code class="docutils literal notranslate"><span class="pre">ds107_sub012_highres.nii</span></code> image.</p>
+<p>We can get the original 3D shape and affine of <code class="docutils literal notranslate"><span class="pre">TPM.nii</span></code> because SPM stored
+them in <code class="docutils literal notranslate"><span class="pre">y_ds107_sub012_highres.nii</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: get original TPM.nii 3D shape and affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpm_shape</span> <span class="o">=</span> <span class="n">deformations_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpm_affine</span> <span class="o">=</span> <span class="n">deformations_img</span><span class="o">.</span><span class="n">affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpm_affine</span>
@@ -131,23 +122,23 @@ them in <code class="docutils literal"><span class="pre">y_ds107_sub012_highres.
 <p>To do that, we will make a new copy of the MNI template, with the same shape
 as the TPM image.</p>
 <p>The MNI template image we will use is
-<a class="reference download internal" href="_downloads/mni_icbm152_t1_tal_nlin_asym_09a.nii" download=""><code class="xref download docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code></a>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the template image we will resample from</span>
+<a class="reference download internal" download="" href="_downloads/7663c854488e675287ecd9db401f89a9/mni_icbm152_t1_tal_nlin_asym_09a.nii"><code class="xref download docutils literal notranslate"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the template image we will resample from</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;mni_icbm152_t1_tal_nlin_asym_09a.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template_data</span> <span class="o">=</span> <span class="n">template_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template_data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(197, 233, 189)</span>
 </pre></div>
 </div>
-<p>Now we need the mapping from voxels in <code class="docutils literal"><span class="pre">TPM.nii</span></code> to voxels in
-<code class="docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>.</p>
+<p>Now we need the mapping from voxels in <code class="docutils literal notranslate"><span class="pre">TPM.nii</span></code> to voxels in
+<code class="docutils literal notranslate"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>.</p>
 <p>We can break this down into two transforms:</p>
 <ul class="simple">
-<li>from voxels in <code class="docutils literal"><span class="pre">TPM.nii</span></code> to (x, y, z) mm;</li>
-<li>from (x, y, z) mm to voxels in <code class="docutils literal"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>.</li>
+<li>from voxels in <code class="docutils literal notranslate"><span class="pre">TPM.nii</span></code> to (x, y, z) mm;</li>
+<li>from (x, y, z) mm to voxels in <code class="docutils literal notranslate"><span class="pre">mni_icbm152_t1_tal_nlin_asym_09a.nii</span></code>.</li>
 </ul>
 <p>We have these transforms already. The full transform is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: voxels in TPM.nii to voxels in mni_icbm152_t1_tal_nlin_asym_09a.nii</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: voxels in TPM.nii to voxels in mni_icbm152_t1_tal_nlin_asym_09a.nii</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Matrix multiplication is right to left</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vox2vox</span> <span class="o">=</span> <span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">template_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">tpm_affine</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vox2vox</span>
@@ -157,8 +148,8 @@ as the TPM image.</p>
 <span class="go">       [   0. ,    0. ,    0. ,    1. ]])</span>
 </pre></div>
 </div>
-<p>We break this down into the 3 x 3 <code class="docutils literal"><span class="pre">mat</span></code> and length 3 <code class="docutils literal"><span class="pre">vec</span></code> components:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: to mat and vec</span>
+<p>We break this down into the 3 x 3 <code class="docutils literal notranslate"><span class="pre">mat</span></code> and length 3 <code class="docutils literal notranslate"><span class="pre">vec</span></code> components:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: to mat and vec</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="p">,</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">to_matvec</span><span class="p">(</span><span class="n">vox2vox</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span>
 <span class="go">array([[-1.5,  0. ,  0. ],</span>
@@ -169,9 +160,9 @@ as the TPM image.</p>
 </pre></div>
 </div>
 <p>Then we resample from the MNI template, into the voxel grid of the
-<code class="docutils literal"><span class="pre">TPM.nii</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: resample MNI template onto TPM grid</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">affine_transform</span>
+<code class="docutils literal notranslate"><span class="pre">TPM.nii</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: resample MNI template onto TPM grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="k">import</span> <span class="n">affine_transform</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template_into_tpm</span> <span class="o">=</span> <span class="n">affine_transform</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">vec</span><span class="p">,</span>
 <span class="gp">... </span>                                     <span class="n">output_shape</span><span class="o">=</span><span class="n">tpm_shape</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">template_into_tpm</span><span class="o">.</span><span class="n">shape</span>
@@ -179,7 +170,7 @@ as the TPM image.</p>
 </pre></div>
 </div>
 <p>Here is the new version of the template image:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: plot the template image resampled onto the TPM grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: plot the template image resampled onto the TPM grid</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">template_into_tpm</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">60</span><span class="p">])</span>
 <span class="go">&lt;...&gt;</span>
 </pre></div>
@@ -188,22 +179,22 @@ as the TPM image.</p>
 <div class="figure">
 <img alt="_images/applying_deformations_solution-11.png" src="_images/applying_deformations_solution-11.png" />
 </div>
-<p>Now, what to do with with the SPM distortion field in <code class="docutils literal"><span class="pre">deformations_data</span></code>?</p>
+<p>Now, what to do with with the SPM distortion field in <code class="docutils literal notranslate"><span class="pre">deformations_data</span></code>?</p>
 <p>By checking in the SPM source code <a class="footnote-reference" href="#spm-deform-detective" id="id1">[1]</a>, it is possible to
-work out that <code class="docutils literal"><span class="pre">deformations_data</span></code> contains, for every voxel in TPM, the
+work out that <code class="docutils literal notranslate"><span class="pre">deformations_data</span></code> contains, for every voxel in TPM, the
 corresponding mm coordinate in the <em>mm space</em> of the subject image.</p>
-<p>That is, <code class="docutils literal"><span class="pre">deformations_data[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code> is a length 3 vector <code class="docutils literal"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code>
-where <code class="docutils literal"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code> are the mm coordinates of voxel <code class="docutils literal"><span class="pre">[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code> when mapped
+<p>That is, <code class="docutils literal notranslate"><span class="pre">deformations_data[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code> is a length 3 vector <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code>
+where <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code> are the mm coordinates of voxel <code class="docutils literal notranslate"><span class="pre">[i,</span> <span class="pre">j,</span> <span class="pre">k]</span></code> when mapped
 into millimeters for the subject image.</p>
 <p>Here is the subject data, and the image, which contains the affine:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the subject data that we will resample from</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: load the subject data that we will resample from</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subject_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds107_sub012_highres.nii&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subject_data</span> <span class="o">=</span> <span class="n">subject_img</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subject_data</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(256, 208, 192)</span>
 </pre></div>
 </div>
-<p>With this information, and with the <code class="docutils literal"><span class="pre">scipy.ndimage.map_coordinates</span></code>
+<p>With this information, and with the <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.map_coordinates</span></code>
 function, you should be able to:</p>
 <ul class="simple">
 <li>get the mapping from voxels in TPM to voxels in the subject image and;</li>
@@ -211,12 +202,12 @@ function, you should be able to:</p>
 mapping.</li>
 </ul>
 <p>Hint: remember that <a class="reference internal" href="map_coordinates.html"><span class="doc">map_coordinates</span></a> expects the
-3-length coordinate dimension to be first, but <code class="docutils literal"><span class="pre">deformations_data</span></code> – at
+3-length coordinate dimension to be first, but <code class="docutils literal notranslate"><span class="pre">deformations_data</span></code> – at
 the moment – has the 3-length coordinate dimension last.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * get mapping from voxels in TPM to voxels in the subject image;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * get mapping from voxels in TPM to voxels in the subject image;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- * resample the subject image into the grid of the TPM image using</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#-   this mapping.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">map_coordinates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="k">import</span> <span class="n">map_coordinates</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vox2vox_mapping</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">affines</span><span class="o">.</span><span class="n">apply_affine</span><span class="p">(</span><span class="n">npl</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">subject_img</span><span class="o">.</span><span class="n">affine</span><span class="p">),</span> <span class="n">deformations_data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">for_map_coords</span> <span class="o">=</span> <span class="n">vox2vox_mapping</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">subject_into_tpm</span> <span class="o">=</span> <span class="n">map_coordinates</span><span class="p">(</span><span class="n">subject_data</span><span class="p">,</span> <span class="n">for_map_coords</span><span class="p">)</span>
@@ -226,7 +217,7 @@ the moment – has the 3-length coordinate dimension last.</p>
 </div>
 <p>Show an example slice from the template resampled into the TPM voxel grid, and the subject
 resampled into the TPM voxel grid:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- show an example slice from the resampled template and resampled</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- show an example slice from the resampled template and resampled</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- subject</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">template_into_tpm</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">60</span><span class="p">])</span>
@@ -243,19 +234,19 @@ resampled into the TPM voxel grid:</p>
 <table class="docutils footnote" frame="void" id="spm-deform-detective" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It&#8217;s not very easy to work through the SPM12 source
-code for this, but if you want to check for yourself, you&#8217;ll find that the
-SPM batch interface for &#8220;Normalise: Write&#8221; is in <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&amp;fileviewer=file-view-default#spm_run_norm.m-29">config/spm_run_norm.m</a>.
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>It’s not very easy to work through the SPM12 source
+code for this, but if you want to check for yourself, you’ll find that the
+SPM batch interface for “Normalise: Write” is in <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&amp;fileviewer=file-view-default#spm_run_norm.m-29">config/spm_run_norm.m</a>.
 The batch interface calls the sub-function <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/config/spm_run_norm.m?at=master&amp;fileviewer=file-view-default#spm_run_norm.m-77">norm_write</a>.
-<code class="docutils literal"><span class="pre">norm_write</span></code> collects the NIfTI file with the <code class="docutils literal"><span class="pre">y_</span></code> prefix that contains
+<code class="docutils literal notranslate"><span class="pre">norm_write</span></code> collects the NIfTI file with the <code class="docutils literal notranslate"><span class="pre">y_</span></code> prefix that contains
 the deformations, if the user did not specify the file, and calls the
-<code class="docutils literal"><span class="pre">spm_deformations</span></code> function.  This function in turn calls down into the
+<code class="docutils literal notranslate"><span class="pre">spm_deformations</span></code> function.  This function in turn calls down into the
 <a class="reference external" href="https://bitbucket.org/matthewbrett/spm12/src/ec9cae02ebf8bb367ba71e2782e2be1a77a67e28/spm_deformations.m?at=master&amp;fileviewer=file-view-default#spm_deformations.m-360">pull_def</a>
-sub-function, in which SPM calculates the matrix <code class="docutils literal"><span class="pre">Y</span></code>, which is the (I, J,
+sub-function, in which SPM calculates the matrix <code class="docutils literal notranslate"><span class="pre">Y</span></code>, which is the (I, J,
 K, 3) image data from the deformations NIfTI file, left multiplied by the
-mm to voxel mapping for the image being resampled.  <code class="docutils literal"><span class="pre">pull_def</span></code> then
-resamples from the image to which we are applying &#8220;Normalize: Write&#8221;, using
-the <code class="docutils literal"><span class="pre">Y</span></code> array as voxel coordinates.  Therefore the <code class="docutils literal"><span class="pre">y_</span></code>-prefixed
+mm to voxel mapping for the image being resampled.  <code class="docutils literal notranslate"><span class="pre">pull_def</span></code> then
+resamples from the image to which we are applying “Normalize: Write”, using
+the <code class="docutils literal notranslate"><span class="pre">Y</span></code> array as voxel coordinates.  Therefore the <code class="docutils literal notranslate"><span class="pre">y_</span></code>-prefixed
 deformation field image contains the coodinates mapping from voxels in the
 template to millimeters in the image that was registered.</td></tr>
 </tbody>
@@ -265,6 +256,7 @@ template to millimeters in the image that was registered.</td></tr>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -306,21 +298,31 @@ template to millimeters in the image that was registered.</td></tr>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="map_coordinates.html" title="previous chapter">General resampling between images with <code class="docutils literal"><span class="pre">scipy.ndimage.map_coordinates</span></code></a></li>
+      <li>Previous: <a href="map_coordinates.html" title="previous chapter">General resampling between images with <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.map_coordinates</span></code></a></li>
       <li>Next: <a href="applying_deformations_exercise.html" title="next chapter">Applying deformations exercise</a></li>
   </ul></li>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -329,8 +331,8 @@ template to millimeters in the image that was registered.</td></tr>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/applying_deformations_solution.rst.txt"

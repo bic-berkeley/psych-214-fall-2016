@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>A worked example of the general linear model &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Modeling groups with dummy variables exercise" href="on_dummies_exercise.html" />
@@ -36,16 +26,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="a-worked-example-of-the-general-linear-model">
 <h1>A worked example of the general linear model<a class="headerlink" href="#a-worked-example-of-the-general-linear-model" title="Permalink to this headline">¶</a></h1>
 <p>See: <a class="reference external" href="https://matthew-brett.github.io/teaching/glm_intro.html">introduction to the general linear model</a>.</p>
@@ -55,16 +46,16 @@ from zero.</p>
 <p>Let us say we have the hypothesis that men are more psychopathic than women.</p>
 <p>We find 10 male-female couples, and we give them each a psychopathy
 questionnaire.  We score the questionnaires, and then, for each couple, we
-subtract the woman&#8217;s score from the man&#8217;s score, to get a difference score.</p>
+subtract the woman’s score from the man’s score, to get a difference score.</p>
 <p>We have 10 difference scores:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our standard imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Our standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Only show 4 decimals when printing arrays</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">differences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.5993</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13</span>  <span class="p">,</span>  <span class="mf">2.3806</span><span class="p">,</span>  <span class="mf">1.3761</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3595</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">differences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.5993</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13</span>  <span class="p">,</span>  <span class="mf">2.3806</span><span class="p">,</span>  <span class="mf">1.3761</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3595</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="mf">1.0286</span><span class="p">,</span>  <span class="mf">0.8466</span><span class="p">,</span>  <span class="mf">1.6669</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8241</span><span class="p">,</span>  <span class="mf">0.4469</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -84,27 +75,27 @@ distribution is the distribution of the statistic that we expect when taking a
 very large number of samples of the statistic.  For example, the sampling
 distribution of the mean, is the expected distribution of the sample means
 generated by taking a very large number of samples.</p>
-<p>As usual, define the <em>mean</em> of a vector of values <span class="math">\(\vec{x}\)</span> as:</p>
-<div class="math">
+<p>As usual, define the <em>mean</em> of a vector of values <span class="math notranslate nohighlight">\(\vec{x}\)</span> as:</p>
+<div class="math notranslate nohighlight">
 \[\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i\]</div>
-<p>Define the <em>unbiased estimate of the standard deviation</em> of <span class="math">\(\vec{x}\)</span> as:</p>
-<div class="math">
+<p>Define the <em>unbiased estimate of the standard deviation</em> of <span class="math notranslate nohighlight">\(\vec{x}\)</span> as:</p>
+<div class="math notranslate nohighlight">
 \[s_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2}\]</div>
-<p>Notice the <span class="math">\(\frac{1}{n-1}\)</span>.   We have previously used <span class="math">\(n\)</span> rather than <span class="math">\(n-1\)</span> as
-the divisor for the <em>sample standard deviation</em>.  Using <span class="math">\(n\)</span>, our <em>sample
+<p>Notice the <span class="math notranslate nohighlight">\(\frac{1}{n-1}\)</span>.   We have previously used <span class="math notranslate nohighlight">\(n\)</span> rather than <span class="math notranslate nohighlight">\(n-1\)</span> as
+the divisor for the <em>sample standard deviation</em>.  Using <span class="math notranslate nohighlight">\(n\)</span>, our <em>sample
 standard deviation</em> is a biased estimate of the population standard deviation.
-Using <span class="math">\(n-1\)</span> as the divisor gives an unbiased estimate for population standard
+Using <span class="math notranslate nohighlight">\(n-1\)</span> as the divisor gives an unbiased estimate for population standard
 deviation.</p>
 <p>The standard error of the mean is:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[SE_{\bar{x}} = \frac{s_x}{\sqrt{n}}\]</div>
-<p>where <span class="math">\(n\)</span> is the number of samples, 10 in our case.</p>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of samples, 10 in our case.</p>
 <p>A t statistic is given by a value divided by the <em>standard error</em> of that
-value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
-<div class="math">
+value.  The t statistic for <span class="math notranslate nohighlight">\(\bar{x}\)</span> is:</p>
+<div class="math notranslate nohighlight">
 \[t = \frac{\bar{x}}{SE_{\bar{x}}}\]</div>
 <p>In our case:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">differences</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">differences</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x_bar</span>
@@ -125,35 +116,35 @@ value.  The t statistic for <span class="math">\(\bar{x}\)</span> is:</p>
 <div class="section" id="the-standard-error-as-an-estimator">
 <h2>The standard error as an estimator<a class="headerlink" href="#the-standard-error-as-an-estimator" title="Permalink to this headline">¶</a></h2>
 <p>Imagine that we repeat the following procedure many times, collecting each
-value into a vector <span class="math">\(\vec{m}\)</span>:</p>
+value into a vector <span class="math notranslate nohighlight">\(\vec{m}\)</span>:</p>
 <ul class="simple">
-<li>take <span class="math">\(n\)</span> samples from some distribution;</li>
-<li>take the mean of these <span class="math">\(n\)</span> samples.</li>
+<li>take <span class="math notranslate nohighlight">\(n\)</span> samples from some distribution;</li>
+<li>take the mean of these <span class="math notranslate nohighlight">\(n\)</span> samples.</li>
 </ul>
 <p>The standard error of the mean is an estimate of the standard deviation of the
-values in <span class="math">\(\vec{m}\)</span>.</p>
+values in <span class="math notranslate nohighlight">\(\vec{m}\)</span>.</p>
 <p>We can simulate this process when we know the exact distribution of the values
 in the population.  For example, let us imagine that we know that the
-population distribution is a normal distribution with population mean 10 (<span class="math">\(\mu
-= 10\)</span>) and population standard deviation 1.5 (<span class="math">\(\sigma = 1.5\)</span>).  We can use
+population distribution is a normal distribution with population mean 10 (<span class="math notranslate nohighlight">\(\mu
+= 10\)</span>) and population standard deviation 1.5 (<span class="math notranslate nohighlight">\(\sigma = 1.5\)</span>).  We can use
 <a class="reference internal" href="numpy_random.html"><span class="doc">numpy.random</span></a> to draw samples from this distribution:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 10 samples from normal distribution with mean 5 and sd 1.5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># 10 samples from normal distribution with mean 5 and sd 1.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span>
 <span class="go">array([ 5.7451,  4.7926,  5.9715,  7.2845,  4.6488,  4.6488,  7.3688,</span>
 <span class="go">        6.1512,  4.2958,  5.8138])</span>
 </pre></div>
 </div>
-<p>We know the exact mean (<span class="math">\(\mu\)</span>) and standard deviation (<span class="math">\(\sigma\)</span>).  If we draw
+<p>We know the exact mean (<span class="math notranslate nohighlight">\(\mu\)</span>) and standard deviation (<span class="math notranslate nohighlight">\(\sigma\)</span>).  If we draw
 a near-infinite number of samples like this, then the standard deviation of
-the mean of these samples will be <span class="math">\(\frac{\sigma}{\sqrt{n}}\)</span>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+the mean of these samples will be <span class="math notranslate nohighlight">\(\frac{\sigma}{\sqrt{n}}\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="go">0.474341...</span>
 </pre></div>
 </div>
 <p>We can compare this number to an estimate of the same thing from a very large
 number of means from samples size 10:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pop_mean</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pop_sd</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">means_of_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
@@ -171,7 +162,7 @@ number of means from samples size 10:</p>
 standard error of the mean is for that situation.  First we use the sample
 that we have to get an <em>unbiased estimate</em> of the population standard
 deviation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">sample</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">y_bar</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_var_estimate</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_bar</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -179,15 +170,15 @@ deviation:</p>
 </pre></div>
 </div>
 <p>Of course, this estimate will not be exactly the same as the population
-standard deviation (<span class="math">\(\sigma = 1.5\)</span>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span>
+standard deviation (<span class="math notranslate nohighlight">\(\sigma = 1.5\)</span>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unbiased_sd_est</span>
 <span class="go">1.433659...</span>
 </pre></div>
 </div>
 <p>We use the unbiased standard deviation estimate to give an unbiased estimate
 for the standard error of the mean. This estimate will be close to the
-standard deviation of means from many samples of size <span class="math">\(n\)</span>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Standard deviation of means from population</span>
+standard deviation of means from many samples of size <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Standard deviation of means from population</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="go">0.474341...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Our estimate for the standard error of mean</span>
@@ -200,14 +191,14 @@ standard deviation of means from many samples of size <span class="math">\(n\)</
 <h2>Testing using the general linear model<a class="headerlink" href="#testing-using-the-general-linear-model" title="Permalink to this headline">¶</a></h2>
 <p>It is overkill for us to use the general linear model for this, but it does
 show how the machinery works in the simplest case.</p>
-<p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span>
-<span class="math">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\yvec}{\vec{y}} \newcommand{\xvec}{\vec{x}} \newcommand{\evec}{\vec{\varepsilon}}\)</span></p>
 <p>The matrix expression of the general linear model is:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\yvec = \Xmat \bvec + \evec\]</div>
-<p><span class="math">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span></p>
-<p>Define our design matrix <span class="math">\(\Xmat\)</span> to have a single column of ones:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<p><span class="math notranslate nohighlight">\(\newcommand{Xmat}{\boldsymbol X} \newcommand{\bvec}{\vec{\beta}}\)</span></p>
+<p>Define our design matrix <span class="math notranslate nohighlight">\(\Xmat\)</span> to have a single column of ones:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
 <span class="go">array([[ 1.],</span>
 <span class="go">       [ 1.],</span>
@@ -221,27 +212,27 @@ show how the machinery works in the simplest case.</p>
 <span class="go">       [ 1.]])</span>
 </pre></div>
 </div>
-<p><span class="math">\(\newcommand{\bhat}{\hat{\bvec}} \newcommand{\yhat}{\hat{\yvec}}\)</span></p>
-<p><span class="math">\(\bhat\)</span> is The least squares estimate for <span class="math">\(\bvec\)</span>, and is given by:</p>
-<div class="math">
+<p><span class="math notranslate nohighlight">\(\newcommand{\bhat}{\hat{\bvec}} \newcommand{\yhat}{\hat{\yvec}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\bhat\)</span> is The least squares estimate for <span class="math notranslate nohighlight">\(\bvec\)</span>, and is given by:</p>
+<div class="math notranslate nohighlight">
 \[\bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec\]</div>
-<p>Because <span class="math">\(\Xmat\)</span> is just a column of ones, <span class="math">\(\Xmat^T \yvec = \sum_i{y_i}\)</span>.</p>
-<p><span class="math">\(\Xmat^T \Xmat = n\)</span>, so <span class="math">\((\Xmat^T \Xmat)^{-1} = \frac{1}{n}\)</span>.</p>
+<p>Because <span class="math notranslate nohighlight">\(\Xmat\)</span> is just a column of ones, <span class="math notranslate nohighlight">\(\Xmat^T \yvec = \sum_i{y_i}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Xmat^T \Xmat = n\)</span>, so <span class="math notranslate nohighlight">\((\Xmat^T \Xmat)^{-1} = \frac{1}{n}\)</span>.</p>
 <p>Thus:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}\bhat = (\Xmat^T \Xmat)^{-1} \Xmat^T \yvec \\
 = \frac{1}{n} \sum_i{y_i} \\
 = \bar{y}\end{split}\]</div>
-<p>The student&#8217;s t statistic from the general linear model is:</p>
-<div class="math">
+<p>The student’s t statistic from the general linear model is:</p>
+<div class="math notranslate nohighlight">
 \[t = \frac{c^T \hat\beta}{\sqrt{\hat{\sigma}^2 c^T (\Xmat^T \Xmat)^+ c}}\]</div>
-<p>where <span class="math">\(\hat{\sigma}^2\)</span> is our estimate of variance in the residuals, <span class="math">\(c\)</span> is a
+<p>where <span class="math notranslate nohighlight">\(\hat{\sigma}^2\)</span> is our estimate of variance in the residuals, <span class="math notranslate nohighlight">\(c\)</span> is a
 contrast vector to select some combination of the design columns, and
-<span class="math">\((\Xmat^T \Xmat)^+\)</span> is the <em>pseudoinverse</em> of <span class="math">\(\Xmat^T \Xmat\)</span>.</p>
-<p>In our case we have only one design column, so <span class="math">\(c = [1]\)</span> and we can omit it.
-<span class="math">\(\hat{\sigma}^2 = s_x^2\)</span> for <span class="math">\(s_x\)</span> defined above.  <span class="math">\(\Xmat^T \Xmat\)</span> is
-invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)</span>.  Therefore:</p>
-<div class="math">
+<span class="math notranslate nohighlight">\((\Xmat^T \Xmat)^+\)</span> is the <em>pseudoinverse</em> of <span class="math notranslate nohighlight">\(\Xmat^T \Xmat\)</span>.</p>
+<p>In our case we have only one design column, so <span class="math notranslate nohighlight">\(c = [1]\)</span> and we can omit it.
+<span class="math notranslate nohighlight">\(\hat{\sigma}^2 = s_x^2\)</span> for <span class="math notranslate nohighlight">\(s_x\)</span> defined above.  <span class="math notranslate nohighlight">\(\Xmat^T \Xmat\)</span> is
+invertible, and we know the inverse already: <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>.  Therefore:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}t = \frac{\bar{y}}{s_x \sqrt{\frac{1}{n}}} \\
 = \bar{y} \Big/ \frac{s_x}{\sqrt{n}} \\
 = \frac{\bar{y}}{SE_{\bar{y}}}\end{split}\]</div>
@@ -250,6 +241,7 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -298,14 +290,24 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -314,8 +316,8 @@ invertible, and we know the inverse already: <span class="math">\(\frac{1}{n}\)<
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/mean_test_example.rst.txt"

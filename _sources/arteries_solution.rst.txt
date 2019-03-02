@@ -134,7 +134,7 @@ When you have done the scikit-image install, uncomment this code:
 .. nbplot::
     :include-source: false
 
-    >>> from skimage import measure
+    >>> from skimage.measure import marching_cubes_lewiner as mcubes
 
 With that import done, here is the fancy function to display your subvolume in
 3D:
@@ -152,7 +152,7 @@ With that import done, here is the fancy function to display your subvolume in
     ...     commands that we don't need to worry about at the moment.
     ...     """
     ...     # Here we use the scikit-image "measure" function
-    ...     verts, faces = measure.marching_cubes(binary_array, 0)
+    ...     verts, faces, norms, vals = mcubes(binary_array, 0)
     ...     fig = plt.figure(figsize=(10, 12))
     ...     ax = fig.add_subplot(111, projection='3d')
     ...

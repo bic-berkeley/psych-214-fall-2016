@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>PCA exercise &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="PCA exercise" href="pca_solution.html" />
@@ -36,239 +26,240 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="pca-exercise">
 <h1>PCA exercise<a class="headerlink" href="#pca-exercise" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>For code template see: <a class="reference download internal" href="_downloads/pca_code.py" download=""><code class="xref download docutils literal"><span class="pre">pca_code.py</span></code></a>;</li>
+<li>For code template see: <a class="reference download internal" download="" href="_downloads/7bb7cbaf9855e00ab3a79abd80e2a249/pca_code.py"><code class="xref download docutils literal notranslate"><span class="pre">pca_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="pca_solution.html"><span class="doc">PCA exercise</span></a>.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import common modules</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import common modules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># the Python array package</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  <span class="c1"># the Python plotting package</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Display array values to 6 digits of precision</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import numpy.linalg with a shorter name</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: import numpy.linalg with a shorter name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
 </pre></div>
 </div>
-<p>Download the image <a class="reference download internal" href="_downloads/ds114_sub009_t2r1.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_t2r1.nii</span></code></a> if you don&#8217;t already have
+<p>Download the image <a class="reference download internal" download="" href="_downloads/6a7796486499152f0bd6ac9cd119ddc1/ds114_sub009_t2r1.nii"><code class="xref download docutils literal notranslate"><span class="pre">ds114_sub009_t2r1.nii</span></code></a> if you don’t already have
 it. Load it with nibabel. Get the data.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the image &#39;ds114_sub009_t2r1.nii&#39; with nibabel</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Load the image &#39;ds114_sub009_t2r1.nii&#39; with nibabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Get the data array from the image</span>
 </pre></div>
 </div>
 <p>We can think of the shape of the data as two parts - the first 3 values are
 the 3D shape of the individual volumes, and the last value is the number of
 volumes.</p>
-<p>Put the 3D shape into a variable <code class="docutils literal"><span class="pre">vol_shape</span></code> and the number of volumes into
-a variable <code class="docutils literal"><span class="pre">n_vols</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make variables:</span>
+<p>Put the 3D shape into a variable <code class="docutils literal notranslate"><span class="pre">vol_shape</span></code> and the number of volumes into
+a variable <code class="docutils literal notranslate"><span class="pre">n_vols</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make variables:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- &#39;vol_shape&#39; for shape of volumes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- &#39;n_vols&#39; for number of volumes</span>
 </pre></div>
 </div>
-<p>We are going to take the time axis as containing the &#8220;features&#8221;.  We will take
-the voxels as being the &#8220;samples&#8221;.  We start by taking the first two features
+<p>We are going to take the time axis as containing the “features”.  We will take
+the voxels as being the “samples”.  We start by taking the first two features
 (time points).</p>
 <p>Slice the data array to make a new array that contains only the first two
 volumes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice the image data array to give array with only first two</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Slice the image data array to give array with only first two</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- volumes</span>
 </pre></div>
 </div>
-<p>How many voxels are there in one volume? Put this number in a variable <code class="docutils literal"><span class="pre">N</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Set N to be the number of voxels in a volume</span>
+<p>How many voxels are there in one volume? Put this number in a variable <code class="docutils literal notranslate"><span class="pre">N</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Set N to be the number of voxels in a volume</span>
 </pre></div>
 </div>
-<p>Reshape the new two-volume data array to have a first dimension length <code class="docutils literal"><span class="pre">N</span></code>
+<p>Reshape the new two-volume data array to have a first dimension length <code class="docutils literal notranslate"><span class="pre">N</span></code>
 and second dimension length 2.  Each of the two columns corresponds to the
 voxels for a whole volume.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape to 2D array with first dimension length N</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape to 2D array with first dimension length N</span>
 </pre></div>
 </div>
-<p>Take the transpose of this array to get a 2 by <code class="docutils literal"><span class="pre">N</span></code> array, ready for the PCA:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose to 2 by N array</span>
+<p>Take the transpose of this array to get a 2 by <code class="docutils literal notranslate"><span class="pre">N</span></code> array, ready for the PCA:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose to 2 by N array</span>
 </pre></div>
 </div>
 <p>Calculate the mean across columns (row means).  Put these means into a
-variable <code class="docutils literal"><span class="pre">row_means</span></code>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the mean across columns</span>
+variable <code class="docutils literal notranslate"><span class="pre">row_means</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the mean across columns</span>
 </pre></div>
 </div>
-<p>Expand the <code class="docutils literal"><span class="pre">row_means</span></code> vector out to a 2 by N array by using <code class="docutils literal"><span class="pre">np.outer</span></code>
+<p>Expand the <code class="docutils literal notranslate"><span class="pre">row_means</span></code> vector out to a 2 by N array by using <code class="docutils literal notranslate"><span class="pre">np.outer</span></code>
 and a vector of ones:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Row means copied N times to become a 2 by N array</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Row means copied N times to become a 2 by N array</span>
 </pre></div>
 </div>
 <p>Subtract this expanded 2 by N means array from the 2 by N data matrix and put
-the result into a variable <code class="docutils literal"><span class="pre">X</span></code>. Print the means across columns (row means)
+the result into a variable <code class="docutils literal notranslate"><span class="pre">X</span></code>. Print the means across columns (row means)
 to check they are now very close to 0:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Subtract the means for each row, put the result into X</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Subtract the means for each row, put the result into X</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the means over the columns, after the subtraction</span>
 </pre></div>
 </div>
 <p>Plot the two rows against each other to get a feel for the variation.
-Remember that each row in <code class="docutils literal"><span class="pre">X</span></code> is a volume, so you are plotting the signal
+Remember that each row in <code class="docutils literal notranslate"><span class="pre">X</span></code> is a volume, so you are plotting the signal
 from the first volume against the corresponding signal for the second volume.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
 </pre></div>
 </div>
 <p>Time for the PCA.</p>
 <p>We are going to use the <em>unscaled</em> covariance across time. This is given by
-the matrix multiplication of <code class="docutils literal"><span class="pre">X</span></code> with its transpose. Calculate this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate unscaled covariance matrix for X</span>
+the matrix multiplication of <code class="docutils literal notranslate"><span class="pre">X</span></code> with its transpose. Calculate this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate unscaled covariance matrix for X</span>
 </pre></div>
 </div>
-<p>Use SVD to get the <code class="docutils literal"><span class="pre">U</span></code>, <code class="docutils literal"><span class="pre">S</span></code> and <code class="docutils literal"><span class="pre">VT</span></code> matrices from the unscaled
+<p>Use SVD to get the <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">S</span></code> and <code class="docutils literal notranslate"><span class="pre">VT</span></code> matrices from the unscaled
 covariance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use SVD to return U, S, VT matrices from unscaled covariance</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use SVD to return U, S, VT matrices from unscaled covariance</span>
 </pre></div>
 </div>
-<p>Confirm that the column vectors in <code class="docutils literal"><span class="pre">U</span></code> are both unit vectors. A unit vector
+<p>Confirm that the column vectors in <code class="docutils literal notranslate"><span class="pre">U</span></code> are both unit vectors. A unit vector
 has vector length (vector <em>norm</em>) 1:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show that the columns in U each have vector length 1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show that the columns in U each have vector length 1</span>
 </pre></div>
 </div>
-<p>Confirm that the first column in <code class="docutils literal"><span class="pre">U</span></code> is orthogonal to the second:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm orthogonality of columns in U</span>
+<p>Confirm that the first column in <code class="docutils literal notranslate"><span class="pre">U</span></code> is orthogonal to the second:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm orthogonality of columns in U</span>
 </pre></div>
 </div>
-<p>Confirm that the transpose of <code class="docutils literal"><span class="pre">U</span></code> is also the matrix inverse of <code class="docutils literal"><span class="pre">U</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm tranpose of U is inverse of U</span>
+<p>Confirm that the transpose of <code class="docutils literal notranslate"><span class="pre">U</span></code> is also the matrix inverse of <code class="docutils literal notranslate"><span class="pre">U</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Confirm tranpose of U is inverse of U</span>
 </pre></div>
 </div>
-<p>Show the total sum of squares in <code class="docutils literal"><span class="pre">X</span></code>. Confirm that the total sum of squares
-in <code class="docutils literal"><span class="pre">X</span></code> is the same as the sum of the <em>singular values</em> in the <code class="docutils literal"><span class="pre">S</span></code> vector
+<p>Show the total sum of squares in <code class="docutils literal notranslate"><span class="pre">X</span></code>. Confirm that the total sum of squares
+in <code class="docutils literal notranslate"><span class="pre">X</span></code> is the same as the sum of the <em>singular values</em> in the <code class="docutils literal notranslate"><span class="pre">S</span></code> vector
 from the SVD:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the total sum of squares in X</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the total sum of squares in X</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Is this (nearly) the same as the sum of the values in S?</span>
 </pre></div>
 </div>
-<p>Plot the first row in <code class="docutils literal"><span class="pre">X</span></code> against the second row in <code class="docutils literal"><span class="pre">X</span></code> again. This
+<p>Plot the first row in <code class="docutils literal notranslate"><span class="pre">X</span></code> against the second row in <code class="docutils literal notranslate"><span class="pre">X</span></code> again. This
 time add a line to the plot that corresponds to the first principal component.
-You&#8217;ll have to scale this line (a unit vector) to make it long enough to see
+You’ll have to scale this line (a unit vector) to make it long enough to see
 on the axes of the plot. If the first principal component is flipped
-(<span class="math">\(\vec{r}\)</span> defines same line as <span class="math">\(-\vec{r}\)</span>) you may need to scale
+(<span class="math notranslate nohighlight">\(\vec{r}\)</span> defines same line as <span class="math notranslate nohighlight">\(-\vec{r}\)</span>) you may need to scale
 by a negative number for it to look nice on the plot:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot the signal in the first row against the signal in the second</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot line corresponding to a scaled version of the first principal component</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- (Scaling may need to be negative)</span>
 </pre></div>
 </div>
-<p>Remember the projection formula <span class="math">\(c = \hat{u} \cdot \vec{v}\)</span>.</p>
-<p>We now need to calculate the scalar projections <span class="math">\(c\)</span> for each component
-<span class="math">\(\hat{u}\)</span> and each voxel (each <span class="math">\(\vec{v}\)</span>).</p>
-<p>This will give us a new output matrix of scalar projections <span class="math">\(C\)</span> of shape
-<code class="docutils literal"><span class="pre">(2,</span> <span class="pre">N)</span></code>, where the rows give the scalar projections for one component, and
+<p>Remember the projection formula <span class="math notranslate nohighlight">\(c = \hat{u} \cdot \vec{v}\)</span>.</p>
+<p>We now need to calculate the scalar projections <span class="math notranslate nohighlight">\(c\)</span> for each component
+<span class="math notranslate nohighlight">\(\hat{u}\)</span> and each voxel (each <span class="math notranslate nohighlight">\(\vec{v}\)</span>).</p>
+<p>This will give us a new output matrix of scalar projections <span class="math notranslate nohighlight">\(C\)</span> of shape
+<code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">N)</span></code>, where the rows give the scalar projections for one component, and
 the columns give the coefficients for one voxel.</p>
-<p>For example, <code class="docutils literal"><span class="pre">C[0,</span> <span class="pre">0]</span></code> will be the result of <code class="docutils literal"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">0])</span></code>, <code class="docutils literal"><span class="pre">C[0,</span>
-<span class="pre">1]</span></code> will be the result of <code class="docutils literal"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">1])</span></code>, and <code class="docutils literal"><span class="pre">C[1,</span> <span class="pre">0]</span></code> will be the
-result of <code class="docutils literal"><span class="pre">U[:,</span> <span class="pre">1].dot(X[:,</span> <span class="pre">0])</span></code>.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">C[0,</span> <span class="pre">0]</span></code> will be the result of <code class="docutils literal notranslate"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">0])</span></code>, <code class="docutils literal notranslate"><span class="pre">C[0,</span>
+<span class="pre">1]</span></code> will be the result of <code class="docutils literal notranslate"><span class="pre">U[0,</span> <span class="pre">:].dot(X[:,</span> <span class="pre">1])</span></code>, and <code class="docutils literal notranslate"><span class="pre">C[1,</span> <span class="pre">0]</span></code> will be the
+result of <code class="docutils literal notranslate"><span class="pre">U[:,</span> <span class="pre">1].dot(X[:,</span> <span class="pre">0])</span></code>.</p>
 <p>With that background, use matrix multiplication to calculate the scalar
-projections <code class="docutils literal"><span class="pre">C</span></code> for projecting the data <code class="docutils literal"><span class="pre">X</span></code> onto the vectors in <code class="docutils literal"><span class="pre">U</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the scalar projections for projecting X onto the</span>
+projections <code class="docutils literal notranslate"><span class="pre">C</span></code> for projecting the data <code class="docutils literal notranslate"><span class="pre">X</span></code> onto the vectors in <code class="docutils literal notranslate"><span class="pre">U</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate the scalar projections for projecting X onto the</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- vectors in U.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put the result into a new array C.</span>
 </pre></div>
 </div>
-<p>Remember that <code class="docutils literal"><span class="pre">C</span></code> - the matrix of scalar projections – has one column per
+<p>Remember that <code class="docutils literal notranslate"><span class="pre">C</span></code> - the matrix of scalar projections – has one column per
 voxel. We can think of each row as corresponding to a volume where the volumes
-are contained in: <code class="docutils literal"><span class="pre">C[0]</span></code> (first row of <code class="docutils literal"><span class="pre">C</span></code>) – scalar projections for
-first principal component; <code class="docutils literal"><span class="pre">C[1]</span></code> (second row of C) – scalar projections
+are contained in: <code class="docutils literal notranslate"><span class="pre">C[0]</span></code> (first row of <code class="docutils literal notranslate"><span class="pre">C</span></code>) – scalar projections for
+first principal component; <code class="docutils literal notranslate"><span class="pre">C[1]</span></code> (second row of C) – scalar projections
 for second principal component.</p>
-<p>Take the transpose of <code class="docutils literal"><span class="pre">C</span></code> and reshape the resulting first dimension (length
-<code class="docutils literal"><span class="pre">N</span></code>) back to <code class="docutils literal"><span class="pre">vol_shape</span></code> - the original shape of the 3D volumes in the
+<p>Take the transpose of <code class="docutils literal notranslate"><span class="pre">C</span></code> and reshape the resulting first dimension (length
+<code class="docutils literal notranslate"><span class="pre">N</span></code>) back to <code class="docutils literal notranslate"><span class="pre">vol_shape</span></code> - the original shape of the 3D volumes in the
 data:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose C</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose C</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape the first dimension of C to have the 3D shape of the</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- original data volumes.</span>
 </pre></div>
 </div>
 <p>Break this 4D array up into two volumes (volume for first component, volume
 for second component) using slicing:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Break 4D array into two 3D volumes</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Break 4D array into two 3D volumes</span>
 </pre></div>
 </div>
 <p>Show the middle plane (slice over the third dimension) from the volume of
 scalar projections for the first component:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for first component</span>
 </pre></div>
 </div>
 <p>Show the middle plane (slice over the third dimension) from the volume of
 scalar projections for the second component:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) from scalar projections</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- for second component</span>
 </pre></div>
 </div>
 <p>Now we are ready to do the same thing for all the time points, instead of just
 the first two.</p>
-<p>Take the original array data matrix with <code class="docutils literal"><span class="pre">n_vols</span></code> volumes. Reshape to be
-shape <code class="docutils literal"><span class="pre">(N,</span> <span class="pre">nvols)</span></code>. Take the transpose to get an array shape <code class="docutils literal"><span class="pre">(n_vols,</span>
+<p>Take the original array data matrix with <code class="docutils literal notranslate"><span class="pre">n_vols</span></code> volumes. Reshape to be
+shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">nvols)</span></code>. Take the transpose to get an array shape <code class="docutils literal notranslate"><span class="pre">(n_vols,</span>
 <span class="pre">N)</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape first dimension of whole image data array to N, and take</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape first dimension of whole image data array to N, and take</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- transpose</span>
 </pre></div>
 </div>
 <p>Calculate the mean across columns (mean per volume). Expand this 1D shape
-<code class="docutils literal"><span class="pre">(173,)</span></code> vector to an array shape <code class="docutils literal"><span class="pre">(173,</span> <span class="pre">N)</span></code>, using <code class="docutils literal"><span class="pre">np.outer</span></code> and a
-vector of ones. Subtract this array from the <code class="docutils literal"><span class="pre">(173,</span> <span class="pre">N)</span></code> data array to remove
+<code class="docutils literal notranslate"><span class="pre">(173,)</span></code> vector to an array shape <code class="docutils literal notranslate"><span class="pre">(173,</span> <span class="pre">N)</span></code>, using <code class="docutils literal notranslate"><span class="pre">np.outer</span></code> and a
+vector of ones. Subtract this array from the <code class="docutils literal notranslate"><span class="pre">(173,</span> <span class="pre">N)</span></code> data array to remove
 the mean across columns (mean per volume). Call this mean-corrected variable
-<code class="docutils literal"><span class="pre">X</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate mean across columns</span>
+<code class="docutils literal notranslate"><span class="pre">X</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate mean across columns</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Expand to (173, N) shape using np.outer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Subtract from data array to remove mean over columns (row means)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put result into array X</span>
 </pre></div>
 </div>
-<p>Get the unscaled covariance matrix of <code class="docutils literal"><span class="pre">X</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate unscaled covariance matrix of X</span>
+<p>Get the unscaled covariance matrix of <code class="docutils literal notranslate"><span class="pre">X</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate unscaled covariance matrix of X</span>
 </pre></div>
 </div>
-<p>Get <code class="docutils literal"><span class="pre">U</span></code>, <code class="docutils literal"><span class="pre">S</span></code>, <code class="docutils literal"><span class="pre">VT</span></code> outputs from the SVD of the unscaled covariance</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>
+<p>Get <code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">VT</span></code> outputs from the SVD of the unscaled covariance</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">plt.subplots</span></code> to make a column of 10 axes. Iterate over these axes,
+<p>Use <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code> to make a column of 10 axes. Iterate over these axes,
 plotting one principal component vector per axis. You should then have a plot
 of each of the first 10 principal component vectors:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use subplots to make axes to plot first 10 principal component</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Use subplots to make axes to plot first 10 principal component</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- vectors</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Plot one component vector per sub-plot.</span>
 </pre></div>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">U</span></code> and matrix multiplication to calculate the scalar projection
-coefficients for projecting the data <code class="docutils literal"><span class="pre">X</span></code> onto the principal components
-<code class="docutils literal"><span class="pre">U</span></code>. Put the result into <code class="docutils literal"><span class="pre">C</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate scalar projections for projecting X onto U</span>
+<p>Use <code class="docutils literal notranslate"><span class="pre">U</span></code> and matrix multiplication to calculate the scalar projection
+coefficients for projecting the data <code class="docutils literal notranslate"><span class="pre">X</span></code> onto the principal components
+<code class="docutils literal notranslate"><span class="pre">U</span></code>. Put the result into <code class="docutils literal notranslate"><span class="pre">C</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Calculate scalar projections for projecting X onto U</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Put results into array C.</span>
 </pre></div>
 </div>
-<p>Remember, each row of <code class="docutils literal"><span class="pre">C</span></code> is a full volume of scalar projections, one row
+<p>Remember, each row of <code class="docutils literal notranslate"><span class="pre">C</span></code> is a full volume of scalar projections, one row
 per principal component.</p>
-<p>Reconstruct these rows as volumes by taking the transpose of <code class="docutils literal"><span class="pre">C</span></code> and
-reshaping the first dimension length <code class="docutils literal"><span class="pre">N</span></code> to the original three dimensions of
+<p>Reconstruct these rows as volumes by taking the transpose of <code class="docutils literal notranslate"><span class="pre">C</span></code> and
+reshaping the first dimension length <code class="docutils literal notranslate"><span class="pre">N</span></code> to the original three dimensions of
 the original data volumes.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose C</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Transpose C</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Reshape the first dimension of C to have the 3D shape of the</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- original data volumes.</span>
 </pre></div>
 </div>
 <p>Take the first volume (corresponding to the first principal component) and
 display the middle plane (slicing over the third dimension):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) of first principal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle slice (over third dimension) of first principal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
 </pre></div>
 </div>
@@ -283,7 +274,7 @@ positive or negative amplitude of the time course come about?</p>
 <p>As a hint while you are thinking, get the mean over time from the image data
 (mean over the last axis), and show the middle plane (slicing over the third
 axis):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make the mean volume (mean over the last axis)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Make the mean volume (mean over the last axis)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show the middle plane (slicing over the third axis)</span>
 </pre></div>
 </div>
@@ -291,12 +282,12 @@ axis):</p>
 principal component volume.</p>
 <p>Looking at the principal component plot - what kind of changes over time does
 this principal component represent?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of second principal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of second principal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
 </pre></div>
 </div>
 <p>Do the same for the third principal component volume:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of third principal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Show middle plane (slice over third dimension) of third principal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#- component volume</span>
 </pre></div>
 </div>
@@ -304,6 +295,7 @@ this principal component represent?</p>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -352,14 +344,24 @@ this principal component represent?</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -368,8 +370,8 @@ this principal component represent?</p>
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/pca_exercise.rst.txt"

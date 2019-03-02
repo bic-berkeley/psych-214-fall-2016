@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Extra transform exercise &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Extra transform exercise" href="what_extra_transform_solution.html" />
@@ -36,32 +26,33 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="extra-transform-exercise">
 <h1>Extra transform exercise<a class="headerlink" href="#extra-transform-exercise" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>For code template see: <a class="reference download internal" href="_downloads/what_extra_transform_code.py" download=""><code class="xref download docutils literal"><span class="pre">what_extra_transform_code.py</span></code></a>;</li>
+<li>For code template see: <a class="reference download internal" download="" href="_downloads/fbe82e4450cf2856a363b3b6d686166e/what_extra_transform_code.py"><code class="xref download docutils literal notranslate"><span class="pre">what_extra_transform_code.py</span></code></a>;</li>
 <li>For solution see: <a class="reference internal" href="what_extra_transform_solution.html"><span class="doc">Extra transform exercise</span></a>.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="kn">as</span> <span class="nn">npl</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: standard imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">npl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># print arrays to 4 decimal places</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: gray colormap and nearest neighbor interpolation by default</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.interpolation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span>
 </pre></div>
@@ -70,19 +61,19 @@
 <h2>What transforms did I add?<a class="headerlink" href="#what-transforms-did-i-add" title="Permalink to this headline">¶</a></h2>
 <p>I took this image</p>
 <ul class="simple">
-<li><a class="reference download internal" href="_downloads/ds114_sub009_highres.nii" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres.nii</span></code></a></li>
+<li><a class="reference download internal" download="" href="_downloads/e0d06197ffedf7c7423d1783eb2cf954/ds114_sub009_highres.nii"><code class="xref download docutils literal notranslate"><span class="pre">ds114_sub009_highres.nii</span></code></a></li>
 </ul>
-<p>and I made a new copy, in <code class="docutils literal"><span class="pre">img,</span> <span class="pre">hdr</span></code> format (see
+<p>and I made a new copy, in <code class="docutils literal notranslate"><span class="pre">img,</span> <span class="pre">hdr</span></code> format (see
 <a class="reference internal" href="image_header_and_affine.html"><span class="doc">The image header and affine</span></a>):</p>
 <ul class="simple">
-<li><a class="reference download internal" href="_downloads/ds114_sub009_highres_moved.img" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_moved.img</span></code></a>;
-<a class="reference download internal" href="_downloads/ds114_sub009_highres_moved.hdr" download=""><code class="xref download docutils literal"><span class="pre">ds114_sub009_highres_moved.hdr</span></code></a>.</li>
+<li><a class="reference download internal" download="" href="_downloads/5db43cb6a942437791e61ae00b66888f/ds114_sub009_highres_moved.img"><code class="xref download docutils literal notranslate"><span class="pre">ds114_sub009_highres_moved.img</span></code></a>;
+<a class="reference download internal" download="" href="_downloads/80ca530c34c162d49e0702f6c59c2bc3/ds114_sub009_highres_moved.hdr"><code class="xref download docutils literal notranslate"><span class="pre">ds114_sub009_highres_moved.hdr</span></code></a>.</li>
 </ul>
-<p>I then modified the affine in <code class="docutils literal"><span class="pre">ds114_sub009_highres_moved.hdr</span></code> to add an
+<p>I then modified the affine in <code class="docutils literal notranslate"><span class="pre">ds114_sub009_highres_moved.hdr</span></code> to add an
 extra rotation and translation.</p>
 <p>What extra translation and rotation did I add?</p>
 <p>Hint: remember the rotation formulae from <a class="reference internal" href="rotation_2d_3d.html"><span class="doc">Rotations and rotation matrices</span></a>:</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{alignat}{1}
 R_x(\theta) &amp;= \begin{bmatrix}
 1 &amp; 0 &amp; 0 \\
@@ -101,26 +92,26 @@ R_z(\theta) &amp;= \begin{bmatrix}
 \end{bmatrix}
 \end{alignat}\end{split}\]</div>
 <p>You might also want to compare against results from the
-<a class="reference download internal" href="_downloads/rotations.py" download=""><code class="xref download docutils literal"><span class="pre">rotations.py</span></code></a> module:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: functions to make rotation matrices</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="kn">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
+<a class="reference download internal" download="" href="_downloads/7e24b7b12ea31f2ac9d29765845f4361/rotations.py"><code class="xref download docutils literal notranslate"><span class="pre">rotations.py</span></code></a> module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: functions to make rotation matrices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rotations</span> <span class="k">import</span> <span class="n">x_rotmat</span><span class="p">,</span> <span class="n">y_rotmat</span><span class="p">,</span> <span class="n">z_rotmat</span>
 </pre></div>
 </div>
 <p>Final hint:</p>
 <ul class="simple">
-<li>inverse sine, cosine are <code class="docutils literal"><span class="pre">np.arcsin,</span> <span class="pre">np.arccos</span></code>.</li>
+<li>inverse sine, cosine are <code class="docutils literal notranslate"><span class="pre">np.arcsin,</span> <span class="pre">np.arccos</span></code>.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the original image affine</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="kn">as</span> <span class="nn">nib</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the original image affine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orig_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres.nii&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">orig_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">orig_img</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
 <span class="go">[[   0.9989   -0.0605    0.0109 -129.8257]</span>
 <span class="go"> [   0.0427    1.263     0.2336 -119.0906]</span>
 <span class="go"> [  -0.0215   -0.3028    0.9723 -143.4178]</span>
 <span class="go"> [   0.        0.        0.        1.    ]]</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the new image affine</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#: Get the new image affine</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">moved_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ds114_sub009_highres_moved.img&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">moved_img</span><span class="o">.</span><span class="n">affine</span>
 <span class="go">array([[   0.9416,   -0.4311,   -0.0586,  -98.8336],</span>
@@ -129,10 +120,10 @@ R_z(\theta) &amp;= \begin{bmatrix}
 <span class="go">       [   0.    ,    0.    ,    0.    ,    1.    ]])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Work out what transform has been added in the new affine</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- Work out what transform has been added in the new affine</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- What rotation and translation has been applied?</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#- What rotation and translation has been applied?</span>
 </pre></div>
 </div>
 </div>
@@ -140,6 +131,7 @@ R_z(\theta) &amp;= \begin{bmatrix}
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -188,14 +180,24 @@ R_z(\theta) &amp;= \begin{bmatrix}
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -204,8 +206,8 @@ R_z(\theta) &amp;= \begin{bmatrix}
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/what_extra_transform_exercise.rst.txt"

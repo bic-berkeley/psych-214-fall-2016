@@ -1,31 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Glossary &#8212; Functional MRI methods</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Project mentors" href="mentors.html" />
@@ -36,58 +26,59 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <p><span class="math">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{L}[1]{\| #1 \|}\newcommand{VL}[1]{\L{ \vec{#1} }}\newcommand{R}[1]{\operatorname{Re}\,(#1)}\newcommand{I}[1]{\operatorname{Im}\, (#1)}\)</span></p>
 <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-path">PATH</dt>
 <dd><p class="first">The list of directories in which your system will look for programs to
-execute.  See <a class="reference external" href="http://www.jarrodmillman.com/rcsds/standard/bash.html#commands">PATH</a>.  When you type a command such as <code class="docutils literal"><span class="pre">ls</span></code> at the
+execute.  See <a class="reference external" href="http://www.jarrodmillman.com/rcsds/standard/bash.html#commands">PATH</a>.  When you type a command such as <code class="docutils literal notranslate"><span class="pre">ls</span></code> at the
 terminal prompt, this will cause your <a class="reference internal" href="#term-shell"><span class="xref std std-term">shell</span></a> to look for an
-<a class="reference internal" href="#term-executable"><span class="xref std std-term">executable</span></a> file called <code class="docutils literal"><span class="pre">ls</span></code> in a list of directories.  The
+<a class="reference internal" href="#term-executable"><span class="xref std std-term">executable</span></a> file called <code class="docutils literal notranslate"><span class="pre">ls</span></code> in a list of directories.  The
 list of directories is called the system PATH.  Specifically these
 directories are listed in the value of an <a class="reference internal" href="#term-environment-variable"><span class="xref std std-term">environment variable</span></a>
-called <code class="docutils literal"><span class="pre">PATH</span></code>. Assuming you are using the default Unix <code class="docutils literal"><span class="pre">bash</span></code>
+called <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. Assuming you are using the default Unix <code class="docutils literal notranslate"><span class="pre">bash</span></code>
 shell, you can see these directories by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>at the terminal prompt, followed by the return key. This might give
 you output like this:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 </pre></div>
 </div>
 <p>The shell will search this list of directories in order for an
-executable file called <code class="docutils literal"><span class="pre">ls</span></code>: first <code class="docutils literal"><span class="pre">/usr/bin</span></code>, then <code class="docutils literal"><span class="pre">/bin</span></code>, and
+executable file called <code class="docutils literal notranslate"><span class="pre">ls</span></code>: first <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>, then <code class="docutils literal notranslate"><span class="pre">/bin</span></code>, and
 so on.  We can ask to see the full path of the program that the system
-finds with the <code class="docutils literal"><span class="pre">which</span></code> command:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>$ which ls
+finds with the <code class="docutils literal notranslate"><span class="pre">which</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ which ls
 /bin/ls
 </pre></div>
 </div>
-<p class="last">This tells us that the system did not find a <code class="docutils literal"><span class="pre">ls</span></code> executable file in
-<code class="docutils literal"><span class="pre">/usr/bin</span></code>, but did find one in <code class="docutils literal"><span class="pre">/bin</span></code>, for a full path of
-<code class="docutils literal"><span class="pre">/bin/ls</span></code>.</p>
+<p class="last">This tells us that the system did not find a <code class="docutils literal notranslate"><span class="pre">ls</span></code> executable file in
+<code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>, but did find one in <code class="docutils literal notranslate"><span class="pre">/bin</span></code>, for a full path of
+<code class="docutils literal notranslate"><span class="pre">/bin/ls</span></code>.</p>
 </dd>
 <dt id="term-shell">shell</dt>
 <dd>A shell is a program that gives access to the computer operating
-system.  It is usually a &#8220;command line interface&#8221; program that runs in
+system.  It is usually a “command line interface” program that runs in
 a terminal, accepting strings that the user types at the keyboard.
 The shell program interprets the string and executes commands.  The
-most common default shell program is <code class="docutils literal"><span class="pre">bash</span></code> – for Bourne-Again
+most common default shell program is <code class="docutils literal notranslate"><span class="pre">bash</span></code> – for Bourne-Again
 SHell, so-called because it is an expanded variant of an older shell
 program, called the Bourne shell.  For example, when you open a
-default terminal application, such as <code class="docutils literal"><span class="pre">Terminal.app</span></code> in OSX or
-<code class="docutils literal"><span class="pre">gnome-terminal</span></code> in Linux, you will usually see a prompt at which
+default terminal application, such as <code class="docutils literal notranslate"><span class="pre">Terminal.app</span></code> in OSX or
+<code class="docutils literal notranslate"><span class="pre">gnome-terminal</span></code> in Linux, you will usually see a prompt at which
 you can type.  When you type, the program displaying the characters
 and interpreting them is the <em>shell</em>.  When you press return at the
 end of a line, the shell takes the completed line, and tries to
@@ -95,10 +86,10 @@ interpret it as a command.  See also <a class="reference internal" href="#term-p
 <dt id="term-environment-variable">environment variable</dt>
 <dd>An environment variable is a key, value pair that is stored in
 computer memory and available to other programs running in the same
-environment.  For example the <code class="docutils literal"><span class="pre">PATH</span></code> environment variable, is a key,
-value pair where the key is <code class="docutils literal"><span class="pre">PATH</span></code> and the value is a list of
-directories, such as <code class="docutils literal"><span class="pre">/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span></code>.
-In particular, the shell uses the value of the <code class="docutils literal"><span class="pre">PATH</span></code> environment
+environment.  For example the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable, is a key,
+value pair where the key is <code class="docutils literal notranslate"><span class="pre">PATH</span></code> and the value is a list of
+directories, such as <code class="docutils literal notranslate"><span class="pre">/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</span></code>.
+In particular, the shell uses the value of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment
 variable as a list of directories to search for executable programs.</dd>
 <dt id="term-executable">executable</dt>
 <dd>A file is <em>executable</em> if the file is correctly set up to execute as a
@@ -118,6 +109,7 @@ grid in three dimensional space - see the <a class="reference external" href="ht
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -166,14 +158,24 @@ grid in three dimensional space - see the <a class="reference external" href="ht
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -182,8 +184,8 @@ grid in three dimensional space - see the <a class="reference external" href="ht
       &copy;2016, Matthew Brett, JB Poline.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/glossary.rst.txt"
