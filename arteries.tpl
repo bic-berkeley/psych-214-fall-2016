@@ -152,7 +152,7 @@ With that import done, here is the fancy function to display your subvolume in
     ...     commands that we don't need to worry about at the moment.
     ...     """
     ...     # Here we use the scikit-image "measure" function
-    ...     verts, faces = measure.marching_cubes(binary_array, 0)
+    ...     verts, faces, _, _ = measure.marching_cubes(binary_array, 0)
     ...     fig = plt.figure(figsize=(10, 12))
     ...     ax = fig.add_subplot(111, projection='3d')
     ...
