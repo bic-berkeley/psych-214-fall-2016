@@ -355,7 +355,7 @@ autorun_languages['octave_prefix_chars'] = 3
 # Add the 'copybutton' javascript, to hide/show the prompt in code
 # examples
 def setup(app):
-    app.add_javascript('copybutton.js')
+    app.add_js_file('copybutton.js')
 
 # Use local mathjax when environment variable IN_CUBA is set
 if os.environ.get('IN_CUBA'):
@@ -366,3 +366,5 @@ nbplot_flags = dict(have_matlab=False, have_spm=False)
 if os.path.isfile('nbplot_flags.toml'):
     with open('nbplot_flags.toml', 'rt') as fobj:
         nbplot_flags.update(pytoml.load(fobj))
+
+bibtex_bibfiles = ["class_bibliography.bib"]
