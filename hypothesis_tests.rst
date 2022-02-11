@@ -1,6 +1,6 @@
-###############################################
-Hypothesis tesing with the general linear model
-###############################################
+################################################
+Hypothesis testing with the general linear model
+################################################
 
 ****************************
 General linear model reprise
